@@ -1,0 +1,23 @@
+title         = "SHAFIQAIMAN"
+weight        = 1
+languageCode  = "en"
+languageName  = "English"
+
+[params]
+  rtl         = false
+  isoCode     = "en"
+  copyright   = ":copyright: 2021 - 2023"
+  dateFormat  = "2 January 2006"
+  displayName = "EN"
+  description = "shafiqaiman.com is a cybersecurity/ethical hacking website that focus on publishing of writeup in HacktheBox, Tryhackme and other online CTF (capture the flag) challenge."
+
+[author]
+  bio       = "Simple human being"
+  name      = "SH∆FIQ ∆IM∆N"
+  image     = "images/shafiqaiman_profile.jpg"
+  headline  = "Nothing much..."
+  links = [
+    { github  = "https://github.com/doct3rjohn" },
+    { twitter = "https://twitter.com/_shafiqaiman_" },
+    { link    = "https://shafiqaiman.com" },
+  ]
