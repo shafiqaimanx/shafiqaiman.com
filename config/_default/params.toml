@@ -1,4 +1,4 @@
-colorScheme           = "loco"
+colorScheme           = "mellow"
 defaultAppearance     = "dark" # valid options: light or dark
 autoSwitchAppearance  = true
 
@@ -20,7 +20,7 @@ defaultFeaturedImage      = "images/shafiqaiman_main_background.jpg"
   showAppearanceSwitcher  = false
 
 [homepage]
-  layout                = "background"
+  layout                = "profile"
   cardView              = true
   showRecent            = true
   showMoreLink          = false
