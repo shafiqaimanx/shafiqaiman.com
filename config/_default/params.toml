@@ -6,17 +6,17 @@ enableSearch    = true
 enableCodeCopy  = true
 
 disableImageOptimization  = false
-defaultBackgroundImage    = "images/shafiqaiman_main_background.jpg" 
-defaultFeaturedImage      = "images/shafiqaiman_main_background.jpg" 
+#defaultBackgroundImage    = "images/shafiqaiman_main_background.jpg" 
+#defaultFeaturedImage      = "images/shafiqaiman_main_background.jpg" 
 
 [header]
-  layout = "fixed"
+  layout = "basic"
 
 [footer]
   showMenu                = true
   showCopyright           = true
   showScrollToTop         = true
-  showThemeAttribution    = true
+  showThemeAttribution    = false
   showAppearanceSwitcher  = false
 
 [homepage]
@@ -27,7 +27,7 @@ defaultFeaturedImage      = "images/shafiqaiman_main_background.jpg"
   showRecentItems       = 6
   showMoreLinkDest      = "/posts"
   cardViewScreenWidth   = false
-  layoutBackgroundBlur  = true
+  layoutBackgroundBlur  = false
 
 [article]
   showEdit                    = false
@@ -35,7 +35,7 @@ defaultFeaturedImage      = "images/shafiqaiman_main_background.jpg"
   showHero                    = true
   showViews                   = false
   showLikes                   = false
-  heroStyle                   = "background"
+  heroStyle                   = "big"
   showAuthor                  = true
   showSummary                 = true
   sharingLinks                = [ "linkedin", "twitter", "facebook"]
@@ -54,8 +54,8 @@ defaultFeaturedImage      = "images/shafiqaiman_main_background.jpg"
   showRelatedContent          = true
   showTableOfContents         = true
   relatedContentLimit         = 5
-  layoutBackgroundBlur        = true 
-  layoutBackgroundHeaderSpace = true 
+  layoutBackgroundBlur        = false 
+  layoutBackgroundHeaderSpace = false
 
 [list]
   showHero                    = true
@@ -70,7 +70,7 @@ defaultFeaturedImage      = "images/shafiqaiman_main_background.jpg"
   cardViewScreenWidth         = false
   constrainItemsWidth         = false
   showTableOfContents         = true
-  layoutBackgroundBlur        = true
+  layoutBackgroundBlur        = false
   layoutBackgroundHeaderSpace = false
 
 [sitemap]
