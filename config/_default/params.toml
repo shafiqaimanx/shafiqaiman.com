@@ -5,7 +5,7 @@ autoSwitchAppearance  = true
 enableSearch    = true
 enableCodeCopy  = true
 
-disableImageOptimization  = false
+disableImageOptimization  = true
 #defaultBackgroundImage    = "images/shafiqaiman_main_background.jpg" 
 #defaultFeaturedImage      = "images/shafiqaiman_main_background.jpg" 
 
