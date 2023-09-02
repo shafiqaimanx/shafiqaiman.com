@@ -1,5 +1,5 @@
-module github.com/Doct3rJohn/doct3rjohn.github.io
+module github.com/shafiqaimanx/shafiqaiman.com
 
 go 1.20
 
-require github.com/nunocoracao/blowfish/v2 v2.35.1 // indirect
+require github.com/nunocoracao/blowfish/v2 v2.40.1 // indirect

@@ -17,7 +17,7 @@ languageName  = "English"
   image     = "images/shafiqaiman_profile.jpg"
   headline  = "Nothing much..."
   links = [
-    { github  = "https://github.com/doct3rjohn" },
+    { github  = "https://github.com/shafiqaimanx" },
     { twitter = "https://twitter.com/_shafiqaiman_" },
     { link    = "https://shafiqaiman.com" },
   ]
