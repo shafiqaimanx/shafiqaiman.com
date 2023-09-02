@@ -1,6 +1,6 @@
 ---
 title: "HackTheBox - MonitorsTwo Writeup"
-date: 2023-09-03
+date: 2023-09-03T00:00:27+08:00
 draft: false
 tags: ["CVE-2022-46169", "CVE-2021-41091", "upgrade-shell-using-script", "rce", "GTFOBins", "capsh", "mysql", "john", "docker"]
 htb: "HacktheBox"
