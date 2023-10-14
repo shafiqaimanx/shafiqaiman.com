@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>x-powered-by on SH∆FIQ ∆IM∆N</title>
+    <link>http://example.com/tags/x-powered-by/</link>
+    <description>Recent content in x-powered-by on SH∆FIQ ∆IM∆N</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-gb</language>
+    <lastBuildDate>Sat, 15 Jan 2022 00:00:00 +0000</lastBuildDate><atom:link href="http://example.com/tags/x-powered-by/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>HackTheBox - Knife Writeup</title>
+      <link>http://example.com/posts/htb/knife/</link>
+      <pubDate>Sat, 15 Jan 2022 00:00:00 +0000</pubDate>
+      
+      <guid>http://example.com/posts/htb/knife/</guid>
+      
+      <description>Enumeration Nmap First, let&amp;rsquo;s start with the Nmap scan. Here is the result of the scan.
+the result I ran another Nmap scan against all ports. However, the result still returns the same. So, that&amp;rsquo;s not much we can do.
+Webserver Let&amp;rsquo;s navigate to the website on port 80. It&amp;rsquo;s just one big landing page and doesn&amp;rsquo;t have anything interesting in it. I also checked the source of this page and nothing.</description>
+      
+    </item>
+    
+  </channel>
+</rss>

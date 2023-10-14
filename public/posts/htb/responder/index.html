@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="en-gb"><head><meta charset="utf-8">
+<meta http-equiv="content-type" content="text/html">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title itemprop="name">HackTheBox - Responder Writeup | SH∆FIQ ∆IM∆N</title>
+<meta property="og:title" content="HackTheBox - Responder Writeup | SH∆FIQ ∆IM∆N" />
+<meta name="twitter:title" content="HackTheBox - Responder Writeup | SH∆FIQ ∆IM∆N" />
+<meta itemprop="name" content="HackTheBox - Responder Writeup | SH∆FIQ ∆IM∆N" />
+<meta name="application-name" content="HackTheBox - Responder Writeup | SH∆FIQ ∆IM∆N" />
+<meta property="og:site_name" content="SH∆FIQ ∆IM∆N" />
+
+<meta name="description" content="Minimal Hugo blog theme with light and dark mode support">
+<meta itemprop="description" content="Minimal Hugo blog theme with light and dark mode support" />
+<meta property="og:description" content="Minimal Hugo blog theme with light and dark mode support" />
+<meta name="twitter:description" content="Minimal Hugo blog theme with light and dark mode support" />
+
+<meta property="og:locale" content="en-gb" />
+<meta name="language" content="en-gb" />
+
+
+
+  <meta itemprop="image" content="http://example.com" />
+  <meta property="og:image" content="http://example.com" />
+  <meta name="twitter:image" content="http://example.com" />
+  <meta name="twitter:image:src" content="http://example.com" />
+
+
+
+
+    
+    
+    
+    
+
+    <meta property="og:type" content="article" />
+    <meta property="og:article:published_time" content=2022-04-09T00:00:00Z />
+    <meta property="article:published_time" content=2022-04-09T00:00:00Z />
+
+    
+
+    
+
+    <script defer type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "Article",
+        "headline": "HackTheBox - Responder Writeup",
+        "author": {
+        "@type": "Person",
+        "name": ""
+        },
+        "datePublished": "2022-04-09",
+        "description": "",
+        "wordCount":  870 ,
+        "mainEntityOfPage": "True",
+        "dateModified": "2022-04-09",
+        "image": {
+        "@type": "imageObject",
+        "url": ""
+        },
+        "publisher": {
+        "@type": "Organization",
+        "name": "SH∆FIQ ∆IM∆N"
+        }
+    }
+    </script>
+
+
+<meta name="generator" content="Hugo 0.119.0">
+
+    
+
+    <link rel="canonical" href="http://example.com/posts/htb/responder/">
+    <link href="/style.min.b7e4bda148ee8a6b6e7d052cb6d77374a2dca955a40352c3ccf576dc5f33af2c.css" rel="stylesheet">
+    <link href="/code-highlight.min.706d31975fec544a864cb7f0d847a73ea55ca1df91bf495fd12a177138d807cf.css" rel="stylesheet">
+
+    
+    <link rel="apple-touch-icon" sizes="180x180" href="/icons/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/icons/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/icons/favicon-16x16.png">
+    <link rel="mask-icon" href="/icons/safari-pinned-tab.svg">
+    <link rel="shortcut icon" href="/favicon.ico">
+
+
+
+
+<link rel="manifest" href="http://example.com/site.webmanifest">
+
+<meta name="msapplication-config" content="/browserconfig.xml">
+<meta name="msapplication-TileColor" content="#2d89ef">
+<meta name="theme-color" content="#434648">
+
+    
+    <link rel="icon" type="image/svg+xml" href="/icons/favicon.svg">
+
+    
+    </head>
+<body data-theme = "dark" class="notransition">
+
+<script src="/js/theme.min.8961c317c5b88b953fe27525839672c9343f1058ab044696ca225656c8ba2ab0.js" integrity="sha256-iWHDF8W4i5U/4nUlg5ZyyTQ/EFirBEaWyiJWVsi6KrA="></script>
+
+<div class="navbar" role="navigation">
+    <nav class="menu" aria-label="Main Navigation">
+        <a href="http://example.com/" class="logo">
+            <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" 
+viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" 
+stroke-linejoin="round" class="feather feather-home">
+<title>Home</title>
+<path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+<polyline points="9 22 9 12 15 12 15 22"></polyline>
+</svg>
+        </a>
+        <input type="checkbox" id="menu-trigger" class="menu-trigger" />
+        <label for="menu-trigger">
+            <span class="menu-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" stroke="currentColor" fill="none" viewBox="0 0 14 14"><title>Menu</title><path stroke-linecap="round" stroke-linejoin="round" d="M10.595 7L3.40726 7"></path><path stroke-linecap="round" stroke-linejoin="round" d="M10.5096 3.51488L3.49301 3.51488"></path><path stroke-linecap="round" stroke-linejoin="round" d="M10.5096 10.4851H3.49301"></path><path stroke-linecap="round" stroke-linejoin="round" d="M0.5 12.5V1.5C0.5 0.947715 0.947715 0.5 1.5 0.5H12.5C13.0523 0.5 13.5 0.947715 13.5 1.5V12.5C13.5 13.0523 13.0523 13.5 12.5 13.5H1.5C0.947715 13.5 0.5 13.0523 0.5 12.5Z"></path></svg>
+            </span>
+        </label>
+
+        <div class="trigger">
+            <ul class="trigger-container">
+                
+                
+                <li>
+                    <a class="menu-link " href="/">
+                        Home
+                    </a>
+                    
+                </li>
+                
+                <li>
+                    <a class="menu-link active" href="/posts/">
+                        Posts
+                    </a>
+                    
+                </li>
+                
+                <li>
+                    <a class="menu-link " href="/about/">
+                        About
+                    </a>
+                    
+                </li>
+                
+                <li>
+                    <a class="menu-link " href="/tags/">
+                        Tags
+                    </a>
+                    
+                </li>
+                
+                <li>
+                    <a class="menu-link " href="/search/">
+                        Search
+                    </a>
+                    
+                </li>
+                
+                <li class="menu-separator">
+                    <span>|</span>
+                </li>
+                
+                
+            </ul>
+            <a id="mode" href="#">
+                <svg xmlns="http://www.w3.org/2000/svg" class="mode-sunny" width="21" height="21" viewBox="0 0 14 14" stroke-width="1">
+<title>LIGHT</title><g><circle cx="7" cy="7" r="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"></circle><line x1="7" y1="0.5" x2="7" y2="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="2.4" y1="2.4" x2="3.82" y2="3.82" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="0.5" y1="7" x2="2.5" y2="7" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="2.4" y1="11.6" x2="3.82" y2="10.18" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="7" y1="13.5" x2="7" y2="11.5" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="11.6" y1="11.6" x2="10.18" y2="10.18" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="13.5" y1="7" x2="11.5" y2="7" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="11.6" y1="2.4" x2="10.18" y2="3.82" fill="none" stroke-linecap="round" stroke-linejoin="round"></line></g></svg>
+                <svg xmlns="http://www.w3.org/2000/svg" class="mode-moon" width="21" height="21" viewBox="0 0 14 14" stroke-width="1">
+<title>DARK</title><g><circle cx="7" cy="7" r="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"></circle><line x1="7" y1="0.5" x2="7" y2="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="2.4" y1="2.4" x2="3.82" y2="3.82" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="0.5" y1="7" x2="2.5" y2="7" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="2.4" y1="11.6" x2="3.82" y2="10.18" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="7" y1="13.5" x2="7" y2="11.5" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="11.6" y1="11.6" x2="10.18" y2="10.18" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="13.5" y1="7" x2="11.5" y2="7" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="11.6" y1="2.4" x2="10.18" y2="3.82" fill="none" stroke-linecap="round" stroke-linejoin="round"></line></g></svg>
+            </a>
+        </div>
+    </nav>
+</div>
+
+<div class="wrapper post">
+    <main class="page-content" aria-label="Content">
+        <article>
+            <header class="header">
+                <h1 class="header-title">HackTheBox - Responder Writeup</h1>
+                
+                
+                <div class="post-meta">
+                    <time datetime="2022-04-09T00:00:00&#43;00:00" itemprop="datePublished"> 9 Apr 2022 </time>
+                </div>
+                
+            </header>
+                <details class="toc">
+                    <summary><b>Table of Contents</b></summary>
+                    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#nmap">Nmap</a>
+      <ul>
+        <li><a href="#result">result</a></li>
+      </ul>
+    </li>
+    <li><a href="#first-method">First Method</a>
+      <ul>
+        <li><a href="#http">Http</a></li>
+        <li><a href="#local-file-inclusionlfi">Local File Inclusion/LFI</a></li>
+        <li><a href="#responderpy">Responder.py</a></li>
+        <li><a href="#hashcat">Hashcat</a></li>
+        <li><a href="#evil-winrm">Evil-WinRM</a></li>
+      </ul>
+    </li>
+    <li><a href="#second-method">Second Method</a>
+      <ul>
+        <li><a href="#log-poisoning">Log Poisoning</a></li>
+        <li><a href="#nishang-invoke-powershelltcpps1">Nishang: Invoke-PowerShellTcp.ps1</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+                </details>
+                <div class="page-content">
+                <p>I found <code>two ways</code> to gain into this machine. First, stealing the password hash by using the responder and then logon through evil-winrm. Second, gaining the remote code execution through log poisoning and getting the reverse shell.</p>
+<h2 id="nmap">Nmap</h2>
+<p>Let&rsquo;s scan the Ip address first by using Nmap.</p>
+<h3 id="result">result</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="line"><span class="cl"><span class="o">#</span><span class="w"> </span><span class="n">Nmap</span><span class="w"> </span><span class="mi">7</span><span class="p">.</span><span class="mi">92</span><span class="w"> </span><span class="n">scan</span><span class="w"> </span><span class="n">initiated</span><span class="w"> </span><span class="n">Sat</span><span class="w"> </span><span class="n">Apr</span><span class="w">  </span><span class="mi">9</span><span class="w"> </span><span class="mi">04</span><span class="p">:</span><span class="mi">18</span><span class="p">:</span><span class="mi">54</span><span class="w"> </span><span class="mi">2022</span><span class="w"> </span><span class="k">as</span><span class="p">:</span><span class="w"> </span><span class="n">nmap</span><span class="w"> </span><span class="o">-</span><span class="n">sC</span><span class="w"> </span><span class="o">-</span><span class="n">sV</span><span class="w"> </span><span class="o">-</span><span class="n">p</span><span class="o">-</span><span class="w"> </span><span class="o">-</span><span class="k">oN</span><span class="w"> </span><span class="n">nmap</span><span class="o">/</span><span class="n">responder_all</span><span class="w"> </span><span class="mi">10</span><span class="p">.</span><span class="mi">129</span><span class="p">.</span><span class="mi">101</span><span class="p">.</span><span class="mi">69</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="n">Nmap</span><span class="w"> </span><span class="n">scan</span><span class="w"> </span><span class="n">report</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="mi">10</span><span class="p">.</span><span class="mi">129</span><span class="p">.</span><span class="mi">101</span><span class="p">.</span><span class="mi">69</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="k">Host</span><span class="w"> </span><span class="k">is</span><span class="w"> </span><span class="n">up</span><span class="w"> </span><span class="p">(</span><span class="mi">0</span><span class="p">.</span><span class="mi">42</span><span class="n">s</span><span class="w"> </span><span class="n">latency</span><span class="p">).</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="k">Not</span><span class="w"> </span><span class="n">shown</span><span class="p">:</span><span class="w"> </span><span class="mi">65532</span><span class="w"> </span><span class="n">filtered</span><span class="w"> </span><span class="n">tcp</span><span class="w"> </span><span class="n">ports</span><span class="w"> </span><span class="p">(</span><span class="k">no</span><span class="o">-</span><span class="n">response</span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="n">PORT</span><span class="w">     </span><span class="k">STATE</span><span class="w"> </span><span class="n">SERVICE</span><span class="w">    </span><span class="k">VERSION</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="mi">80</span><span class="o">/</span><span class="n">tcp</span><span class="w">   </span><span class="k">open</span><span class="w">  </span><span class="n">http</span><span class="w">       </span><span class="n">Apache</span><span class="w"> </span><span class="n">httpd</span><span class="w"> </span><span class="mi">2</span><span class="p">.</span><span class="mi">4</span><span class="p">.</span><span class="mi">52</span><span class="w"> </span><span class="p">((</span><span class="n">Win64</span><span class="p">)</span><span class="w"> </span><span class="n">OpenSSL</span><span class="o">/</span><span class="mi">1</span><span class="p">.</span><span class="mi">1</span><span class="p">.</span><span class="mi">1</span><span class="n">m</span><span class="w"> </span><span class="n">PHP</span><span class="o">/</span><span class="mi">8</span><span class="p">.</span><span class="mi">1</span><span class="p">.</span><span class="mi">1</span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="o">|</span><span class="n">_http</span><span class="o">-</span><span class="n">title</span><span class="p">:</span><span class="w"> </span><span class="n">Site</span><span class="w"> </span><span class="n">doesn</span><span class="s1">&#39;t have a title (text/html; charset=UTF-8).
+</span></span></span><span class="line"><span class="cl"><span class="s1">|_http-server-header: Apache/2.4.52 (Win64) OpenSSL/1.1.1m PHP/8.1.1
+</span></span></span><span class="line"><span class="cl"><span class="s1">5985/tcp open  http       Microsoft HTTPAPI httpd 2.0 (SSDP/UPnP)
+</span></span></span><span class="line"><span class="cl"><span class="s1">|_http-title: Not Found
+</span></span></span><span class="line"><span class="cl"><span class="s1">|_http-server-header: Microsoft-HTTPAPI/2.0
+</span></span></span><span class="line"><span class="cl"><span class="s1">7680/tcp open  tcpwrapped
+</span></span></span><span class="line"><span class="cl"><span class="s1">Service Info: OS: Windows; CPE: cpe:/o:microsoft:windows
+</span></span></span><span class="line"><span class="cl"><span class="s1">
+</span></span></span><span class="line"><span class="cl"><span class="s1">Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
+</span></span></span><span class="line"><span class="cl"><span class="s1"># Nmap done at Sat Apr  9 04:35:03 2022 -- 1 IP address (1 host up) scanned in 968.69 seconds
+</span></span></span></code></pre></div><p>That&rsquo;s not a lot of open ports.</p>
+<h2 id="first-method">First Method</h2>
+<h3 id="http">Http</h3>
+<p>The Nmap scan result shows this machine has a webserver on <code>port 80</code>. When I put the Ip address in the <code>url bar</code> it&rsquo;s redirected me to <code>unika.htb</code></p>
+<p><img src="unika-htb-redirect.png" alt="1"></p>
+<p>To solve this issue, put the Ip address of this machine in the <code>/etc/hosts</code> file and give it a name. In this case, the name is <code>unika.htb</code> and save it. Now, just refresh the page, and BOOM!</p>
+<p><img src="add-etc-hosts-unika-htb.png" alt="1"></p>
+<p><img src="unika-webpage.png" alt="1"></p>
+<h3 id="local-file-inclusionlfi">Local File Inclusion/LFI</h3>
+<p>I&rsquo;m started playing around with the website. Then, I found a button on the top navigation bar that you can change the language. When clicking any of the languages to change. The url became looks like this <code>http://unika.htb/index.php?page=french.html</code></p>
+<p>Every time I saw this kinda url with the parameter with it. I usually try to do <code>local file inclusion</code> first. In this case, I&rsquo;m using the <code>PHP wrapper</code> because it&rsquo;s kinda easy for me. Let&rsquo;s hit the <code>hosts</code> file in the Windows that locate here <code>C:/WINDOWS/System32/drivers/etc/hosts</code> and BOOM!</p>
+<p><img src="lfi-php-wrapper.png" alt="1"></p>
+<p>With this information. We can get access to this machine with <code>Log Poisoing</code>. However, the question asks something about <code>Responder</code> utility.</p>
+<h3 id="responderpy">Responder.py</h3>
+<p>Every starting-point machine has a <code>walkthrough pdf</code> file to download. So, I download it and read the <code>Using Responder</code> section. That&rsquo;s no shame to read the walkthrough to learn. Well, I&rsquo;m kinda lost reading those sections but I found this article <a href="https://forums.kali.org/showthread.php?36036-Penetration-Testing-How-to-use-Responder-py-to-Steal-Credentials">kali:forums - How to use Responder.py to Steal Credentials</a>  and it kinda makes sense to my small brain :).  Here&rsquo;s the article that got highlighted from the pdf file <a href="https://book.hacktricks.xyz/windows/ntlm/places-to-steal-ntlm-creds#lfi">HackTricks - places to steal ntlm creds</a></p>
+<p>Enough with all of this, let&rsquo;s try to steal the hash. First, let&rsquo;s run the <code>responder</code> with <code>sudo</code> privilege and specify the <code>tun0</code> as the interface with tag <code>-I</code>. Now, add the &ldquo;share&rdquo; in the url bar at the <code>page parameter</code>. Make sure to use your <code>tun0 Ip address</code> and the &ldquo;share&rdquo; can be anything.</p>
+<p><img src="responder-run.png" alt="1"></p>
+<p><img src="responder-yeet.png" alt="1"></p>
+<p><img src="responder-hash.png" alt="1"></p>
+<p>The image above shows that the <code>responder</code> successfully grab the <code>NTLMv2</code> hash.</p>
+<h3 id="hashcat">Hashcat</h3>
+<p>Well, I got the hash already and put it in the file called <code>admin.hash</code> and the last thing to do is crack it. I love <code>hashcat</code> so much and that&rsquo;s the one I&rsquo;m gonna use it. Let&rsquo;s run it with <code>mode 5600</code> for the <code>NTLMv2</code> hash and I&rsquo;m gonna use <code>rockyou.txt</code> as my wordlist.</p>
+<p><img src="hashcat-run.png" alt="1"></p>
+<p><img src="hashcat-got-it.png" alt="1"></p>
+<p>YES! Finally! I&rsquo;ve got the password.</p>
+<h3 id="evil-winrm">Evil-WinRM</h3>
+<p>Based on the Nmap scan result. The <code>port 5985</code> is open, which is <code>Windows Remote Management (winrm)</code>. Let&rsquo;s try to connect to it with these credentials.</p>
+<p><img src="evil-winrm-administrator.png" alt="1"></p>
+<p>NICE!</p>
+<h2 id="second-method">Second Method</h2>
+<h3 id="log-poisoning">Log Poisoning</h3>
+<p>As you know, from the <code>First Method</code> section. This machine is vulnerable to <code>local file inclusion</code>. So, I&rsquo;m gonna try to gain <code>remote code execution</code> through <code>log poisoning</code>. Here&rsquo;s the article talking about it <a href="https://www.hackingarticles.in/apache-log-poisoning-through-lfi/">hackingarticles - apache log poisoning through lfi</a> that I found. The result from the Nmap scan shows us this is an <code>apache</code> server running on <code>Windows</code>. Let&rsquo;s verify that we can read the log file that locates in <code>C:\xampp\apache\logs\access.log</code> by default and to do this I&rsquo;m gonna use the <code>BurpSuite</code>.</p>
+<p><img src="burpsuite-read-logs.png" alt="1"></p>
+<p>Looks like I can read the log file. Now, let&rsquo;s poison the <code>User-Agent</code> header with a basic <code>PHP web shell</code> by putting this code (down below). Then, click send.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-php" data-lang="php"><span class="line"><span class="cl"><span class="o">&lt;?</span><span class="nx">php</span> <span class="nx">system</span><span class="p">(</span><span class="nv">$_REQUEST</span><span class="p">[</span><span class="s1">&#39;cmd&#39;</span><span class="p">]);</span><span class="cp">?&gt;</span><span class="err">
+</span></span></span></code></pre></div><p><img src="burpsuite-send-php-web-shell.png" alt="1"></p>
+<p>The log should now contain PHP code. The  LFI vulnerability should execute this code and we should be able to gain <code>remote code execution</code> by putting the <code>&amp;cmd=whoami</code> at the end of the url. The command successfully ran.</p>
+<p><img src="burpsuite-rce-whoami.png" alt="1"></p>
+<h3 id="nishang-invoke-powershelltcpps1">Nishang: Invoke-PowerShellTcp.ps1</h3>
+<p>Now, we have the RCE, and let&rsquo;s try to gain the reverse shell. I&rsquo;m gonna use the <a href="https://github.com/samratashok/nishang">Nishang</a> reverse shell which is <code>Invoke-PowerShellTcp.ps1</code> but first, I&rsquo;m gonna make a new directory named <code>www</code> and copy the <code>powershell file</code> into that directory. Then, I&rsquo;m gonna open that file and select one of the example lines available and change the <code>Ip address</code> and <code>port</code>. After that, put it in the last line in the file.</p>
+<p><img src="nishang-ip-port.png" alt="1"></p>
+<p>Now, I&rsquo;m running the python <code>http server</code> into the <code>www</code> directory. Then, download the  <code>reverse shell</code> file using <code>BurpSuite</code> and don&rsquo;t forget to url encode it. Make sure to run the <code>nc</code> listener with <code>rlwrap</code> on the port that you specify in the reverse shell file.</p>
+<p><img src="nishang-python-http-server.png" alt="1"></p>
+<p><img src="nishang-burpsuite-download-reverse-shell.png" alt="1"></p>
+<p><img src="nishang-got-the-shell.png" alt="1"></p>
+<p>TADAA!! we&rsquo;ve got the shell and can read the flag.</p>
+
+            </div>
+        </article></main>
+</div>
+<footer class="footer">
+    <span class="footer_item"> </span>
+    &nbsp;
+
+    <div class="footer_social-icons">
+<a href="https://github.com/hugo-sid" target="_blank" rel="noopener noreferrer me"
+    title="Github">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+    stroke-linecap="round" stroke-linejoin="round">
+    <path
+        d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22">
+    </path>
+</svg>
+</a>
+<a href="https://twitter.com" target="_blank" rel="noopener noreferrer me"
+    title="Twitter">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+    stroke-linecap="round" stroke-linejoin="round">
+    <path
+        d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z">
+    </path>
+</svg>
+</a>
+<a href="index.xml" target="_blank" rel="noopener noreferrer me"
+    title="Rss">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+    stroke-linecap="round" stroke-linejoin="round">
+    <path d="M4 11a9 9 0 0 1 9 9" />
+    <path d="M4 4a16 16 0 0 1 16 16" />
+    <circle cx="5" cy="19" r="1" />
+</svg>
+</a>
+</div>
+    <small class="footer_copyright">
+        © 2023 shafiqaiman.
+        Powered by <a href="https://github.com/hugo-sid/hugo-blog-awesome" target="_blank" rel="noopener">Hugo blog awesome</a>.
+    </small>
+</footer><a href="#" title="Go to top" id="totop">
+    <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" fill="currentColor" stroke="currentColor" viewBox="0 96 960 960">
+    <path d="M283 704.739 234.261 656 480 410.261 725.739 656 677 704.739l-197-197-197 197Z"/>
+</svg>
+
+</a>
+
+
+    
+
+
+
+
+    
+    
+        
+    
+
+    
+    
+        
+    
+
+
+
+    
+    <script src="http://example.com/js/main.min.35f435a5d8eac613c52daa28d8af544a4512337d3e95236e4a4978417b8dcb2f.js" integrity="sha256-NfQ1pdjqxhPFLaoo2K9USkUSM30&#43;lSNuSkl4QXuNyy8="></script>
+
+    
+
+</body>
+</html>

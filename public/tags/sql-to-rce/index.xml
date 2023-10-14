@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>sql-to-rce on SH∆FIQ ∆IM∆N</title>
+    <link>http://example.com/tags/sql-to-rce/</link>
+    <description>Recent content in sql-to-rce on SH∆FIQ ∆IM∆N</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-gb</language>
+    <lastBuildDate>Fri, 26 Aug 2022 00:00:00 +0000</lastBuildDate><atom:link href="http://example.com/tags/sql-to-rce/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>HackTheBox - Validation Writeup</title>
+      <link>http://example.com/posts/htb/validation/</link>
+      <pubDate>Fri, 26 Aug 2022 00:00:00 +0000</pubDate>
+      
+      <guid>http://example.com/posts/htb/validation/</guid>
+      
+      <description>Nmap Like always, I&amp;rsquo;m going to scan the IP Address by using Nmap.
+# Nmap 7.92 scan initiated Fri Aug 19 23:10:37 2022 as: nmap -sCV -O -oN nmap/validation 10.10.11.116 Nmap scan report for 10.10.11.116 Host is up (0.19s latency). Not shown: 992 closed tcp ports (reset) PORT STATE SERVICE VERSION 22/tcp open ssh OpenSSH 8.2p1 Ubuntu 4ubuntu0.3 (Ubuntu Linux; protocol 2.0) | ssh-hostkey: | 3072 d8:f5:ef:d2:d3:f9:8d:ad:c6:cf:24:85:94:26:ef:7a (RSA) | 256 46:3d:6b:cb:a8:19:eb:6a:d0:68:86:94:86:73:e1:72 (ECDSA) |_ 256 70:32:d7:e3:77:c1:4a:cf:47:2a:de:e5:08:7a:f8:7a (ED25519) 80/tcp open http Apache httpd 2.</description>
+      
+    </item>
+    
+  </channel>
+</rss>

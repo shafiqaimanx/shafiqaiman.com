@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>sqlmap on SH∆FIQ ∆IM∆N</title>
+    <link>http://example.com/tags/sqlmap/</link>
+    <description>Recent content in sqlmap on SH∆FIQ ∆IM∆N</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-gb</language>
+    <lastBuildDate>Wed, 21 Jul 2021 00:00:00 +0000</lastBuildDate><atom:link href="http://example.com/tags/sqlmap/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>HackTheBox - Vaccine Writeup</title>
+      <link>http://example.com/posts/htb/vaccine/</link>
+      <pubDate>Wed, 21 Jul 2021 00:00:00 +0000</pubDate>
+      
+      <guid>http://example.com/posts/htb/vaccine/</guid>
+      
+      <description>Enumeration Top 1000 ports scan sudo nmap -sC -sV -oN nmap/initial 10.10.10.46 the result # Nmap 7.91 scan initiated Sat Jun 5 20:45:49 2021 as: nmap -sC -sV -oN nmap/initial 10.10.10.46 Nmap scan report for 10.10.10.46 Host is up (2.2s latency). Not shown: 997 closed ports PORT STATE SERVICE VERSION 21/tcp open ftp vsftpd 3.0.3 22/tcp open ssh OpenSSH 8.0p1 Ubuntu 6build1 (Ubuntu Linux; protocol 2.0) | ssh-hostkey: | 3072 c0:ee:58:07:75:34:b0:0b:91:65:b2:59:56:95:27:a4 (RSA) | 256 ac:6e:81:18:89:22:d7:a7:41:7d:81:4f:1b:b8:b2:51 (ECDSA) |_ 256 42:5b:c3:21:df:ef:a2:0b:c9:5e:03:42:1d:69:d0:28 (ED25519) 80/tcp open http Apache httpd 2.</description>
+      
+    </item>
+    
+  </channel>
+</rss>

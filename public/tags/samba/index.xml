@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>samba on SH∆FIQ ∆IM∆N</title>
+    <link>http://example.com/tags/samba/</link>
+    <description>Recent content in samba on SH∆FIQ ∆IM∆N</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-gb</language>
+    <lastBuildDate>Tue, 20 Jul 2021 00:00:00 +0000</lastBuildDate><atom:link href="http://example.com/tags/samba/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>HackTheBox - Lame Writeup</title>
+      <link>http://example.com/posts/htb/lame/</link>
+      <pubDate>Tue, 20 Jul 2021 00:00:00 +0000</pubDate>
+      
+      <guid>http://example.com/posts/htb/lame/</guid>
+      
+      <description>Enumeration First, let’s do an enumeration with the IP address of this machine. I’m gonna run Nmap [Netwok Mapper] to scan any open ports. I’m gonna run this command
+nmap -sC -sV -oN nmap/initial 10.10.10.3 Explaining the nmap scan: -sC	:= scan using nmap default script -sV	:= scan for version -oN := output in normal format The Nmap scan shows us port 21 is FTP and can log in as anonymous.</description>
+      
+    </item>
+    
+  </channel>
+</rss>

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>heartbleed on SH∆FIQ ∆IM∆N</title>
+    <link>http://example.com/tags/heartbleed/</link>
+    <description>Recent content in heartbleed on SH∆FIQ ∆IM∆N</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-gb</language>
+    <lastBuildDate>Sun, 20 Nov 2022 00:00:00 +0000</lastBuildDate><atom:link href="http://example.com/tags/heartbleed/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>HackTheBox - Valentine Writeup</title>
+      <link>http://example.com/posts/htb/valentine/</link>
+      <pubDate>Sun, 20 Nov 2022 00:00:00 +0000</pubDate>
+      
+      <guid>http://example.com/posts/htb/valentine/</guid>
+      
+      <description>Nmap Like always, I’m going to scan the IP Address by using nmap but I’m going to scan the full port first. Then, I’m going to scan the only open ports.
+nmap -p22,80,443 -sCV -oN nmap/valentine 10.10.10.79 22/tcp open ssh OpenSSH 5.9p1 Debian 5ubuntu1.10 (Ubuntu Linux; protocol 2.0) | ssh-hostkey: | 1024 964c51423cba2249204d3eec90ccfd0e (DSA) | 2048 46bf1fcc924f1da042b3d216a8583133 (RSA) |_ 256 e62b2519cb7e54cb0ab9ac1698c67da9 (ECDSA) 80/tcp open http Apache httpd 2.2.22 ((Ubuntu)) |_http-server-header: Apache/2.</description>
+      
+    </item>
+    
+  </channel>
+</rss>

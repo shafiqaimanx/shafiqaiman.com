@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>gobuster on SH∆FIQ ∆IM∆N</title>
+    <link>http://example.com/tags/gobuster/</link>
+    <description>Recent content in gobuster on SH∆FIQ ∆IM∆N</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-gb</language>
+    <lastBuildDate>Sun, 20 Nov 2022 00:00:00 +0000</lastBuildDate><atom:link href="http://example.com/tags/gobuster/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>HackTheBox - Valentine Writeup</title>
+      <link>http://example.com/posts/htb/valentine/</link>
+      <pubDate>Sun, 20 Nov 2022 00:00:00 +0000</pubDate>
+      
+      <guid>http://example.com/posts/htb/valentine/</guid>
+      
+      <description>Nmap Like always, I’m going to scan the IP Address by using nmap but I’m going to scan the full port first. Then, I’m going to scan the only open ports.
+nmap -p22,80,443 -sCV -oN nmap/valentine 10.10.10.79 22/tcp open ssh OpenSSH 5.9p1 Debian 5ubuntu1.10 (Ubuntu Linux; protocol 2.0) | ssh-hostkey: | 1024 964c51423cba2249204d3eec90ccfd0e (DSA) | 2048 46bf1fcc924f1da042b3d216a8583133 (RSA) |_ 256 e62b2519cb7e54cb0ab9ac1698c67da9 (ECDSA) 80/tcp open http Apache httpd 2.2.22 ((Ubuntu)) |_http-server-header: Apache/2.</description>
+      
+    </item>
+    
+    <item>
+      <title>HackTheBox - Sense Writeup</title>
+      <link>http://example.com/posts/htb/sense/</link>
+      <pubDate>Sun, 13 Nov 2022 00:00:00 +0000</pubDate>
+      
+      <guid>http://example.com/posts/htb/sense/</guid>
+      
+      <description>Nmap Like always, I’m going to scan the IP Address by using nmap but I’m going to scan the full port first. Then, I’m going to scan the only open ports.
+nmap -p80,443 -sCV -oN nmap/sense 10.10.10.60 80/tcp open http lighttpd 1.4.35 |_http-server-header: lighttpd/1.4.35 |_http-title: Did not follow redirect to https://10.10.10.60/ 443/tcp open ssl/http lighttpd 1.4.35 |_http-server-header: lighttpd/1.4.35 |_ssl-date: TLS randomness does not represent time |_http-title: Login | ssl-cert: Subject: commonName=Common Name (eg, YOUR name)/organizationName=CompanyName/stateOrProvinceName=Somewhere/countryName=US | Not valid before: 2017-10-14T19:21:35 |_Not valid after: 2023-04-06T19:21:35 Well, only 2 ports are open, which is port 80 and 443.</description>
+      
+    </item>
+    
+    <item>
+      <title>HackTheBox - Shocker Writeup</title>
+      <link>http://example.com/posts/htb/shocker/</link>
+      <pubDate>Sat, 05 Nov 2022 00:00:00 +0000</pubDate>
+      
+      <guid>http://example.com/posts/htb/shocker/</guid>
+      
+      <description>Nmap Like always, I’m going to scan the IP Address by using nmap but I’m going to scan the full port first. Then, I’m going to scan the only open ports.
+nmap -p80,2222 -sCV -oN nmap/shocker 10.10.10.56 80/tcp open http Apache httpd 2.4.18 ((Ubuntu)) |_http-title: Site doesn&amp;#39;t have a title (text/html). |_http-server-header: Apache/2.4.18 (Ubuntu) 2222/tcp open ssh OpenSSH 7.2p2 Ubuntu 4ubuntu2.2 (Ubuntu Linux; protocol 2.0) | ssh-hostkey: | 2048 c4f8ade8f80477decf150d630a187e49 (RSA) | 256 228fb197bf0f1708fc7e2c8fe9773a48 (ECDSA) |_ 256 e6ac27a3b5a9f1123c34a55d5beb3de9 (ED25519) Service Info: OS: Linux; CPE: cpe:/o:linux:linux_kernel The nmap scan result is completed.</description>
+      
+    </item>
+    
+    <item>
+      <title>HackTheBox - Blocky Writeup</title>
+      <link>http://example.com/posts/htb/blocky/</link>
+      <pubDate>Sat, 22 Oct 2022 00:00:00 +0000</pubDate>
+      
+      <guid>http://example.com/posts/htb/blocky/</guid>
+      
+      <description>Nmap Like always, I’m going to scan the IP address by using nmap but I’m going to scan the full port first. Then, I’m going to scan the only open ports.
+nmap -p21,22,80,25565 -sCV -oN nmap/blocky 10.10.10.37 21/tcp open ftp ProFTPD 1.3.5a 22/tcp open ssh OpenSSH 7.2p2 Ubuntu 4ubuntu2.2 (Ubuntu Linux; protocol 2.0) | ssh-hostkey: | 2048 d62b99b4d5e753ce2bfcb5d79d79fba2 (RSA) | 256 5d7f389570c9beac67a01e86e7978403 (ECDSA) |_ 256 09d5c204951a90ef87562597df837067 (ED25519) 80/tcp open http Apache httpd 2.</description>
+      
+    </item>
+    
+    <item>
+      <title>HackTheBox - Bank Writeup</title>
+      <link>http://example.com/posts/htb/bank/</link>
+      <pubDate>Sat, 15 Oct 2022 00:00:00 +0000</pubDate>
+      
+      <guid>http://example.com/posts/htb/bank/</guid>
+      
+      <description>Nmap Like always, I&amp;rsquo;m going to scan the IP address by using nmap but I&amp;rsquo;m going to scan the full port first. Then, I&amp;rsquo;m going to scan the only open ports.
+nmap -p- --min-rate=10000 10.10.10.29 nmap -p22,53,80 -sCV -oN nmap/bank 10.10.10.29 22/tcp open ssh OpenSSH 6.6.1p1 Ubuntu 2ubuntu2.8 (Ubuntu Linux; protocol 2.0) | ssh-hostkey: | 1024 08eed030d545e459db4d54a8dc5cef15 (DSA) | 2048 b8e015482d0df0f17333b78164084a91 (RSA) | 256 a04c94d17b6ea8fd07fe11eb88d51665 (ECDSA) |_ 256 2d794430c8bb5e8f07cf5b72efa16d67 (ED25519) 53/tcp open domain ISC BIND 9.</description>
+      
+    </item>
+    
+    <item>
+      <title>HackTheBox - Nibbles Writeup</title>
+      <link>http://example.com/posts/htb/nibbles/</link>
+      <pubDate>Mon, 03 Oct 2022 00:00:00 +0000</pubDate>
+      
+      <guid>http://example.com/posts/htb/nibbles/</guid>
+      
+      <description>Nmap Like always, I&amp;rsquo;m going to scan the IP address by using Nmap. However, today I feel spicier ;). So, I&amp;rsquo;m going to scan the full port with -p- then I&amp;rsquo;m only scanning those open ports with scripts and version enumeration.
+nmap -sCV -p22,80 -oN nmap/nibbles 10.10.10.75 22/tcp open ssh OpenSSH 7.2p2 Ubuntu 4ubuntu2.2 (Ubuntu Linux; protocol 2.0) | ssh-hostkey: | 2048 c4:f8:ad:e8:f8:04:77:de:cf:15:0d:63:0a:18:7e:49 (RSA) | 256 22:8f:b1:97:bf:0f:17:08:fc:7e:2c:8f:e9:77:3a:48 (ECDSA) |_ 256 e6:ac:27:a3:b5:a9:f1:12:3c:34:a5:5d:5b:eb:3d:e9 (ED25519) 80/tcp open http Apache httpd 2.</description>
+      
+    </item>
+    
+    <item>
+      <title>HackTheBox - Validation Writeup</title>
+      <link>http://example.com/posts/htb/validation/</link>
+      <pubDate>Fri, 26 Aug 2022 00:00:00 +0000</pubDate>
+      
+      <guid>http://example.com/posts/htb/validation/</guid>
+      
+      <description>Nmap Like always, I&amp;rsquo;m going to scan the IP Address by using Nmap.
+# Nmap 7.92 scan initiated Fri Aug 19 23:10:37 2022 as: nmap -sCV -O -oN nmap/validation 10.10.11.116 Nmap scan report for 10.10.11.116 Host is up (0.19s latency). Not shown: 992 closed tcp ports (reset) PORT STATE SERVICE VERSION 22/tcp open ssh OpenSSH 8.2p1 Ubuntu 4ubuntu0.3 (Ubuntu Linux; protocol 2.0) | ssh-hostkey: | 3072 d8:f5:ef:d2:d3:f9:8d:ad:c6:cf:24:85:94:26:ef:7a (RSA) | 256 46:3d:6b:cb:a8:19:eb:6a:d0:68:86:94:86:73:e1:72 (ECDSA) |_ 256 70:32:d7:e3:77:c1:4a:cf:47:2a:de:e5:08:7a:f8:7a (ED25519) 80/tcp open http Apache httpd 2.</description>
+      
+    </item>
+    
+    <item>
+      <title>HackTheBox - Paper Writeup</title>
+      <link>http://example.com/posts/htb/paper/</link>
+      <pubDate>Sun, 19 Jun 2022 00:00:00 +0000</pubDate>
+      
+      <guid>http://example.com/posts/htb/paper/</guid>
+      
+      <description>Nmap Let&amp;rsquo;s scan the IP Address first by using Nmap.
+# Nmap 7.92 scan initiated Wed Feb 9 07:45:26 2022 as: nmap -sC -sV -oN nmap/paper 10.129.156.206 Nmap scan report for 10.129.156.206 Host is up (0.23s latency). Not shown: 997 closed tcp ports (reset) PORT STATE SERVICE VERSION 22/tcp open ssh OpenSSH 8.0 (protocol 2.0) | ssh-hostkey: | 2048 10:05:ea:50:56:a6:00:cb:1c:9c:93:df:5f:83:e0:64 (RSA) | 256 58:8c:82:1c:c6:63:2a:83:87:5c:2f:2b:4f:4d:c3:79 (ECDSA) |_ 256 31:78:af:d1:3b:c4:2e:9d:60:4e:eb:5d:03:ec:a0:22 (ED25519) 80/tcp open http Apache httpd 2.</description>
+      
+    </item>
+    
+    <item>
+      <title>HackTheBox - Bashed Writeup</title>
+      <link>http://example.com/posts/htb/bashed/</link>
+      <pubDate>Tue, 01 Mar 2022 00:00:00 +0000</pubDate>
+      
+      <guid>http://example.com/posts/htb/bashed/</guid>
+      
+      <description>Nmap As always. I&amp;rsquo;m gonna run the Nmap scan. Here is the result of the scan.
+result # Nmap 7.92 scan initiated Sat Feb 26 01:50:32 2022 as: nmap -sC -sV -oN nmap/bashed 10.10.10.68 Nmap scan report for 10.10.10.68 Host is up (0.054s latency). Not shown: 999 closed tcp ports (reset) PORT STATE SERVICE VERSION 80/tcp open http Apache httpd 2.4.18 ((Ubuntu)) |_http-title: Arrexel&amp;#39;s Development Site |_http-server-header: Apache/2.4.18 (Ubuntu) Service detection performed.</description>
+      
+    </item>
+    
+    <item>
+      <title>HackTheBox - Beep Writeup</title>
+      <link>http://example.com/posts/htb/beep/</link>
+      <pubDate>Fri, 21 Jan 2022 00:00:00 +0000</pubDate>
+      
+      <guid>http://example.com/posts/htb/beep/</guid>
+      
+      <description>Nmap As always. I&amp;rsquo;m gonna run the Nmap scan against this IP address 10.10.10.7. Here is the result of the scan
+the result # Nmap 7.92 scan initiated Sun Jan 16 05:37:13 2022 as: nmap -sC -sV -p- -oN nmap/beep_all 10.10.10.7 Nmap scan report for 10.10.10.7 Host is up (0.056s latency). Not shown: 65519 closed tcp ports (reset) PORT STATE SERVICE VERSION 22/tcp open ssh OpenSSH 4.3 (protocol 2.0) | ssh-hostkey: | 1024 ad:ee:5a:bb:69:37:fb:27:af:b8:30:72:a0:f9:6f:53 (DSA) |_ 2048 bc:c6:73:59:13:a1:8a:4b:55:07:50:f6:65:1d:6d:0d (RSA) 25/tcp open smtp Postfix smtpd |_smtp-commands: beep.</description>
+      
+    </item>
+    
+    <item>
+      <title>TryHackMe - Lazy Admin Writeup</title>
+      <link>http://example.com/posts/thm/lazy_admin/</link>
+      <pubDate>Sat, 10 Jul 2021 00:00:00 +0000</pubDate>
+      
+      <guid>http://example.com/posts/thm/lazy_admin/</guid>
+      
+      <description>Link : https://tryhackme.com/room/lazyadmin
+Enumeration First, let’s do an enumeration with the IP address of this machine. I’m gonna run Nmap [Netwok Mapper] to scan any open ports. I’m gonna run this command
+nmap -sC -sV -oN nmap/initial &amp;lt;machine ip&amp;gt; Explaining the nmap scan: -sC	:= scan using nmap default script -sV	:= scan for version -oN := output in normal format We can see this machine has 2 ports open. SSH and HTTP.</description>
+      
+    </item>
+    
+    <item>
+      <title>TryHackMe - Pickle Rick Writeup</title>
+      <link>http://example.com/posts/thm/pickle_rick/</link>
+      <pubDate>Sat, 10 Jul 2021 00:00:00 +0000</pubDate>
+      
+      <guid>http://example.com/posts/thm/pickle_rick/</guid>
+      
+      <description>Link : https://tryhackme.com/room/picklerick
+Enumeration First, let’s do an enumeration with the IP address of this machine. I’m gonna run Nmap [Netwok Mapper] to scan any open ports. I’m gonna run this command
+nmap -sC -sV -oN nmap/initial &amp;lt;machine ip&amp;gt; Explaining the nmap scan: -sC	:= scan using nmap default script -sV	:= scan for version -oN := output in normal format Nmap scan shows us. There are 2 ports open ssh and HTTP.</description>
+      
+    </item>
+    
+  </channel>
+</rss>

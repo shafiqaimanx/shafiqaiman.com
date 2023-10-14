@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="en-gb"><head><meta charset="utf-8">
+<meta http-equiv="content-type" content="text/html">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title itemprop="name">HackTheBox - Validation Writeup | SH∆FIQ ∆IM∆N</title>
+<meta property="og:title" content="HackTheBox - Validation Writeup | SH∆FIQ ∆IM∆N" />
+<meta name="twitter:title" content="HackTheBox - Validation Writeup | SH∆FIQ ∆IM∆N" />
+<meta itemprop="name" content="HackTheBox - Validation Writeup | SH∆FIQ ∆IM∆N" />
+<meta name="application-name" content="HackTheBox - Validation Writeup | SH∆FIQ ∆IM∆N" />
+<meta property="og:site_name" content="SH∆FIQ ∆IM∆N" />
+
+<meta name="description" content="Minimal Hugo blog theme with light and dark mode support">
+<meta itemprop="description" content="Minimal Hugo blog theme with light and dark mode support" />
+<meta property="og:description" content="Minimal Hugo blog theme with light and dark mode support" />
+<meta name="twitter:description" content="Minimal Hugo blog theme with light and dark mode support" />
+
+<meta property="og:locale" content="en-gb" />
+<meta name="language" content="en-gb" />
+
+
+
+  <meta itemprop="image" content="http://example.com" />
+  <meta property="og:image" content="http://example.com" />
+  <meta name="twitter:image" content="http://example.com" />
+  <meta name="twitter:image:src" content="http://example.com" />
+
+
+
+
+    
+    
+    
+    
+
+    <meta property="og:type" content="article" />
+    <meta property="og:article:published_time" content=2022-08-26T00:00:00Z />
+    <meta property="article:published_time" content=2022-08-26T00:00:00Z />
+
+    
+
+    
+
+    <script defer type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "Article",
+        "headline": "HackTheBox - Validation Writeup",
+        "author": {
+        "@type": "Person",
+        "name": ""
+        },
+        "datePublished": "2022-08-26",
+        "description": "",
+        "wordCount":  828 ,
+        "mainEntityOfPage": "True",
+        "dateModified": "2022-08-26",
+        "image": {
+        "@type": "imageObject",
+        "url": ""
+        },
+        "publisher": {
+        "@type": "Organization",
+        "name": "SH∆FIQ ∆IM∆N"
+        }
+    }
+    </script>
+
+
+<meta name="generator" content="Hugo 0.119.0">
+
+    
+
+    <link rel="canonical" href="http://example.com/posts/htb/validation/">
+    <link href="/style.min.b7e4bda148ee8a6b6e7d052cb6d77374a2dca955a40352c3ccf576dc5f33af2c.css" rel="stylesheet">
+    <link href="/code-highlight.min.706d31975fec544a864cb7f0d847a73ea55ca1df91bf495fd12a177138d807cf.css" rel="stylesheet">
+
+    
+    <link rel="apple-touch-icon" sizes="180x180" href="/icons/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/icons/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/icons/favicon-16x16.png">
+    <link rel="mask-icon" href="/icons/safari-pinned-tab.svg">
+    <link rel="shortcut icon" href="/favicon.ico">
+
+
+
+
+<link rel="manifest" href="http://example.com/site.webmanifest">
+
+<meta name="msapplication-config" content="/browserconfig.xml">
+<meta name="msapplication-TileColor" content="#2d89ef">
+<meta name="theme-color" content="#434648">
+
+    
+    <link rel="icon" type="image/svg+xml" href="/icons/favicon.svg">
+
+    
+    </head>
+<body data-theme = "dark" class="notransition">
+
+<script src="/js/theme.min.8961c317c5b88b953fe27525839672c9343f1058ab044696ca225656c8ba2ab0.js" integrity="sha256-iWHDF8W4i5U/4nUlg5ZyyTQ/EFirBEaWyiJWVsi6KrA="></script>
+
+<div class="navbar" role="navigation">
+    <nav class="menu" aria-label="Main Navigation">
+        <a href="http://example.com/" class="logo">
+            <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" 
+viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" 
+stroke-linejoin="round" class="feather feather-home">
+<title>Home</title>
+<path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+<polyline points="9 22 9 12 15 12 15 22"></polyline>
+</svg>
+        </a>
+        <input type="checkbox" id="menu-trigger" class="menu-trigger" />
+        <label for="menu-trigger">
+            <span class="menu-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" stroke="currentColor" fill="none" viewBox="0 0 14 14"><title>Menu</title><path stroke-linecap="round" stroke-linejoin="round" d="M10.595 7L3.40726 7"></path><path stroke-linecap="round" stroke-linejoin="round" d="M10.5096 3.51488L3.49301 3.51488"></path><path stroke-linecap="round" stroke-linejoin="round" d="M10.5096 10.4851H3.49301"></path><path stroke-linecap="round" stroke-linejoin="round" d="M0.5 12.5V1.5C0.5 0.947715 0.947715 0.5 1.5 0.5H12.5C13.0523 0.5 13.5 0.947715 13.5 1.5V12.5C13.5 13.0523 13.0523 13.5 12.5 13.5H1.5C0.947715 13.5 0.5 13.0523 0.5 12.5Z"></path></svg>
+            </span>
+        </label>
+
+        <div class="trigger">
+            <ul class="trigger-container">
+                
+                
+                <li>
+                    <a class="menu-link " href="/">
+                        Home
+                    </a>
+                    
+                </li>
+                
+                <li>
+                    <a class="menu-link active" href="/posts/">
+                        Posts
+                    </a>
+                    
+                </li>
+                
+                <li>
+                    <a class="menu-link " href="/about/">
+                        About
+                    </a>
+                    
+                </li>
+                
+                <li>
+                    <a class="menu-link " href="/tags/">
+                        Tags
+                    </a>
+                    
+                </li>
+                
+                <li>
+                    <a class="menu-link " href="/search/">
+                        Search
+                    </a>
+                    
+                </li>
+                
+                <li class="menu-separator">
+                    <span>|</span>
+                </li>
+                
+                
+            </ul>
+            <a id="mode" href="#">
+                <svg xmlns="http://www.w3.org/2000/svg" class="mode-sunny" width="21" height="21" viewBox="0 0 14 14" stroke-width="1">
+<title>LIGHT</title><g><circle cx="7" cy="7" r="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"></circle><line x1="7" y1="0.5" x2="7" y2="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="2.4" y1="2.4" x2="3.82" y2="3.82" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="0.5" y1="7" x2="2.5" y2="7" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="2.4" y1="11.6" x2="3.82" y2="10.18" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="7" y1="13.5" x2="7" y2="11.5" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="11.6" y1="11.6" x2="10.18" y2="10.18" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="13.5" y1="7" x2="11.5" y2="7" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="11.6" y1="2.4" x2="10.18" y2="3.82" fill="none" stroke-linecap="round" stroke-linejoin="round"></line></g></svg>
+                <svg xmlns="http://www.w3.org/2000/svg" class="mode-moon" width="21" height="21" viewBox="0 0 14 14" stroke-width="1">
+<title>DARK</title><g><circle cx="7" cy="7" r="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"></circle><line x1="7" y1="0.5" x2="7" y2="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="2.4" y1="2.4" x2="3.82" y2="3.82" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="0.5" y1="7" x2="2.5" y2="7" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="2.4" y1="11.6" x2="3.82" y2="10.18" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="7" y1="13.5" x2="7" y2="11.5" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="11.6" y1="11.6" x2="10.18" y2="10.18" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="13.5" y1="7" x2="11.5" y2="7" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="11.6" y1="2.4" x2="10.18" y2="3.82" fill="none" stroke-linecap="round" stroke-linejoin="round"></line></g></svg>
+            </a>
+        </div>
+    </nav>
+</div>
+
+<div class="wrapper post">
+    <main class="page-content" aria-label="Content">
+        <article>
+            <header class="header">
+                <h1 class="header-title">HackTheBox - Validation Writeup</h1>
+                
+                
+                <div class="post-meta">
+                    <time datetime="2022-08-26T00:00:00&#43;00:00" itemprop="datePublished"> 26 Aug 2022 </time>
+                </div>
+                
+            </header>
+                <details class="toc">
+                    <summary><b>Table of Contents</b></summary>
+                    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#nmap">Nmap</a></li>
+    <li><a href="#http-uhc">Http: UHC</a>
+      <ul>
+        <li><a href="#gobuster">Gobuster</a></li>
+        <li><a href="#http-cookie">Http: Cookie</a></li>
+      </ul>
+    </li>
+    <li><a href="#sql-injection">SQL Injection</a>
+      <ul>
+        <li><a href="#sql-injection-union">SQL Injection: UNION</a></li>
+        <li><a href="#sql-injection-rce">SQL Injection: RCE</a></li>
+      </ul>
+    </li>
+    <li><a href="#foothold-bash-reverse-shell">Foothold: Bash reverse shell</a>
+      <ul>
+        <li><a href="#foothold-upgrade-shell-using-script">Foothold: Upgrade shell using script</a></li>
+        <li><a href="#foothold-configphp">Foothold: Config.php</a></li>
+      </ul>
+    </li>
+    <li><a href="#root">Root</a></li>
+  </ul>
+</nav>
+                </details>
+                <div class="page-content">
+                <h2 id="nmap">Nmap</h2>
+<p>Like always, I&rsquo;m going to scan the IP Address by using <a href="https://nmap.org/">Nmap</a>.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="line"><span class="cl"><span class="o">#</span><span class="w"> </span><span class="n">Nmap</span><span class="w"> </span><span class="mi">7</span><span class="p">.</span><span class="mi">92</span><span class="w"> </span><span class="n">scan</span><span class="w"> </span><span class="n">initiated</span><span class="w"> </span><span class="n">Fri</span><span class="w"> </span><span class="n">Aug</span><span class="w"> </span><span class="mi">19</span><span class="w"> </span><span class="mi">23</span><span class="p">:</span><span class="mi">10</span><span class="p">:</span><span class="mi">37</span><span class="w"> </span><span class="mi">2022</span><span class="w"> </span><span class="k">as</span><span class="p">:</span><span class="w"> </span><span class="n">nmap</span><span class="w"> </span><span class="o">-</span><span class="n">sCV</span><span class="w"> </span><span class="o">-</span><span class="n">O</span><span class="w"> </span><span class="o">-</span><span class="k">oN</span><span class="w"> </span><span class="n">nmap</span><span class="o">/</span><span class="n">validation</span><span class="w"> </span><span class="mi">10</span><span class="p">.</span><span class="mi">10</span><span class="p">.</span><span class="mi">11</span><span class="p">.</span><span class="mi">116</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="n">Nmap</span><span class="w"> </span><span class="n">scan</span><span class="w"> </span><span class="n">report</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="mi">10</span><span class="p">.</span><span class="mi">10</span><span class="p">.</span><span class="mi">11</span><span class="p">.</span><span class="mi">116</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="k">Host</span><span class="w"> </span><span class="k">is</span><span class="w"> </span><span class="n">up</span><span class="w"> </span><span class="p">(</span><span class="mi">0</span><span class="p">.</span><span class="mi">19</span><span class="n">s</span><span class="w"> </span><span class="n">latency</span><span class="p">).</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="k">Not</span><span class="w"> </span><span class="n">shown</span><span class="p">:</span><span class="w"> </span><span class="mi">992</span><span class="w"> </span><span class="n">closed</span><span class="w"> </span><span class="n">tcp</span><span class="w"> </span><span class="n">ports</span><span class="w"> </span><span class="p">(</span><span class="k">reset</span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="n">PORT</span><span class="w">     </span><span class="k">STATE</span><span class="w">    </span><span class="n">SERVICE</span><span class="w">       </span><span class="k">VERSION</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="mi">22</span><span class="o">/</span><span class="n">tcp</span><span class="w">   </span><span class="k">open</span><span class="w">     </span><span class="n">ssh</span><span class="w">           </span><span class="n">OpenSSH</span><span class="w"> </span><span class="mi">8</span><span class="p">.</span><span class="mi">2</span><span class="n">p1</span><span class="w"> </span><span class="n">Ubuntu</span><span class="w"> </span><span class="mi">4</span><span class="n">ubuntu0</span><span class="p">.</span><span class="mi">3</span><span class="w"> </span><span class="p">(</span><span class="n">Ubuntu</span><span class="w"> </span><span class="n">Linux</span><span class="p">;</span><span class="w"> </span><span class="n">protocol</span><span class="w"> </span><span class="mi">2</span><span class="p">.</span><span class="mi">0</span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="o">|</span><span class="w"> </span><span class="n">ssh</span><span class="o">-</span><span class="n">hostkey</span><span class="p">:</span><span class="w"> 
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="o">|</span><span class="w">   </span><span class="mi">3072</span><span class="w"> </span><span class="n">d8</span><span class="p">:</span><span class="n">f5</span><span class="p">:</span><span class="n">ef</span><span class="p">:</span><span class="n">d2</span><span class="p">:</span><span class="n">d3</span><span class="p">:</span><span class="n">f9</span><span class="p">:</span><span class="mi">8</span><span class="n">d</span><span class="p">:</span><span class="n">ad</span><span class="p">:</span><span class="n">c6</span><span class="p">:</span><span class="n">cf</span><span class="p">:</span><span class="mi">24</span><span class="p">:</span><span class="mi">85</span><span class="p">:</span><span class="mi">94</span><span class="p">:</span><span class="mi">26</span><span class="p">:</span><span class="n">ef</span><span class="p">:</span><span class="mi">7</span><span class="n">a</span><span class="w"> </span><span class="p">(</span><span class="n">RSA</span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="o">|</span><span class="w">   </span><span class="mi">256</span><span class="w"> </span><span class="mi">46</span><span class="p">:</span><span class="mi">3</span><span class="n">d</span><span class="p">:</span><span class="mi">6</span><span class="n">b</span><span class="p">:</span><span class="n">cb</span><span class="p">:</span><span class="n">a8</span><span class="p">:</span><span class="mi">19</span><span class="p">:</span><span class="n">eb</span><span class="p">:</span><span class="mi">6</span><span class="n">a</span><span class="p">:</span><span class="n">d0</span><span class="p">:</span><span class="mi">68</span><span class="p">:</span><span class="mi">86</span><span class="p">:</span><span class="mi">94</span><span class="p">:</span><span class="mi">86</span><span class="p">:</span><span class="mi">73</span><span class="p">:</span><span class="n">e1</span><span class="p">:</span><span class="mi">72</span><span class="w"> </span><span class="p">(</span><span class="n">ECDSA</span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="o">|</span><span class="n">_</span><span class="w">  </span><span class="mi">256</span><span class="w"> </span><span class="mi">70</span><span class="p">:</span><span class="mi">32</span><span class="p">:</span><span class="n">d7</span><span class="p">:</span><span class="n">e3</span><span class="p">:</span><span class="mi">77</span><span class="p">:</span><span class="n">c1</span><span class="p">:</span><span class="mi">4</span><span class="n">a</span><span class="p">:</span><span class="n">cf</span><span class="p">:</span><span class="mi">47</span><span class="p">:</span><span class="mi">2</span><span class="n">a</span><span class="p">:</span><span class="n">de</span><span class="p">:</span><span class="n">e5</span><span class="p">:</span><span class="mi">08</span><span class="p">:</span><span class="mi">7</span><span class="n">a</span><span class="p">:</span><span class="n">f8</span><span class="p">:</span><span class="mi">7</span><span class="n">a</span><span class="w"> </span><span class="p">(</span><span class="n">ED25519</span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="mi">80</span><span class="o">/</span><span class="n">tcp</span><span class="w">   </span><span class="k">open</span><span class="w">     </span><span class="n">http</span><span class="w">          </span><span class="n">Apache</span><span class="w"> </span><span class="n">httpd</span><span class="w"> </span><span class="mi">2</span><span class="p">.</span><span class="mi">4</span><span class="p">.</span><span class="mi">48</span><span class="w"> </span><span class="p">((</span><span class="n">Debian</span><span class="p">))</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="o">|</span><span class="n">_http</span><span class="o">-</span><span class="n">title</span><span class="p">:</span><span class="w"> </span><span class="n">Site</span><span class="w"> </span><span class="n">doesn</span><span class="s1">&#39;t have a title (text/html; charset=UTF-8).
+</span></span></span><span class="line"><span class="cl"><span class="s1">|_http-server-header: Apache/2.4.48 (Debian)
+</span></span></span><span class="line"><span class="cl"><span class="s1">5000/tcp filtered upnp
+</span></span></span><span class="line"><span class="cl"><span class="s1">5001/tcp filtered commplex-link
+</span></span></span><span class="line"><span class="cl"><span class="s1">5002/tcp filtered rfe
+</span></span></span><span class="line"><span class="cl"><span class="s1">5003/tcp filtered filemaker
+</span></span></span><span class="line"><span class="cl"><span class="s1">5004/tcp filtered avt-profile-1
+</span></span></span><span class="line"><span class="cl"><span class="s1">8080/tcp open     http          nginx
+</span></span></span><span class="line"><span class="cl"><span class="s1">|_http-title: 502 Bad Gateway
+</span></span></span><span class="line"><span class="cl"><span class="s1">No exact OS matches for host (If you know what OS is running on it, see https://nmap.org/submit/ ).
+</span></span></span><span class="line"><span class="cl"><span class="s1">TCP/IP fingerprint:
+</span></span></span><span class="line"><span class="cl"><span class="s1">OS:SCAN(V=7.92%E=4%D=8/19%OT=22%CT=1%CU=39488%PV=Y%DS=2%DC=I%G=Y%TM=62FFA81
+</span></span></span><span class="line"><span class="cl"><span class="s1">OS:5%P=x86_64-pc-linux-gnu)SEQ(SP=103%GCD=2%ISR=10F%TI=Z%CI=Z%II=I%TS=A)OPS
+</span></span></span><span class="line"><span class="cl"><span class="s1">OS:(O1=M54DST11NW7%O2=M54DST11NW7%O3=M54DNNT11NW7%O4=M54DST11NW7%O5=M54DST1
+</span></span></span><span class="line"><span class="cl"><span class="s1">OS:1NW7%O6=M54DST11)WIN(W1=FE88%W2=FE88%W3=FE88%W4=FE88%W5=FE88%W6=FE88)ECN
+</span></span></span><span class="line"><span class="cl"><span class="s1">OS:(R=Y%DF=Y%T=40%W=FAF0%O=M54DNNSNW7%CC=Y%Q=)T1(R=Y%DF=Y%T=40%S=O%A=S+%F=A
+</span></span></span><span class="line"><span class="cl"><span class="s1">OS:S%RD=0%Q=)T2(R=N)T3(R=N)T4(R=Y%DF=Y%T=40%W=0%S=A%A=Z%F=R%O=%RD=0%Q=)T5(R
+</span></span></span><span class="line"><span class="cl"><span class="s1">OS:=Y%DF=Y%T=40%W=0%S=Z%A=S+%F=AR%O=%RD=0%Q=)T6(R=Y%DF=Y%T=40%W=0%S=A%A=Z%F
+</span></span></span><span class="line"><span class="cl"><span class="s1">OS:=R%O=%RD=0%Q=)T7(R=Y%DF=Y%T=40%W=0%S=Z%A=S+%F=AR%O=%RD=0%Q=)U1(R=Y%DF=N%
+</span></span></span><span class="line"><span class="cl"><span class="s1">OS:T=40%IPL=164%UN=0%RIPL=G%RID=G%RIPCK=G%RUCK=G%RUD=G)IE(R=Y%DFI=N%T=40%CD
+</span></span></span><span class="line"><span class="cl"><span class="s1">OS:=S)
+</span></span></span><span class="line"><span class="cl"><span class="s1">
+</span></span></span><span class="line"><span class="cl"><span class="s1">Network Distance: 2 hops
+</span></span></span><span class="line"><span class="cl"><span class="s1">Service Info: OS: Linux; CPE: cpe:/o:linux:linux_kernel
+</span></span></span><span class="line"><span class="cl"><span class="s1">
+</span></span></span><span class="line"><span class="cl"><span class="s1">OS and Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
+</span></span></span><span class="line"><span class="cl"><span class="s1"># Nmap done at Fri Aug 19 23:11:17 2022 -- 1 IP address (1 host up) scanned in 39.91 seconds
+</span></span></span></code></pre></div><p>There are a bunch of filtered ports. However, there still have open ports. Such as <code>22,80,8080</code>. It&rsquo;s like something is happening with these ports. Based on <code>port 22</code> the host is running <code>Ubuntu</code> but in <code>port 80</code> it says the host running on <code>Debian</code>.</p>
+<h2 id="http-uhc">Http: UHC</h2>
+<p>Well, the <code>port 80</code> is open and running on <code>Apache</code>. Now, I&rsquo;m going to take a look at it. Surprisingly, it is a simple website about <a href="https://twitter.com/hackingesports">UHC</a> and I can register on it by putting the username and selecting the country.</p>
+<p><img src="uhc-simple-main-page.png" alt="uhc simple main page"></p>
+<p>I&rsquo;m going to register my name and the country. When I clicked the &ldquo;Join Now&rdquo; button, it goes to this page.</p>
+<p><img src="uhc-register-name.png" alt="uhc register name"></p>
+<p>It shows my name and the county that I picked to register. When I register with the same name and a different country. It keeps showing the page as the image above and always goes through the <code>/account.php</code> endpoint.</p>
+<h3 id="gobuster">Gobuster</h3>
+<p>So, I&rsquo;m going to run <a href="https://github.com/OJ/gobuster">gobuster</a> to enumerate the hidden directory on it. Well, it did not reveal much of the directory in other words this site is very &ldquo;barebone&rdquo;. However, <code>config.php</code>  sounds interesting but it is empty.</p>
+<p><img src="gobuster-scan-on-port-80.png" alt="gobuster scan on port 80"></p>
+<h3 id="http-cookie">Http: Cookie</h3>
+<p>Honestly, I found that weird. So, I&rsquo;ll try to check if this page has some sort of section or cookie. Turns out, it has a set <code>cookie</code> called <code>user</code>. This cookie appears to change when I register a new username.</p>
+<p><img src="aiman-cookie.png" alt="aiman cookie"></p>
+<p><img src="test-cookie.png" alt="test cookie"></p>
+<h2 id="sql-injection">SQL Injection</h2>
+<p>I end up running the <a href="https://portswigger.net/burp">burpsuite</a> to analyze the response and how the register form handles the request. Then, I&rsquo;ll try to add a single quote <code>'</code> everywhere and nothing happens. That&rsquo;s so weird!, Hold and behold I forgot to change the cookie. So, I changed it and I&rsquo;ve got an error that indicates it is vulnerable to <code>SQLi</code>.</p>
+<p><img src="single-quote-register.png" alt="single quote register"></p>
+<p><img src="error-indicate-sql-injection.png" alt="error indicate sql injection"></p>
+<h3 id="sql-injection-union">SQL Injection: UNION</h3>
+<p>Then, I&rsquo;ll check the columns that can be injected and display the output to me. As always, this is the first time I&rsquo;m going to try and the columns must be number 1. Right? ;). So, the <a href="https://github.com/payloadbox/sql-injection-payload-list">payloads</a> going to be <code>country=country' UNION ALL SELECT 1-- -</code>.</p>
+<p><img src="inject-the-first-columns.png" alt="inject the first columns"></p>
+<p><img src="output-of-the-number-one.png" alt="ouput of the number one"></p>
+<p>Shockingly, it works on the first try. Based on the output itself, I can inject it with a malicious payload and display it to me. Such as <code>VERSION()</code>.</p>
+<p><img src="inject-to-show-the-version.png" alt="inject to show the version"></p>
+<h3 id="sql-injection-rce">SQL Injection: RCE</h3>
+<p>I want to upload the web shell to this box. However, I can&rsquo;t find any path to upload it. To be honest, I&rsquo;m stuck at this point and felt defeated. Then, I manage to find this <a href="https://kayran.io/blog/web-vulnerabilities/sqli-to-rce/">article</a> by threatening Mr.Google (not asking nicely today sir! jk). This is possible by using <code>OUTFILE</code> to write a file to the server.</p>
+<p><img src="inject-malicious-payload.png" alt="inject malicious payload"></p>
+<p>The webpage still throws an error. When I navigated to the file that I created and try the <code>id</code> commands it works.</p>
+<p><img src="run-id-command-in-the-php-webshell.png" alt="run id command in the php webshell"></p>
+<h2 id="foothold-bash-reverse-shell">Foothold: Bash reverse shell</h2>
+<p>Now, it&rsquo;s time to get a reverse shell. Seems the host is running on Linux. I&rsquo;m going to use bash reverse shell and encoded with URL and BOOM!</p>
+<p><img src="used-bash-reverse-shell.png" alt="bash reverse shell"></p>
+<h3 id="foothold-upgrade-shell-using-script">Foothold: Upgrade shell using script</h3>
+<p>Finally, I&rsquo;ve got the reverse shell as the <code>www-data</code> user. As always, I want to have a full working shell, and it&rsquo;s time to upgrade my reverse shell. However, when I lookups python either v2 or v3 its shows no result at all. Then, it clicks in my mind. I can upgrade this shell using <code>script</code> like <a href="https://shafiqaiman.com/hackthebox-unified-writeup/#upgrade-shell-using-script">unified</a> box.</p>
+<p><img src="upgrade-the-shell-using-script.png" alt="upgrade the shell using script"></p>
+<h3 id="foothold-configphp">Foothold: Config.php</h3>
+<p>So, I&rsquo;m already in <code>/var/www/html</code> directory. When I list all the content in this directory. I found that <code>config.php</code> is not empty after all. Not just that! I manage to grab credentials in that file as well.</p>
+<p><img src="credentials-in-config-php.png" alt="crendentials in config php"></p>
+<p>Then, I&rsquo;ll try to enumerate the database with those credentials but nothing useful came back. So, I check how many users are on this box by reading the <code>/etc/passwd</code> file. Surprisingly, there&rsquo;s only one user in this box.</p>
+<p><img src="reading-etc-passwd-file.png" alt="reading etc passwd file"></p>
+<h2 id="root">Root</h2>
+<p>So, I&rsquo;ll try those credentials with the root user and it works.</p>
+<p><img src="login-as-root.png" alt="login as root"></p>
+<p>NICE!</p>
+
+            </div>
+        </article></main>
+</div>
+<footer class="footer">
+    <span class="footer_item"> </span>
+    &nbsp;
+
+    <div class="footer_social-icons">
+<a href="https://github.com/hugo-sid" target="_blank" rel="noopener noreferrer me"
+    title="Github">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+    stroke-linecap="round" stroke-linejoin="round">
+    <path
+        d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22">
+    </path>
+</svg>
+</a>
+<a href="https://twitter.com" target="_blank" rel="noopener noreferrer me"
+    title="Twitter">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+    stroke-linecap="round" stroke-linejoin="round">
+    <path
+        d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z">
+    </path>
+</svg>
+</a>
+<a href="index.xml" target="_blank" rel="noopener noreferrer me"
+    title="Rss">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+    stroke-linecap="round" stroke-linejoin="round">
+    <path d="M4 11a9 9 0 0 1 9 9" />
+    <path d="M4 4a16 16 0 0 1 16 16" />
+    <circle cx="5" cy="19" r="1" />
+</svg>
+</a>
+</div>
+    <small class="footer_copyright">
+        © 2023 shafiqaiman.
+        Powered by <a href="https://github.com/hugo-sid/hugo-blog-awesome" target="_blank" rel="noopener">Hugo blog awesome</a>.
+    </small>
+</footer><a href="#" title="Go to top" id="totop">
+    <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" fill="currentColor" stroke="currentColor" viewBox="0 96 960 960">
+    <path d="M283 704.739 234.261 656 480 410.261 725.739 656 677 704.739l-197-197-197 197Z"/>
+</svg>
+
+</a>
+
+
+    
+
+
+
+
+    
+    
+        
+    
+
+    
+    
+        
+    
+
+
+
+    
+    <script src="http://example.com/js/main.min.35f435a5d8eac613c52daa28d8af544a4512337d3e95236e4a4978417b8dcb2f.js" integrity="sha256-NfQ1pdjqxhPFLaoo2K9USkUSM30&#43;lSNuSkl4QXuNyy8="></script>
+
+    
+
+</body>
+</html>

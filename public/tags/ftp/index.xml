@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>ftp on SH∆FIQ ∆IM∆N</title>
+    <link>http://example.com/tags/ftp/</link>
+    <description>Recent content in ftp on SH∆FIQ ∆IM∆N</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-gb</language>
+    <lastBuildDate>Sat, 28 May 2022 00:00:00 +0000</lastBuildDate><atom:link href="http://example.com/tags/ftp/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>HackTheBox - Netmon Writeup</title>
+      <link>http://example.com/posts/htb/netmon/</link>
+      <pubDate>Sat, 28 May 2022 00:00:00 +0000</pubDate>
+      
+      <guid>http://example.com/posts/htb/netmon/</guid>
+      
+      <description>Nmap First, let&amp;rsquo;s scan the IP address by using the Nmap
+# Nmap 7.92 scan initiated Thu May 26 02:11:18 2022 as: nmap -sC -sV -vv -T4 -p- -oN nmap/netmon_all 10.10.10.152 Nmap scan report for 10.10.10.152 Host is up, received echo-reply ttl 127 (0.048s latency). Scanned at 2022-05-26 02:11:19 +08 for 126s Not shown: 65522 closed tcp ports (reset) PORT STATE SERVICE REASON VERSION 21/tcp open ftp syn-ack ttl 127 Microsoft ftpd | ftp-anon: Anonymous FTP login allowed (FTP code 230) | 02-03-19 12:18AM 1024 .</description>
+      
+    </item>
+    
+    <item>
+      <title>TryHackMe - Anonforce Writeup</title>
+      <link>http://example.com/posts/thm/anonforce/</link>
+      <pubDate>Sat, 10 Jul 2021 00:00:00 +0000</pubDate>
+      
+      <guid>http://example.com/posts/thm/anonforce/</guid>
+      
+      <description>Link : https://tryhackme.com/room/bsidesgtanonforce
+Enumeration First, let’s do an enumeration with the IP address of this machine. I’m gonna run Nmap [Netwok Mapper] to scan any open ports. I’m gonna run this command
+nmap -sC -sV -oN nmap/initial &amp;lt;machine ip&amp;gt; Explaining the nmap flag: -sC := scan using nmap default script -sV := scan for version -oN := output in normal format Nmap scan is done. Let’s take a look at that result.</description>
+      
+    </item>
+    
+  </channel>
+</rss>

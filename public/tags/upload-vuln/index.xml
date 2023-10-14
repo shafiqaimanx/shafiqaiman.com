@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>upload-vuln on SH∆FIQ ∆IM∆N</title>
+    <link>http://example.com/tags/upload-vuln/</link>
+    <description>Recent content in upload-vuln on SH∆FIQ ∆IM∆N</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-gb</language>
+    <lastBuildDate>Sat, 15 Oct 2022 00:00:00 +0000</lastBuildDate><atom:link href="http://example.com/tags/upload-vuln/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>HackTheBox - Bank Writeup</title>
+      <link>http://example.com/posts/htb/bank/</link>
+      <pubDate>Sat, 15 Oct 2022 00:00:00 +0000</pubDate>
+      
+      <guid>http://example.com/posts/htb/bank/</guid>
+      
+      <description>Nmap Like always, I&amp;rsquo;m going to scan the IP address by using nmap but I&amp;rsquo;m going to scan the full port first. Then, I&amp;rsquo;m going to scan the only open ports.
+nmap -p- --min-rate=10000 10.10.10.29 nmap -p22,53,80 -sCV -oN nmap/bank 10.10.10.29 22/tcp open ssh OpenSSH 6.6.1p1 Ubuntu 2ubuntu2.8 (Ubuntu Linux; protocol 2.0) | ssh-hostkey: | 1024 08eed030d545e459db4d54a8dc5cef15 (DSA) | 2048 b8e015482d0df0f17333b78164084a91 (RSA) | 256 a04c94d17b6ea8fd07fe11eb88d51665 (ECDSA) |_ 256 2d794430c8bb5e8f07cf5b72efa16d67 (ED25519) 53/tcp open domain ISC BIND 9.</description>
+      
+    </item>
+    
+    <item>
+      <title>HackTheBox - Arctic Writeup</title>
+      <link>http://example.com/posts/htb/arctic/</link>
+      <pubDate>Sat, 08 Oct 2022 00:00:00 +0000</pubDate>
+      
+      <guid>http://example.com/posts/htb/arctic/</guid>
+      
+      <description>Nmap Like always, I&amp;rsquo;m going to scan the IP address by using Nmap but I&amp;rsquo;m going to scan the full port first. Then, I&amp;rsquo;m going to scan the only open ports.
+nmap -p135,8500,49154 -sCV -oN nmap/arctic 10.10.10.11 135/tcp open msrpc Microsoft Windows RPC 8500/tcp open fmtp? 49154/tcp open msrpc Microsoft Windows RPC Service Info: OS: Windows; CPE: cpe:/o:microsoft:windows The nmap scan result is completed. Based on the services, look like this is a Windows target and three ports that open.</description>
+      
+    </item>
+    
+    <item>
+      <title>HackTheBox - Nibbles Writeup</title>
+      <link>http://example.com/posts/htb/nibbles/</link>
+      <pubDate>Mon, 03 Oct 2022 00:00:00 +0000</pubDate>
+      
+      <guid>http://example.com/posts/htb/nibbles/</guid>
+      
+      <description>Nmap Like always, I&amp;rsquo;m going to scan the IP address by using Nmap. However, today I feel spicier ;). So, I&amp;rsquo;m going to scan the full port with -p- then I&amp;rsquo;m only scanning those open ports with scripts and version enumeration.
+nmap -sCV -p22,80 -oN nmap/nibbles 10.10.10.75 22/tcp open ssh OpenSSH 7.2p2 Ubuntu 4ubuntu2.2 (Ubuntu Linux; protocol 2.0) | ssh-hostkey: | 2048 c4:f8:ad:e8:f8:04:77:de:cf:15:0d:63:0a:18:7e:49 (RSA) | 256 22:8f:b1:97:bf:0f:17:08:fc:7e:2c:8f:e9:77:3a:48 (ECDSA) |_ 256 e6:ac:27:a3:b5:a9:f1:12:3c:34:a5:5d:5b:eb:3d:e9 (ED25519) 80/tcp open http Apache httpd 2.</description>
+      
+    </item>
+    
+    <item>
+      <title>HackTheBox - Late Writeup</title>
+      <link>http://example.com/posts/htb/late/</link>
+      <pubDate>Sat, 30 Jul 2022 00:00:00 +0000</pubDate>
+      
+      <guid>http://example.com/posts/htb/late/</guid>
+      
+      <description>Nmap Like always, I&amp;rsquo;m going to scan the IP Address by using Nmap.
+# Nmap 7.92 scan initiated Tue May 17 23:03:20 2022 as: nmap -sC -sV -vv -p- -oN nmap/late_all 10.10.11.156 Nmap scan report for 10.10.11.156 Host is up, received echo-reply ttl 63 (0.070s latency). Scanned at 2022-05-17 23:03:21 +08 for 243s Not shown: 65533 closed tcp ports (reset) PORT STATE SERVICE REASON VERSION 22/tcp open ssh syn-ack ttl 63 OpenSSH 7.</description>
+      
+    </item>
+    
+    <item>
+      <title>HackTheBox - Jerry Writeup</title>
+      <link>http://example.com/posts/htb/jerry/</link>
+      <pubDate>Sat, 04 Jun 2022 00:00:00 +0000</pubDate>
+      
+      <guid>http://example.com/posts/htb/jerry/</guid>
+      
+      <description>Nmap As always, I&amp;rsquo;m gonna start with the Nmap scan with this IP address 10.10.10.95
+# Nmap 7.92 scan initiated Tue Mar 1 07:29:58 2022 as: nmap -sC -sV -p- -oN nmap/jerry_all 10.10.10.95 Nmap scan report for 10.10.10.95 Host is up (0.060s latency). Not shown: 65534 filtered tcp ports (no-response) PORT STATE SERVICE VERSION 8080/tcp open http Apache Tomcat/Coyote JSP engine 1.1 |_http-server-header: Apache-Coyote/1.1 |_http-favicon: Apache Tomcat |_http-title: Apache Tomcat/7.0.88 Service detection performed.</description>
+      
+    </item>
+    
+    <item>
+      <title>HackTheBox - Love Writeup</title>
+      <link>http://example.com/posts/htb/love/</link>
+      <pubDate>Wed, 25 Aug 2021 00:00:00 +0000</pubDate>
+      
+      <guid>http://example.com/posts/htb/love/</guid>
+      
+      <description>Enumeration scan top 1000 ports nmap -sC -sV -oN nmap/initial 10.10.10.239 the result # Nmap 7.91 scan initiated Sat Aug 14 02:50:38 2021 as: nmap -sC -sV -oN nmap/initial 10.10.10.239 Nmap scan report for 10.10.10.239 Host is up (0.28s latency). Not shown: 993 closed ports PORT STATE SERVICE VERSION 80/tcp open http Apache httpd 2.4.46 ((Win64) OpenSSL/1.1.1j PHP/7.3.27) | http-cookie-flags: | /: | PHPSESSID: |_ httponly flag not set |_http-server-header: Apache/2.</description>
+      
+    </item>
+    
+    <item>
+      <title>HackTheBox - Base Writeup</title>
+      <link>http://example.com/posts/htb/base/</link>
+      <pubDate>Fri, 13 Aug 2021 00:00:00 +0000</pubDate>
+      
+      <guid>http://example.com/posts/htb/base/</guid>
+      
+      <description>Enumeration Top 1000 ports scan nmap -sC -sV -oN nmap/initial 10.10.10.48 the result All ports scan nmap -sC -sV -p- -oN nmap/all__ports 10.10.10.48 the result Open Ports both Nmap scan result shows the only port open are SSH and HTTP Gobuster gobuster dir -u http://10.10.10.48 -w /opt/SecLists/Discovery/Web-Content/raft-small-words.txt -x php.html -o Rgobuster We&amp;rsquo;ve found couples of hidden directory
+the result
+http://10.10.10.48/login/ http://10.10.10.48/static/ http://10.10.10.48/_uploaded/ let&amp;rsquo;s take a look at /login/ directory
+Config.php sounds fantastic but I can&amp;rsquo;t read them.</description>
+      
+    </item>
+    
+    <item>
+      <title>HackTheBox - Oopsie Writeup</title>
+      <link>http://example.com/posts/htb/oopsie/</link>
+      <pubDate>Tue, 20 Jul 2021 00:00:00 +0000</pubDate>
+      
+      <guid>http://example.com/posts/htb/oopsie/</guid>
+      
+      <description>Enumeration Top 1000 ports scan nmap -sC -sV -oN nmap/inital 10.10.10.28 all ports scan nmap -sC -sV -p- -oN nmap/all_ports 10.10.10.28 Still the same result Open ports port 22 / ssh port 80 / http The Website Gobuster Auto recon in the background looking the hidden directory gobuster dir -u http://10.10.10.28 -w /opt/SecLists/Discovery/Web-Content/raft-medium-directories.txt -o gobuster.log The result This webpage have an upload directory.
+Login Page Found something insteresting in the source code the directory into /cdn-cgi/login/script.</description>
+      
+    </item>
+    
+    <item>
+      <title>TryHackMe - DAV Writeup</title>
+      <link>http://example.com/posts/thm/dav/</link>
+      <pubDate>Sat, 10 Jul 2021 00:00:00 +0000</pubDate>
+      
+      <guid>http://example.com/posts/thm/dav/</guid>
+      
+      <description>Link : https://tryhackme.com/room/bsidesgtdav
+Enumeration First we need to connect to try hack me networks through openvpn and deploy the machine.
+Now, the box is up. So, first we need to do a reconnaissance using nmap. Nmap is a network mapper tools for scanning the ports or enumerate the machine through ports. I will run this command for my nmap scan.
+nmap -sC -sV -oN nmap/initial &amp;lt;machine ip&amp;gt; Explaining the nmap flag: -sC := scan using nmap default script -sV := scan for version -oN := output in normal format The result of our nmap scan</description>
+      
+    </item>
+    
+    <item>
+      <title>TryHackMe - Vulnversity Writeup</title>
+      <link>http://example.com/posts/thm/vulnversity/</link>
+      <pubDate>Sat, 10 Jul 2021 00:00:00 +0000</pubDate>
+      
+      <guid>http://example.com/posts/thm/vulnversity/</guid>
+      
+      <description>Link : https://tryhackme.com/room/vulnversity
+Enumeration First we need to do reconnaissance by using nmap (Network Mapper) to find open ports and to understand the machine. I&amp;rsquo;m gonna run this command:
+nmap -sC -sV -O -oN nmap/initial &amp;lt;machine ip&amp;gt; Explaining the nmap scan: -sC	:= scan using nmap default script -sV	:= scan for version -O := scan for OS (operating system) -oN := output in normal format Now our nmap scan is done.</description>
+      
+    </item>
+    
+  </channel>
+</rss>

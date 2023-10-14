@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>linpeas on SH∆FIQ ∆IM∆N</title>
+    <link>http://example.com/tags/linpeas/</link>
+    <description>Recent content in linpeas on SH∆FIQ ∆IM∆N</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-gb</language>
+    <lastBuildDate>Sat, 30 Jul 2022 00:00:00 +0000</lastBuildDate><atom:link href="http://example.com/tags/linpeas/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>HackTheBox - Late Writeup</title>
+      <link>http://example.com/posts/htb/late/</link>
+      <pubDate>Sat, 30 Jul 2022 00:00:00 +0000</pubDate>
+      
+      <guid>http://example.com/posts/htb/late/</guid>
+      
+      <description>Nmap Like always, I&amp;rsquo;m going to scan the IP Address by using Nmap.
+# Nmap 7.92 scan initiated Tue May 17 23:03:20 2022 as: nmap -sC -sV -vv -p- -oN nmap/late_all 10.10.11.156 Nmap scan report for 10.10.11.156 Host is up, received echo-reply ttl 63 (0.070s latency). Scanned at 2022-05-17 23:03:21 +08 for 243s Not shown: 65533 closed tcp ports (reset) PORT STATE SERVICE REASON VERSION 22/tcp open ssh syn-ack ttl 63 OpenSSH 7.</description>
+      
+    </item>
+    
+    <item>
+      <title>HackTheBox - Paper Writeup</title>
+      <link>http://example.com/posts/htb/paper/</link>
+      <pubDate>Sun, 19 Jun 2022 00:00:00 +0000</pubDate>
+      
+      <guid>http://example.com/posts/htb/paper/</guid>
+      
+      <description>Nmap Let&amp;rsquo;s scan the IP Address first by using Nmap.
+# Nmap 7.92 scan initiated Wed Feb 9 07:45:26 2022 as: nmap -sC -sV -oN nmap/paper 10.129.156.206 Nmap scan report for 10.129.156.206 Host is up (0.23s latency). Not shown: 997 closed tcp ports (reset) PORT STATE SERVICE VERSION 22/tcp open ssh OpenSSH 8.0 (protocol 2.0) | ssh-hostkey: | 2048 10:05:ea:50:56:a6:00:cb:1c:9c:93:df:5f:83:e0:64 (RSA) | 256 58:8c:82:1c:c6:63:2a:83:87:5c:2f:2b:4f:4d:c3:79 (ECDSA) |_ 256 31:78:af:d1:3b:c4:2e:9d:60:4e:eb:5d:03:ec:a0:22 (ED25519) 80/tcp open http Apache httpd 2.</description>
+      
+    </item>
+    
+    <item>
+      <title>TryHackMe - Gaming Server Writeup</title>
+      <link>http://example.com/posts/thm/gaming_server/</link>
+      <pubDate>Sat, 10 Jul 2021 00:00:00 +0000</pubDate>
+      
+      <guid>http://example.com/posts/thm/gaming_server/</guid>
+      
+      <description>Link : https://tryhackme.com/room/gamingserver
+Enumeration First, let’s do an enumeration with the IP address of this machine. I’m gonna run Nmap [Netwok Mapper] to scan any open ports. I’m gonna run this command
+nmap -sC -sV -oN nmap/initial &amp;lt;machine ip&amp;gt; Explaining the nmap scan: -sC	:= scan using nmap default script -sV	:= scan for version -oN := output in normal format Nmap scan shows us. There are 2 ports open ssh and HTTP.</description>
+      
+    </item>
+    
+  </channel>
+</rss>

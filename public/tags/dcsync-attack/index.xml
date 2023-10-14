@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>DCSync-attack on SH∆FIQ ∆IM∆N</title>
+    <link>http://example.com/tags/dcsync-attack/</link>
+    <description>Recent content in DCSync-attack on SH∆FIQ ∆IM∆N</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-gb</language>
+    <lastBuildDate>Wed, 21 Jul 2021 00:00:00 +0000</lastBuildDate><atom:link href="http://example.com/tags/dcsync-attack/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>HackTheBox - Pathfinder Writeup</title>
+      <link>http://example.com/posts/htb/pathfinder/</link>
+      <pubDate>Wed, 21 Jul 2021 00:00:00 +0000</pubDate>
+      
+      <guid>http://example.com/posts/htb/pathfinder/</guid>
+      
+      <description>Enumeration scan top 1000 ports nmap -sC -sV -oN nmap/initial 10.10.10.30 the result # Nmap 7.91 scan initiated Sat Jul 10 02:31:44 2021 as: nmap -sC -sV -oN nmap/initial 10.10.10.30 Nmap scan report for 10.10.10.30 Host is up (0.34s latency). Not shown: 989 closed ports PORT STATE SERVICE VERSION 53/tcp open domain Simple DNS Plus 88/tcp open kerberos-sec Microsoft Windows Kerberos (server time: 2021-07-10 01:40:02Z) 135/tcp open msrpc Microsoft Windows RPC 139/tcp open netbios-ssn Microsoft Windows netbios-ssn 389/tcp open ldap Microsoft Windows Active Directory LDAP (Domain: MEGACORP.</description>
+      
+    </item>
+    
+  </channel>
+</rss>

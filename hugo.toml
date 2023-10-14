@@ -1,0 +1,79 @@
+title = "SH∆FIQ ∆IM∆N"
+baseURL = 'https://shafiqaiman.com'
+languageCode = 'en-us'
+theme = "hugo-blog-awesome"
+
+defaultContentLanguage = "en-gb"
+ignoreErrors = ["additional-script-loading-error"] 
+
+[markup]
+	[markup.highlight]
+		noClasses = false
+	[markup.goldmark.renderer]
+    	unsafe = true
+		[markup.tableOfContents]
+			startLevel = 2
+			endLevel = 4
+			ordered = false
+
+[Languages.en-gb]
+	languageName = "English"
+	languageCode = "en-gb"
+	contentDir = "content/en"
+	weight = 1
+
+  	[Languages.en-gb.menu]
+  	[[Languages.en-gb.menu.main]]
+    	pageRef="/"
+    	name="Home"
+    	url="/"
+    	weight=10
+	[[Languages.en-gb.menu.main]]
+    	pageRef="posts"
+    	name="Posts"
+    	url="/posts/"
+    	weight=20
+	[[Languages.en-gb.menu.main]]
+		pageRef="tags"
+		name="Tags"
+		url="/tags/"
+		weight=30
+    
+[Languages.en-gb.params]
+  	sitename = "SH∆FIQ ∆IM∆N"
+  	defaultColor = "dark"
+  	description = "shafiqaiman.com is a cybersecurity/ethical hacking website that focus on publishing of writeup in HacktheBox, Tryhackme and other online CTF (capture the flag) challenge."
+  	mainSections = ['posts']
+  	toc = true 
+  	goToTop = true 
+  	additionalScripts = ['js/custom.js', 'js/custom-2.js']
+  	dateFormat = "" 
+  	rssFeedDescription = "summary" 
+
+[Languages.en-gb.params.author] 
+  	intro = "SH∆FIQ ∆IM∆N"
+  	name = "shafiqaiman"
+  	description = "Nothing much..."
+
+[Languages.en-gb.params.webmanifest]
+  	name = "sitename" 
+  	short_name = "sitename" 
+  	start_url = "/" 
+  	theme_color = "#434648" 
+  	background_color = "#fff" 
+  	display = "standalone"
+
+[params.browserconfig]
+  	TileColor = "#2d89ef" 
+
+[[params.socialIcons]]
+	name = "github"
+	url = "https://github.com/shafiqaimanx"
+
+[[params.socialIcons]]
+	name = "twitter"
+	url = "https://twitter.com/_shafiqaiman_"
+
+[[params.socialIcons]]
+	name = "Rss"
+	url = "index.xml"

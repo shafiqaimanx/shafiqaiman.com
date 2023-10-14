@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="en-gb"><head><meta charset="utf-8">
+<meta http-equiv="content-type" content="text/html">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title itemprop="name">HackTheBox - Paper Writeup | SH∆FIQ ∆IM∆N</title>
+<meta property="og:title" content="HackTheBox - Paper Writeup | SH∆FIQ ∆IM∆N" />
+<meta name="twitter:title" content="HackTheBox - Paper Writeup | SH∆FIQ ∆IM∆N" />
+<meta itemprop="name" content="HackTheBox - Paper Writeup | SH∆FIQ ∆IM∆N" />
+<meta name="application-name" content="HackTheBox - Paper Writeup | SH∆FIQ ∆IM∆N" />
+<meta property="og:site_name" content="SH∆FIQ ∆IM∆N" />
+
+<meta name="description" content="Minimal Hugo blog theme with light and dark mode support">
+<meta itemprop="description" content="Minimal Hugo blog theme with light and dark mode support" />
+<meta property="og:description" content="Minimal Hugo blog theme with light and dark mode support" />
+<meta name="twitter:description" content="Minimal Hugo blog theme with light and dark mode support" />
+
+<meta property="og:locale" content="en-gb" />
+<meta name="language" content="en-gb" />
+
+
+
+  <meta itemprop="image" content="http://example.com" />
+  <meta property="og:image" content="http://example.com" />
+  <meta name="twitter:image" content="http://example.com" />
+  <meta name="twitter:image:src" content="http://example.com" />
+
+
+
+
+    
+    
+    
+    
+
+    <meta property="og:type" content="article" />
+    <meta property="og:article:published_time" content=2022-06-19T00:00:00Z />
+    <meta property="article:published_time" content=2022-06-19T00:00:00Z />
+
+    
+
+    
+
+    <script defer type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "Article",
+        "headline": "HackTheBox - Paper Writeup",
+        "author": {
+        "@type": "Person",
+        "name": ""
+        },
+        "datePublished": "2022-06-19",
+        "description": "",
+        "wordCount":  951 ,
+        "mainEntityOfPage": "True",
+        "dateModified": "2022-06-19",
+        "image": {
+        "@type": "imageObject",
+        "url": ""
+        },
+        "publisher": {
+        "@type": "Organization",
+        "name": "SH∆FIQ ∆IM∆N"
+        }
+    }
+    </script>
+
+
+<meta name="generator" content="Hugo 0.119.0">
+
+    
+
+    <link rel="canonical" href="http://example.com/posts/htb/paper/">
+    <link href="/style.min.b7e4bda148ee8a6b6e7d052cb6d77374a2dca955a40352c3ccf576dc5f33af2c.css" rel="stylesheet">
+    <link href="/code-highlight.min.706d31975fec544a864cb7f0d847a73ea55ca1df91bf495fd12a177138d807cf.css" rel="stylesheet">
+
+    
+    <link rel="apple-touch-icon" sizes="180x180" href="/icons/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/icons/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/icons/favicon-16x16.png">
+    <link rel="mask-icon" href="/icons/safari-pinned-tab.svg">
+    <link rel="shortcut icon" href="/favicon.ico">
+
+
+
+
+<link rel="manifest" href="http://example.com/site.webmanifest">
+
+<meta name="msapplication-config" content="/browserconfig.xml">
+<meta name="msapplication-TileColor" content="#2d89ef">
+<meta name="theme-color" content="#434648">
+
+    
+    <link rel="icon" type="image/svg+xml" href="/icons/favicon.svg">
+
+    
+    </head>
+<body data-theme = "dark" class="notransition">
+
+<script src="/js/theme.min.8961c317c5b88b953fe27525839672c9343f1058ab044696ca225656c8ba2ab0.js" integrity="sha256-iWHDF8W4i5U/4nUlg5ZyyTQ/EFirBEaWyiJWVsi6KrA="></script>
+
+<div class="navbar" role="navigation">
+    <nav class="menu" aria-label="Main Navigation">
+        <a href="http://example.com/" class="logo">
+            <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" 
+viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" 
+stroke-linejoin="round" class="feather feather-home">
+<title>Home</title>
+<path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+<polyline points="9 22 9 12 15 12 15 22"></polyline>
+</svg>
+        </a>
+        <input type="checkbox" id="menu-trigger" class="menu-trigger" />
+        <label for="menu-trigger">
+            <span class="menu-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" stroke="currentColor" fill="none" viewBox="0 0 14 14"><title>Menu</title><path stroke-linecap="round" stroke-linejoin="round" d="M10.595 7L3.40726 7"></path><path stroke-linecap="round" stroke-linejoin="round" d="M10.5096 3.51488L3.49301 3.51488"></path><path stroke-linecap="round" stroke-linejoin="round" d="M10.5096 10.4851H3.49301"></path><path stroke-linecap="round" stroke-linejoin="round" d="M0.5 12.5V1.5C0.5 0.947715 0.947715 0.5 1.5 0.5H12.5C13.0523 0.5 13.5 0.947715 13.5 1.5V12.5C13.5 13.0523 13.0523 13.5 12.5 13.5H1.5C0.947715 13.5 0.5 13.0523 0.5 12.5Z"></path></svg>
+            </span>
+        </label>
+
+        <div class="trigger">
+            <ul class="trigger-container">
+                
+                
+                <li>
+                    <a class="menu-link " href="/">
+                        Home
+                    </a>
+                    
+                </li>
+                
+                <li>
+                    <a class="menu-link active" href="/posts/">
+                        Posts
+                    </a>
+                    
+                </li>
+                
+                <li>
+                    <a class="menu-link " href="/about/">
+                        About
+                    </a>
+                    
+                </li>
+                
+                <li>
+                    <a class="menu-link " href="/tags/">
+                        Tags
+                    </a>
+                    
+                </li>
+                
+                <li>
+                    <a class="menu-link " href="/search/">
+                        Search
+                    </a>
+                    
+                </li>
+                
+                <li class="menu-separator">
+                    <span>|</span>
+                </li>
+                
+                
+            </ul>
+            <a id="mode" href="#">
+                <svg xmlns="http://www.w3.org/2000/svg" class="mode-sunny" width="21" height="21" viewBox="0 0 14 14" stroke-width="1">
+<title>LIGHT</title><g><circle cx="7" cy="7" r="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"></circle><line x1="7" y1="0.5" x2="7" y2="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="2.4" y1="2.4" x2="3.82" y2="3.82" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="0.5" y1="7" x2="2.5" y2="7" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="2.4" y1="11.6" x2="3.82" y2="10.18" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="7" y1="13.5" x2="7" y2="11.5" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="11.6" y1="11.6" x2="10.18" y2="10.18" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="13.5" y1="7" x2="11.5" y2="7" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="11.6" y1="2.4" x2="10.18" y2="3.82" fill="none" stroke-linecap="round" stroke-linejoin="round"></line></g></svg>
+                <svg xmlns="http://www.w3.org/2000/svg" class="mode-moon" width="21" height="21" viewBox="0 0 14 14" stroke-width="1">
+<title>DARK</title><g><circle cx="7" cy="7" r="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"></circle><line x1="7" y1="0.5" x2="7" y2="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="2.4" y1="2.4" x2="3.82" y2="3.82" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="0.5" y1="7" x2="2.5" y2="7" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="2.4" y1="11.6" x2="3.82" y2="10.18" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="7" y1="13.5" x2="7" y2="11.5" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="11.6" y1="11.6" x2="10.18" y2="10.18" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="13.5" y1="7" x2="11.5" y2="7" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="11.6" y1="2.4" x2="10.18" y2="3.82" fill="none" stroke-linecap="round" stroke-linejoin="round"></line></g></svg>
+            </a>
+        </div>
+    </nav>
+</div>
+
+<div class="wrapper post">
+    <main class="page-content" aria-label="Content">
+        <article>
+            <header class="header">
+                <h1 class="header-title">HackTheBox - Paper Writeup</h1>
+                
+                
+                <div class="post-meta">
+                    <time datetime="2022-06-19T00:00:00&#43;00:00" itemprop="datePublished"> 19 Jun 2022 </time>
+                </div>
+                
+            </header>
+                <details class="toc">
+                    <summary><b>Table of Contents</b></summary>
+                    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#nmap">Nmap</a></li>
+    <li><a href="#httphttps">Http/HttpS</a>
+      <ul>
+        <li><a href="#gobuster">Gobuster</a></li>
+        <li><a href="#header-x-backend-server">Header: X-Backend-Server</a></li>
+        <li><a href="#http-officepaper">Http: office.paper</a></li>
+      </ul>
+    </li>
+    <li><a href="#cve-2019-17671">CVE-2019-17671</a>
+      <ul>
+        <li><a href="#http-chatofficepaper">Http: chat.office.paper</a></li>
+      </ul>
+    </li>
+    <li><a href="#recyclops">Recyclops</a>
+      <ul>
+        <li><a href="#recyclops-path-traversal">Recyclops: path traversal</a></li>
+      </ul>
+    </li>
+    <li><a href="#hubot">Hubot</a>
+      <ul>
+        <li><a href="#hubot-env">Hubot: /.env</a></li>
+        <li><a href="#hubot-run-commandfont">Hubot: RUN command</font></a></li>
+      </ul>
+    </li>
+    <li><a href="#peass-ng-linpeassh">PEASS-ng: linpeas.sh</a></li>
+    <li><a href="#cve-2021-3560">CVE-2021-3560</a></li>
+  </ul>
+</nav>
+                </details>
+                <div class="page-content">
+                <h2 id="nmap">Nmap</h2>
+<p>Let&rsquo;s scan the IP Address first by using Nmap.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="line"><span class="cl"><span class="o">#</span><span class="w"> </span><span class="n">Nmap</span><span class="w"> </span><span class="mi">7</span><span class="p">.</span><span class="mi">92</span><span class="w"> </span><span class="n">scan</span><span class="w"> </span><span class="n">initiated</span><span class="w"> </span><span class="n">Wed</span><span class="w"> </span><span class="n">Feb</span><span class="w">  </span><span class="mi">9</span><span class="w"> </span><span class="mi">07</span><span class="p">:</span><span class="mi">45</span><span class="p">:</span><span class="mi">26</span><span class="w"> </span><span class="mi">2022</span><span class="w"> </span><span class="k">as</span><span class="p">:</span><span class="w"> </span><span class="n">nmap</span><span class="w"> </span><span class="o">-</span><span class="n">sC</span><span class="w"> </span><span class="o">-</span><span class="n">sV</span><span class="w"> </span><span class="o">-</span><span class="k">oN</span><span class="w"> </span><span class="n">nmap</span><span class="o">/</span><span class="n">paper</span><span class="w"> </span><span class="mi">10</span><span class="p">.</span><span class="mi">129</span><span class="p">.</span><span class="mi">156</span><span class="p">.</span><span class="mi">206</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="n">Nmap</span><span class="w"> </span><span class="n">scan</span><span class="w"> </span><span class="n">report</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="mi">10</span><span class="p">.</span><span class="mi">129</span><span class="p">.</span><span class="mi">156</span><span class="p">.</span><span class="mi">206</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="k">Host</span><span class="w"> </span><span class="k">is</span><span class="w"> </span><span class="n">up</span><span class="w"> </span><span class="p">(</span><span class="mi">0</span><span class="p">.</span><span class="mi">23</span><span class="n">s</span><span class="w"> </span><span class="n">latency</span><span class="p">).</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="k">Not</span><span class="w"> </span><span class="n">shown</span><span class="p">:</span><span class="w"> </span><span class="mi">997</span><span class="w"> </span><span class="n">closed</span><span class="w"> </span><span class="n">tcp</span><span class="w"> </span><span class="n">ports</span><span class="w"> </span><span class="p">(</span><span class="k">reset</span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="n">PORT</span><span class="w">    </span><span class="k">STATE</span><span class="w"> </span><span class="n">SERVICE</span><span class="w">  </span><span class="k">VERSION</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="mi">22</span><span class="o">/</span><span class="n">tcp</span><span class="w">  </span><span class="k">open</span><span class="w">  </span><span class="n">ssh</span><span class="w">      </span><span class="n">OpenSSH</span><span class="w"> </span><span class="mi">8</span><span class="p">.</span><span class="mi">0</span><span class="w"> </span><span class="p">(</span><span class="n">protocol</span><span class="w"> </span><span class="mi">2</span><span class="p">.</span><span class="mi">0</span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="o">|</span><span class="w"> </span><span class="n">ssh</span><span class="o">-</span><span class="n">hostkey</span><span class="p">:</span><span class="w"> 
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="o">|</span><span class="w">   </span><span class="mi">2048</span><span class="w"> </span><span class="mi">10</span><span class="p">:</span><span class="mi">05</span><span class="p">:</span><span class="n">ea</span><span class="p">:</span><span class="mi">50</span><span class="p">:</span><span class="mi">56</span><span class="p">:</span><span class="n">a6</span><span class="p">:</span><span class="mi">00</span><span class="p">:</span><span class="n">cb</span><span class="p">:</span><span class="mi">1</span><span class="k">c</span><span class="p">:</span><span class="mi">9</span><span class="k">c</span><span class="p">:</span><span class="mi">93</span><span class="p">:</span><span class="n">df</span><span class="p">:</span><span class="mi">5</span><span class="n">f</span><span class="p">:</span><span class="mi">83</span><span class="p">:</span><span class="n">e0</span><span class="p">:</span><span class="mi">64</span><span class="w"> </span><span class="p">(</span><span class="n">RSA</span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="o">|</span><span class="w">   </span><span class="mi">256</span><span class="w"> </span><span class="mi">58</span><span class="p">:</span><span class="mi">8</span><span class="k">c</span><span class="p">:</span><span class="mi">82</span><span class="p">:</span><span class="mi">1</span><span class="k">c</span><span class="p">:</span><span class="n">c6</span><span class="p">:</span><span class="mi">63</span><span class="p">:</span><span class="mi">2</span><span class="n">a</span><span class="p">:</span><span class="mi">83</span><span class="p">:</span><span class="mi">87</span><span class="p">:</span><span class="mi">5</span><span class="k">c</span><span class="p">:</span><span class="mi">2</span><span class="n">f</span><span class="p">:</span><span class="mi">2</span><span class="n">b</span><span class="p">:</span><span class="mi">4</span><span class="n">f</span><span class="p">:</span><span class="mi">4</span><span class="n">d</span><span class="p">:</span><span class="n">c3</span><span class="p">:</span><span class="mi">79</span><span class="w"> </span><span class="p">(</span><span class="n">ECDSA</span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="o">|</span><span class="n">_</span><span class="w">  </span><span class="mi">256</span><span class="w"> </span><span class="mi">31</span><span class="p">:</span><span class="mi">78</span><span class="p">:</span><span class="n">af</span><span class="p">:</span><span class="n">d1</span><span class="p">:</span><span class="mi">3</span><span class="n">b</span><span class="p">:</span><span class="n">c4</span><span class="p">:</span><span class="mi">2</span><span class="n">e</span><span class="p">:</span><span class="mi">9</span><span class="n">d</span><span class="p">:</span><span class="mi">60</span><span class="p">:</span><span class="mi">4</span><span class="n">e</span><span class="p">:</span><span class="n">eb</span><span class="p">:</span><span class="mi">5</span><span class="n">d</span><span class="p">:</span><span class="mi">03</span><span class="p">:</span><span class="n">ec</span><span class="p">:</span><span class="n">a0</span><span class="p">:</span><span class="mi">22</span><span class="w"> </span><span class="p">(</span><span class="n">ED25519</span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="mi">80</span><span class="o">/</span><span class="n">tcp</span><span class="w">  </span><span class="k">open</span><span class="w">  </span><span class="n">http</span><span class="w">     </span><span class="n">Apache</span><span class="w"> </span><span class="n">httpd</span><span class="w"> </span><span class="mi">2</span><span class="p">.</span><span class="mi">4</span><span class="p">.</span><span class="mi">37</span><span class="w"> </span><span class="p">((</span><span class="n">centos</span><span class="p">)</span><span class="w"> </span><span class="n">OpenSSL</span><span class="o">/</span><span class="mi">1</span><span class="p">.</span><span class="mi">1</span><span class="p">.</span><span class="mi">1</span><span class="n">k</span><span class="w"> </span><span class="n">mod_fcgid</span><span class="o">/</span><span class="mi">2</span><span class="p">.</span><span class="mi">3</span><span class="p">.</span><span class="mi">9</span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="o">|</span><span class="n">_http</span><span class="o">-</span><span class="n">generator</span><span class="p">:</span><span class="w"> </span><span class="n">HTML</span><span class="w"> </span><span class="n">Tidy</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="n">HTML5</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="n">Linux</span><span class="w"> </span><span class="k">version</span><span class="w"> </span><span class="mi">5</span><span class="p">.</span><span class="mi">7</span><span class="p">.</span><span class="mi">28</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="o">|</span><span class="w"> </span><span class="n">http</span><span class="o">-</span><span class="n">methods</span><span class="p">:</span><span class="w"> 
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="o">|</span><span class="n">_</span><span class="w">  </span><span class="n">Potentially</span><span class="w"> </span><span class="n">risky</span><span class="w"> </span><span class="n">methods</span><span class="p">:</span><span class="w"> </span><span class="n">TRACE</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="o">|</span><span class="n">_http</span><span class="o">-</span><span class="n">title</span><span class="p">:</span><span class="w"> </span><span class="n">HTTP</span><span class="w"> </span><span class="n">Server</span><span class="w"> </span><span class="n">Test</span><span class="w"> </span><span class="n">Page</span><span class="w"> </span><span class="n">powered</span><span class="w"> </span><span class="k">by</span><span class="w"> </span><span class="n">CentOS</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="o">|</span><span class="n">_http</span><span class="o">-</span><span class="n">server</span><span class="o">-</span><span class="n">header</span><span class="p">:</span><span class="w"> </span><span class="n">Apache</span><span class="o">/</span><span class="mi">2</span><span class="p">.</span><span class="mi">4</span><span class="p">.</span><span class="mi">37</span><span class="w"> </span><span class="p">(</span><span class="n">centos</span><span class="p">)</span><span class="w"> </span><span class="n">OpenSSL</span><span class="o">/</span><span class="mi">1</span><span class="p">.</span><span class="mi">1</span><span class="p">.</span><span class="mi">1</span><span class="n">k</span><span class="w"> </span><span class="n">mod_fcgid</span><span class="o">/</span><span class="mi">2</span><span class="p">.</span><span class="mi">3</span><span class="p">.</span><span class="mi">9</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="mi">443</span><span class="o">/</span><span class="n">tcp</span><span class="w"> </span><span class="k">open</span><span class="w">  </span><span class="n">ssl</span><span class="o">/</span><span class="n">http</span><span class="w"> </span><span class="n">Apache</span><span class="w"> </span><span class="n">httpd</span><span class="w"> </span><span class="mi">2</span><span class="p">.</span><span class="mi">4</span><span class="p">.</span><span class="mi">37</span><span class="w"> </span><span class="p">((</span><span class="n">centos</span><span class="p">)</span><span class="w"> </span><span class="n">OpenSSL</span><span class="o">/</span><span class="mi">1</span><span class="p">.</span><span class="mi">1</span><span class="p">.</span><span class="mi">1</span><span class="n">k</span><span class="w"> </span><span class="n">mod_fcgid</span><span class="o">/</span><span class="mi">2</span><span class="p">.</span><span class="mi">3</span><span class="p">.</span><span class="mi">9</span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="o">|</span><span class="n">_ssl</span><span class="o">-</span><span class="nb">date</span><span class="p">:</span><span class="w"> </span><span class="n">TLS</span><span class="w"> </span><span class="n">randomness</span><span class="w"> </span><span class="n">does</span><span class="w"> </span><span class="k">not</span><span class="w"> </span><span class="n">represent</span><span class="w"> </span><span class="n">time</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="o">|</span><span class="w"> </span><span class="n">http</span><span class="o">-</span><span class="n">methods</span><span class="p">:</span><span class="w"> 
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="o">|</span><span class="n">_</span><span class="w">  </span><span class="n">Potentially</span><span class="w"> </span><span class="n">risky</span><span class="w"> </span><span class="n">methods</span><span class="p">:</span><span class="w"> </span><span class="n">TRACE</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="o">|</span><span class="n">_http</span><span class="o">-</span><span class="n">generator</span><span class="p">:</span><span class="w"> </span><span class="n">HTML</span><span class="w"> </span><span class="n">Tidy</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="n">HTML5</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="n">Linux</span><span class="w"> </span><span class="k">version</span><span class="w"> </span><span class="mi">5</span><span class="p">.</span><span class="mi">7</span><span class="p">.</span><span class="mi">28</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="o">|</span><span class="n">_http</span><span class="o">-</span><span class="n">title</span><span class="p">:</span><span class="w"> </span><span class="n">HTTP</span><span class="w"> </span><span class="n">Server</span><span class="w"> </span><span class="n">Test</span><span class="w"> </span><span class="n">Page</span><span class="w"> </span><span class="n">powered</span><span class="w"> </span><span class="k">by</span><span class="w"> </span><span class="n">CentOS</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="o">|</span><span class="w"> </span><span class="n">ssl</span><span class="o">-</span><span class="n">cert</span><span class="p">:</span><span class="w"> </span><span class="n">Subject</span><span class="p">:</span><span class="w"> </span><span class="n">commonName</span><span class="o">=</span><span class="n">localhost</span><span class="p">.</span><span class="n">localdomain</span><span class="o">/</span><span class="n">organizationName</span><span class="o">=</span><span class="n">Unspecified</span><span class="o">/</span><span class="n">countryName</span><span class="o">=</span><span class="n">US</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="o">|</span><span class="w"> </span><span class="n">Subject</span><span class="w"> </span><span class="n">Alternative</span><span class="w"> </span><span class="n">Name</span><span class="p">:</span><span class="w"> </span><span class="n">DNS</span><span class="p">:</span><span class="n">localhost</span><span class="p">.</span><span class="n">localdomain</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="o">|</span><span class="w"> </span><span class="k">Not</span><span class="w"> </span><span class="k">valid</span><span class="w"> </span><span class="k">before</span><span class="p">:</span><span class="w"> </span><span class="mi">2021</span><span class="o">-</span><span class="mi">07</span><span class="o">-</span><span class="mi">03</span><span class="n">T08</span><span class="p">:</span><span class="mi">52</span><span class="p">:</span><span class="mi">34</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="o">|</span><span class="n">_Not</span><span class="w"> </span><span class="k">valid</span><span class="w"> </span><span class="k">after</span><span class="p">:</span><span class="w">  </span><span class="mi">2022</span><span class="o">-</span><span class="mi">07</span><span class="o">-</span><span class="mi">08</span><span class="n">T10</span><span class="p">:</span><span class="mi">32</span><span class="p">:</span><span class="mi">34</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="o">|</span><span class="n">_http</span><span class="o">-</span><span class="n">server</span><span class="o">-</span><span class="n">header</span><span class="p">:</span><span class="w"> </span><span class="n">Apache</span><span class="o">/</span><span class="mi">2</span><span class="p">.</span><span class="mi">4</span><span class="p">.</span><span class="mi">37</span><span class="w"> </span><span class="p">(</span><span class="n">centos</span><span class="p">)</span><span class="w"> </span><span class="n">OpenSSL</span><span class="o">/</span><span class="mi">1</span><span class="p">.</span><span class="mi">1</span><span class="p">.</span><span class="mi">1</span><span class="n">k</span><span class="w"> </span><span class="n">mod_fcgid</span><span class="o">/</span><span class="mi">2</span><span class="p">.</span><span class="mi">3</span><span class="p">.</span><span class="mi">9</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="o">|</span><span class="w"> </span><span class="n">tls</span><span class="o">-</span><span class="n">alpn</span><span class="p">:</span><span class="w"> 
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="o">|</span><span class="n">_</span><span class="w">  </span><span class="n">http</span><span class="o">/</span><span class="mi">1</span><span class="p">.</span><span class="mi">1</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="n">Service</span><span class="w"> </span><span class="n">detection</span><span class="w"> </span><span class="n">performed</span><span class="p">.</span><span class="w"> </span><span class="n">Please</span><span class="w"> </span><span class="n">report</span><span class="w"> </span><span class="k">any</span><span class="w"> </span><span class="n">incorrect</span><span class="w"> </span><span class="n">results</span><span class="w"> </span><span class="k">at</span><span class="w"> </span><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">nmap</span><span class="p">.</span><span class="n">org</span><span class="o">/</span><span class="n">submit</span><span class="o">/</span><span class="w"> </span><span class="p">.</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="o">#</span><span class="w"> </span><span class="n">Nmap</span><span class="w"> </span><span class="n">done</span><span class="w"> </span><span class="k">at</span><span class="w"> </span><span class="n">Wed</span><span class="w"> </span><span class="n">Feb</span><span class="w">  </span><span class="mi">9</span><span class="w"> </span><span class="mi">07</span><span class="p">:</span><span class="mi">45</span><span class="p">:</span><span class="mi">54</span><span class="w"> </span><span class="mi">2022</span><span class="w"> </span><span class="c1">-- 1 IP address (1 host up) scanned in 27.74 seconds
+</span></span></span></code></pre></div><p>Only <code>3</code> open ports</p>
+<h2 id="httphttps">Http/HttpS</h2>
+<p>From the Nmap scan result above, the <code>port 80,443</code> is open. So, like a normal human being.  I&rsquo;m navigating through it using a web browser :)</p>
+<p><img src="webpage-1.png" alt="apache default page after installation"></p>
+<p>Well, that&rsquo;s not what I expected. It shows the default page after installation in <code>CentOS</code>.</p>
+<h3 id="gobuster">Gobuster</h3>
+<p>When I found a webpage, the first thing I&rsquo;ll do is run the <a href="https://github.com/OJ/gobuster">gobuster</a> to find any hidden directory. Unfortunately, I can&rsquo;t find anything useful.</p>
+<h3 id="header-x-backend-server">Header: X-Backend-Server</h3>
+<p>To be honest, I&rsquo;m stuck and don&rsquo;t know what to do. Then, I remember that I didn&rsquo;t even check the <code>header</code>. I&rsquo;m going to check it using the <code>curl</code> command. OH WOW! the <a href="https://docs.gitlab.com/ee/user/application_security/dast/checks/16.4.html">X-Backend-Server</a> just exposes the hostname called <code>office.paper</code>. So, I&rsquo;ll add the hostname into the <code>/etc/hosts</code> file.</p>
+<p><img src="curl-head.png" alt="running the curl command to get the header of the server"></p>
+<p><img src="etc-hosts-office-paper.png" alt="adding the hostname in etc host file"></p>
+<h3 id="http-officepaper">Http: office.paper</h3>
+<p>Then, I navigate to <code>http://office.paper</code>. Turns out, it&rsquo;s a blog. Down to the footer, it says <code>Proudly Powered by WordPress</code> and this indicates it&rsquo;s using <a href="https://wordpress.org/">WordPress</a> as <a href="https://en.wikipedia.org/wiki/Content_management_system">CMS</a>.</p>
+<p><img src="office-paper-home.png" alt="office.paper using wordpress website"></p>
+<p>The first thing I&rsquo;ll do is start messing around with it. However, one comment sticks out. It says something about <code>drafts</code> is not secure and should be deleted ASAP.</p>
+<p><img src="office-paper-drafts.png" alt="comment says the drafts is not secure"></p>
+<h2 id="cve-2019-17671">CVE-2019-17671</h2>
+<p>As the comment above shown. The <code>drafts</code> section is not secure. So, with this information. I&rsquo;m searching on the net about it and found this <a href="https://wpscan.com/vulnerability/3413b879-785f-4c9f-aa8a-5a4a1d5e0ba2">article</a> with <code>PoC</code> and it got assigned as <a href="https://nvd.nist.gov/vuln/detail/CVE-2019-17671">CVE-2019-17671</a>.</p>
+<blockquote>
+<p>CVE description: In WordPress before 5.2.4, unauthenticated viewing of certain content is possible because the static query property is mishandled.</p>
+</blockquote>
+<p>So, I&rsquo;ll try to read the <code>secret draft</code> with this URL <code>http://office.paper/?static=1</code> and it&rsquo;s successfully retrieved. After I read it, I found the <code>secret registration URL</code> that leads into the <code>chat</code> subdomain. Like always, I&rsquo;ll add it into the <code>/etc/hosts</code> file.</p>
+<p><img src="office-paper-drafts-secret.png" alt="reading the unsecure draft and found secret links with new hostname"></p>
+<p><img src="etc-hosts-chat-office-paper.png" alt="adding the new hostname found in etc host file"></p>
+<h3 id="http-chatofficepaper">Http: chat.office.paper</h3>
+<p>I&rsquo;m copying and pasting the URL in my web browser and being greeted by <a href="https://rocket.chat/">rocket.chat</a> registration page. Well, I&rsquo;m registering a new account and taking a look inside it. Turns out, it&rsquo;s just a chat app and I can&rsquo;t find anything useful. However, it&rsquo;s has a <code>bot</code> called <code>recyclops</code> that can be interacted with.</p>
+<p><img src="recyclops-general.png" alt="spotting bot called recyclops in rocket.chat"></p>
+<h2 id="recyclops">Recyclops</h2>
+<p>To interact with the bot, first, click the <code>bot's profile</code> and click the <code>direct message</code> button. So, I&rsquo;ll try the <code>help</code> command first. There is some interesting stuff this bot can do. However, I&rsquo;m interested in the <code>Files</code> and <code>List</code> commands.</p>
+<p><img src="recyclops-help.png" alt="list all commands in a recyclops bot"></p>
+<h3 id="recyclops-path-traversal">Recyclops: path traversal</h3>
+<p>To invoke the <code>list</code> command, type <code>recyclops list</code>. It&rsquo;s just giving me a listing of the <code>/sales/</code> directory. However, this makes me wonder, can I make it list another directory as <a href="https://owasp.org/www-community/attacks/Path_Traversal">path traversal</a> the answer is YES!. Here&rsquo;s the command that I put in, <code>recyclops list ..</code></p>
+<p><img src="recyclops-list-dot2.png" alt="recyclops list all directory in a server"></p>
+<h2 id="hubot">Hubot</h2>
+<p>There is a <code>.ssh</code> directory present and the Nmap scan shows, that this machine has <code>port 22</code> open. Unfortunately, there&rsquo;s nothing in that directory. On top of that, I found the directory called <code>hubot</code>. It&rsquo;s a robot for a chat room. So, I assumed <code>recyclops</code> are based on <a href="https://hubot.github.com/">hubot</a>.</p>
+<h3 id="hubot-env">Hubot: /.env</h3>
+<p>After listing the <code>hubot</code> directory. The file called <code>.env</code> really stands out above the rest. Here&rsquo;s the command that I put in <code>recyclops file ../hubot/.env</code> to read the file. Finally, I found something useful this time. It is a password belonging to the <code>recyclops</code> user.</p>
+<p><em>Note: these creds also share with the <code>dwight</code> user and can be also <code>SSH</code> into the box</em></p>
+<p><img src="hubot-env-pass.png" alt="recyclops reveals the credentials"></p>
+<h3 id="hubot-run-commandfont">Hubot: RUN command</font></h3>
+<p>Futher enumeration, I found the <a href="https://en.wikipedia.org/wiki/JavaScript">javascript</a> file called <code>run.js</code> in the <code>hubot/scripts</code> directory. When I inspect the file, it executes the command with the <code>RUN</code> function. Well, let me try put the simple bash reverse shell. YES! successfully get the foothold as a <code>dwight</code> user.</p>
+<p><img src="recyclops-run.png" alt="running the bash reverse shell in rocket.chat using recyclops run command"></p>
+<p><img src="foothold-as-dwight.png" alt="catch the reverse shell using netcat"></p>
+<h2 id="peass-ng-linpeassh">PEASS-ng: linpeas.sh</h2>
+<p>I&rsquo;m already in as <code>dwight</code>. First, I&rsquo;ll check the sudo permission with <code>sudo -l</code> using the credentials found earliear. Unfortunatelly, <code>dwight</code> can&rsquo;t run <code>sudo</code> in this machine. So, to make it quick, I&rsquo;m going to run <a href="https://github.com/carlospolop/PEASS-ng">linpeas</a>.</p>
+<p><img src="run-the-linpeas-as-dwight.png" alt="upload the linpeas script in the target machine and run it"></p>
+<h2 id="cve-2021-3560">CVE-2021-3560</h2>
+<p>The linpeas script is already done running. OH WOW! it says this machine is vulnerable to <a href="https://nvd.nist.gov/vuln/detail/CVE-2021-3560">CVE-2021-3560</a>. The funny thing is when I searched on the internet about this <a href="https://en.wikipedia.org/wiki/Common_Vulnerabilities_and_Exposures">CVE</a>. I found <a href="https://github.com/secnigma">secnigma github repos</a> and this machine was created by <a href="https://twitter.com/secnigma">secnigma</a>.</p>
+<blockquote>
+<p>CVE description: It was found that polkit could be tricked into bypassing the credential checks for D-Bus requests, elevating the privileges of the requestor to the root user.</p>
+</blockquote>
+<p><img src="linpeas-find-CVE-2021-3560.png" alt="linpeas found that this machine is vulnerable to CVE-2021-3560"></p>
+<p>The <a href="https://github.com/secnigma/CVE-2021-3560-Polkit-Privilege-Esclation">github repos</a> itself is about bash <code>PoC</code> script. Also, the original research is done by <a href="https://twitter.com/kevin_backhouse">Kevin Backhouse</a>, and here&rsquo;s <a href="https://github.blog/2021-06-10-privilege-escalation-polkit-root-on-linux-with-bug/">his blog post</a> talking about it. Well, it&rsquo;s time to run the <code>PoC</code> script. <br>
+<em>Disclaimer: <strong>MULTIPLE TRIES ARE USUALLY REQUIRED</strong> for this exploit to work.</em></p>
+<p><img src="download-the-poc-script-on-victim-machine.png" alt="upload proof of concept bash script in the target machine and make it executable"></p>
+<p><img src="run-the-script-and-get-the-root-shell.png" alt="running the proof of concept bash script and get the root shell"></p>
+<p>I&rsquo;M ROOT BABYYY!</p>
+
+            </div>
+        </article></main>
+</div>
+<footer class="footer">
+    <span class="footer_item"> </span>
+    &nbsp;
+
+    <div class="footer_social-icons">
+<a href="https://github.com/hugo-sid" target="_blank" rel="noopener noreferrer me"
+    title="Github">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+    stroke-linecap="round" stroke-linejoin="round">
+    <path
+        d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22">
+    </path>
+</svg>
+</a>
+<a href="https://twitter.com" target="_blank" rel="noopener noreferrer me"
+    title="Twitter">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+    stroke-linecap="round" stroke-linejoin="round">
+    <path
+        d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z">
+    </path>
+</svg>
+</a>
+<a href="index.xml" target="_blank" rel="noopener noreferrer me"
+    title="Rss">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+    stroke-linecap="round" stroke-linejoin="round">
+    <path d="M4 11a9 9 0 0 1 9 9" />
+    <path d="M4 4a16 16 0 0 1 16 16" />
+    <circle cx="5" cy="19" r="1" />
+</svg>
+</a>
+</div>
+    <small class="footer_copyright">
+        © 2023 shafiqaiman.
+        Powered by <a href="https://github.com/hugo-sid/hugo-blog-awesome" target="_blank" rel="noopener">Hugo blog awesome</a>.
+    </small>
+</footer><a href="#" title="Go to top" id="totop">
+    <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" fill="currentColor" stroke="currentColor" viewBox="0 96 960 960">
+    <path d="M283 704.739 234.261 656 480 410.261 725.739 656 677 704.739l-197-197-197 197Z"/>
+</svg>
+
+</a>
+
+
+    
+
+
+
+
+    
+    
+        
+    
+
+    
+    
+        
+    
+
+
+
+    
+    <script src="http://example.com/js/main.min.35f435a5d8eac613c52daa28d8af544a4512337d3e95236e4a4978417b8dcb2f.js" integrity="sha256-NfQ1pdjqxhPFLaoo2K9USkUSM30&#43;lSNuSkl4QXuNyy8="></script>
+
+    
+
+</body>
+</html>

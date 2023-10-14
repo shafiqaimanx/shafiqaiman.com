@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>lxd-alpine on SH∆FIQ ∆IM∆N</title>
+    <link>http://example.com/tags/lxd-alpine/</link>
+    <description>Recent content in lxd-alpine on SH∆FIQ ∆IM∆N</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-gb</language>
+    <lastBuildDate>Thu, 29 Jul 2021 00:00:00 +0000</lastBuildDate><atom:link href="http://example.com/tags/lxd-alpine/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>HackTheBox - Included Writeup</title>
+      <link>http://example.com/posts/htb/included/</link>
+      <pubDate>Thu, 29 Jul 2021 00:00:00 +0000</pubDate>
+      
+      <guid>http://example.com/posts/htb/included/</guid>
+      
+      <description>Enumeration scan top 1000 ports nmap -sC -sV -oN nmap/initial 10.10.10.55 the result scan all ports nmap -sC -sV -p- -oN nmap/all_ports 10.10.10.55 the result Open Ports Well, both the Nmap result shows only port 80 just open That&amp;rsquo;s mean this server have a website Local File Inclusion [LFI] Based on the Nmap scan result, This server has a website Let&amp;rsquo;s take a look When I saw this string that had file as parameter I&amp;rsquo;m always thinking Local File Inclusion [LFI] Let&amp;rsquo;s try it with this string: http://10.</description>
+      
+    </item>
+    
+    <item>
+      <title>TryHackMe - Gaming Server Writeup</title>
+      <link>http://example.com/posts/thm/gaming_server/</link>
+      <pubDate>Sat, 10 Jul 2021 00:00:00 +0000</pubDate>
+      
+      <guid>http://example.com/posts/thm/gaming_server/</guid>
+      
+      <description>Link : https://tryhackme.com/room/gamingserver
+Enumeration First, let’s do an enumeration with the IP address of this machine. I’m gonna run Nmap [Netwok Mapper] to scan any open ports. I’m gonna run this command
+nmap -sC -sV -oN nmap/initial &amp;lt;machine ip&amp;gt; Explaining the nmap scan: -sC	:= scan using nmap default script -sV	:= scan for version -oN := output in normal format Nmap scan shows us. There are 2 ports open ssh and HTTP.</description>
+      
+    </item>
+    
+  </channel>
+</rss>

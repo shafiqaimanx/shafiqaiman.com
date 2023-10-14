@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="en-gb"><head><meta charset="utf-8">
+<meta http-equiv="content-type" content="text/html">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title itemprop="name">HackTheBox - Timelapse Writeup | SH∆FIQ ∆IM∆N</title>
+<meta property="og:title" content="HackTheBox - Timelapse Writeup | SH∆FIQ ∆IM∆N" />
+<meta name="twitter:title" content="HackTheBox - Timelapse Writeup | SH∆FIQ ∆IM∆N" />
+<meta itemprop="name" content="HackTheBox - Timelapse Writeup | SH∆FIQ ∆IM∆N" />
+<meta name="application-name" content="HackTheBox - Timelapse Writeup | SH∆FIQ ∆IM∆N" />
+<meta property="og:site_name" content="SH∆FIQ ∆IM∆N" />
+
+<meta name="description" content="Minimal Hugo blog theme with light and dark mode support">
+<meta itemprop="description" content="Minimal Hugo blog theme with light and dark mode support" />
+<meta property="og:description" content="Minimal Hugo blog theme with light and dark mode support" />
+<meta name="twitter:description" content="Minimal Hugo blog theme with light and dark mode support" />
+
+<meta property="og:locale" content="en-gb" />
+<meta name="language" content="en-gb" />
+
+
+
+  <meta itemprop="image" content="http://example.com" />
+  <meta property="og:image" content="http://example.com" />
+  <meta name="twitter:image" content="http://example.com" />
+  <meta name="twitter:image:src" content="http://example.com" />
+
+
+
+
+    
+    
+    
+    
+
+    <meta property="og:type" content="article" />
+    <meta property="og:article:published_time" content=2022-08-21T00:00:00Z />
+    <meta property="article:published_time" content=2022-08-21T00:00:00Z />
+
+    
+
+    
+
+    <script defer type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "Article",
+        "headline": "HackTheBox - Timelapse Writeup",
+        "author": {
+        "@type": "Person",
+        "name": ""
+        },
+        "datePublished": "2022-08-21",
+        "description": "",
+        "wordCount":  1250 ,
+        "mainEntityOfPage": "True",
+        "dateModified": "2022-08-21",
+        "image": {
+        "@type": "imageObject",
+        "url": ""
+        },
+        "publisher": {
+        "@type": "Organization",
+        "name": "SH∆FIQ ∆IM∆N"
+        }
+    }
+    </script>
+
+
+<meta name="generator" content="Hugo 0.119.0">
+
+    
+
+    <link rel="canonical" href="http://example.com/posts/htb/timelapse/">
+    <link href="/style.min.b7e4bda148ee8a6b6e7d052cb6d77374a2dca955a40352c3ccf576dc5f33af2c.css" rel="stylesheet">
+    <link href="/code-highlight.min.706d31975fec544a864cb7f0d847a73ea55ca1df91bf495fd12a177138d807cf.css" rel="stylesheet">
+
+    
+    <link rel="apple-touch-icon" sizes="180x180" href="/icons/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/icons/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/icons/favicon-16x16.png">
+    <link rel="mask-icon" href="/icons/safari-pinned-tab.svg">
+    <link rel="shortcut icon" href="/favicon.ico">
+
+
+
+
+<link rel="manifest" href="http://example.com/site.webmanifest">
+
+<meta name="msapplication-config" content="/browserconfig.xml">
+<meta name="msapplication-TileColor" content="#2d89ef">
+<meta name="theme-color" content="#434648">
+
+    
+    <link rel="icon" type="image/svg+xml" href="/icons/favicon.svg">
+
+    
+    </head>
+<body data-theme = "dark" class="notransition">
+
+<script src="/js/theme.min.8961c317c5b88b953fe27525839672c9343f1058ab044696ca225656c8ba2ab0.js" integrity="sha256-iWHDF8W4i5U/4nUlg5ZyyTQ/EFirBEaWyiJWVsi6KrA="></script>
+
+<div class="navbar" role="navigation">
+    <nav class="menu" aria-label="Main Navigation">
+        <a href="http://example.com/" class="logo">
+            <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" 
+viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" 
+stroke-linejoin="round" class="feather feather-home">
+<title>Home</title>
+<path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+<polyline points="9 22 9 12 15 12 15 22"></polyline>
+</svg>
+        </a>
+        <input type="checkbox" id="menu-trigger" class="menu-trigger" />
+        <label for="menu-trigger">
+            <span class="menu-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" stroke="currentColor" fill="none" viewBox="0 0 14 14"><title>Menu</title><path stroke-linecap="round" stroke-linejoin="round" d="M10.595 7L3.40726 7"></path><path stroke-linecap="round" stroke-linejoin="round" d="M10.5096 3.51488L3.49301 3.51488"></path><path stroke-linecap="round" stroke-linejoin="round" d="M10.5096 10.4851H3.49301"></path><path stroke-linecap="round" stroke-linejoin="round" d="M0.5 12.5V1.5C0.5 0.947715 0.947715 0.5 1.5 0.5H12.5C13.0523 0.5 13.5 0.947715 13.5 1.5V12.5C13.5 13.0523 13.0523 13.5 12.5 13.5H1.5C0.947715 13.5 0.5 13.0523 0.5 12.5Z"></path></svg>
+            </span>
+        </label>
+
+        <div class="trigger">
+            <ul class="trigger-container">
+                
+                
+                <li>
+                    <a class="menu-link " href="/">
+                        Home
+                    </a>
+                    
+                </li>
+                
+                <li>
+                    <a class="menu-link active" href="/posts/">
+                        Posts
+                    </a>
+                    
+                </li>
+                
+                <li>
+                    <a class="menu-link " href="/about/">
+                        About
+                    </a>
+                    
+                </li>
+                
+                <li>
+                    <a class="menu-link " href="/tags/">
+                        Tags
+                    </a>
+                    
+                </li>
+                
+                <li>
+                    <a class="menu-link " href="/search/">
+                        Search
+                    </a>
+                    
+                </li>
+                
+                <li class="menu-separator">
+                    <span>|</span>
+                </li>
+                
+                
+            </ul>
+            <a id="mode" href="#">
+                <svg xmlns="http://www.w3.org/2000/svg" class="mode-sunny" width="21" height="21" viewBox="0 0 14 14" stroke-width="1">
+<title>LIGHT</title><g><circle cx="7" cy="7" r="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"></circle><line x1="7" y1="0.5" x2="7" y2="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="2.4" y1="2.4" x2="3.82" y2="3.82" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="0.5" y1="7" x2="2.5" y2="7" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="2.4" y1="11.6" x2="3.82" y2="10.18" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="7" y1="13.5" x2="7" y2="11.5" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="11.6" y1="11.6" x2="10.18" y2="10.18" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="13.5" y1="7" x2="11.5" y2="7" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="11.6" y1="2.4" x2="10.18" y2="3.82" fill="none" stroke-linecap="round" stroke-linejoin="round"></line></g></svg>
+                <svg xmlns="http://www.w3.org/2000/svg" class="mode-moon" width="21" height="21" viewBox="0 0 14 14" stroke-width="1">
+<title>DARK</title><g><circle cx="7" cy="7" r="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"></circle><line x1="7" y1="0.5" x2="7" y2="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="2.4" y1="2.4" x2="3.82" y2="3.82" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="0.5" y1="7" x2="2.5" y2="7" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="2.4" y1="11.6" x2="3.82" y2="10.18" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="7" y1="13.5" x2="7" y2="11.5" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="11.6" y1="11.6" x2="10.18" y2="10.18" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="13.5" y1="7" x2="11.5" y2="7" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="11.6" y1="2.4" x2="10.18" y2="3.82" fill="none" stroke-linecap="round" stroke-linejoin="round"></line></g></svg>
+            </a>
+        </div>
+    </nav>
+</div>
+
+<div class="wrapper post">
+    <main class="page-content" aria-label="Content">
+        <article>
+            <header class="header">
+                <h1 class="header-title">HackTheBox - Timelapse Writeup</h1>
+                
+                
+                <div class="post-meta">
+                    <time datetime="2022-08-21T00:00:00&#43;00:00" itemprop="datePublished"> 21 Aug 2022 </time>
+                </div>
+                
+            </header>
+                <details class="toc">
+                    <summary><b>Table of Contents</b></summary>
+                    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#nmap">Nmap</a>
+      <ul>
+        <li><a href="#result">result</a></li>
+      </ul>
+    </li>
+    <li><a href="#smb">SMB</a>
+      <ul>
+        <li><a href="#crackmapexec-smb">CrackMapExec: SMB</a></li>
+        <li><a href="#smbclient">SMBclient</a></li>
+      </ul>
+    </li>
+    <li><a href="#johntheripper-zip2john">JohntheRipper: zip2john</a></li>
+    <li><a href="#pfx-file">*.PFX file</a>
+      <ul>
+        <li><a href="#johntheripper-pfx2john">JohntheRipper: pfx2john</a></li>
+        <li><a href="#extracting-the-cert-from-pfx-file">Extracting the cert from *.PFX file</a></li>
+      </ul>
+    </li>
+    <li><a href="#evil-winrm-legacyy">Evil-WinRM: legacyy</a>
+      <ul>
+        <li><a href="#powershell-history">Powershell History</a></li>
+      </ul>
+    </li>
+    <li><a href="#evil-winrm-svc_deploy">Evil-WinRM: svc_deploy</a>
+      <ul>
+        <li><a href="#group-laps_readers">Group: LAPS_Readers</a></li>
+        <li><a href="#ldapsearch">LDAPsearch</a></li>
+      </ul>
+    </li>
+    <li><a href="#evil-winrm-administrator">Evil-WinRM: administrator</a></li>
+  </ul>
+</nav>
+                </details>
+                <div class="page-content">
+                <h2 id="nmap">Nmap</h2>
+<p>Let&rsquo;s scan the Ip address first, by using Nmap.</p>
+<h3 id="result">result</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="line"><span class="cl"><span class="o">#</span><span class="w"> </span><span class="n">Nmap</span><span class="w"> </span><span class="mi">7</span><span class="p">.</span><span class="mi">92</span><span class="w"> </span><span class="n">scan</span><span class="w"> </span><span class="n">initiated</span><span class="w"> </span><span class="n">Sun</span><span class="w"> </span><span class="n">Apr</span><span class="w"> </span><span class="mi">17</span><span class="w"> </span><span class="mi">06</span><span class="p">:</span><span class="mi">14</span><span class="p">:</span><span class="mi">42</span><span class="w"> </span><span class="mi">2022</span><span class="w"> </span><span class="k">as</span><span class="p">:</span><span class="w"> </span><span class="n">nmap</span><span class="w"> </span><span class="o">-</span><span class="n">sC</span><span class="w"> </span><span class="o">-</span><span class="n">sV</span><span class="w"> </span><span class="o">-</span><span class="n">p</span><span class="o">-</span><span class="w"> </span><span class="o">-</span><span class="n">T4</span><span class="w"> </span><span class="o">-</span><span class="n">vv</span><span class="w"> </span><span class="o">-</span><span class="k">oN</span><span class="w"> </span><span class="n">nmap</span><span class="o">/</span><span class="n">timelapse_all</span><span class="w"> </span><span class="mi">10</span><span class="p">.</span><span class="mi">10</span><span class="p">.</span><span class="mi">11</span><span class="p">.</span><span class="mi">152</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="n">Nmap</span><span class="w"> </span><span class="n">scan</span><span class="w"> </span><span class="n">report</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="mi">10</span><span class="p">.</span><span class="mi">10</span><span class="p">.</span><span class="mi">11</span><span class="p">.</span><span class="mi">152</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="k">Host</span><span class="w"> </span><span class="k">is</span><span class="w"> </span><span class="n">up</span><span class="p">,</span><span class="w"> </span><span class="n">received</span><span class="w"> </span><span class="n">echo</span><span class="o">-</span><span class="n">reply</span><span class="w"> </span><span class="n">ttl</span><span class="w"> </span><span class="mi">127</span><span class="w"> </span><span class="p">(</span><span class="mi">0</span><span class="p">.</span><span class="mi">055</span><span class="n">s</span><span class="w"> </span><span class="n">latency</span><span class="p">).</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="n">Scanned</span><span class="w"> </span><span class="k">at</span><span class="w"> </span><span class="mi">2022</span><span class="o">-</span><span class="mi">04</span><span class="o">-</span><span class="mi">17</span><span class="w"> </span><span class="mi">06</span><span class="p">:</span><span class="mi">14</span><span class="p">:</span><span class="mi">43</span><span class="w"> </span><span class="o">+</span><span class="mi">08</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="mi">205</span><span class="n">s</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="k">Not</span><span class="w"> </span><span class="n">shown</span><span class="p">:</span><span class="w"> </span><span class="mi">65517</span><span class="w"> </span><span class="n">filtered</span><span class="w"> </span><span class="n">tcp</span><span class="w"> </span><span class="n">ports</span><span class="w"> </span><span class="p">(</span><span class="k">no</span><span class="o">-</span><span class="n">response</span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="n">PORT</span><span class="w">      </span><span class="k">STATE</span><span class="w"> </span><span class="n">SERVICE</span><span class="w">           </span><span class="n">REASON</span><span class="w">          </span><span class="k">VERSION</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="mi">53</span><span class="o">/</span><span class="n">tcp</span><span class="w">    </span><span class="k">open</span><span class="w">  </span><span class="k">domain</span><span class="w">            </span><span class="n">syn</span><span class="o">-</span><span class="n">ack</span><span class="w"> </span><span class="n">ttl</span><span class="w"> </span><span class="mi">127</span><span class="w"> </span><span class="k">Simple</span><span class="w"> </span><span class="n">DNS</span><span class="w"> </span><span class="n">Plus</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="mi">88</span><span class="o">/</span><span class="n">tcp</span><span class="w">    </span><span class="k">open</span><span class="w">  </span><span class="n">kerberos</span><span class="o">-</span><span class="n">sec</span><span class="w">      </span><span class="n">syn</span><span class="o">-</span><span class="n">ack</span><span class="w"> </span><span class="n">ttl</span><span class="w"> </span><span class="mi">127</span><span class="w"> </span><span class="n">Microsoft</span><span class="w"> </span><span class="n">Windows</span><span class="w"> </span><span class="n">Kerberos</span><span class="w"> </span><span class="p">(</span><span class="n">server</span><span class="w"> </span><span class="n">time</span><span class="p">:</span><span class="w"> </span><span class="mi">2022</span><span class="o">-</span><span class="mi">04</span><span class="o">-</span><span class="mi">17</span><span class="w"> </span><span class="mi">06</span><span class="p">:</span><span class="mi">16</span><span class="p">:</span><span class="mi">37</span><span class="n">Z</span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="mi">135</span><span class="o">/</span><span class="n">tcp</span><span class="w">   </span><span class="k">open</span><span class="w">  </span><span class="n">msrpc</span><span class="w">             </span><span class="n">syn</span><span class="o">-</span><span class="n">ack</span><span class="w"> </span><span class="n">ttl</span><span class="w"> </span><span class="mi">127</span><span class="w"> </span><span class="n">Microsoft</span><span class="w"> </span><span class="n">Windows</span><span class="w"> </span><span class="n">RPC</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="mi">139</span><span class="o">/</span><span class="n">tcp</span><span class="w">   </span><span class="k">open</span><span class="w">  </span><span class="n">netbios</span><span class="o">-</span><span class="n">ssn</span><span class="w">       </span><span class="n">syn</span><span class="o">-</span><span class="n">ack</span><span class="w"> </span><span class="n">ttl</span><span class="w"> </span><span class="mi">127</span><span class="w"> </span><span class="n">Microsoft</span><span class="w"> </span><span class="n">Windows</span><span class="w"> </span><span class="n">netbios</span><span class="o">-</span><span class="n">ssn</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="mi">389</span><span class="o">/</span><span class="n">tcp</span><span class="w">   </span><span class="k">open</span><span class="w">  </span><span class="n">ldap</span><span class="w">              </span><span class="n">syn</span><span class="o">-</span><span class="n">ack</span><span class="w"> </span><span class="n">ttl</span><span class="w"> </span><span class="mi">127</span><span class="w"> </span><span class="n">Microsoft</span><span class="w"> </span><span class="n">Windows</span><span class="w"> </span><span class="n">Active</span><span class="w"> </span><span class="n">Directory</span><span class="w"> </span><span class="n">LDAP</span><span class="w"> </span><span class="p">(</span><span class="k">Domain</span><span class="p">:</span><span class="w"> </span><span class="n">timelapse</span><span class="p">.</span><span class="n">htb0</span><span class="p">.,</span><span class="w"> </span><span class="n">Site</span><span class="p">:</span><span class="w"> </span><span class="k">Default</span><span class="o">-</span><span class="k">First</span><span class="o">-</span><span class="n">Site</span><span class="o">-</span><span class="n">Name</span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="mi">445</span><span class="o">/</span><span class="n">tcp</span><span class="w">   </span><span class="k">open</span><span class="w">  </span><span class="n">microsoft</span><span class="o">-</span><span class="n">ds</span><span class="o">?</span><span class="w">     </span><span class="n">syn</span><span class="o">-</span><span class="n">ack</span><span class="w"> </span><span class="n">ttl</span><span class="w"> </span><span class="mi">127</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="mi">464</span><span class="o">/</span><span class="n">tcp</span><span class="w">   </span><span class="k">open</span><span class="w">  </span><span class="n">kpasswd5</span><span class="o">?</span><span class="w">         </span><span class="n">syn</span><span class="o">-</span><span class="n">ack</span><span class="w"> </span><span class="n">ttl</span><span class="w"> </span><span class="mi">127</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="mi">593</span><span class="o">/</span><span class="n">tcp</span><span class="w">   </span><span class="k">open</span><span class="w">  </span><span class="n">ncacn_http</span><span class="w">        </span><span class="n">syn</span><span class="o">-</span><span class="n">ack</span><span class="w"> </span><span class="n">ttl</span><span class="w"> </span><span class="mi">127</span><span class="w"> </span><span class="n">Microsoft</span><span class="w"> </span><span class="n">Windows</span><span class="w"> </span><span class="n">RPC</span><span class="w"> </span><span class="n">over</span><span class="w"> </span><span class="n">HTTP</span><span class="w"> </span><span class="mi">1</span><span class="p">.</span><span class="mi">0</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="mi">636</span><span class="o">/</span><span class="n">tcp</span><span class="w">   </span><span class="k">open</span><span class="w">  </span><span class="n">ldapssl</span><span class="o">?</span><span class="w">          </span><span class="n">syn</span><span class="o">-</span><span class="n">ack</span><span class="w"> </span><span class="n">ttl</span><span class="w"> </span><span class="mi">127</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="mi">3268</span><span class="o">/</span><span class="n">tcp</span><span class="w">  </span><span class="k">open</span><span class="w">  </span><span class="n">ldap</span><span class="w">              </span><span class="n">syn</span><span class="o">-</span><span class="n">ack</span><span class="w"> </span><span class="n">ttl</span><span class="w"> </span><span class="mi">127</span><span class="w"> </span><span class="n">Microsoft</span><span class="w"> </span><span class="n">Windows</span><span class="w"> </span><span class="n">Active</span><span class="w"> </span><span class="n">Directory</span><span class="w"> </span><span class="n">LDAP</span><span class="w"> </span><span class="p">(</span><span class="k">Domain</span><span class="p">:</span><span class="w"> </span><span class="n">timelapse</span><span class="p">.</span><span class="n">htb0</span><span class="p">.,</span><span class="w"> </span><span class="n">Site</span><span class="p">:</span><span class="w"> </span><span class="k">Default</span><span class="o">-</span><span class="k">First</span><span class="o">-</span><span class="n">Site</span><span class="o">-</span><span class="n">Name</span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="mi">3269</span><span class="o">/</span><span class="n">tcp</span><span class="w">  </span><span class="k">open</span><span class="w">  </span><span class="n">globalcatLDAPssl</span><span class="o">?</span><span class="w"> </span><span class="n">syn</span><span class="o">-</span><span class="n">ack</span><span class="w"> </span><span class="n">ttl</span><span class="w"> </span><span class="mi">127</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="mi">5986</span><span class="o">/</span><span class="n">tcp</span><span class="w">  </span><span class="k">open</span><span class="w">  </span><span class="n">ssl</span><span class="o">/</span><span class="n">http</span><span class="w">          </span><span class="n">syn</span><span class="o">-</span><span class="n">ack</span><span class="w"> </span><span class="n">ttl</span><span class="w"> </span><span class="mi">127</span><span class="w"> </span><span class="n">Microsoft</span><span class="w"> </span><span class="n">HTTPAPI</span><span class="w"> </span><span class="n">httpd</span><span class="w"> </span><span class="mi">2</span><span class="p">.</span><span class="mi">0</span><span class="w"> </span><span class="p">(</span><span class="n">SSDP</span><span class="o">/</span><span class="n">UPnP</span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="o">|</span><span class="w"> </span><span class="n">ssl</span><span class="o">-</span><span class="n">cert</span><span class="p">:</span><span class="w"> </span><span class="n">Subject</span><span class="p">:</span><span class="w"> </span><span class="n">commonName</span><span class="o">=</span><span class="n">dc01</span><span class="p">.</span><span class="n">timelapse</span><span class="p">.</span><span class="n">htb</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="o">|</span><span class="w"> </span><span class="n">Issuer</span><span class="p">:</span><span class="w"> </span><span class="n">commonName</span><span class="o">=</span><span class="n">dc01</span><span class="p">.</span><span class="n">timelapse</span><span class="p">.</span><span class="n">htb</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="o">|</span><span class="w"> </span><span class="k">Public</span><span class="w"> </span><span class="k">Key</span><span class="w"> </span><span class="k">type</span><span class="p">:</span><span class="w"> </span><span class="n">rsa</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="o">|</span><span class="w"> </span><span class="k">Public</span><span class="w"> </span><span class="k">Key</span><span class="w"> </span><span class="n">bits</span><span class="p">:</span><span class="w"> </span><span class="mi">2048</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="o">|</span><span class="w"> </span><span class="n">Signature</span><span class="w"> </span><span class="n">Algorithm</span><span class="p">:</span><span class="w"> </span><span class="n">sha256WithRSAEncryption</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="o">|</span><span class="w"> </span><span class="k">Not</span><span class="w"> </span><span class="k">valid</span><span class="w"> </span><span class="k">before</span><span class="p">:</span><span class="w"> </span><span class="mi">2021</span><span class="o">-</span><span class="mi">10</span><span class="o">-</span><span class="mi">25</span><span class="n">T14</span><span class="p">:</span><span class="mi">05</span><span class="p">:</span><span class="mi">29</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="o">|</span><span class="w"> </span><span class="k">Not</span><span class="w"> </span><span class="k">valid</span><span class="w"> </span><span class="k">after</span><span class="p">:</span><span class="w">  </span><span class="mi">2022</span><span class="o">-</span><span class="mi">10</span><span class="o">-</span><span class="mi">25</span><span class="n">T14</span><span class="p">:</span><span class="mi">25</span><span class="p">:</span><span class="mi">29</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="o">|</span><span class="w"> </span><span class="n">MD5</span><span class="p">:</span><span class="w">   </span><span class="n">e233</span><span class="w"> </span><span class="n">a199</span><span class="w"> </span><span class="mi">4504</span><span class="w"> </span><span class="mi">0859</span><span class="w"> </span><span class="mi">013</span><span class="n">f</span><span class="w"> </span><span class="n">b9c5</span><span class="w"> </span><span class="n">e4f6</span><span class="w"> </span><span class="mi">91</span><span class="n">c3</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="o">|</span><span class="w"> </span><span class="n">SHA</span><span class="o">-</span><span class="mi">1</span><span class="p">:</span><span class="w"> </span><span class="mi">5861</span><span class="w"> </span><span class="n">acf7</span><span class="w"> </span><span class="mi">76</span><span class="n">b8</span><span class="w"> </span><span class="mi">703</span><span class="n">f</span><span class="w"> </span><span class="n">d01e</span><span class="w"> </span><span class="n">e25d</span><span class="w"> </span><span class="n">fc7c</span><span class="w"> </span><span class="mi">9952</span><span class="w"> </span><span class="n">a447</span><span class="w"> </span><span class="mi">7652</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="o">|</span><span class="w"> </span><span class="c1">-----BEGIN CERTIFICATE-----
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="o">|</span><span class="w"> </span><span class="n">MIIDCjCCAfKgAwIBAgIQLRY</span><span class="o">/</span><span class="n">feXALoZCPZtUeyiC4DANBgkqhkiG9w0BAQsFADAd</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="o">|</span><span class="w"> </span><span class="n">MRswGQYDVQQDDBJkYzAxLnRpbWVsYXBzZS5odGIwHhcNMjExMDI1MTQwNTI5WhcN</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="o">|</span><span class="w"> </span><span class="n">MjIxMDI1MTQyNTI5WjAdMRswGQYDVQQDDBJkYzAxLnRpbWVsYXBzZS5odGIwggEi</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="o">|</span><span class="w"> </span><span class="n">MA0GCSqGSIb3DQEBAQUAA4IBDwAwggEKAoIBAQDJdoIQMYt47skzf17SI7M8jubO</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="o">|</span><span class="w"> </span><span class="n">rD6sHg8yZw0YXKumOd5zofcSBPHfC1d</span><span class="o">/</span><span class="n">jtcHjGSsc5dQQ66qnlwdlOvifNW</span><span class="o">/</span><span class="n">KcaX</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="o">|</span><span class="w"> </span><span class="n">LqNmzjhwL49UGUw0MAMPAyi1hcYP6LG0dkU84zNuoNMprMpzya3</span><span class="o">+</span><span class="n">aU1u7YpQ6Dui</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="o">|</span><span class="w"> </span><span class="n">AzNKPa</span><span class="o">+</span><span class="mi">6</span><span class="n">zJzPSMkg</span><span class="o">/</span><span class="n">TlUuSN4LjnSgIV6xKBc1qhVYDEyTUsHZUgkIYtN0</span><span class="o">+</span><span class="n">zvwpU5</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="o">|</span><span class="w"> </span><span class="n">isiwyp9M4RYZbxe0xecW39hfTvec</span><span class="o">++</span><span class="mi">94</span><span class="n">VYkH4uO</span><span class="o">+</span><span class="n">ITtpmZ5OVvWOCpqagznTSXTg</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="o">|</span><span class="w"> </span><span class="n">FFuSYQTSjqYDwxPXHTK</span><span class="o">+/</span><span class="n">GAlq3uUWQYGdNeVMEZt</span><span class="o">+</span><span class="mi">8</span><span class="n">EIEmyL4i4ToPkqjPF1AgMB</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="o">|</span><span class="w"> </span><span class="n">AAGjRjBEMA4GA1UdDwEB</span><span class="o">/</span><span class="n">wQEAwIFoDATBgNVHSUEDDAKBggrBgEFBQcDATAdBgNV</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="o">|</span><span class="w"> </span><span class="n">HQ4EFgQUZ6PTTN1pEmDFD6YXfQ1tfTnXde0wDQYJKoZIhvcNAQELBQADggEBAL2Y</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="o">|</span><span class="w"> </span><span class="o">/</span><span class="mi">57</span><span class="n">FBUBLqUKZKp</span><span class="o">+</span><span class="n">P0vtbUAD0</span><span class="o">+</span><span class="n">J7bg4m</span><span class="o">/</span><span class="mi">1</span><span class="n">tAHcN6Cf89KwRSkRLdq</span><span class="o">++</span><span class="n">RWaQk9CKIU</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="o">|</span><span class="w"> </span><span class="mi">4</span><span class="n">g3M3stTWCnMf1CgXax</span><span class="o">+</span><span class="n">WeuTpzGmITLeVA6L8I2FaIgNdFVQGIG1nAn1UpYueR</span><span class="o">/</span><span class="n">H</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="o">|</span><span class="w"> </span><span class="n">NTIVjMPA93XR1JLsW601WV6eUI</span><span class="o">/</span><span class="n">q7t6e52sAADECjsnG1p37NjNbmTwHabrUVjBK</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="o">|</span><span class="w"> </span><span class="mi">6</span><span class="n">Luol</span><span class="o">+</span><span class="n">v2QtqP6nY4DRH</span><span class="o">+</span><span class="n">XSk6xDaxjfwd5qN7DvSpdoz09</span><span class="o">+</span><span class="mi">2</span><span class="n">ffrFuQkxxs6Pp8bQE</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="o">|</span><span class="w"> </span><span class="mi">5</span><span class="n">GJ</span><span class="o">+</span><span class="n">aSfE</span><span class="o">+</span><span class="n">xua2vpYyyGxO0Or1J2YA1CXMijise2tp</span><span class="o">+</span><span class="n">m9JBQ1wJ2suUS2wGv1Tvyh</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="o">|</span><span class="w"> </span><span class="n">lrrndm32</span><span class="o">+</span><span class="n">d0YeP</span><span class="o">/</span><span class="n">wb8E</span><span class="o">=</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="o">|</span><span class="n">_</span><span class="c1">-----END CERTIFICATE-----
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="o">|</span><span class="n">_http</span><span class="o">-</span><span class="n">title</span><span class="p">:</span><span class="w"> </span><span class="k">Not</span><span class="w"> </span><span class="k">Found</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="o">|</span><span class="n">_http</span><span class="o">-</span><span class="n">server</span><span class="o">-</span><span class="n">header</span><span class="p">:</span><span class="w"> </span><span class="n">Microsoft</span><span class="o">-</span><span class="n">HTTPAPI</span><span class="o">/</span><span class="mi">2</span><span class="p">.</span><span class="mi">0</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="o">|</span><span class="w"> </span><span class="n">tls</span><span class="o">-</span><span class="n">alpn</span><span class="p">:</span><span class="w"> 
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="o">|</span><span class="n">_</span><span class="w">  </span><span class="n">http</span><span class="o">/</span><span class="mi">1</span><span class="p">.</span><span class="mi">1</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="o">|</span><span class="n">_ssl</span><span class="o">-</span><span class="nb">date</span><span class="p">:</span><span class="w"> </span><span class="mi">2022</span><span class="o">-</span><span class="mi">04</span><span class="o">-</span><span class="mi">17</span><span class="n">T06</span><span class="p">:</span><span class="mi">18</span><span class="p">:</span><span class="mi">07</span><span class="o">+</span><span class="mi">00</span><span class="p">:</span><span class="mi">00</span><span class="p">;</span><span class="w"> </span><span class="o">+</span><span class="mi">7</span><span class="n">h59m59s</span><span class="w"> </span><span class="k">from</span><span class="w"> </span><span class="n">scanner</span><span class="w"> </span><span class="n">time</span><span class="p">.</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="mi">9389</span><span class="o">/</span><span class="n">tcp</span><span class="w">  </span><span class="k">open</span><span class="w">  </span><span class="n">mc</span><span class="o">-</span><span class="n">nmf</span><span class="w">            </span><span class="n">syn</span><span class="o">-</span><span class="n">ack</span><span class="w"> </span><span class="n">ttl</span><span class="w"> </span><span class="mi">127</span><span class="w"> </span><span class="p">.</span><span class="n">NET</span><span class="w"> </span><span class="n">Message</span><span class="w"> </span><span class="n">Framing</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="mi">49667</span><span class="o">/</span><span class="n">tcp</span><span class="w"> </span><span class="k">open</span><span class="w">  </span><span class="n">msrpc</span><span class="w">             </span><span class="n">syn</span><span class="o">-</span><span class="n">ack</span><span class="w"> </span><span class="n">ttl</span><span class="w"> </span><span class="mi">127</span><span class="w"> </span><span class="n">Microsoft</span><span class="w"> </span><span class="n">Windows</span><span class="w"> </span><span class="n">RPC</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="mi">49673</span><span class="o">/</span><span class="n">tcp</span><span class="w"> </span><span class="k">open</span><span class="w">  </span><span class="n">ncacn_http</span><span class="w">        </span><span class="n">syn</span><span class="o">-</span><span class="n">ack</span><span class="w"> </span><span class="n">ttl</span><span class="w"> </span><span class="mi">127</span><span class="w"> </span><span class="n">Microsoft</span><span class="w"> </span><span class="n">Windows</span><span class="w"> </span><span class="n">RPC</span><span class="w"> </span><span class="n">over</span><span class="w"> </span><span class="n">HTTP</span><span class="w"> </span><span class="mi">1</span><span class="p">.</span><span class="mi">0</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="mi">49674</span><span class="o">/</span><span class="n">tcp</span><span class="w"> </span><span class="k">open</span><span class="w">  </span><span class="n">msrpc</span><span class="w">             </span><span class="n">syn</span><span class="o">-</span><span class="n">ack</span><span class="w"> </span><span class="n">ttl</span><span class="w"> </span><span class="mi">127</span><span class="w"> </span><span class="n">Microsoft</span><span class="w"> </span><span class="n">Windows</span><span class="w"> </span><span class="n">RPC</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="mi">49696</span><span class="o">/</span><span class="n">tcp</span><span class="w"> </span><span class="k">open</span><span class="w">  </span><span class="n">msrpc</span><span class="w">             </span><span class="n">syn</span><span class="o">-</span><span class="n">ack</span><span class="w"> </span><span class="n">ttl</span><span class="w"> </span><span class="mi">127</span><span class="w"> </span><span class="n">Microsoft</span><span class="w"> </span><span class="n">Windows</span><span class="w"> </span><span class="n">RPC</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="mi">64800</span><span class="o">/</span><span class="n">tcp</span><span class="w"> </span><span class="k">open</span><span class="w">  </span><span class="n">msrpc</span><span class="w">             </span><span class="n">syn</span><span class="o">-</span><span class="n">ack</span><span class="w"> </span><span class="n">ttl</span><span class="w"> </span><span class="mi">127</span><span class="w"> </span><span class="n">Microsoft</span><span class="w"> </span><span class="n">Windows</span><span class="w"> </span><span class="n">RPC</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="n">Service</span><span class="w"> </span><span class="n">Info</span><span class="p">:</span><span class="w"> </span><span class="k">Host</span><span class="p">:</span><span class="w"> </span><span class="n">DC01</span><span class="p">;</span><span class="w"> </span><span class="n">OS</span><span class="p">:</span><span class="w"> </span><span class="n">Windows</span><span class="p">;</span><span class="w"> </span><span class="n">CPE</span><span class="p">:</span><span class="w"> </span><span class="n">cpe</span><span class="p">:</span><span class="o">/</span><span class="n">o</span><span class="p">:</span><span class="n">microsoft</span><span class="p">:</span><span class="n">windows</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="k">Host</span><span class="w"> </span><span class="n">script</span><span class="w"> </span><span class="n">results</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="o">|</span><span class="w"> </span><span class="n">smb2</span><span class="o">-</span><span class="n">time</span><span class="p">:</span><span class="w"> 
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="o">|</span><span class="w">   </span><span class="nb">date</span><span class="p">:</span><span class="w"> </span><span class="mi">2022</span><span class="o">-</span><span class="mi">04</span><span class="o">-</span><span class="mi">17</span><span class="n">T06</span><span class="p">:</span><span class="mi">17</span><span class="p">:</span><span class="mi">30</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="o">|</span><span class="n">_</span><span class="w">  </span><span class="n">start_date</span><span class="p">:</span><span class="w"> </span><span class="n">N</span><span class="o">/</span><span class="n">A</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="o">|</span><span class="w"> </span><span class="n">smb2</span><span class="o">-</span><span class="k">security</span><span class="o">-</span><span class="k">mode</span><span class="p">:</span><span class="w"> 
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="o">|</span><span class="w">   </span><span class="mi">3</span><span class="p">.</span><span class="mi">1</span><span class="p">.</span><span class="mi">1</span><span class="p">:</span><span class="w"> 
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="o">|</span><span class="n">_</span><span class="w">    </span><span class="n">Message</span><span class="w"> </span><span class="n">signing</span><span class="w"> </span><span class="n">enabled</span><span class="w"> </span><span class="k">and</span><span class="w"> </span><span class="n">required</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="o">|</span><span class="n">_clock</span><span class="o">-</span><span class="n">skew</span><span class="p">:</span><span class="w"> </span><span class="n">mean</span><span class="p">:</span><span class="w"> </span><span class="mi">7</span><span class="n">h59m58s</span><span class="p">,</span><span class="w"> </span><span class="n">deviation</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="n">s</span><span class="p">,</span><span class="w"> </span><span class="n">median</span><span class="p">:</span><span class="w"> </span><span class="mi">7</span><span class="n">h59m58s</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="o">|</span><span class="w"> </span><span class="n">p2p</span><span class="o">-</span><span class="n">conficker</span><span class="p">:</span><span class="w"> 
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="o">|</span><span class="w">   </span><span class="n">Checking</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="n">Conficker</span><span class="p">.</span><span class="k">C</span><span class="w"> </span><span class="k">or</span><span class="w"> </span><span class="n">higher</span><span class="p">...</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="o">|</span><span class="w">   </span><span class="k">Check</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="p">(</span><span class="n">port</span><span class="w"> </span><span class="mi">62878</span><span class="o">/</span><span class="n">tcp</span><span class="p">):</span><span class="w"> </span><span class="n">CLEAN</span><span class="w"> </span><span class="p">(</span><span class="n">Timeout</span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="o">|</span><span class="w">   </span><span class="k">Check</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="p">(</span><span class="n">port</span><span class="w"> </span><span class="mi">32357</span><span class="o">/</span><span class="n">tcp</span><span class="p">):</span><span class="w"> </span><span class="n">CLEAN</span><span class="w"> </span><span class="p">(</span><span class="n">Timeout</span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="o">|</span><span class="w">   </span><span class="k">Check</span><span class="w"> </span><span class="mi">3</span><span class="w"> </span><span class="p">(</span><span class="n">port</span><span class="w"> </span><span class="mi">38085</span><span class="o">/</span><span class="n">udp</span><span class="p">):</span><span class="w"> </span><span class="n">CLEAN</span><span class="w"> </span><span class="p">(</span><span class="n">Timeout</span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="o">|</span><span class="w">   </span><span class="k">Check</span><span class="w"> </span><span class="mi">4</span><span class="w"> </span><span class="p">(</span><span class="n">port</span><span class="w"> </span><span class="mi">22941</span><span class="o">/</span><span class="n">udp</span><span class="p">):</span><span class="w"> </span><span class="n">CLEAN</span><span class="w"> </span><span class="p">(</span><span class="n">Timeout</span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="o">|</span><span class="n">_</span><span class="w">  </span><span class="mi">0</span><span class="o">/</span><span class="mi">4</span><span class="w"> </span><span class="n">checks</span><span class="w"> </span><span class="k">are</span><span class="w"> </span><span class="n">positive</span><span class="p">:</span><span class="w"> </span><span class="k">Host</span><span class="w"> </span><span class="k">is</span><span class="w"> </span><span class="n">CLEAN</span><span class="w"> </span><span class="k">or</span><span class="w"> </span><span class="n">ports</span><span class="w"> </span><span class="k">are</span><span class="w"> </span><span class="n">blocked</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="k">Read</span><span class="w"> </span><span class="k">data</span><span class="w"> </span><span class="n">files</span><span class="w"> </span><span class="k">from</span><span class="p">:</span><span class="w"> </span><span class="o">/</span><span class="n">usr</span><span class="o">/</span><span class="n">bin</span><span class="o">/</span><span class="p">..</span><span class="o">/</span><span class="k">share</span><span class="o">/</span><span class="n">nmap</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="n">Service</span><span class="w"> </span><span class="n">detection</span><span class="w"> </span><span class="n">performed</span><span class="p">.</span><span class="w"> </span><span class="n">Please</span><span class="w"> </span><span class="n">report</span><span class="w"> </span><span class="k">any</span><span class="w"> </span><span class="n">incorrect</span><span class="w"> </span><span class="n">results</span><span class="w"> </span><span class="k">at</span><span class="w"> </span><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">nmap</span><span class="p">.</span><span class="n">org</span><span class="o">/</span><span class="n">submit</span><span class="o">/</span><span class="w"> </span><span class="p">.</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="o">#</span><span class="w"> </span><span class="n">Nmap</span><span class="w"> </span><span class="n">done</span><span class="w"> </span><span class="k">at</span><span class="w"> </span><span class="n">Sun</span><span class="w"> </span><span class="n">Apr</span><span class="w"> </span><span class="mi">17</span><span class="w"> </span><span class="mi">06</span><span class="p">:</span><span class="mi">18</span><span class="p">:</span><span class="mi">08</span><span class="w"> </span><span class="mi">2022</span><span class="w"> </span><span class="c1">-- 1 IP address (1 host up) scanned in 206.29 seconds
+</span></span></span></code></pre></div><p>Oh wow! this is an active directory machine and that&rsquo;s a lot of open ports. We also get the hostname called <code>timelapse.htb</code>, let&rsquo;s add it to the <code>/etc/hosts</code> file.</p>
+<h2 id="smb">SMB</h2>
+<p>In the result of the Nmap scan. I saw that ports <code>139</code> and <code>445</code> are open and it&rsquo;s a default for <code>SMB (Server Message Block)</code>. Let&rsquo;s check the windows version using a tool called <a href="https://github.com/byt3bl33d3r/CrackMapExec">CrackMapExec</a>.</p>
+<h3 id="crackmapexec-smb">CrackMapExec: SMB</h3>
+<p>The version of Windows currently using is <code>Windows 10.0 Build 17763 x64</code>. So, this is not a new version of Windows, at the time writing this blog Windows 11 is already out.</p>
+<p><img src="crackmapexec-check-windows-version-over-smb.png" alt="check windows version over smb using crackmapexec"></p>
+<h3 id="smbclient">SMBclient</h3>
+<p>Now, we already know that smb ports are open. Let&rsquo;s try listing the shares by using <code>smbclient</code>. Surprisingly, it doesn&rsquo;t require authentication for it. I just press <code>Enter</code> in the password prompt.</p>
+<p><img src="smbclient-list-all-shares.png" alt="list all shares using smbclient"></p>
+<h2 id="johntheripper-zip2john">JohntheRipper: zip2john</h2>
+<p>After checking the all shares. I finally found something that looks interesting. I found the <code>winrm_backup.zip</code> file in <code>\Shares\Dev\</code>. Let&rsquo;s download it, into our attack machine with the <code>get command</code>. Now, it&rsquo;s time to unzip the file. However, it is protected by a password and I don&rsquo;t know, what the password is. So, I&rsquo;m gonna run <code>zip2john</code> to crack the zip file with <code>rockyou.txt</code> as a wordlist.</p>
+<p><img src="download-winrm-backup-zip-file.png" alt="download zip file"></p>
+<p><img src="using-zip2john-to-convert-into-hash-and-use-john-to-crack-it.png" alt="using zip2john"></p>
+<h2 id="pfx-file">*.PFX file</h2>
+<p>Finally, the wait pay off. We&rsquo;ve got the password and it&rsquo;s time to crack it open. Well, it just contains one file called <code>legacyy_dev_auth.pfx</code>. I never heard of the extensions called <code>pfx</code>  before, and with quick googling. It says:</p>
+<blockquote>
+<p>The .pfx file, which is in a PKCS#12 format, <strong>contains the SSL certificate (public keys) and the corresponding private keys</strong>.</p>
+</blockquote>
+<p><img src="unzip-the-file-and-it-is-contain-the-pfx-file.png" alt="unzip the .pfx file"></p>
+<h3 id="johntheripper-pfx2john">JohntheRipper: pfx2john</h3>
+<p>The <code>pfx</code> file it&rsquo;s just a binary that compiles with public and private keys. Now, what we need is, to extract the keys from it. I manage found an article that shows us <code>'How to extract it'</code>. Here&rsquo;s the <a href="https://www.ibm.com/docs/en/arl/9.7?topic=certification-extracting-certificate-keys-from-pfx-file">article</a>. First, we need to extract the private key by using <code>openssl</code>. Unfortunately, its needed the password. I already try the password that we found earlier and it doesn&rsquo;t work. Now, I&rsquo;m gonna run the file against <code>pfx2john</code> to produce the hash and crack it with <code>john</code>.</p>
+<p><img src="invalid-password-openssl-extract-priv-key-from-pfx-file.png" alt="openssl extract priv key"></p>
+<p><img src="using-pfx2john-to-produce-hash-and-crack-it-with-john.png" alt="using pfx2john"></p>
+<h3 id="extracting-the-cert-from-pfx-file">Extracting the cert from *.PFX file</h3>
+<p>Nice! we finally managed to retrieve the <code>pfx</code> file password. Let&rsquo;s try to extract the keys one more time. Here&rsquo;s an <a href="https://www.ibm.com/docs/en/arl/9.7?topic=certification-extracting-certificate-keys-from-pfx-file">article</a> for reference. Let me breaks down into three parts real quick.</p>
+<ol>
+<li>The first command is basically to extract  the encrypted private key</li>
+<li>Run the next following command to extract the certificate/public key</li>
+<li>The final command, it&rsquo;s just decrypted the private key</li>
+</ol>
+<p><em><font color="yellow">NOTE: you will be prompted to type the import password. Type the password you found earlier by using pfx2john</font></em></p>
+<p><img src="extract-the-priv-and-pub-key-from-pfx-file.png" alt="extract the priv/pub key"></p>
+<h2 id="evil-winrm-legacyy">Evil-WinRM: legacyy</h2>
+<p>Based on the zip file name <code>'winrm_backup.zip'</code>. I guess this might be something to do with <code>winrm</code>, and the Nmap scan result also shows us that port <code>5986</code> is open.</p>
+<p>Let&rsquo;s try connecting to it with <code>Evil-WinRM</code> and make sure to <code>enable ssl</code> with the <code>-S</code> tag. I&rsquo;m gonna use the keys we discovered with  <code>-c</code> for the public key and <code>-k</code> for a private key. Finally, I&rsquo;m in as a <code>legacyy</code> user.</p>
+<p><img src="evil-winrm-login-as-legacyy-user.png" alt="evil-winrm login as user"></p>
+<h3 id="powershell-history">Powershell History</h3>
+<p>So, I&rsquo;ll try to run the <code>winpeas</code>. Unfortunately, it doesn&rsquo;t execute because the <code>Anti-Virus</code> program managed to catch it and throws this error <code>file contains a virus or potentially unwanted software</code>. Honestly, I am stuck on this machine. Then, I realized, I never check the <code>powershell history</code> and I felt guilty because that file has always been ignored by me. To my surprise, I found something useful yet interesting in the <code>powershell history</code> file.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-powershell" data-lang="powershell"><span class="line"><span class="cl"><span class="nb">type </span><span class="nv">$env:APPDATA</span><span class="p">\</span><span class="n">Microsoft</span><span class="p">\</span><span class="n">Windows</span><span class="p">\</span><span class="n">PowerShell</span><span class="p">\</span><span class="n">PSReadLine</span><span class="p">\</span><span class="n">ConsoleHost_history</span><span class="p">.</span><span class="py">txt</span>
+</span></span></code></pre></div><p><img src="read-the-powershell-history.png" alt="read the powershell history"></p>
+<h2 id="evil-winrm-svc_deploy">Evil-WinRM: svc_deploy</h2>
+<p>Well, in the <code>history</code> file contains <code>svc_deploy</code> user credentials and lead us into port <code>5986</code> once again. Let&rsquo;s connect to the machine as <code>svc_deploy</code> user with the credentials we just found. Success!</p>
+<p><img src="evil-winrm-login-as-svc_deploy-user.png" alt="evil-winrm login as svc_deploy"></p>
+<h3 id="group-laps_readers">Group: LAPS_Readers</h3>
+<p>Let&rsquo;s check this user &ldquo;background&rdquo; with the <code>net user</code> command. Turns out, this user is part of <code>LAPS_Readers</code> Global Group memberships. Honestly, I didn&rsquo;t even know what it is, but it sounds cool :p with a quick search on the net. It says:</p>
+<blockquote>
+<p>The &ldquo;Local Administrator Password Solution&rdquo; (LAPS) provides management of local account passwords of domain-joined computers. Passwords are stored in Active Directory (AD) and protected by ACL, so only eligible users can read them or request its reset.</p>
+</blockquote>
+<p><img src="run-the-command-of-net-user-svc_deploy.png" alt="run the command"></p>
+<h3 id="ldapsearch">LDAPsearch</h3>
+<p>The excited part of it. We can read the password stored in Active Directory. The last time I checked, this is an AD machine. So, I manage to find an <a href="https://www.hackingarticles.in/credential-dumpinglaps/">article</a> that&rsquo;s about credentials dumping. I already try used <code>crackmapexec</code> and it just threw a bunch of errors at me. So, I end up using <code>ldapsearch</code>. Let&rsquo;s dump the <code>administrator</code> credentials.</p>
+<p><img src="ldapsearch-creds-dump.png" alt="ldapsearch credentials dumping"></p>
+<h2 id="evil-winrm-administrator">Evil-WinRM: administrator</h2>
+<p>We successfully retrieve the <code>administrator</code> credentials. Let&rsquo;s try connect to <code>evil-winrm</code>.</p>
+<p><img src="login-as-administrator-and-read-the-root-flag.png" alt="login as administrator and read the root flag"></p>
+<p>*CHEF KISS* Beautiful</p>
+
+            </div>
+        </article></main>
+</div>
+<footer class="footer">
+    <span class="footer_item"> </span>
+    &nbsp;
+
+    <div class="footer_social-icons">
+<a href="https://github.com/hugo-sid" target="_blank" rel="noopener noreferrer me"
+    title="Github">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+    stroke-linecap="round" stroke-linejoin="round">
+    <path
+        d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22">
+    </path>
+</svg>
+</a>
+<a href="https://twitter.com" target="_blank" rel="noopener noreferrer me"
+    title="Twitter">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+    stroke-linecap="round" stroke-linejoin="round">
+    <path
+        d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z">
+    </path>
+</svg>
+</a>
+<a href="index.xml" target="_blank" rel="noopener noreferrer me"
+    title="Rss">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+    stroke-linecap="round" stroke-linejoin="round">
+    <path d="M4 11a9 9 0 0 1 9 9" />
+    <path d="M4 4a16 16 0 0 1 16 16" />
+    <circle cx="5" cy="19" r="1" />
+</svg>
+</a>
+</div>
+    <small class="footer_copyright">
+        © 2023 shafiqaiman.
+        Powered by <a href="https://github.com/hugo-sid/hugo-blog-awesome" target="_blank" rel="noopener">Hugo blog awesome</a>.
+    </small>
+</footer><a href="#" title="Go to top" id="totop">
+    <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" fill="currentColor" stroke="currentColor" viewBox="0 96 960 960">
+    <path d="M283 704.739 234.261 656 480 410.261 725.739 656 677 704.739l-197-197-197 197Z"/>
+</svg>
+
+</a>
+
+
+    
+
+
+
+
+    
+    
+        
+    
+
+    
+    
+        
+    
+
+
+
+    
+    <script src="http://example.com/js/main.min.35f435a5d8eac613c52daa28d8af544a4512337d3e95236e4a4978417b8dcb2f.js" integrity="sha256-NfQ1pdjqxhPFLaoo2K9USkUSM30&#43;lSNuSkl4QXuNyy8="></script>
+
+    
+
+</body>
+</html>

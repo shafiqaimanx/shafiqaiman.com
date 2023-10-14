@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>hydra on SH∆FIQ ∆IM∆N</title>
+    <link>http://example.com/tags/hydra/</link>
+    <description>Recent content in hydra on SH∆FIQ ∆IM∆N</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-gb</language>
+    <lastBuildDate>Sat, 10 Jul 2021 00:00:00 +0000</lastBuildDate><atom:link href="http://example.com/tags/hydra/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>TryHackMe - Bounty Hacker Writeup</title>
+      <link>http://example.com/posts/thm/bounty_hacker/</link>
+      <pubDate>Sat, 10 Jul 2021 00:00:00 +0000</pubDate>
+      
+      <guid>http://example.com/posts/thm/bounty_hacker/</guid>
+      
+      <description>Link : https://tryhackme.com/room/cowboyhacker
+Enumeration First, let’s do an enumeration with the IP address of this machine. I’m gonna run Nmap [Netwok Mapper] to scan any open ports. I’m gonna run this command
+nmap -sC -sV -oN nmap/initial &amp;lt;machine ip&amp;gt; Explaining the nmap scan: -sC	:= scan using nmap default script -sV	:= scan for version -oN := output in normal format Now, the Nmap scan it’s done. We have 3 open ports FTP, ssh, and HTTP.</description>
+      
+    </item>
+    
+    <item>
+      <title>TryHackMe - Brooklyn99 Writeup</title>
+      <link>http://example.com/posts/thm/brooklyn_99/</link>
+      <pubDate>Sat, 10 Jul 2021 00:00:00 +0000</pubDate>
+      
+      <guid>http://example.com/posts/thm/brooklyn_99/</guid>
+      
+      <description>Link : https://tryhackme.com/room/brooklynninenine
+[The First Method] Enumeration First, let’s do an enumeration with the IP address of this machine. I’m gonna run Nmap [Netwok Mapper] to scan any open ports. I’m gonna run this command
+nmap -sC -sV -oN nmap/initial &amp;lt;machine ip&amp;gt; Explaining the nmap scan: -sC	:= scan using nmap default script -sV	:= scan for version -oN := output in normal format Nmap scan shows us there is 3 port open.</description>
+      
+    </item>
+    
+  </channel>
+</rss>

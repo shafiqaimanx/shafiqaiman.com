@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>seImpersonatePrivilege on SH∆FIQ ∆IM∆N</title>
+    <link>http://example.com/tags/seimpersonateprivilege/</link>
+    <description>Recent content in seImpersonatePrivilege on SH∆FIQ ∆IM∆N</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-gb</language>
+    <lastBuildDate>Sat, 08 Oct 2022 00:00:00 +0000</lastBuildDate><atom:link href="http://example.com/tags/seimpersonateprivilege/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>HackTheBox - Arctic Writeup</title>
+      <link>http://example.com/posts/htb/arctic/</link>
+      <pubDate>Sat, 08 Oct 2022 00:00:00 +0000</pubDate>
+      
+      <guid>http://example.com/posts/htb/arctic/</guid>
+      
+      <description>Nmap Like always, I&amp;rsquo;m going to scan the IP address by using Nmap but I&amp;rsquo;m going to scan the full port first. Then, I&amp;rsquo;m going to scan the only open ports.
+nmap -p135,8500,49154 -sCV -oN nmap/arctic 10.10.10.11 135/tcp open msrpc Microsoft Windows RPC 8500/tcp open fmtp? 49154/tcp open msrpc Microsoft Windows RPC Service Info: OS: Windows; CPE: cpe:/o:microsoft:windows The nmap scan result is completed. Based on the services, look like this is a Windows target and three ports that open.</description>
+      
+    </item>
+    
+    <item>
+      <title>HackTheBox - Grandpa Writeup</title>
+      <link>http://example.com/posts/htb/grandpa/</link>
+      <pubDate>Fri, 19 Aug 2022 00:00:00 +0000</pubDate>
+      
+      <guid>http://example.com/posts/htb/grandpa/</guid>
+      
+      <description>Nmap Like always, I&amp;rsquo;m going to scan the IP Address by using Nmap.
+# Nmap 7.92 scan initiated Fri Aug 5 21:51:15 2022 as: nmap -sCV -oN nmap/grandpa 10.10.10.14 Nmap scan report for 10.10.10.14 Host is up (0.66s latency). Not shown: 999 filtered tcp ports (no-response) PORT STATE SERVICE VERSION 80/tcp open http Microsoft IIS httpd 6.0 |_http-title: Under Construction | http-methods: |_ Potentially risky methods: TRACE COPY PROPFIND SEARCH LOCK UNLOCK DELETE PUT MOVE MKCOL PROPPATCH | http-webdav-scan: | Allowed Methods: OPTIONS, TRACE, GET, HEAD, COPY, PROPFIND, SEARCH, LOCK, UNLOCK | Server Type: Microsoft-IIS/6.</description>
+      
+    </item>
+    
+    <item>
+      <title>HackTheBox - Shield Writeup</title>
+      <link>http://example.com/posts/htb/shield/</link>
+      <pubDate>Wed, 21 Jul 2021 00:00:00 +0000</pubDate>
+      
+      <guid>http://example.com/posts/htb/shield/</guid>
+      
+      <description>Enumeration scan top 1000 ports the result nmap -sC -sV -oN nmap/initial 10.10.10.29 scan all ports the result nmap -sC -sV -p- -oN nmap/all_ports 10.10.10.29 all scan still the same open ports 80 / http 3306 / mysql WebPage Just default windows server page Gobuster Using gobuster to find any hidden directory the result WordPress the result show this server have wordpress install as we know, the wordpress login path is /wp-admin let&amp;rsquo;s take a look Admin Login Try to login as admin with credentials from previous box vaccine Success Foothold/Gaining Access WordPress Theme Injection Let&amp;rsquo;s try get the reverse shell by injected the theme I&amp;rsquo;m gonna use this theme &amp;ldquo;GutenBooster&amp;rdquo; and the shell I&amp;rsquo;m gonna use Nishang Now, I&amp;rsquo;m gonna put command in the 404.</description>
+      
+    </item>
+    
+  </channel>
+</rss>

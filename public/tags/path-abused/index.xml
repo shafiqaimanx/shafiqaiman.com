@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>path-abused on SH∆FIQ ∆IM∆N</title>
+    <link>http://example.com/tags/path-abused/</link>
+    <description>Recent content in path-abused on SH∆FIQ ∆IM∆N</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-gb</language>
+    <lastBuildDate>Sat, 03 Dec 2022 00:00:00 +0000</lastBuildDate><atom:link href="http://example.com/tags/path-abused/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>HackTheBox - Sunday Writeup</title>
+      <link>http://example.com/posts/htb/sunday/</link>
+      <pubDate>Sat, 03 Dec 2022 00:00:00 +0000</pubDate>
+      
+      <guid>http://example.com/posts/htb/sunday/</guid>
+      
+      <description>Nmap Like always, I’m going to scan the IP Address by using nmap but I’m going to scan the full port first. Then, I’m going to scan the only open ports.
+nmap -p79,111,515,6787,22022 -sCV -oN nmap/sunday 10.10.10.76 79/tcp open finger? | fingerprint-strings: | GenericLines: | No one logged on | GetRequest: | Login Name TTY Idle When Where | HTTP/1.0 ??? | HTTPOptions: | Login Name TTY Idle When Where | HTTP/1.</description>
+      
+    </item>
+    
+    <item>
+      <title>HackTheBox - Oopsie Writeup</title>
+      <link>http://example.com/posts/htb/oopsie/</link>
+      <pubDate>Tue, 20 Jul 2021 00:00:00 +0000</pubDate>
+      
+      <guid>http://example.com/posts/htb/oopsie/</guid>
+      
+      <description>Enumeration Top 1000 ports scan nmap -sC -sV -oN nmap/inital 10.10.10.28 all ports scan nmap -sC -sV -p- -oN nmap/all_ports 10.10.10.28 Still the same result Open ports port 22 / ssh port 80 / http The Website Gobuster Auto recon in the background looking the hidden directory gobuster dir -u http://10.10.10.28 -w /opt/SecLists/Discovery/Web-Content/raft-medium-directories.txt -o gobuster.log The result This webpage have an upload directory.
+Login Page Found something insteresting in the source code the directory into /cdn-cgi/login/script.</description>
+      
+    </item>
+    
+  </channel>
+</rss>
