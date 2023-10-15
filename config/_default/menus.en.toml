@@ -1,0 +1,72 @@
+
+[[main]]
+    name = "Blog"
+    pageRef = "posts"
+    weight = 10
+
+[[main]]
+    name = "Tags"
+    pageRef = "tags"
+    weight = 20
+
+[[main]]
+    identifier = "github"
+    pre = "github"
+    url = "https://github.com/shafiqaimanx"
+    weight = 40
+
+[[main]]
+    identifier = "twitter"
+    pre = "twitter"
+    url = "https://twitter.com/_shafiqaiman_"
+    weight = 50
+
+# -- Dropdown Menu --
+[[main]]
+    name = "Categories"
+    weight = 30
+
+[[main]]
+    name = "HacktheBox"
+    parent = "Categories"
+    pageRef = "htb/HacktheBox"
+    weight = 10
+
+[[main]]
+    name = "TryHackMe"
+    parent = "Categories"
+    pageRef = "thm/TryHackMe"
+    weight = 20
+
+[[main]]
+    name = "Linux"
+    parent = "Categories"
+    pageRef = "linux/Linux"
+    weight = 30
+
+[[main]]
+    name = "Windows"
+    parent = "Categories"
+    pageRef = "windows/Windows"
+    weight = 40
+
+[[main]]
+    name = "FreeBSD"
+    parent = "Categories"
+    pageRef = "freebsd/FreeBSD"
+    weight = 50
+
+[[main]]
+    name = "Project"
+    parent = "Categories"
+    pageRef = "project"
+    weight = 60
+
+# -- Footer Menu --
+# The footer menu is displayed at the bottom of the page, just before
+# the copyright notice. Configure as per the main menu above.
+
+#[[footer]]
+#    name = "Authors"
+#    pageRef = "authors"
+#    weight = 10

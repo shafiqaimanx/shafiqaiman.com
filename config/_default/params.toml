@@ -1,0 +1,97 @@
+colorScheme           = "mellow"
+defaultAppearance     = "dark" # valid options: light or dark
+autoSwitchAppearance  = true
+
+enableSearch    = true
+enableCodeCopy  = true
+
+disableImageOptimization  = true
+#defaultBackgroundImage    = "images/shafiqaiman_main_background.jpg" 
+#defaultFeaturedImage      = "images/shafiqaiman_main_background.jpg" 
+
+[header]
+  layout = "basic"
+
+[footer]
+  showMenu                = true
+  showCopyright           = true
+  showScrollToTop         = true
+  showThemeAttribution    = false
+  showAppearanceSwitcher  = false
+
+[homepage]
+  layout                = "profile"
+  cardView              = true
+  showRecent            = true
+  showMoreLink          = false
+  showRecentItems       = 6
+  showMoreLinkDest      = "/posts"
+  cardViewScreenWidth   = false
+  layoutBackgroundBlur  = false
+
+[article]
+  showEdit                    = false
+  showDate                    = true
+  showHero                    = true
+  showViews                   = false
+  showLikes                   = false
+  heroStyle                   = "big"
+  showAuthor                  = true
+  showSummary                 = true
+  sharingLinks                = [ "linkedin", "twitter", "facebook"]
+  seriesOpened                = false
+  showWordCount               = false
+  showDraftLabel              = true
+  editAppendPath              = true
+  showPagination              = true
+  showTaxonomies              = true
+  showReadingTime             = true
+  showDateUpdated             = false
+  showBreadcrumbs             = false
+  invertPagination            = false
+  showAuthorsBadges           = false
+  showHeadingAnchors          = true
+  showRelatedContent          = true
+  showTableOfContents         = true
+  relatedContentLimit         = 5
+  layoutBackgroundBlur        = false 
+  layoutBackgroundHeaderSpace = false
+
+[list]
+  showHero                    = true
+  heroStyle                   = "background"
+  showViews                   = false
+  showLikes                   = false
+  showCards                   = true
+  cardView                    = false
+  showSummary                 = true
+  groupByYear                 = false
+  showBreadcrumbs             = false
+  cardViewScreenWidth         = false
+  constrainItemsWidth         = false
+  showTableOfContents         = true
+  layoutBackgroundBlur        = false
+  layoutBackgroundHeaderSpace = false
+
+[sitemap]
+  excludedKinds = ["taxonomy", "term"]
+
+[taxonomy]
+  showHero            = true
+  cardView            = false
+  heroStyle           = "background"
+  showViews           = false
+  showLikes           = false
+  showTermCount       = true
+  showBreadcrumbs     = false
+  showTableOfContents = true
+
+[term]
+  cardView            = false
+  showHero            = false
+  showViews           = false
+  showLikes           = false
+  groupByYear         = false
+  showBreadcrumbs     = false
+  showTableOfContents = true
+  cardViewScreenWidth = false
