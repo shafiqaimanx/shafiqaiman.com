@@ -1,0 +1,26 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>php-webshell - Tag - SHAFIQAIMAN</title>
+        <link>https://shafiqaiman.com/tags/php-webshell/</link>
+        <description>php-webshell - Tag - SHAFIQAIMAN</description>
+        <generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Fri, 26 Aug 2022 00:00:00 &#43;0000</lastBuildDate><atom:link href="https://shafiqaiman.com/tags/php-webshell/" rel="self" type="application/rss+xml" /><item>
+    <title>HackTheBox - Responder Writeup</title>
+    <link>https://shafiqaiman.com/posts/htb/responder/</link>
+    <pubDate>Sat, 09 Apr 2022 00:00:00 &#43;0000</pubDate>
+    <author>SH∆FIQ ∆IM∆N</author>
+    <guid>https://shafiqaiman.com/posts/htb/responder/</guid>
+    <description><![CDATA[I found two ways to gain into this machine. First, stealing the password hash by using the responder and then logon through evil-winrm. Second, gaining the remote code execution through log poisoning and getting the reverse shell.
+Nmap Let&rsquo;s scan the Ip address first by using Nmap.
+result 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 # Nmap 7.92 scan initiated Sat Apr 9 04:18:54 2022 as: nmap -sC -sV -p- -oN nmap/responder_all 10.]]></description>
+</item>
+<item>
+    <title>HackTheBox - Validation Writeup</title>
+    <link>https://shafiqaiman.com/posts/htb/validation/</link>
+    <pubDate>Fri, 26 Aug 2022 00:00:00 &#43;0000</pubDate>
+    <author>SHAFIQAIMAN</author>
+    <guid>https://shafiqaiman.com/posts/htb/validation/</guid>
+    <description><![CDATA[Nmap Like always, I&rsquo;m going to scan the IP Address by using Nmap.
+1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 # Nmap 7.92 scan initiated Fri Aug 19 23:10:37 2022 as: nmap -sCV -O -oN nmap/validation 10.10.11.116 Nmap scan report for 10.]]></description>
+</item>
+</channel>
+</rss>

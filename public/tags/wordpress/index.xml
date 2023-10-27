@@ -1,0 +1,25 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>wordpress - Tag - SHAFIQAIMAN</title>
+        <link>https://shafiqaiman.com/tags/wordpress/</link>
+        <description>wordpress - Tag - SHAFIQAIMAN</description>
+        <generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Sat, 22 Oct 2022 00:00:00 &#43;0000</lastBuildDate><atom:link href="https://shafiqaiman.com/tags/wordpress/" rel="self" type="application/rss+xml" /><item>
+    <title>HackTheBox - Blocky Writeup</title>
+    <link>https://shafiqaiman.com/posts/htb/blocky/</link>
+    <pubDate>Sat, 22 Oct 2022 00:00:00 &#43;0000</pubDate>
+    <author>SH∆FIQ ∆IM∆N</author>
+    <guid>https://shafiqaiman.com/posts/htb/blocky/</guid>
+    <description><![CDATA[Nmap Like always, I’m going to scan the IP address by using nmap but I’m going to scan the full port first. Then, I’m going to scan the only open ports.
+1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 nmap -p21,22,80,25565 -sCV -oN nmap/blocky 10.10.10.37 21/tcp open ftp ProFTPD 1.3.5a 22/tcp open ssh OpenSSH 7.2p2 Ubuntu 4ubuntu2.2 (Ubuntu Linux; protocol 2.0) | ssh-hostkey: | 2048 d62b99b4d5e753ce2bfcb5d79d79fba2 (RSA) | 256 5d7f389570c9beac67a01e86e7978403 (ECDSA) |_ 256 09d5c204951a90ef87562597df837067 (ED25519) 80/tcp open http Apache httpd 2.]]></description>
+</item>
+<item>
+    <title>HackTheBox - Paper Writeup</title>
+    <link>https://shafiqaiman.com/posts/htb/paper/</link>
+    <pubDate>Sun, 19 Jun 2022 00:00:00 &#43;0000</pubDate>
+    <author>SH∆FIQ ∆IM∆N</author>
+    <guid>https://shafiqaiman.com/posts/htb/paper/</guid>
+    <description><![CDATA[Nmap Let&rsquo;s scan the IP Address first by using Nmap.
+1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 # Nmap 7.92 scan initiated Wed Feb 9 07:45:26 2022 as: nmap -sC -sV -oN nmap/paper 10.129.156.206 Nmap scan report for 10.129.156.206 Host is up (0.23s latency). Not shown: 997 closed tcp ports (reset) PORT STATE SERVICE VERSION 22/tcp open ssh OpenSSH 8.]]></description>
+</item>
+</channel>
+</rss>

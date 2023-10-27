@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <title>HackTheBox - Validation Writeup - SHAFIQAIMAN</title><meta name="Description" content="shafiqaiman.com is a cybersecurity/ethical hacking website that focus on publishing of writeup in HacktheBox, Tryhackme and other online CTF (capture the flag) challenge."><meta property="og:title" content="HackTheBox - Validation Writeup" />
+<meta property="og:description" content="Nmap Like always, I&rsquo;m going to scan the IP Address by using Nmap.
+1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 # Nmap 7.92 scan initiated Fri Aug 19 23:10:37 2022 as: nmap -sCV -O -oN nmap/validation 10.10.11.116 Nmap scan report for 10." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://shafiqaiman.com/posts/htb/validation/" /><meta property="og:image" content="https://shafiqaiman.com/posts/htb/validation/featured.png"/><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2022-08-26T00:00:00+00:00" />
+<meta property="article:modified_time" content="2022-08-26T00:00:00+00:00" /><meta property="og:site_name" content="SHAFIQAIMAN" />
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="https://shafiqaiman.com/posts/htb/validation/featured.png"/>
+<meta name="twitter:title" content="HackTheBox - Validation Writeup"/>
+<meta name="twitter:description" content="Nmap Like always, I&rsquo;m going to scan the IP Address by using Nmap.
+1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 # Nmap 7.92 scan initiated Fri Aug 19 23:10:37 2022 as: nmap -sCV -O -oN nmap/validation 10.10.11.116 Nmap scan report for 10."/>
+<meta name="application-name" content="SHAFIQAIMAN">
+<meta name="apple-mobile-web-app-title" content="SHAFIQAIMAN"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://shafiqaiman.com/posts/htb/validation/" /><link rel="prev" href="https://shafiqaiman.com/posts/htb/timelapse/" /><link rel="next" href="https://shafiqaiman.com/posts/htb/shocker/" /><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="/lib/fontawesome-free/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"></noscript><link rel="preload" href="/lib/animate/animate.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="/lib/animate/animate.min.css"></noscript><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "HackTheBox - Validation Writeup",
+        "inLanguage": "en",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https:\/\/shafiqaiman.com\/posts\/htb\/validation\/"
+        },"genre": "posts","keywords": "sqli, sql-union, sql-to-rce, php-webshell, gobuster, rce, upgrade-shell-using-script","wordcount":  866 ,
+        "url": "https:\/\/shafiqaiman.com\/posts\/htb\/validation\/","datePublished": "2022-08-26T00:00:00+00:00","dateModified": "2022-08-26T00:00:00+00:00","publisher": {
+            "@type": "Organization",
+            "name": ""},"author": {
+                "@type": "Person",
+                "name": "SHAFIQAIMAN"
+            },"description": ""
+    }
+    </script></head>
+    <body data-header-desktop="fixed" data-header-mobile="auto"><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('dark' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'dark' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="SHAFIQAIMAN">SH∆FIQ∆IM∆N</a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/posts/" title="Posts"><i class="fa-solid fa-book"></i>  </a><a class="menu-item" href="/tags/" title="Tags"><i class="fa-solid fa-tags"></i>  </a><a class="menu-item" href="/categories/" title="Categories"><i class="fa-solid fa-folder"></i>  </a><span class="menu-item delimiter"></span><span class="menu-item search" id="search-desktop">
+                        <input type="text" placeholder="Search titles or contents..." id="search-input-desktop">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-desktop" title="Search">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-desktop" title="Clear">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-desktop">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </span><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                    <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+                </a></div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="SHAFIQAIMAN">SH∆FIQ∆IM∆N</a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><div class="search-wrapper">
+                    <div class="search mobile" id="search-mobile">
+                        <input type="text" placeholder="Search titles or contents..." id="search-input-mobile">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-mobile" title="Search">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-mobile" title="Clear">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-mobile">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </div>
+                    <a href="javascript:void(0);" class="search-cancel" id="search-cancel-mobile">
+                        Cancel
+                    </a>
+                </div><a class="menu-item" href="/posts/" title="Posts"><i class="fa-solid fa-book"></i></a><a class="menu-item" href="/tags/" title="Tags"><i class="fa-solid fa-tags"></i></a><a class="menu-item" href="/categories/" title="Categories"><i class="fa-solid fa-folder"></i></a><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+            </a></div>
+    </div>
+</header><div class="search-dropdown desktop">
+        <div id="search-dropdown-desktop"></div>
+    </div>
+    <div class="search-dropdown mobile">
+        <div id="search-dropdown-mobile"></div>
+    </div><main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">Contents</h2>
+            <div class="toc-content" id="toc-content-auto"></div>
+        </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">HackTheBox - Validation Writeup</h1><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="https://shafiqaiman.com" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>SHAFIQAIMAN</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="26-08-2022">26-08-2022</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;866 words&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;5 minutes&nbsp;</div>
+        </div><div class="details toc" id="toc-static"  data-kept="">
+                <div class="details-summary toc-title">
+                    <span>Contents</span>
+                    <span><i class="details-icon fas fa-angle-right" aria-hidden="true"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#nmap">Nmap</a></li>
+    <li><a href="#http-uhc">Http: UHC</a>
+      <ul>
+        <li><a href="#gobuster">Gobuster</a></li>
+        <li><a href="#http-cookie">Http: Cookie</a></li>
+      </ul>
+    </li>
+    <li><a href="#sql-injection">SQL Injection</a>
+      <ul>
+        <li><a href="#sql-injection-union">SQL Injection: UNION</a></li>
+        <li><a href="#sql-injection-rce">SQL Injection: RCE</a></li>
+      </ul>
+    </li>
+    <li><a href="#foothold-bash-reverse-shell">Foothold: Bash reverse shell</a>
+      <ul>
+        <li><a href="#foothold-upgrade-shell-using-script">Foothold: Upgrade shell using script</a></li>
+        <li><a href="#foothold-configphp">Foothold: Config.php</a></li>
+      </ul>
+    </li>
+    <li><a href="#root">Root</a></li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><h2 id="nmap">Nmap</h2>
+<p>Like always, I&rsquo;m going to scan the IP Address by using <a href="https://nmap.org/" target="_blank" rel="noopener noreffer ">Nmap</a>.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="line"><span class="cl"><span class="o">#</span><span class="w"> </span><span class="n">Nmap</span><span class="w"> </span><span class="mi">7</span><span class="p">.</span><span class="mi">92</span><span class="w"> </span><span class="n">scan</span><span class="w"> </span><span class="n">initiated</span><span class="w"> </span><span class="n">Fri</span><span class="w"> </span><span class="n">Aug</span><span class="w"> </span><span class="mi">19</span><span class="w"> </span><span class="mi">23</span><span class="p">:</span><span class="mi">10</span><span class="p">:</span><span class="mi">37</span><span class="w"> </span><span class="mi">2022</span><span class="w"> </span><span class="k">as</span><span class="p">:</span><span class="w"> </span><span class="n">nmap</span><span class="w"> </span><span class="o">-</span><span class="n">sCV</span><span class="w"> </span><span class="o">-</span><span class="n">O</span><span class="w"> </span><span class="o">-</span><span class="k">oN</span><span class="w"> </span><span class="n">nmap</span><span class="o">/</span><span class="n">validation</span><span class="w"> </span><span class="mi">10</span><span class="p">.</span><span class="mi">10</span><span class="p">.</span><span class="mi">11</span><span class="p">.</span><span class="mi">116</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="n">Nmap</span><span class="w"> </span><span class="n">scan</span><span class="w"> </span><span class="n">report</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="mi">10</span><span class="p">.</span><span class="mi">10</span><span class="p">.</span><span class="mi">11</span><span class="p">.</span><span class="mi">116</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="k">Host</span><span class="w"> </span><span class="k">is</span><span class="w"> </span><span class="n">up</span><span class="w"> </span><span class="p">(</span><span class="mi">0</span><span class="p">.</span><span class="mi">19</span><span class="n">s</span><span class="w"> </span><span class="n">latency</span><span class="p">).</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="k">Not</span><span class="w"> </span><span class="n">shown</span><span class="p">:</span><span class="w"> </span><span class="mi">992</span><span class="w"> </span><span class="n">closed</span><span class="w"> </span><span class="n">tcp</span><span class="w"> </span><span class="n">ports</span><span class="w"> </span><span class="p">(</span><span class="k">reset</span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="n">PORT</span><span class="w">     </span><span class="k">STATE</span><span class="w">    </span><span class="n">SERVICE</span><span class="w">       </span><span class="k">VERSION</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="mi">22</span><span class="o">/</span><span class="n">tcp</span><span class="w">   </span><span class="k">open</span><span class="w">     </span><span class="n">ssh</span><span class="w">           </span><span class="n">OpenSSH</span><span class="w"> </span><span class="mi">8</span><span class="p">.</span><span class="mi">2</span><span class="n">p1</span><span class="w"> </span><span class="n">Ubuntu</span><span class="w"> </span><span class="mi">4</span><span class="n">ubuntu0</span><span class="p">.</span><span class="mi">3</span><span class="w"> </span><span class="p">(</span><span class="n">Ubuntu</span><span class="w"> </span><span class="n">Linux</span><span class="p">;</span><span class="w"> </span><span class="n">protocol</span><span class="w"> </span><span class="mi">2</span><span class="p">.</span><span class="mi">0</span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="o">|</span><span class="w"> </span><span class="n">ssh</span><span class="o">-</span><span class="n">hostkey</span><span class="p">:</span><span class="w"> 
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="o">|</span><span class="w">   </span><span class="mi">3072</span><span class="w"> </span><span class="n">d8</span><span class="p">:</span><span class="n">f5</span><span class="p">:</span><span class="n">ef</span><span class="p">:</span><span class="n">d2</span><span class="p">:</span><span class="n">d3</span><span class="p">:</span><span class="n">f9</span><span class="p">:</span><span class="mi">8</span><span class="n">d</span><span class="p">:</span><span class="n">ad</span><span class="p">:</span><span class="n">c6</span><span class="p">:</span><span class="n">cf</span><span class="p">:</span><span class="mi">24</span><span class="p">:</span><span class="mi">85</span><span class="p">:</span><span class="mi">94</span><span class="p">:</span><span class="mi">26</span><span class="p">:</span><span class="n">ef</span><span class="p">:</span><span class="mi">7</span><span class="n">a</span><span class="w"> </span><span class="p">(</span><span class="n">RSA</span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="o">|</span><span class="w">   </span><span class="mi">256</span><span class="w"> </span><span class="mi">46</span><span class="p">:</span><span class="mi">3</span><span class="n">d</span><span class="p">:</span><span class="mi">6</span><span class="n">b</span><span class="p">:</span><span class="n">cb</span><span class="p">:</span><span class="n">a8</span><span class="p">:</span><span class="mi">19</span><span class="p">:</span><span class="n">eb</span><span class="p">:</span><span class="mi">6</span><span class="n">a</span><span class="p">:</span><span class="n">d0</span><span class="p">:</span><span class="mi">68</span><span class="p">:</span><span class="mi">86</span><span class="p">:</span><span class="mi">94</span><span class="p">:</span><span class="mi">86</span><span class="p">:</span><span class="mi">73</span><span class="p">:</span><span class="n">e1</span><span class="p">:</span><span class="mi">72</span><span class="w"> </span><span class="p">(</span><span class="n">ECDSA</span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="o">|</span><span class="n">_</span><span class="w">  </span><span class="mi">256</span><span class="w"> </span><span class="mi">70</span><span class="p">:</span><span class="mi">32</span><span class="p">:</span><span class="n">d7</span><span class="p">:</span><span class="n">e3</span><span class="p">:</span><span class="mi">77</span><span class="p">:</span><span class="n">c1</span><span class="p">:</span><span class="mi">4</span><span class="n">a</span><span class="p">:</span><span class="n">cf</span><span class="p">:</span><span class="mi">47</span><span class="p">:</span><span class="mi">2</span><span class="n">a</span><span class="p">:</span><span class="n">de</span><span class="p">:</span><span class="n">e5</span><span class="p">:</span><span class="mi">08</span><span class="p">:</span><span class="mi">7</span><span class="n">a</span><span class="p">:</span><span class="n">f8</span><span class="p">:</span><span class="mi">7</span><span class="n">a</span><span class="w"> </span><span class="p">(</span><span class="n">ED25519</span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="mi">80</span><span class="o">/</span><span class="n">tcp</span><span class="w">   </span><span class="k">open</span><span class="w">     </span><span class="n">http</span><span class="w">          </span><span class="n">Apache</span><span class="w"> </span><span class="n">httpd</span><span class="w"> </span><span class="mi">2</span><span class="p">.</span><span class="mi">4</span><span class="p">.</span><span class="mi">48</span><span class="w"> </span><span class="p">((</span><span class="n">Debian</span><span class="p">))</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="o">|</span><span class="n">_http</span><span class="o">-</span><span class="n">title</span><span class="p">:</span><span class="w"> </span><span class="n">Site</span><span class="w"> </span><span class="n">doesn</span><span class="s1">&#39;t have a title (text/html; charset=UTF-8).
+</span></span></span><span class="line"><span class="cl"><span class="s1">|_http-server-header: Apache/2.4.48 (Debian)
+</span></span></span><span class="line"><span class="cl"><span class="s1">5000/tcp filtered upnp
+</span></span></span><span class="line"><span class="cl"><span class="s1">5001/tcp filtered commplex-link
+</span></span></span><span class="line"><span class="cl"><span class="s1">5002/tcp filtered rfe
+</span></span></span><span class="line"><span class="cl"><span class="s1">5003/tcp filtered filemaker
+</span></span></span><span class="line"><span class="cl"><span class="s1">5004/tcp filtered avt-profile-1
+</span></span></span><span class="line"><span class="cl"><span class="s1">8080/tcp open     http          nginx
+</span></span></span><span class="line"><span class="cl"><span class="s1">|_http-title: 502 Bad Gateway
+</span></span></span><span class="line"><span class="cl"><span class="s1">No exact OS matches for host (If you know what OS is running on it, see https://nmap.org/submit/ ).
+</span></span></span><span class="line"><span class="cl"><span class="s1">TCP/IP fingerprint:
+</span></span></span><span class="line"><span class="cl"><span class="s1">OS:SCAN(V=7.92%E=4%D=8/19%OT=22%CT=1%CU=39488%PV=Y%DS=2%DC=I%G=Y%TM=62FFA81
+</span></span></span><span class="line"><span class="cl"><span class="s1">OS:5%P=x86_64-pc-linux-gnu)SEQ(SP=103%GCD=2%ISR=10F%TI=Z%CI=Z%II=I%TS=A)OPS
+</span></span></span><span class="line"><span class="cl"><span class="s1">OS:(O1=M54DST11NW7%O2=M54DST11NW7%O3=M54DNNT11NW7%O4=M54DST11NW7%O5=M54DST1
+</span></span></span><span class="line"><span class="cl"><span class="s1">OS:1NW7%O6=M54DST11)WIN(W1=FE88%W2=FE88%W3=FE88%W4=FE88%W5=FE88%W6=FE88)ECN
+</span></span></span><span class="line"><span class="cl"><span class="s1">OS:(R=Y%DF=Y%T=40%W=FAF0%O=M54DNNSNW7%CC=Y%Q=)T1(R=Y%DF=Y%T=40%S=O%A=S+%F=A
+</span></span></span><span class="line"><span class="cl"><span class="s1">OS:S%RD=0%Q=)T2(R=N)T3(R=N)T4(R=Y%DF=Y%T=40%W=0%S=A%A=Z%F=R%O=%RD=0%Q=)T5(R
+</span></span></span><span class="line"><span class="cl"><span class="s1">OS:=Y%DF=Y%T=40%W=0%S=Z%A=S+%F=AR%O=%RD=0%Q=)T6(R=Y%DF=Y%T=40%W=0%S=A%A=Z%F
+</span></span></span><span class="line"><span class="cl"><span class="s1">OS:=R%O=%RD=0%Q=)T7(R=Y%DF=Y%T=40%W=0%S=Z%A=S+%F=AR%O=%RD=0%Q=)U1(R=Y%DF=N%
+</span></span></span><span class="line"><span class="cl"><span class="s1">OS:T=40%IPL=164%UN=0%RIPL=G%RID=G%RIPCK=G%RUCK=G%RUD=G)IE(R=Y%DFI=N%T=40%CD
+</span></span></span><span class="line"><span class="cl"><span class="s1">OS:=S)
+</span></span></span><span class="line"><span class="cl"><span class="s1">
+</span></span></span><span class="line"><span class="cl"><span class="s1">Network Distance: 2 hops
+</span></span></span><span class="line"><span class="cl"><span class="s1">Service Info: OS: Linux; CPE: cpe:/o:linux:linux_kernel
+</span></span></span><span class="line"><span class="cl"><span class="s1">
+</span></span></span><span class="line"><span class="cl"><span class="s1">OS and Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
+</span></span></span><span class="line"><span class="cl"><span class="s1"># Nmap done at Fri Aug 19 23:11:17 2022 -- 1 IP address (1 host up) scanned in 39.91 seconds
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>There are a bunch of filtered ports. However, there still have open ports. Such as <code>22,80,8080</code>. It&rsquo;s like something is happening with these ports. Based on <code>port 22</code> the host is running <code>Ubuntu</code> but in <code>port 80</code> it says the host running on <code>Debian</code>.</p>
+<h2 id="http-uhc">Http: UHC</h2>
+<p>Well, the <code>port 80</code> is open and running on <code>Apache</code>. Now, I&rsquo;m going to take a look at it. Surprisingly, it is a simple website about <a href="https://twitter.com/hackingesports" target="_blank" rel="noopener noreffer ">UHC</a> and I can register on it by putting the username and selecting the country.</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/posts/htb/validation/uhc-simple-main-page.png"
+        data-srcset="/posts/htb/validation/uhc-simple-main-page.png, /posts/htb/validation/uhc-simple-main-page.png 1.5x, /posts/htb/validation/uhc-simple-main-page.png 2x"
+        data-sizes="auto"
+        alt="/posts/htb/validation/uhc-simple-main-page.png"
+        title="uhc simple main page" width="952" height="543" /></p>
+<p>I&rsquo;m going to register my name and the country. When I clicked the &ldquo;Join Now&rdquo; button, it goes to this page.</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/posts/htb/validation/uhc-register-name.png"
+        data-srcset="/posts/htb/validation/uhc-register-name.png, /posts/htb/validation/uhc-register-name.png 1.5x, /posts/htb/validation/uhc-register-name.png 2x"
+        data-sizes="auto"
+        alt="/posts/htb/validation/uhc-register-name.png"
+        title="uhc register name" width="910" height="609" /></p>
+<p>It shows my name and the county that I picked to register. When I register with the same name and a different country. It keeps showing the page as the image above and always goes through the <code>/account.php</code> endpoint.</p>
+<h3 id="gobuster">Gobuster</h3>
+<p>So, I&rsquo;m going to run <a href="https://github.com/OJ/gobuster" target="_blank" rel="noopener noreffer ">gobuster</a> to enumerate the hidden directory on it. Well, it did not reveal much of the directory in other words this site is very &ldquo;barebone&rdquo;. However, <code>config.php</code>  sounds interesting but it is empty.</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/posts/htb/validation/gobuster-scan-on-port-80.png"
+        data-srcset="/posts/htb/validation/gobuster-scan-on-port-80.png, /posts/htb/validation/gobuster-scan-on-port-80.png 1.5x, /posts/htb/validation/gobuster-scan-on-port-80.png 2x"
+        data-sizes="auto"
+        alt="/posts/htb/validation/gobuster-scan-on-port-80.png"
+        title="gobuster scan on port 80" width="851" height="250" /></p>
+<h3 id="http-cookie">Http: Cookie</h3>
+<p>Honestly, I found that weird. So, I&rsquo;ll try to check if this page has some sort of section or cookie. Turns out, it has a set <code>cookie</code> called <code>user</code>. This cookie appears to change when I register a new username.</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/posts/htb/validation/aiman-cookie.png"
+        data-srcset="/posts/htb/validation/aiman-cookie.png, /posts/htb/validation/aiman-cookie.png 1.5x, /posts/htb/validation/aiman-cookie.png 2x"
+        data-sizes="auto"
+        alt="/posts/htb/validation/aiman-cookie.png"
+        title="aiman cookie" width="707" height="454" /></p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/posts/htb/validation/test-cookie.png"
+        data-srcset="/posts/htb/validation/test-cookie.png, /posts/htb/validation/test-cookie.png 1.5x, /posts/htb/validation/test-cookie.png 2x"
+        data-sizes="auto"
+        alt="/posts/htb/validation/test-cookie.png"
+        title="test cookie" width="669" height="415" /></p>
+<h2 id="sql-injection">SQL Injection</h2>
+<p>I end up running the <a href="https://portswigger.net/burp" target="_blank" rel="noopener noreffer ">burpsuite</a> to analyze the response and how the register form handles the request. Then, I&rsquo;ll try to add a single quote <code>'</code> everywhere and nothing happens. That&rsquo;s so weird!, Hold and behold I forgot to change the cookie. So, I changed it and I&rsquo;ve got an error that indicates it is vulnerable to <code>SQLi</code>.</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/posts/htb/validation/single-quote-register.png"
+        data-srcset="/posts/htb/validation/single-quote-register.png, /posts/htb/validation/single-quote-register.png 1.5x, /posts/htb/validation/single-quote-register.png 2x"
+        data-sizes="auto"
+        alt="/posts/htb/validation/single-quote-register.png"
+        title="single quote register" width="1536" height="450" /></p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/posts/htb/validation/error-indicate-sql-injection.png"
+        data-srcset="/posts/htb/validation/error-indicate-sql-injection.png, /posts/htb/validation/error-indicate-sql-injection.png 1.5x, /posts/htb/validation/error-indicate-sql-injection.png 2x"
+        data-sizes="auto"
+        alt="/posts/htb/validation/error-indicate-sql-injection.png"
+        title="error indicate sql injection" width="1630" height="857" /></p>
+<h3 id="sql-injection-union">SQL Injection: UNION</h3>
+<p>Then, I&rsquo;ll check the columns that can be injected and display the output to me. As always, this is the first time I&rsquo;m going to try and the columns must be number 1. Right? ;). So, the <a href="https://github.com/payloadbox/sql-injection-payload-list" target="_blank" rel="noopener noreffer ">payloads</a> going to be <code>country=country' UNION ALL SELECT 1-- -</code>.</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/posts/htb/validation/inject-the-first-columns.png"
+        data-srcset="/posts/htb/validation/inject-the-first-columns.png, /posts/htb/validation/inject-the-first-columns.png 1.5x, /posts/htb/validation/inject-the-first-columns.png 2x"
+        data-sizes="auto"
+        alt="/posts/htb/validation/inject-the-first-columns.png"
+        title="inject the first columns" width="802" height="357" /></p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/posts/htb/validation/output-of-the-number-one.png"
+        data-srcset="/posts/htb/validation/output-of-the-number-one.png, /posts/htb/validation/output-of-the-number-one.png 1.5x, /posts/htb/validation/output-of-the-number-one.png 2x"
+        data-sizes="auto"
+        alt="/posts/htb/validation/output-of-the-number-one.png"
+        title="ouput of the number one" width="668" height="457" /></p>
+<p>Shockingly, it works on the first try. Based on the output itself, I can inject it with a malicious payload and display it to me. Such as <code>VERSION()</code>.</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/posts/htb/validation/inject-to-show-the-version.png"
+        data-srcset="/posts/htb/validation/inject-to-show-the-version.png, /posts/htb/validation/inject-to-show-the-version.png 1.5x, /posts/htb/validation/inject-to-show-the-version.png 2x"
+        data-sizes="auto"
+        alt="/posts/htb/validation/inject-to-show-the-version.png"
+        title="inject to show the version" width="662" height="470" /></p>
+<h3 id="sql-injection-rce">SQL Injection: RCE</h3>
+<p>I want to upload the web shell to this box. However, I can&rsquo;t find any path to upload it. To be honest, I&rsquo;m stuck at this point and felt defeated. Then, I manage to find this <a href="https://kayran.io/blog/web-vulnerabilities/sqli-to-rce/" target="_blank" rel="noopener noreffer ">article</a> by threatening Mr.Google (not asking nicely today sir! jk). This is possible by using <code>OUTFILE</code> to write a file to the server.</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/posts/htb/validation/inject-malicious-payload.png"
+        data-srcset="/posts/htb/validation/inject-malicious-payload.png, /posts/htb/validation/inject-malicious-payload.png 1.5x, /posts/htb/validation/inject-malicious-payload.png 2x"
+        data-sizes="auto"
+        alt="/posts/htb/validation/inject-malicious-payload.png"
+        title="inject malicious payload" width="809" height="418" /></p>
+<p>The webpage still throws an error. When I navigated to the file that I created and try the <code>id</code> commands it works.</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/posts/htb/validation/run-id-command-in-the-php-webshell.png"
+        data-srcset="/posts/htb/validation/run-id-command-in-the-php-webshell.png, /posts/htb/validation/run-id-command-in-the-php-webshell.png 1.5x, /posts/htb/validation/run-id-command-in-the-php-webshell.png 2x"
+        data-sizes="auto"
+        alt="/posts/htb/validation/run-id-command-in-the-php-webshell.png"
+        title="run id command in the php webshell" width="735" height="187" /></p>
+<h2 id="foothold-bash-reverse-shell">Foothold: Bash reverse shell</h2>
+<p>Now, it&rsquo;s time to get a reverse shell. Seems the host is running on Linux. I&rsquo;m going to use bash reverse shell and encoded with URL and BOOM!</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/posts/htb/validation/used-bash-reverse-shell.png"
+        data-srcset="/posts/htb/validation/used-bash-reverse-shell.png, /posts/htb/validation/used-bash-reverse-shell.png 1.5x, /posts/htb/validation/used-bash-reverse-shell.png 2x"
+        data-sizes="auto"
+        alt="/posts/htb/validation/used-bash-reverse-shell.png"
+        title="bash reverse shell" width="800" height="327" /></p>
+<h3 id="foothold-upgrade-shell-using-script">Foothold: Upgrade shell using script</h3>
+<p>Finally, I&rsquo;ve got the reverse shell as the <code>www-data</code> user. As always, I want to have a full working shell, and it&rsquo;s time to upgrade my reverse shell. However, when I lookups python either v2 or v3 its shows no result at all. Then, it clicks in my mind. I can upgrade this shell using <code>script</code> like <a href="https://shafiqaiman.com/hackthebox-unified-writeup/#upgrade-shell-using-script" target="_blank" rel="noopener noreffer ">unified</a> box.</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/posts/htb/validation/upgrade-the-shell-using-script.png"
+        data-srcset="/posts/htb/validation/upgrade-the-shell-using-script.png, /posts/htb/validation/upgrade-the-shell-using-script.png 1.5x, /posts/htb/validation/upgrade-the-shell-using-script.png 2x"
+        data-sizes="auto"
+        alt="/posts/htb/validation/upgrade-the-shell-using-script.png"
+        title="upgrade the shell using script" width="617" height="214" /></p>
+<h3 id="foothold-configphp">Foothold: Config.php</h3>
+<p>So, I&rsquo;m already in <code>/var/www/html</code> directory. When I list all the content in this directory. I found that <code>config.php</code> is not empty after all. Not just that! I manage to grab credentials in that file as well.</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/posts/htb/validation/credentials-in-config-php.png"
+        data-srcset="/posts/htb/validation/credentials-in-config-php.png, /posts/htb/validation/credentials-in-config-php.png 1.5x, /posts/htb/validation/credentials-in-config-php.png 2x"
+        data-sizes="auto"
+        alt="/posts/htb/validation/credentials-in-config-php.png"
+        title="crendentials in config php" width="694" height="213" /></p>
+<p>Then, I&rsquo;ll try to enumerate the database with those credentials but nothing useful came back. So, I check how many users are on this box by reading the <code>/etc/passwd</code> file. Surprisingly, there&rsquo;s only one user in this box.</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/posts/htb/validation/reading-etc-passwd-file.png"
+        data-srcset="/posts/htb/validation/reading-etc-passwd-file.png, /posts/htb/validation/reading-etc-passwd-file.png 1.5x, /posts/htb/validation/reading-etc-passwd-file.png 2x"
+        data-sizes="auto"
+        alt="/posts/htb/validation/reading-etc-passwd-file.png"
+        title="reading etc passwd file" width="692" height="112" /></p>
+<h2 id="root">Root</h2>
+<p>So, I&rsquo;ll try those credentials with the root user and it works.</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/posts/htb/validation/login-as-root.png"
+        data-srcset="/posts/htb/validation/login-as-root.png, /posts/htb/validation/login-as-root.png 1.5x, /posts/htb/validation/login-as-root.png 2x"
+        data-sizes="auto"
+        alt="/posts/htb/validation/login-as-root.png"
+        title="login as root" width="436" height="147" /></p>
+<p>NICE!</p>
+</div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>Updated on 26-08-2022</span>
+            </div></div>
+        <div class="post-info-line">
+            <div class="post-info-md"></div>
+            <div class="post-info-share">
+                <span><a href="javascript:void(0);" title="Share on Twitter" data-sharer="twitter" data-url="https://shafiqaiman.com/posts/htb/validation/" data-title="HackTheBox - Validation Writeup" data-via="_shafiqaiman_" data-hashtags="sqli,sql-union,sql-to-rce,php-webshell,gobuster,rce,upgrade-shell-using-script"><i class="fab fa-twitter fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Linkedin" data-sharer="linkedin" data-url="https://shafiqaiman.com/posts/htb/validation/"><i class="fab fa-linkedin fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Hacker News" data-sharer="hackernews" data-url="https://shafiqaiman.com/posts/htb/validation/" data-title="HackTheBox - Validation Writeup"><i class="fab fa-hacker-news fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Reddit" data-sharer="reddit" data-url="https://shafiqaiman.com/posts/htb/validation/"><i class="fab fa-reddit fa-fw" aria-hidden="true"></i></a></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"><i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/sqli/">sqli</a>,&nbsp;<a href="/tags/sql-union/">sql-union</a>,&nbsp;<a href="/tags/sql-to-rce/">sql-to-rce</a>,&nbsp;<a href="/tags/php-webshell/">php-webshell</a>,&nbsp;<a href="/tags/gobuster/">gobuster</a>,&nbsp;<a href="/tags/rce/">rce</a>,&nbsp;<a href="/tags/upgrade-shell-using-script/">upgrade-shell-using-script</a></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">Back</a></span>&nbsp;|&nbsp;<span><a href="/">Home</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/posts/htb/timelapse/" class="prev" rel="prev" title="HackTheBox - Timelapse Writeup"><i class="fas fa-angle-left fa-fw" aria-hidden="true"></i>HackTheBox - Timelapse Writeup</a>
+            <a href="/posts/htb/shocker/" class="next" rel="next" title="HackTheBox - Shocker Writeup">HackTheBox - Shocker Writeup<i class="fas fa-angle-right fa-fw" aria-hidden="true"></i></a></div>
+</div>
+</article></div>
+            </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line" itemscope itemtype="http://schema.org/CreativeWork"><i class="far fa-copyright fa-fw" aria-hidden="true"></i><span itemprop="copyrightYear">2021 - 2023</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="https://shafiqaiman.com" target="_blank">SHAFIQAIMAN</a></span></div>
+        </div>
+    </footer></div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="Back to Top">
+                <i class="fas fa-arrow-up fa-fw" aria-hidden="true"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="View Comments">
+                <i class="fas fa-comment fa-fw" aria-hidden="true"></i>
+            </a>
+        </div><script type="text/javascript" src="/lib/autocomplete/autocomplete.min.js"></script><script type="text/javascript" src="/lib/lunr/lunr.min.js"></script><script type="text/javascript" src="/lib/lazysizes/lazysizes.min.js"></script><script type="text/javascript" src="/lib/clipboard/clipboard.min.js"></script><script type="text/javascript" src="/lib/sharer/sharer.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"Copy to clipboard","maxShownLines":50},"comment":{},"search":{"highlightTag":"em","lunrIndexURL":"/index.json","maxResultLength":10,"noResultsFound":"No results found","snippetLength":30,"type":"lunr"}};</script><script type="text/javascript" src="/js/theme.min.js"></script></body>
+</html>

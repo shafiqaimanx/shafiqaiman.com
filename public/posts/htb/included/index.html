@@ -1,0 +1,512 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <title>HackTheBox - Included Writeup - SHAFIQAIMAN</title><meta name="Description" content="shafiqaiman.com is a cybersecurity/ethical hacking website that focus on publishing of writeup in HacktheBox, Tryhackme and other online CTF (capture the flag) challenge."><meta property="og:title" content="HackTheBox - Included Writeup" />
+<meta property="og:description" content="Enumeration scan top 1000 ports 1 nmap -sC -sV -oN nmap/initial 10.10.10.55 the result nmap initial scan scan all ports 1 nmap -sC -sV -p- -oN nmap/all_ports 10.10.10.55 the result nmap allports scan Open Ports Well, both the Nmap result shows only port 80 just open That&rsquo;s mean this server have a website Local File Inclusion [LFI] Based on the Nmap scan result, This server has a website Let&rsquo;s take a look webpage has file parameter When I saw this string that had file as parameter I&rsquo;m always thinking Local File Inclusion [LFI] Let&rsquo;s try it with this string: http://10." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://shafiqaiman.com/posts/htb/included/" /><meta property="og:image" content="https://shafiqaiman.com/posts/htb/included/featured.png"/><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2021-07-29T00:00:00+00:00" />
+<meta property="article:modified_time" content="2021-07-29T00:00:00+00:00" /><meta property="og:site_name" content="SHAFIQAIMAN" />
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="https://shafiqaiman.com/posts/htb/included/featured.png"/>
+<meta name="twitter:title" content="HackTheBox - Included Writeup"/>
+<meta name="twitter:description" content="Enumeration scan top 1000 ports 1 nmap -sC -sV -oN nmap/initial 10.10.10.55 the result nmap initial scan scan all ports 1 nmap -sC -sV -p- -oN nmap/all_ports 10.10.10.55 the result nmap allports scan Open Ports Well, both the Nmap result shows only port 80 just open That&rsquo;s mean this server have a website Local File Inclusion [LFI] Based on the Nmap scan result, This server has a website Let&rsquo;s take a look webpage has file parameter When I saw this string that had file as parameter I&rsquo;m always thinking Local File Inclusion [LFI] Let&rsquo;s try it with this string: http://10."/>
+<meta name="application-name" content="SHAFIQAIMAN">
+<meta name="apple-mobile-web-app-title" content="SHAFIQAIMAN"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://shafiqaiman.com/posts/htb/included/" /><link rel="prev" href="https://shafiqaiman.com/posts/htb/pathfinder/" /><link rel="next" href="https://shafiqaiman.com/posts/htb/markup/" /><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="/lib/fontawesome-free/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"></noscript><link rel="preload" href="/lib/animate/animate.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="/lib/animate/animate.min.css"></noscript><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "HackTheBox - Included Writeup",
+        "inLanguage": "en",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https:\/\/shafiqaiman.com\/posts\/htb\/included\/"
+        },"image": [{
+                            "@type": "ImageObject",
+                            "url": "https:\/\/shafiqaiman.com\/posts\/htb\/included\/featured.png",
+                            "width":  1050 ,
+                            "height":  665 
+                        }],"genre": "posts","keywords": "lfi, tftp, lxd-alpine, php-reverse-shell","wordcount":  581 ,
+        "url": "https:\/\/shafiqaiman.com\/posts\/htb\/included\/","datePublished": "2021-07-29T00:00:00+00:00","dateModified": "2021-07-29T00:00:00+00:00","publisher": {
+            "@type": "Organization",
+            "name": ""},"author": {
+                "@type": "Person",
+                "name": "SH∆FIQ ∆IM∆N"
+            },"description": ""
+    }
+    </script></head>
+    <body data-header-desktop="fixed" data-header-mobile="auto"><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('dark' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'dark' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="SHAFIQAIMAN">SH∆FIQ∆IM∆N</a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/posts/" title="Posts"><i class="fa-solid fa-book"></i>  </a><a class="menu-item" href="/tags/" title="Tags"><i class="fa-solid fa-tags"></i>  </a><a class="menu-item" href="/categories/" title="Categories"><i class="fa-solid fa-folder"></i>  </a><span class="menu-item delimiter"></span><span class="menu-item search" id="search-desktop">
+                        <input type="text" placeholder="Search titles or contents..." id="search-input-desktop">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-desktop" title="Search">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-desktop" title="Clear">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-desktop">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </span><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                    <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+                </a></div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="SHAFIQAIMAN">SH∆FIQ∆IM∆N</a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><div class="search-wrapper">
+                    <div class="search mobile" id="search-mobile">
+                        <input type="text" placeholder="Search titles or contents..." id="search-input-mobile">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-mobile" title="Search">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-mobile" title="Clear">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-mobile">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </div>
+                    <a href="javascript:void(0);" class="search-cancel" id="search-cancel-mobile">
+                        Cancel
+                    </a>
+                </div><a class="menu-item" href="/posts/" title="Posts"><i class="fa-solid fa-book"></i></a><a class="menu-item" href="/tags/" title="Tags"><i class="fa-solid fa-tags"></i></a><a class="menu-item" href="/categories/" title="Categories"><i class="fa-solid fa-folder"></i></a><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+            </a></div>
+    </div>
+</header><div class="search-dropdown desktop">
+        <div id="search-dropdown-desktop"></div>
+    </div>
+    <div class="search-dropdown mobile">
+        <div id="search-dropdown-mobile"></div>
+    </div><main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">Contents</h2>
+            <div class="toc-content always-active" id="toc-content-auto"></div>
+        </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">HackTheBox - Included Writeup</h1><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="https://shafiqaiman.com" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>SH∆FIQ ∆IM∆N</a></span>&nbsp;<span class="post-category">included in <a href="/categories/hackthebox/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>HacktheBox</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="29-07-2021">29-07-2021</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;581 words&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;3 minutes&nbsp;</div>
+        </div><div class="featured-image"><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/posts/htb/included/featured.png"
+        data-srcset="/posts/htb/included/featured.png, /posts/htb/included/featured.png 1.5x, /posts/htb/included/featured.png 2x"
+        data-sizes="auto"
+        alt="/posts/htb/included/featured.png"
+        title="/posts/htb/included/featured.png" /></div><div class="details toc" id="toc-static"  data-kept="">
+                <div class="details-summary toc-title">
+                    <span>Contents</span>
+                    <span><i class="details-icon fas fa-angle-right" aria-hidden="true"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#enumeration">Enumeration</a>
+      <ul>
+        <li><a href="#open-ports">Open Ports</a></li>
+        <li><a href="#local-file-inclusion-lfi">Local File Inclusion [LFI]</a></li>
+        <li><a href="#udp-scan">UDP Scan</a></li>
+        <li><a href="#trivial-file-transfer-protocol-tftp">Trivial File Transfer Protocol [TFTP]</a></li>
+        <li><a href="#put-file">Put File</a></li>
+      </ul>
+    </li>
+    <li><a href="#footholdgaining-access">Foothold/Gaining Access</a></li>
+    <li><a href="#user-flag">User Flag</a></li>
+    <li><a href="#mike">Mike</a></li>
+    <li><a href="#privilege-escalation">Privilege Escalation</a>
+      <ul>
+        <li><a href="#lxd">LXD</a></li>
+      </ul>
+    </li>
+    <li><a href="#root-flag">Root Flag</a></li>
+    <li><a href="#conclusion">Conclusion</a></li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><h2 id="enumeration">Enumeration</h2>
+<ul>
+<li>scan top 1000 ports</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">nmap -sC -sV -oN nmap/initial 10.10.10.55
+</span></span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>the result</li>
+</ul>
+<p><figure><a class="lightgallery" href="/posts/htb/included/nmap_1000.png" title="nmap initial scan" data-thumbnail="/posts/htb/included/nmap_1000.png" data-sub-html="<h2>nmap initial scan</h2><p>nmap initial scan</p>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/posts/htb/included/nmap_1000.png"
+            data-srcset="/posts/htb/included/nmap_1000.png, /posts/htb/included/nmap_1000.png 1.5x, /posts/htb/included/nmap_1000.png 2x"
+            data-sizes="auto"
+            alt="/posts/htb/included/nmap_1000.png" width="989" height="299" />
+    </a><figcaption class="image-caption">nmap initial scan</figcaption>
+    </figure></p>
+<ul>
+<li>scan all ports</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">nmap -sC -sV -p- -oN nmap/all_ports 10.10.10.55
+</span></span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>the result</li>
+</ul>
+<p><figure><a class="lightgallery" href="/posts/htb/included/nmap_all_ports.png" title="nmap allports scan" data-thumbnail="/posts/htb/included/nmap_all_ports.png" data-sub-html="<h2>nmap allports scan</h2><p>nmap allports scan</p>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/posts/htb/included/nmap_all_ports.png"
+            data-srcset="/posts/htb/included/nmap_all_ports.png, /posts/htb/included/nmap_all_ports.png 1.5x, /posts/htb/included/nmap_all_ports.png 2x"
+            data-sizes="auto"
+            alt="/posts/htb/included/nmap_all_ports.png" width="1043" height="318" />
+    </a><figcaption class="image-caption">nmap allports scan</figcaption>
+    </figure></p>
+<h3 id="open-ports">Open Ports</h3>
+<ul>
+<li>Well, both the Nmap result shows only <code>port 80</code> just <code>open</code></li>
+<li>That&rsquo;s mean this server have a website</li>
+</ul>
+<h3 id="local-file-inclusion-lfi">Local File Inclusion [LFI]</h3>
+<ul>
+<li>Based on the Nmap scan result, This server has a <code>website</code></li>
+<li>Let&rsquo;s take a look</li>
+</ul>
+<p><figure><a class="lightgallery" href="/posts/htb/included/test.png" title="webpage has file parameter" data-thumbnail="/posts/htb/included/test.png" data-sub-html="<h2>webpage has file parameter</h2><p>webpage has file parameter</p>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/posts/htb/included/test.png"
+            data-srcset="/posts/htb/included/test.png, /posts/htb/included/test.png 1.5x, /posts/htb/included/test.png 2x"
+            data-sizes="auto"
+            alt="/posts/htb/included/test.png" width="975" height="618" />
+    </a><figcaption class="image-caption">webpage has file parameter</figcaption>
+    </figure></p>
+<ul>
+<li>When I saw this string that had <code>file</code> as <code>parameter</code></li>
+<li>I&rsquo;m always thinking <font color="yellow">Local File Inclusion [LFI]</font>
+<ul>
+<li>Let&rsquo;s try it with this string:</li>
+<li><code>http://10.10.10.55/?file=../../../../../../../etc/passwd</code></li>
+</ul>
+</li>
+<li>the result</li>
+</ul>
+<p><figure><a class="lightgallery" href="/posts/htb/included/lfi_passwd.png" title="lfi read /etc/passwd" data-thumbnail="/posts/htb/included/lfi_passwd.png" data-sub-html="<h2>lfi read /etc/passwd</h2><p>lfi read /etc/passwd</p>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/posts/htb/included/lfi_passwd.png"
+            data-srcset="/posts/htb/included/lfi_passwd.png, /posts/htb/included/lfi_passwd.png 1.5x, /posts/htb/included/lfi_passwd.png 2x"
+            data-sizes="auto"
+            alt="/posts/htb/included/lfi_passwd.png" width="1025" height="819" />
+    </a><figcaption class="image-caption">lfi read /etc/passwd</figcaption>
+    </figure></p>
+<ul>
+<li>We can try to get <code>Remote Code Execution [RCE]</code> through log poisoning
+<ul>
+<li>Well, we can&rsquo;t</li>
+<li>Let&rsquo;s try to enumerate again</li>
+</ul>
+</li>
+</ul>
+<hr>
+<blockquote>
+<p><font color='yellow'>Quick Note:</font> I&rsquo;ve already found the website is vuln to Local File Inclusion [LFI].</p>
+</blockquote>
+<p>However, I can&rsquo;t find anything. To be honest, I took a peek of the writeup. There is no shamed of and I&rsquo;m still learning. So, Here we go.</p>
+<h3 id="udp-scan">UDP Scan</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">nmap -sU -oN nmap/UDP_scan 10.10.10.55
+</span></span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>I&rsquo;m gonna run the nmap scan once again with <code>-sU</code> flag for UDP scan</li>
+<li>the result</li>
+</ul>
+<p><figure><a class="lightgallery" href="/posts/htb/included/nmap_udp.png" title="nmap udp scan" data-thumbnail="/posts/htb/included/nmap_udp.png" data-sub-html="<h2>nmap udp scan</h2><p>nmap udp scan</p>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/posts/htb/included/nmap_udp.png"
+            data-srcset="/posts/htb/included/nmap_udp.png, /posts/htb/included/nmap_udp.png 1.5x, /posts/htb/included/nmap_udp.png 2x"
+            data-sizes="auto"
+            alt="/posts/htb/included/nmap_udp.png" width="978" height="316" />
+    </a><figcaption class="image-caption">nmap udp scan</figcaption>
+    </figure></p>
+<h3 id="trivial-file-transfer-protocol-tftp">Trivial File Transfer Protocol [TFTP]</h3>
+<div class="details admonition tip open">
+        <div class="details-summary admonition-title">
+            <i class="icon fas fa-lightbulb fa-fw" aria-hidden="true"></i>Description<i class="details-icon fas fa-angle-right fa-fw" aria-hidden="true"></i>
+        </div>
+        <div class="details-content">
+            <div class="admonition-content">Trivial File Transfer Protocol is a simple lockstep File Transfer Protocol which allows a client to get a file from or put a file onto a remote host.</div>
+        </div>
+    </div>
+<ul>
+<li>Read more here <a href="https://en.wikipedia.org/wiki/Trivial_File_Transfer_Protocol" target="_blank" rel="noopener noreffer ">Wikipedia - Trivial File Transfer Protocol</a></li>
+<li>In simple term this protocol is simple than regular protocol [FTP]</li>
+</ul>
+<h3 id="put-file">Put File</h3>
+<ul>
+<li>Now, we&rsquo;ve already know the website can do <code>directory traversal</code>.</li>
+<li>Let&rsquo;s put the simple <code>Hello,World</code> file in <code>TFTP</code></li>
+</ul>
+<p><figure><a class="lightgallery" href="/posts/htb/included/tftp_cli.png" title="put file in tftp" data-thumbnail="/posts/htb/included/tftp_cli.png" data-sub-html="<h2>put file in tftp</h2><p>put file in tftp</p>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/posts/htb/included/tftp_cli.png"
+            data-srcset="/posts/htb/included/tftp_cli.png, /posts/htb/included/tftp_cli.png 1.5x, /posts/htb/included/tftp_cli.png 2x"
+            data-sizes="auto"
+            alt="/posts/htb/included/tftp_cli.png" width="494" height="268" />
+    </a><figcaption class="image-caption">put file in tftp</figcaption>
+    </figure></p>
+<ul>
+<li><code>Let's hit that file using LFI</code></li>
+<li>But where is the location of that file?
+<ul>
+<li>according this <a href="https://www.quora.com/Where-is-the-TFTP-directory-in-Linux?share=1" target="_blank" rel="noopener noreffer ">link</a> It&rsquo;s locate <code>/var/lib/tftpboot</code></li>
+</ul>
+</li>
+<li>Let&rsquo;s try it out</li>
+</ul>
+<p><figure><a class="lightgallery" href="/posts/htb/included/hello.png" title="read file in tftp" data-thumbnail="/posts/htb/included/hello.png" data-sub-html="<h2>read file in tftp</h2><p>read file in tftp</p>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/posts/htb/included/hello.png"
+            data-srcset="/posts/htb/included/hello.png, /posts/htb/included/hello.png 1.5x, /posts/htb/included/hello.png 2x"
+            data-sizes="auto"
+            alt="/posts/htb/included/hello.png" width="942" height="529" />
+    </a><figcaption class="image-caption">read file in tftp</figcaption>
+    </figure></p>
+<ul>
+<li>It Work!</li>
+</ul>
+<h2 id="footholdgaining-access">Foothold/Gaining Access</h2>
+<ul>
+<li>Let&rsquo;s try get <code>the reverse shell</code></li>
+<li>So, I&rsquo;m gonna <code>put</code> the <code>php reverse shell</code> into TFTP</li>
+</ul>
+<p><figure><a class="lightgallery" href="/posts/htb/included/rs.png" title="put php reverse shell in tftp" data-thumbnail="/posts/htb/included/rs.png" data-sub-html="<h2>put php reverse shell in tftp</h2><p>put php reverse shell in tftp</p>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/posts/htb/included/rs.png"
+            data-srcset="/posts/htb/included/rs.png, /posts/htb/included/rs.png 1.5x, /posts/htb/included/rs.png 2x"
+            data-sizes="auto"
+            alt="/posts/htb/included/rs.png" width="473" height="266" />
+    </a><figcaption class="image-caption">put php reverse shell in tftp</figcaption>
+    </figure></p>
+<ul>
+<li>Start the listener and execute it</li>
+</ul>
+<p><figure><a class="lightgallery" href="/posts/htb/included/nc.png" title="shell as www-data" data-thumbnail="/posts/htb/included/nc.png" data-sub-html="<h2>shell as www-data</h2><p>shell as www-data</p>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/posts/htb/included/nc.png"
+            data-srcset="/posts/htb/included/nc.png, /posts/htb/included/nc.png 1.5x, /posts/htb/included/nc.png 2x"
+            data-sizes="auto"
+            alt="/posts/htb/included/nc.png" width="1107" height="319" />
+    </a><figcaption class="image-caption">shell as www-data</figcaption>
+    </figure></p>
+<ul>
+<li>I&rsquo;M IN!</li>
+</ul>
+<h2 id="user-flag">User Flag</h2>
+<ul>
+<li>Let&rsquo;s try login as <code>Mike</code> with a <code>password from the previous box</code></li>
+<li>Success</li>
+</ul>
+<p><figure><a class="lightgallery" href="/posts/htb/included/user.png" title="user flag" data-thumbnail="/posts/htb/included/user.png" data-sub-html="<h2>user flag</h2><p>user flag</p>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/posts/htb/included/user.png"
+            data-srcset="/posts/htb/included/user.png, /posts/htb/included/user.png 1.5x, /posts/htb/included/user.png 2x"
+            data-sizes="auto"
+            alt="/posts/htb/included/user.png" width="417" height="290" />
+    </a><figcaption class="image-caption">user flag</figcaption>
+    </figure></p>
+<h2 id="mike">Mike</h2>
+<ul>
+<li>Now, we&rsquo;ve got Mike&rsquo;s password.</li>
+<li>So, I&rsquo;m gonna check Mike&rsquo;s sudo capabilities by run this command <code>sudo -l</code></li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1"># Well, that&#39;s unfortunate</span>
+</span></span><span class="line"><span class="cl">mike@included:~$ sudo -l
+</span></span><span class="line"><span class="cl"><span class="o">[</span>sudo<span class="o">]</span> password <span class="k">for</span> mike: 
+</span></span><span class="line"><span class="cl">Sorry, user mike may not run sudo on included.
+</span></span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>Let&rsquo;s check out his group, etc with <code>id command</code></li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">mike@included:~$ id
+</span></span><span class="line"><span class="cl"><span class="nv">uid</span><span class="o">=</span>1000<span class="o">(</span>mike<span class="o">)</span> <span class="nv">gid</span><span class="o">=</span>1000<span class="o">(</span>mike<span class="o">)</span> <span class="nv">groups</span><span class="o">=</span>1000<span class="o">(</span>mike<span class="o">)</span>,108<span class="o">(</span>lxd<span class="o">)</span>
+</span></span><span class="line"><span class="cl">mike@included:~$ 
+</span></span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>Owhhh. I&rsquo;m thinking we can become root with <code>exploit lxd</code></li>
+<li>Because I found one of the machines in <a href="https://shafiqaiman.com/posts/thm/gaming_server/" target="_blank" rel="noopener noreffer ">TryHackMe</a> have this same vuln.</li>
+<li>Sources
+<ul>
+<li><a href="https://shafiqaiman.com/posts/thm/gaming_server/" target="_blank" rel="noopener noreffer ">Doct3rJohn - GamingServer[THM]</a></li>
+<li><a href="https://www.hackingarticles.in/lxd-privilege-escalation/" target="_blank" rel="noopener noreffer ">Hacking Articles - lxd-privilege-escalation</a></li>
+<li><a href="https://github.com/saghul/lxd-alpine-builder" target="_blank" rel="noopener noreffer ">Github - lxd-alpine-builder</a></li>
+</ul>
+</li>
+</ul>
+<h2 id="privilege-escalation">Privilege Escalation</h2>
+<h3 id="lxd">LXD</h3>
+<ul>
+<li>Let&rsquo;s try it.</li>
+<li>First, I’m gonna <code>git clone the lxd-alpine-builder</code></li>
+<li>Then, run the <code>build-alpine</code> command.</li>
+</ul>
+<p><figure><a class="lightgallery" href="/posts/htb/included/alpine.png" title="building alpine" data-thumbnail="/posts/htb/included/alpine.png" data-sub-html="<h2>building alpine</h2><p>building alpine</p>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/posts/htb/included/alpine.png"
+            data-srcset="/posts/htb/included/alpine.png, /posts/htb/included/alpine.png 1.5x, /posts/htb/included/alpine.png 2x"
+            data-sizes="auto"
+            alt="/posts/htb/included/alpine.png" width="807" height="527" />
+    </a><figcaption class="image-caption">building alpine</figcaption>
+    </figure></p>
+<ul>
+<li>After it&rsquo;s done building.</li>
+<li>The tar file will be created in our directory.</li>
+<li>Now, we need to download the tar file from our victim machine.</li>
+</ul>
+<p><figure><a class="lightgallery" href="/posts/htb/included/upload.png" title="transfer alpine" data-thumbnail="/posts/htb/included/upload.png" data-sub-html="<h2>transfer alpine</h2><p>transfer alpine</p>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/posts/htb/included/upload.png"
+            data-srcset="/posts/htb/included/upload.png, /posts/htb/included/upload.png 1.5x, /posts/htb/included/upload.png 2x"
+            data-sizes="auto"
+            alt="/posts/htb/included/upload.png" width="1254" height="754" />
+    </a><figcaption class="image-caption">transfer alpine</figcaption>
+    </figure></p>
+<ul>
+<li>This next bit gonna be complicated.</li>
+<li>So, if you wanna follow along. Please do</li>
+</ul>
+<p><figure><a class="lightgallery" href="/posts/htb/included/rokok.png" title="becoming root" data-thumbnail="/posts/htb/included/rokok.png" data-sub-html="<h2>becoming root</h2><p>becoming root</p>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/posts/htb/included/rokok.png"
+            data-srcset="/posts/htb/included/rokok.png, /posts/htb/included/rokok.png 1.5x, /posts/htb/included/rokok.png 2x"
+            data-sizes="auto"
+            alt="/posts/htb/included/rokok.png" width="1229" height="638" />
+    </a><figcaption class="image-caption">becoming root</figcaption>
+    </figure></p>
+<ul>
+<li>YESSSS. I&rsquo;M ROOT</li>
+</ul>
+<h2 id="root-flag">Root Flag</h2>
+<p><figure><a class="lightgallery" href="/posts/htb/included/root.png" title="root flag" data-thumbnail="/posts/htb/included/root.png" data-sub-html="<h2>root flag</h2><p>root flag</p>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/posts/htb/included/root.png"
+            data-srcset="/posts/htb/included/root.png, /posts/htb/included/root.png 1.5x, /posts/htb/included/root.png 2x"
+            data-sizes="auto"
+            alt="/posts/htb/included/root.png" width="431" height="282" />
+    </a><figcaption class="image-caption">root flag</figcaption>
+    </figure></p>
+<h2 id="conclusion">Conclusion</h2>
+<p>I&rsquo;ve learned a lot today. First, make sure to do recon properly and make sure to scan everything TCP/UDP/everything. Then, configure the webpage properly. Most of the time the webpage is the easier/first thing they(hacker) look at. Once again, don&rsquo;t use the same password.</p>
+<p>I have a fun time doing this machine and I hope you guys do too. Bye ;)</p>
+</div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>Updated on 29-07-2021</span>
+            </div></div>
+        <div class="post-info-line">
+            <div class="post-info-md"></div>
+            <div class="post-info-share">
+                <span><a href="javascript:void(0);" title="Share on Twitter" data-sharer="twitter" data-url="https://shafiqaiman.com/posts/htb/included/" data-title="HackTheBox - Included Writeup" data-via="_shafiqaiman_" data-hashtags="lfi,tftp,lxd-alpine,php-reverse-shell"><i class="fab fa-twitter fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Linkedin" data-sharer="linkedin" data-url="https://shafiqaiman.com/posts/htb/included/"><i class="fab fa-linkedin fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Hacker News" data-sharer="hackernews" data-url="https://shafiqaiman.com/posts/htb/included/" data-title="HackTheBox - Included Writeup"><i class="fab fa-hacker-news fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Reddit" data-sharer="reddit" data-url="https://shafiqaiman.com/posts/htb/included/"><i class="fab fa-reddit fa-fw" aria-hidden="true"></i></a></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"><i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/lfi/">lfi</a>,&nbsp;<a href="/tags/tftp/">tftp</a>,&nbsp;<a href="/tags/lxd-alpine/">lxd-alpine</a>,&nbsp;<a href="/tags/php-reverse-shell/">php-reverse-shell</a></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">Back</a></span>&nbsp;|&nbsp;<span><a href="/">Home</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/posts/htb/pathfinder/" class="prev" rel="prev" title="HackTheBox - Pathfinder Writeup"><i class="fas fa-angle-left fa-fw" aria-hidden="true"></i>HackTheBox - Pathfinder Writeup</a>
+            <a href="/posts/htb/markup/" class="next" rel="next" title="HackTheBox - Markup Writeup">HackTheBox - Markup Writeup<i class="fas fa-angle-right fa-fw" aria-hidden="true"></i></a></div>
+</div>
+</article></div>
+            </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line" itemscope itemtype="http://schema.org/CreativeWork"><i class="far fa-copyright fa-fw" aria-hidden="true"></i><span itemprop="copyrightYear">2021 - 2023</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="https://shafiqaiman.com" target="_blank">SHAFIQAIMAN</a></span></div>
+        </div>
+    </footer></div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="Back to Top">
+                <i class="fas fa-arrow-up fa-fw" aria-hidden="true"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="View Comments">
+                <i class="fas fa-comment fa-fw" aria-hidden="true"></i>
+            </a>
+        </div><link rel="stylesheet" href="/lib/lightgallery/css/lightgallery-bundle.min.css"><script type="text/javascript" src="/lib/autocomplete/autocomplete.min.js"></script><script type="text/javascript" src="/lib/lunr/lunr.min.js"></script><script type="text/javascript" src="/lib/lazysizes/lazysizes.min.js"></script><script type="text/javascript" src="/lib/lightgallery/lightgallery.min.js"></script><script type="text/javascript" src="/lib/lightgallery/plugins/thumbnail/lg-thumbnail.min.js"></script><script type="text/javascript" src="/lib/lightgallery/plugins/zoom/lg-zoom.min.js"></script><script type="text/javascript" src="/lib/clipboard/clipboard.min.js"></script><script type="text/javascript" src="/lib/sharer/sharer.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"Copy to clipboard","maxShownLines":50},"comment":{},"lightgallery":true,"search":{"highlightTag":"em","lunrIndexURL":"/index.json","maxResultLength":10,"noResultsFound":"No results found","snippetLength":30,"type":"lunr"}};</script><script type="text/javascript" src="/js/theme.min.js"></script></body>
+</html>

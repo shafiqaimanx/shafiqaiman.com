@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <title>HackTheBox - Arctic Writeup - SHAFIQAIMAN</title><meta name="Description" content="shafiqaiman.com is a cybersecurity/ethical hacking website that focus on publishing of writeup in HacktheBox, Tryhackme and other online CTF (capture the flag) challenge."><meta property="og:title" content="HackTheBox - Arctic Writeup" />
+<meta property="og:description" content="Nmap Like always, I&rsquo;m going to scan the IP address by using Nmap but I&rsquo;m going to scan the full port first. Then, I&rsquo;m going to scan the only open ports.
+1 2 3 4 5 6 nmap -p135,8500,49154 -sCV -oN nmap/arctic 10.10.10.11 135/tcp open msrpc Microsoft Windows RPC 8500/tcp open fmtp? 49154/tcp open msrpc Microsoft Windows RPC Service Info: OS: Windows; CPE: cpe:/o:microsoft:windows The nmap scan result is completed. Based on the services, look like this is a Windows target and three ports that open." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://shafiqaiman.com/posts/htb/arctic/" /><meta property="og:image" content="https://shafiqaiman.com/posts/htb/arctic/featured.png"/><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2022-10-08T00:00:00+00:00" />
+<meta property="article:modified_time" content="2022-10-08T00:00:00+00:00" /><meta property="og:site_name" content="SHAFIQAIMAN" />
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="https://shafiqaiman.com/posts/htb/arctic/featured.png"/>
+<meta name="twitter:title" content="HackTheBox - Arctic Writeup"/>
+<meta name="twitter:description" content="Nmap Like always, I&rsquo;m going to scan the IP address by using Nmap but I&rsquo;m going to scan the full port first. Then, I&rsquo;m going to scan the only open ports.
+1 2 3 4 5 6 nmap -p135,8500,49154 -sCV -oN nmap/arctic 10.10.10.11 135/tcp open msrpc Microsoft Windows RPC 8500/tcp open fmtp? 49154/tcp open msrpc Microsoft Windows RPC Service Info: OS: Windows; CPE: cpe:/o:microsoft:windows The nmap scan result is completed. Based on the services, look like this is a Windows target and three ports that open."/>
+<meta name="application-name" content="SHAFIQAIMAN">
+<meta name="apple-mobile-web-app-title" content="SHAFIQAIMAN"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://shafiqaiman.com/posts/htb/arctic/" /><link rel="prev" href="https://shafiqaiman.com/posts/htb/nibbles/" /><link rel="next" href="https://shafiqaiman.com/posts/htb/bank/" /><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="/lib/fontawesome-free/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"></noscript><link rel="preload" href="/lib/animate/animate.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="/lib/animate/animate.min.css"></noscript><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "HackTheBox - Arctic Writeup",
+        "inLanguage": "en",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https:\/\/shafiqaiman.com\/posts\/htb\/arctic\/"
+        },"image": [{
+                            "@type": "ImageObject",
+                            "url": "https:\/\/shafiqaiman.com\/posts\/htb\/arctic\/featured.png",
+                            "width":  1400 ,
+                            "height":  1060 
+                        }],"genre": "posts","keywords": "CVE-2009-2265, juicy-potato, seImpersonatePrivilege, coldfusion, rce, smbserver.py, upload-vuln, lfi, jsp-reverse-shell, msfvenom","wordcount":  642 ,
+        "url": "https:\/\/shafiqaiman.com\/posts\/htb\/arctic\/","datePublished": "2022-10-08T00:00:00+00:00","dateModified": "2022-10-08T00:00:00+00:00","publisher": {
+            "@type": "Organization",
+            "name": ""},"author": {
+                "@type": "Person",
+                "name": "SH∆FIQ ∆IM∆N"
+            },"description": ""
+    }
+    </script></head>
+    <body data-header-desktop="fixed" data-header-mobile="auto"><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('dark' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'dark' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="SHAFIQAIMAN">SH∆FIQ∆IM∆N</a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/posts/" title="Posts"><i class="fa-solid fa-book"></i>  </a><a class="menu-item" href="/tags/" title="Tags"><i class="fa-solid fa-tags"></i>  </a><a class="menu-item" href="/categories/" title="Categories"><i class="fa-solid fa-folder"></i>  </a><span class="menu-item delimiter"></span><span class="menu-item search" id="search-desktop">
+                        <input type="text" placeholder="Search titles or contents..." id="search-input-desktop">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-desktop" title="Search">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-desktop" title="Clear">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-desktop">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </span><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                    <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+                </a></div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="SHAFIQAIMAN">SH∆FIQ∆IM∆N</a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><div class="search-wrapper">
+                    <div class="search mobile" id="search-mobile">
+                        <input type="text" placeholder="Search titles or contents..." id="search-input-mobile">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-mobile" title="Search">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-mobile" title="Clear">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-mobile">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </div>
+                    <a href="javascript:void(0);" class="search-cancel" id="search-cancel-mobile">
+                        Cancel
+                    </a>
+                </div><a class="menu-item" href="/posts/" title="Posts"><i class="fa-solid fa-book"></i></a><a class="menu-item" href="/tags/" title="Tags"><i class="fa-solid fa-tags"></i></a><a class="menu-item" href="/categories/" title="Categories"><i class="fa-solid fa-folder"></i></a><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+            </a></div>
+    </div>
+</header><div class="search-dropdown desktop">
+        <div id="search-dropdown-desktop"></div>
+    </div>
+    <div class="search-dropdown mobile">
+        <div id="search-dropdown-mobile"></div>
+    </div><main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">Contents</h2>
+            <div class="toc-content always-active" id="toc-content-auto"></div>
+        </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">HackTheBox - Arctic Writeup</h1><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="https://shafiqaiman.com" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>SH∆FIQ ∆IM∆N</a></span>&nbsp;<span class="post-category">included in <a href="/categories/hackthebox/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>HacktheBox</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="08-10-2022">08-10-2022</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;642 words&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;4 minutes&nbsp;</div>
+        </div><div class="featured-image"><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/posts/htb/arctic/featured.png"
+        data-srcset="/posts/htb/arctic/featured.png, /posts/htb/arctic/featured.png 1.5x, /posts/htb/arctic/featured.png 2x"
+        data-sizes="auto"
+        alt="/posts/htb/arctic/featured.png"
+        title="/posts/htb/arctic/featured.png" /></div><div class="details toc" id="toc-static"  data-kept="">
+                <div class="details-summary toc-title">
+                    <span>Contents</span>
+                    <span><i class="details-icon fas fa-angle-right" aria-hidden="true"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#nmap">Nmap</a></li>
+    <li><a href="#webserver-8500">Webserver: 8500</a></li>
+    <li><a href="#foothold-rce">Foothold: RCE</a></li>
+    <li><a href="#privesc-seimpersonateprivilege">PrivEsc: SeImpersonatePrivilege</a></li>
+    <li><a href="#system">System</a></li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><h2 id="nmap">Nmap</h2>
+<p>Like always, I&rsquo;m going to scan the IP address by using <a href="https://nmap.org/" target="_blank" rel="noopener noreffer ">Nmap</a> but I&rsquo;m going to scan the full port first. Then, I&rsquo;m going to scan the only open ports.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="line"><span class="cl"><span class="n">nmap</span><span class="w"> </span><span class="o">-</span><span class="n">p135</span><span class="p">,</span><span class="mi">8500</span><span class="p">,</span><span class="mi">49154</span><span class="w"> </span><span class="o">-</span><span class="n">sCV</span><span class="w"> </span><span class="o">-</span><span class="k">oN</span><span class="w"> </span><span class="n">nmap</span><span class="o">/</span><span class="n">arctic</span><span class="w"> </span><span class="mi">10</span><span class="p">.</span><span class="mi">10</span><span class="p">.</span><span class="mi">10</span><span class="p">.</span><span class="mi">11</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="mi">135</span><span class="o">/</span><span class="n">tcp</span><span class="w">   </span><span class="k">open</span><span class="w">  </span><span class="n">msrpc</span><span class="w">   </span><span class="n">Microsoft</span><span class="w"> </span><span class="n">Windows</span><span class="w"> </span><span class="n">RPC</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="mi">8500</span><span class="o">/</span><span class="n">tcp</span><span class="w">  </span><span class="k">open</span><span class="w">  </span><span class="n">fmtp</span><span class="o">?</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="mi">49154</span><span class="o">/</span><span class="n">tcp</span><span class="w"> </span><span class="k">open</span><span class="w">  </span><span class="n">msrpc</span><span class="w">   </span><span class="n">Microsoft</span><span class="w"> </span><span class="n">Windows</span><span class="w"> </span><span class="n">RPC</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="n">Service</span><span class="w"> </span><span class="n">Info</span><span class="p">:</span><span class="w"> </span><span class="n">OS</span><span class="p">:</span><span class="w"> </span><span class="n">Windows</span><span class="p">;</span><span class="w"> </span><span class="n">CPE</span><span class="p">:</span><span class="w"> </span><span class="n">cpe</span><span class="p">:</span><span class="o">/</span><span class="n">o</span><span class="p">:</span><span class="n">microsoft</span><span class="p">:</span><span class="n">windows</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>The nmap scan result is completed. Based on the services, look like this is a Windows target and three ports that open. Port <code>135/49154</code> msrpc and <code>8500</code> fmtp.</p>
+<p>To be honest, I&rsquo;ll try to enumerate all of those open ports and I cannot find anything useful at all. First, I&rsquo;ll try playing around with <code>msrpc</code> and try using impacket to dump endpoints but again nothing useful came out of it and <code>fmtp</code> does not have a lot of information about it as far as I search (maybe not that far I guess). It was just a train wreck for me. So, I end up navigating those ports on my browser and I found something useful *SMILE*.</p>
+<h2 id="webserver-8500">Webserver: 8500</h2>
+<p>Turns out, this machine has a web server that lists directories on port <code>8500</code> and one of the directories called <code>CFIDE</code>. Then, I googled it and found out, it is related to Adobe software called <a href="https://www.adobe.com/products/coldfusion-standard.html" target="_blank" rel="noopener noreffer ">Coldfusion</a> and my prediction is correct when I navigate to <code>/CFIDE/administrator/</code>.</p>
+<p><figure><a class="lightgallery" href="/posts/htb/arctic/coldfusion-login-page.png" title="coldfusion login page" data-thumbnail="/posts/htb/arctic/coldfusion-login-page.png" data-sub-html="<h2>coldfusion login page</h2><p>coldfusion login page</p>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/posts/htb/arctic/coldfusion-login-page.png"
+            data-srcset="/posts/htb/arctic/coldfusion-login-page.png, /posts/htb/arctic/coldfusion-login-page.png 1.5x, /posts/htb/arctic/coldfusion-login-page.png 2x"
+            data-sizes="auto"
+            alt="/posts/htb/arctic/coldfusion-login-page.png" width="669" height="454" />
+    </a><figcaption class="image-caption">coldfusion login page</figcaption>
+    </figure></p>
+<p>On the login page, I can&rsquo;t change the username but the password input field is something else. When I&rsquo;ll try to put something in the password field, then I click on <code>login</code>. Suddenly, it changes the string into something else.</p>
+<h2 id="foothold-rce">Foothold: RCE</h2>
+<p>Well, I don&rsquo;t want to waste any time looking deeper into the login page (plz don&rsquo;t be like me). On the login page itself, it displays the version. Then, I&rsquo;ll try to search for the exploit on <a href="https://www.exploit-db.com/searchsploit" target="_blank" rel="noopener noreffer ">searchsploit</a>.</p>
+<p><figure><a class="lightgallery" href="/posts/htb/arctic/coldfusion-8-rce.png" title="coldfusion 8 rce" data-thumbnail="/posts/htb/arctic/coldfusion-8-rce.png" data-sub-html="<h2>coldfusion 8 rce</h2><p>coldfusion 8 rce</p>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/posts/htb/arctic/coldfusion-8-rce.png"
+            data-srcset="/posts/htb/arctic/coldfusion-8-rce.png, /posts/htb/arctic/coldfusion-8-rce.png 1.5x, /posts/htb/arctic/coldfusion-8-rce.png 2x"
+            data-sizes="auto"
+            alt="/posts/htb/arctic/coldfusion-8-rce.png" width="1877" height="398" />
+    </a><figcaption class="image-caption">coldfusion 8 rce</figcaption>
+    </figure></p>
+<p>Shockingly, there&rsquo;s an RCE exploit and it did not disappoint me at all. So, I&rsquo;m copying that exploit into my current directory with <code>-m</code> and the <code>exploit id</code>. When I expect the exploit, it says this version of Coldfusion has a CVE assigned to it called <a href="https://nvd.nist.gov/vuln/detail/CVE-2009-2265" target="_blank" rel="noopener noreffer ">CVE-2009-2265</a> and vulnerabilities can be found in FCKeditor before 2.6.4.1 that allows remote attackers to create executable files.</p>
+<p>So, this exploits that I have right now, it&rsquo;s going to create a payload through <code>msfvenom</code> and upload it, and also started the <code>nc</code> listener. Well, I need to change the listening host and port inside of it and I&rsquo;m good to go. However, I love to add <code>rlwrap</code> in the <code>listen_connection</code> function since this is a Windows machine.</p>
+<p><figure><a class="lightgallery" href="/posts/htb/arctic/shell-tolis.png" title="shell as tolis" data-thumbnail="/posts/htb/arctic/shell-tolis.png" data-sub-html="<h2>shell as tolis</h2><p>shell as tolis</p>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/posts/htb/arctic/shell-tolis.png"
+            data-srcset="/posts/htb/arctic/shell-tolis.png, /posts/htb/arctic/shell-tolis.png 1.5x, /posts/htb/arctic/shell-tolis.png 2x"
+            data-sizes="auto"
+            alt="/posts/htb/arctic/shell-tolis.png" width="720" height="409" />
+    </a><figcaption class="image-caption">shell as tolis</figcaption>
+    </figure></p>
+<h2 id="privesc-seimpersonateprivilege">PrivEsc: SeImpersonatePrivilege</h2>
+<p>Nice! I&rsquo;m in as <code>tolis</code>. The first thing, I love to do is run the <code>whoami /priv</code> command and the result is shocking to me. Turns out, the <code>SeImpersonatePrivilege</code> token is enabled and I can use the &ldquo;impersonation method&rdquo; like the <a href="https://shafiqaiman.com/hackthebox-sheild-writeup/" target="_blank" rel="noopener noreffer ">previous</a> machine. So, I run the <code>systeminfo</code> command to know the version of Windows I&rsquo;m currently in and the result is <code>Windows Server 2008 R2</code>.</p>
+<p><figure><a class="lightgallery" href="/posts/htb/arctic/check-system-and-priv.png" title="check the system and priv" data-thumbnail="/posts/htb/arctic/check-system-and-priv.png" data-sub-html="<h2>check the system and priv</h2><p>check the system and priv</p>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/posts/htb/arctic/check-system-and-priv.png"
+            data-srcset="/posts/htb/arctic/check-system-and-priv.png, /posts/htb/arctic/check-system-and-priv.png 1.5x, /posts/htb/arctic/check-system-and-priv.png 2x"
+            data-sizes="auto"
+            alt="/posts/htb/arctic/check-system-and-priv.png" width="831" height="424" />
+    </a><figcaption class="image-caption">check the system and priv</figcaption>
+    </figure></p>
+<p>Since this is an old version of Windows. I&rsquo;m going to use <a href="https://github.com/ohpe/juicy-potato/releases" target="_blank" rel="noopener noreffer ">JuicyPotato</a> exploit to gain <code>system</code> but first, I need to transfer it into the target machine by firing off the <code>impacket-smbserver</code> like the <a href="https://shafiqaiman.com/hackthebox-grandpa-writeup/" target="_blank" rel="noopener noreffer ">previous</a> machine that I work on. After it&rsquo;s done transferring the exploit I also transfer the <code>nc.exe</code> executables. Since I&rsquo;m on a Kali machine this executable can be found on <code>/usr/share/windows-binaries/</code>.</p>
+<p><figure><a class="lightgallery" href="/posts/htb/arctic/transfer-file.png" title="transferring file" data-thumbnail="/posts/htb/arctic/transfer-file.png" data-sub-html="<h2>transferring file</h2><p>transferring file</p>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/posts/htb/arctic/transfer-file.png"
+            data-srcset="/posts/htb/arctic/transfer-file.png, /posts/htb/arctic/transfer-file.png 1.5x, /posts/htb/arctic/transfer-file.png 2x"
+            data-sizes="auto"
+            alt="/posts/htb/arctic/transfer-file.png" width="878" height="423" />
+    </a><figcaption class="image-caption">transferring file</figcaption>
+    </figure></p>
+<h2 id="system">System</h2>
+<p>I&rsquo;ve already transferred the file that is needed before I executed it. I need to grab one of the <a href="https://ohpe.it/juicy-potato/CLSID/Windows_Server_2008_R2_Enterprise/" target="_blank" rel="noopener noreffer ">CLSID</a> to make it work since the default one did not work. So, this target machine is a Windows Server 2008 R2 Standard but I&rsquo;m going to use the R2 Enterprise version of it. *hope it works*</p>
+<p><figure><a class="lightgallery" href="/posts/htb/arctic/shell-system.png" title="shell as system" data-thumbnail="/posts/htb/arctic/shell-system.png" data-sub-html="<h2>shell as system</h2><p>shell as system</p>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/posts/htb/arctic/shell-system.png"
+            data-srcset="/posts/htb/arctic/shell-system.png, /posts/htb/arctic/shell-system.png 1.5x, /posts/htb/arctic/shell-system.png 2x"
+            data-sizes="auto"
+            alt="/posts/htb/arctic/shell-system.png" width="1816" height="734" />
+    </a><figcaption class="image-caption">shell as system</figcaption>
+    </figure></p>
+<p>Awesome!</p>
+</div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>Updated on 08-10-2022</span>
+            </div></div>
+        <div class="post-info-line">
+            <div class="post-info-md"></div>
+            <div class="post-info-share">
+                <span><a href="javascript:void(0);" title="Share on Twitter" data-sharer="twitter" data-url="https://shafiqaiman.com/posts/htb/arctic/" data-title="HackTheBox - Arctic Writeup" data-via="_shafiqaiman_" data-hashtags="CVE-2009-2265,juicy-potato,seImpersonatePrivilege,coldfusion,rce,smbserver.py,upload-vuln,lfi,jsp-reverse-shell,msfvenom"><i class="fab fa-twitter fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Linkedin" data-sharer="linkedin" data-url="https://shafiqaiman.com/posts/htb/arctic/"><i class="fab fa-linkedin fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Hacker News" data-sharer="hackernews" data-url="https://shafiqaiman.com/posts/htb/arctic/" data-title="HackTheBox - Arctic Writeup"><i class="fab fa-hacker-news fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Reddit" data-sharer="reddit" data-url="https://shafiqaiman.com/posts/htb/arctic/"><i class="fab fa-reddit fa-fw" aria-hidden="true"></i></a></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"><i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/cve-2009-2265/">CVE-2009-2265</a>,&nbsp;<a href="/tags/juicy-potato/">juicy-potato</a>,&nbsp;<a href="/tags/seimpersonateprivilege/">seImpersonatePrivilege</a>,&nbsp;<a href="/tags/coldfusion/">coldfusion</a>,&nbsp;<a href="/tags/rce/">rce</a>,&nbsp;<a href="/tags/smbserver.py/">smbserver.py</a>,&nbsp;<a href="/tags/upload-vuln/">upload-vuln</a>,&nbsp;<a href="/tags/lfi/">lfi</a>,&nbsp;<a href="/tags/jsp-reverse-shell/">jsp-reverse-shell</a>,&nbsp;<a href="/tags/msfvenom/">msfvenom</a></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">Back</a></span>&nbsp;|&nbsp;<span><a href="/">Home</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/posts/htb/nibbles/" class="prev" rel="prev" title="HackTheBox - Nibbles Writeup"><i class="fas fa-angle-left fa-fw" aria-hidden="true"></i>HackTheBox - Nibbles Writeup</a>
+            <a href="/posts/htb/bank/" class="next" rel="next" title="HackTheBox - Bank Writeup">HackTheBox - Bank Writeup<i class="fas fa-angle-right fa-fw" aria-hidden="true"></i></a></div>
+</div>
+</article></div>
+            </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line" itemscope itemtype="http://schema.org/CreativeWork"><i class="far fa-copyright fa-fw" aria-hidden="true"></i><span itemprop="copyrightYear">2021 - 2023</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="https://shafiqaiman.com" target="_blank">SHAFIQAIMAN</a></span></div>
+        </div>
+    </footer></div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="Back to Top">
+                <i class="fas fa-arrow-up fa-fw" aria-hidden="true"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="View Comments">
+                <i class="fas fa-comment fa-fw" aria-hidden="true"></i>
+            </a>
+        </div><link rel="stylesheet" href="/lib/lightgallery/css/lightgallery-bundle.min.css"><script type="text/javascript" src="/lib/autocomplete/autocomplete.min.js"></script><script type="text/javascript" src="/lib/lunr/lunr.min.js"></script><script type="text/javascript" src="/lib/lazysizes/lazysizes.min.js"></script><script type="text/javascript" src="/lib/lightgallery/lightgallery.min.js"></script><script type="text/javascript" src="/lib/lightgallery/plugins/thumbnail/lg-thumbnail.min.js"></script><script type="text/javascript" src="/lib/lightgallery/plugins/zoom/lg-zoom.min.js"></script><script type="text/javascript" src="/lib/clipboard/clipboard.min.js"></script><script type="text/javascript" src="/lib/sharer/sharer.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"Copy to clipboard","maxShownLines":50},"comment":{},"lightgallery":true,"search":{"highlightTag":"em","lunrIndexURL":"/index.json","maxResultLength":10,"noResultsFound":"No results found","snippetLength":30,"type":"lunr"}};</script><script type="text/javascript" src="/js/theme.min.js"></script></body>
+</html>

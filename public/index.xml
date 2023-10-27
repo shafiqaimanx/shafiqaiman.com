@@ -1,0 +1,99 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>SHAFIQAIMAN</title>
+        <link>https://shafiqaiman.com/</link>
+        <description>shafiqaiman.com is a cybersecurity/ethical hacking website that focus on publishing of writeup in HacktheBox, Tryhackme and other online CTF (capture the flag) challenge.</description>
+        <generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Sun, 03 Sep 2023 00:00:00 &#43;0000</lastBuildDate>
+            <atom:link href="https://shafiqaiman.com/index.xml" rel="self" type="application/rss+xml" />
+        <item>
+    <title>HackTheBox - MonitorsTwo Writeup</title>
+    <link>https://shafiqaiman.com/posts/htb/monitorstwo/</link>
+    <pubDate>Sun, 03 Sep 2023 00:00:00 &#43;0000</pubDate>
+    <author>SH∆FIQ ∆IM∆N</author>
+    <guid>https://shafiqaiman.com/posts/htb/monitorstwo/</guid>
+    <description><![CDATA[Nmap Like always, I’m going to scan the IP Address by using nmap but I’m going to scan the full port first. Then, I’m going to scan the only open ports.
+1 2 3 4 5 6 7 8 9 10 11 12 13 nmap -sCV -p22,80 -oN nmap/monitorstwo 10.10.11.211 PORT STATE SERVICE VERSION 22/tcp open ssh OpenSSH 8.2p1 Ubuntu 4ubuntu0.5 (Ubuntu Linux; protocol 2.0) | ssh-hostkey: | 3072 48:ad:d5:b8:3a:9f:bc:be:f7:e8:20:1e:f6:bf:de:ae (RSA) | 256 b7:89:6c:0b:20:ed:49:b2:c1:86:7c:29:92:74:1c:1f (ECDSA) |_ 256 18:cd:9d:08:a6:21:a8:b8:b6:f7:9f:8d:40:51:54:fb (ED25519) 80/tcp open http nginx 1.]]></description>
+</item>
+<item>
+    <title>HackTheBox - Busqueda Writeup</title>
+    <link>https://shafiqaiman.com/posts/htb/busqueda/</link>
+    <pubDate>Sat, 08 Jul 2023 00:00:00 &#43;0000</pubDate>
+    <author>SH∆FIQ ∆IM∆N</author>
+    <guid>https://shafiqaiman.com/posts/htb/busqueda/</guid>
+    <description><![CDATA[Nmap Like always, I’m going to scan the IP Address by using nmap but I’m going to scan the full port first. Then, I’m going to scan the only open ports.
+1 2 3 4 5 6 7 8 9 10 11 12 nmap -p22,80 -sCV -oN nmap/busqueda 10.10.11.208 PORT STATE SERVICE VERSION 22/tcp open ssh OpenSSH 8.9p1 Ubuntu 3ubuntu0.1 (Ubuntu Linux; protocol 2.0) | ssh-hostkey: | 256 4f:e3:a6:67:a2:27:f9:11:8d:c3:0e:d7:73:a0:2c:28 (ECDSA) |_ 256 81:6e:78:76:6b:8a:ea:7d:1b:ab:d4:36:b7:f8:ec:c4 (ED25519) 80/tcp open http Apache httpd 2.]]></description>
+</item>
+<item>
+    <title>HackTheBox - Sense Writeup</title>
+    <link>https://shafiqaiman.com/posts/htb/sense/</link>
+    <pubDate>Sun, 13 Nov 2022 00:00:00 &#43;0000</pubDate>
+    <author>SH∆FIQ ∆IM∆N</author>
+    <guid>https://shafiqaiman.com/posts/htb/sense/</guid>
+    <description><![CDATA[Nmap Like always, I’m going to scan the IP Address by using nmap but I’m going to scan the full port first. Then, I’m going to scan the only open ports.
+1 2 3 4 5 6 7 8 9 10 11 12 13 nmap -p80,443 -sCV -oN nmap/sense 10.10.10.60 80/tcp open http lighttpd 1.4.35 |_http-server-header: lighttpd/1.4.35 |_http-title: Did not follow redirect to https://10.10.10.60/ 443/tcp open ssl/http lighttpd 1.4.35 |_http-server-header: lighttpd/1.]]></description>
+</item>
+<item>
+    <title>HackTheBox - Mirai Writeup</title>
+    <link>https://shafiqaiman.com/posts/htb/mirai/</link>
+    <pubDate>Wed, 02 Nov 2022 00:00:00 &#43;0000</pubDate>
+    <author>SH∆FIQ ∆IM∆N</author>
+    <guid>https://shafiqaiman.com/posts/htb/mirai/</guid>
+    <description><![CDATA[Nmap Like always, I’m going to scan the IP Address by using nmap but I&rsquo;m going to scan the full port first. Then, I&rsquo;m going to scan the only open ports.
+1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 nmap -p22,53,80,1776,32400,32469 -sCV -oN nmap/mirai 10.10.10.48 22/tcp open ssh OpenSSH 6.]]></description>
+</item>
+<item>
+    <title>HackTheBox - Blocky Writeup</title>
+    <link>https://shafiqaiman.com/posts/htb/blocky/</link>
+    <pubDate>Sat, 22 Oct 2022 00:00:00 &#43;0000</pubDate>
+    <author>SH∆FIQ ∆IM∆N</author>
+    <guid>https://shafiqaiman.com/posts/htb/blocky/</guid>
+    <description><![CDATA[Nmap Like always, I’m going to scan the IP address by using nmap but I’m going to scan the full port first. Then, I’m going to scan the only open ports.
+1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 nmap -p21,22,80,25565 -sCV -oN nmap/blocky 10.10.10.37 21/tcp open ftp ProFTPD 1.3.5a 22/tcp open ssh OpenSSH 7.2p2 Ubuntu 4ubuntu2.2 (Ubuntu Linux; protocol 2.0) | ssh-hostkey: | 2048 d62b99b4d5e753ce2bfcb5d79d79fba2 (RSA) | 256 5d7f389570c9beac67a01e86e7978403 (ECDSA) |_ 256 09d5c204951a90ef87562597df837067 (ED25519) 80/tcp open http Apache httpd 2.]]></description>
+</item>
+<item>
+    <title>HackTheBox - Bank Writeup</title>
+    <link>https://shafiqaiman.com/posts/htb/bank/</link>
+    <pubDate>Sat, 15 Oct 2022 00:00:00 &#43;0000</pubDate>
+    <author>SH∆FIQ ∆IM∆N</author>
+    <guid>https://shafiqaiman.com/posts/htb/bank/</guid>
+    <description><![CDATA[Nmap Like always, I&rsquo;m going to scan the IP address by using nmap but I&rsquo;m going to scan the full port first. Then, I&rsquo;m going to scan the only open ports.
+1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 nmap -p- --min-rate=10000 10.10.10.29 nmap -p22,53,80 -sCV -oN nmap/bank 10.10.10.29 22/tcp open ssh OpenSSH 6.6.1p1 Ubuntu 2ubuntu2.8 (Ubuntu Linux; protocol 2.0) | ssh-hostkey: | 1024 08eed030d545e459db4d54a8dc5cef15 (DSA) | 2048 b8e015482d0df0f17333b78164084a91 (RSA) | 256 a04c94d17b6ea8fd07fe11eb88d51665 (ECDSA) |_ 256 2d794430c8bb5e8f07cf5b72efa16d67 (ED25519) 53/tcp open domain ISC BIND 9.]]></description>
+</item>
+<item>
+    <title>HackTheBox - Arctic Writeup</title>
+    <link>https://shafiqaiman.com/posts/htb/arctic/</link>
+    <pubDate>Sat, 08 Oct 2022 00:00:00 &#43;0000</pubDate>
+    <author>SH∆FIQ ∆IM∆N</author>
+    <guid>https://shafiqaiman.com/posts/htb/arctic/</guid>
+    <description><![CDATA[Nmap Like always, I&rsquo;m going to scan the IP address by using Nmap but I&rsquo;m going to scan the full port first. Then, I&rsquo;m going to scan the only open ports.
+1 2 3 4 5 6 nmap -p135,8500,49154 -sCV -oN nmap/arctic 10.10.10.11 135/tcp open msrpc Microsoft Windows RPC 8500/tcp open fmtp? 49154/tcp open msrpc Microsoft Windows RPC Service Info: OS: Windows; CPE: cpe:/o:microsoft:windows The nmap scan result is completed. Based on the services, look like this is a Windows target and three ports that open.]]></description>
+</item>
+<item>
+    <title>HackTheBox - Nibbles Writeup</title>
+    <link>https://shafiqaiman.com/posts/htb/nibbles/</link>
+    <pubDate>Mon, 03 Oct 2022 00:00:00 &#43;0000</pubDate>
+    <author>SH∆FIQ ∆IM∆N</author>
+    <guid>https://shafiqaiman.com/posts/htb/nibbles/</guid>
+    <description><![CDATA[Nmap Like always, I&rsquo;m going to scan the IP address by using Nmap. However, today I feel spicier ;). So, I&rsquo;m going to scan the full port with -p- then I&rsquo;m only scanning those open ports with scripts and version enumeration.
+1 2 3 4 5 6 7 8 9 10 11 12 nmap -sCV -p22,80 -oN nmap/nibbles 10.10.10.75 22/tcp open ssh OpenSSH 7.2p2 Ubuntu 4ubuntu2.2 (Ubuntu Linux; protocol 2.0) | ssh-hostkey: | 2048 c4:f8:ad:e8:f8:04:77:de:cf:15:0d:63:0a:18:7e:49 (RSA) | 256 22:8f:b1:97:bf:0f:17:08:fc:7e:2c:8f:e9:77:3a:48 (ECDSA) |_ 256 e6:ac:27:a3:b5:a9:f1:12:3c:34:a5:5d:5b:eb:3d:e9 (ED25519) 80/tcp open http Apache httpd 2.]]></description>
+</item>
+<item>
+    <title>HackTheBox - Grandpa Writeup</title>
+    <link>https://shafiqaiman.com/posts/htb/grandpa/</link>
+    <pubDate>Fri, 19 Aug 2022 00:00:00 &#43;0000</pubDate>
+    <author>SH∆FIQ ∆IM∆N</author>
+    <guid>https://shafiqaiman.com/posts/htb/grandpa/</guid>
+    <description><![CDATA[Nmap Like always, I&rsquo;m going to scan the IP Address by using Nmap.
+1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 # Nmap 7.92 scan initiated Fri Aug 5 21:51:15 2022 as: nmap -sCV -oN nmap/grandpa 10.10.10.14 Nmap scan report for 10.10.10.14 Host is up (0.66s latency). Not shown: 999 filtered tcp ports (no-response) PORT STATE SERVICE VERSION 80/tcp open http Microsoft IIS httpd 6.]]></description>
+</item>
+<item>
+    <title>HackTheBox - Late Writeup</title>
+    <link>https://shafiqaiman.com/posts/htb/late/</link>
+    <pubDate>Sat, 30 Jul 2022 00:00:00 &#43;0000</pubDate>
+    <author>SH∆FIQ ∆IM∆N</author>
+    <guid>https://shafiqaiman.com/posts/htb/late/</guid>
+    <description><![CDATA[Nmap Like always, I&rsquo;m going to scan the IP Address by using Nmap.
+1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 # Nmap 7.92 scan initiated Tue May 17 23:03:20 2022 as: nmap -sC -sV -vv -p- -oN nmap/late_all 10.10.11.156 Nmap scan report for 10.10.11.156 Host is up, received echo-reply ttl 63 (0.070s latency).]]></description>
+</item>
+</channel>
+</rss>

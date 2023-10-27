@@ -1,0 +1,36 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>hashcat - Tag - SHAFIQAIMAN</title>
+        <link>https://shafiqaiman.com/tags/hashcat/</link>
+        <description>hashcat - Tag - SHAFIQAIMAN</description>
+        <generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Sat, 09 Apr 2022 00:00:00 &#43;0000</lastBuildDate><atom:link href="https://shafiqaiman.com/tags/hashcat/" rel="self" type="application/rss+xml" /><item>
+    <title>HackTheBox - Responder Writeup</title>
+    <link>https://shafiqaiman.com/posts/htb/responder/</link>
+    <pubDate>Sat, 09 Apr 2022 00:00:00 &#43;0000</pubDate>
+    <author>SH∆FIQ ∆IM∆N</author>
+    <guid>https://shafiqaiman.com/posts/htb/responder/</guid>
+    <description><![CDATA[I found two ways to gain into this machine. First, stealing the password hash by using the responder and then logon through evil-winrm. Second, gaining the remote code execution through log poisoning and getting the reverse shell.
+Nmap Let&rsquo;s scan the Ip address first by using Nmap.
+result 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 # Nmap 7.92 scan initiated Sat Apr 9 04:18:54 2022 as: nmap -sC -sV -p- -oN nmap/responder_all 10.]]></description>
+</item>
+<item>
+    <title>HackTheBox - Guard Writeup</title>
+    <link>https://shafiqaiman.com/posts/htb/guard/</link>
+    <pubDate>Sun, 08 Aug 2021 00:00:00 &#43;0000</pubDate>
+    <author>SH∆FIQ ∆IM∆N</author>
+    <guid>https://shafiqaiman.com/posts/htb/guard/</guid>
+    <description><![CDATA[Enumeration Top 1000 ports scan 1 nmap -sC -sV -oN nmap/initial 10.10.10.50 the result nmap initial scan scan all ports 1 nmap -sC -sV -p- -oN nmap/all_ports 10.10.10.50 the result nmap allports scan Open Ports Well, both nmap scan result shows SSH port just open Foothold/Gaining Access SSH Let&rsquo;s try SSH into the machine using the private key we&rsquo;ve got from the previous box markup. ssh as daniel It works rBash Well, I&rsquo;m login as daniel and I found the user flag already.]]></description>
+</item>
+<item>
+    <title>TryHackMe - Brute It Writeup</title>
+    <link>https://shafiqaiman.com/posts/thm/brute_it/</link>
+    <pubDate>Sat, 10 Jul 2021 00:00:00 &#43;0000</pubDate>
+    <author>SHAFIQAIMAN</author>
+    <guid>https://shafiqaiman.com/posts/thm/brute_it/</guid>
+    <description><![CDATA[Link : https://tryhackme.com/room/bruteit
+Enumeration First we need to connect to try hack me networks through openvpn and deploy the machine.
+Now, the box is up. First, we need to do a reconnaissance using nmap. Nmap is a network mapper tool for scanning the ports or enumerate the machine through ports. I will run this command for my nmap scan.
+1 nmap -sC -sV -O -oN nmap/initial &lt;machine ip&gt; Explaining the nmap flag: -sC := scan using nmap default script -sV := scan for version -O := scan for OS [operating system] -oN := output in normal format Now our nmap scan is done.]]></description>
+</item>
+</channel>
+</rss>

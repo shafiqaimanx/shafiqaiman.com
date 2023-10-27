@@ -1,0 +1,25 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>jsp-reverse-shell - Tag - SHAFIQAIMAN</title>
+        <link>https://shafiqaiman.com/tags/jsp-reverse-shell/</link>
+        <description>jsp-reverse-shell - Tag - SHAFIQAIMAN</description>
+        <generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Sat, 08 Oct 2022 00:00:00 &#43;0000</lastBuildDate><atom:link href="https://shafiqaiman.com/tags/jsp-reverse-shell/" rel="self" type="application/rss+xml" /><item>
+    <title>HackTheBox - Arctic Writeup</title>
+    <link>https://shafiqaiman.com/posts/htb/arctic/</link>
+    <pubDate>Sat, 08 Oct 2022 00:00:00 &#43;0000</pubDate>
+    <author>SH∆FIQ ∆IM∆N</author>
+    <guid>https://shafiqaiman.com/posts/htb/arctic/</guid>
+    <description><![CDATA[Nmap Like always, I&rsquo;m going to scan the IP address by using Nmap but I&rsquo;m going to scan the full port first. Then, I&rsquo;m going to scan the only open ports.
+1 2 3 4 5 6 nmap -p135,8500,49154 -sCV -oN nmap/arctic 10.10.10.11 135/tcp open msrpc Microsoft Windows RPC 8500/tcp open fmtp? 49154/tcp open msrpc Microsoft Windows RPC Service Info: OS: Windows; CPE: cpe:/o:microsoft:windows The nmap scan result is completed. Based on the services, look like this is a Windows target and three ports that open.]]></description>
+</item>
+<item>
+    <title>HackTheBox - Jerry Writeup</title>
+    <link>https://shafiqaiman.com/posts/htb/jerry/</link>
+    <pubDate>Sat, 04 Jun 2022 00:00:00 &#43;0000</pubDate>
+    <author>SH∆FIQ ∆IM∆N</author>
+    <guid>https://shafiqaiman.com/posts/htb/jerry/</guid>
+    <description><![CDATA[Nmap As always, I&rsquo;m gonna start with the Nmap scan with this IP address 10.10.10.95
+1 2 3 4 5 6 7 8 9 10 11 12 # Nmap 7.92 scan initiated Tue Mar 1 07:29:58 2022 as: nmap -sC -sV -p- -oN nmap/jerry_all 10.10.10.95 Nmap scan report for 10.10.10.95 Host is up (0.060s latency). Not shown: 65534 filtered tcp ports (no-response) PORT STATE SERVICE VERSION 8080/tcp open http Apache Tomcat/Coyote JSP engine 1.]]></description>
+</item>
+</channel>
+</rss>

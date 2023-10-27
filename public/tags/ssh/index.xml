@@ -1,0 +1,44 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>ssh - Tag - SHAFIQAIMAN</title>
+        <link>https://shafiqaiman.com/tags/ssh/</link>
+        <description>ssh - Tag - SHAFIQAIMAN</description>
+        <generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Sat, 03 Dec 2022 00:00:00 &#43;0000</lastBuildDate><atom:link href="https://shafiqaiman.com/tags/ssh/" rel="self" type="application/rss+xml" /><item>
+    <title>HackTheBox - Beep Writeup</title>
+    <link>https://shafiqaiman.com/posts/htb/beep/</link>
+    <pubDate>Fri, 21 Jan 2022 00:00:00 &#43;0000</pubDate>
+    <author>SH∆FIQ ∆IM∆N</author>
+    <guid>https://shafiqaiman.com/posts/htb/beep/</guid>
+    <description><![CDATA[Nmap As always. I&rsquo;m gonna run the Nmap scan against this IP address 10.10.10.7. Here is the result of the scan
+the result 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 41 42 43 44 45 46 47 48 49 50 51 52 53 54 55 56 57 58 59 60 61 62 63 64 65 66 67 68 69 70 71 72 73 74 # Nmap 7.]]></description>
+</item>
+<item>
+    <title>HackTheBox - Sunday Writeup</title>
+    <link>https://shafiqaiman.com/posts/htb/sunday/</link>
+    <pubDate>Sat, 03 Dec 2022 00:00:00 &#43;0000</pubDate>
+    <author>SHAFIQAIMAN</author>
+    <guid>https://shafiqaiman.com/posts/htb/sunday/</guid>
+    <description><![CDATA[Nmap Like always, I’m going to scan the IP Address by using nmap but I’m going to scan the full port first. Then, I’m going to scan the only open ports.
+1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 41 42 nmap -p79,111,515,6787,22022 -sCV -oN nmap/sunday 10.]]></description>
+</item>
+<item>
+    <title>HackTheBox - Valentine Writeup</title>
+    <link>https://shafiqaiman.com/posts/htb/valentine/</link>
+    <pubDate>Sun, 20 Nov 2022 00:00:00 &#43;0000</pubDate>
+    <author>SHAFIQAIMAN</author>
+    <guid>https://shafiqaiman.com/posts/htb/valentine/</guid>
+    <description><![CDATA[Nmap Like always, I’m going to scan the IP Address by using nmap but I’m going to scan the full port first. Then, I’m going to scan the only open ports.
+1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 nmap -p22,80,443 -sCV -oN nmap/valentine 10.10.10.79 22/tcp open ssh OpenSSH 5.9p1 Debian 5ubuntu1.10 (Ubuntu Linux; protocol 2.0) | ssh-hostkey: | 1024 964c51423cba2249204d3eec90ccfd0e (DSA) | 2048 46bf1fcc924f1da042b3d216a8583133 (RSA) |_ 256 e62b2519cb7e54cb0ab9ac1698c67da9 (ECDSA) 80/tcp open http Apache httpd 2.]]></description>
+</item>
+<item>
+    <title>TryHackMe - Bounty Hacker Writeup</title>
+    <link>https://shafiqaiman.com/posts/thm/bounty_hacker/</link>
+    <pubDate>Sat, 10 Jul 2021 00:00:00 &#43;0000</pubDate>
+    <author>SHAFIQAIMAN</author>
+    <guid>https://shafiqaiman.com/posts/thm/bounty_hacker/</guid>
+    <description><![CDATA[Link : https://tryhackme.com/room/cowboyhacker
+Enumeration First, let’s do an enumeration with the IP address of this machine. I’m gonna run Nmap [Netwok Mapper] to scan any open ports. I’m gonna run this command
+1 nmap -sC -sV -oN nmap/initial &lt;machine ip&gt; Explaining the nmap scan: -sC	:= scan using nmap default script -sV	:= scan for version -oN := output in normal format Now, the Nmap scan it’s done. We have 3 open ports FTP, ssh, and HTTP.]]></description>
+</item>
+</channel>
+</rss>

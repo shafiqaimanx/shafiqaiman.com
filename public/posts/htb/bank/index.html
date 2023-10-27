@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <title>HackTheBox - Bank Writeup - SHAFIQAIMAN</title><meta name="Description" content="shafiqaiman.com is a cybersecurity/ethical hacking website that focus on publishing of writeup in HacktheBox, Tryhackme and other online CTF (capture the flag) challenge."><meta property="og:title" content="HackTheBox - Bank Writeup" />
+<meta property="og:description" content="Nmap Like always, I&rsquo;m going to scan the IP address by using nmap but I&rsquo;m going to scan the full port first. Then, I&rsquo;m going to scan the only open ports.
+1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 nmap -p- --min-rate=10000 10.10.10.29 nmap -p22,53,80 -sCV -oN nmap/bank 10.10.10.29 22/tcp open ssh OpenSSH 6.6.1p1 Ubuntu 2ubuntu2.8 (Ubuntu Linux; protocol 2.0) | ssh-hostkey: | 1024 08eed030d545e459db4d54a8dc5cef15 (DSA) | 2048 b8e015482d0df0f17333b78164084a91 (RSA) | 256 a04c94d17b6ea8fd07fe11eb88d51665 (ECDSA) |_ 256 2d794430c8bb5e8f07cf5b72efa16d67 (ED25519) 53/tcp open domain ISC BIND 9." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://shafiqaiman.com/posts/htb/bank/" /><meta property="og:image" content="https://shafiqaiman.com/posts/htb/bank/featured.png"/><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2022-10-15T00:00:00+00:00" />
+<meta property="article:modified_time" content="2022-10-15T00:00:00+00:00" /><meta property="og:site_name" content="SHAFIQAIMAN" />
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="https://shafiqaiman.com/posts/htb/bank/featured.png"/>
+<meta name="twitter:title" content="HackTheBox - Bank Writeup"/>
+<meta name="twitter:description" content="Nmap Like always, I&rsquo;m going to scan the IP address by using nmap but I&rsquo;m going to scan the full port first. Then, I&rsquo;m going to scan the only open ports.
+1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 nmap -p- --min-rate=10000 10.10.10.29 nmap -p22,53,80 -sCV -oN nmap/bank 10.10.10.29 22/tcp open ssh OpenSSH 6.6.1p1 Ubuntu 2ubuntu2.8 (Ubuntu Linux; protocol 2.0) | ssh-hostkey: | 1024 08eed030d545e459db4d54a8dc5cef15 (DSA) | 2048 b8e015482d0df0f17333b78164084a91 (RSA) | 256 a04c94d17b6ea8fd07fe11eb88d51665 (ECDSA) |_ 256 2d794430c8bb5e8f07cf5b72efa16d67 (ED25519) 53/tcp open domain ISC BIND 9."/>
+<meta name="application-name" content="SHAFIQAIMAN">
+<meta name="apple-mobile-web-app-title" content="SHAFIQAIMAN"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://shafiqaiman.com/posts/htb/bank/" /><link rel="prev" href="https://shafiqaiman.com/posts/htb/arctic/" /><link rel="next" href="https://shafiqaiman.com/posts/htb/blocky/" /><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="/lib/fontawesome-free/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"></noscript><link rel="preload" href="/lib/animate/animate.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="/lib/animate/animate.min.css"></noscript><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "HackTheBox - Bank Writeup",
+        "inLanguage": "en",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https:\/\/shafiqaiman.com\/posts\/htb\/bank\/"
+        },"image": [{
+                            "@type": "ImageObject",
+                            "url": "https:\/\/shafiqaiman.com\/posts\/htb\/bank\/featured.png",
+                            "width":  1400 ,
+                            "height":  1060 
+                        }],"genre": "posts","keywords": "upload-vuln, gobuster, php-reverse-shell, SUID","wordcount":  782 ,
+        "url": "https:\/\/shafiqaiman.com\/posts\/htb\/bank\/","datePublished": "2022-10-15T00:00:00+00:00","dateModified": "2022-10-15T00:00:00+00:00","publisher": {
+            "@type": "Organization",
+            "name": ""},"author": {
+                "@type": "Person",
+                "name": "SH∆FIQ ∆IM∆N"
+            },"description": ""
+    }
+    </script></head>
+    <body data-header-desktop="fixed" data-header-mobile="auto"><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('dark' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'dark' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="SHAFIQAIMAN">SH∆FIQ∆IM∆N</a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/posts/" title="Posts"><i class="fa-solid fa-book"></i>  </a><a class="menu-item" href="/tags/" title="Tags"><i class="fa-solid fa-tags"></i>  </a><a class="menu-item" href="/categories/" title="Categories"><i class="fa-solid fa-folder"></i>  </a><span class="menu-item delimiter"></span><span class="menu-item search" id="search-desktop">
+                        <input type="text" placeholder="Search titles or contents..." id="search-input-desktop">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-desktop" title="Search">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-desktop" title="Clear">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-desktop">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </span><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                    <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+                </a></div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="SHAFIQAIMAN">SH∆FIQ∆IM∆N</a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><div class="search-wrapper">
+                    <div class="search mobile" id="search-mobile">
+                        <input type="text" placeholder="Search titles or contents..." id="search-input-mobile">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-mobile" title="Search">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-mobile" title="Clear">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-mobile">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </div>
+                    <a href="javascript:void(0);" class="search-cancel" id="search-cancel-mobile">
+                        Cancel
+                    </a>
+                </div><a class="menu-item" href="/posts/" title="Posts"><i class="fa-solid fa-book"></i></a><a class="menu-item" href="/tags/" title="Tags"><i class="fa-solid fa-tags"></i></a><a class="menu-item" href="/categories/" title="Categories"><i class="fa-solid fa-folder"></i></a><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+            </a></div>
+    </div>
+</header><div class="search-dropdown desktop">
+        <div id="search-dropdown-desktop"></div>
+    </div>
+    <div class="search-dropdown mobile">
+        <div id="search-dropdown-mobile"></div>
+    </div><main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">Contents</h2>
+            <div class="toc-content always-active" id="toc-content-auto"></div>
+        </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">HackTheBox - Bank Writeup</h1><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="https://shafiqaiman.com" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>SH∆FIQ ∆IM∆N</a></span>&nbsp;<span class="post-category">included in <a href="/categories/hackthebox/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>HacktheBox</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="15-10-2022">15-10-2022</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;782 words&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;4 minutes&nbsp;</div>
+        </div><div class="featured-image"><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/posts/htb/bank/featured.png"
+        data-srcset="/posts/htb/bank/featured.png, /posts/htb/bank/featured.png 1.5x, /posts/htb/bank/featured.png 2x"
+        data-sizes="auto"
+        alt="/posts/htb/bank/featured.png"
+        title="/posts/htb/bank/featured.png" /></div><div class="details toc" id="toc-static"  data-kept="">
+                <div class="details-summary toc-title">
+                    <span>Contents</span>
+                    <span><i class="details-icon fas fa-angle-right" aria-hidden="true"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#nmap">Nmap</a>
+      <ul>
+        <li><a href="#http-bankhtb">Http: bank.htb</a></li>
+        <li><a href="#gobuster">Gobuster</a></li>
+        <li><a href="#http-balance-transfer">Http: /balance-transfer</a></li>
+      </ul>
+    </li>
+    <li><a href="#foothold-upload">Foothold: upload</a></li>
+    <li><a href="#privesc-suid">PrivEsc: SUID</a></li>
+    <li><a href="#root">Root</a></li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><h2 id="nmap">Nmap</h2>
+<p>Like always, I&rsquo;m going to scan the IP address by using <a href="https://nmap.org/" target="_blank" rel="noopener noreffer ">nmap</a> but I&rsquo;m going to scan the full port first. Then, I&rsquo;m going to scan the only open ports.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="line"><span class="cl"><span class="n">nmap</span><span class="w"> </span><span class="o">-</span><span class="n">p</span><span class="o">-</span><span class="w"> </span><span class="c1">--min-rate=10000 10.10.10.29
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">nmap</span><span class="w"> </span><span class="o">-</span><span class="n">p22</span><span class="p">,</span><span class="mi">53</span><span class="p">,</span><span class="mi">80</span><span class="w"> </span><span class="o">-</span><span class="n">sCV</span><span class="w"> </span><span class="o">-</span><span class="k">oN</span><span class="w"> </span><span class="n">nmap</span><span class="o">/</span><span class="n">bank</span><span class="w"> </span><span class="mi">10</span><span class="p">.</span><span class="mi">10</span><span class="p">.</span><span class="mi">10</span><span class="p">.</span><span class="mi">29</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="mi">22</span><span class="o">/</span><span class="n">tcp</span><span class="w"> </span><span class="k">open</span><span class="w">  </span><span class="n">ssh</span><span class="w">     </span><span class="n">OpenSSH</span><span class="w"> </span><span class="mi">6</span><span class="p">.</span><span class="mi">6</span><span class="p">.</span><span class="mi">1</span><span class="n">p1</span><span class="w"> </span><span class="n">Ubuntu</span><span class="w"> </span><span class="mi">2</span><span class="n">ubuntu2</span><span class="p">.</span><span class="mi">8</span><span class="w"> </span><span class="p">(</span><span class="n">Ubuntu</span><span class="w"> </span><span class="n">Linux</span><span class="p">;</span><span class="w"> </span><span class="n">protocol</span><span class="w"> </span><span class="mi">2</span><span class="p">.</span><span class="mi">0</span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="o">|</span><span class="w"> </span><span class="n">ssh</span><span class="o">-</span><span class="n">hostkey</span><span class="p">:</span><span class="w"> 
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="o">|</span><span class="w">   </span><span class="mi">1024</span><span class="w"> </span><span class="mi">08</span><span class="n">eed030d545e459db4d54a8dc5cef15</span><span class="w"> </span><span class="p">(</span><span class="n">DSA</span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="o">|</span><span class="w">   </span><span class="mi">2048</span><span class="w"> </span><span class="n">b8e015482d0df0f17333b78164084a91</span><span class="w"> </span><span class="p">(</span><span class="n">RSA</span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="o">|</span><span class="w">   </span><span class="mi">256</span><span class="w"> </span><span class="n">a04c94d17b6ea8fd07fe11eb88d51665</span><span class="w"> </span><span class="p">(</span><span class="n">ECDSA</span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="o">|</span><span class="n">_</span><span class="w">  </span><span class="mi">256</span><span class="w"> </span><span class="mi">2</span><span class="n">d794430c8bb5e8f07cf5b72efa16d67</span><span class="w"> </span><span class="p">(</span><span class="n">ED25519</span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="mi">53</span><span class="o">/</span><span class="n">tcp</span><span class="w"> </span><span class="k">open</span><span class="w">  </span><span class="k">domain</span><span class="w">  </span><span class="n">ISC</span><span class="w"> </span><span class="n">BIND</span><span class="w"> </span><span class="mi">9</span><span class="p">.</span><span class="mi">9</span><span class="p">.</span><span class="mi">5</span><span class="o">-</span><span class="mi">3</span><span class="n">ubuntu0</span><span class="p">.</span><span class="mi">14</span><span class="w"> </span><span class="p">(</span><span class="n">Ubuntu</span><span class="w"> </span><span class="n">Linux</span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="o">|</span><span class="w"> </span><span class="n">dns</span><span class="o">-</span><span class="n">nsid</span><span class="p">:</span><span class="w"> 
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="o">|</span><span class="n">_</span><span class="w">  </span><span class="n">bind</span><span class="p">.</span><span class="k">version</span><span class="p">:</span><span class="w"> </span><span class="mi">9</span><span class="p">.</span><span class="mi">9</span><span class="p">.</span><span class="mi">5</span><span class="o">-</span><span class="mi">3</span><span class="n">ubuntu0</span><span class="p">.</span><span class="mi">14</span><span class="o">-</span><span class="n">Ubuntu</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="mi">80</span><span class="o">/</span><span class="n">tcp</span><span class="w"> </span><span class="k">open</span><span class="w">  </span><span class="n">http</span><span class="w">    </span><span class="n">Apache</span><span class="w"> </span><span class="n">httpd</span><span class="w"> </span><span class="mi">2</span><span class="p">.</span><span class="mi">4</span><span class="p">.</span><span class="mi">7</span><span class="w"> </span><span class="p">((</span><span class="n">Ubuntu</span><span class="p">))</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="o">|</span><span class="n">_http</span><span class="o">-</span><span class="n">title</span><span class="p">:</span><span class="w"> </span><span class="n">Apache2</span><span class="w"> </span><span class="n">Ubuntu</span><span class="w"> </span><span class="k">Default</span><span class="w"> </span><span class="n">Page</span><span class="p">:</span><span class="w"> </span><span class="n">It</span><span class="w"> </span><span class="n">works</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="o">|</span><span class="n">_http</span><span class="o">-</span><span class="n">server</span><span class="o">-</span><span class="n">header</span><span class="p">:</span><span class="w"> </span><span class="n">Apache</span><span class="o">/</span><span class="mi">2</span><span class="p">.</span><span class="mi">4</span><span class="p">.</span><span class="mi">7</span><span class="w"> </span><span class="p">(</span><span class="n">Ubuntu</span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="n">Service</span><span class="w"> </span><span class="n">Info</span><span class="p">:</span><span class="w"> </span><span class="n">OS</span><span class="p">:</span><span class="w"> </span><span class="n">Linux</span><span class="p">;</span><span class="w"> </span><span class="n">CPE</span><span class="p">:</span><span class="w"> </span><span class="n">cpe</span><span class="p">:</span><span class="o">/</span><span class="n">o</span><span class="p">:</span><span class="n">linux</span><span class="p">:</span><span class="n">linux_kernel</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>The nmap scan result is completed. Looks like, this machine has a web server running on <code>Apache</code> and this is an <code>Ubuntu</code> machine. Also, port <code>53</code> is open and the scan results did not reveal any information about the domain/hostname. So, I&rsquo;m going to add <code>bank.htb</code> into my <code>/etc/hosts</code> file just in case.</p>
+<p><figure><a class="lightgallery" href="/posts/htb/bank/adding-bank-hostname.png" title="adding bank hostname" data-thumbnail="/posts/htb/bank/adding-bank-hostname.png" data-sub-html="<h2>adding bank hostname</h2><p>adding bank hostname</p>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/posts/htb/bank/adding-bank-hostname.png"
+            data-srcset="/posts/htb/bank/adding-bank-hostname.png, /posts/htb/bank/adding-bank-hostname.png 1.5x, /posts/htb/bank/adding-bank-hostname.png 2x"
+            data-sizes="auto"
+            alt="/posts/htb/bank/adding-bank-hostname.png" width="601" height="347" />
+    </a><figcaption class="image-caption">adding bank hostname</figcaption>
+    </figure></p>
+<h3 id="http-bankhtb">Http: bank.htb</h3>
+<p>I already add the IP address into the <code>/etc/hosts</code> file but I&rsquo;m eager to check the IP address in the URL. When I checked, I&rsquo;m greeted by the apache default installation page. However, when I navigate to the <code>bank.htb</code> I&rsquo;ve been greeted with the <code>login</code> page. That&rsquo;s interesting because nmap did not find any results about it.</p>
+<p><figure><a class="lightgallery" href="/posts/htb/bank/bank-htb-login-page.png" title="bank.htb login page" data-thumbnail="/posts/htb/bank/bank-htb-login-page.png" data-sub-html="<h2>bank.htb login page</h2><p>bank.htb login page</p>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/posts/htb/bank/bank-htb-login-page.png"
+            data-srcset="/posts/htb/bank/bank-htb-login-page.png, /posts/htb/bank/bank-htb-login-page.png 1.5x, /posts/htb/bank/bank-htb-login-page.png 2x"
+            data-sizes="auto"
+            alt="/posts/htb/bank/bank-htb-login-page.png" width="1194" height="528" />
+    </a><figcaption class="image-caption">bank.htb login page</figcaption>
+    </figure></p>
+<h3 id="gobuster">Gobuster</h3>
+<p>Since this is a <code>php</code> webserver, I&rsquo;m going to run <a href="https://github.com/OJ/gobuster" target="_blank" rel="noopener noreffer ">gobuster</a> with the <code>-x</code> flag for looking up only <code>.php</code> extensions. To be honest, this part is making me lose my mind because the directories that I found are not interesting at all. So, I&rsquo;m going to the login page again and tried sql injection and nothing comeback. Turns out, some are not in <code>raft</code> wordlists, and that wordlist is the one that I love the most using it. However, when I used the <code>directory-list-2.3-medium.txt</code> wordlist, something interesting popped up.</p>
+<p><figure><a class="lightgallery" href="/posts/htb/bank/run-gobuster.png" title="run gobuster" data-thumbnail="/posts/htb/bank/run-gobuster.png" data-sub-html="<h2>gobuster</h2><p>run gobuster</p>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/posts/htb/bank/run-gobuster.png"
+            data-srcset="/posts/htb/bank/run-gobuster.png, /posts/htb/bank/run-gobuster.png 1.5x, /posts/htb/bank/run-gobuster.png 2x"
+            data-sizes="auto"
+            alt="/posts/htb/bank/run-gobuster.png" width="889" height="229" />
+    </a><figcaption class="image-caption">gobuster</figcaption>
+    </figure></p>
+<h3 id="http-balance-transfer">Http: /balance-transfer</h3>
+<p>That directory is called <code>/balance-transfer</code> and it has a bunch of files with <code>.acc</code> extensions on it. Since this is a <code>bank</code> machine and it has a bank login page. So, I assumed this is the user account file. When I clicked on one of the files, it automatically download it.</p>
+<p><figure><a class="lightgallery" href="/posts/htb/bank/balance-transfer.png" title="balance transfer" data-thumbnail="/posts/htb/bank/balance-transfer.png" data-sub-html="<h2>balance transfer</h2><p>balance transfer</p>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/posts/htb/bank/balance-transfer.png"
+            data-srcset="/posts/htb/bank/balance-transfer.png, /posts/htb/bank/balance-transfer.png 1.5x, /posts/htb/bank/balance-transfer.png 2x"
+            data-sizes="auto"
+            alt="/posts/htb/bank/balance-transfer.png" width="725" height="480" />
+    </a><figcaption class="image-caption">balance transfer</figcaption>
+    </figure></p>
+<p>Upon expecting the file, I&rsquo;m right. It contains user account information such as name, email, password, and balance with all the private info encrypted. I&rsquo;ll try to crack it but unfortunately, it can&rsquo;t be cracked. Hmmm</p>
+<p><figure><a class="lightgallery" href="/posts/htb/bank/read-encypt-success.png" title="read encypt success" data-thumbnail="/posts/htb/bank/read-encypt-success.png" data-sub-html="<h2>read encypt success</h2><p>read encypt success</p>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/posts/htb/bank/read-encypt-success.png"
+            data-srcset="/posts/htb/bank/read-encypt-success.png, /posts/htb/bank/read-encypt-success.png 1.5x, /posts/htb/bank/read-encypt-success.png 2x"
+            data-sizes="auto"
+            alt="/posts/htb/bank/read-encypt-success.png" width="1413" height="346" />
+    </a><figcaption class="image-caption">read encypt success</figcaption>
+    </figure></p>
+<p>Then, I navigate back to the <code>/balance-transfer</code> directory and click the <code>Size</code> filter on top, and found the only file that has an insignificant less size than the others. However, I want to be &ldquo;leet&rdquo; today by sorting those files size out by using a terminal. Why not ;)</p>
+<p><figure><a class="lightgallery" href="/posts/htb/bank/run-the-leet-command.png" title="run the leet command" data-thumbnail="/posts/htb/bank/run-the-leet-command.png" data-sub-html="<h2>run the leet command</h2><p>run the leet command</p>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/posts/htb/bank/run-the-leet-command.png"
+            data-srcset="/posts/htb/bank/run-the-leet-command.png, /posts/htb/bank/run-the-leet-command.png 1.5x, /posts/htb/bank/run-the-leet-command.png 2x"
+            data-sizes="auto"
+            alt="/posts/htb/bank/run-the-leet-command.png" width="1416" height="551" />
+    </a><figcaption class="image-caption">run the leet command</figcaption>
+    </figure></p>
+<p>The first command, will count the size of the file and sorting out by unique count. Then, I&rsquo;m trying to grep the file name by that size <code>257</code> and I&rsquo;m making the curl request to the file and got the user information to expose because this file seems it&rsquo;s failed to be encrypted.</p>
+<h2 id="foothold-upload">Foothold: upload</h2>
+<p>Now, I have the credentials that I needed. So, I&rsquo;m going ahead to the login page, and voila. Success!</p>
+<p><figure><a class="lightgallery" href="/posts/htb/bank/page-after-login.png" title="page after login" data-thumbnail="/posts/htb/bank/page-after-login.png" data-sub-html="<h2>page after login</h2><p>page after login</p>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/posts/htb/bank/page-after-login.png"
+            data-srcset="/posts/htb/bank/page-after-login.png, /posts/htb/bank/page-after-login.png 1.5x, /posts/htb/bank/page-after-login.png 2x"
+            data-sizes="auto"
+            alt="/posts/htb/bank/page-after-login.png" width="1487" height="689" />
+    </a><figcaption class="image-caption">page after login</figcaption>
+    </figure></p>
+<p>Looks like, just a simple bank account page, by clicking on <code>Support</code> on the left navigation bar. I&rsquo;ve been greeted by a support ticket page where I can upload a file to it. Since this is a php website I&rsquo;ll try uploading the reverse shell and it&rsquo;s shouting at me says &ldquo;image file only&rdquo;.</p>
+<p><figure><a class="lightgallery" href="/posts/htb/bank/support-page.png" title="support page" data-thumbnail="/posts/htb/bank/support-page.png" data-sub-html="<h2>support page</h2><p>support page</p>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/posts/htb/bank/support-page.png"
+            data-srcset="/posts/htb/bank/support-page.png, /posts/htb/bank/support-page.png 1.5x, /posts/htb/bank/support-page.png 2x"
+            data-sizes="auto"
+            alt="/posts/htb/bank/support-page.png" width="1563" height="562" />
+    </a><figcaption class="image-caption">support page</figcaption>
+    </figure></p>
+<p>So, I fire up <a href="https://portswigger.net/burp" target="_blank" rel="noopener noreffer ">burpsuite</a> and tried a bunch of extensions and hoping that I can bypass it but unfortunately all failed. However, when I looked at the request I found these interesting comments. It&rsquo;s says &ldquo;to execute php file, must use .htb extension&rdquo;. Without time wasted, I&rsquo;m uploading the php reverse shell with the <code>.htb</code> extension.</p>
+<p><figure><a class="lightgallery" href="/posts/htb/bank/extensions-comments.png" title="extensions comments" data-thumbnail="/posts/htb/bank/extensions-comments.png" data-sub-html="<h2>extensions comments</h2><p>extensions comments</p>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/posts/htb/bank/extensions-comments.png"
+            data-srcset="/posts/htb/bank/extensions-comments.png, /posts/htb/bank/extensions-comments.png 1.5x, /posts/htb/bank/extensions-comments.png 2x"
+            data-sizes="auto"
+            alt="/posts/htb/bank/extensions-comments.png" width="819" height="470" />
+    </a><figcaption class="image-caption">extensions comments</figcaption>
+    </figure></p>
+<h2 id="privesc-suid">PrivEsc: SUID</h2>
+<p>Nice! I&rsquo;m in as a <code>www-data</code> user and the best thing to do is <a href="https://note.shafiqaiman.com/misc/upgrade-reverse-shell#upgrade-using-python" target="_blank" rel="noopener noreffer ">upgrade my shell</a>. Then, I&rsquo;ll try to enumerate the sudo permissions by running this command <code>sudo -l</code>. However, it required the password for this user that I did not have it.</p>
+<p><figure><a class="lightgallery" href="/posts/htb/bank/shell-www-data.png" title="shell as www-data" data-thumbnail="/posts/htb/bank/shell-www-data.png" data-sub-html="<h2>shell as www-data</h2><p>shell as www-data</p>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/posts/htb/bank/shell-www-data.png"
+            data-srcset="/posts/htb/bank/shell-www-data.png, /posts/htb/bank/shell-www-data.png 1.5x, /posts/htb/bank/shell-www-data.png 2x"
+            data-sizes="auto"
+            alt="/posts/htb/bank/shell-www-data.png" width="589" height="258" />
+    </a><figcaption class="image-caption">shell as www-data</figcaption>
+    </figure></p>
+<p>So, I end up checking the <code>SUID</code>  binaries and found an interesting file called <code>emergency</code> that is located at <code>/var/htb/bin</code> which is not native to linux system files and directories.</p>
+<p><figure><a class="lightgallery" href="/posts/htb/bank/find-suid.png" title="find suid" data-thumbnail="/posts/htb/bank/find-suid.png" data-sub-html="<h2>find suid</h2><p>find suid</p>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/posts/htb/bank/find-suid.png"
+            data-srcset="/posts/htb/bank/find-suid.png, /posts/htb/bank/find-suid.png 1.5x, /posts/htb/bank/find-suid.png 2x"
+            data-sizes="auto"
+            alt="/posts/htb/bank/find-suid.png" width="628" height="590" />
+    </a><figcaption class="image-caption">find suid</figcaption>
+    </figure></p>
+<h2 id="root">Root</h2>
+<p>I&rsquo;m excited to run it and hope it gets me the root shell. Without further ado, I executed it, and BOOM!</p>
+<p><figure><a class="lightgallery" href="/posts/htb/bank/shell-root.png" title="shell as root" data-thumbnail="/posts/htb/bank/shell-root.png" data-sub-html="<h2>shell as root</h2><p>shell as root</p>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/posts/htb/bank/shell-root.png"
+            data-srcset="/posts/htb/bank/shell-root.png, /posts/htb/bank/shell-root.png 1.5x, /posts/htb/bank/shell-root.png 2x"
+            data-sizes="auto"
+            alt="/posts/htb/bank/shell-root.png" width="769" height="249" />
+    </a><figcaption class="image-caption">shell as root</figcaption>
+    </figure></p>
+<p>I&rsquo;m root.</p>
+</div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>Updated on 15-10-2022</span>
+            </div></div>
+        <div class="post-info-line">
+            <div class="post-info-md"></div>
+            <div class="post-info-share">
+                <span><a href="javascript:void(0);" title="Share on Twitter" data-sharer="twitter" data-url="https://shafiqaiman.com/posts/htb/bank/" data-title="HackTheBox - Bank Writeup" data-via="_shafiqaiman_" data-hashtags="upload-vuln,gobuster,php-reverse-shell,SUID"><i class="fab fa-twitter fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Linkedin" data-sharer="linkedin" data-url="https://shafiqaiman.com/posts/htb/bank/"><i class="fab fa-linkedin fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Hacker News" data-sharer="hackernews" data-url="https://shafiqaiman.com/posts/htb/bank/" data-title="HackTheBox - Bank Writeup"><i class="fab fa-hacker-news fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Reddit" data-sharer="reddit" data-url="https://shafiqaiman.com/posts/htb/bank/"><i class="fab fa-reddit fa-fw" aria-hidden="true"></i></a></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"><i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/upload-vuln/">upload-vuln</a>,&nbsp;<a href="/tags/gobuster/">gobuster</a>,&nbsp;<a href="/tags/php-reverse-shell/">php-reverse-shell</a>,&nbsp;<a href="/tags/suid/">SUID</a></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">Back</a></span>&nbsp;|&nbsp;<span><a href="/">Home</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/posts/htb/arctic/" class="prev" rel="prev" title="HackTheBox - Arctic Writeup"><i class="fas fa-angle-left fa-fw" aria-hidden="true"></i>HackTheBox - Arctic Writeup</a>
+            <a href="/posts/htb/blocky/" class="next" rel="next" title="HackTheBox - Blocky Writeup">HackTheBox - Blocky Writeup<i class="fas fa-angle-right fa-fw" aria-hidden="true"></i></a></div>
+</div>
+</article></div>
+            </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line" itemscope itemtype="http://schema.org/CreativeWork"><i class="far fa-copyright fa-fw" aria-hidden="true"></i><span itemprop="copyrightYear">2021 - 2023</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="https://shafiqaiman.com" target="_blank">SHAFIQAIMAN</a></span></div>
+        </div>
+    </footer></div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="Back to Top">
+                <i class="fas fa-arrow-up fa-fw" aria-hidden="true"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="View Comments">
+                <i class="fas fa-comment fa-fw" aria-hidden="true"></i>
+            </a>
+        </div><link rel="stylesheet" href="/lib/lightgallery/css/lightgallery-bundle.min.css"><script type="text/javascript" src="/lib/autocomplete/autocomplete.min.js"></script><script type="text/javascript" src="/lib/lunr/lunr.min.js"></script><script type="text/javascript" src="/lib/lazysizes/lazysizes.min.js"></script><script type="text/javascript" src="/lib/lightgallery/lightgallery.min.js"></script><script type="text/javascript" src="/lib/lightgallery/plugins/thumbnail/lg-thumbnail.min.js"></script><script type="text/javascript" src="/lib/lightgallery/plugins/zoom/lg-zoom.min.js"></script><script type="text/javascript" src="/lib/clipboard/clipboard.min.js"></script><script type="text/javascript" src="/lib/sharer/sharer.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"Copy to clipboard","maxShownLines":50},"comment":{},"lightgallery":true,"search":{"highlightTag":"em","lunrIndexURL":"/index.json","maxResultLength":10,"noResultsFound":"No results found","snippetLength":30,"type":"lunr"}};</script><script type="text/javascript" src="/js/theme.min.js"></script></body>
+</html>

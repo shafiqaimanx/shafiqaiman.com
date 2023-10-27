@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <title>HackTheBox - Late Writeup - SHAFIQAIMAN</title><meta name="Description" content="shafiqaiman.com is a cybersecurity/ethical hacking website that focus on publishing of writeup in HacktheBox, Tryhackme and other online CTF (capture the flag) challenge."><meta property="og:title" content="HackTheBox - Late Writeup" />
+<meta property="og:description" content="Nmap Like always, I&rsquo;m going to scan the IP Address by using Nmap.
+1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 # Nmap 7.92 scan initiated Tue May 17 23:03:20 2022 as: nmap -sC -sV -vv -p- -oN nmap/late_all 10.10.11.156 Nmap scan report for 10.10.11.156 Host is up, received echo-reply ttl 63 (0.070s latency)." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://shafiqaiman.com/posts/htb/late/" /><meta property="og:image" content="https://shafiqaiman.com/posts/htb/late/featured.png"/><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2022-07-30T00:00:00+00:00" />
+<meta property="article:modified_time" content="2022-07-30T00:00:00+00:00" /><meta property="og:site_name" content="SHAFIQAIMAN" />
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="https://shafiqaiman.com/posts/htb/late/featured.png"/>
+<meta name="twitter:title" content="HackTheBox - Late Writeup"/>
+<meta name="twitter:description" content="Nmap Like always, I&rsquo;m going to scan the IP Address by using Nmap.
+1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 # Nmap 7.92 scan initiated Tue May 17 23:03:20 2022 as: nmap -sC -sV -vv -p- -oN nmap/late_all 10.10.11.156 Nmap scan report for 10.10.11.156 Host is up, received echo-reply ttl 63 (0.070s latency)."/>
+<meta name="application-name" content="SHAFIQAIMAN">
+<meta name="apple-mobile-web-app-title" content="SHAFIQAIMAN"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://shafiqaiman.com/posts/htb/late/" /><link rel="prev" href="https://shafiqaiman.com/posts/htb/paper/" /><link rel="next" href="https://shafiqaiman.com/posts/htb/grandpa/" /><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="/lib/fontawesome-free/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"></noscript><link rel="preload" href="/lib/animate/animate.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="/lib/animate/animate.min.css"></noscript><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "HackTheBox - Late Writeup",
+        "inLanguage": "en",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https:\/\/shafiqaiman.com\/posts\/htb\/late\/"
+        },"image": [{
+                            "@type": "ImageObject",
+                            "url": "https:\/\/shafiqaiman.com\/posts\/htb\/late\/featured.png",
+                            "width":  1400 ,
+                            "height":  1060 
+                        }],"genre": "posts","keywords": "linpeas, ssti, pspy","wordcount":  1061 ,
+        "url": "https:\/\/shafiqaiman.com\/posts\/htb\/late\/","datePublished": "2022-07-30T00:00:00+00:00","dateModified": "2022-07-30T00:00:00+00:00","publisher": {
+            "@type": "Organization",
+            "name": ""},"author": {
+                "@type": "Person",
+                "name": "SH∆FIQ ∆IM∆N"
+            },"description": ""
+    }
+    </script></head>
+    <body data-header-desktop="fixed" data-header-mobile="auto"><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('dark' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'dark' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="SHAFIQAIMAN">SH∆FIQ∆IM∆N</a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/posts/" title="Posts"><i class="fa-solid fa-book"></i>  </a><a class="menu-item" href="/tags/" title="Tags"><i class="fa-solid fa-tags"></i>  </a><a class="menu-item" href="/categories/" title="Categories"><i class="fa-solid fa-folder"></i>  </a><span class="menu-item delimiter"></span><span class="menu-item search" id="search-desktop">
+                        <input type="text" placeholder="Search titles or contents..." id="search-input-desktop">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-desktop" title="Search">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-desktop" title="Clear">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-desktop">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </span><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                    <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+                </a></div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="SHAFIQAIMAN">SH∆FIQ∆IM∆N</a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><div class="search-wrapper">
+                    <div class="search mobile" id="search-mobile">
+                        <input type="text" placeholder="Search titles or contents..." id="search-input-mobile">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-mobile" title="Search">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-mobile" title="Clear">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-mobile">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </div>
+                    <a href="javascript:void(0);" class="search-cancel" id="search-cancel-mobile">
+                        Cancel
+                    </a>
+                </div><a class="menu-item" href="/posts/" title="Posts"><i class="fa-solid fa-book"></i></a><a class="menu-item" href="/tags/" title="Tags"><i class="fa-solid fa-tags"></i></a><a class="menu-item" href="/categories/" title="Categories"><i class="fa-solid fa-folder"></i></a><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+            </a></div>
+    </div>
+</header><div class="search-dropdown desktop">
+        <div id="search-dropdown-desktop"></div>
+    </div>
+    <div class="search-dropdown mobile">
+        <div id="search-dropdown-mobile"></div>
+    </div><main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">Contents</h2>
+            <div class="toc-content always-active" id="toc-content-auto"></div>
+        </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">HackTheBox - Late Writeup</h1><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="https://shafiqaiman.com" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>SH∆FIQ ∆IM∆N</a></span>&nbsp;<span class="post-category">included in <a href="/categories/hackthebox/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>HacktheBox</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="30-07-2022">30-07-2022</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;1061 words&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;5 minutes&nbsp;</div>
+        </div><div class="featured-image"><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/posts/htb/late/featured.png"
+        data-srcset="/posts/htb/late/featured.png, /posts/htb/late/featured.png 1.5x, /posts/htb/late/featured.png 2x"
+        data-sizes="auto"
+        alt="/posts/htb/late/featured.png"
+        title="/posts/htb/late/featured.png" /></div><div class="details toc" id="toc-static"  data-kept="">
+                <div class="details-summary toc-title">
+                    <span>Contents</span>
+                    <span><i class="details-icon fas fa-angle-right" aria-hidden="true"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#nmap">Nmap</a>
+      <ul>
+        <li><a href="#http-latehtb">Http: late.htb</a></li>
+        <li><a href="#http-imageslatehtb">Http: images.late.htb</a></li>
+        <li><a href="#ssti-server-side-template-injection">SSTI (Server Side Template Injection)</a></li>
+      </ul>
+    </li>
+    <li><a href="#ssh-svc_acc">SSH: svc_acc</a>
+      <ul>
+        <li><a href="#peass-ng-linpeassh">PEASS-ng: linpeas.sh</a></li>
+        <li><a href="#usrlocalsbin-ssh-alertsh">/usr/local/sbin: ssh-alert.sh</a></li>
+        <li><a href="#pspy">Pspy</a></li>
+      </ul>
+    </li>
+    <li><a href="#linux-privilege-escalation">Linux: Privilege Escalation</a></li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><h2 id="nmap">Nmap</h2>
+<p>Like always, I&rsquo;m going to scan the IP Address by using <a href="https://nmap.org/" target="_blank" rel="noopener noreffer ">Nmap</a>.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="line"><span class="cl"><span class="o">#</span><span class="w"> </span><span class="n">Nmap</span><span class="w"> </span><span class="mi">7</span><span class="p">.</span><span class="mi">92</span><span class="w"> </span><span class="n">scan</span><span class="w"> </span><span class="n">initiated</span><span class="w"> </span><span class="n">Tue</span><span class="w"> </span><span class="n">May</span><span class="w"> </span><span class="mi">17</span><span class="w"> </span><span class="mi">23</span><span class="p">:</span><span class="mi">03</span><span class="p">:</span><span class="mi">20</span><span class="w"> </span><span class="mi">2022</span><span class="w"> </span><span class="k">as</span><span class="p">:</span><span class="w"> </span><span class="n">nmap</span><span class="w"> </span><span class="o">-</span><span class="n">sC</span><span class="w"> </span><span class="o">-</span><span class="n">sV</span><span class="w"> </span><span class="o">-</span><span class="n">vv</span><span class="w"> </span><span class="o">-</span><span class="n">p</span><span class="o">-</span><span class="w"> </span><span class="o">-</span><span class="k">oN</span><span class="w"> </span><span class="n">nmap</span><span class="o">/</span><span class="n">late_all</span><span class="w"> </span><span class="mi">10</span><span class="p">.</span><span class="mi">10</span><span class="p">.</span><span class="mi">11</span><span class="p">.</span><span class="mi">156</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="n">Nmap</span><span class="w"> </span><span class="n">scan</span><span class="w"> </span><span class="n">report</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="mi">10</span><span class="p">.</span><span class="mi">10</span><span class="p">.</span><span class="mi">11</span><span class="p">.</span><span class="mi">156</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="k">Host</span><span class="w"> </span><span class="k">is</span><span class="w"> </span><span class="n">up</span><span class="p">,</span><span class="w"> </span><span class="n">received</span><span class="w"> </span><span class="n">echo</span><span class="o">-</span><span class="n">reply</span><span class="w"> </span><span class="n">ttl</span><span class="w"> </span><span class="mi">63</span><span class="w"> </span><span class="p">(</span><span class="mi">0</span><span class="p">.</span><span class="mi">070</span><span class="n">s</span><span class="w"> </span><span class="n">latency</span><span class="p">).</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="n">Scanned</span><span class="w"> </span><span class="k">at</span><span class="w"> </span><span class="mi">2022</span><span class="o">-</span><span class="mi">05</span><span class="o">-</span><span class="mi">17</span><span class="w"> </span><span class="mi">23</span><span class="p">:</span><span class="mi">03</span><span class="p">:</span><span class="mi">21</span><span class="w"> </span><span class="o">+</span><span class="mi">08</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="mi">243</span><span class="n">s</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="k">Not</span><span class="w"> </span><span class="n">shown</span><span class="p">:</span><span class="w"> </span><span class="mi">65533</span><span class="w"> </span><span class="n">closed</span><span class="w"> </span><span class="n">tcp</span><span class="w"> </span><span class="n">ports</span><span class="w"> </span><span class="p">(</span><span class="k">reset</span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="n">PORT</span><span class="w">   </span><span class="k">STATE</span><span class="w"> </span><span class="n">SERVICE</span><span class="w"> </span><span class="n">REASON</span><span class="w">         </span><span class="k">VERSION</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="mi">22</span><span class="o">/</span><span class="n">tcp</span><span class="w"> </span><span class="k">open</span><span class="w">  </span><span class="n">ssh</span><span class="w">     </span><span class="n">syn</span><span class="o">-</span><span class="n">ack</span><span class="w"> </span><span class="n">ttl</span><span class="w"> </span><span class="mi">63</span><span class="w"> </span><span class="n">OpenSSH</span><span class="w"> </span><span class="mi">7</span><span class="p">.</span><span class="mi">6</span><span class="n">p1</span><span class="w"> </span><span class="n">Ubuntu</span><span class="w"> </span><span class="mi">4</span><span class="n">ubuntu0</span><span class="p">.</span><span class="mi">6</span><span class="w"> </span><span class="p">(</span><span class="n">Ubuntu</span><span class="w"> </span><span class="n">Linux</span><span class="p">;</span><span class="w"> </span><span class="n">protocol</span><span class="w"> </span><span class="mi">2</span><span class="p">.</span><span class="mi">0</span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="o">|</span><span class="w"> </span><span class="n">ssh</span><span class="o">-</span><span class="n">hostkey</span><span class="p">:</span><span class="w"> 
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="o">|</span><span class="w">   </span><span class="mi">2048</span><span class="w"> </span><span class="mi">02</span><span class="p">:</span><span class="mi">5</span><span class="n">e</span><span class="p">:</span><span class="mi">29</span><span class="p">:</span><span class="mi">0</span><span class="n">e</span><span class="p">:</span><span class="n">a3</span><span class="p">:</span><span class="n">af</span><span class="p">:</span><span class="mi">4</span><span class="n">e</span><span class="p">:</span><span class="mi">72</span><span class="p">:</span><span class="mi">9</span><span class="n">d</span><span class="p">:</span><span class="n">a4</span><span class="p">:</span><span class="n">fe</span><span class="p">:</span><span class="mi">0</span><span class="n">d</span><span class="p">:</span><span class="n">cb</span><span class="p">:</span><span class="mi">5</span><span class="n">d</span><span class="p">:</span><span class="mi">83</span><span class="p">:</span><span class="mi">07</span><span class="w"> </span><span class="p">(</span><span class="n">RSA</span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="o">|</span><span class="w"> </span><span class="n">ssh</span><span class="o">-</span><span class="n">rsa</span><span class="w"> </span><span class="n">AAAAB3NzaC1yc2EAAAADAQABAAABAQDSqIcUZeMzG</span><span class="o">+</span><span class="n">QAl</span><span class="o">/</span><span class="mi">4</span><span class="n">uYzsU98davIPkVzDmzTPOmMONUsYleBjGVwAyLHsZHhgsJqM9lmxXkb8hT4ZTTa1azg4JsLwX1xKa8m</span><span class="o">+</span><span class="n">RnXwJ1DibEMNAO0vzaEBMsOOhFRwm5IcoDR0gOONsYYfz18pafMpaocitjw8mURa</span><span class="o">+</span><span class="n">YeY21EpF6cKSOCjkVWa6yB</span><span class="o">+</span><span class="n">GT8mOcTZOZStRXYosrOqz5w7hG</span><span class="o">+</span><span class="mi">20</span><span class="n">RY8OYwBXJ2Ags6HJz3sqsyT80FMoHeGAUmu</span><span class="o">+</span><span class="n">LUJnyrW5foozKgxXhyOPszMvqosbrcrsG3ic3yhjSYKWCJO</span><span class="o">/</span><span class="n">Oxc76WUdUAlcGxbtD9U5jL</span><span class="o">+</span><span class="n">LY2ZCOPva1</span><span class="o">+/</span><span class="n">kznK8FhQN</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="o">|</span><span class="w">   </span><span class="mi">256</span><span class="w"> </span><span class="mi">41</span><span class="p">:</span><span class="n">e1</span><span class="p">:</span><span class="n">fe</span><span class="p">:</span><span class="mi">03</span><span class="p">:</span><span class="n">a5</span><span class="p">:</span><span class="n">c7</span><span class="p">:</span><span class="mi">97</span><span class="p">:</span><span class="n">c4</span><span class="p">:</span><span class="n">d5</span><span class="p">:</span><span class="mi">16</span><span class="p">:</span><span class="mi">77</span><span class="p">:</span><span class="n">f3</span><span class="p">:</span><span class="mi">41</span><span class="p">:</span><span class="mi">0</span><span class="k">c</span><span class="p">:</span><span class="n">e9</span><span class="p">:</span><span class="n">fb</span><span class="w"> </span><span class="p">(</span><span class="n">ECDSA</span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="o">|</span><span class="w"> </span><span class="n">ecdsa</span><span class="o">-</span><span class="n">sha2</span><span class="o">-</span><span class="n">nistp256</span><span class="w"> </span><span class="n">AAAAE2VjZHNhLXNoYTItbmlzdHAyNTYAAAAIbmlzdHAyNTYAAABBBBMen7Mjv8J63UQbISZ3Yju</span><span class="o">+</span><span class="n">a8dgXFwVLgKeTxgRc7W</span><span class="o">+</span><span class="n">k33OZaOqWBctKs8hIbaOehzMRsU7ugP6zIvYb25Kylw</span><span class="o">=</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="o">|</span><span class="w">   </span><span class="mi">256</span><span class="w"> </span><span class="mi">28</span><span class="p">:</span><span class="mi">39</span><span class="p">:</span><span class="mi">46</span><span class="p">:</span><span class="mi">98</span><span class="p">:</span><span class="mi">17</span><span class="p">:</span><span class="mi">1</span><span class="n">e</span><span class="p">:</span><span class="mi">46</span><span class="p">:</span><span class="mi">1</span><span class="n">a</span><span class="p">:</span><span class="mi">1</span><span class="n">e</span><span class="p">:</span><span class="n">a1</span><span class="p">:</span><span class="n">ab</span><span class="p">:</span><span class="mi">3</span><span class="n">b</span><span class="p">:</span><span class="mi">9</span><span class="n">a</span><span class="p">:</span><span class="mi">57</span><span class="p">:</span><span class="mi">70</span><span class="p">:</span><span class="mi">48</span><span class="w"> </span><span class="p">(</span><span class="n">ED25519</span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="o">|</span><span class="n">_ssh</span><span class="o">-</span><span class="n">ed25519</span><span class="w"> </span><span class="n">AAAAC3NzaC1lZDI1NTE5AAAAIIGrWbMoMH87K09rDrkUvPUJ</span><span class="o">/</span><span class="n">ZpNAwHiUB66a</span><span class="o">/</span><span class="n">FKHWrj</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="mi">80</span><span class="o">/</span><span class="n">tcp</span><span class="w"> </span><span class="k">open</span><span class="w">  </span><span class="n">http</span><span class="w">    </span><span class="n">syn</span><span class="o">-</span><span class="n">ack</span><span class="w"> </span><span class="n">ttl</span><span class="w"> </span><span class="mi">63</span><span class="w"> </span><span class="n">nginx</span><span class="w"> </span><span class="mi">1</span><span class="p">.</span><span class="mi">14</span><span class="p">.</span><span class="mi">0</span><span class="w"> </span><span class="p">(</span><span class="n">Ubuntu</span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="o">|</span><span class="n">_http</span><span class="o">-</span><span class="n">title</span><span class="p">:</span><span class="w"> </span><span class="n">Late</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">Best</span><span class="w"> </span><span class="n">online</span><span class="w"> </span><span class="n">image</span><span class="w"> </span><span class="n">tools</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="o">|</span><span class="n">_http</span><span class="o">-</span><span class="n">favicon</span><span class="p">:</span><span class="w"> </span><span class="k">Unknown</span><span class="w"> </span><span class="n">favicon</span><span class="w"> </span><span class="n">MD5</span><span class="p">:</span><span class="w"> </span><span class="mi">1575</span><span class="n">FDF0E164C3DB0739CF05D9315BDF</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="o">|</span><span class="w"> </span><span class="n">http</span><span class="o">-</span><span class="n">methods</span><span class="p">:</span><span class="w"> 
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="o">|</span><span class="n">_</span><span class="w">  </span><span class="n">Supported</span><span class="w"> </span><span class="n">Methods</span><span class="p">:</span><span class="w"> </span><span class="k">GET</span><span class="w"> </span><span class="n">HEAD</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="o">|</span><span class="n">_http</span><span class="o">-</span><span class="n">server</span><span class="o">-</span><span class="n">header</span><span class="p">:</span><span class="w"> </span><span class="n">nginx</span><span class="o">/</span><span class="mi">1</span><span class="p">.</span><span class="mi">14</span><span class="p">.</span><span class="mi">0</span><span class="w"> </span><span class="p">(</span><span class="n">Ubuntu</span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="n">Service</span><span class="w"> </span><span class="n">Info</span><span class="p">:</span><span class="w"> </span><span class="n">OS</span><span class="p">:</span><span class="w"> </span><span class="n">Linux</span><span class="p">;</span><span class="w"> </span><span class="n">CPE</span><span class="p">:</span><span class="w"> </span><span class="n">cpe</span><span class="p">:</span><span class="o">/</span><span class="n">o</span><span class="p">:</span><span class="n">linux</span><span class="p">:</span><span class="n">linux_kernel</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="k">Read</span><span class="w"> </span><span class="k">data</span><span class="w"> </span><span class="n">files</span><span class="w"> </span><span class="k">from</span><span class="p">:</span><span class="w"> </span><span class="o">/</span><span class="n">usr</span><span class="o">/</span><span class="n">bin</span><span class="o">/</span><span class="p">..</span><span class="o">/</span><span class="k">share</span><span class="o">/</span><span class="n">nmap</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="n">Service</span><span class="w"> </span><span class="n">detection</span><span class="w"> </span><span class="n">performed</span><span class="p">.</span><span class="w"> </span><span class="n">Please</span><span class="w"> </span><span class="n">report</span><span class="w"> </span><span class="k">any</span><span class="w"> </span><span class="n">incorrect</span><span class="w"> </span><span class="n">results</span><span class="w"> </span><span class="k">at</span><span class="w"> </span><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">nmap</span><span class="p">.</span><span class="n">org</span><span class="o">/</span><span class="n">submit</span><span class="o">/</span><span class="w"> </span><span class="p">.</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="o">#</span><span class="w"> </span><span class="n">Nmap</span><span class="w"> </span><span class="n">done</span><span class="w"> </span><span class="k">at</span><span class="w"> </span><span class="n">Tue</span><span class="w"> </span><span class="n">May</span><span class="w"> </span><span class="mi">17</span><span class="w"> </span><span class="mi">23</span><span class="p">:</span><span class="mi">07</span><span class="p">:</span><span class="mi">24</span><span class="w"> </span><span class="mi">2022</span><span class="w"> </span><span class="c1">-- 1 IP address (1 host up) scanned in 243.26 seconds
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>There are only <code>2</code> ports open. The <code>22/SSH</code> and <code>80/HTTP</code> ports.</p>
+<h3 id="http-latehtb">Http: late.htb</h3>
+<p>Well, the <code>SSH</code> is open. However, I&rsquo;m going to ignore it because that&rsquo;s almost not likely going to be vulnerable. So, I&rsquo;m going to check the other port, which is <code>port 80</code> by navigating through my browser. That&rsquo;s unexpected, I found a subdomain called <code>images</code> and also the hostname <code>late.htb</code>. I&rsquo;m going to add it to my <code>/etc/hosts</code> file.</p>
+<p><figure><a class="lightgallery" href="/posts/htb/late/late-htb-main-page.png" title="found the hostname" data-thumbnail="/posts/htb/late/late-htb-main-page.png" data-sub-html="<h2>found the hostname</h2><p>found the hostname</p>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/posts/htb/late/late-htb-main-page.png"
+            data-srcset="/posts/htb/late/late-htb-main-page.png, /posts/htb/late/late-htb-main-page.png 1.5x, /posts/htb/late/late-htb-main-page.png 2x"
+            data-sizes="auto"
+            alt="/posts/htb/late/late-htb-main-page.png" width="1633" height="711" />
+    </a><figcaption class="image-caption">found the hostname</figcaption>
+    </figure></p>
+<p><figure><a class="lightgallery" href="/posts/htb/late/add-the-hostname-into-file.png" title="add hostname in /etc/hosts" data-thumbnail="/posts/htb/late/add-the-hostname-into-file.png" data-sub-html="<h2>add hostname in /etc/hosts</h2><p>add hostname in /etc/hosts</p>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/posts/htb/late/add-the-hostname-into-file.png"
+            data-srcset="/posts/htb/late/add-the-hostname-into-file.png, /posts/htb/late/add-the-hostname-into-file.png 1.5x, /posts/htb/late/add-the-hostname-into-file.png 2x"
+            data-sizes="auto"
+            alt="/posts/htb/late/add-the-hostname-into-file.png" width="437" height="121" />
+    </a><figcaption class="image-caption">add hostname in /etc/hosts</figcaption>
+    </figure></p>
+<h3 id="http-imageslatehtb">Http: images.late.htb</h3>
+<p>Going to the <code>images.late.htb</code> it says <code>convert image to text with flask</code>. Well, I&rsquo;m using  <a href="https://www.kali.org/" target="_blank" rel="noopener noreffer ">kali</a> linux and its came with <code>mousepad</code> as text editor (<a href="https://www.xfce.org/" target="_blank" rel="noopener noreffer ">XFCE</a> flavour). So, I&rsquo;m going to open the text editor and type the <code>Hello,World</code> as the text and screenshot it with <a href="https://flameshot.org/" target="_blank" rel="noopener noreffer ">Flameshot</a>. Save it and upload the file.</p>
+<p><figure><a class="lightgallery" href="/posts/htb/late/images-late-htb-main-page.png" title="convert image webpage" data-thumbnail="/posts/htb/late/images-late-htb-main-page.png" data-sub-html="<h2>convert image webpage</h2><p>convert image webpage</p>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/posts/htb/late/images-late-htb-main-page.png"
+            data-srcset="/posts/htb/late/images-late-htb-main-page.png, /posts/htb/late/images-late-htb-main-page.png 1.5x, /posts/htb/late/images-late-htb-main-page.png 2x"
+            data-sizes="auto"
+            alt="/posts/htb/late/images-late-htb-main-page.png" width="1545" height="639" />
+    </a><figcaption class="image-caption">convert image webpage</figcaption>
+    </figure></p>
+<p>After I uploaded it, my browser downloaded the file called <code>result.txt</code>. When I read the content of the file it says <code>Hello,World</code> like the image that I uploaded but it&rsquo;s wrapped in an HTML paragraph tag.</p>
+<p><figure><a class="lightgallery" href="/posts/htb/late/hello-world-output-result-txt.png" title="output result" data-thumbnail="/posts/htb/late/hello-world-output-result-txt.png" data-sub-html="<h2>output result</h2><p>output result</p>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/posts/htb/late/hello-world-output-result-txt.png"
+            data-srcset="/posts/htb/late/hello-world-output-result-txt.png, /posts/htb/late/hello-world-output-result-txt.png 1.5x, /posts/htb/late/hello-world-output-result-txt.png 2x"
+            data-sizes="auto"
+            alt="/posts/htb/late/hello-world-output-result-txt.png" width="180" height="64" />
+    </a><figcaption class="image-caption">output result</figcaption>
+    </figure></p>
+<h3 id="ssti-server-side-template-injection">SSTI (Server Side Template Injection)</h3>
+<p>That&rsquo;s interesting. So, like any human being that I am. I asked for help from Mr.Google itself (ask nicely of course;p). I&rsquo;ve got bombarded with the result always something to do with <a href="https://owasp.org/www-project-web-security-testing-guide/v41/4-Web_Application_Security_Testing/07-Input_Validation_Testing/18-Testing_for_Server_Side_Template_Injection" target="_blank" rel="noopener noreffer ">SSTI</a>. Well, to be fair! this is a <a href="https://flask.palletsprojects.com/en/2.1.x/" target="_blank" rel="noopener noreffer ">flask</a> application that&rsquo;s using <a href="https://jinja.palletsprojects.com/en/3.1.x/" target="_blank" rel="noopener noreffer ">jinja</a> as the template engine. It does make sense if this app is vulnerable to it.</p>
+<p>Time to find out! first, I&rsquo;m going to upload an image with this payload as text <em>{{7*7}}</em>. In theory, the template engine will see this as a mathematical equation and try to solve it. Hold and behold, the result is <code>49</code> and this is a positive indication it is vulnerable. So, I&rsquo;ll try uploading the <a href="https://github.com/swisskyrepo/PayloadsAllTheThings/blob/master/Server%20Side%20Template%20Injection/README.md#jinja2---read-remote-file" target="_blank" rel="noopener noreffer ">read file payload</a>. In this case, it is <code>/etc/passwd</code> file. It successfully retrieves the file.</p>
+<div class="details admonition tip open">
+        <div class="details-summary admonition-title">
+            <i class="icon fas fa-lightbulb fa-fw" aria-hidden="true"></i>Tip<i class="details-icon fas fa-angle-right fa-fw" aria-hidden="true"></i>
+        </div>
+        <div class="details-content">
+            <div class="admonition-content">I&rsquo;m using Roboto Slab Regular fonts in Mousepad</div>
+        </div>
+    </div>
+<p><figure><a class="lightgallery" href="/posts/htb/late/read-file-etc-password-payload-ssti.png" title="SSTI payload read file" data-thumbnail="/posts/htb/late/read-file-etc-password-payload-ssti.png" data-sub-html="<h2>SSTI payload read file</h2><p>SSTI payload read file</p>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/posts/htb/late/read-file-etc-password-payload-ssti.png"
+            data-srcset="/posts/htb/late/read-file-etc-password-payload-ssti.png, /posts/htb/late/read-file-etc-password-payload-ssti.png 1.5x, /posts/htb/late/read-file-etc-password-payload-ssti.png 2x"
+            data-sizes="auto"
+            alt="/posts/htb/late/read-file-etc-password-payload-ssti.png" width="1616" height="410" />
+    </a><figcaption class="image-caption">SSTI payload read file</figcaption>
+    </figure></p>
+<p><figure><a class="lightgallery" href="/posts/htb/late/read-file-etc-passwd.png" title="output result /etc/passwd" data-thumbnail="/posts/htb/late/read-file-etc-passwd.png" data-sub-html="<h2>output result /etc/passwd</h2><p>output result /etc/passwd</p>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/posts/htb/late/read-file-etc-passwd.png"
+            data-srcset="/posts/htb/late/read-file-etc-passwd.png, /posts/htb/late/read-file-etc-passwd.png 1.5x, /posts/htb/late/read-file-etc-passwd.png 2x"
+            data-sizes="auto"
+            alt="/posts/htb/late/read-file-etc-passwd.png" width="1008" height="900" />
+    </a><figcaption class="image-caption">output result /etc/passwd</figcaption>
+    </figure></p>
+<h2 id="ssh-svc_acc">SSH: svc_acc</h2>
+<p>From the result above, there are just two users in this box. The <code>root</code> and <code>svc_acc</code> user. Also, the nmap scan result above shows <code>port 22</code> is open. Which is <code>SSH</code>. Then, I&rsquo;ll try to retrieve the <code>svc_acc</code> ssh private key in the user&rsquo;s home directory in the <code>.ssh</code></p>
+<p><figure><a class="lightgallery" href="/posts/htb/late/grep-the-user-from-etc-passwd.png" title="check user on the box" data-thumbnail="/posts/htb/late/grep-the-user-from-etc-passwd.png" data-sub-html="<h2>check user on the box</h2><p>check user on the box</p>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/posts/htb/late/grep-the-user-from-etc-passwd.png"
+            data-srcset="/posts/htb/late/grep-the-user-from-etc-passwd.png, /posts/htb/late/grep-the-user-from-etc-passwd.png 1.5x, /posts/htb/late/grep-the-user-from-etc-passwd.png 2x"
+            data-sizes="auto"
+            alt="/posts/htb/late/grep-the-user-from-etc-passwd.png" width="604" height="102" />
+    </a><figcaption class="image-caption">check user on the box</figcaption>
+    </figure></p>
+<p>I&rsquo;ll change the payload from read <code>/etc/passwd</code> file into <code>/home/svc_acc/.ssh/id_rsa</code>. Well, the result came back and it did not disappoint at all. So, I&rsquo;m going to open the file and remove the HTML paragraph tag <code>&lt;p&gt;&lt;/p&gt;</code>, and save it into a new name called <code>svc_acc</code>. Also, change the permission with this command; <code>chmod 600 &lt;id_rsa&gt;</code>. Without further ado, I&rsquo;m going to ssh into the box with this key. (please work *finger cross*). It did work! YES!</p>
+<p><figure><a class="lightgallery" href="/posts/htb/late/read-ssh-file-with-ssti-payload.png" title="read svc_acc SSH file" data-thumbnail="/posts/htb/late/read-ssh-file-with-ssti-payload.png" data-sub-html="<h2>read svc_acc SSH file</h2><p>read svc_acc SSH file</p>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/posts/htb/late/read-ssh-file-with-ssti-payload.png"
+            data-srcset="/posts/htb/late/read-ssh-file-with-ssti-payload.png, /posts/htb/late/read-ssh-file-with-ssti-payload.png 1.5x, /posts/htb/late/read-ssh-file-with-ssti-payload.png 2x"
+            data-sizes="auto"
+            alt="/posts/htb/late/read-ssh-file-with-ssti-payload.png" width="1822" height="380" />
+    </a><figcaption class="image-caption">read svc_acc SSH file</figcaption>
+    </figure></p>
+<p><figure><a class="lightgallery" href="/posts/htb/late/ssh-in-the-box-as-svc_acc.png" title="ssh as svc_acc" data-thumbnail="/posts/htb/late/ssh-in-the-box-as-svc_acc.png" data-sub-html="<h2>ssh as svc_acc</h2><p>ssh as svc_acc</p>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/posts/htb/late/ssh-in-the-box-as-svc_acc.png"
+            data-srcset="/posts/htb/late/ssh-in-the-box-as-svc_acc.png, /posts/htb/late/ssh-in-the-box-as-svc_acc.png 1.5x, /posts/htb/late/ssh-in-the-box-as-svc_acc.png 2x"
+            data-sizes="auto"
+            alt="/posts/htb/late/ssh-in-the-box-as-svc_acc.png" width="686" height="391" />
+    </a><figcaption class="image-caption">ssh as svc_acc</figcaption>
+    </figure></p>
+<h3 id="peass-ng-linpeassh">PEASS-ng: linpeas.sh</h3>
+<p>I&rsquo;m in as a <code>svc_acc</code> user and I also can read the first flag, which is the <code>user flag</code>. To be honest, I just want a quick win. Since this is a linux box, I&rsquo;m going to run the linpeas script in this box. As always, I&rsquo;m going to run the latest version of <a href="https://github.com/carlospolop/PEASS-ng" target="_blank" rel="noopener noreffer ">linpeas</a> from <a href="https://twitter.com/carlospolopm" target="_blank" rel="noopener noreffer ">carlospolop</a>.</p>
+<p>After it is all done running, I&rsquo;ll check the output and find something weird. A directory called <code>/usr/local/sbin</code> contain a file called <code>ssh-alert.sh</code>. The file itself looks like a <code>bash script</code> because it&rsquo;s ended up with <code>.sh</code> extensions and this file is not a native to the linux ecosystem. (I think?)</p>
+<p><figure><a class="lightgallery" href="/posts/htb/late/linpeas-find-the-ssh-alert-file.png" title="linpeas output" data-thumbnail="/posts/htb/late/linpeas-find-the-ssh-alert-file.png" data-sub-html="<h2>linpeas output</h2><p>linpeas output</p>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/posts/htb/late/linpeas-find-the-ssh-alert-file.png"
+            data-srcset="/posts/htb/late/linpeas-find-the-ssh-alert-file.png, /posts/htb/late/linpeas-find-the-ssh-alert-file.png 1.5x, /posts/htb/late/linpeas-find-the-ssh-alert-file.png 2x"
+            data-sizes="auto"
+            alt="/posts/htb/late/linpeas-find-the-ssh-alert-file.png" width="1127" height="510" />
+    </a><figcaption class="image-caption">linpeas output</figcaption>
+    </figure></p>
+<h3 id="usrlocalsbin-ssh-alertsh">/usr/local/sbin: ssh-alert.sh</h3>
+<p>Upon inspecting the file, it&rsquo;s looks like this file probably running every time someone logs in. Well, I&rsquo;ll try to edit the file but permissions don&rsquo;t allow me to write it when I checked the file attribute. Turns out, I can append something to this file.</p>
+<p>However, if I manage to change this file. It doesn&rsquo;t mean I&rsquo;m going to be <code>root</code> because this file belongs to the <code>svc_acc</code> user &amp; groups. Honestly, I&rsquo;m stuck and don&rsquo;t know what to do next. So, I reached out to the <a href="https://discord.com/invite/hackthebox" target="_blank" rel="noopener noreffer ">HackTheBOX community</a> and got a nudge on <code>pspy</code>. I&rsquo;m super excited because I&rsquo;ve never used this tool before let alone known it exists.</p>
+<p><figure><a class="lightgallery" href="/posts/htb/late/ssh-alert-read-pic.png" title="contents in ssh-alert.sh file" data-thumbnail="/posts/htb/late/ssh-alert-read-pic.png" data-sub-html="<h2>contents in ssh-alert.sh file</h2><p>contents in ssh-alert.sh file</p>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/posts/htb/late/ssh-alert-read-pic.png"
+            data-srcset="/posts/htb/late/ssh-alert-read-pic.png, /posts/htb/late/ssh-alert-read-pic.png 1.5x, /posts/htb/late/ssh-alert-read-pic.png 2x"
+            data-sizes="auto"
+            alt="/posts/htb/late/ssh-alert-read-pic.png" width="805" height="531" />
+    </a><figcaption class="image-caption">contents in ssh-alert.sh file</figcaption>
+    </figure></p>
+<h3 id="pspy">Pspy</h3>
+<p><a href="https://github.com/DominicBreuker/pspy" target="_blank" rel="noopener noreffer ">Pspy</a> is a command-line tool designed to snoop on processes without the need for root permissions. It allows seeing commands run by other users, cron jobs, etc. as they execute. Without wasting any single second, I&rsquo;m going to download the <code>pspy64</code> on the release page and execute it.</p>
+<p><figure><a class="lightgallery" href="/posts/htb/late/run-the-pspy.png" title="execute pspy" data-thumbnail="/posts/htb/late/run-the-pspy.png" data-sub-html="<h2>execute pspy</h2><p>execute pspy</p>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/posts/htb/late/run-the-pspy.png"
+            data-srcset="/posts/htb/late/run-the-pspy.png, /posts/htb/late/run-the-pspy.png 1.5x, /posts/htb/late/run-the-pspy.png 2x"
+            data-sizes="auto"
+            alt="/posts/htb/late/run-the-pspy.png" width="1706" height="705" />
+    </a><figcaption class="image-caption">execute pspy</figcaption>
+    </figure></p>
+<p>Based on the file <code>ssh-alert.sh</code> above. I need to make an ssh connection, to be able to execute the file. So, I&rsquo;m going to open a new terminal and ssh in the box again. Interestingly, something pops out in the pspy output. The output itself shows the <code>ssh-alert.sh</code> file be executed by <code>root</code> and I can gain the <code>reverse shell</code> in this way.</p>
+<p><em>NOTE: <code>UID=0</code> is root</em></p>
+<p><figure><a class="lightgallery" href="/posts/htb/late/ssh-in-the-box-once-again.png" title="root execute ssh-alert.sh file" data-thumbnail="/posts/htb/late/ssh-in-the-box-once-again.png" data-sub-html="<h2>root execute ssh-alert.sh file</h2><p>root execute ssh-alert.sh file</p>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/posts/htb/late/ssh-in-the-box-once-again.png"
+            data-srcset="/posts/htb/late/ssh-in-the-box-once-again.png, /posts/htb/late/ssh-in-the-box-once-again.png 1.5x, /posts/htb/late/ssh-in-the-box-once-again.png 2x"
+            data-sizes="auto"
+            alt="/posts/htb/late/ssh-in-the-box-once-again.png" width="1326" height="202" />
+    </a><figcaption class="image-caption">root execute ssh-alert.sh file</figcaption>
+    </figure></p>
+<h2 id="linux-privilege-escalation">Linux: Privilege Escalation</h2>
+<p>Going back to the <code>/usr/local/sbin</code> directory, I&rsquo;m going to append the bash <code>reverse shell</code> into the <code>ssh-alert.sh</code> file. As mentioned above, I&rsquo;m going to make a connection once again, and BOOM!. I&rsquo;ve got the root shell.</p>
+<p><figure><a class="lightgallery" href="/posts/htb/late/append-the-reverse-shell.png" title="append bash reverse shell" data-thumbnail="/posts/htb/late/append-the-reverse-shell.png" data-sub-html="<h2>append bash reverse shell</h2><p>append bash reverse shell</p>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/posts/htb/late/append-the-reverse-shell.png"
+            data-srcset="/posts/htb/late/append-the-reverse-shell.png, /posts/htb/late/append-the-reverse-shell.png 1.5x, /posts/htb/late/append-the-reverse-shell.png 2x"
+            data-sizes="auto"
+            alt="/posts/htb/late/append-the-reverse-shell.png" width="953" height="284" />
+    </a><figcaption class="image-caption">append bash reverse shell</figcaption>
+    </figure></p>
+<p><figure><a class="lightgallery" href="/posts/htb/late/root-shell.png" title="shell as root" data-thumbnail="/posts/htb/late/root-shell.png" data-sub-html="<h2>shell as root</h2><p>shell as root</p>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/posts/htb/late/root-shell.png"
+            data-srcset="/posts/htb/late/root-shell.png, /posts/htb/late/root-shell.png 1.5x, /posts/htb/late/root-shell.png 2x"
+            data-sizes="auto"
+            alt="/posts/htb/late/root-shell.png" width="843" height="313" />
+    </a><figcaption class="image-caption">shell as root</figcaption>
+    </figure></p>
+</div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>Updated on 30-07-2022</span>
+            </div></div>
+        <div class="post-info-line">
+            <div class="post-info-md"></div>
+            <div class="post-info-share">
+                <span><a href="javascript:void(0);" title="Share on Twitter" data-sharer="twitter" data-url="https://shafiqaiman.com/posts/htb/late/" data-title="HackTheBox - Late Writeup" data-via="_shafiqaiman_" data-hashtags="linpeas,ssti,pspy"><i class="fab fa-twitter fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Linkedin" data-sharer="linkedin" data-url="https://shafiqaiman.com/posts/htb/late/"><i class="fab fa-linkedin fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Hacker News" data-sharer="hackernews" data-url="https://shafiqaiman.com/posts/htb/late/" data-title="HackTheBox - Late Writeup"><i class="fab fa-hacker-news fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Reddit" data-sharer="reddit" data-url="https://shafiqaiman.com/posts/htb/late/"><i class="fab fa-reddit fa-fw" aria-hidden="true"></i></a></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"><i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/linpeas/">linpeas</a>,&nbsp;<a href="/tags/ssti/">ssti</a>,&nbsp;<a href="/tags/pspy/">pspy</a></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">Back</a></span>&nbsp;|&nbsp;<span><a href="/">Home</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/posts/htb/paper/" class="prev" rel="prev" title="HackTheBox - Paper Writeup"><i class="fas fa-angle-left fa-fw" aria-hidden="true"></i>HackTheBox - Paper Writeup</a>
+            <a href="/posts/htb/grandpa/" class="next" rel="next" title="HackTheBox - Grandpa Writeup">HackTheBox - Grandpa Writeup<i class="fas fa-angle-right fa-fw" aria-hidden="true"></i></a></div>
+</div>
+</article></div>
+            </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line" itemscope itemtype="http://schema.org/CreativeWork"><i class="far fa-copyright fa-fw" aria-hidden="true"></i><span itemprop="copyrightYear">2021 - 2023</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="https://shafiqaiman.com" target="_blank">SHAFIQAIMAN</a></span></div>
+        </div>
+    </footer></div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="Back to Top">
+                <i class="fas fa-arrow-up fa-fw" aria-hidden="true"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="View Comments">
+                <i class="fas fa-comment fa-fw" aria-hidden="true"></i>
+            </a>
+        </div><link rel="stylesheet" href="/lib/lightgallery/css/lightgallery-bundle.min.css"><script type="text/javascript" src="/lib/autocomplete/autocomplete.min.js"></script><script type="text/javascript" src="/lib/lunr/lunr.min.js"></script><script type="text/javascript" src="/lib/lazysizes/lazysizes.min.js"></script><script type="text/javascript" src="/lib/lightgallery/lightgallery.min.js"></script><script type="text/javascript" src="/lib/lightgallery/plugins/thumbnail/lg-thumbnail.min.js"></script><script type="text/javascript" src="/lib/lightgallery/plugins/zoom/lg-zoom.min.js"></script><script type="text/javascript" src="/lib/clipboard/clipboard.min.js"></script><script type="text/javascript" src="/lib/sharer/sharer.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"Copy to clipboard","maxShownLines":50},"comment":{},"lightgallery":true,"search":{"highlightTag":"em","lunrIndexURL":"/index.json","maxResultLength":10,"noResultsFound":"No results found","snippetLength":30,"type":"lunr"}};</script><script type="text/javascript" src="/js/theme.min.js"></script></body>
+</html>

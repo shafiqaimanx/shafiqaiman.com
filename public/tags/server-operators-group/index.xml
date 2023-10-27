@@ -1,0 +1,16 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>server-operators-group - Tag - SHAFIQAIMAN</title>
+        <link>https://shafiqaiman.com/tags/server-operators-group/</link>
+        <description>server-operators-group - Tag - SHAFIQAIMAN</description>
+        <generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Sat, 02 Apr 2022 00:00:00 &#43;0000</lastBuildDate><atom:link href="https://shafiqaiman.com/tags/server-operators-group/" rel="self" type="application/rss+xml" /><item>
+    <title>HackTheBox - Return Writeup</title>
+    <link>https://shafiqaiman.com/posts/htb/return/</link>
+    <pubDate>Sat, 02 Apr 2022 00:00:00 &#43;0000</pubDate>
+    <author>SH∆FIQ ∆IM∆N</author>
+    <guid>https://shafiqaiman.com/posts/htb/return/</guid>
+    <description><![CDATA[Nmap First, let&rsquo;s start scanning the IP address with the Nmap.
+result 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 # Nmap 7.92 scan initiated Sat Apr 2 02:24:05 2022 as: nmap -sC -sV -oN nmap/return 10.10.11.108 Nmap scan report for 10.10.11.108 Host is up (0.]]></description>
+</item>
+</channel>
+</rss>

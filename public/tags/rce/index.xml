@@ -1,0 +1,99 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>rce - Tag - SHAFIQAIMAN</title>
+        <link>https://shafiqaiman.com/tags/rce/</link>
+        <description>rce - Tag - SHAFIQAIMAN</description>
+        <generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Sun, 03 Sep 2023 00:00:00 &#43;0000</lastBuildDate><atom:link href="https://shafiqaiman.com/tags/rce/" rel="self" type="application/rss+xml" /><item>
+    <title>HackTheBox - MonitorsTwo Writeup</title>
+    <link>https://shafiqaiman.com/posts/htb/monitorstwo/</link>
+    <pubDate>Sun, 03 Sep 2023 00:00:00 &#43;0000</pubDate>
+    <author>SH∆FIQ ∆IM∆N</author>
+    <guid>https://shafiqaiman.com/posts/htb/monitorstwo/</guid>
+    <description><![CDATA[Nmap Like always, I’m going to scan the IP Address by using nmap but I’m going to scan the full port first. Then, I’m going to scan the only open ports.
+1 2 3 4 5 6 7 8 9 10 11 12 13 nmap -sCV -p22,80 -oN nmap/monitorstwo 10.10.11.211 PORT STATE SERVICE VERSION 22/tcp open ssh OpenSSH 8.2p1 Ubuntu 4ubuntu0.5 (Ubuntu Linux; protocol 2.0) | ssh-hostkey: | 3072 48:ad:d5:b8:3a:9f:bc:be:f7:e8:20:1e:f6:bf:de:ae (RSA) | 256 b7:89:6c:0b:20:ed:49:b2:c1:86:7c:29:92:74:1c:1f (ECDSA) |_ 256 18:cd:9d:08:a6:21:a8:b8:b6:f7:9f:8d:40:51:54:fb (ED25519) 80/tcp open http nginx 1.]]></description>
+</item>
+<item>
+    <title>HackTheBox - Busqueda Writeup</title>
+    <link>https://shafiqaiman.com/posts/htb/busqueda/</link>
+    <pubDate>Sat, 08 Jul 2023 00:00:00 &#43;0000</pubDate>
+    <author>SH∆FIQ ∆IM∆N</author>
+    <guid>https://shafiqaiman.com/posts/htb/busqueda/</guid>
+    <description><![CDATA[Nmap Like always, I’m going to scan the IP Address by using nmap but I’m going to scan the full port first. Then, I’m going to scan the only open ports.
+1 2 3 4 5 6 7 8 9 10 11 12 nmap -p22,80 -sCV -oN nmap/busqueda 10.10.11.208 PORT STATE SERVICE VERSION 22/tcp open ssh OpenSSH 8.9p1 Ubuntu 3ubuntu0.1 (Ubuntu Linux; protocol 2.0) | ssh-hostkey: | 256 4f:e3:a6:67:a2:27:f9:11:8d:c3:0e:d7:73:a0:2c:28 (ECDSA) |_ 256 81:6e:78:76:6b:8a:ea:7d:1b:ab:d4:36:b7:f8:ec:c4 (ED25519) 80/tcp open http Apache httpd 2.]]></description>
+</item>
+<item>
+    <title>HackTheBox - Sense Writeup</title>
+    <link>https://shafiqaiman.com/posts/htb/sense/</link>
+    <pubDate>Sun, 13 Nov 2022 00:00:00 &#43;0000</pubDate>
+    <author>SH∆FIQ ∆IM∆N</author>
+    <guid>https://shafiqaiman.com/posts/htb/sense/</guid>
+    <description><![CDATA[Nmap Like always, I’m going to scan the IP Address by using nmap but I’m going to scan the full port first. Then, I’m going to scan the only open ports.
+1 2 3 4 5 6 7 8 9 10 11 12 13 nmap -p80,443 -sCV -oN nmap/sense 10.10.10.60 80/tcp open http lighttpd 1.4.35 |_http-server-header: lighttpd/1.4.35 |_http-title: Did not follow redirect to https://10.10.10.60/ 443/tcp open ssl/http lighttpd 1.4.35 |_http-server-header: lighttpd/1.]]></description>
+</item>
+<item>
+    <title>HackTheBox - Arctic Writeup</title>
+    <link>https://shafiqaiman.com/posts/htb/arctic/</link>
+    <pubDate>Sat, 08 Oct 2022 00:00:00 &#43;0000</pubDate>
+    <author>SH∆FIQ ∆IM∆N</author>
+    <guid>https://shafiqaiman.com/posts/htb/arctic/</guid>
+    <description><![CDATA[Nmap Like always, I&rsquo;m going to scan the IP address by using Nmap but I&rsquo;m going to scan the full port first. Then, I&rsquo;m going to scan the only open ports.
+1 2 3 4 5 6 nmap -p135,8500,49154 -sCV -oN nmap/arctic 10.10.10.11 135/tcp open msrpc Microsoft Windows RPC 8500/tcp open fmtp? 49154/tcp open msrpc Microsoft Windows RPC Service Info: OS: Windows; CPE: cpe:/o:microsoft:windows The nmap scan result is completed. Based on the services, look like this is a Windows target and three ports that open.]]></description>
+</item>
+<item>
+    <title>HackTheBox - Optimum Writeup</title>
+    <link>https://shafiqaiman.com/posts/htb/optimum/</link>
+    <pubDate>Fri, 17 Jun 2022 00:00:00 &#43;0000</pubDate>
+    <author>SH∆FIQ ∆IM∆N</author>
+    <guid>https://shafiqaiman.com/posts/htb/optimum/</guid>
+    <description><![CDATA[Nmap First, let’s scan the IP address by using the Nmap
+1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 # Nmap 7.92 scan initiated Fri Jun 10 19:25:32 2022 as: nmap -sC -sV -vv -p- --min-rate=10000 -oN nmap/optimum_all 10.10.10.8 Nmap scan report for 10.10.10.8 Host is up, received echo-reply ttl 127 (0.40s latency). Scanned at 2022-06-10 19:25:32 +08 for 25s Not shown: 65534 filtered tcp ports (no-response) PORT STATE SERVICE REASON VERSION 80/tcp open http syn-ack ttl 127 HttpFileServer httpd 2.]]></description>
+</item>
+<item>
+    <title>HackTheBox - Netmon Writeup</title>
+    <link>https://shafiqaiman.com/posts/htb/netmon/</link>
+    <pubDate>Sat, 28 May 2022 00:00:00 &#43;0000</pubDate>
+    <author>SH∆FIQ ∆IM∆N</author>
+    <guid>https://shafiqaiman.com/posts/htb/netmon/</guid>
+    <description><![CDATA[Nmap First, let&rsquo;s scan the IP address by using the Nmap
+1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 41 42 43 44 45 46 47 48 49 50 51 52 53 54 55 56 57 58 59 60 61 62 63 64 65 # Nmap 7.]]></description>
+</item>
+<item>
+    <title>HackTheBox - Responder Writeup</title>
+    <link>https://shafiqaiman.com/posts/htb/responder/</link>
+    <pubDate>Sat, 09 Apr 2022 00:00:00 &#43;0000</pubDate>
+    <author>SH∆FIQ ∆IM∆N</author>
+    <guid>https://shafiqaiman.com/posts/htb/responder/</guid>
+    <description><![CDATA[I found two ways to gain into this machine. First, stealing the password hash by using the responder and then logon through evil-winrm. Second, gaining the remote code execution through log poisoning and getting the reverse shell.
+Nmap Let&rsquo;s scan the Ip address first by using Nmap.
+result 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 # Nmap 7.92 scan initiated Sat Apr 9 04:18:54 2022 as: nmap -sC -sV -p- -oN nmap/responder_all 10.]]></description>
+</item>
+<item>
+    <title>HackTheBox - Beep Writeup</title>
+    <link>https://shafiqaiman.com/posts/htb/beep/</link>
+    <pubDate>Fri, 21 Jan 2022 00:00:00 &#43;0000</pubDate>
+    <author>SH∆FIQ ∆IM∆N</author>
+    <guid>https://shafiqaiman.com/posts/htb/beep/</guid>
+    <description><![CDATA[Nmap As always. I&rsquo;m gonna run the Nmap scan against this IP address 10.10.10.7. Here is the result of the scan
+the result 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 41 42 43 44 45 46 47 48 49 50 51 52 53 54 55 56 57 58 59 60 61 62 63 64 65 66 67 68 69 70 71 72 73 74 # Nmap 7.]]></description>
+</item>
+<item>
+    <title>HackTheBox - Knife Writeup</title>
+    <link>https://shafiqaiman.com/posts/htb/knife/</link>
+    <pubDate>Sat, 15 Jan 2022 00:00:00 &#43;0000</pubDate>
+    <author>SH∆FIQ ∆IM∆N</author>
+    <guid>https://shafiqaiman.com/posts/htb/knife/</guid>
+    <description><![CDATA[Enumeration Nmap First, let&rsquo;s start with the Nmap scan. Here is the result of the scan.
+the result nmap scan result I ran another Nmap scan against all ports. However, the result still returns the same. So, that&rsquo;s not much we can do.
+Webserver Let&rsquo;s navigate to the website on port 80. It&rsquo;s just one big landing page and doesn&rsquo;t have anything interesting in it. I also checked the source of this page and nothing.]]></description>
+</item>
+<item>
+    <title>HackTheBox - Shocker Writeup</title>
+    <link>https://shafiqaiman.com/posts/htb/shocker/</link>
+    <pubDate>Sat, 05 Nov 2022 00:00:00 &#43;0000</pubDate>
+    <author>SHAFIQAIMAN</author>
+    <guid>https://shafiqaiman.com/posts/htb/shocker/</guid>
+    <description><![CDATA[Nmap Like always, I’m going to scan the IP Address by using nmap but I’m going to scan the full port first. Then, I’m going to scan the only open ports.
+1 2 3 4 5 6 7 8 9 10 11 12 nmap -p80,2222 -sCV -oN nmap/shocker 10.10.10.56 80/tcp open http Apache httpd 2.4.18 ((Ubuntu)) |_http-title: Site doesn&#39;t have a title (text/html). |_http-server-header: Apache/2.4.18 (Ubuntu) 2222/tcp open ssh OpenSSH 7.]]></description>
+</item>
+</channel>
+</rss>

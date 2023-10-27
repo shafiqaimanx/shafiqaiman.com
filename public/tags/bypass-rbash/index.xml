@@ -1,0 +1,15 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>bypass-rbash - Tag - SHAFIQAIMAN</title>
+        <link>https://shafiqaiman.com/tags/bypass-rbash/</link>
+        <description>bypass-rbash - Tag - SHAFIQAIMAN</description>
+        <generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Sun, 08 Aug 2021 00:00:00 &#43;0000</lastBuildDate><atom:link href="https://shafiqaiman.com/tags/bypass-rbash/" rel="self" type="application/rss+xml" /><item>
+    <title>HackTheBox - Guard Writeup</title>
+    <link>https://shafiqaiman.com/posts/htb/guard/</link>
+    <pubDate>Sun, 08 Aug 2021 00:00:00 &#43;0000</pubDate>
+    <author>SH∆FIQ ∆IM∆N</author>
+    <guid>https://shafiqaiman.com/posts/htb/guard/</guid>
+    <description><![CDATA[Enumeration Top 1000 ports scan 1 nmap -sC -sV -oN nmap/initial 10.10.10.50 the result nmap initial scan scan all ports 1 nmap -sC -sV -p- -oN nmap/all_ports 10.10.10.50 the result nmap allports scan Open Ports Well, both nmap scan result shows SSH port just open Foothold/Gaining Access SSH Let&rsquo;s try SSH into the machine using the private key we&rsquo;ve got from the previous box markup. ssh as daniel It works rBash Well, I&rsquo;m login as daniel and I found the user flag already.]]></description>
+</item>
+</channel>
+</rss>

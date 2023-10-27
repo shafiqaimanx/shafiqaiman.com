@@ -1,0 +1,53 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>john - Tag - SHAFIQAIMAN</title>
+        <link>https://shafiqaiman.com/tags/john/</link>
+        <description>john - Tag - SHAFIQAIMAN</description>
+        <generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Sun, 03 Sep 2023 00:00:00 &#43;0000</lastBuildDate><atom:link href="https://shafiqaiman.com/tags/john/" rel="self" type="application/rss+xml" /><item>
+    <title>HackTheBox - MonitorsTwo Writeup</title>
+    <link>https://shafiqaiman.com/posts/htb/monitorstwo/</link>
+    <pubDate>Sun, 03 Sep 2023 00:00:00 &#43;0000</pubDate>
+    <author>SH∆FIQ ∆IM∆N</author>
+    <guid>https://shafiqaiman.com/posts/htb/monitorstwo/</guid>
+    <description><![CDATA[Nmap Like always, I’m going to scan the IP Address by using nmap but I’m going to scan the full port first. Then, I’m going to scan the only open ports.
+1 2 3 4 5 6 7 8 9 10 11 12 13 nmap -sCV -p22,80 -oN nmap/monitorstwo 10.10.11.211 PORT STATE SERVICE VERSION 22/tcp open ssh OpenSSH 8.2p1 Ubuntu 4ubuntu0.5 (Ubuntu Linux; protocol 2.0) | ssh-hostkey: | 3072 48:ad:d5:b8:3a:9f:bc:be:f7:e8:20:1e:f6:bf:de:ae (RSA) | 256 b7:89:6c:0b:20:ed:49:b2:c1:86:7c:29:92:74:1c:1f (ECDSA) |_ 256 18:cd:9d:08:a6:21:a8:b8:b6:f7:9f:8d:40:51:54:fb (ED25519) 80/tcp open http nginx 1.]]></description>
+</item>
+<item>
+    <title>HackTheBox - Pathfinder Writeup</title>
+    <link>https://shafiqaiman.com/posts/htb/pathfinder/</link>
+    <pubDate>Wed, 21 Jul 2021 00:00:00 &#43;0000</pubDate>
+    <author>SH∆FIQ ∆IM∆N</author>
+    <guid>https://shafiqaiman.com/posts/htb/pathfinder/</guid>
+    <description><![CDATA[Enumeration scan top 1000 ports 1 nmap -sC -sV -oN nmap/initial 10.10.10.30 the result 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 # Nmap 7.91 scan initiated Sat Jul 10 02:31:44 2021 as: nmap -sC -sV -oN nmap/initial 10.10.10.30 Nmap scan report for 10.10.10.30 Host is up (0.34s latency). Not shown: 989 closed ports PORT STATE SERVICE VERSION 53/tcp open domain Simple DNS Plus 88/tcp open kerberos-sec Microsoft Windows Kerberos (server time: 2021-07-10 01:40:02Z) 135/tcp open msrpc Microsoft Windows RPC 139/tcp open netbios-ssn Microsoft Windows netbios-ssn 389/tcp open ldap Microsoft Windows Active Directory LDAP (Domain: MEGACORP.]]></description>
+</item>
+<item>
+    <title>HackTheBox - Sunday Writeup</title>
+    <link>https://shafiqaiman.com/posts/htb/sunday/</link>
+    <pubDate>Sat, 03 Dec 2022 00:00:00 &#43;0000</pubDate>
+    <author>SHAFIQAIMAN</author>
+    <guid>https://shafiqaiman.com/posts/htb/sunday/</guid>
+    <description><![CDATA[Nmap Like always, I’m going to scan the IP Address by using nmap but I’m going to scan the full port first. Then, I’m going to scan the only open ports.
+1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 41 42 nmap -p79,111,515,6787,22022 -sCV -oN nmap/sunday 10.]]></description>
+</item>
+<item>
+    <title>HackTheBox - Timelapse Writeup</title>
+    <link>https://shafiqaiman.com/posts/htb/timelapse/</link>
+    <pubDate>Sun, 21 Aug 2022 00:00:00 &#43;0000</pubDate>
+    <author>SHAFIQAIMAN</author>
+    <guid>https://shafiqaiman.com/posts/htb/timelapse/</guid>
+    <description><![CDATA[Nmap Let&rsquo;s scan the Ip address first, by using Nmap.
+result 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 41 42 43 44 45 46 47 48 49 50 51 52 53 54 55 56 57 58 59 60 61 62 63 64 65 66 67 68 69 70 71 72 73 74 75 76 77 78 # Nmap 7.]]></description>
+</item>
+<item>
+    <title>TryHackMe - Brute It Writeup</title>
+    <link>https://shafiqaiman.com/posts/thm/brute_it/</link>
+    <pubDate>Sat, 10 Jul 2021 00:00:00 &#43;0000</pubDate>
+    <author>SHAFIQAIMAN</author>
+    <guid>https://shafiqaiman.com/posts/thm/brute_it/</guid>
+    <description><![CDATA[Link : https://tryhackme.com/room/bruteit
+Enumeration First we need to connect to try hack me networks through openvpn and deploy the machine.
+Now, the box is up. First, we need to do a reconnaissance using nmap. Nmap is a network mapper tool for scanning the ports or enumerate the machine through ports. I will run this command for my nmap scan.
+1 nmap -sC -sV -O -oN nmap/initial &lt;machine ip&gt; Explaining the nmap flag: -sC := scan using nmap default script -sV := scan for version -O := scan for OS [operating system] -oN := output in normal format Now our nmap scan is done.]]></description>
+</item>
+</channel>
+</rss>

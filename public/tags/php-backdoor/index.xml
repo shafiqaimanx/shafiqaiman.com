@@ -1,0 +1,17 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>php-backdoor - Tag - SHAFIQAIMAN</title>
+        <link>https://shafiqaiman.com/tags/php-backdoor/</link>
+        <description>php-backdoor - Tag - SHAFIQAIMAN</description>
+        <generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Sat, 15 Jan 2022 00:00:00 &#43;0000</lastBuildDate><atom:link href="https://shafiqaiman.com/tags/php-backdoor/" rel="self" type="application/rss+xml" /><item>
+    <title>HackTheBox - Knife Writeup</title>
+    <link>https://shafiqaiman.com/posts/htb/knife/</link>
+    <pubDate>Sat, 15 Jan 2022 00:00:00 &#43;0000</pubDate>
+    <author>SH∆FIQ ∆IM∆N</author>
+    <guid>https://shafiqaiman.com/posts/htb/knife/</guid>
+    <description><![CDATA[Enumeration Nmap First, let&rsquo;s start with the Nmap scan. Here is the result of the scan.
+the result nmap scan result I ran another Nmap scan against all ports. However, the result still returns the same. So, that&rsquo;s not much we can do.
+Webserver Let&rsquo;s navigate to the website on port 80. It&rsquo;s just one big landing page and doesn&rsquo;t have anything interesting in it. I also checked the source of this page and nothing.]]></description>
+</item>
+</channel>
+</rss>

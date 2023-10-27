@@ -1,0 +1,484 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <title>HackTheBox - Paper Writeup - SHAFIQAIMAN</title><meta name="Description" content="shafiqaiman.com is a cybersecurity/ethical hacking website that focus on publishing of writeup in HacktheBox, Tryhackme and other online CTF (capture the flag) challenge."><meta property="og:title" content="HackTheBox - Paper Writeup" />
+<meta property="og:description" content="Nmap Let&rsquo;s scan the IP Address first by using Nmap.
+1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 # Nmap 7.92 scan initiated Wed Feb 9 07:45:26 2022 as: nmap -sC -sV -oN nmap/paper 10.129.156.206 Nmap scan report for 10.129.156.206 Host is up (0.23s latency). Not shown: 997 closed tcp ports (reset) PORT STATE SERVICE VERSION 22/tcp open ssh OpenSSH 8." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://shafiqaiman.com/posts/htb/paper/" /><meta property="og:image" content="https://shafiqaiman.com/posts/htb/paper/featured.png"/><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2022-06-19T00:00:00+00:00" />
+<meta property="article:modified_time" content="2022-06-19T00:00:00+00:00" /><meta property="og:site_name" content="SHAFIQAIMAN" />
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="https://shafiqaiman.com/posts/htb/paper/featured.png"/>
+<meta name="twitter:title" content="HackTheBox - Paper Writeup"/>
+<meta name="twitter:description" content="Nmap Let&rsquo;s scan the IP Address first by using Nmap.
+1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 # Nmap 7.92 scan initiated Wed Feb 9 07:45:26 2022 as: nmap -sC -sV -oN nmap/paper 10.129.156.206 Nmap scan report for 10.129.156.206 Host is up (0.23s latency). Not shown: 997 closed tcp ports (reset) PORT STATE SERVICE VERSION 22/tcp open ssh OpenSSH 8."/>
+<meta name="application-name" content="SHAFIQAIMAN">
+<meta name="apple-mobile-web-app-title" content="SHAFIQAIMAN"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://shafiqaiman.com/posts/htb/paper/" /><link rel="prev" href="https://shafiqaiman.com/posts/htb/optimum/" /><link rel="next" href="https://shafiqaiman.com/posts/htb/late/" /><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="/lib/fontawesome-free/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"></noscript><link rel="preload" href="/lib/animate/animate.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="/lib/animate/animate.min.css"></noscript><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "HackTheBox - Paper Writeup",
+        "inLanguage": "en",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https:\/\/shafiqaiman.com\/posts\/htb\/paper\/"
+        },"image": [{
+                            "@type": "ImageObject",
+                            "url": "https:\/\/shafiqaiman.com\/posts\/htb\/paper\/featured.png",
+                            "width":  1400 ,
+                            "height":  1060 
+                        }],"genre": "posts","keywords": "CVE-2019-17671, CVE-2021-3560, polkit, linpeas, gobuster, wordpress, hubot","wordcount":  1030 ,
+        "url": "https:\/\/shafiqaiman.com\/posts\/htb\/paper\/","datePublished": "2022-06-19T00:00:00+00:00","dateModified": "2022-06-19T00:00:00+00:00","publisher": {
+            "@type": "Organization",
+            "name": ""},"author": {
+                "@type": "Person",
+                "name": "SH∆FIQ ∆IM∆N"
+            },"description": ""
+    }
+    </script></head>
+    <body data-header-desktop="fixed" data-header-mobile="auto"><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('dark' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'dark' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="SHAFIQAIMAN">SH∆FIQ∆IM∆N</a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/posts/" title="Posts"><i class="fa-solid fa-book"></i>  </a><a class="menu-item" href="/tags/" title="Tags"><i class="fa-solid fa-tags"></i>  </a><a class="menu-item" href="/categories/" title="Categories"><i class="fa-solid fa-folder"></i>  </a><span class="menu-item delimiter"></span><span class="menu-item search" id="search-desktop">
+                        <input type="text" placeholder="Search titles or contents..." id="search-input-desktop">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-desktop" title="Search">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-desktop" title="Clear">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-desktop">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </span><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                    <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+                </a></div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="SHAFIQAIMAN">SH∆FIQ∆IM∆N</a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><div class="search-wrapper">
+                    <div class="search mobile" id="search-mobile">
+                        <input type="text" placeholder="Search titles or contents..." id="search-input-mobile">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-mobile" title="Search">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-mobile" title="Clear">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-mobile">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </div>
+                    <a href="javascript:void(0);" class="search-cancel" id="search-cancel-mobile">
+                        Cancel
+                    </a>
+                </div><a class="menu-item" href="/posts/" title="Posts"><i class="fa-solid fa-book"></i></a><a class="menu-item" href="/tags/" title="Tags"><i class="fa-solid fa-tags"></i></a><a class="menu-item" href="/categories/" title="Categories"><i class="fa-solid fa-folder"></i></a><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+            </a></div>
+    </div>
+</header><div class="search-dropdown desktop">
+        <div id="search-dropdown-desktop"></div>
+    </div>
+    <div class="search-dropdown mobile">
+        <div id="search-dropdown-mobile"></div>
+    </div><main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">Contents</h2>
+            <div class="toc-content always-active" id="toc-content-auto"></div>
+        </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">HackTheBox - Paper Writeup</h1><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="https://shafiqaiman.com" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>SH∆FIQ ∆IM∆N</a></span>&nbsp;<span class="post-category">included in <a href="/categories/hackthebox/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>HacktheBox</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="19-06-2022">19-06-2022</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;1030 words&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;5 minutes&nbsp;</div>
+        </div><div class="featured-image"><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/posts/htb/paper/featured.png"
+        data-srcset="/posts/htb/paper/featured.png, /posts/htb/paper/featured.png 1.5x, /posts/htb/paper/featured.png 2x"
+        data-sizes="auto"
+        alt="/posts/htb/paper/featured.png"
+        title="/posts/htb/paper/featured.png" /></div><div class="details toc" id="toc-static"  data-kept="">
+                <div class="details-summary toc-title">
+                    <span>Contents</span>
+                    <span><i class="details-icon fas fa-angle-right" aria-hidden="true"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#nmap">Nmap</a></li>
+    <li><a href="#httphttps">Http/HttpS</a>
+      <ul>
+        <li><a href="#gobuster">Gobuster</a></li>
+        <li><a href="#header-x-backend-server">Header: X-Backend-Server</a></li>
+        <li><a href="#http-officepaper">Http: office.paper</a></li>
+      </ul>
+    </li>
+    <li><a href="#cve-2019-17671">CVE-2019-17671</a>
+      <ul>
+        <li><a href="#http-chatofficepaper">Http: chat.office.paper</a></li>
+      </ul>
+    </li>
+    <li><a href="#recyclops">Recyclops</a>
+      <ul>
+        <li><a href="#recyclops-path-traversal">Recyclops: path traversal</a></li>
+      </ul>
+    </li>
+    <li><a href="#hubot">Hubot</a>
+      <ul>
+        <li><a href="#hubot-env">Hubot: /.env</a></li>
+        <li><a href="#hubot-run-commandfont">Hubot: RUN command</font></a></li>
+      </ul>
+    </li>
+    <li><a href="#peass-ng-linpeassh">PEASS-ng: linpeas.sh</a></li>
+    <li><a href="#cve-2021-3560">CVE-2021-3560</a></li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><h2 id="nmap">Nmap</h2>
+<p>Let&rsquo;s scan the IP Address first by using Nmap.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="line"><span class="cl"><span class="o">#</span><span class="w"> </span><span class="n">Nmap</span><span class="w"> </span><span class="mi">7</span><span class="p">.</span><span class="mi">92</span><span class="w"> </span><span class="n">scan</span><span class="w"> </span><span class="n">initiated</span><span class="w"> </span><span class="n">Wed</span><span class="w"> </span><span class="n">Feb</span><span class="w">  </span><span class="mi">9</span><span class="w"> </span><span class="mi">07</span><span class="p">:</span><span class="mi">45</span><span class="p">:</span><span class="mi">26</span><span class="w"> </span><span class="mi">2022</span><span class="w"> </span><span class="k">as</span><span class="p">:</span><span class="w"> </span><span class="n">nmap</span><span class="w"> </span><span class="o">-</span><span class="n">sC</span><span class="w"> </span><span class="o">-</span><span class="n">sV</span><span class="w"> </span><span class="o">-</span><span class="k">oN</span><span class="w"> </span><span class="n">nmap</span><span class="o">/</span><span class="n">paper</span><span class="w"> </span><span class="mi">10</span><span class="p">.</span><span class="mi">129</span><span class="p">.</span><span class="mi">156</span><span class="p">.</span><span class="mi">206</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="n">Nmap</span><span class="w"> </span><span class="n">scan</span><span class="w"> </span><span class="n">report</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="mi">10</span><span class="p">.</span><span class="mi">129</span><span class="p">.</span><span class="mi">156</span><span class="p">.</span><span class="mi">206</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="k">Host</span><span class="w"> </span><span class="k">is</span><span class="w"> </span><span class="n">up</span><span class="w"> </span><span class="p">(</span><span class="mi">0</span><span class="p">.</span><span class="mi">23</span><span class="n">s</span><span class="w"> </span><span class="n">latency</span><span class="p">).</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="k">Not</span><span class="w"> </span><span class="n">shown</span><span class="p">:</span><span class="w"> </span><span class="mi">997</span><span class="w"> </span><span class="n">closed</span><span class="w"> </span><span class="n">tcp</span><span class="w"> </span><span class="n">ports</span><span class="w"> </span><span class="p">(</span><span class="k">reset</span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="n">PORT</span><span class="w">    </span><span class="k">STATE</span><span class="w"> </span><span class="n">SERVICE</span><span class="w">  </span><span class="k">VERSION</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="mi">22</span><span class="o">/</span><span class="n">tcp</span><span class="w">  </span><span class="k">open</span><span class="w">  </span><span class="n">ssh</span><span class="w">      </span><span class="n">OpenSSH</span><span class="w"> </span><span class="mi">8</span><span class="p">.</span><span class="mi">0</span><span class="w"> </span><span class="p">(</span><span class="n">protocol</span><span class="w"> </span><span class="mi">2</span><span class="p">.</span><span class="mi">0</span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="o">|</span><span class="w"> </span><span class="n">ssh</span><span class="o">-</span><span class="n">hostkey</span><span class="p">:</span><span class="w"> 
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="o">|</span><span class="w">   </span><span class="mi">2048</span><span class="w"> </span><span class="mi">10</span><span class="p">:</span><span class="mi">05</span><span class="p">:</span><span class="n">ea</span><span class="p">:</span><span class="mi">50</span><span class="p">:</span><span class="mi">56</span><span class="p">:</span><span class="n">a6</span><span class="p">:</span><span class="mi">00</span><span class="p">:</span><span class="n">cb</span><span class="p">:</span><span class="mi">1</span><span class="k">c</span><span class="p">:</span><span class="mi">9</span><span class="k">c</span><span class="p">:</span><span class="mi">93</span><span class="p">:</span><span class="n">df</span><span class="p">:</span><span class="mi">5</span><span class="n">f</span><span class="p">:</span><span class="mi">83</span><span class="p">:</span><span class="n">e0</span><span class="p">:</span><span class="mi">64</span><span class="w"> </span><span class="p">(</span><span class="n">RSA</span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="o">|</span><span class="w">   </span><span class="mi">256</span><span class="w"> </span><span class="mi">58</span><span class="p">:</span><span class="mi">8</span><span class="k">c</span><span class="p">:</span><span class="mi">82</span><span class="p">:</span><span class="mi">1</span><span class="k">c</span><span class="p">:</span><span class="n">c6</span><span class="p">:</span><span class="mi">63</span><span class="p">:</span><span class="mi">2</span><span class="n">a</span><span class="p">:</span><span class="mi">83</span><span class="p">:</span><span class="mi">87</span><span class="p">:</span><span class="mi">5</span><span class="k">c</span><span class="p">:</span><span class="mi">2</span><span class="n">f</span><span class="p">:</span><span class="mi">2</span><span class="n">b</span><span class="p">:</span><span class="mi">4</span><span class="n">f</span><span class="p">:</span><span class="mi">4</span><span class="n">d</span><span class="p">:</span><span class="n">c3</span><span class="p">:</span><span class="mi">79</span><span class="w"> </span><span class="p">(</span><span class="n">ECDSA</span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="o">|</span><span class="n">_</span><span class="w">  </span><span class="mi">256</span><span class="w"> </span><span class="mi">31</span><span class="p">:</span><span class="mi">78</span><span class="p">:</span><span class="n">af</span><span class="p">:</span><span class="n">d1</span><span class="p">:</span><span class="mi">3</span><span class="n">b</span><span class="p">:</span><span class="n">c4</span><span class="p">:</span><span class="mi">2</span><span class="n">e</span><span class="p">:</span><span class="mi">9</span><span class="n">d</span><span class="p">:</span><span class="mi">60</span><span class="p">:</span><span class="mi">4</span><span class="n">e</span><span class="p">:</span><span class="n">eb</span><span class="p">:</span><span class="mi">5</span><span class="n">d</span><span class="p">:</span><span class="mi">03</span><span class="p">:</span><span class="n">ec</span><span class="p">:</span><span class="n">a0</span><span class="p">:</span><span class="mi">22</span><span class="w"> </span><span class="p">(</span><span class="n">ED25519</span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="mi">80</span><span class="o">/</span><span class="n">tcp</span><span class="w">  </span><span class="k">open</span><span class="w">  </span><span class="n">http</span><span class="w">     </span><span class="n">Apache</span><span class="w"> </span><span class="n">httpd</span><span class="w"> </span><span class="mi">2</span><span class="p">.</span><span class="mi">4</span><span class="p">.</span><span class="mi">37</span><span class="w"> </span><span class="p">((</span><span class="n">centos</span><span class="p">)</span><span class="w"> </span><span class="n">OpenSSL</span><span class="o">/</span><span class="mi">1</span><span class="p">.</span><span class="mi">1</span><span class="p">.</span><span class="mi">1</span><span class="n">k</span><span class="w"> </span><span class="n">mod_fcgid</span><span class="o">/</span><span class="mi">2</span><span class="p">.</span><span class="mi">3</span><span class="p">.</span><span class="mi">9</span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="o">|</span><span class="n">_http</span><span class="o">-</span><span class="n">generator</span><span class="p">:</span><span class="w"> </span><span class="n">HTML</span><span class="w"> </span><span class="n">Tidy</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="n">HTML5</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="n">Linux</span><span class="w"> </span><span class="k">version</span><span class="w"> </span><span class="mi">5</span><span class="p">.</span><span class="mi">7</span><span class="p">.</span><span class="mi">28</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="o">|</span><span class="w"> </span><span class="n">http</span><span class="o">-</span><span class="n">methods</span><span class="p">:</span><span class="w"> 
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="o">|</span><span class="n">_</span><span class="w">  </span><span class="n">Potentially</span><span class="w"> </span><span class="n">risky</span><span class="w"> </span><span class="n">methods</span><span class="p">:</span><span class="w"> </span><span class="n">TRACE</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="o">|</span><span class="n">_http</span><span class="o">-</span><span class="n">title</span><span class="p">:</span><span class="w"> </span><span class="n">HTTP</span><span class="w"> </span><span class="n">Server</span><span class="w"> </span><span class="n">Test</span><span class="w"> </span><span class="n">Page</span><span class="w"> </span><span class="n">powered</span><span class="w"> </span><span class="k">by</span><span class="w"> </span><span class="n">CentOS</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="o">|</span><span class="n">_http</span><span class="o">-</span><span class="n">server</span><span class="o">-</span><span class="n">header</span><span class="p">:</span><span class="w"> </span><span class="n">Apache</span><span class="o">/</span><span class="mi">2</span><span class="p">.</span><span class="mi">4</span><span class="p">.</span><span class="mi">37</span><span class="w"> </span><span class="p">(</span><span class="n">centos</span><span class="p">)</span><span class="w"> </span><span class="n">OpenSSL</span><span class="o">/</span><span class="mi">1</span><span class="p">.</span><span class="mi">1</span><span class="p">.</span><span class="mi">1</span><span class="n">k</span><span class="w"> </span><span class="n">mod_fcgid</span><span class="o">/</span><span class="mi">2</span><span class="p">.</span><span class="mi">3</span><span class="p">.</span><span class="mi">9</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="mi">443</span><span class="o">/</span><span class="n">tcp</span><span class="w"> </span><span class="k">open</span><span class="w">  </span><span class="n">ssl</span><span class="o">/</span><span class="n">http</span><span class="w"> </span><span class="n">Apache</span><span class="w"> </span><span class="n">httpd</span><span class="w"> </span><span class="mi">2</span><span class="p">.</span><span class="mi">4</span><span class="p">.</span><span class="mi">37</span><span class="w"> </span><span class="p">((</span><span class="n">centos</span><span class="p">)</span><span class="w"> </span><span class="n">OpenSSL</span><span class="o">/</span><span class="mi">1</span><span class="p">.</span><span class="mi">1</span><span class="p">.</span><span class="mi">1</span><span class="n">k</span><span class="w"> </span><span class="n">mod_fcgid</span><span class="o">/</span><span class="mi">2</span><span class="p">.</span><span class="mi">3</span><span class="p">.</span><span class="mi">9</span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="o">|</span><span class="n">_ssl</span><span class="o">-</span><span class="nb">date</span><span class="p">:</span><span class="w"> </span><span class="n">TLS</span><span class="w"> </span><span class="n">randomness</span><span class="w"> </span><span class="n">does</span><span class="w"> </span><span class="k">not</span><span class="w"> </span><span class="n">represent</span><span class="w"> </span><span class="n">time</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="o">|</span><span class="w"> </span><span class="n">http</span><span class="o">-</span><span class="n">methods</span><span class="p">:</span><span class="w"> 
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="o">|</span><span class="n">_</span><span class="w">  </span><span class="n">Potentially</span><span class="w"> </span><span class="n">risky</span><span class="w"> </span><span class="n">methods</span><span class="p">:</span><span class="w"> </span><span class="n">TRACE</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="o">|</span><span class="n">_http</span><span class="o">-</span><span class="n">generator</span><span class="p">:</span><span class="w"> </span><span class="n">HTML</span><span class="w"> </span><span class="n">Tidy</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="n">HTML5</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="n">Linux</span><span class="w"> </span><span class="k">version</span><span class="w"> </span><span class="mi">5</span><span class="p">.</span><span class="mi">7</span><span class="p">.</span><span class="mi">28</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="o">|</span><span class="n">_http</span><span class="o">-</span><span class="n">title</span><span class="p">:</span><span class="w"> </span><span class="n">HTTP</span><span class="w"> </span><span class="n">Server</span><span class="w"> </span><span class="n">Test</span><span class="w"> </span><span class="n">Page</span><span class="w"> </span><span class="n">powered</span><span class="w"> </span><span class="k">by</span><span class="w"> </span><span class="n">CentOS</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="o">|</span><span class="w"> </span><span class="n">ssl</span><span class="o">-</span><span class="n">cert</span><span class="p">:</span><span class="w"> </span><span class="n">Subject</span><span class="p">:</span><span class="w"> </span><span class="n">commonName</span><span class="o">=</span><span class="n">localhost</span><span class="p">.</span><span class="n">localdomain</span><span class="o">/</span><span class="n">organizationName</span><span class="o">=</span><span class="n">Unspecified</span><span class="o">/</span><span class="n">countryName</span><span class="o">=</span><span class="n">US</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="o">|</span><span class="w"> </span><span class="n">Subject</span><span class="w"> </span><span class="n">Alternative</span><span class="w"> </span><span class="n">Name</span><span class="p">:</span><span class="w"> </span><span class="n">DNS</span><span class="p">:</span><span class="n">localhost</span><span class="p">.</span><span class="n">localdomain</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="o">|</span><span class="w"> </span><span class="k">Not</span><span class="w"> </span><span class="k">valid</span><span class="w"> </span><span class="k">before</span><span class="p">:</span><span class="w"> </span><span class="mi">2021</span><span class="o">-</span><span class="mi">07</span><span class="o">-</span><span class="mi">03</span><span class="n">T08</span><span class="p">:</span><span class="mi">52</span><span class="p">:</span><span class="mi">34</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="o">|</span><span class="n">_Not</span><span class="w"> </span><span class="k">valid</span><span class="w"> </span><span class="k">after</span><span class="p">:</span><span class="w">  </span><span class="mi">2022</span><span class="o">-</span><span class="mi">07</span><span class="o">-</span><span class="mi">08</span><span class="n">T10</span><span class="p">:</span><span class="mi">32</span><span class="p">:</span><span class="mi">34</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="o">|</span><span class="n">_http</span><span class="o">-</span><span class="n">server</span><span class="o">-</span><span class="n">header</span><span class="p">:</span><span class="w"> </span><span class="n">Apache</span><span class="o">/</span><span class="mi">2</span><span class="p">.</span><span class="mi">4</span><span class="p">.</span><span class="mi">37</span><span class="w"> </span><span class="p">(</span><span class="n">centos</span><span class="p">)</span><span class="w"> </span><span class="n">OpenSSL</span><span class="o">/</span><span class="mi">1</span><span class="p">.</span><span class="mi">1</span><span class="p">.</span><span class="mi">1</span><span class="n">k</span><span class="w"> </span><span class="n">mod_fcgid</span><span class="o">/</span><span class="mi">2</span><span class="p">.</span><span class="mi">3</span><span class="p">.</span><span class="mi">9</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="o">|</span><span class="w"> </span><span class="n">tls</span><span class="o">-</span><span class="n">alpn</span><span class="p">:</span><span class="w"> 
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="o">|</span><span class="n">_</span><span class="w">  </span><span class="n">http</span><span class="o">/</span><span class="mi">1</span><span class="p">.</span><span class="mi">1</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="n">Service</span><span class="w"> </span><span class="n">detection</span><span class="w"> </span><span class="n">performed</span><span class="p">.</span><span class="w"> </span><span class="n">Please</span><span class="w"> </span><span class="n">report</span><span class="w"> </span><span class="k">any</span><span class="w"> </span><span class="n">incorrect</span><span class="w"> </span><span class="n">results</span><span class="w"> </span><span class="k">at</span><span class="w"> </span><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">nmap</span><span class="p">.</span><span class="n">org</span><span class="o">/</span><span class="n">submit</span><span class="o">/</span><span class="w"> </span><span class="p">.</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="o">#</span><span class="w"> </span><span class="n">Nmap</span><span class="w"> </span><span class="n">done</span><span class="w"> </span><span class="k">at</span><span class="w"> </span><span class="n">Wed</span><span class="w"> </span><span class="n">Feb</span><span class="w">  </span><span class="mi">9</span><span class="w"> </span><span class="mi">07</span><span class="p">:</span><span class="mi">45</span><span class="p">:</span><span class="mi">54</span><span class="w"> </span><span class="mi">2022</span><span class="w"> </span><span class="c1">-- 1 IP address (1 host up) scanned in 27.74 seconds
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>Only <code>3</code> open ports</p>
+<h2 id="httphttps">Http/HttpS</h2>
+<p>From the Nmap scan result above, the <code>port 80,443</code> is open. So, like a normal human being.  I&rsquo;m navigating through it using a web browser :)</p>
+<p><figure><a class="lightgallery" href="/posts/htb/paper/webpage-1.png" title="apache default page in centOS" data-thumbnail="/posts/htb/paper/webpage-1.png" data-sub-html="<h2>apache default page in centOS</h2><p>apache default page in centOS</p>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/posts/htb/paper/webpage-1.png"
+            data-srcset="/posts/htb/paper/webpage-1.png, /posts/htb/paper/webpage-1.png 1.5x, /posts/htb/paper/webpage-1.png 2x"
+            data-sizes="auto"
+            alt="/posts/htb/paper/webpage-1.png" width="1259" height="655" />
+    </a><figcaption class="image-caption">apache default page in centOS</figcaption>
+    </figure></p>
+<p>Well, that&rsquo;s not what I expected. It shows the default page after installation in <code>CentOS</code>.</p>
+<h3 id="gobuster">Gobuster</h3>
+<p>When I found a webpage, the first thing I&rsquo;ll do is run the <a href="https://github.com/OJ/gobuster" target="_blank" rel="noopener noreffer ">gobuster</a> to find any hidden directory. Unfortunately, I can&rsquo;t find anything useful.</p>
+<h3 id="header-x-backend-server">Header: X-Backend-Server</h3>
+<p>To be honest, I&rsquo;m stuck and don&rsquo;t know what to do. Then, I remember that I didn&rsquo;t even check the <code>header</code>. I&rsquo;m going to check it using the <code>curl</code> command. OH WOW! the <a href="https://docs.gitlab.com/ee/user/application_security/dast/checks/16.4.html" target="_blank" rel="noopener noreffer ">X-Backend-Server</a> just exposes the hostname called <code>office.paper</code>. So, I&rsquo;ll add the hostname into the <code>/etc/hosts</code> file.</p>
+<p><figure><a class="lightgallery" href="/posts/htb/paper/curl-head.png" title="hostname expose" data-thumbnail="/posts/htb/paper/curl-head.png" data-sub-html="<h2>hostname expose</h2><p>hostname expose</p>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/posts/htb/paper/curl-head.png"
+            data-srcset="/posts/htb/paper/curl-head.png, /posts/htb/paper/curl-head.png 1.5x, /posts/htb/paper/curl-head.png 2x"
+            data-sizes="auto"
+            alt="/posts/htb/paper/curl-head.png" width="1098" height="527" />
+    </a><figcaption class="image-caption">hostname expose</figcaption>
+    </figure></p>
+<p><figure><a class="lightgallery" href="/posts/htb/paper/etc-hosts-office-paper.png" title="add hostname in /etc/hosts" data-thumbnail="/posts/htb/paper/etc-hosts-office-paper.png" data-sub-html="<h2>add hostname in /etc/hosts</h2><p>add hostname in /etc/hosts</p>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/posts/htb/paper/etc-hosts-office-paper.png"
+            data-srcset="/posts/htb/paper/etc-hosts-office-paper.png, /posts/htb/paper/etc-hosts-office-paper.png 1.5x, /posts/htb/paper/etc-hosts-office-paper.png 2x"
+            data-sizes="auto"
+            alt="/posts/htb/paper/etc-hosts-office-paper.png" width="602" height="415" />
+    </a><figcaption class="image-caption">add hostname in /etc/hosts</figcaption>
+    </figure></p>
+<h3 id="http-officepaper">Http: office.paper</h3>
+<p>Then, I navigate to <code>http://office.paper</code>. Turns out, it&rsquo;s a blog. Down to the footer, it says <code>Proudly Powered by WordPress</code> and this indicates it&rsquo;s using <a href="https://wordpress.org/" target="_blank" rel="noopener noreffer ">WordPress</a> as <a href="https://en.wikipedia.org/wiki/Content_management_system" target="_blank" rel="noopener noreffer ">CMS</a>.</p>
+<p><figure><a class="lightgallery" href="/posts/htb/paper/office-paper-home.png" title="office.paper webpage" data-thumbnail="/posts/htb/paper/office-paper-home.png" data-sub-html="<h2>office.paper webpage</h2><p>office.paper webpage</p>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/posts/htb/paper/office-paper-home.png"
+            data-srcset="/posts/htb/paper/office-paper-home.png, /posts/htb/paper/office-paper-home.png 1.5x, /posts/htb/paper/office-paper-home.png 2x"
+            data-sizes="auto"
+            alt="/posts/htb/paper/office-paper-home.png" width="1275" height="564" />
+    </a><figcaption class="image-caption">office.paper webpage</figcaption>
+    </figure></p>
+<p>The first thing I&rsquo;ll do is start messing around with it. However, one comment sticks out. It says something about <code>drafts</code> is not secure and should be deleted ASAP.</p>
+<p><figure><a class="lightgallery" href="/posts/htb/paper/office-paper-drafts.png" title="sensitive comment" data-thumbnail="/posts/htb/paper/office-paper-drafts.png" data-sub-html="<h2>sensitive comment</h2><p>sensitive comment</p>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/posts/htb/paper/office-paper-drafts.png"
+            data-srcset="/posts/htb/paper/office-paper-drafts.png, /posts/htb/paper/office-paper-drafts.png 1.5x, /posts/htb/paper/office-paper-drafts.png 2x"
+            data-sizes="auto"
+            alt="/posts/htb/paper/office-paper-drafts.png" width="761" height="381" />
+    </a><figcaption class="image-caption">sensitive comment</figcaption>
+    </figure></p>
+<h2 id="cve-2019-17671">CVE-2019-17671</h2>
+<p>As the comment above shown. The <code>drafts</code> section is not secure. So, with this information. I&rsquo;m searching on the net about it and found this <a href="https://wpscan.com/vulnerability/3413b879-785f-4c9f-aa8a-5a4a1d5e0ba2" target="_blank" rel="noopener noreffer ">article</a> with <code>PoC</code> and it got assigned as <a href="https://nvd.nist.gov/vuln/detail/CVE-2019-17671" target="_blank" rel="noopener noreffer ">CVE-2019-17671</a>.</p>
+<div class="details admonition tip open">
+        <div class="details-summary admonition-title">
+            <i class="icon fas fa-lightbulb fa-fw" aria-hidden="true"></i>CVE description<i class="details-icon fas fa-angle-right fa-fw" aria-hidden="true"></i>
+        </div>
+        <div class="details-content">
+            <div class="admonition-content">In WordPress before <code>5.2.4</code>, unauthenticated viewing of certain content is possible because the static query property is mishandled.</div>
+        </div>
+    </div>
+<p>So, I&rsquo;ll try to read the <code>secret draft</code> with this URL <code>http://office.paper/?static=1</code> and it&rsquo;s successfully retrieved. After I read it, I found the <code>secret registration URL</code> that leads into the <code>chat</code> subdomain. Like always, I&rsquo;ll add it into the <code>/etc/hosts</code> file.</p>
+<p><figure><a class="lightgallery" href="/posts/htb/paper/office-paper-drafts-secret.png" title="hostname chat.office.paper expose" data-thumbnail="/posts/htb/paper/office-paper-drafts-secret.png" data-sub-html="<h2>hostname chat.office.paper expose</h2><p>hostname chat.office.paper expose</p>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/posts/htb/paper/office-paper-drafts-secret.png"
+            data-srcset="/posts/htb/paper/office-paper-drafts-secret.png, /posts/htb/paper/office-paper-drafts-secret.png 1.5x, /posts/htb/paper/office-paper-drafts-secret.png 2x"
+            data-sizes="auto"
+            alt="/posts/htb/paper/office-paper-drafts-secret.png" width="793" height="449" />
+    </a><figcaption class="image-caption">hostname chat.office.paper expose</figcaption>
+    </figure></p>
+<p><figure><a class="lightgallery" href="/posts/htb/paper/etc-hosts-chat-office-paper.png" title="add hostname chat.office.paper in /etc/hosts" data-thumbnail="/posts/htb/paper/etc-hosts-chat-office-paper.png" data-sub-html="<h2>add hostname chat.office.paper in /etc/hosts</h2><p>add hostname chat.office.paper in /etc/hosts</p>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/posts/htb/paper/etc-hosts-chat-office-paper.png"
+            data-srcset="/posts/htb/paper/etc-hosts-chat-office-paper.png, /posts/htb/paper/etc-hosts-chat-office-paper.png 1.5x, /posts/htb/paper/etc-hosts-chat-office-paper.png 2x"
+            data-sizes="auto"
+            alt="/posts/htb/paper/etc-hosts-chat-office-paper.png" width="604" height="414" />
+    </a><figcaption class="image-caption">add hostname chat.office.paper in /etc/hosts</figcaption>
+    </figure></p>
+<h3 id="http-chatofficepaper">Http: chat.office.paper</h3>
+<p>I&rsquo;m copying and pasting the URL in my web browser and being greeted by <a href="https://rocket.chat/" target="_blank" rel="noopener noreffer ">rocket.chat</a> registration page. Well, I&rsquo;m registering a new account and taking a look inside it. Turns out, it&rsquo;s just a chat app and I can&rsquo;t find anything useful. However, it&rsquo;s has a <code>bot</code> called <code>recyclops</code> that can be interacted with.</p>
+<p><figure><a class="lightgallery" href="/posts/htb/paper/recyclops-general.png" title="recyclops bot" data-thumbnail="/posts/htb/paper/recyclops-general.png" data-sub-html="<h2>recyclops bot</h2><p>recyclops bot</p>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/posts/htb/paper/recyclops-general.png"
+            data-srcset="/posts/htb/paper/recyclops-general.png, /posts/htb/paper/recyclops-general.png 1.5x, /posts/htb/paper/recyclops-general.png 2x"
+            data-sizes="auto"
+            alt="/posts/htb/paper/recyclops-general.png" width="1278" height="638" />
+    </a><figcaption class="image-caption">recyclops bot</figcaption>
+    </figure></p>
+<h2 id="recyclops">Recyclops</h2>
+<p>To interact with the bot, first, click the <code>bot's profile</code> and click the <code>direct message</code> button. So, I&rsquo;ll try the <code>help</code> command first. There is some interesting stuff this bot can do. However, I&rsquo;m interested in the <code>Files</code> and <code>List</code> commands.</p>
+<p><figure><a class="lightgallery" href="/posts/htb/paper/recyclops-help.png" title="view help command" data-thumbnail="/posts/htb/paper/recyclops-help.png" data-sub-html="<h2>view help command</h2><p>view help command</p>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/posts/htb/paper/recyclops-help.png"
+            data-srcset="/posts/htb/paper/recyclops-help.png, /posts/htb/paper/recyclops-help.png 1.5x, /posts/htb/paper/recyclops-help.png 2x"
+            data-sizes="auto"
+            alt="/posts/htb/paper/recyclops-help.png" width="992" height="763" />
+    </a><figcaption class="image-caption">view help command</figcaption>
+    </figure></p>
+<h3 id="recyclops-path-traversal">Recyclops: path traversal</h3>
+<p>To invoke the <code>list</code> command, type <code>recyclops list</code>. It&rsquo;s just giving me a listing of the <code>/sales/</code> directory. However, this makes me wonder, can I make it list another directory as <a href="https://owasp.org/www-community/attacks/Path_Traversal" target="_blank" rel="noopener noreffer ">path traversal</a> the answer is YES!. Here&rsquo;s the command that I put in, <code>recyclops list ..</code></p>
+<p><figure><a class="lightgallery" href="/posts/htb/paper/recyclops-list-dot2.png" title="listing directory" data-thumbnail="/posts/htb/paper/recyclops-list-dot2.png" data-sub-html="<h2>listing directory</h2><p>listing directory</p>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/posts/htb/paper/recyclops-list-dot2.png"
+            data-srcset="/posts/htb/paper/recyclops-list-dot2.png, /posts/htb/paper/recyclops-list-dot2.png 1.5x, /posts/htb/paper/recyclops-list-dot2.png 2x"
+            data-sizes="auto"
+            alt="/posts/htb/paper/recyclops-list-dot2.png" width="741" height="630" />
+    </a><figcaption class="image-caption">listing directory</figcaption>
+    </figure></p>
+<h2 id="hubot">Hubot</h2>
+<p>There is a <code>.ssh</code> directory present and the Nmap scan shows, that this machine has <code>port 22</code> open. Unfortunately, there&rsquo;s nothing in that directory. On top of that, I found the directory called <code>hubot</code>. It&rsquo;s a robot for a chat room. So, I assumed <code>recyclops</code> are based on <a href="https://hubot.github.com/" target="_blank" rel="noopener noreffer ">hubot</a>.</p>
+<h3 id="hubot-env">Hubot: /.env</h3>
+<p>After listing the <code>hubot</code> directory. The file called <code>.env</code> really stands out above the rest. Here&rsquo;s the command that I put in <code>recyclops file ../hubot/.env</code> to read the file. Finally, I found something useful this time. It is a password belonging to the <code>recyclops</code> user.</p>
+<p><em>Note: these creds also share with the <code>dwight</code> user and can be also <code>SSH</code> into the box</em></p>
+<p><figure><a class="lightgallery" href="/posts/htb/paper/hubot-env-pass.png" title="found recyclops credentials" data-thumbnail="/posts/htb/paper/hubot-env-pass.png" data-sub-html="<h2>found recyclops credentials</h2><p>found recyclops credentials</p>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/posts/htb/paper/hubot-env-pass.png"
+            data-srcset="/posts/htb/paper/hubot-env-pass.png, /posts/htb/paper/hubot-env-pass.png 1.5x, /posts/htb/paper/hubot-env-pass.png 2x"
+            data-sizes="auto"
+            alt="/posts/htb/paper/hubot-env-pass.png" width="677" height="463" />
+    </a><figcaption class="image-caption">found recyclops credentials</figcaption>
+    </figure></p>
+<h3 id="hubot-run-commandfont">Hubot: RUN command</font></h3>
+<p>Futher enumeration, I found the <a href="https://en.wikipedia.org/wiki/JavaScript" target="_blank" rel="noopener noreffer ">javascript</a> file called <code>run.js</code> in the <code>hubot/scripts</code> directory. When I inspect the file, it executes the command with the <code>RUN</code> function. Well, let me try put the simple bash reverse shell. YES! successfully get the foothold as a <code>dwight</code> user.</p>
+<p><figure><a class="lightgallery" href="/posts/htb/paper/recyclops-run.png" title="execute reverse shell" data-thumbnail="/posts/htb/paper/recyclops-run.png" data-sub-html="<h2>execute reverse shell</h2><p>execute reverse shell</p>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/posts/htb/paper/recyclops-run.png"
+            data-srcset="/posts/htb/paper/recyclops-run.png, /posts/htb/paper/recyclops-run.png 1.5x, /posts/htb/paper/recyclops-run.png 2x"
+            data-sizes="auto"
+            alt="/posts/htb/paper/recyclops-run.png" width="784" height="585" />
+    </a><figcaption class="image-caption">execute reverse shell</figcaption>
+    </figure></p>
+<p><figure><a class="lightgallery" href="/posts/htb/paper/foothold-as-dwight.png" title="shell as dwight" data-thumbnail="/posts/htb/paper/foothold-as-dwight.png" data-sub-html="<h2>shell as dwight</h2><p>shell as dwight</p>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/posts/htb/paper/foothold-as-dwight.png"
+            data-srcset="/posts/htb/paper/foothold-as-dwight.png, /posts/htb/paper/foothold-as-dwight.png 1.5x, /posts/htb/paper/foothold-as-dwight.png 2x"
+            data-sizes="auto"
+            alt="/posts/htb/paper/foothold-as-dwight.png" width="825" height="426" />
+    </a><figcaption class="image-caption">shell as dwight</figcaption>
+    </figure></p>
+<h2 id="peass-ng-linpeassh">PEASS-ng: linpeas.sh</h2>
+<p>I&rsquo;m already in as <code>dwight</code>. First, I&rsquo;ll check the sudo permission with <code>sudo -l</code> using the credentials found earliear. Unfortunatelly, <code>dwight</code> can&rsquo;t run <code>sudo</code> in this machine. So, to make it quick, I&rsquo;m going to run <a href="https://github.com/carlospolop/PEASS-ng" target="_blank" rel="noopener noreffer ">linpeas</a>.</p>
+<p><figure><a class="lightgallery" href="/posts/htb/paper/run-the-linpeas-as-dwight.png" title="execute linpeas" data-thumbnail="/posts/htb/paper/run-the-linpeas-as-dwight.png" data-sub-html="<h2>execute linpeas</h2><p>execute linpeas</p>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/posts/htb/paper/run-the-linpeas-as-dwight.png"
+            data-srcset="/posts/htb/paper/run-the-linpeas-as-dwight.png, /posts/htb/paper/run-the-linpeas-as-dwight.png 1.5x, /posts/htb/paper/run-the-linpeas-as-dwight.png 2x"
+            data-sizes="auto"
+            alt="/posts/htb/paper/run-the-linpeas-as-dwight.png" width="895" height="654" />
+    </a><figcaption class="image-caption">execute linpeas</figcaption>
+    </figure></p>
+<h2 id="cve-2021-3560">CVE-2021-3560</h2>
+<p>The linpeas script is already done running. OH WOW! it says this machine is vulnerable to <a href="https://nvd.nist.gov/vuln/detail/CVE-2021-3560" target="_blank" rel="noopener noreffer ">CVE-2021-3560</a>. The funny thing is when I searched on the internet about this <a href="https://en.wikipedia.org/wiki/Common_Vulnerabilities_and_Exposures" target="_blank" rel="noopener noreffer ">CVE</a>. I found <a href="https://github.com/secnigma" target="_blank" rel="noopener noreffer ">secnigma github repos</a> and this machine was created by <a href="https://twitter.com/secnigma" target="_blank" rel="noopener noreffer ">secnigma</a>.</p>
+<div class="details admonition tip open">
+        <div class="details-summary admonition-title">
+            <i class="icon fas fa-lightbulb fa-fw" aria-hidden="true"></i>CVE description<i class="details-icon fas fa-angle-right fa-fw" aria-hidden="true"></i>
+        </div>
+        <div class="details-content">
+            <div class="admonition-content">It was found that polkit could be tricked into bypassing the credential checks for D-Bus requests, elevating the privileges of the requestor to the root user.</div>
+        </div>
+    </div>
+<p><figure><a class="lightgallery" href="/posts/htb/paper/linpeas-find-CVE-2021-3560.png" title="linpeas output" data-thumbnail="/posts/htb/paper/linpeas-find-CVE-2021-3560.png" data-sub-html="<h2>linpeas output</h2><p>linpeas output</p>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/posts/htb/paper/linpeas-find-CVE-2021-3560.png"
+            data-srcset="/posts/htb/paper/linpeas-find-CVE-2021-3560.png, /posts/htb/paper/linpeas-find-CVE-2021-3560.png 1.5x, /posts/htb/paper/linpeas-find-CVE-2021-3560.png 2x"
+            data-sizes="auto"
+            alt="/posts/htb/paper/linpeas-find-CVE-2021-3560.png" width="1250" height="358" />
+    </a><figcaption class="image-caption">linpeas output</figcaption>
+    </figure></p>
+<p>The <a href="https://github.com/secnigma/CVE-2021-3560-Polkit-Privilege-Esclation" target="_blank" rel="noopener noreffer ">github repos</a> itself is about bash <code>PoC</code> script. Also, the original research is done by <a href="https://twitter.com/kevin_backhouse" target="_blank" rel="noopener noreffer ">Kevin Backhouse</a>, and here&rsquo;s <a href="https://github.blog/2021-06-10-privilege-escalation-polkit-root-on-linux-with-bug/" target="_blank" rel="noopener noreffer ">his blog post</a> talking about it. Well, it&rsquo;s time to run the <code>PoC</code> script. <br>
+<em>Disclaimer: <strong>MULTIPLE TRIES ARE USUALLY REQUIRED</strong> for this exploit to work.</em></p>
+<p><figure><a class="lightgallery" href="/posts/htb/paper/download-the-poc-script-on-victim-machine.png" title="transfer exploit" data-thumbnail="/posts/htb/paper/download-the-poc-script-on-victim-machine.png" data-sub-html="<h2>transfer exploit</h2><p>transfer exploit</p>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/posts/htb/paper/download-the-poc-script-on-victim-machine.png"
+            data-srcset="/posts/htb/paper/download-the-poc-script-on-victim-machine.png, /posts/htb/paper/download-the-poc-script-on-victim-machine.png 1.5x, /posts/htb/paper/download-the-poc-script-on-victim-machine.png 2x"
+            data-sizes="auto"
+            alt="/posts/htb/paper/download-the-poc-script-on-victim-machine.png" width="841" height="626" />
+    </a><figcaption class="image-caption">transfer exploit</figcaption>
+    </figure></p>
+<p><figure><a class="lightgallery" href="/posts/htb/paper/run-the-script-and-get-the-root-shell.png" title="become root" data-thumbnail="/posts/htb/paper/run-the-script-and-get-the-root-shell.png" data-sub-html="<h2>become root</h2><p>become root</p>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/posts/htb/paper/run-the-script-and-get-the-root-shell.png"
+            data-srcset="/posts/htb/paper/run-the-script-and-get-the-root-shell.png, /posts/htb/paper/run-the-script-and-get-the-root-shell.png 1.5x, /posts/htb/paper/run-the-script-and-get-the-root-shell.png 2x"
+            data-sizes="auto"
+            alt="/posts/htb/paper/run-the-script-and-get-the-root-shell.png" width="955" height="643" />
+    </a><figcaption class="image-caption">become root</figcaption>
+    </figure></p>
+<p>I&rsquo;M ROOT BABYYY!</p>
+</div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>Updated on 19-06-2022</span>
+            </div></div>
+        <div class="post-info-line">
+            <div class="post-info-md"></div>
+            <div class="post-info-share">
+                <span><a href="javascript:void(0);" title="Share on Twitter" data-sharer="twitter" data-url="https://shafiqaiman.com/posts/htb/paper/" data-title="HackTheBox - Paper Writeup" data-via="_shafiqaiman_" data-hashtags="CVE-2019-17671,CVE-2021-3560,polkit,linpeas,gobuster,wordpress,hubot"><i class="fab fa-twitter fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Linkedin" data-sharer="linkedin" data-url="https://shafiqaiman.com/posts/htb/paper/"><i class="fab fa-linkedin fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Hacker News" data-sharer="hackernews" data-url="https://shafiqaiman.com/posts/htb/paper/" data-title="HackTheBox - Paper Writeup"><i class="fab fa-hacker-news fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Reddit" data-sharer="reddit" data-url="https://shafiqaiman.com/posts/htb/paper/"><i class="fab fa-reddit fa-fw" aria-hidden="true"></i></a></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"><i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/cve-2019-17671/">CVE-2019-17671</a>,&nbsp;<a href="/tags/cve-2021-3560/">CVE-2021-3560</a>,&nbsp;<a href="/tags/polkit/">polkit</a>,&nbsp;<a href="/tags/linpeas/">linpeas</a>,&nbsp;<a href="/tags/gobuster/">gobuster</a>,&nbsp;<a href="/tags/wordpress/">wordpress</a>,&nbsp;<a href="/tags/hubot/">hubot</a></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">Back</a></span>&nbsp;|&nbsp;<span><a href="/">Home</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/posts/htb/optimum/" class="prev" rel="prev" title="HackTheBox - Optimum Writeup"><i class="fas fa-angle-left fa-fw" aria-hidden="true"></i>HackTheBox - Optimum Writeup</a>
+            <a href="/posts/htb/late/" class="next" rel="next" title="HackTheBox - Late Writeup">HackTheBox - Late Writeup<i class="fas fa-angle-right fa-fw" aria-hidden="true"></i></a></div>
+</div>
+</article></div>
+            </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line" itemscope itemtype="http://schema.org/CreativeWork"><i class="far fa-copyright fa-fw" aria-hidden="true"></i><span itemprop="copyrightYear">2021 - 2023</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="https://shafiqaiman.com" target="_blank">SHAFIQAIMAN</a></span></div>
+        </div>
+    </footer></div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="Back to Top">
+                <i class="fas fa-arrow-up fa-fw" aria-hidden="true"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="View Comments">
+                <i class="fas fa-comment fa-fw" aria-hidden="true"></i>
+            </a>
+        </div><link rel="stylesheet" href="/lib/lightgallery/css/lightgallery-bundle.min.css"><script type="text/javascript" src="/lib/autocomplete/autocomplete.min.js"></script><script type="text/javascript" src="/lib/lunr/lunr.min.js"></script><script type="text/javascript" src="/lib/lazysizes/lazysizes.min.js"></script><script type="text/javascript" src="/lib/lightgallery/lightgallery.min.js"></script><script type="text/javascript" src="/lib/lightgallery/plugins/thumbnail/lg-thumbnail.min.js"></script><script type="text/javascript" src="/lib/lightgallery/plugins/zoom/lg-zoom.min.js"></script><script type="text/javascript" src="/lib/clipboard/clipboard.min.js"></script><script type="text/javascript" src="/lib/sharer/sharer.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"Copy to clipboard","maxShownLines":50},"comment":{},"lightgallery":true,"search":{"highlightTag":"em","lunrIndexURL":"/index.json","maxResultLength":10,"noResultsFound":"No results found","snippetLength":30,"type":"lunr"}};</script><script type="text/javascript" src="/js/theme.min.js"></script></body>
+</html>

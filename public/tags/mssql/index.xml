@@ -1,0 +1,16 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>mssql - Tag - SHAFIQAIMAN</title>
+        <link>https://shafiqaiman.com/tags/mssql/</link>
+        <description>mssql - Tag - SHAFIQAIMAN</description>
+        <generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Tue, 20 Jul 2021 00:00:00 &#43;0000</lastBuildDate><atom:link href="https://shafiqaiman.com/tags/mssql/" rel="self" type="application/rss+xml" /><item>
+    <title>HacktheBox - Archetype Writeup</title>
+    <link>https://shafiqaiman.com/posts/htb/archetype/</link>
+    <pubDate>Tue, 20 Jul 2021 00:00:00 &#43;0000</pubDate>
+    <author>SH∆FIQ ∆IM∆N</author>
+    <guid>https://shafiqaiman.com/posts/htb/archetype/</guid>
+    <description><![CDATA[Enumeration 1000 ports scan 1 nmap -sC -sV -oN nmap/initial 10.10.10.27 initial nmap scan all ports scan full nmap scan Open ports 135 (msrpc) 139 (smb 4 sure) 445 (smb 4 sure) 1433 (ms-sql-s/Microsoft SQL Server) SMB Enum CrackMapEXEC crackmapexec smbclient smbclient wow backups shares. Let&rsquo;s try connect to it.
+backup shares download the file using the get command prod.dtsConfig content of the file 1 2 3 4 5 6 7 8 &lt;DTSConfiguration&gt; &lt;DTSConfigurationHeading&gt; &lt;DTSConfigurationFileInfo GeneratedBy=&#34;.]]></description>
+</item>
+</channel>
+</rss>

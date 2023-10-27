@@ -1,0 +1,16 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>churrasco - Tag - SHAFIQAIMAN</title>
+        <link>https://shafiqaiman.com/tags/churrasco/</link>
+        <description>churrasco - Tag - SHAFIQAIMAN</description>
+        <generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Fri, 19 Aug 2022 00:00:00 &#43;0000</lastBuildDate><atom:link href="https://shafiqaiman.com/tags/churrasco/" rel="self" type="application/rss+xml" /><item>
+    <title>HackTheBox - Grandpa Writeup</title>
+    <link>https://shafiqaiman.com/posts/htb/grandpa/</link>
+    <pubDate>Fri, 19 Aug 2022 00:00:00 &#43;0000</pubDate>
+    <author>SH∆FIQ ∆IM∆N</author>
+    <guid>https://shafiqaiman.com/posts/htb/grandpa/</guid>
+    <description><![CDATA[Nmap Like always, I&rsquo;m going to scan the IP Address by using Nmap.
+1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 # Nmap 7.92 scan initiated Fri Aug 5 21:51:15 2022 as: nmap -sCV -oN nmap/grandpa 10.10.10.14 Nmap scan report for 10.10.10.14 Host is up (0.66s latency). Not shown: 999 filtered tcp ports (no-response) PORT STATE SERVICE VERSION 80/tcp open http Microsoft IIS httpd 6.]]></description>
+</item>
+</channel>
+</rss>

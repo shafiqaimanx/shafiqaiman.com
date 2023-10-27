@@ -1,0 +1,17 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>strcmp-bypass - Tag - SHAFIQAIMAN</title>
+        <link>https://shafiqaiman.com/tags/strcmp-bypass/</link>
+        <description>strcmp-bypass - Tag - SHAFIQAIMAN</description>
+        <generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Fri, 13 Aug 2021 00:00:00 &#43;0000</lastBuildDate><atom:link href="https://shafiqaiman.com/tags/strcmp-bypass/" rel="self" type="application/rss+xml" /><item>
+    <title>HackTheBox - Base Writeup</title>
+    <link>https://shafiqaiman.com/posts/htb/base/</link>
+    <pubDate>Fri, 13 Aug 2021 00:00:00 &#43;0000</pubDate>
+    <author>SH∆FIQ ∆IM∆N</author>
+    <guid>https://shafiqaiman.com/posts/htb/base/</guid>
+    <description><![CDATA[Enumeration Top 1000 ports scan 1 nmap -sC -sV -oN nmap/initial 10.10.10.48 the result nmap scan result All ports scan 1 nmap -sC -sV -p- -oN nmap/all__ports 10.10.10.48 the result nmap scan allports Open Ports both Nmap scan result shows the only port open are SSH and HTTP Gobuster 1 gobuster dir -u http://10.10.10.48 -w /opt/SecLists/Discovery/Web-Content/raft-small-words.txt -x php.html -o Rgobuster We&rsquo;ve found couples of hidden directory
+the result
+http://10.10.10.48/login/ http://10.10.10.48/static/ http://10.]]></description>
+</item>
+</channel>
+</rss>

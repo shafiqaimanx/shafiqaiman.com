@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <title>HackTheBox - Valentine Writeup - SHAFIQAIMAN</title><meta name="Description" content="shafiqaiman.com is a cybersecurity/ethical hacking website that focus on publishing of writeup in HacktheBox, Tryhackme and other online CTF (capture the flag) challenge."><meta property="og:title" content="HackTheBox - Valentine Writeup" />
+<meta property="og:description" content="Nmap Like always, I’m going to scan the IP Address by using nmap but I’m going to scan the full port first. Then, I’m going to scan the only open ports.
+1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 nmap -p22,80,443 -sCV -oN nmap/valentine 10.10.10.79 22/tcp open ssh OpenSSH 5.9p1 Debian 5ubuntu1.10 (Ubuntu Linux; protocol 2.0) | ssh-hostkey: | 1024 964c51423cba2249204d3eec90ccfd0e (DSA) | 2048 46bf1fcc924f1da042b3d216a8583133 (RSA) |_ 256 e62b2519cb7e54cb0ab9ac1698c67da9 (ECDSA) 80/tcp open http Apache httpd 2." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://shafiqaiman.com/posts/htb/valentine/" /><meta property="og:image" content="https://shafiqaiman.com/posts/htb/valentine/featured.png"/><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2022-11-20T00:00:00+00:00" />
+<meta property="article:modified_time" content="2022-11-20T00:00:00+00:00" /><meta property="og:site_name" content="SHAFIQAIMAN" />
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="https://shafiqaiman.com/posts/htb/valentine/featured.png"/>
+<meta name="twitter:title" content="HackTheBox - Valentine Writeup"/>
+<meta name="twitter:description" content="Nmap Like always, I’m going to scan the IP Address by using nmap but I’m going to scan the full port first. Then, I’m going to scan the only open ports.
+1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 nmap -p22,80,443 -sCV -oN nmap/valentine 10.10.10.79 22/tcp open ssh OpenSSH 5.9p1 Debian 5ubuntu1.10 (Ubuntu Linux; protocol 2.0) | ssh-hostkey: | 1024 964c51423cba2249204d3eec90ccfd0e (DSA) | 2048 46bf1fcc924f1da042b3d216a8583133 (RSA) |_ 256 e62b2519cb7e54cb0ab9ac1698c67da9 (ECDSA) 80/tcp open http Apache httpd 2."/>
+<meta name="application-name" content="SHAFIQAIMAN">
+<meta name="apple-mobile-web-app-title" content="SHAFIQAIMAN"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://shafiqaiman.com/posts/htb/valentine/" /><link rel="prev" href="https://shafiqaiman.com/posts/htb/shocker/" /><link rel="next" href="https://shafiqaiman.com/posts/htb/sunday/" /><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="/lib/fontawesome-free/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"></noscript><link rel="preload" href="/lib/animate/animate.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="/lib/animate/animate.min.css"></noscript><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "HackTheBox - Valentine Writeup",
+        "inLanguage": "en",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https:\/\/shafiqaiman.com\/posts\/htb\/valentine\/"
+        },"genre": "posts","keywords": "gobuster, heartbleed, CVE-2014-0160, tmux-session, ssh-no-mutual-signature-supported, ssh","wordcount":  1127 ,
+        "url": "https:\/\/shafiqaiman.com\/posts\/htb\/valentine\/","datePublished": "2022-11-20T00:00:00+00:00","dateModified": "2022-11-20T00:00:00+00:00","publisher": {
+            "@type": "Organization",
+            "name": ""},"author": {
+                "@type": "Person",
+                "name": "SHAFIQAIMAN"
+            },"description": ""
+    }
+    </script></head>
+    <body data-header-desktop="fixed" data-header-mobile="auto"><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('dark' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'dark' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="SHAFIQAIMAN">SH∆FIQ∆IM∆N</a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/posts/" title="Posts"><i class="fa-solid fa-book"></i>  </a><a class="menu-item" href="/tags/" title="Tags"><i class="fa-solid fa-tags"></i>  </a><a class="menu-item" href="/categories/" title="Categories"><i class="fa-solid fa-folder"></i>  </a><span class="menu-item delimiter"></span><span class="menu-item search" id="search-desktop">
+                        <input type="text" placeholder="Search titles or contents..." id="search-input-desktop">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-desktop" title="Search">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-desktop" title="Clear">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-desktop">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </span><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                    <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+                </a></div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="SHAFIQAIMAN">SH∆FIQ∆IM∆N</a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><div class="search-wrapper">
+                    <div class="search mobile" id="search-mobile">
+                        <input type="text" placeholder="Search titles or contents..." id="search-input-mobile">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-mobile" title="Search">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-mobile" title="Clear">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-mobile">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </div>
+                    <a href="javascript:void(0);" class="search-cancel" id="search-cancel-mobile">
+                        Cancel
+                    </a>
+                </div><a class="menu-item" href="/posts/" title="Posts"><i class="fa-solid fa-book"></i></a><a class="menu-item" href="/tags/" title="Tags"><i class="fa-solid fa-tags"></i></a><a class="menu-item" href="/categories/" title="Categories"><i class="fa-solid fa-folder"></i></a><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+            </a></div>
+    </div>
+</header><div class="search-dropdown desktop">
+        <div id="search-dropdown-desktop"></div>
+    </div>
+    <div class="search-dropdown mobile">
+        <div id="search-dropdown-mobile"></div>
+    </div><main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">Contents</h2>
+            <div class="toc-content" id="toc-content-auto"></div>
+        </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">HackTheBox - Valentine Writeup</h1><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="https://shafiqaiman.com" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>SHAFIQAIMAN</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="20-11-2022">20-11-2022</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;1127 words&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;6 minutes&nbsp;</div>
+        </div><div class="details toc" id="toc-static"  data-kept="">
+                <div class="details-summary toc-title">
+                    <span>Contents</span>
+                    <span><i class="details-icon fas fa-angle-right" aria-hidden="true"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#nmap">Nmap</a></li>
+    <li><a href="#https-valentinehtb">Https: Valentine.htb</a>
+      <ul>
+        <li><a href="#gobuster">Gobuster</a></li>
+        <li><a href="#https-dev">Https: /dev</a></li>
+      </ul>
+    </li>
+    <li><a href="#foothold-cve-2014-0160">Foothold: CVE-2014-0160</a></li>
+    <li><a href="#privesc-tmux-session">PrivEsc: Tmux Session</a></li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><h2 id="nmap">Nmap</h2>
+<p>Like always, I’m going to scan the IP Address by using <a href="https://nmap.org/" target="_blank" rel="noopener noreffer ">nmap</a> but I’m going to scan the full port first. Then, I’m going to scan the only open ports.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="line"><span class="cl"><span class="n">nmap</span><span class="w"> </span><span class="o">-</span><span class="n">p22</span><span class="p">,</span><span class="mi">80</span><span class="p">,</span><span class="mi">443</span><span class="w"> </span><span class="o">-</span><span class="n">sCV</span><span class="w"> </span><span class="o">-</span><span class="k">oN</span><span class="w"> </span><span class="n">nmap</span><span class="o">/</span><span class="n">valentine</span><span class="w"> </span><span class="mi">10</span><span class="p">.</span><span class="mi">10</span><span class="p">.</span><span class="mi">10</span><span class="p">.</span><span class="mi">79</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="mi">22</span><span class="o">/</span><span class="n">tcp</span><span class="w">  </span><span class="k">open</span><span class="w">  </span><span class="n">ssh</span><span class="w">      </span><span class="n">OpenSSH</span><span class="w"> </span><span class="mi">5</span><span class="p">.</span><span class="mi">9</span><span class="n">p1</span><span class="w"> </span><span class="n">Debian</span><span class="w"> </span><span class="mi">5</span><span class="n">ubuntu1</span><span class="p">.</span><span class="mi">10</span><span class="w"> </span><span class="p">(</span><span class="n">Ubuntu</span><span class="w"> </span><span class="n">Linux</span><span class="p">;</span><span class="w"> </span><span class="n">protocol</span><span class="w"> </span><span class="mi">2</span><span class="p">.</span><span class="mi">0</span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="o">|</span><span class="w"> </span><span class="n">ssh</span><span class="o">-</span><span class="n">hostkey</span><span class="p">:</span><span class="w"> 
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="o">|</span><span class="w">   </span><span class="mi">1024</span><span class="w"> </span><span class="mi">964</span><span class="n">c51423cba2249204d3eec90ccfd0e</span><span class="w"> </span><span class="p">(</span><span class="n">DSA</span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="o">|</span><span class="w">   </span><span class="mi">2048</span><span class="w"> </span><span class="mi">46</span><span class="n">bf1fcc924f1da042b3d216a8583133</span><span class="w"> </span><span class="p">(</span><span class="n">RSA</span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="o">|</span><span class="n">_</span><span class="w">  </span><span class="mi">256</span><span class="w"> </span><span class="n">e62b2519cb7e54cb0ab9ac1698c67da9</span><span class="w"> </span><span class="p">(</span><span class="n">ECDSA</span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="mi">80</span><span class="o">/</span><span class="n">tcp</span><span class="w">  </span><span class="k">open</span><span class="w">  </span><span class="n">http</span><span class="w">     </span><span class="n">Apache</span><span class="w"> </span><span class="n">httpd</span><span class="w"> </span><span class="mi">2</span><span class="p">.</span><span class="mi">2</span><span class="p">.</span><span class="mi">22</span><span class="w"> </span><span class="p">((</span><span class="n">Ubuntu</span><span class="p">))</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="o">|</span><span class="n">_http</span><span class="o">-</span><span class="n">server</span><span class="o">-</span><span class="n">header</span><span class="p">:</span><span class="w"> </span><span class="n">Apache</span><span class="o">/</span><span class="mi">2</span><span class="p">.</span><span class="mi">2</span><span class="p">.</span><span class="mi">22</span><span class="w"> </span><span class="p">(</span><span class="n">Ubuntu</span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="o">|</span><span class="n">_http</span><span class="o">-</span><span class="n">title</span><span class="p">:</span><span class="w"> </span><span class="n">Site</span><span class="w"> </span><span class="n">doesn</span><span class="s1">&#39;t have a title (text/html).
+</span></span></span><span class="line"><span class="cl"><span class="s1">
+</span></span></span><span class="line"><span class="cl"><span class="s1">443/tcp open  ssl/http Apache httpd 2.2.22 ((Ubuntu))
+</span></span></span><span class="line"><span class="cl"><span class="s1">| ssl-cert: Subject: commonName=valentine.htb/organizationName=valentine.htb/stateOrProvinceName=FL/countryName=US
+</span></span></span><span class="line"><span class="cl"><span class="s1">| Not valid before: 2018-02-06T00:45:25
+</span></span></span><span class="line"><span class="cl"><span class="s1">|_Not valid after:  2019-02-06T00:45:25
+</span></span></span><span class="line"><span class="cl"><span class="s1">|_ssl-date: 2022-11-16T22:23:45+00:00; +1s from scanner time.
+</span></span></span><span class="line"><span class="cl"><span class="s1">|_http-server-header: Apache/2.2.22 (Ubuntu)
+</span></span></span><span class="line"><span class="cl"><span class="s1">|_http-title: Site doesn&#39;</span><span class="n">t</span><span class="w"> </span><span class="n">have</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="n">title</span><span class="w"> </span><span class="p">(</span><span class="nb">text</span><span class="o">/</span><span class="n">html</span><span class="p">).</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="n">Service</span><span class="w"> </span><span class="n">Info</span><span class="p">:</span><span class="w"> </span><span class="n">OS</span><span class="p">:</span><span class="w"> </span><span class="n">Linux</span><span class="p">;</span><span class="w"> </span><span class="n">CPE</span><span class="p">:</span><span class="w"> </span><span class="n">cpe</span><span class="p">:</span><span class="o">/</span><span class="n">o</span><span class="p">:</span><span class="n">linux</span><span class="p">:</span><span class="n">linux_kernel</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>The nmap scan result is completed. There are just <code>3</code> port opens which are <code>SSH, HTTP, and HTTPS</code>. Based on the <a href="https://launchpad.net/ubuntu/&#43;source/openssh/1:5.9p1-5ubuntu1.10" target="_blank" rel="noopener noreffer ">OpenSSH</a> service banner, this is an Ubuntu (precise) machine. However, on port <code>443</code>, the nmap found the <code>hostname</code> on the <code>ssl-cert</code> scripts scan. The hostname called <code>valentine.htb</code> and with that information I&rsquo;m going to add the name to the <code>/etc/hosts</code> file.</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/posts/htb/valentine/adding-the-hostname-in-etc-hosts-file.png"
+        data-srcset="/posts/htb/valentine/adding-the-hostname-in-etc-hosts-file.png, /posts/htb/valentine/adding-the-hostname-in-etc-hosts-file.png 1.5x, /posts/htb/valentine/adding-the-hostname-in-etc-hosts-file.png 2x"
+        data-sizes="auto"
+        alt="/posts/htb/valentine/adding-the-hostname-in-etc-hosts-file.png"
+        title="adding the hostname" width="442" height="151" /></p>
+<h2 id="https-valentinehtb">Https: Valentine.htb</h2>
+<p>I navigate to port <code>443</code> on my browser and accept the <code>SSL</code> certificates. I&rsquo;ll check the certificate and nothing useful for me except the <code>hostname</code> which nmap already found it. Shockingly, the homepage it&rsquo;s just an image of a woman that looks like screaming at something. The &ldquo;Something&rdquo; is an image/logo that is related to the <code>heartbleed</code> vulnerability.</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/posts/htb/valentine/omg-home-page.png"
+        data-srcset="/posts/htb/valentine/omg-home-page.png, /posts/htb/valentine/omg-home-page.png 1.5x, /posts/htb/valentine/omg-home-page.png 2x"
+        data-sizes="auto"
+        alt="/posts/htb/valentine/omg-home-page.png"
+        title="omg homepage" width="1282" height="675" /></p>
+<p>Then, I&rsquo;m running the second nmap scan with the <code>--script</code> flag and followed with <code>ssl-heartbleed</code> scripts.</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/posts/htb/valentine/nmap-scan-heartbleed-scripts.png"
+        data-srcset="/posts/htb/valentine/nmap-scan-heartbleed-scripts.png, /posts/htb/valentine/nmap-scan-heartbleed-scripts.png 1.5x, /posts/htb/valentine/nmap-scan-heartbleed-scripts.png 2x"
+        data-sizes="auto"
+        alt="/posts/htb/valentine/nmap-scan-heartbleed-scripts.png"
+        title="heartbleed nmap scan" width="1089" height="488" /></p>
+<p>The result came back with <code>&quot;VULNERABLE&quot;</code> to this type of vulnerability. <a href="https://heartbleed.com/" target="_blank" rel="noopener noreffer ">Heartbleed</a> is a bug found in the popular OpenSSL cryptographic software library also the CVE assigned to it, called <a href="https://nvd.nist.gov/vuln/detail/cve-2014-0160" target="_blank" rel="noopener noreffer ">CVE-2014-0160</a>, and here&rsquo;s a <a href="https://xkcd.com/1354/" target="_blank" rel="noopener noreffer ">great comic</a> explaining it.</p>
+<h3 id="gobuster">Gobuster</h3>
+<p>Although, I know this web server is vulnerable, based on the nmap scan result above. The homepage itself also gave me a clue and based on the index file extension it&rsquo;s a <code>PHP</code> page. Then, I&rsquo;m going to run the <a href="https://github.com/OJ/gobuster" target="_blank" rel="noopener noreffer ">gobuster</a> to search for what&rsquo;s hidden inside this webserver with the <code>-x</code> flag for the <code>PHP</code> extension.</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/posts/htb/valentine/gobuster-scan-result.png"
+        data-srcset="/posts/htb/valentine/gobuster-scan-result.png, /posts/htb/valentine/gobuster-scan-result.png 1.5x, /posts/htb/valentine/gobuster-scan-result.png 2x"
+        data-sizes="auto"
+        alt="/posts/htb/valentine/gobuster-scan-result.png"
+        title="gobuster scan result" width="819" height="261" /></p>
+<h3 id="https-dev">Https: /dev</h3>
+<p>The <code>/dev</code> directory caught my attention because it&rsquo;s on top of course :). Interestingly enough, this directory enables file indexing and shows there are <code>2</code> files on it. The first one is called <code>hype_key</code> and the second one is called <code>notes.txt</code>.</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/posts/htb/valentine/dev-file-indexing-enable.png"
+        data-srcset="/posts/htb/valentine/dev-file-indexing-enable.png, /posts/htb/valentine/dev-file-indexing-enable.png 1.5x, /posts/htb/valentine/dev-file-indexing-enable.png 2x"
+        data-sizes="auto"
+        alt="/posts/htb/valentine/dev-file-indexing-enable.png"
+        title="file indexing in dev" width="590" height="328" /></p>
+<p>However, I&rsquo;m more hype about the <code>hype_key</code> file because it sounds interesting but when I clicked it open, it&rsquo;s a bunch of <code>hex</code> bytes. So, I&rsquo;m going ahead to the best <a href="https://gchq.github.io/CyberChef/" target="_blank" rel="noopener noreffer ">chef</a> I know in the entire world and try to ask him about it, and BOOM! Turns out, it&rsquo;s a legit key and I&rsquo;m going to copy and save it on my machine. Based on the key itself, I assumed this is an <code>SSH</code> private key, and it&rsquo;s also <code>encrypted</code>. Now, I need to find the passphrase for it.</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/posts/htb/valentine/cyberchef-decode-hex-bytes.png"
+        data-srcset="/posts/htb/valentine/cyberchef-decode-hex-bytes.png, /posts/htb/valentine/cyberchef-decode-hex-bytes.png 1.5x, /posts/htb/valentine/cyberchef-decode-hex-bytes.png 2x"
+        data-sizes="auto"
+        alt="/posts/htb/valentine/cyberchef-decode-hex-bytes.png"
+        title="cyberchef decode hex" width="1539" height="803" /></p>
+<h2 id="foothold-cve-2014-0160">Foothold: CVE-2014-0160</h2>
+<p>Based on this <a href="https://nvd.nist.gov/vuln/detail/CVE-2014-0160" target="_blank" rel="noopener noreffer ">CVE</a> which is a heartbleed vulnerability. The description says <code>&quot;which allows remote attackers to obtain sensitive information from process memory such as private key&quot;</code>. To be honest, I hope I manage to find the passphrase for the private key that I found earlier in the <code>/dev</code> directory. Like always, I&rsquo;ll search for the exploit on the <code>searchsploit</code> database and manage to find the python exploit.</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/posts/htb/valentine/searchsploit-search-heartbleed.png"
+        data-srcset="/posts/htb/valentine/searchsploit-search-heartbleed.png, /posts/htb/valentine/searchsploit-search-heartbleed.png 1.5x, /posts/htb/valentine/searchsploit-search-heartbleed.png 2x"
+        data-sizes="auto"
+        alt="/posts/htb/valentine/searchsploit-search-heartbleed.png"
+        title="searchsploit heartbleed" width="1871" height="530" /></p>
+<p>Then, I&rsquo;m running the exploit and give the victim <code>IP</code> as an argument and the output is massive. However, it&rsquo;s a bunch of zero hex bytes of nothing and I&rsquo;ll try to chop some of it by piping the output to the <code>grep</code> command. My first time running it, and I can&rsquo;t find anything useful. So, I&rsquo;ll try to keep running it, and finally, I manage to find a <code>base64</code> string under the <code>/decode.php</code> file.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">&gt; python2 32764.py 10.10.10.79 <span class="p">|</span> grep -v <span class="s2">&#34;00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00&#34;</span>
+</span></span><span class="line"><span class="cl">Trying SSL 3.0...
+</span></span><span class="line"><span class="cl">Connecting...
+</span></span><span class="line"><span class="cl">Sending Client Hello...
+</span></span><span class="line"><span class="cl">---<span class="o">[</span>snip<span class="o">]</span>---
+</span></span><span class="line"><span class="cl">Received heartbeat response:
+</span></span><span class="line"><span class="cl">---<span class="o">[</span>snip<span class="o">]</span>---
+</span></span><span class="line"><span class="cl">  00e0: <span class="m">31</span> 2F <span class="m">64</span> <span class="m">65</span> <span class="m">63</span> 6F <span class="m">64</span> <span class="m">65</span> 2E <span class="m">70</span> <span class="m">68</span> <span class="m">70</span> 0D 0A <span class="m">43</span> 6F  1/decode.php..Co
+</span></span><span class="line"><span class="cl">  00f0: 6E <span class="m">74</span> <span class="m">65</span> 6E <span class="m">74</span> 2D <span class="m">54</span> <span class="m">79</span> <span class="m">70</span> <span class="m">65</span> 3A <span class="m">20</span> <span class="m">61</span> <span class="m">70</span> <span class="m">70</span> 6C  ntent-Type: appl
+</span></span><span class="line"><span class="cl">  0100: <span class="m">69</span> <span class="m">63</span> <span class="m">61</span> <span class="m">74</span> <span class="m">69</span> 6F 6E 2F <span class="m">78</span> 2D <span class="m">77</span> <span class="m">77</span> <span class="m">77</span> 2D <span class="m">66</span> 6F  ication/x-www-fo
+</span></span><span class="line"><span class="cl">  0110: <span class="m">72</span> 6D 2D <span class="m">75</span> <span class="m">72</span> 6C <span class="m">65</span> 6E <span class="m">63</span> 6F <span class="m">64</span> <span class="m">65</span> <span class="m">64</span> 0D 0A <span class="m">43</span>  rm-urlencoded..C
+</span></span><span class="line"><span class="cl">  0120: 6F 6E <span class="m">74</span> <span class="m">65</span> 6E <span class="m">74</span> 2D 4C <span class="m">65</span> 6E <span class="m">67</span> <span class="m">74</span> <span class="m">68</span> 3A <span class="m">20</span> <span class="m">34</span>  ontent-Length: <span class="m">4</span>
+</span></span><span class="line"><span class="cl">  0130: <span class="m">32</span> 0D 0A 0D 0A <span class="m">24</span> <span class="m">74</span> <span class="m">65</span> <span class="m">78</span> <span class="m">74</span> 3D <span class="m">61</span> <span class="m">47</span> <span class="m">56</span> <span class="m">68</span> <span class="m">63</span>  2....<span class="nv">$text</span><span class="o">=</span>aGVhc
+</span></span><span class="line"><span class="cl">  0140: <span class="m">78</span> <span class="m">78</span> <span class="m">78</span> <span class="m">78</span> <span class="m">78</span> <span class="m">78</span> <span class="m">78</span> <span class="m">78</span> <span class="m">78</span> <span class="m">78</span> <span class="m">78</span> <span class="m">78</span> <span class="m">78</span> <span class="m">78</span> <span class="m">78</span> <span class="m">78</span>  xxxxxxxxxxxxxxxx
+</span></span><span class="line"><span class="cl">  0150: <span class="m">78</span> <span class="m">78</span> <span class="m">78</span> <span class="m">78</span> <span class="m">78</span> <span class="m">78</span> <span class="m">78</span> <span class="m">78</span> <span class="m">78</span> <span class="m">78</span> <span class="m">78</span> <span class="m">78</span> <span class="m">78</span> 3d 3d 7e  <span class="nv">xxxxxxxxxxxxx</span><span class="o">==</span>~
+</span></span><span class="line"><span class="cl">  0160: FA 6E <span class="m">07</span> CE <span class="m">08</span> F3 DE D1 <span class="m">69</span> D9 <span class="m">18</span> <span class="m">87</span> D5 <span class="m">31</span> <span class="m">66</span> EC  .n......i....1f.
+</span></span><span class="line"><span class="cl">  0170: 6B E8 4E 0C 0C 0C 0C 0C 0C 0C 0C 0C 0C 0C 0C 0C  k.N.............
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>Looks like, someone used the <code>/decode.php</code> on this webserver to decode this string before. I navigated to the <code>/decode.php</code> page and try to decode it and it managed to encode. The encoded string is human readable and I believe it&rsquo;s a passphrase for the private key.</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/posts/htb/valentine/decode-base64.png"
+        data-srcset="/posts/htb/valentine/decode-base64.png, /posts/htb/valentine/decode-base64.png 1.5x, /posts/htb/valentine/decode-base64.png 2x"
+        data-sizes="auto"
+        alt="/posts/htb/valentine/decode-base64.png"
+        title="decode base64" width="442" height="246" /></p>
+<p>With this information that I gather, I&rsquo;ll try to <code>SSH</code> into the machine using the private key and <code>hype</code> as the user. Based on, the name of the key file that I found earlier, first I need to change the permission of the key with this command <code>chmod 600 &lt;file.key&gt;</code>.
+However, I&rsquo;ve got an error that says <code>&quot;sign_and_send_pubkey: no mutual signature supported&quot;</code>, with quick googling I manage to find the <a href="https://transang.me/ssh-handshake-is-rejected-with-no-mutual-signature-algorithm-error/" target="_blank" rel="noopener noreffer ">answer</a> for it. Then, I&rsquo;ll try again to login in and KACHOW!</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/posts/htb/valentine/hype-user.png"
+        data-srcset="/posts/htb/valentine/hype-user.png, /posts/htb/valentine/hype-user.png 1.5x, /posts/htb/valentine/hype-user.png 2x"
+        data-sizes="auto"
+        alt="/posts/htb/valentine/hype-user.png"
+        title="hype user" width="965" height="412" /></p>
+<h2 id="privesc-tmux-session">PrivEsc: Tmux Session</h2>
+<p>I&rsquo;m in as the <code>hype</code> user and the first thing I love to do is check the sudo permission with the <code>sudo -l</code> command. Unfortunately, it does require a password which I don&rsquo;t have. Then, I&rsquo;ll try to list all files in the <code>/home/hype</code> directory and I&rsquo;m amazed that the <code>.bash_history</code> file contains something. Most of the time, this file always redirects to the <code>2&gt;/dev/null</code> which is nothing.</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/posts/htb/valentine/history.png"
+        data-srcset="/posts/htb/valentine/history.png, /posts/htb/valentine/history.png 1.5x, /posts/htb/valentine/history.png 2x"
+        data-sizes="auto"
+        alt="/posts/htb/valentine/history.png"
+        title="bash history file" width="495" height="383" /></p>
+<p>A lot of history contains something to do with <code>Tmux</code>. So, I&rsquo;ll try to do a bunch of it and I manage to get root by executing this command <code>tmux -S /.devs/dev_sess</code> and it throws me in a <code>Tmux</code> session.</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/posts/htb/valentine/root-user.png"
+        data-srcset="/posts/htb/valentine/root-user.png, /posts/htb/valentine/root-user.png 1.5x, /posts/htb/valentine/root-user.png 2x"
+        data-sizes="auto"
+        alt="/posts/htb/valentine/root-user.png"
+        title="root user" width="428" height="182" /></p>
+<p>ROOT!</p>
+</div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>Updated on 20-11-2022</span>
+            </div></div>
+        <div class="post-info-line">
+            <div class="post-info-md"></div>
+            <div class="post-info-share">
+                <span><a href="javascript:void(0);" title="Share on Twitter" data-sharer="twitter" data-url="https://shafiqaiman.com/posts/htb/valentine/" data-title="HackTheBox - Valentine Writeup" data-via="_shafiqaiman_" data-hashtags="gobuster,heartbleed,CVE-2014-0160,tmux-session,ssh-no-mutual-signature-supported,ssh"><i class="fab fa-twitter fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Linkedin" data-sharer="linkedin" data-url="https://shafiqaiman.com/posts/htb/valentine/"><i class="fab fa-linkedin fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Hacker News" data-sharer="hackernews" data-url="https://shafiqaiman.com/posts/htb/valentine/" data-title="HackTheBox - Valentine Writeup"><i class="fab fa-hacker-news fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Reddit" data-sharer="reddit" data-url="https://shafiqaiman.com/posts/htb/valentine/"><i class="fab fa-reddit fa-fw" aria-hidden="true"></i></a></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"><i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/gobuster/">gobuster</a>,&nbsp;<a href="/tags/heartbleed/">heartbleed</a>,&nbsp;<a href="/tags/cve-2014-0160/">CVE-2014-0160</a>,&nbsp;<a href="/tags/tmux-session/">tmux-session</a>,&nbsp;<a href="/tags/ssh-no-mutual-signature-supported/">ssh-no-mutual-signature-supported</a>,&nbsp;<a href="/tags/ssh/">ssh</a></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">Back</a></span>&nbsp;|&nbsp;<span><a href="/">Home</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/posts/htb/shocker/" class="prev" rel="prev" title="HackTheBox - Shocker Writeup"><i class="fas fa-angle-left fa-fw" aria-hidden="true"></i>HackTheBox - Shocker Writeup</a>
+            <a href="/posts/htb/sunday/" class="next" rel="next" title="HackTheBox - Sunday Writeup">HackTheBox - Sunday Writeup<i class="fas fa-angle-right fa-fw" aria-hidden="true"></i></a></div>
+</div>
+</article></div>
+            </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line" itemscope itemtype="http://schema.org/CreativeWork"><i class="far fa-copyright fa-fw" aria-hidden="true"></i><span itemprop="copyrightYear">2021 - 2023</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="https://shafiqaiman.com" target="_blank">SHAFIQAIMAN</a></span></div>
+        </div>
+    </footer></div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="Back to Top">
+                <i class="fas fa-arrow-up fa-fw" aria-hidden="true"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="View Comments">
+                <i class="fas fa-comment fa-fw" aria-hidden="true"></i>
+            </a>
+        </div><script type="text/javascript" src="/lib/autocomplete/autocomplete.min.js"></script><script type="text/javascript" src="/lib/lunr/lunr.min.js"></script><script type="text/javascript" src="/lib/lazysizes/lazysizes.min.js"></script><script type="text/javascript" src="/lib/clipboard/clipboard.min.js"></script><script type="text/javascript" src="/lib/sharer/sharer.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"Copy to clipboard","maxShownLines":50},"comment":{},"search":{"highlightTag":"em","lunrIndexURL":"/index.json","maxResultLength":10,"noResultsFound":"No results found","snippetLength":30,"type":"lunr"}};</script><script type="text/javascript" src="/js/theme.min.js"></script></body>
+</html>
