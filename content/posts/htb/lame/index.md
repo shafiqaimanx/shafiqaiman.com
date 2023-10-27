@@ -1,17 +1,28 @@
 ---
+weight: 1
 title: "HackTheBox - Lame Writeup"
 date: 2021-07-20
 draft: false
+author: "SH∆FIQ ∆IM∆N"
+authorLink: "https://shafiqaiman.com"
+images: []
+resources:
+- name: "featured-image"
+  src: "featured.png"
+
 tags: ["samba", "CVE-2007-2447"]
-htb: "HacktheBox"
-linux: "Linux"
+categories: ["HacktheBox"]
+
+lightgallery: true
+toc:
+  auto: false
 ---
 
 ## Enumeration
 
 First, let’s do an enumeration with the IP address of this machine. I’m gonna run Nmap [Netwok Mapper] to scan any open ports. I’m gonna run this command
 
-```sql
+```bash
 nmap -sC -sV -oN nmap/initial 10.10.10.3
 ```
 ### Explaining the nmap scan:
@@ -19,7 +30,7 @@ nmap -sC -sV -oN nmap/initial 10.10.10.3
 * -sV	:= scan for version
 * -oN := output in normal format
 
-![2](2.png)
+![nmap initial scan](2.png "nmap initial scan")
 
 The Nmap scan shows us port 21 is `FTP` and can log in as `anonymous`. However, I can't find anything useful in there but the version of FTP looks vulnerable. I'll try to exploit it again I failed. Turns out that particular version is `already patch`. So, yup.
 
@@ -29,27 +40,27 @@ Also, we can see this machine has `samba 3.0.20` maybe it's useful for us.
 
 So, I'm searching smb exploit for this specific version samba 3.0.20 on the internet and I found this exploit.
 
-![3](3.png)
+![found samba exploit](3.png "found samba exploit")
 
 This exploit is available on `metasploit`. I'm gonna run my msfconsole . I'm gonna search this exploit and use it.
 
-![4](4.png)
+![select exploit from metasploit](4.png "select exploit from metasploit")
 
 After that, I'm gonna set the important thing `lhost` and `rhost`. Then, I'm gonna run the exploit.
 
 ## Oopsie
 
-![5](5.png)
+![shell as root](5.png "shell as root")
 
 WOW! I'M A ROOT USER. Unbelievable! Anyways let's hunt the user and root flag
 
 ### User flag
 
-![6](6.png)
+![user flag](6.png "user flag")
 
 ### Root flag
 
-![7](7.png)
+![root flag](7.png "root flag")
 
 ## Conclusion
 

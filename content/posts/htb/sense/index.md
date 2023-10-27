@@ -1,10 +1,21 @@
 ---
+weight: 1
 title: "HackTheBox - Sense Writeup"
 date: 2022-11-13
 draft: false
+author: "SH∆FIQ ∆IM∆N"
+authorLink: "https://shafiqaiman.com"
+images: []
+resources:
+- name: "featured-image"
+  src: "featured.png"
+
 tags: ["CVE-2014-4688", "pfsense-default-creds", "pfsense", "gobuster", "python", "rce"]
-htb: "HacktheBox"
-freebsd: "FreeBSD"
+categories: ["HacktheBox"]
+
+lightgallery: true
+toc:
+  auto: false
 ---
 
 ## Nmap
@@ -31,27 +42,27 @@ Well, only `2` ports are open, which is port `80` and `443`. Based on the port a
 ## Https: Pfsense
 I've navigated to port `443` on my browser and accepted the `SSL` certificates. I'll check the certificate and nothing useful for me. Turn's out, it is a [Pfsense](https://www.pfsense.org/) login page. Then, I'll try login in with the default credentials which is `admin:pfsense` and nothing unveil. By the look at the `index` page extension, this is a `PHP` webpage.
 
-![pfsense login page](login-page.png)
+![pfsense login page](login-page.png "pfsense login page")
 
 ### Gobuster
 Then, I run the [gobuster](https://github.com/OJ/gobuster) to enumerate more on this webserver. Unfortunately, I can't find anything useful and it's just found empty directories. So, I ended up putting a bunch of extensions such as `php,txt,html,cgi` for the second scan, and it manage to find "gold".
 
-![gobuster scan](gobuster-scan.png)
+![gobuster](gobuster-scan.png "gobuster")
 
 ### Https: /changelog.txt
 The first file that caught my attention is called `changelog.txt`. Upon expecting the file it says `"2 of 3 vulnerabilities have been patched"`. This gives me an idea of this particular version having a severe flaw that hasn't been patched. I have 1/3 luck here, to find which one of the flaws is.
 
-![changelog text](changelog-txt.png)
+![changelog.txt](changelog-txt.png "changelog.txt")
 
 ### Https: /system-users.txt
 Anyways, I've navigated to another text file called `system-users.txt` which leaks the username. However, the password says `"company defaults"`. Then, it makes me think it could be the box name which is `sense` just like [nibbles](https://shafiqaiman.com/hackthebox-nibbles-writeup/) box that I did before, or the default [Pfsense](https://www.pfsense.org/) credentials which is `pfsense`.
 
-![system users text](system-users-txt.png)
+![found username](system-users-txt.png "found username")
 
 ### Https: Pfsense/Dashboard
 I'll try both credentials and the correct one is `pfsense` and it looks just like a generic pfsense dashboard, what do I expect :). However, it has the version number sitting in front of me which is `2.1.3-RELEASE`.
 
-![version number](version-number.png)
+![pfsense version](version-number.png "pfsense version")
 
 ## Foothold: CVE-2014-4688
 Since this is an old box, I immediately find the exploit and cve with it. This vulnerability is assigned to [CVE-2014-4688](https://nvd.nist.gov/vuln/detail/CVE-2014-4688) and the description says `"this CVE assign to 3 vulnerabilty found in pfsense"`. However, one of them did not patch as the `changelog.txt` file expose to me. Luckily, I find this [exploit](https://www.exploit-db.com/exploits/43560) on [exploit-db](https://www.exploit-db.com/). Which explores the vulnerability in post-authentication in the `status_rrd_graph_img.php` page but again I want to be "l33t" and create my exploits by copying the existent exploits. (Why not? lol). Credited to Ryan McFarland aka [absolomb](https://www.absolomb.com/) and here are the results.
@@ -103,6 +114,6 @@ if __name__ == '__main__':
         sys.exit()
 ```
 
-![root](root.png)
+![shell as root](root.png "shell as root")
 
 BOOM! root baby! this is because firewall applications tend to be installed under root privilege.

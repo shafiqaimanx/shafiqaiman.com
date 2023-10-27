@@ -1,10 +1,21 @@
 ---
+weight: 1
 title: "HackTheBox - Netmon Writeup"
 date: 2022-05-28
 draft: false
-tags: ["CVE-2018-9276", "evil-winrm", "PRTG-netmon", "ftp", "paessler", "rce"]
-htb: "HacktheBox"
-windows: "Windows"
+author: "SH∆FIQ ∆IM∆N"
+authorLink: "https://shafiqaiman.com"
+images: []
+resources:
+- name: "featured-image"
+  src: "featured.png"
+
+tags: ["CVE-2018-9276", "evil-winrm", "PRTG-netmon", "ftp", "paessler", "rce", "PRTG-netmon-default-creds"]
+categories: ["HacktheBox"]
+
+lightgallery: true
+toc:
+  auto: false
 ---
 
 ## Nmap
@@ -84,38 +95,38 @@ That's a lot of open ports. Port `21/ftp` really caught my eyes. In this scan, i
 
 Successfully login as an `anonymous` user. OH WOW!. Looks like we've got the entire directory of the server. In this case, the server running `Windows`. On top of that, I've got the `user flag` in the `/Users/Public` directory.
 
-![1](ftp-anonymous-login.png)
+![ftp anonymous](ftp-anonymous-login.png "ftp anonymous")
 
 ## Http (PRTG Network Monitor)
 The Nmap scan above also reveals, that port `80/http` is open and the title was `Welcome | PRTG Network Monitor (NETMON)`. Now, let's check the http site. It's just a login page. 
 
 First, I'm gonna try the default credentials `prtgadmin:prtgadmin`.  Unfortunately, it didn't work but luck is on our side. We already have the access to the server file system through `FTP`.
 
-![1](PRTG-main-login-page.png)
+![login page](PRTG-main-login-page.png "login page")
 
 ### Paessler
 So, I went googling around the internet and found this [article](https://kb.paessler.com/en/topic/463-how-and-where-does-prtg-store-its-data) about; where does PRTG store its data. The `Data directory` is stored in a folder called `Paessler` that locate in `programdata`. 
 
 To be honest, I am stuck at this point cause I didn't even see the directory called `programdata`. Then, I'm just playing around in the file system and finally found it. Turns out, it's located in the root directory `/programdata`.
 
-![1](cd-into-programdata.png)
+![found Paessler directory](cd-into-programdata.png "found Paessler directory")
 
 ### PRTG Configuration.old.bak
 
 Then, I found the `PRTG Configuration` files locate in the directory `/programdata/Paessler/PRTG Network Monitor`. The `.bak` extensions caught my eyes. So, I ended up downloading the 3 config files with the `get` command.
 
-![1](downloading-the-config-file.png)
+![downloading the config file](downloading-the-config-file.png "downloading the config file")
 
 I manage found the `password` inside the `PRTG Configuration.old.bak` file. So, let's try login in with these found credentials. Unfortunately, it doesn't work. 
 
-![1](read-the-password-from-file.png)
+![found credentials](read-the-password-from-file.png "found credentials")
 
 Upon inspection, I found that the file called `PRTG Configuration.old.bak` was created back in `2018`, and the 2 other files were created in `2019`. So, I'm gonna assumed the developers are so lazy and not careful enough with the password. Now, I'm gonna change the password to end with `2018` into `2019`. Let's try it out.
 
-![1](2018-date.png)
+![date differences](2018-date.png "date differences")
 
 ### Http (Welcome PRTG System Administrator!)
-![1](system-admin-main-page.png)
+![PRTG admin webpage](system-admin-main-page.png "PRTG admin webpage")
 
 YES!!! IT WORKS!!!
 
@@ -124,12 +135,12 @@ This admin page, reveals the version of the software version `18.1.37.13946`. Th
 ## RCE (Remote Code Execution)
 Then, I'll try to search the exploit in the `searchsploit` databases and find, one that has `(Authenticated) RCE`. We are in luck because I've already got the admin credentials. So, I'm gonna copy the exploit into my current directory with the `-m` flag.
 
-![1](mirror-the-exploit-into-current-directory.png)
+![search the exploit in searchsploit](mirror-the-exploit-into-current-directory.png "search the exploit in searchsploit")
 
 The exploit needed the admin `cookies`. Then, Its gonna created the user called `pentest` in the admin groups. In the Nmap scan result above, we see that port [5985](https://www.speedguide.net/port.php?port=5985) is open. The exploit successfully ran. Let's connected to the machine through the credentials `pentest:P3nT3st!`
 
-![1](run-the-exploit.png)
+![execute the exploit](run-the-exploit.png "execute the exploit")
 
-![1](connect-using-user-with-admin-groups.png)
+![become administrator](connect-using-user-with-admin-groups.png "become administrator")
 
 NICE!

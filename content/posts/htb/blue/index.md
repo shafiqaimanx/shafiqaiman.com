@@ -1,10 +1,21 @@
 ---
+weight: 1
 title: "HackTheBox - Blue Writeup"
 date: 2021-07-20
 draft: false
+author: "SH∆FIQ ∆IM∆N"
+authorLink: "https://shafiqaiman.com"
+images: []
+resources:
+- name: "featured-image"
+  src: "featured.png"
+
 tags: ["legacy", "eternalblue"]
-htb: "HacktheBox"
-windows: "Windows"
+categories: ["HacktheBox"]
+
+lightgallery: true
+toc:
+  auto: false
 ---
 
 ## Enumeration
@@ -19,7 +30,7 @@ nmap -sC -sV -oN nmap/initial 10.10.10.40
 * -sV	:= scan for version
 * -oN := output in normal format
 
-![2](2.png)
+![nmap initial scan](2.png "nmap initial scan")
 
 The Nmap scan is done. The result shows us this is a Windows 7 machine and has smb!
 
@@ -29,7 +40,7 @@ This is a very old machine. I'm pretty sure this is vulnerable to Eternalblue. L
 nmap --script smb-vuln* -p139,445 -oN nmap/vuln_script 10.10.10.40
 ```
 
-![3](3.png)
+![NSE check vulnerable to Eternalblue](3.png "NSE check vulnerable to Eternalblue")
 
 Yup. This machine is vulnerable to Eternalblue exploit.
 
@@ -37,17 +48,17 @@ Yup. This machine is vulnerable to Eternalblue exploit.
 
 I'm gonna run Metasploit and search for `eternalblue` and use it
 
-![4](4.png)
+![search Eternalblue exploit](4.png "search Eternalblue exploit")
 
 Before we run it. We need to set up the `RHOSTS` and `LHOST`. Make the lhost is set into your htb ip addr.
 
-![5](5.png)
+![setup listener ip and port](5.png "setup listener ip and port")
 
 ## Oopsie
 
 After that just type `run`.
 
-![6](6.png)
+![execute the exploit](6.png "execute the exploit")
 
 WE'RE IN AS SYSTEM!!! cool.
 
@@ -55,11 +66,11 @@ Now, let's hunt for the user & admin flag.
 
 ## User flag
 
-![7](7.png)
+![user flag](7.png "user flag")
 
 ## Root/Admin flag
 
-![8](8.png)
+![root flag](8.png "root flag")
 
 ## Conclusion
 

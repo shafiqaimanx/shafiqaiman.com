@@ -1,29 +1,40 @@
 ---
+weight: 1
 title: "HackTheBox - Oopsie Writeup"
 date: 2021-07-20
 draft: false
-tags: ["SUID", "path-abused", "upload-vuln"]
-htb: "HacktheBox"
-linux: "Linux"
+author: "SH∆FIQ ∆IM∆N"
+authorLink: "https://shafiqaiman.com"
+images: []
+resources:
+- name: "featured-image"
+  src: "featured.png"
+
+tags: ["SUID", "path-abused", "upload-vuln", "gobuster", "python", "php-reverse-shell"]
+categories: ["HacktheBox"]
+
+lightgallery: true
+toc:
+  auto: false
 ---
 
 ## Enumeration
 
 - Top 1000 ports scan
 
-```sql
+```bash
 nmap -sC -sV -oN nmap/inital 10.10.10.28
 ```
 
-![2](2.png)
+![nmap initial scan](2.png "nmap initial scan")
 
 - all ports scan
 
-```sql
+```bash
 nmap -sC -sV -p- -oN nmap/all_ports 10.10.10.28
 ```
 
-![3](3.png)
+![nmap allports scan](3.png "nmap allports scan")
 
 - Still the same result 
 - Open ports
@@ -32,7 +43,7 @@ nmap -sC -sV -p- -oN nmap/all_ports 10.10.10.28
 
 
 ### The Website
-![4](4.png)
+![MegaCorp Automotive webpage](4.png "MegaCorp Automotive webpage")
 
 ### Gobuster
 - Auto recon in the background
@@ -43,7 +54,7 @@ gobuster dir -u http://10.10.10.28 -w /opt/SecLists/Discovery/Web-Content/raft-m
 ```
 - The result
 
-![5](5.png)
+![gobuster](5.png "gobuster")
 
 This webpage have an upload directory.
 
@@ -51,28 +62,28 @@ This webpage have an upload directory.
 - Found something insteresting in the source code
 
 
-![6](6.png)
+![view source code](6.png "view source code")
 
 - the directory into `/cdn-cgi/login/script.js`
 - navigate into `http://10.10.10.28/cdn-cgi/login`
 - found the login page
 
-![7](7.png)
+![login page](7.png "login page")
 
-- Got the credentials in previous box called [Archetype](/htb/archetype) _in official pdf_
+- Got the credentials in previous box called [Archetype](https://shafiqaiman.com/posts/htb/archetype/) _in official pdf_
 - Successfully login as admin
 
-![8](8.png)
+![admin webpage](8.png "admin webpage")
 
 ### Can't Upload
 - navigate to the upload page
 - it says `super admin` have right to view it
 
-![9](9.png)
+![can't view upload page](9.png "can't view upload page")
 
 ### The ID
 
-![10](10.png)
+![id parameter](10.png "id parameter")
 
 - This page appear to be `user table` base on the `id parameter` in the link
 - Making `python script` for IDs brute-force 
@@ -101,7 +112,7 @@ print("Done")
 ```
 - The result
 
-![11](11.png)
+![brute-force id](11.png "brute-force id")
 
 - Here is the ID lead to (in order)
 
@@ -116,44 +127,44 @@ print("Done")
 ### Upload as super admin
 - Found the super admin table
 
-![12](12.png)
+![found superadmin table](12.png "found superadmin table")
 
 - Turns out the `Access ID` it is the `cookie value`
 - Change the admin cookies into super admin
 
-![13](13.png) <br>_before_
+![admin cookie](13.png "admin cookie") <br>_before_
 
-![14](14.png) <br>_after refresh the page_
+![superadmin cookie](14.png "superadmin cookie") <br>_after refresh the page_
 
 ### Reverse Shell
 - Upload the php reverse shell
   - [Here is the source ](https://raw.githubusercontent.com/pentestmonkey/php-reverse-shell/master/php-reverse-shell.php)
 
-![15](15.png)
+![upload php reverse shell](15.png "upload php reverse shell")
 
 - Activated the reverse shell
   - through this link
 
-![16](16.png)
+![execute the shell](16.png "execute the shell")
 
 - Got the shell
 
-![17](17.png)
+![shell as www-data](17.png "shell as www-data")
 
 ### www-data
 - Found the credentials in file called `db.php`
 - in `/var/www/html/cdn-cgi/login/db.php`
 
-![18](18.png)
+![found robert credentials](18.png "found robert credentials")
 
 ### Robert
 - Login as robert
 
-![19](19.png)
+![change user to robert](19.png "change user to robert")
 
 ### User Flag
 
-![20](20.png)
+![user flag](20.png "user flag")
 
 - Find the <font color="yellow">SUID</font>
 - The command for find it
@@ -163,7 +174,7 @@ find / -user root -perm -4000 -exec ls {} \; 2>/dev/null
 ```
 - Found weird binary that not suppose to be there
 
-![21](21.png)
+![find all SUID](21.png "find all SUID")
 
 ## Privilege Escalation
 
@@ -171,17 +182,17 @@ find / -user root -perm -4000 -exec ls {} \; 2>/dev/null
 - This is how it works
 - However it says `no such file or directory`
 
-![22](22.png)
+![cat error](22.png "cat error")
 
 - Try `strings` out the binary 
 - Turns out this binary use `cat command`
 - However this is use relative path
 
-![23](23.png)
+![strings bugtracker](23.png "strings bugtracker")
 
 - explain the _`relative & absolute path`_
 
-![24](24.png)
+![relative & absolute path differences](24.png "relative & absolute path differences")
 
 ### Relative Path Abused
 - Make a fake `cat command`
@@ -189,11 +200,11 @@ find / -user root -perm -4000 -exec ls {} \; 2>/dev/null
 	- the bugtracker binary will execute this fake file as `root`
 	- [source for relative path abused](https://www.hackingarticles.in/linux-privilege-escalation-using-path-variable/)
 
-![25](25.png)
+![shell as root](25.png "shell as root")
 
 ### Root Flag
 
-![26](26.png)
+![root flag](26.png "root flag")
 
 ## Conclusion
 I’ve learned a lot today. Never put the user ID as cookies value and make sure you configure the website properly. Lastly, make sure to configure the SUID binary carefully and do not put any untrust or unpatched version as SUID

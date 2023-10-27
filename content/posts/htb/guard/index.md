@@ -1,31 +1,42 @@
 ---
+weight: 1
 title: "HackTheBox - Guard Writeup"
 date: 2021-08-08
 draft: false
-tags: ["rBash", "hashcat"]
-htb: "HacktheBox"
-linux: "Linux"
+author: "SH∆FIQ ∆IM∆N"
+authorLink: "https://shafiqaiman.com"
+images: []
+resources:
+- name: "featured-image"
+  src: "featured.png"
+
+tags: ["rbash", "hashcat", "bypass-rbash"]
+categories: ["HacktheBox"]
+
+lightgallery: true
+toc:
+  auto: false
 ---
 
 ## Enumeration
 
 - Top 1000 ports scan
 
-```sql
+```bash
 nmap -sC -sV -oN nmap/initial 10.10.10.50
 ```
 - the result
 
-![1](1000.png)
+![nmap initial scan](1000.png "nmap initial scan")
 
 - scan all ports
 
-```sql
+```bash
 nmap -sC -sV -p- -oN nmap/all_ports 10.10.10.50
 ```
 - the result
 
-![1](all_ports.png)
+![nmap allports scan](all_ports.png "nmap allports scan")
 
 ### Open Ports
 - Well, both nmap scan result shows `SSH port` just open
@@ -33,9 +44,9 @@ nmap -sC -sV -p- -oN nmap/all_ports 10.10.10.50
 ## Foothold/Gaining Access
 
 ### SSH
-- Let's try SSH into the machine using the `private key` we've got from the `previous box [Markup]`
+- Let's try SSH into the machine using the `private key` we've got from the `previous box` [markup](https://shafiqaiman.com/posts/htb/markup/).
 
-![1](ssh.png)
+![ssh as daniel](ssh.png "ssh as daniel")
 
 - It works
 
@@ -44,7 +55,7 @@ nmap -sC -sV -p- -oN nmap/all_ports 10.10.10.50
 - However, it's odd. When I try to read the content of the file
 - It doesn't have any output.
 
-![1](rbash.png)
+![daniel user in rbash](rbash.png "daniel user in rbash")
 
 - Turns out this user have `rbash/Restricted Bash Shell`
 - Let's try bypass it
@@ -56,7 +67,7 @@ nmap -sC -sV -p- -oN nmap/all_ports 10.10.10.50
 - I'm gonna try bypass it using `ed`
 - the result
 
-![1](user.png)
+![bypass rbash using ed](user.png "bypass rbash using ed")
 
 - Finally, I can read the `user.txt` file
 - That's means we successfully bypass the `rBash`
@@ -75,7 +86,7 @@ nmap -sC -sV -p- -oN nmap/all_ports 10.10.10.50
 find / -iname '*.bak' -exec ls -l {} \; 2>/dev/null
 ```
 
-![1](bak.png)
+![found backup files](bak.png "found backup files")
 
 - We've found couples `backup files` but I can't read them.
 - Let's try another approach.
@@ -84,20 +95,24 @@ find / -iname '*.bak' -exec ls -l {} \; 2>/dev/null
 locate backup
 ```
 
-![1](not_bak.png)
+![found /var/backups/shadow](not_bak.png "found /var/backups/shadow")
 
 - Well, I've found this.
 - Let's try read `/var/backups/shadow` file
 - the result
 
-![1](hash.png)
+![get the root hash](hash.png "get the root hash")
 
 - Nice. We've got hashes. Let's try to crack it
 
 ### HashCat
-> Hashcat is a password recovery tool. Examples of hashcat-supported hashing algorithms are LM hashes, MD4, MD5, SHA-family, and Unix Crypt formats as well as algorithms used in MySQL and Cisco PIX. <br>
-> [Wikipedia - Hashcat](https://en.wikipedia.org/wiki/Hashcat) <br>
-> [hashcat.net](https://hashcat.net/hashcat/)
+{{< admonition tip "Description" >}}
+Hashcat is a password recovery tool. <br>
+Examples of hashcat-supported hashing algorithms are LM hashes, MD4, MD5, SHA-family, and Unix Crypt formats as well as algorithms used in MySQL and Cisco PIX. 
+- [Wikipedia - Hashcat](https://en.wikipedia.org/wiki/Hashcat) <br>
+- [hashcat.net](https://hashcat.net/hashcat/)
+{{< /admonition >}}
+
 
 - Now, I'm gonna copy and paste the `root hash` into a file `called root`
 - Here is the [link to hashcat example hashes](https://hashcat.net/wiki/doku.php?id=example_hashes)
@@ -107,7 +122,7 @@ locate backup
 hashcat -m 1800 root /opt/rockyou.txt
 ```
 
-![1](hcat.png)
+![crack root password](hcat.png "crack root password")
 
 _Note: I've already run it that's why I'm using `--show` at the end_
 
@@ -115,13 +130,13 @@ _Note: I've already run it that's why I'm using `--show` at the end_
 - Let's change our user into the root by using this command `su`
 - when it's prompt for the password. Just insert the password we crack earlier
 
-![1](root.png)
+![change user to root](root.png "change user to root")
 
 ## Root Flag
 - Let's get the final flag
 - Nice
 
-![1](root-flag.png)
+![root flag](root-flag.png "root flag")
 
 ## Conclusion
 I've learned a lot today. What is the `rBash` and how to bypass it. The most important thing is how you store your data or backup. If you do not properly store it or not configure the permission carefully. This thing might gonna happen. Once again, don't use the same password.

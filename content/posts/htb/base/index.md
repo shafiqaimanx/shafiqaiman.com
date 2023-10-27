@@ -1,33 +1,44 @@
 ---
+weight: 1
 title: "HackTheBox - Base Writeup"
 date: 2021-08-13
 draft: false
-tags: ["strcmp-bypass", "upload-vuln", "GFTOBins"]
-htb: "HacktheBox"
-linux: "Linux"
+author: "SH∆FIQ ∆IM∆N"
+authorLink: "https://shafiqaiman.com"
+images: []
+resources:
+- name: "featured-image"
+  src: "featured.png"
+
+tags: ["strcmp-bypass", "upload-vuln", "GTFOBins", "gobuster", "SUID"]
+categories: ["HacktheBox"]
+
+lightgallery: true
+toc:
+  auto: false
 ---
 
 ## Enumeration
 
 - Top 1000 ports scan
 
-```sql
+```bash
 nmap -sC -sV -oN nmap/initial 10.10.10.48
 ```
 
 - the result
 
-![1](1000.png)
+![nmap scan result](1000.png "nmap scan result")
 
 - All ports scan
 
-```sql
+```bash
 nmap -sC -sV -p- -oN nmap/all__ports 10.10.10.48
 ```
 
 - the result
 
-![1](all_port.png)
+![nmap scan allports](all_port.png "nmap scan allports")
 
 ### Open Ports
 - both Nmap scan result shows the only port open are `SSH` and `HTTP`
@@ -46,7 +57,7 @@ gobuster dir -u http://10.10.10.48 -w /opt/SecLists/Discovery/Web-Content/raft-s
 
 - let's take a look at `/login/` directory
 
-![1](index.png)
+![directory listing](index.png "directory listing")
 
 - `Config.php` sounds fantastic but I can't read them.
 - However, the file `login.php.swp` can be download.
@@ -57,15 +68,17 @@ gobuster dir -u http://10.10.10.48 -w /opt/SecLists/Discovery/Web-Content/raft-s
 - let's `strings` that file out
 - the result
 
-![1](swp.png)
+![login.php.swp file](swp.png "login.php.swp file")
 
 - well, it is a piece of code on `how the login form works`
 - it's just logic `if-else statements` but again my eye caught something else.
 
 ### Strcmp bypass
-![1](strcmp.png)
-> Returns < 0 if `string1` is less than `string2`; > 0 if `string1` is greater than `string2`, and 0 if they are equal.
+![php strcmp](strcmp.png "php strcmp")
 
+{{< admonition tip "Description" >}}
+Returns < 0 if `string1` is less than `string2`; > 0 if `string1` is greater than `string2`, and 0 if they are equal.
+{{< /admonition >}}
 
 - it compares the `string1` and `string2` . If they equal returns 0
 - Again we don't know the `password`. 
@@ -85,18 +98,18 @@ gobuster dir -u http://10.10.10.48 -w /opt/SecLists/Discovery/Web-Content/raft-s
 - `Right-click` and click on `Edit and Resend`
 - it should look like this.
 
-![1](dev-1.png)
+![devtools](dev-1.png "devtools")
 
 - Then edit the `Request Body` something like this
 - `username[]=''&password[]=''`
 - After that, click on `Send` and you should see the `upload.php` appears.
 
-![1](dev-2.png)
+![modify login request](dev-2.png "modify login request")
 
 ### Upload
 - Now, you have to do is `Double-click` on `upload.php` and you should greet by this page.
 
-![1](upload.png)
+![upload page](upload.png "upload page")
 
 - That means we successfully bypass the login.
 - So, I'm gonna upload the `PHP reverse shell`
@@ -105,7 +118,7 @@ gobuster dir -u http://10.10.10.48 -w /opt/SecLists/Discovery/Web-Content/raft-s
 
 `http://10.10.10.48/_uploaded/<filename>`
 
-![1](shell.png)
+![shell as www-data](shell.png "shell as www-data")
 - we've got the shell
 
 ### config.php
@@ -113,25 +126,25 @@ gobuster dir -u http://10.10.10.48 -w /opt/SecLists/Discovery/Web-Content/raft-s
 - Now, it's the time to read it. Let's navigate into this directory
 - `/var/www/html/login/`. Then, read the `config.php` file
 
-![1](pass.png)
+![password in config.php](pass.png "password in config.php")
 
 ## John
 - So, we've found the `password`.
 - Maybe this password belongs to the user on this system.
 - Let's `cat /etc/passwd`
 
-![1](john.png)
+![check user in /etc/password](john.png "check user in /etc/password")
 
 - we found one user name john.
 - Let's try login as `john` with those `password` we've found.
 
-![1](john-cena.png)
+![change user to john](john-cena.png "change user to john")
 
 - Great. Now, I'm John
 
 ### User Flag
 
-![1](user.png)
+![user flag](user.png "user flag")
 
 ## Privilege Escalation
 
@@ -139,7 +152,7 @@ gobuster dir -u http://10.10.10.48 -w /opt/SecLists/Discovery/Web-Content/raft-s
 - Let's try to check the `sudo permission` this user got with this commands `sudo -l`
 - the result
 
-![1](find.png)
+![check sudo permission](find.png "check sudo permission")
 
 - Well, Let's try to become `root`
 - by running this command
@@ -150,10 +163,10 @@ gobuster dir -u http://10.10.10.48 -w /opt/SecLists/Discovery/Web-Content/raft-s
 sudo /usr/bin/find . -exec /bin/bash \; -quit
 ```
 
-![1](haha.png)
+![become root](haha.png "become root")
 
 ### Root Flag
-![1](root.png)
+![root flag](root.png "root flag")
 
 ## Conclusion
 I've learned a lot today. Do not expose anything on the internet. Make sure your website properly configure. If your website `offers to upload something`. Make it harder for an attacker to upload that related to security risks such as `reverse shell`. Once again, don't use the same password. Oh before I forgot. Configure the user and the root properly.

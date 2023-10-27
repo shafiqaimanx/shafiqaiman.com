@@ -1,10 +1,21 @@
 ---
+weight: 1
 title: "HackTheBox - Late Writeup"
 date: 2022-07-30
 draft: false
-tags: ["linpeas", "ssti", "upload-vuln", "ssh", "pspy"]
-htb: "HacktheBox"
-linux: "linux"
+author: "SH∆FIQ ∆IM∆N"
+authorLink: "https://shafiqaiman.com"
+images: []
+resources:
+- name: "featured-image"
+  src: "featured.png"
+
+tags: ["linpeas", "ssti", "pspy"]
+categories: ["HacktheBox"]
+
+lightgallery: true
+toc:
+  auto: false
 ---
 
 ## Nmap
@@ -44,19 +55,19 @@ There are only `2` ports open. The `22/SSH` and `80/HTTP` ports.
 
 Well, the `SSH` is open. However, I'm going to ignore it because that's almost not likely going to be vulnerable. So, I'm going to check the other port, which is `port 80` by navigating through my browser. That's unexpected, I found a subdomain called `images` and also the hostname `late.htb`. I'm going to add it to my `/etc/hosts` file. 
 
-![1](late-htb-main-page.png)
+![found the hostname](late-htb-main-page.png "found the hostname")
 
-![1](add-the-hostname-into-file.png)
+![add hostname in /etc/hosts](add-the-hostname-into-file.png "add hostname in /etc/hosts")
 
 ### Http: images.late.htb
 
 Going to the `images.late.htb` it says `convert image to text with flask`. Well, I'm using  [kali](https://www.kali.org/) linux and its came with `mousepad` as text editor ([XFCE](https://www.xfce.org/) flavour). So, I'm going to open the text editor and type the `Hello,World` as the text and screenshot it with [Flameshot](https://flameshot.org/). Save it and upload the file.
 
-![1](images-late-htb-main-page.png)
+![convert image webpage](images-late-htb-main-page.png "convert image webpage")
 
 After I uploaded it, my browser downloaded the file called `result.txt`. When I read the content of the file it says `Hello,World` like the image that I uploaded but it's wrapped in an HTML paragraph tag.
 
-![1](hello-world-output-result-txt.png)
+![output result](hello-world-output-result-txt.png "output result")
 
 ### SSTI (Server Side Template Injection)
 
@@ -64,24 +75,26 @@ That's interesting. So, like any human being that I am. I asked for help from Mr
 
 Time to find out! first, I'm going to upload an image with this payload as text _{\{7*7}}_. In theory, the template engine will see this as a mathematical equation and try to solve it. Hold and behold, the result is `49` and this is a positive indication it is vulnerable. So, I'll try uploading the [read file payload](https://github.com/swisskyrepo/PayloadsAllTheThings/blob/master/Server%20Side%20Template%20Injection/README.md#jinja2---read-remote-file). In this case, it is `/etc/passwd` file. It successfully retrieves the file.
 
-_NOTE: I'm using Roboto Slab Regular fonts in Mousepad_
+{{< admonition tip >}}
+I'm using Roboto Slab Regular fonts in Mousepad
+{{< /admonition >}}
 
-![1](read-file-etc-password-payload-ssti.png)
+![SSTI payload read file](read-file-etc-password-payload-ssti.png "SSTI payload read file")
 
-![1](read-file-etc-passwd.png)
+![output result /etc/passwd](read-file-etc-passwd.png "output result /etc/passwd")
 
 
 ## SSH: svc_acc
 
 From the result above, there are just two users in this box. The `root` and `svc_acc` user. Also, the nmap scan result above shows `port 22` is open. Which is `SSH`. Then, I'll try to retrieve the `svc_acc` ssh private key in the user's home directory in the `.ssh`
 
-![1](grep-the-user-from-etc-passwd.png)
+![check user on the box](grep-the-user-from-etc-passwd.png "check user on the box")
 
 I'll change the payload from read `/etc/passwd` file into `/home/svc_acc/.ssh/id_rsa`. Well, the result came back and it did not disappoint at all. So, I'm going to open the file and remove the HTML paragraph tag `<p></p>`, and save it into a new name called `svc_acc`. Also, change the permission with this command; `chmod 600 <id_rsa>`. Without further ado, I'm going to ssh into the box with this key. (please work \*finger cross\*). It did work! YES!
 
-![1](read-ssh-file-with-ssti-payload.png)
+![read svc_acc SSH file](read-ssh-file-with-ssti-payload.png "read svc_acc SSH file")
 
-![1](ssh-in-the-box-as-svc_acc.png)
+![ssh as svc_acc](ssh-in-the-box-as-svc_acc.png "ssh as svc_acc")
 
 ### PEASS-ng: linpeas.sh
 
@@ -89,7 +102,7 @@ I'm in as a `svc_acc` user and I also can read the first flag, which is the `use
 
 After it is all done running, I'll check the output and find something weird. A directory called `/usr/local/sbin` contain a file called `ssh-alert.sh`. The file itself looks like a `bash script` because it's ended up with `.sh` extensions and this file is not a native to the linux ecosystem. (I think?)
 
-![1](linpeas-find-the-ssh-alert-file.png)
+![linpeas output](linpeas-find-the-ssh-alert-file.png "linpeas output")
 
 ### /usr/local/sbin: ssh-alert.sh
 
@@ -97,25 +110,25 @@ Upon inspecting the file, it's looks like this file probably running every time 
 
 However, if I manage to change this file. It doesn't mean I'm going to be `root` because this file belongs to the `svc_acc` user & groups. Honestly, I'm stuck and don't know what to do next. So, I reached out to the [HackTheBOX community](https://discord.com/invite/hackthebox) and got a nudge on `pspy`. I'm super excited because I've never used this tool before let alone known it exists. 
 
-![1](ssh-alert-read-pic.png)
+![contents in ssh-alert.sh file](ssh-alert-read-pic.png "contents in ssh-alert.sh file")
 
 ### Pspy
 
 [Pspy](https://github.com/DominicBreuker/pspy) is a command-line tool designed to snoop on processes without the need for root permissions. It allows seeing commands run by other users, cron jobs, etc. as they execute. Without wasting any single second, I'm going to download the `pspy64` on the release page and execute it.
 
-![1](run-the-pspy.png)
+![execute pspy](run-the-pspy.png "execute pspy")
 
 Based on the file `ssh-alert.sh` above. I need to make an ssh connection, to be able to execute the file. So, I'm going to open a new terminal and ssh in the box again. Interestingly, something pops out in the pspy output. The output itself shows the `ssh-alert.sh` file be executed by `root` and I can gain the `reverse shell` in this way.
 
-_NOTE: UID=0 is root_
+_NOTE: `UID=0` is root_
 
-![1](ssh-in-the-box-once-again.png)
+![root execute ssh-alert.sh file](ssh-in-the-box-once-again.png "root execute ssh-alert.sh file")
 
 ## Linux: Privilege Escalation
 
 Going back to the `/usr/local/sbin` directory, I'm going to append the bash `reverse shell` into the `ssh-alert.sh` file. As mentioned above, I'm going to make a connection once again, and BOOM!. I've got the root shell.
 
-![1](append-the-reverse-shell.png)
+![append bash reverse shell](append-the-reverse-shell.png "append bash reverse shell")
 
-![1](root-shell.png)
+![shell as root](root-shell.png "shell as root")
 

@@ -1,10 +1,21 @@
 ---
+weight: 1
 title: "HackTheBox - Responder Writeup"
 date: 2022-04-09
 draft: false
+author: "SH∆FIQ ∆IM∆N"
+authorLink: "https://shafiqaiman.com"
+images: []
+resources:
+- name: "featured-image"
+  src: "featured.png"
+
 tags: ["lfi", "rce", "log-poisoning", "responder.py", "NTLMv2", "hashcat", "reverse-powershell", "php-webshell", "evil-winrm"]
-htb: "HacktheBox"
-windows: "Windows"
+categories: ["HacktheBox"]
+
+lightgallery: true
+toc:
+  auto: false
 ---
 
 I found `two ways` to gain into this machine. First, stealing the password hash by using the responder and then logon through evil-winrm. Second, gaining the remote code execution through log poisoning and getting the reverse shell.
@@ -42,13 +53,13 @@ That's not a lot of open ports.
 
 The Nmap scan result shows this machine has a webserver on `port 80`. When I put the Ip address in the `url bar` it's redirected me to `unika.htb`
 
-![1](unika-htb-redirect.png)
+![redirect to unika.htb](unika-htb-redirect.png "redirect to unika.htb")
 
 To solve this issue, put the Ip address of this machine in the `/etc/hosts` file and give it a name. In this case, the name is `unika.htb` and save it. Now, just refresh the page, and BOOM!
 
-![1](add-etc-hosts-unika-htb.png)
+![add hostname in /etc/hosts](add-etc-hosts-unika-htb.png "add hostname in /etc/hosts")
 
-![1](unika-webpage.png)
+![unika webpage](unika-webpage.png "unika webpage")
 
 ### Local File Inclusion/LFI
 
@@ -56,7 +67,7 @@ I'm started playing around with the website. Then, I found a button on the top n
 
 Every time I saw this kinda url with the parameter with it. I usually try to do `local file inclusion` first. In this case, I'm using the `PHP wrapper` because it's kinda easy for me. Let's hit the `hosts` file in the Windows that locate here `C:/WINDOWS/System32/drivers/etc/hosts` and BOOM!
 
-![1](lfi-php-wrapper.png)
+![php wrapper read file](lfi-php-wrapper.png "php wrapper read file")
 
 With this information. We can get access to this machine with `Log Poisoing`. However, the question asks something about `Responder` utility. 
 
@@ -65,11 +76,11 @@ Every starting-point machine has a `walkthrough pdf` file to download. So, I dow
 
 Enough with all of this, let's try to steal the hash. First, let's run the `responder` with `sudo` privilege and specify the `tun0` as the interface with tag `-I`. Now, add the "share" in the url bar at the `page parameter`. Make sure to use your `tun0 Ip address` and the "share" can be anything.
 
-![1](responder-run.png)
+![responder](responder-run.png "responder")
 
-![1](responder-yeet.png)
+![access yeet share](responder-yeet.png "access yeet share")
 
-![1](responder-hash.png)
+![respond with hash](responder-hash.png "respond with hash")
 
 The image above shows that the `responder` successfully grab the `NTLMv2` hash.
 
@@ -77,16 +88,16 @@ The image above shows that the `responder` successfully grab the `NTLMv2` hash.
 
 Well, I got the hash already and put it in the file called `admin.hash` and the last thing to do is crack it. I love `hashcat` so much and that's the one I'm gonna use it. Let's run it with `mode 5600` for the `NTLMv2` hash and I'm gonna use `rockyou.txt` as my wordlist. 
 
-![1](hashcat-run.png)
+![hashcat](hashcat-run.png "hashcat")
 
-![1](hashcat-got-it.png)
+![cracked administrator hash](hashcat-got-it.png "cracked administrator hash")
 
 YES! Finally! I've got the password.
 
 ### Evil-WinRM
 Based on the Nmap scan result. The `port 5985` is open, which is `Windows Remote Management (winrm)`. Let's try to connect to it with these credentials.
 
-![1](evil-winrm-administrator.png)
+![login as administrator](evil-winrm-administrator.png "login as administrator")
 
 NICE!
 
@@ -96,7 +107,7 @@ NICE!
 
 As you know, from the `First Method` section. This machine is vulnerable to `local file inclusion`. So, I'm gonna try to gain `remote code execution` through `log poisoning`. Here's the article talking about it [hackingarticles - apache log poisoning through lfi](https://www.hackingarticles.in/apache-log-poisoning-through-lfi/) that I found. The result from the Nmap scan shows us this is an `apache` server running on `Windows`. Let's verify that we can read the log file that locates in `C:\xampp\apache\logs\access.log` by default and to do this I'm gonna use the `BurpSuite`.
 
-![1](burpsuite-read-logs.png)
+![read log file](burpsuite-read-logs.png "read log file")
 
 Looks like I can read the log file. Now, let's poison the `User-Agent` header with a basic `PHP web shell` by putting this code (down below). Then, click send.
 
@@ -104,24 +115,24 @@ Looks like I can read the log file. Now, let's poison the `User-Agent` header wi
 <?php system($_REQUEST['cmd']);?>
 ```
 
-![1](burpsuite-send-php-web-shell.png)
+![send php webshell](burpsuite-send-php-web-shell.png "send php webshell")
 
 The log should now contain PHP code. The  LFI vulnerability should execute this code and we should be able to gain `remote code execution` by putting the `&cmd=whoami` at the end of the url. The command successfully ran.
 
-![1](burpsuite-rce-whoami.png)
+![execute whoami](burpsuite-rce-whoami.png "execute whoami")
 
 ### Nishang: Invoke-PowerShellTcp.ps1
 
 Now, we have the RCE, and let's try to gain the reverse shell. I'm gonna use the [Nishang](https://github.com/samratashok/nishang) reverse shell which is `Invoke-PowerShellTcp.ps1` but first, I'm gonna make a new directory named `www` and copy the `powershell file` into that directory. Then, I'm gonna open that file and select one of the example lines available and change the `Ip address` and `port`. After that, put it in the last line in the file.
 
-![1](nishang-ip-port.png)
+![powershell reverse shell](nishang-ip-port.png "powershell reverse shell")
 
 Now, I'm running the python `http server` into the `www` directory. Then, download the  `reverse shell` file using `BurpSuite` and don't forget to url encode it. Make sure to run the `nc` listener with `rlwrap` on the port that you specify in the reverse shell file.
 
-![1](nishang-python-http-server.png)
+![serve python server](nishang-python-http-server.png "serve python server")
 
-![1](nishang-burpsuite-download-reverse-shell.png)
+![execute powershell reverse shell](nishang-burpsuite-download-reverse-shell.png "execute powershell reverse shell")
 
-![1](nishang-got-the-shell.png)
+![shell as administrator](nishang-got-the-shell.png "shell as administrator")
 
 TADAA!! we've got the shell and can read the flag.

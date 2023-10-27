@@ -1,10 +1,21 @@
 ---
+weight: 1
 title: "HackTheBox - Shield Writeup"
 date: 2021-07-21
 draft: false
+author: "SH∆FIQ ∆IM∆N"
+authorLink: "https://shafiqaiman.com"
+images: []
+resources:
+- name: "featured-image"
+  src: "featured.png"
+
 tags: ["juicy-potato", "seImpersonatePrivilege"]
-htb: "HacktheBox"
-windows: "Windows"
+categories: ["HacktheBox"]
+
+lightgallery: true
+toc:
+  auto: false
 ---
 
 ## Enumeration

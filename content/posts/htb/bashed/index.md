@@ -1,10 +1,21 @@
 ---
+weight: 1
 title: "HackTheBox - Bashed Writeup"
 date: 2022-03-01
 draft: false
-tags: ["python", "gobuster", "crontab", "file-misconfiguration"]
-htb: "HacktheBox"
-linux: "Linux"
+author: "SH∆FIQ ∆IM∆N"
+authorLink: "https://shafiqaiman.com"
+images: []
+resources:
+- name: "featured-image"
+  src: "featured.png"
+
+tags: ["python-shell", "gobuster", "crontab", "upgrade-shell-python", "phpbash-webshell"]
+categories: ["HacktheBox"]
+
+lightgallery: true
+toc:
+  auto: false
 ---
 
 ## Nmap
@@ -33,7 +44,7 @@ port `80/HTTP` is the only one open.
 
 Let's take a look at the website. 
 
-![1](website.png)
+![phpbash webpage](website.png "phpbash webpage")
 
 Turns out, the `phpbash` is a web shell. Well, it is an open-source project and I found the GitHub link on the site itself.
 
@@ -43,21 +54,21 @@ https://github.com/Arrexel/phpbash
 
 On the GitHub page. The `phpbash` location looks like at the uploads directory. However, when I went to the uploads directory it's nothing there.
 
-![1](upload_dir.png)
+![check upload directory](upload_dir.png "check upload directory")
 
 ### Gobuster
 
 So, I'm gonna run the `gobuster` to search all hidden directories. It found a bunch of directories but the `/dev` really caught my eye.
 
-![1](gobuster.png)
+![gobuster](gobuster.png "gobuster")
 
 ### /dev
 
 Let's take a look at the `/dev` directory. Wow! found it. Now, I'm just clicking the `phpbash.php` and I've got the web shell as the `www-data` user. 
 
-![1](dev.png)
+![directory listing](dev.png "directory listing")
 
-![1](web_shell.png)
+![phpbash web shell](web_shell.png "phpbash web shell")
 
 ## Reverse Shell
 
@@ -65,13 +76,13 @@ Let's try to get the proper reverse shell. I have already tried a bunch of thing
 
 So, the first thing is I'm gonna encoded this `bash reverse shell` into `base64`
 
-![1](b64.png)
+![bash oneliner base64](b64.png "bash oneliner base64")
 
 Then, I'm gonna put it into the input of `phpbash`. Down below; is a syntax should be.  Make sure to set up an `nc` listener first. 
 
-![1](bs64_webshell.png)
+![execute reverse shell](bs64_webshell.png "execute reverse shell")
 
-![1](got_the_shell.png)
+![shell as www-data](got_the_shell.png "shell as www-data")
 
 ### Upgrade shell using python
 
@@ -88,7 +99,7 @@ Ctrl + Z
 
 The first thing a love to do when get access to the machine. I love to check the sudo permission. Let's check it with `sudo -l`. Shockingly, I can run the `sudo` with the `www-data` user. 
 
-![1](scriptmanager.png)
+![check sudo permission](scriptmanager.png "check sudo permission")
 
 Looks like, I can run any command with the `scriptmanager` user without authentication. Well, let's change into that user with this syntax;
 
@@ -96,17 +107,17 @@ Looks like, I can run any command with the `scriptmanager` user without authenti
 sudo -u scriptmanager bash
 ```
 
-![1](change_2_scriptmanager.png)
+![change user to scriptmanager](change_2_scriptmanager.png "change user to scriptmanager")
 
 ### /scripts
 
 This is caught by surprise. I found the `/scripts` directory located in the base `/`. Luckily, I already become the `scriptmanager`. Let's take a peek into the particular directory.
 
-![1](script_dir.png)
+![found /scripts directory](script_dir.png "found /scripts directory")
 
 So, the directory content 2 files are called `test.py` and `test.txt`. However, the test.txt is owned by the `root` user. After endless investigation ;) Looks like any python file in here is gonna run by root. Like a `cronjob`.
 
-![1](contents.png)
+![contents in /scripts](contents.png "contents in /scripts")
 
 ## Root Shell
 
@@ -124,4 +135,4 @@ os.dup2(s.fileno(),2)
 import pty; pty.spawn("/bin/bash")
 ```
 
-![1](petai_root.png)
+![shell as root](petai_root.png "shell as root")

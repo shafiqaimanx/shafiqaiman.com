@@ -1,10 +1,21 @@
 ---
+weight: 1
 title: "HackTheBox - Return Writeup"
 date: 2022-04-02
 draft: false
-tags: ["file-misconfiguration", "group-server_operators", "printer", "sc.exe", "evil-winrm"]
-htb: "HacktheBox"
-windows: "Windows"
+author: "SH∆FIQ ∆IM∆N"
+authorLink: "https://shafiqaiman.com"
+images: []
+resources:
+- name: "featured-image"
+  src: "featured.png"
+
+tags: ["server-operators-group", "printer", "sc.exe", "evil-winrm"]
+categories: ["HacktheBox"]
+
+lightgallery: true
+toc:
+  auto: false
 ---
 
 ## Nmap
@@ -56,11 +67,11 @@ That's a bunch of open ports. Turns out, this machine is an Active Directory Dom
 
 The `port 80` is got my attention because the Nmap scan result says, the title of the webpage is `HTB Printer Admin Panel`. Let's take a look at it, which is running on `Microsoft IIS`.
 
-![1](printer-home.png)
+![printer webpage](printer-home.png "printer webpage")
 
 It is a simple webpage and a lot of the buttons on the navigation bar don't work at all. However, when I clicked on the `Settings` button. I've been greeted by this!
 
-![1](printer-settings.png)
+![printer settings](printer-settings.png "printer settings")
 
 So, I tried to change the password first and play around with it but nothing has happens. Then, I google around and found this [HackTricks - AD information in printers](https://book.hacktricks.xyz/windows/active-directory-methodology/ad-information-in-printers). It highlights some blogs too: 
 - [https://www.ceos3c.com/hacking/obtaining-domain-credentials-printer-netcat/](https://www.ceos3c.com/hacking/obtaining-domain-credentials-printer-netcat/)
@@ -71,9 +82,9 @@ So, I tried to change the password first and play around with it but nothing has
 
 First, let's start the `nc` and listen to `port 389`. Then, in the `settings` page, change the `Server Address` into your IP address which is tun0, and click `Update`.
 
-![1](printer-tun0.png)
+![put tun0 ip](printer-tun0.png "put tun0 ip")
 
-![1](nc-clear-pass.png)
+![grab the credentials](nc-clear-pass.png "grab the credentials")
 
 In the image above. The `nc` successfully grabs the password and it's in form of `clear-text`.
 
@@ -81,7 +92,7 @@ In the image above. The `nc` successfully grabs the password and it's in form of
 
 Now, I have the password of the `svc-printer` user. Let's try to connect to this machine by using `Evil-WinRM`.
 
-![1](evil-winrm-svc-printer.png)
+![login as svc-printer](evil-winrm-svc-printer.png "login as svc-printer")
 
 YES! I'm in. This user also can read the `user flag` located in this directory `C:\Users\svc-printer\Desktop`.
 
@@ -89,7 +100,7 @@ YES! I'm in. This user also can read the `user flag` located in this directory `
 
 The first thing I love to do is run this command `whoami /all`. This command is gonna display user, group, and privileges information for the user who is currently logged on. 
 
-![1](whoami-all.png)
+![Server Operators group](whoami-all.png "Server Operators group")
 
 Here's the result. The `BUILTIN\Server Operators` caught my eyes. Why? because this group can create and delete network shared resources, start and stop services, back up and restore files. Need more information on this group. Here's the link [Microsoft - Server Operators](https://docs.microsoft.com/en-us/windows/security/identity-protection/access-control/active-directory-security-groups#bkmk-serveroperators)
 
@@ -99,7 +110,7 @@ So, I start googling around and found this [cube0x0 - Poc'ing Beyond Domain Admi
 
 First, I'm gonna start the `python http server` in my attack machine in the directory called `www` and it contains the copy of the `nc.exe` file. Then, `download` it into the victim machine which is a Windows machine.
 
-![1](nc-exe-download.png)
+![transfer nc.exe](nc-exe-download.png "transfer nc.exe")
 
 ## System Shell
 
@@ -112,6 +123,6 @@ sc.exe stop VSS
 sc.exe start VSS
 ```
 
-![1](system-shell.png)
+![shell as nt authority\system](system-shell.png "shell as nt authority\system")
 
 TA DAAA!!! now I'm an `authority\system`.

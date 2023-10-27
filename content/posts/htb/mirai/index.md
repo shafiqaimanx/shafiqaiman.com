@@ -1,10 +1,21 @@
 ---
+weight: 1
 title: "HackTheBox - Mirai Writeup"
 date: 2022-11-02
 draft: false
-tags: ["raspberry-pi-default-creds-ssh", "check-all-the-devices", "file-misconfiguration", "pi-hole", "usb-stick", "recover-file", "lsblk", "ssh"]
-htb: "HacktheBox"
-linux: "Linux"
+author: "SH∆FIQ ∆IM∆N"
+authorLink: "https://shafiqaiman.com"
+images: []
+resources:
+- name: "featured-image"
+  src: "featured.png"
+
+tags: ["raspberry-pi-default-creds-ssh", "check-all-the-devices", "pi-hole", "usb-stick", "recover-file", "lsblk"]
+categories: ["HacktheBox"]
+
+lightgallery: true
+toc:
+  auto: false
 ---
 
 ## Nmap
@@ -46,7 +57,7 @@ The nmap scan result is completed. Looks like, I'm dealing with Debian (Jessie) 
 ## Http: mirai.htb
 Upon navigating through the `mirai.htb` on my browser.  I've been greeted by the `"Website Blocked"` page. However, at the bottom of this page, I can see it says `Pi-hole` with the version number. As far as I know, `Pi-hole` is commonly used in "homemade" `VPNs` that run on [Raspberry Pi](https://www.raspberrypi.com/).
 
-![main page](main-page.png)
+![main page](main-page.png "main page")
 
 ### Http: pi.hole/admin
 By checking the page source code. I manage to find the `hostname` called `pi.hole` and I added it to my `/etc/hosts` file and also its have `/admin` directory.
@@ -57,34 +68,36 @@ By checking the page source code. I manage to find the `hostname` called `pi.hol
 
 So, I navigated to the `/admin` directory and was greeted with the `Pi-hole` page. I managed to find the `login` form by clicking `Login` on the left sidebar and I'll try simple credentials such as `admin:admin`. Then, it spits out this error and simply says `"password is generated after installation and make sure to save it or it's too late"`. Based on this error, I guess the password must be random and it's impossible to guess it.
 
-![login error](login-error.png)
+![login error](login-error.png "login error")
 
 ## Foothold: SSH
 To be honest, I'm stuck at this point and clueless. Then, I realized something, this is a [RaspberryPi](https://www.raspberrypi.com/). There are two ways, to interact with it either `connect to monitor` or `SSH` into it. Fortunately, with light googling, I managed to find the default `SSH` credentials. I'll try it and BOOM! 
 
-![ssh in as pi](ssh-in-as-user.png)
+![ssh in as pi](ssh-in-as-user.png "ssh in as pi")
 
 ## PrivEsc: Sudo
 I'm in as a `pi` user and the first thing I'll check is the sudo permission with the command `sudo -l`. Surprisingly, this user has all access to everything and I ended up just running the command `sudo su` to get the root shell.
 
-![root shell](root-shell.png)
+![change user to root](root-shell.png "change user to root")
 
 ### Flag: Root
 I'm so excited that I get the `root` shell. However, I was stunned when I'll try to retrieve the root flag because the flag isn't in that file at all but this message was.
 
-![root deleted](root-deleted.png)
+![root flag deleted](root-deleted.png "root flag deleted")
 
 Upon reading that, I'll check the `devices` that are connected to this machine with the `lsblk` command. Fair enough, I found the usb stick device that connected under `/media/usbstick`. So, I change the directory into it and it has two items in it. The first is the `lost+found` directory but unfortunately, it's just an empty directory the other file `damnit.txt` has this message.
 
-![cd usbstick](cd-into-usbstick.png)
+![cd usbstick](cd-into-usbstick.png "cd usbstick")
 
-> Damnit! Sorry man I accidentally deleted your files off the USB stick.
-> Do you know if there is any way to get them back?
->
-> -James
+{{< admonition note "damnit.txt" >}}
+Damnit! Sorry man I accidentally deleted your files off the USB stick. </br>
+Do you know if there is any way to get them back?
+
+-James
+{{< /admonition >}}
 
 Now, I'm really mad because why?? why!!!!!!! arggggg!!.. adkjlfhgasjkudfgjh \*hahahaha\* but when I'm thinking again it's linux. Everything on linux is a file because of its nature of it. So, I'm thinking `"how I'm going to read this usb stick device"` then I remembered, I can use the `strings` command to display all the things human-readable. So, I'd ended up running `strings` on the partition itself `/dev/sdb`, and again BOOM! (double-BOOM!).
 
-![shit.txt](shit-txt.png)
+![shit.txt](shit-txt.png "real root flag")
 
 \*EVIL LAUGH\*
