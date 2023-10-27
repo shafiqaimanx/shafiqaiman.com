@@ -1,10 +1,21 @@
 ---
+weight: 1
 title: "TryHackMe - Anonforce Writeup"
 date: 2021-07-10
 draft: false
+author: "SH∆FIQ ∆IM∆N"
+authorLink: "https://shafiqaiman.com"
+images: []
+resources:
+- name: "featured-image"
+  src: "featured.png"
+
 tags: ["ftp"]
-thm: "TryHackMe"
-linux: "Linux"
+categories: ["TryHackMe"]
+
+lightgallery: true
+toc:
+  auto: false
 ---
 
 [Link : https://tryhackme.com/room/bsidesgtanonforce](https://tryhackme.com/room/bsidesgtanonforce)
@@ -13,7 +24,7 @@ linux: "Linux"
 
 First, let’s do an enumeration with the IP address of this machine. I’m gonna run Nmap [Netwok Mapper] to scan any open ports. I’m gonna run this command
 
-```
+```bash
 nmap -sC -sV -oN nmap/initial <machine ip>
 ```
 

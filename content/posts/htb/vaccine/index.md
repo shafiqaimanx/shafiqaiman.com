@@ -1,17 +1,28 @@
 ---
+weight: 1
 title: "HackTheBox - Vaccine Writeup"
 date: 2021-07-21
 draft: false
-tags: ["sqlmap", "sql-union", "GTFOBins"]
-htb: "HacktheBox"
-linux: "Linux"
+author: "SH∆FIQ ∆IM∆N"
+authorLink: "https://shafiqaiman.com"
+images: []
+resources:
+- name: "featured-image"
+  src: "featured.png"
+
+tags: ["sqlmap", "sql-union", "sqli", "GTFOBins", "ftp", "rce", "zip2john", "john", "crackstation", "python", "PostgreSQL"]
+categories: ["HacktheBox"]
+
+lightgallery: true
+toc:
+  auto: false
 ---
 
 ## Enumeration
 
 - Top 1000 ports scan
 
-```sql
+```bash
 sudo nmap -sC -sV -oN nmap/initial 10.10.10.46
 ```
 
@@ -44,7 +55,7 @@ Service detection performed. Please report any incorrect results at https://nmap
 
 - All ports scan
 
-```sql
+```bash
 sudo nmap -sC -sV -p- -oN nmap/all_ports 10.10.10.46
 ```
 
@@ -89,29 +100,29 @@ Service detection performed. Please report any incorrect results at https://nmap
 
 - Found `backup.zip` file
 
-![1](1.png)
+![ftp as ftpuser](1.png "ftp as ftpuser")
 
 - download the `zip file`
 
-![1](2.png)
+![download the zipfile](2.png "download the zipfile")
 
 ## Zip2John
 
 - the zip file is encrypted
 
-![1](3.png)
+![backup.zip password protected](3.png "backup.zip password protected")
 
 - Time to use `zip2john`
 - Direct the output from `zip2john` into file called `backup.hash`
 
-![1](4.png)
+![zip2john](4.png "zip2john")
 
 ### John-The-Ripper[JtR]
 
 - Use JtR to crack it
   - found the password
 
-![1](5.png)
+![cracked the zipfile](5.png "cracked the zipfile")
 
 ### Content of the ZipFile
 
@@ -121,24 +132,24 @@ Service detection performed. Please report any incorrect results at https://nmap
 
 - Found the password in `index.php`
 
-![1](6.png)
+![found the credentials](6.png "found the credentials")
 
 - turns out, it is `md5 hash`
 - crack it using online tool
 	- [crackstation.net](https://crackstation.net/)
 
-![1](7.png)
+![crackstation](7.png "crackstation")
 
 ## The Website
 
 - Login with the password found in `index.php` file
 
-![1](8.png)
+![MegaCorp Car webpage](8.png "MegaCorp Car webpage")
 
 - Assuming this is a database loaded several cars
 - Try to insert `'` in the search field and got this error
 
-![1](9.png)
+![try to SQL injection](9.png "try to SQL injection")
 
 ### SQLmap
 
@@ -148,12 +159,12 @@ Service detection performed. Please report any incorrect results at https://nmap
 sqlmap.py -u 'http://10.10.10.46/dashboard.php?search=sunny' --cookie="PHPSESSID=q14pc524upvp0hspqoh1n5nq8p" --batch
 ```
 
-![1](10.png)
+![PostgreSQL database](10.png "PostgreSQL database")
 
 - This server is using PostgreSQL database
 - Sqlmap also found vulnerability can lead into injections
 
-![1](11.png)
+![sqlmap payload](11.png "sqlmap payload")
 
 ### UNION select
 - Source
@@ -187,13 +198,16 @@ for i in range(1,100):
 
 - the result
 
-![1](12.png)
+![checking columns](12.png "checking columns")
 
 - By looking at this result, we've found 5 columns.
 
 ### Finding Columns with useful data
 
-> Generally, the interesting data that you want to retrieve will be in string form, so you need to find one or more columns in the original query results whose data type is, or is compatible with, string data.
+{{< admonition info >}}
+Generally, the interesting data that you want to retrieve will be in string form, so you need to find one or more columns in the original query results whose data type is, or is compatible with, string data.
+{{< /admonition >}}
+
 
 - Now, we just found `5 columns` 
 - The next payload gonna be using `UNION SELECT` 
@@ -210,10 +224,12 @@ for i in range(1,100):
 	- `ERROR:  invalid input syntax for integer: "a"
 LINE 1: ...ect \* from cars where name ilike '%' UNION SELECT 'a',NULL,N...`
 
-![1](13.png)
+![SQLi union select](13.png "SQLi union select")
 
-> If the data type of a column is not compatible with string data, the injected query will cause a database error, such as:
-> `Conversion failed when converting the varchar value 'a' to data type int.`
+{{< admonition warning "Info" >}}
+If the data type of a column is not compatible with string data, the injected query will cause a database error, such as: </br>
+`Conversion failed when converting the varchar value 'a' to data type int.`
+{{< /admonition >}}
 
 - The rest of it. Work Fine
 
@@ -225,7 +241,7 @@ LINE 1: ...ect \* from cars where name ilike '%' UNION SELECT 'a',NULL,N...`
 - `' UNION SELECT NULL,VERSION(),NULL,NULL,NULL--`
 - The result
 
-![1](14.png)
+![found injection point](14.png "found injection point")
 
 ## Exploit
 
@@ -242,28 +258,28 @@ LINE 1: ...ect \* from cars where name ilike '%' UNION SELECT 'a',NULL,N...`
 
 - Got the reverse shell
 
-![1](15.png)
+![shell as postgres](15.png "shell as postgres")
 
 - Found ssh key
 
-![1](16.png)
+![found ssh key](16.png "found ssh key")
 
 ## SSH
 
 - Copy the key and change the permission with `chmod 600`
 -  ssh into it
 
-![1](17.png)
+![ssh as postgres](17.png "ssh as postgres")
 
 - Let's take a look at the website folder
 - `/var/www/html`
 - we've found a lot of files
 
-![1](18.png)
+![list webroot directory](18.png "list webroot directory")
 
 - First, lets check if there any user on it by using `grep`
 
-![1](19.png)
+![found credentials](19.png "found credentials")
 
 - Found 2 user exist:
 	- `admin`
@@ -273,7 +289,7 @@ LINE 1: ...ect \* from cars where name ilike '%' UNION SELECT 'a',NULL,N...`
 - Now, we've got the password. Let's try check the sudo permission on it by typing `sudo -l`
 
 
-![1](20.png)
+![check sudo permission](20.png "check sudo permission")
 
 ## Privilege Escalation
 
@@ -290,7 +306,7 @@ LINE 1: ...ect \* from cars where name ilike '%' UNION SELECT 'a',NULL,N...`
 - Now, I'm root
 - Found the root flag
 
-![1](21.png)
+![become root](21.png "become root")
 
 ## Conclusion
 I’ve learned a lot today. Make sure to configure the database properly and please update it. Use, long and complicate passwords. DO NOT mix around with the `user command` and the `root command`.

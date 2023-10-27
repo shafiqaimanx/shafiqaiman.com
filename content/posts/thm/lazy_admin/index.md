@@ -1,10 +1,21 @@
 ---
+weight: 1
 title: "TryHackMe - Lazy Admin Writeup"
 date: 2021-07-10
 draft: false
-tags: ["cms", "gobuster", "crackstation"]
-thm: "TryHackMe"
-linux: "Linux"
+author: "SH∆FIQ ∆IM∆N"
+authorLink: "https://shafiqaiman.com"
+images: []
+resources:
+- name: "featured-image"
+  src: "featured.png"
+
+tags: ["gobuster", "crackstation"]
+categories: ["TryHackMe"]
+
+lightgallery: true
+toc:
+  auto: false
 ---
 
 [Link : https://tryhackme.com/room/lazyadmin](https://tryhackme.com/room/lazyadmin)

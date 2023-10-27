@@ -1,10 +1,21 @@
 ---
+weight: 1
 title: "TryHackMe - Brute It Writeup"
 date: 2021-07-10
 draft: false
+author: "SH∆FIQ ∆IM∆N"
+authorLink: "https://shafiqaiman.com"
+images: []
+resources:
+- name: "featured-image"
+  src: "featured.png"
+
 tags: ["john", "hashcat"]
-thm: "TryHackMe"
-linux: "Linux"
+categories: ["TryHackMe"]
+
+lightgallery: true
+toc:
+  auto: false
 ---
 
 [Link : https://tryhackme.com/room/bruteit](https://tryhackme.com/room/bruteit)

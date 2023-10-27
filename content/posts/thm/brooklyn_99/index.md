@@ -1,11 +1,23 @@
 ---
+weight: 1
 title: "TryHackMe - Brooklyn99 Writeup"
 date: 2021-07-10
 draft: false
+author: "SH∆FIQ ∆IM∆N"
+authorLink: "https://shafiqaiman.com"
+images: []
+resources:
+- name: "featured-image"
+  src: "featured.png"
+
 tags: ["stegseek", "GTFOBins", "hydra"]
-thm: "TryHackMe"
-linux: "Linux"
+categories: ["TryHackMe"]
+
+lightgallery: true
+toc:
+  auto: false
 ---
+
 
 [Link : https://tryhackme.com/room/brooklynninenine](https://tryhackme.com/room/brooklynninenine)
 
@@ -15,7 +27,7 @@ linux: "Linux"
 
 First, let’s do an enumeration with the IP address of this machine. I’m gonna run Nmap [Netwok Mapper] to scan any open ports. I’m gonna run this command
 
-```
+```bash
 nmap -sC -sV -oN nmap/initial <machine ip>
 ```
 
@@ -28,7 +40,7 @@ nmap -sC -sV -oN nmap/initial <machine ip>
 
 Nmap scan shows us there is 3 port open. Ports SSH, HTTP, and FTP. I’m interested in the FTP port. You can see, FTP in this machine allows anonymous login. So, let’s try to check it out.
 
-```
+```bash
 ftp <machine ip>
 ```
 

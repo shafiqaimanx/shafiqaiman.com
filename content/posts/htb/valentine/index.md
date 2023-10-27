@@ -1,10 +1,21 @@
 ---
+weight: 1
 title: "HackTheBox - Valentine Writeup"
 date: 2022-11-20
 draft: false
-tags: ["gobuster", "heartbleed", "CVE-2014-0160", "tmux-session", "ssh-no-mutual-signature-supported", "ssh"]
-htb: "HacktheBox"
-linux: "Linux"
+author: "SH∆FIQ ∆IM∆N"
+authorLink: "https://shafiqaiman.com"
+images: []
+resources:
+- name: "featured-image"
+  src: "featured.png"
+
+tags: ["gobuster", "heartbleed", "CVE-2014-0160", "tmux-session", "ssh-no-mutual-signature-supported"]
+categories: ["HacktheBox"]
+
+lightgallery: true
+toc:
+  auto: false
 ---
 
 ## Nmap
@@ -35,37 +46,42 @@ Service Info: OS: Linux; CPE: cpe:/o:linux:linux_kernel
 
 The nmap scan result is completed. There are just `3` port opens which are `SSH, HTTP, and HTTPS`. Based on the [OpenSSH](https://launchpad.net/ubuntu/+source/openssh/1:5.9p1-5ubuntu1.10) service banner, this is an Ubuntu (precise) machine. However, on port `443`, the nmap found the `hostname` on the `ssl-cert` scripts scan. The hostname called `valentine.htb` and with that information I'm going to add the name to the `/etc/hosts` file.
 
-![adding the hostname](adding-the-hostname-in-etc-hosts-file.png)
+![adding the hostname](adding-the-hostname-in-etc-hosts-file.png "adding the hostname")
 
 ## Https: Valentine.htb
 I navigate to port `443` on my browser and accept the `SSL` certificates. I'll check the certificate and nothing useful for me except the `hostname` which nmap already found it. Shockingly, the homepage it's just an image of a woman that looks like screaming at something. The "Something" is an image/logo that is related to the `heartbleed` vulnerability. 
 
-![omg homepage](omg-home-page.png)
+![omg homepage](omg-home-page.png "omg homepage")
 
 Then, I'm running the second nmap scan with the `--script` flag and followed with `ssl-heartbleed` scripts. 
 
-![heartbleed nmap scan](nmap-scan-heartbleed-scripts.png)
+![heartbleed nmap scan](nmap-scan-heartbleed-scripts.png "heartbleed nmap scan")
 
 The result came back with `"VULNERABLE"` to this type of vulnerability. [Heartbleed](https://heartbleed.com/) is a bug found in the popular OpenSSL cryptographic software library also the CVE assigned to it, called [CVE-2014-0160](https://nvd.nist.gov/vuln/detail/cve-2014-0160), and here's a [great comic](https://xkcd.com/1354/) explaining it.
 
 ### Gobuster
 Although, I know this web server is vulnerable, based on the nmap scan result above. The homepage itself also gave me a clue and based on the index file extension it's a `PHP` page. Then, I'm going to run the [gobuster](https://github.com/OJ/gobuster) to search for what's hidden inside this webserver with the `-x` flag for the `PHP` extension.
 
-![gobuster scan result](gobuster-scan-result.png)
+![gobuster](gobuster-scan-result.png "gobuster")
 
 ### Https: /dev
 The `/dev` directory caught my attention because it's on top of course :). Interestingly enough, this directory enables file indexing and shows there are `2` files on it. The first one is called `hype_key` and the second one is called `notes.txt`. 
 
-![file indexing in dev](dev-file-indexing-enable.png)
+![directory listing in /dev](dev-file-indexing-enable.png "directory listing in /dev")
 
 However, I'm more hype about the `hype_key` file because it sounds interesting but when I clicked it open, it's a bunch of `hex` bytes. So, I'm going ahead to the best [chef](https://gchq.github.io/CyberChef/) I know in the entire world and try to ask him about it, and BOOM! Turns out, it's a legit key and I'm going to copy and save it on my machine. Based on the key itself, I assumed this is an `SSH` private key, and it's also `encrypted`. Now, I need to find the passphrase for it.
 
-![cyberchef decode hex](cyberchef-decode-hex-bytes.png)
+![cyberchef decode hex](cyberchef-decode-hex-bytes.png "cyberchef decode hex")
 
 ## Foothold: CVE-2014-0160
-Based on this [CVE](https://nvd.nist.gov/vuln/detail/CVE-2014-0160) which is a heartbleed vulnerability. The description says `"which allows remote attackers to obtain sensitive information from process memory such as private key"`. To be honest, I hope I manage to find the passphrase for the private key that I found earlier in the `/dev` directory. Like always, I'll search for the exploit on the `searchsploit` database and manage to find the python exploit.
+Based on this [CVE](https://nvd.nist.gov/vuln/detail/CVE-2014-0160) which is a heartbleed vulnerability.
+{{< admonition tip "Description" >}}
+which allows remote attackers to obtain sensitive information from process memory such as private key
+{{< /admonition >}}
+To be honest, I hope I manage to find the passphrase for the private key that I found earlier in the `/dev` directory. Like always, I'll search for the exploit on the `searchsploit` database and manage to find the python exploit.
 
-![searchsploit heartbleed](searchsploit-search-heartbleed.png)
+
+![searchsploit heartbleed](searchsploit-search-heartbleed.png "searchsploit heartbleed")
 
 Then, I'm running the exploit and give the victim `IP` as an argument and the output is massive. However, it's a bunch of zero hex bytes of nothing and I'll try to chop some of it by piping the output to the `grep` command. My first time running it, and I can't find anything useful. So, I'll try to keep running it, and finally, I manage to find a `base64` string under the `/decode.php` file. 
 
@@ -91,20 +107,20 @@ Received heartbeat response:
 
 Looks like, someone used the `/decode.php` on this webserver to decode this string before. I navigated to the `/decode.php` page and try to decode it and it managed to encode. The encoded string is human readable and I believe it's a passphrase for the private key.
 
-![decode base64](decode-base64.png)
+![base64 string](decode-base64.png "base64 string")
 
 With this information that I gather, I'll try to `SSH` into the machine using the private key and `hype` as the user. Based on, the name of the key file that I found earlier, first I need to change the permission of the key with this command `chmod 600 <file.key>`. 
 However, I've got an error that says `"sign_and_send_pubkey: no mutual signature supported"`, with quick googling I manage to find the [answer](https://transang.me/ssh-handshake-is-rejected-with-no-mutual-signature-algorithm-error/) for it. Then, I'll try again to login in and KACHOW!
 
-![hype user](hype-user.png)
+![ssh as hype](hype-user.png "ssh as hype")
 
 ## PrivEsc: Tmux Session
 I'm in as the `hype` user and the first thing I love to do is check the sudo permission with the `sudo -l` command. Unfortunately, it does require a password which I don't have. Then, I'll try to list all files in the `/home/hype` directory and I'm amazed that the `.bash_history` file contains something. Most of the time, this file always redirects to the `2>/dev/null` which is nothing.
 
-![bash history file](history.png)
+![bash history file](history.png "bash history file")
 
 A lot of history contains something to do with `Tmux`. So, I'll try to do a bunch of it and I manage to get root by executing this command `tmux -S /.devs/dev_sess` and it throws me in a `Tmux` session.
 
-![root user](root-user.png)
+![become root](root-user.png "become root")
 
 ROOT!

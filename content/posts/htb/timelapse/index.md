@@ -1,10 +1,21 @@
 ---
+weight: 1
 title: "HackTheBox - Timelapse Writeup"
 date: 2022-08-21
 draft: false
-tags: ["ldap", "ldapsearch", "smb", "smbclient", "powershell-history", "pfx-file", "evil-winrm", "crackmapexec", "john", "zip2john", "pfx2john", "group-laps_readers"]
-htb: "HacktheBox"
-windows: "Windows"
+author: "SH∆FIQ ∆IM∆N"
+authorLink: "https://shafiqaiman.com"
+images: []
+resources:
+- name: "featured-image"
+  src: "featured.png"
+
+tags: ["crackmapexec", "smbclient", "zip2john", "pfx-file", "pfx2john", "john", "evil-winrm", "powershell-history", "ldap", "ldapsearch", "laps_readers-group"]
+categories: ["HacktheBox"]
+
+lightgallery: true
+toc:
+  auto: false
 ---
 
 ## Nmap
@@ -100,33 +111,35 @@ In the result of the Nmap scan. I saw that ports `139` and `445` are open and it
 ### CrackMapExec: SMB
 The version of Windows currently using is `Windows 10.0 Build 17763 x64`. So, this is not a new version of Windows, at the time writing this blog Windows 11 is already out.
 
-![check windows version over smb using crackmapexec](crackmapexec-check-windows-version-over-smb.png)
+![check windows version over smb using crackmapexec](crackmapexec-check-windows-version-over-smb.png "check windows version over smb using crackmapexec")
 
 ### SMBclient
 Now, we already know that smb ports are open. Let's try listing the shares by using `smbclient`. Surprisingly, it doesn't require authentication for it. I just press `Enter` in the password prompt. 
 
-![list all shares using smbclient](smbclient-list-all-shares.png)
+![list all shares](smbclient-list-all-shares.png "list all shares")
 
 ## JohntheRipper: zip2john
 After checking the all shares. I finally found something that looks interesting. I found the `winrm_backup.zip` file in `\Shares\Dev\`. Let's download it, into our attack machine with the `get command`. Now, it's time to unzip the file. However, it is protected by a password and I don't know, what the password is. So, I'm gonna run `zip2john` to crack the zip file with `rockyou.txt` as a wordlist.
 
-![download zip file](download-winrm-backup-zip-file.png)
+![download zip file](download-winrm-backup-zip-file.png "download zip file")
 
-![using zip2john](using-zip2john-to-convert-into-hash-and-use-john-to-crack-it.png)
+![cracked the zipfile](using-zip2john-to-convert-into-hash-and-use-john-to-crack-it.png "cracked the zipfile")
 
 ## *.PFX file
 Finally, the wait pay off. We've got the password and it's time to crack it open. Well, it just contains one file called `legacyy_dev_auth.pfx`. I never heard of the extensions called `pfx`  before, and with quick googling. It says:
 
-> The .pfx file, which is in a PKCS#12 format, **contains the SSL certificate (public keys) and the corresponding private keys**.
- 
-![unzip the .pfx file](unzip-the-file-and-it-is-contain-the-pfx-file.png)
+{{< admonition tip "Description" >}}
+The `.pfx` file, which is in a `PKCS#12` format, **contains the SSL certificate (public keys) and the corresponding private keys**.
+{{< /admonition >}}
+
+![unzip the zipfile](unzip-the-file-and-it-is-contain-the-pfx-file.png "unzip the zipfile")
  
 ### JohntheRipper: pfx2john
 The `pfx` file it's just a binary that compiles with public and private keys. Now, what we need is, to extract the keys from it. I manage found an article that shows us `'How to extract it'`. Here's the [article](https://www.ibm.com/docs/en/arl/9.7?topic=certification-extracting-certificate-keys-from-pfx-file). First, we need to extract the private key by using `openssl`. Unfortunately, its needed the password. I already try the password that we found earlier and it doesn't work. Now, I'm gonna run the file against `pfx2john` to produce the hash and crack it with `john`.
  
-![openssl extract priv key](invalid-password-openssl-extract-priv-key-from-pfx-file.png)
+![openssl extract priv key](invalid-password-openssl-extract-priv-key-from-pfx-file.png "openssl extract priv key")
  
-![using pfx2john](using-pfx2john-to-produce-hash-and-crack-it-with-john.png)
+![cracked the pfx file](using-pfx2john-to-produce-hash-and-crack-it-with-john.png "cracked the pfx file")
  
 ### Extracting the cert from *.PFX file
 Nice! we finally managed to retrieve the `pfx` file password. Let's try to extract the keys one more time. Here's an [article](https://www.ibm.com/docs/en/arl/9.7?topic=certification-extracting-certificate-keys-from-pfx-file) for reference. Let me breaks down into three parts real quick.
@@ -137,14 +150,14 @@ Nice! we finally managed to retrieve the `pfx` file password. Let's try to extra
 
 _<font color="yellow">NOTE: you will be prompted to type the import password. Type the password you found earlier by using pfx2john</font>_
 
-![extract the priv/pub key](extract-the-priv-and-pub-key-from-pfx-file.png)
+![extract the priv/pub key](extract-the-priv-and-pub-key-from-pfx-file.png "extract the priv/pub key")
 
 ## Evil-WinRM: legacyy
 Based on the zip file name `'winrm_backup.zip'`. I guess this might be something to do with `winrm`, and the Nmap scan result also shows us that port `5986` is open. 
 
 Let's try connecting to it with `Evil-WinRM` and make sure to `enable ssl` with the `-S` tag. I'm gonna use the keys we discovered with  `-c` for the public key and `-k` for a private key. Finally, I'm in as a `legacyy` user.
 
-![evil-winrm login as user](evil-winrm-login-as-legacyy-user.png)
+![login as legacyy](evil-winrm-login-as-legacyy-user.png "login as legacyy")
 
 ### Powershell History
 So, I'll try to run the `winpeas`. Unfortunately, it doesn't execute because the `Anti-Virus` program managed to catch it and throws this error `file contains a virus or potentially unwanted software`. Honestly, I am stuck on this machine. Then, I realized, I never check the `powershell history` and I felt guilty because that file has always been ignored by me. To my surprise, I found something useful yet interesting in the `powershell history` file.
@@ -153,28 +166,31 @@ So, I'll try to run the `winpeas`. Unfortunately, it doesn't execute because the
 type $env:APPDATA\Microsoft\Windows\PowerShell\PSReadLine\ConsoleHost_history.txt
 ```
 
-![read the powershell history](read-the-powershell-history.png)
+![found credentials in powershell history](read-the-powershell-history.png "found credentials in powershell history")
 
 ## Evil-WinRM: svc_deploy
 Well, in the `history` file contains `svc_deploy` user credentials and lead us into port `5986` once again. Let's connect to the machine as `svc_deploy` user with the credentials we just found. Success!
 
-![evil-winrm login as svc_deploy](evil-winrm-login-as-svc_deploy-user.png)
+![login as svc_deploy](evil-winrm-login-as-svc_deploy-user.png "login as svc_deploy")
 
 ### Group: LAPS_Readers
 Let's check this user "background" with the `net user` command. Turns out, this user is part of `LAPS_Readers` Global Group memberships. Honestly, I didn't even know what it is, but it sounds cool :p with a quick search on the net. It says:
 
-> The "Local Administrator Password Solution" (LAPS) provides management of local account passwords of domain-joined computers. Passwords are stored in Active Directory (AD) and protected by ACL, so only eligible users can read them or request its reset.
+{{< admonition tip "Description" >}}
+The `Local Administrator Password Solution` (LAPS) provides management of local account passwords of domain-joined computers. </br>
+Passwords are stored in Active Directory (AD) and protected by ACL, so only eligible users can read them or request its reset.
+{{< /admonition >}}
 
-![run the command](run-the-command-of-net-user-svc_deploy.png)
+![net user svc_deploy](run-the-command-of-net-user-svc_deploy.png "net user svc_deploy")
 
 ### LDAPsearch
 The excited part of it. We can read the password stored in Active Directory. The last time I checked, this is an AD machine. So, I manage to find an [article](https://www.hackingarticles.in/credential-dumpinglaps/) that's about credentials dumping. I already try used `crackmapexec` and it just threw a bunch of errors at me. So, I end up using `ldapsearch`. Let's dump the `administrator` credentials.
 
-![ldapsearch credentials dumping](ldapsearch-creds-dump.png)
+![found credentials in ldap](ldapsearch-creds-dump.png "found credentials in ldapsearch")
 
 ## Evil-WinRM: administrator
 We successfully retrieve the `administrator` credentials. Let's try connect to `evil-winrm`.
 
-![login as administrator and read the root flag](login-as-administrator-and-read-the-root-flag.png)
+![login as administrator](login-as-administrator-and-read-the-root-flag.png "login as administrator")
 
 \*CHEF KISS\* Beautiful

@@ -1,10 +1,21 @@
 ---
+weight: 1
 title: "HackTheBox - Shocker Writeup"
 date: 2022-11-05
 draft: false
-tags: ["CVE-2014-6271", "gobuster", "shellshock", "sudo-perl", "GTFOBins", "rce", "python", "file-misconfiguration", "cgi-bin"]
-htb: "HacktheBox"
-linux: "Linux"
+author: "SH∆FIQ ∆IM∆N"
+authorLink: "https://shafiqaiman.com"
+images: []
+resources:
+- name: "featured-image"
+  src: "featured.png"
+
+tags: ["CVE-2014-6271", "gobuster", "shellshock", "GTFOBins", "rce", "python", "cgi-bin"]
+categories: ["HacktheBox"]
+
+lightgallery: true
+toc:
+  auto: false
 ---
 
 ## Nmap
@@ -30,25 +41,25 @@ The nmap scan result is completed. There are just `2` port opens which are port 
 ## Http: don't bug me!
 With that information in hand. I've navigated port `80` through my browser and I've been greeted with this page. It's just a funny image with text that says `"Don't Bug Me!"`. Based on the `index` page extension, it's an `html` file.
 
-![](dont-bug-me.png)
+![don't bug me](dont-bug-me.png "don't bug me")
 
 ### Gobuster
 So, I'm going to run [gobuster](https://github.com/OJ/gobuster) to enumerate more on this webserver. However, it's just a massive dead end for me. I can't find anything at all. Based on this machine name, which is `shocker` and I'm thinking somehow it's based on [Shellshock](https://en.wikipedia.org/wiki/Shellshock_(software_bug)) vulnerability. Also, it has an `Apache` web server running and this vulnerability can occur in the [/cgi-bin/](https://en.wikipedia.org/wiki/Common_Gateway_Interface) directory. When I navigated to that directory in my browser, I instantly got `Forbidden` or `403` which means it existed.
 
-![](cgi-bin.png)
+![forbidden /cgi-bin/](cgi-bin.png "forbidden /cgi-bin/")
 
 Now, I'm confused why [gobuster](https://github.com/OJ/gobuster) can't find it at all, and based on the wordlist I used, the `cgi-bin` is present in it. With closer inspection, I found out that it needs to be another "slash" `/` in the end. For example `/cgi-bin` vs `/cgi-bin/`. When it doesn't have `/` at the end, it goes straight to `404 Not Found`. Then, I'll try running the [gobuster](https://github.com/OJ/gobuster) again with tag `-f` for `Append / to each request` and it did manage to find the `/cgi-bin/` directory.
 
-![](gobuster-cgi-bin.png)
+![gobuster](gobuster-cgi-bin.png "gobuster")
 
 The best thing to do now is to enumerate more in that directory but this time I'm using the `-x` flag for looking up the extension with `.sh` and `.cgi` and I've got a hit with the `user.sh` file.
 
-![](gobuster-cgi-bin-user-sh.png)
+![gobuster user.sh](gobuster-cgi-bin-user-sh.png "gobuster user.sh")
 
 ### Http: /Cgi-Bin/User.sh
 When I navigated to that file which is `user.sh` it automatically downloaded it into my machine. When I opened it up, it was `"Just an uptime test script"` and nothing too fancy about it. ;)
 
-![](read-the-file-user-sh.png)
+![contents user.sh](read-the-file-user-sh.png "contents user.sh")
 
 ## Foothold: ShellShock
 So, I already have the file that I needed for the exploitation but I didn't know how to tinker with it. So, the same old me goes to my handsome and wise friend Mr.Google and asking about ShellShock's vulnerability. I ended up finding this [blog](https://www.sevenlayers.com/index.php/125-exploiting-shellshock) post showcasing `"how to exploit shellshock manually"` also the given CVE for this vulnerability is [CVE-2014-6271](https://nvd.nist.gov/vuln/detail/cve-2014-6271). I can inject some arbitrary bash command in the `User-Agent` but with some weird string inside it. Luckily, I manage to find this [answer](https://unix.stackexchange.com/a/157520) regard of that `string` (Kind of understand a bit) but I want to be "leet" today. So, I'm going to make a [python](https://www.python.org/) script to gain the initial foothold with [bash reverse shell](https://www.revshells.com/).
@@ -78,8 +89,8 @@ if __name__ == "__main__":
 why not? ¯\\(0_0)/¯
 
 ## PrivEsc: Perl
-I'm in as a `shelly` user and the very first thing I love to do is [upgrading my shell](https://note.shafiqaiman.com/misc/upgrade-reverse-shell#python) with python since this machine has python installed on it. Like always, I love to start with the simple `"check"` in the sudo permission with the `sudo -l` command. Shockingly, I can run `perl` with the sudo command without any authentication needed. So, I'm heading to the lovely [gtfobins](https://gtfobins.github.io/) that have a bunch of collection of Unix binaries that can be abused. Then, I'll try to run it, and BOOM!
+I'm in as a `shelly` user and the very first thing I love to do is [upgrading my shell](https://book.hacktricks.xyz/generic-methodologies-and-resources/shells/full-ttys#python) with python since this machine has python installed on it. Like always, I love to start with the simple `"check"` in the sudo permission with the `sudo -l` command. Shockingly, I can run `perl` with the sudo command without any authentication needed. So, I'm heading to the lovely [gtfobins](https://gtfobins.github.io/) that have a bunch of collection of Unix binaries that can be abused. Then, I'll try to run it, and BOOM!
 
-![](root.png)
+![become root](root.png "become root")
 
 VOILA

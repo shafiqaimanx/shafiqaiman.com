@@ -1,10 +1,21 @@
 ---
+weight: 1
 title: "TryHackMe - Agent Sudo Writeup"
 date: 2021-07-10
 draft: false
-tags: ["stegseek", "CVE-2019-14287"]
-thm: "TryHackMe"
-linux: "Linux"
+author: "SH∆FIQ ∆IM∆N"
+authorLink: "https://shafiqaiman.com"
+images: []
+resources:
+- name: "featured-image"
+  src: "featured.png"
+
+tags: ["stegseek", "CVE-2019-14287", "ftp", "python"]
+categories: ["TryHackMe"]
+
+lightgallery: true
+toc:
+  auto: false
 ---
 
 [Link : https://tryhackme.com/room/agentsudoctf](https://tryhackme.com/room/agentsudoctf)
@@ -13,7 +24,7 @@ linux: "Linux"
 
 First, let’s do an enumeration with the IP address of this machine. I’m gonna run Nmap [Netwok Mapper] to scan any open ports. I’m gonna run this command
 
-```
+```bash
 nmap -sC -sV -oN nmap/initial <machine ip>
 ```
 

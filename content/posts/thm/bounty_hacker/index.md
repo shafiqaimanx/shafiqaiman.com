@@ -1,18 +1,30 @@
 ---
+weight: 1
 title: "TryHackMe - Bounty Hacker Writeup"
 date: 2021-07-10
 draft: false
-tags: ["GTFOBins", "hydra", "ssh"]
-thm: "TryHackMe"
-linux: "Linux"
+author: "SH∆FIQ ∆IM∆N"
+authorLink: "https://shafiqaiman.com"
+images: []
+resources:
+- name: "featured-image"
+  src: "featured.png"
+
+tags: ["GTFOBins", "hydra", "ftp"]
+categories: ["TryHackMe"]
+
+lightgallery: true
+toc:
+  auto: false
 ---
+
 [Link : https://tryhackme.com/room/cowboyhacker](https://tryhackme.com/room/cowboyhacker)
 
 ## Enumeration
 
 First, let’s do an enumeration with the IP address of this machine. I’m gonna run Nmap [Netwok Mapper] to scan any open ports. I’m gonna run this command
 
-```
+```bash
 nmap -sC -sV -oN nmap/initial <machine ip>
 ```
 
@@ -51,7 +63,7 @@ However, I can’t find anything useful. So, I’m gonna run the tool called gob
 
 This leaves me with the 2 files from FTP earlier. Now, let’s try brute force ssh with these credentials. I’m gonna use hydra for this
 
-```
+```bash
 hydra -l <username> -P <password-list> ssh://<machine ip>
 ```
 

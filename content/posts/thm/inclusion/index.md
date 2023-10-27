@@ -1,10 +1,21 @@
 ---
+weight: 1
 title: "TryHackMe - Inclusion Writeup"
 date: 2021-07-10
 draft: false
+author: "SH∆FIQ ∆IM∆N"
+authorLink: "https://shafiqaiman.com"
+images: []
+resources:
+- name: "featured-image"
+  src: "featured.png"
+
 tags: ["GTFOBins", "lfi"]
-thm: "TryHackMe"
-linux: "Linux"
+categories: ["TryHackMe"]
+
+lightgallery: true
+toc:
+  auto: false
 ---
 
 [Link : https://tryhackme.com/room/inclusion](https://tryhackme.com/room/inclusion)
