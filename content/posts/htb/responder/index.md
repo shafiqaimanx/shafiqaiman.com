@@ -10,7 +10,7 @@ resources:
 - name: "featured-image"
   src: "featured.png"
 
-tags: ["lfi", "rce", "log-poisoning", "responder.py", "NTLMv2", "hashcat", "reverse-powershell", "php-webshell", "evil-winrm"]
+tags: ["lfi", "rce", "log-poisoning", "responder.py", "NTLMv2", "hashcat", "reverse-powershell", "php-webshell", "evil-winrm", "steal-NTLMv2"]
 categories: ["HacktheBox"]
 
 lightgallery: true
