@@ -10,7 +10,7 @@ resources:
 - name: "featured-image"
   src: "featured.png"
 
-tags: ["crackmapexec", "smbclient", "zip2john", "pfx-file", "pfx2john", "john", "evil-winrm", "powershell-history", "ldap", "ldapsearch", "laps_readers-group"]
+tags: ["crackmapexec-smb", "smbclient", "zip2john", "pfx-file", "pfx2john", "john", "evil-winrm", "powershell-history", "ldap", "ldapsearch", "laps_readers-group"]
 categories: ["HacktheBox"]
 
 lightgallery: true

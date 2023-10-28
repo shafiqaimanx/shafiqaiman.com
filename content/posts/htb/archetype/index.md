@@ -10,7 +10,7 @@ resources:
 - name: "featured-image"
   src: "featured.png"
 
-tags: ["reverse-powershell", "legacy", "smb", "smbclient", "crackmapexec", "impacket-mssqlclient", "mssql", "xp_cmdshell", "nishang", "modify-services", "windows-check-OS-architecture"]
+tags: ["reverse-powershell", "legacy", "smb", "smbclient", "crackmapexec-smb", "impacket-mssqlclient", "mssql", "xp_cmdshell", "nishang", "modify-services", "windows-check-OS-architecture"]
 categories: ["HacktheBox"]
 
 lightgallery: true
