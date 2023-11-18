@@ -11,12 +11,16 @@ resources:
   src: "featured.png"
 
 tags: ["gobuster", "wordpress", "jd-gui", "jar-file"]
-categories: ["HacktheBox"]
+categories: ["HacktheBox","Linux"]
 
 lightgallery: true
 toc:
   auto: false
 ---
+
+Box author | {{< person url="https://app.hackthebox.com/users/2904" name="Arrexel" picture="https://www.hackthebox.com/storage/avatars/4a677d39a1156ca6a4f2fdce085aa3da.png" >}}
+
+<!--more-->
 
 ## Nmap
 Like always, I’m going to scan the IP address by using [nmap](https://nmap.org/) but I’m going to scan the full port first. Then, I’m going to scan the only open ports.

@@ -11,12 +11,16 @@ resources:
   src: "featured.png"
 
 tags: ["python", "mysql", "gitea", "rce", "searchor 2.4.0", "docker", "docker-inspect"]
-categories: ["HacktheBox"]
+categories: ["HacktheBox","Linux"]
 
 lightgallery: true
 toc:
   auto: false
 ---
+
+Box author | {{< person url="https://app.hackthebox.com/users/389926" name="kavigihan" picture="https://www.hackthebox.com/storage/avatars/c7d136d60709887dafa22d9688bfb47e.png" >}}
+
+<!--more-->
 
 ## Nmap
 Like always, I’m going to scan the IP Address by using [nmap](https://nmap.org/) but I’m going to scan the full port first. Then, I’m going to scan the only open ports.

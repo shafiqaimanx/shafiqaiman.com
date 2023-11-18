@@ -11,12 +11,16 @@ resources:
   src: "featured.png"
 
 tags: ["python-shell", "gobuster", "crontab", "upgrade-shell-python", "phpbash-webshell"]
-categories: ["HacktheBox"]
+categories: ["HacktheBox","Linux"]
 
 lightgallery: true
 toc:
   auto: false
 ---
+
+Box author | {{< person url="https://app.hackthebox.com/users/2904" name="Arrexel" picture="https://www.hackthebox.com/storage/avatars/4a677d39a1156ca6a4f2fdce085aa3da.png" >}}
+
+<!--more-->
 
 ## Nmap
 

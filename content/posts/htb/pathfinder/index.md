@@ -11,12 +11,16 @@ resources:
   src: "featured.png"
 
 tags: ["ldap", "ldapsearch", "ldapdomaindump", "kerberos", "ASREPRoast", "GetNPUsers.py", "DCSync-attack", "secretsdump.py", "john", "evil-winrm", "psexec.py"]
-categories: ["HacktheBox"]
+categories: ["HacktheBox","Windows"]
 
 lightgallery: true
 toc:
   auto: false
 ---
+
+Box author | {{< person url="https://app.hackthebox.com/users/94858" name="egotisticalSW" picture="https://www.hackthebox.com/storage/avatars/6b0396fe25238856ef9ec223896bb8d1.png" >}}
+
+<!--more-->
 
 ## Enumeration
 

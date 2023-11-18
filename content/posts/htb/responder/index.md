@@ -11,12 +11,14 @@ resources:
   src: "featured.png"
 
 tags: ["lfi", "rce", "log-poisoning", "responder.py", "NTLMv2", "hashcat", "reverse-powershell", "php-webshell", "evil-winrm", "steal-NTLMv2"]
-categories: ["HacktheBox"]
+categories: ["HacktheBox","Windows"]
 
 lightgallery: true
 toc:
   auto: false
 ---
+
+<!--more-->
 
 I found `two ways` to gain into this machine. First, stealing the password hash by using the responder and then logon through evil-winrm. Second, gaining the remote code execution through log poisoning and getting the reverse shell.
 

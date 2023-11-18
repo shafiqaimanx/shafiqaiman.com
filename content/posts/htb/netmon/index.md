@@ -11,12 +11,16 @@ resources:
   src: "featured.png"
 
 tags: ["CVE-2018-9276", "evil-winrm", "PRTG-netmon", "ftp", "paessler", "rce", "PRTG-netmon-default-creds"]
-categories: ["HacktheBox"]
+categories: ["HacktheBox","Windows"]
 
 lightgallery: true
 toc:
   auto: false
 ---
+
+Box author | {{< person url="https://app.hackthebox.com/users/2984" name="mrb3n" picture="https://www.hackthebox.com/storage/avatars/adb3d560986d35b4fdd9605bae289ea9.png" >}}
+
+<!--more-->
 
 ## Nmap
 First, let's scan the IP address by using the Nmap

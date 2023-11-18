@@ -11,12 +11,16 @@ resources:
   src: "featured.png"
 
 tags: ["GTFOBins", "rce", "gobuster", "PHP/8.1.0-dev", "php-backdoor"]
-categories: ["HacktheBox"]
+categories: ["HacktheBox","Linux"]
 
 lightgallery: true
 toc:
   auto: false
 ---
+
+Box author | {{< person url="https://app.hackthebox.com/users/98767" name="MrKN16H7" picture="https://www.hackthebox.com/storage/avatars/c6ea8f90a1bb37a68661cc888fefee05.png" >}}
+
+<!--more-->
 
 ## Enumeration
 

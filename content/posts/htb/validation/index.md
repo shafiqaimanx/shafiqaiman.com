@@ -11,12 +11,16 @@ resources:
   src: "featured.png"
 
 tags: ["sqli", "sql-union", "sql-to-rce", "php-webshell", "gobuster", "rce", "upgrade-shell-using-script"]
-categories: ["HacktheBox"]
+categories: ["HacktheBox","Linux"]
 
 lightgallery: true
 toc:
   auto: false
 ---
+
+Box author | {{< person url="https://app.hackthebox.com/users/3769" name="ippsec" picture="https://app.hackthebox.com/images/logos/htb_ic2.svg" >}}
+
+<!--more-->
 
 ## Nmap
 Like always, I'm going to scan the IP Address by using [Nmap](https://nmap.org/).

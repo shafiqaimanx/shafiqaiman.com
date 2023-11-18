@@ -11,12 +11,16 @@ resources:
   src: "featured.png"
 
 tags: ["reverse-powershell", "legacy", "smb", "smbclient", "crackmapexec-smb", "impacket-mssqlclient", "mssql", "xp_cmdshell", "nishang", "modify-services", "windows-check-OS-architecture"]
-categories: ["HacktheBox"]
+categories: ["HacktheBox","Windows"]
 
 lightgallery: true
 toc:
   auto: false
 ---
+
+Box author | {{< person url="https://app.hackthebox.com/users/1190" name="egre55" picture="https://www.hackthebox.com/storage/avatars/a9527867b56b74bd7de6f0b940a04916.png" >}}
+
+<!--more-->
 
 ## Enumeration
 

@@ -11,12 +11,16 @@ resources:
   src: "featured.png"
 
 tags: ["finger", "finger-user-enum", "john", "privesc-wget"]
-categories: ["HacktheBox"]
+categories: ["HacktheBox","Solaris"]
 
 lightgallery: true
 toc:
   auto: false
 ---
+
+Box author | {{< person url="https://app.hackthebox.com/users/10931" name="Agent22" picture="https://www.hackthebox.com/storage/avatars/62f9f866b9733371b38b5c9959574458.png" >}}
+
+<!--more-->
 
 ## Nmap
 Like always, I’m going to scan the IP Address by using [nmap](https://nmap.org/) but I’m going to scan the full port first. Then, I’m going to scan the only open ports.

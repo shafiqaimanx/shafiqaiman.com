@@ -11,12 +11,14 @@ resources:
   src: "featured.png"
 
 tags: ["CVE-2021-44228", "unifi-6.4.54", "log4j", "tcpdump", "rogue-jndi", "mongodb-checking-is-running", "mongodb", "mongodb-dump", "mongodb-update", "generate-sha512-hash", "upgrade-shell-using-script"]
-categories: ["HacktheBox"]
+categories: ["HacktheBox","Linux"]
 
 lightgallery: true
 toc:
   auto: false
 ---
+
+<!--more-->
 
 ## Nmap
 

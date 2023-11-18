@@ -11,12 +11,16 @@ resources:
   src: "featured.png"
 
 tags: ["CVE-2014-4688", "pfsense-default-creds", "pfsense", "gobuster", "python", "rce"]
-categories: ["HacktheBox"]
+categories: ["HacktheBox","OpenBSD"]
 
 lightgallery: true
 toc:
   auto: false
 ---
+
+Box author | {{< person url="https://app.hackthebox.com/users/709" name="lkys37en" picture="https://www.hackthebox.com/storage/avatars/17318612f22650dd53240578156ab264.png" >}}
+
+<!--more-->
 
 ## Nmap
 Like always, I’m going to scan the IP Address by using [nmap](https://nmap.org/) but I’m going to scan the full port first. Then, I’m going to scan the only open ports.

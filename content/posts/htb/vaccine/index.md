@@ -11,12 +11,16 @@ resources:
   src: "featured.png"
 
 tags: ["sqlmap", "sql-union", "sqli", "GTFOBins", "ftp", "rce", "zip2john", "john", "crackstation", "python", "PostgreSQL"]
-categories: ["HacktheBox"]
+categories: ["HacktheBox","Windows"]
 
 lightgallery: true
 toc:
   auto: false
 ---
+
+Box author | {{< person url="https://app.hackthebox.com/users/8308" name="MinatoTW" picture="https://www.hackthebox.com/storage/avatars/bf7f262620421f0e5b49a8a69d583eee.png" >}}
+
+<!--more-->
 
 ## Enumeration
 

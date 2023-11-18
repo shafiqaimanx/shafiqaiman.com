@@ -11,12 +11,16 @@ resources:
   src: "featured.png"
 
 tags: ["ssrf", "upload-vuln", "AlwaysInstallElevated", "winpeas", "msfvenom", "gobuster", "msi-file"]
-categories: ["HacktheBox"]
+categories: ["HacktheBox","Windows"]
 
 lightgallery: true
 toc:
   auto: false
 ---
+
+Box author | {{< person url="https://app.hackthebox.com/users/157669" name="pwnmeow" picture="https://www.hackthebox.com/storage/avatars/0fb7beeded226e92eada949bdd03a2e7.png" >}}
+
+<!--more-->
 
 ## Enumeration
 

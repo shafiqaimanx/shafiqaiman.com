@@ -11,12 +11,16 @@ resources:
   src: "featured.png"
 
 tags: ["CVE-2019-17671", "CVE-2021-3560", "polkit", "linpeas", "gobuster", "wordpress", "hubot"]
-categories: ["HacktheBox"]
+categories: ["HacktheBox","Linux"]
 
 lightgallery: true
 toc:
   auto: false
 ---
+
+Box author | {{< person url="https://app.hackthebox.com/users/92926" name="secnigma" picture="https://www.hackthebox.com/storage/avatars/fc1c35025aa7babcc86031b99f36360a.png" >}}
+
+<!--more-->
 
 ## Nmap
 

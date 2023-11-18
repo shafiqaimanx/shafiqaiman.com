@@ -11,12 +11,16 @@ resources:
   src: "featured.png"
 
 tags: ["crackmapexec-smb", "smbclient", "zip2john", "pfx-file", "pfx2john", "john", "evil-winrm", "powershell-history", "ldap", "ldapsearch", "laps_readers-group"]
-categories: ["HacktheBox"]
+categories: ["HacktheBox","Windows"]
 
 lightgallery: true
 toc:
   auto: false
 ---
+
+Box author | {{< person url="https://app.hackthebox.com/users/168546" name="ctrlzero" picture="https://www.hackthebox.com/storage/avatars/95abe1fd10b0cfac1d5e2131474b9ebd.png" >}}
+
+<!--more-->
 
 ## Nmap
 Let's scan the Ip address first, by using Nmap.

@@ -11,12 +11,16 @@ resources:
   src: "featured.png"
 
 tags: ["rbash", "hashcat", "bypass-rbash"]
-categories: ["HacktheBox"]
+categories: ["HacktheBox","Linux"]
 
 lightgallery: true
 toc:
   auto: false
 ---
+
+Box author | {{< person url="https://app.hackthebox.com/users/31190" name="TRX" picture="https://www.hackthebox.com/storage/avatars/f7a696a1331031242f713514b7a4621a.png" >}}
+
+<!--more-->
 
 ## Enumeration
 

@@ -11,12 +11,16 @@ resources:
   src: "featured.png"
 
 tags: ["lfi", "rce", "ssh", "gobuster", "svwar/sipvicious", "GTFOBins", "python", "SUID", "elastix", "freepbx"]
-categories: ["HacktheBox"]
+categories: ["HacktheBox","Linux"]
 
 lightgallery: true
 toc:
   auto: false
 ---
+
+Box author | {{< person url="https://app.hackthebox.com/users/1" name="ch4p" picture="https://www.hackthebox.com/storage/avatars/08c255a334e10b3033ab7263e6b32422.png" >}}
+
+<!--more-->
 
 ## Nmap
 

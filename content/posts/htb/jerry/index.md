@@ -11,12 +11,16 @@ resources:
   src: "featured.png"
 
 tags: ["msfvenom", "jsp-reverse-shell", "jsp-webshell", "war-file", "apache-tomcat"]
-categories: ["HacktheBox"]
+categories: ["HacktheBox","Windows"]
 
 lightgallery: true
 toc:
   auto: false
 ---
+
+Box author | {{< person url="https://app.hackthebox.com/users/2570" name="mrh4sh" picture="https://www.hackthebox.com/storage/avatars/03763e0eb6ceb271534e847fe104cef1.png" >}}
+
+<!--more-->
 
 ## Nmap
 

@@ -11,12 +11,16 @@ resources:
   src: "featured.png"
 
 tags: ["gobuster", "heartbleed", "CVE-2014-0160", "tmux-session", "ssh-no-mutual-signature-supported"]
-categories: ["HacktheBox"]
+categories: ["HacktheBox","Linux"]
 
 lightgallery: true
 toc:
   auto: false
 ---
+
+Box author | {{< person url="https://app.hackthebox.com/users/2984" name="mrb3n" picture="https://www.hackthebox.com/storage/avatars/adb3d560986d35b4fdd9605bae289ea9.png" >}}
+
+<!--more-->
 
 ## Nmap
 Like always, I’m going to scan the IP Address by using [nmap](https://nmap.org/) but I’m going to scan the full port first. Then, I’m going to scan the only open ports.

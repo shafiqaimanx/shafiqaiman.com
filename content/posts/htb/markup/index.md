@@ -11,12 +11,16 @@ resources:
   src: "featured.png"
 
 tags: ["xxe", "xxe-read-file", "icacls", "checking-file-permission-windows"]
-categories: ["HacktheBox"]
+categories: ["HacktheBox","Windows"]
 
 lightgallery: true
 toc:
   auto: false
 ---
+
+Box author | {{< person url="https://app.hackthebox.com/users/13531" name="MrR3boot" picture="https://www.hackthebox.com/storage/avatars/45c15da90175761bef77ecb2d44942b4.png" >}}
+
+<!--more-->
 
 ## Enumeration
 
