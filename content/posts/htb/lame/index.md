@@ -5,6 +5,7 @@ date: 2021-07-20
 draft: false
 author: "SH∆FIQ ∆IM∆N"
 authorLink: "https://shafiqaiman.com"
+description: "HacktheBox - Lame Writeup"
 images: []
 resources:
 - name: "featured-image"

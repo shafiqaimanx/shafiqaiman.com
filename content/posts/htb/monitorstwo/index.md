@@ -5,6 +5,7 @@ date: 2023-09-03
 draft: false
 author: "SH∆FIQ ∆IM∆N"
 authorLink: "https://shafiqaiman.com"
+description: "HacktheBox - MonitorsTwo Writeup"
 images: []
 resources:
 - name: "featured-image"

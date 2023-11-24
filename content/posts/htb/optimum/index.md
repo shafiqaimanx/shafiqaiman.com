@@ -5,6 +5,7 @@ date: 2022-06-17
 draft: false
 author: "SH∆FIQ ∆IM∆N"
 authorLink: "https://shafiqaiman.com"
+description: "HacktheBox - Optimum Writeup"
 images: []
 resources:
 - name: "featured-image"

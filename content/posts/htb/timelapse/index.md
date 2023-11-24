@@ -5,6 +5,7 @@ date: 2022-08-21
 draft: false
 author: "SH∆FIQ ∆IM∆N"
 authorLink: "https://shafiqaiman.com"
+description: "HacktheBox - Timelapse Writeup"
 images: []
 resources:
 - name: "featured-image"

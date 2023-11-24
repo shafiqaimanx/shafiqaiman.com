@@ -5,6 +5,7 @@ date: 2021-08-27
 draft: false
 author: "SH∆FIQ ∆IM∆N"
 authorLink: "https://shafiqaiman.com"
+description: "HacktheBox - Devel Writeup"
 images: []
 resources:
 - name: "featured-image"

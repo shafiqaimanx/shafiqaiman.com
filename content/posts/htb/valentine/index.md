@@ -5,6 +5,7 @@ date: 2022-11-20
 draft: false
 author: "SH∆FIQ ∆IM∆N"
 authorLink: "https://shafiqaiman.com"
+description: "HacktheBox - Valentine Writeup"
 images: []
 resources:
 - name: "featured-image"

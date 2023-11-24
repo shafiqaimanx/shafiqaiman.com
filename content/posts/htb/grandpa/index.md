@@ -5,6 +5,7 @@ date: 2022-08-19
 draft: false
 author: "SH∆FIQ ∆IM∆N"
 authorLink: "https://shafiqaiman.com"
+description: "HacktheBox - Grandpa Writeup"
 images: []
 resources:
 - name: "featured-image"

@@ -5,6 +5,7 @@ date: 2021-07-21
 draft: false
 author: "SH∆FIQ ∆IM∆N"
 authorLink: "https://shafiqaiman.com"
+description: "HacktheBox - Pathfinder Writeup"
 images: []
 resources:
 - name: "featured-image"

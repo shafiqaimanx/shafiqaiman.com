@@ -5,6 +5,7 @@ date: 2022-02-19
 draft: false
 author: "SH∆FIQ ∆IM∆N"
 authorLink: "https://shafiqaiman.com"
+description: "HacktheBox - Unified Writeup"
 images: []
 resources:
 - name: "featured-image"

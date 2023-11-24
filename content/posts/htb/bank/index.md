@@ -5,6 +5,7 @@ date: 2022-10-15
 draft: false
 author: "SH∆FIQ ∆IM∆N"
 authorLink: "https://shafiqaiman.com"
+description: "HacktheBox - Bank Writeup"
 images: []
 resources:
 - name: "featured-image"

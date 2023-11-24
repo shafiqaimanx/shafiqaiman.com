@@ -5,6 +5,7 @@ date: 2022-07-30
 draft: false
 author: "SH∆FIQ ∆IM∆N"
 authorLink: "https://shafiqaiman.com"
+description: "HacktheBox - Late Writeup"
 images: []
 resources:
 - name: "featured-image"

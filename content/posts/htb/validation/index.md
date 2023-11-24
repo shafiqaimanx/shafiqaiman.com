@@ -5,6 +5,7 @@ date: 2022-08-26
 draft: false
 author: "SH∆FIQ ∆IM∆N"
 authorLink: "https://shafiqaiman.com"
+description: "HacktheBox - Validation Writeup"
 images: []
 resources:
 - name: "featured-image"

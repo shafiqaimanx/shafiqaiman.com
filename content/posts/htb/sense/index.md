@@ -5,6 +5,7 @@ date: 2022-11-13
 draft: false
 author: "SH∆FIQ ∆IM∆N"
 authorLink: "https://shafiqaiman.com"
+description: "HacktheBox - Sense Writeup"
 images: []
 resources:
 - name: "featured-image"

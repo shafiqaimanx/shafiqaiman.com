@@ -5,6 +5,7 @@ date: 2022-11-05
 draft: false
 author: "SH∆FIQ ∆IM∆N"
 authorLink: "https://shafiqaiman.com"
+description: "HacktheBox - Shocker Writeup"
 images: []
 resources:
 - name: "featured-image"

@@ -5,6 +5,7 @@ date: 2022-05-28
 draft: false
 author: "SH∆FIQ ∆IM∆N"
 authorLink: "https://shafiqaiman.com"
+description: "HacktheBox - Netmon Writeup"
 images: []
 resources:
 - name: "featured-image"

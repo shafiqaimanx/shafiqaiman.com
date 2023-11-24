@@ -5,6 +5,7 @@ date: 2022-10-22
 draft: false
 author: "SH∆FIQ ∆IM∆N"
 authorLink: "https://shafiqaiman.com"
+description: "HacktheBox - Blocky Writeup"
 images: []
 resources:
 - name: "featured-image"

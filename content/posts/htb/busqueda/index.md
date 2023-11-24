@@ -5,6 +5,7 @@ date: 2023-07-08
 draft: false
 author: "SH∆FIQ ∆IM∆N"
 authorLink: "https://shafiqaiman.com"
+description: "HacktheBox - Busqueda Writeup"
 images: []
 resources:
 - name: "featured-image"

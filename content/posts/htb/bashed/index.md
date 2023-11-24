@@ -5,6 +5,7 @@ date: 2022-03-01
 draft: false
 author: "SH∆FIQ ∆IM∆N"
 authorLink: "https://shafiqaiman.com"
+description: "HacktheBox - Bashed Writeup"
 images: []
 resources:
 - name: "featured-image"

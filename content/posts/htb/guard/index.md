@@ -5,6 +5,7 @@ date: 2021-08-08
 draft: false
 author: "SH∆FIQ ∆IM∆N"
 authorLink: "https://shafiqaiman.com"
+description: "HacktheBox - Guard Writeup"
 images: []
 resources:
 - name: "featured-image"

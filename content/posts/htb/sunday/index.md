@@ -5,6 +5,7 @@ date: 2022-12-03
 draft: false
 author: "SH∆FIQ ∆IM∆N"
 authorLink: "https://shafiqaiman.com"
+description: "HacktheBox - Sunday Writeup"
 images: []
 resources:
 - name: "featured-image"

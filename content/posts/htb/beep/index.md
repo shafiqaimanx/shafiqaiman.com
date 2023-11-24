@@ -5,6 +5,7 @@ date: 2022-01-21
 draft: false
 author: "SH∆FIQ ∆IM∆N"
 authorLink: "https://shafiqaiman.com"
+description: "HacktheBox - Beep Writeup"
 images: []
 resources:
 - name: "featured-image"

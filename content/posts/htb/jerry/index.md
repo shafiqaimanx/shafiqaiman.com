@@ -5,6 +5,7 @@ date: 2022-06-04
 draft: false
 author: "SH∆FIQ ∆IM∆N"
 authorLink: "https://shafiqaiman.com"
+description: "HacktheBox - Jerry Writeup"
 images: []
 resources:
 - name: "featured-image"
