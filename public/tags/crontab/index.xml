@@ -1,16 +1,15 @@
 <rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
     <channel>
-        <title>crontab - Tag - SHAFIQAIMAN</title>
-        <link>https://shafiqaiman.com/tags/crontab/</link>
-        <description>crontab - Tag - SHAFIQAIMAN</description>
-        <generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Tue, 01 Mar 2022 00:00:00 &#43;0000</lastBuildDate><atom:link href="https://shafiqaiman.com/tags/crontab/" rel="self" type="application/rss+xml" /><item>
+        <title>Crontab - Tag - SHAFIQAIMAN</title>
+        <link>http://localhost:1313/tags/crontab/</link>
+        <description>Crontab - Tag - SHAFIQAIMAN</description>
+        <generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Tue, 01 Mar 2022 00:00:00 &#43;0000</lastBuildDate><atom:link href="http://localhost:1313/tags/crontab/" rel="self" type="application/rss+xml" /><item>
     <title>HackTheBox - Bashed Writeup</title>
-    <link>https://shafiqaiman.com/posts/htb/bashed/</link>
+    <link>http://localhost:1313/posts/htb/bashed/</link>
     <pubDate>Tue, 01 Mar 2022 00:00:00 &#43;0000</pubDate>
     <author>SH∆FIQ ∆IM∆N</author>
-    <guid>https://shafiqaiman.com/posts/htb/bashed/</guid>
-    <description><![CDATA[Nmap As always. I&rsquo;m gonna run the Nmap scan. Here is the result of the scan.
-result 1 2 3 4 5 6 7 8 9 10 11 # Nmap 7.92 scan initiated Sat Feb 26 01:50:32 2022 as: nmap -sC -sV -oN nmap/bashed 10.10.10.68 Nmap scan report for 10.10.10.68 Host is up (0.054s latency). Not shown: 999 closed tcp ports (reset) PORT STATE SERVICE VERSION 80/tcp open http Apache httpd 2.]]></description>
+    <guid>http://localhost:1313/posts/htb/bashed/</guid>
+    <description><![CDATA[<p>Box author | <span class="h-card person-mention"><a href="https://app.hackthebox.com/users/2904" class="u-url url">&#8201;<span class="p-name fn">Arrexel</span></a></span></p>]]></description>
 </item>
 </channel>
 </rss>

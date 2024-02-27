@@ -1,0 +1,87 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>Tags - Tag - SHAFIQAIMAN</title>
+        <link>http://localhost:1313/tags/</link>
+        <description>Tags - Tag - SHAFIQAIMAN</description>
+        <generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Tue, 27 Feb 2024 00:00:00 &#43;0000</lastBuildDate><atom:link href="http://localhost:1313/tags/" rel="self" type="application/rss+xml" /><item>
+    <title>Account-Operators-Group</title>
+    <link>http://localhost:1313/tags/account-operators-group/</link>
+    <pubDate>Tue, 27 Feb 2024 00:00:00 &#43;0000</pubDate>
+    <author>SHAFIQAIMAN</author>
+    <guid>http://localhost:1313/tags/account-operators-group/</guid>
+    <description><![CDATA[]]></description>
+</item>
+<item>
+    <title>ASREPRoast</title>
+    <link>http://localhost:1313/tags/asreproast/</link>
+    <pubDate>Tue, 27 Feb 2024 00:00:00 &#43;0000</pubDate>
+    <author>SHAFIQAIMAN</author>
+    <guid>http://localhost:1313/tags/asreproast/</guid>
+    <description><![CDATA[]]></description>
+</item>
+<item>
+    <title>Bloodhound</title>
+    <link>http://localhost:1313/tags/bloodhound/</link>
+    <pubDate>Tue, 27 Feb 2024 00:00:00 &#43;0000</pubDate>
+    <author>SHAFIQAIMAN</author>
+    <guid>http://localhost:1313/tags/bloodhound/</guid>
+    <description><![CDATA[]]></description>
+</item>
+<item>
+    <title>DCSync-Attack</title>
+    <link>http://localhost:1313/tags/dcsync-attack/</link>
+    <pubDate>Tue, 27 Feb 2024 00:00:00 &#43;0000</pubDate>
+    <author>SHAFIQAIMAN</author>
+    <guid>http://localhost:1313/tags/dcsync-attack/</guid>
+    <description><![CDATA[]]></description>
+</item>
+<item>
+    <title>Evil-Winrm</title>
+    <link>http://localhost:1313/tags/evil-winrm/</link>
+    <pubDate>Tue, 27 Feb 2024 00:00:00 &#43;0000</pubDate>
+    <author>SHAFIQAIMAN</author>
+    <guid>http://localhost:1313/tags/evil-winrm/</guid>
+    <description><![CDATA[]]></description>
+</item>
+<item>
+    <title>GetNPUsers.py</title>
+    <link>http://localhost:1313/tags/getnpusers.py/</link>
+    <pubDate>Tue, 27 Feb 2024 00:00:00 &#43;0000</pubDate>
+    <author>SHAFIQAIMAN</author>
+    <guid>http://localhost:1313/tags/getnpusers.py/</guid>
+    <description><![CDATA[]]></description>
+</item>
+<item>
+    <title>Hashcat</title>
+    <link>http://localhost:1313/tags/hashcat/</link>
+    <pubDate>Tue, 27 Feb 2024 00:00:00 &#43;0000</pubDate>
+    <author>SHAFIQAIMAN</author>
+    <guid>http://localhost:1313/tags/hashcat/</guid>
+    <description><![CDATA[]]></description>
+</item>
+<item>
+    <title>Kerberos</title>
+    <link>http://localhost:1313/tags/kerberos/</link>
+    <pubDate>Tue, 27 Feb 2024 00:00:00 &#43;0000</pubDate>
+    <author>SHAFIQAIMAN</author>
+    <guid>http://localhost:1313/tags/kerberos/</guid>
+    <description><![CDATA[]]></description>
+</item>
+<item>
+    <title>Ldap</title>
+    <link>http://localhost:1313/tags/ldap/</link>
+    <pubDate>Tue, 27 Feb 2024 00:00:00 &#43;0000</pubDate>
+    <author>SHAFIQAIMAN</author>
+    <guid>http://localhost:1313/tags/ldap/</guid>
+    <description><![CDATA[]]></description>
+</item>
+<item>
+    <title>Ldapsearch</title>
+    <link>http://localhost:1313/tags/ldapsearch/</link>
+    <pubDate>Tue, 27 Feb 2024 00:00:00 &#43;0000</pubDate>
+    <author>SHAFIQAIMAN</author>
+    <guid>http://localhost:1313/tags/ldapsearch/</guid>
+    <description><![CDATA[]]></description>
+</item>
+</channel>
+</rss>

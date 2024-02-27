@@ -1,16 +1,23 @@
 <rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
     <channel>
-        <title>pspy - Tag - SHAFIQAIMAN</title>
-        <link>https://shafiqaiman.com/tags/pspy/</link>
-        <description>pspy - Tag - SHAFIQAIMAN</description>
-        <generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Sat, 30 Jul 2022 00:00:00 &#43;0000</lastBuildDate><atom:link href="https://shafiqaiman.com/tags/pspy/" rel="self" type="application/rss+xml" /><item>
+        <title>Pspy - Tag - SHAFIQAIMAN</title>
+        <link>http://localhost:1313/tags/pspy/</link>
+        <description>Pspy - Tag - SHAFIQAIMAN</description>
+        <generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Sat, 25 Nov 2023 00:00:00 &#43;0000</lastBuildDate><atom:link href="http://localhost:1313/tags/pspy/" rel="self" type="application/rss+xml" /><item>
+    <title>HackTheBox - Pilgrimage Writeup</title>
+    <link>http://localhost:1313/posts/htb/pilgrimage/</link>
+    <pubDate>Sat, 25 Nov 2023 00:00:00 &#43;0000</pubDate>
+    <author>SH∆FIQ ∆IM∆N</author>
+    <guid>http://localhost:1313/posts/htb/pilgrimage/</guid>
+    <description><![CDATA[<p>Box author | <span class="h-card person-mention"><a href="https://app.hackthebox.com/users/55851" class="u-url url">&#8201;<span class="p-name fn">coopertim13</span></a></span></p>]]></description>
+</item>
+<item>
     <title>HackTheBox - Late Writeup</title>
-    <link>https://shafiqaiman.com/posts/htb/late/</link>
+    <link>http://localhost:1313/posts/htb/late/</link>
     <pubDate>Sat, 30 Jul 2022 00:00:00 &#43;0000</pubDate>
     <author>SH∆FIQ ∆IM∆N</author>
-    <guid>https://shafiqaiman.com/posts/htb/late/</guid>
-    <description><![CDATA[Nmap Like always, I&rsquo;m going to scan the IP Address by using Nmap.
-1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 # Nmap 7.92 scan initiated Tue May 17 23:03:20 2022 as: nmap -sC -sV -vv -p- -oN nmap/late_all 10.10.11.156 Nmap scan report for 10.10.11.156 Host is up, received echo-reply ttl 63 (0.070s latency).]]></description>
+    <guid>http://localhost:1313/posts/htb/late/</guid>
+    <description><![CDATA[<p>Box author | <span class="h-card person-mention"><a href="https://app.hackthebox.com/users/389926" class="u-url url">&#8201;<span class="p-name fn">kavigihan</span></a></span></p>]]></description>
 </item>
 </channel>
 </rss>

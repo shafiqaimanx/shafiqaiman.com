@@ -1,6 +1,10 @@
 # HackTheBox - Love Writeup
 
 
+Box author | {{< person url="https://app.hackthebox.com/users/157669" name="pwnmeow" picture="https://www.hackthebox.com/storage/avatars/0fb7beeded226e92eada949bdd03a2e7.png" >}}
+
+<!--more-->
+
 ## Enumeration
 
 - scan top 1000 ports

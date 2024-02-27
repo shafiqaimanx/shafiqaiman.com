@@ -1,33 +1,31 @@
 <rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
     <channel>
-        <title>msfvenom - Tag - SHAFIQAIMAN</title>
-        <link>https://shafiqaiman.com/tags/msfvenom/</link>
-        <description>msfvenom - Tag - SHAFIQAIMAN</description>
-        <generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Sat, 08 Oct 2022 00:00:00 &#43;0000</lastBuildDate><atom:link href="https://shafiqaiman.com/tags/msfvenom/" rel="self" type="application/rss+xml" /><item>
+        <title>Msfvenom - Tag - SHAFIQAIMAN</title>
+        <link>http://localhost:1313/tags/msfvenom/</link>
+        <description>Msfvenom - Tag - SHAFIQAIMAN</description>
+        <generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Sat, 08 Oct 2022 00:00:00 &#43;0000</lastBuildDate><atom:link href="http://localhost:1313/tags/msfvenom/" rel="self" type="application/rss+xml" /><item>
     <title>HackTheBox - Arctic Writeup</title>
-    <link>https://shafiqaiman.com/posts/htb/arctic/</link>
+    <link>http://localhost:1313/posts/htb/arctic/</link>
     <pubDate>Sat, 08 Oct 2022 00:00:00 &#43;0000</pubDate>
     <author>SH∆FIQ ∆IM∆N</author>
-    <guid>https://shafiqaiman.com/posts/htb/arctic/</guid>
-    <description><![CDATA[Nmap Like always, I&rsquo;m going to scan the IP address by using Nmap but I&rsquo;m going to scan the full port first. Then, I&rsquo;m going to scan the only open ports.
-1 2 3 4 5 6 nmap -p135,8500,49154 -sCV -oN nmap/arctic 10.10.10.11 135/tcp open msrpc Microsoft Windows RPC 8500/tcp open fmtp? 49154/tcp open msrpc Microsoft Windows RPC Service Info: OS: Windows; CPE: cpe:/o:microsoft:windows The nmap scan result is completed. Based on the services, look like this is a Windows target and three ports that open.]]></description>
+    <guid>http://localhost:1313/posts/htb/arctic/</guid>
+    <description><![CDATA[<p>Box author | <span class="h-card person-mention"><a href="https://app.hackthebox.com/users/1" class="u-url url">&#8201;<span class="p-name fn">ch4p</span></a></span></p>]]></description>
 </item>
 <item>
     <title>HackTheBox - Jerry Writeup</title>
-    <link>https://shafiqaiman.com/posts/htb/jerry/</link>
+    <link>http://localhost:1313/posts/htb/jerry/</link>
     <pubDate>Sat, 04 Jun 2022 00:00:00 &#43;0000</pubDate>
     <author>SH∆FIQ ∆IM∆N</author>
-    <guid>https://shafiqaiman.com/posts/htb/jerry/</guid>
-    <description><![CDATA[Nmap As always, I&rsquo;m gonna start with the Nmap scan with this IP address 10.10.10.95
-1 2 3 4 5 6 7 8 9 10 11 12 # Nmap 7.92 scan initiated Tue Mar 1 07:29:58 2022 as: nmap -sC -sV -p- -oN nmap/jerry_all 10.10.10.95 Nmap scan report for 10.10.10.95 Host is up (0.060s latency). Not shown: 65534 filtered tcp ports (no-response) PORT STATE SERVICE VERSION 8080/tcp open http Apache Tomcat/Coyote JSP engine 1.]]></description>
+    <guid>http://localhost:1313/posts/htb/jerry/</guid>
+    <description><![CDATA[<p>Box author | <span class="h-card person-mention"><a href="https://app.hackthebox.com/users/2570" class="u-url url">&#8201;<span class="p-name fn">mrh4sh</span></a></span></p>]]></description>
 </item>
 <item>
     <title>HackTheBox - Love Writeup</title>
-    <link>https://shafiqaiman.com/posts/htb/love/</link>
+    <link>http://localhost:1313/posts/htb/love/</link>
     <pubDate>Wed, 25 Aug 2021 00:00:00 &#43;0000</pubDate>
     <author>SH∆FIQ ∆IM∆N</author>
-    <guid>https://shafiqaiman.com/posts/htb/love/</guid>
-    <description><![CDATA[Enumeration scan top 1000 ports 1 nmap -sC -sV -oN nmap/initial 10.10.10.239 the result 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 41 42 43 44 45 46 47 48 49 50 51 52 53 54 55 56 57 58 59 60 61 62 63 64 65 66 67 68 69 70 71 72 73 74 75 76 77 78 79 80 81 82 83 84 85 86 87 88 # Nmap 7.]]></description>
+    <guid>http://localhost:1313/posts/htb/love/</guid>
+    <description><![CDATA[<p>Box author | <span class="h-card person-mention"><a href="https://app.hackthebox.com/users/157669" class="u-url url">&#8201;<span class="p-name fn">pwnmeow</span></a></span></p>]]></description>
 </item>
 </channel>
 </rss>

@@ -1,0 +1,58 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>John - Tag - SHAFIQAIMAN</title>
+        <link>http://localhost:1313/tags/john/</link>
+        <description>John - Tag - SHAFIQAIMAN</description>
+        <generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Sun, 03 Sep 2023 00:00:00 &#43;0000</lastBuildDate><atom:link href="http://localhost:1313/tags/john/" rel="self" type="application/rss+xml" /><item>
+    <title>HackTheBox - MonitorsTwo Writeup</title>
+    <link>http://localhost:1313/posts/htb/monitorstwo/</link>
+    <pubDate>Sun, 03 Sep 2023 00:00:00 &#43;0000</pubDate>
+    <author>SH∆FIQ ∆IM∆N</author>
+    <guid>http://localhost:1313/posts/htb/monitorstwo/</guid>
+    <description><![CDATA[<p>Box author | <span class="h-card person-mention"><a href="https://app.hackthebox.com/users/389926" class="u-url url">&#8201;<span class="p-name fn">kavigihan</span></a></span></p>]]></description>
+</item>
+<item>
+    <title>HackTheBox - Sunday Writeup</title>
+    <link>http://localhost:1313/posts/htb/sunday/</link>
+    <pubDate>Sat, 03 Dec 2022 00:00:00 &#43;0000</pubDate>
+    <author>SH∆FIQ ∆IM∆N</author>
+    <guid>http://localhost:1313/posts/htb/sunday/</guid>
+    <description><![CDATA[<p>Box author | <span class="h-card person-mention"><a href="https://app.hackthebox.com/users/10931" class="u-url url">&#8201;<span class="p-name fn">Agent22</span></a></span></p>]]></description>
+</item>
+<item>
+    <title>HackTheBox - Timelapse Writeup</title>
+    <link>http://localhost:1313/posts/htb/timelapse/</link>
+    <pubDate>Sun, 21 Aug 2022 00:00:00 &#43;0000</pubDate>
+    <author>SH∆FIQ ∆IM∆N</author>
+    <guid>http://localhost:1313/posts/htb/timelapse/</guid>
+    <description><![CDATA[<p>Box author | <span class="h-card person-mention"><a href="https://app.hackthebox.com/users/168546" class="u-url url">&#8201;<span class="p-name fn">ctrlzero</span></a></span></p>]]></description>
+</item>
+<item>
+    <title>HackTheBox - Pathfinder Writeup</title>
+    <link>http://localhost:1313/posts/htb/pathfinder/</link>
+    <pubDate>Wed, 21 Jul 2021 00:00:00 &#43;0000</pubDate>
+    <author>SH∆FIQ ∆IM∆N</author>
+    <guid>http://localhost:1313/posts/htb/pathfinder/</guid>
+    <description><![CDATA[<p>Box author | <span class="h-card person-mention"><a href="https://app.hackthebox.com/users/94858" class="u-url url">&#8201;<span class="p-name fn">egotisticalSW</span></a></span></p>]]></description>
+</item>
+<item>
+    <title>HackTheBox - Vaccine Writeup</title>
+    <link>http://localhost:1313/posts/htb/vaccine/</link>
+    <pubDate>Wed, 21 Jul 2021 00:00:00 &#43;0000</pubDate>
+    <author>SH∆FIQ ∆IM∆N</author>
+    <guid>http://localhost:1313/posts/htb/vaccine/</guid>
+    <description><![CDATA[<p>Box author | <span class="h-card person-mention"><a href="https://app.hackthebox.com/users/8308" class="u-url url">&#8201;<span class="p-name fn">MinatoTW</span></a></span></p>]]></description>
+</item>
+<item>
+    <title>TryHackMe - Brute It Writeup</title>
+    <link>http://localhost:1313/posts/thm/brute_it/</link>
+    <pubDate>Sat, 10 Jul 2021 00:00:00 &#43;0000</pubDate>
+    <author>SH∆FIQ ∆IM∆N</author>
+    <guid>http://localhost:1313/posts/thm/brute_it/</guid>
+    <description><![CDATA[Link : https://tryhackme.com/room/bruteit
+Enumeration First we need to connect to try hack me networks through openvpn and deploy the machine.
+Now, the box is up. First, we need to do a reconnaissance using nmap. Nmap is a network mapper tool for scanning the ports or enumerate the machine through ports. I will run this command for my nmap scan.
+1 nmap -sC -sV -O -oN nmap/initial &lt;machine ip&gt; Explaining the nmap flag: -sC := scan using nmap default script -sV := scan for version -O := scan for OS [operating system] -oN := output in normal format Now our nmap scan is done.]]></description>
+</item>
+</channel>
+</rss>

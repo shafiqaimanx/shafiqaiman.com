@@ -1,0 +1,87 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>HacktheBox - Category - SHAFIQAIMAN</title>
+        <link>http://localhost:1313/categories/hackthebox/</link>
+        <description>HacktheBox - Category - SHAFIQAIMAN</description>
+        <generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Tue, 27 Feb 2024 00:00:00 &#43;0000</lastBuildDate><atom:link href="http://localhost:1313/categories/hackthebox/" rel="self" type="application/rss+xml" /><item>
+    <title>HackTheBox - Forest Writeup</title>
+    <link>http://localhost:1313/posts/htb/forest/</link>
+    <pubDate>Tue, 27 Feb 2024 00:00:00 &#43;0000</pubDate>
+    <author>SH∆FIQ ∆IM∆N</author>
+    <guid>http://localhost:1313/posts/htb/forest/</guid>
+    <description><![CDATA[<p>Box author | <span class="h-card person-mention"><a href="https://app.hackthebox.com/users/2984" class="u-url url">&#8201;<span class="p-name fn">mrb3n</span></a></span> <span class="h-card person-mention"><a href="https://app.hackthebox.com/users/1190" class="u-url url">&#8201;<span class="p-name fn">egre55</span></a></span></p>]]></description>
+</item>
+<item>
+    <title>HackTheBox - Pilgrimage Writeup</title>
+    <link>http://localhost:1313/posts/htb/pilgrimage/</link>
+    <pubDate>Sat, 25 Nov 2023 00:00:00 &#43;0000</pubDate>
+    <author>SH∆FIQ ∆IM∆N</author>
+    <guid>http://localhost:1313/posts/htb/pilgrimage/</guid>
+    <description><![CDATA[<p>Box author | <span class="h-card person-mention"><a href="https://app.hackthebox.com/users/55851" class="u-url url">&#8201;<span class="p-name fn">coopertim13</span></a></span></p>]]></description>
+</item>
+<item>
+    <title>HackTheBox - MonitorsTwo Writeup</title>
+    <link>http://localhost:1313/posts/htb/monitorstwo/</link>
+    <pubDate>Sun, 03 Sep 2023 00:00:00 &#43;0000</pubDate>
+    <author>SH∆FIQ ∆IM∆N</author>
+    <guid>http://localhost:1313/posts/htb/monitorstwo/</guid>
+    <description><![CDATA[<p>Box author | <span class="h-card person-mention"><a href="https://app.hackthebox.com/users/389926" class="u-url url">&#8201;<span class="p-name fn">kavigihan</span></a></span></p>]]></description>
+</item>
+<item>
+    <title>HackTheBox - Busqueda Writeup</title>
+    <link>http://localhost:1313/posts/htb/busqueda/</link>
+    <pubDate>Sat, 08 Jul 2023 00:00:00 &#43;0000</pubDate>
+    <author>SH∆FIQ ∆IM∆N</author>
+    <guid>http://localhost:1313/posts/htb/busqueda/</guid>
+    <description><![CDATA[<p>Box author | <span class="h-card person-mention"><a href="https://app.hackthebox.com/users/389926" class="u-url url">&#8201;<span class="p-name fn">kavigihan</span></a></span></p>]]></description>
+</item>
+<item>
+    <title>HackTheBox - Sunday Writeup</title>
+    <link>http://localhost:1313/posts/htb/sunday/</link>
+    <pubDate>Sat, 03 Dec 2022 00:00:00 &#43;0000</pubDate>
+    <author>SH∆FIQ ∆IM∆N</author>
+    <guid>http://localhost:1313/posts/htb/sunday/</guid>
+    <description><![CDATA[<p>Box author | <span class="h-card person-mention"><a href="https://app.hackthebox.com/users/10931" class="u-url url">&#8201;<span class="p-name fn">Agent22</span></a></span></p>]]></description>
+</item>
+<item>
+    <title>HackTheBox - Valentine Writeup</title>
+    <link>http://localhost:1313/posts/htb/valentine/</link>
+    <pubDate>Sun, 20 Nov 2022 00:00:00 &#43;0000</pubDate>
+    <author>SH∆FIQ ∆IM∆N</author>
+    <guid>http://localhost:1313/posts/htb/valentine/</guid>
+    <description><![CDATA[<p>Box author | <span class="h-card person-mention"><a href="https://app.hackthebox.com/users/2984" class="u-url url">&#8201;<span class="p-name fn">mrb3n</span></a></span></p>]]></description>
+</item>
+<item>
+    <title>HackTheBox - Sense Writeup</title>
+    <link>http://localhost:1313/posts/htb/sense/</link>
+    <pubDate>Sun, 13 Nov 2022 00:00:00 &#43;0000</pubDate>
+    <author>SH∆FIQ ∆IM∆N</author>
+    <guid>http://localhost:1313/posts/htb/sense/</guid>
+    <description><![CDATA[<p>Box author | <span class="h-card person-mention"><a href="https://app.hackthebox.com/users/709" class="u-url url">&#8201;<span class="p-name fn">lkys37en</span></a></span></p>]]></description>
+</item>
+<item>
+    <title>HackTheBox - Shocker Writeup</title>
+    <link>http://localhost:1313/posts/htb/shocker/</link>
+    <pubDate>Sat, 05 Nov 2022 00:00:00 &#43;0000</pubDate>
+    <author>SH∆FIQ ∆IM∆N</author>
+    <guid>http://localhost:1313/posts/htb/shocker/</guid>
+    <description><![CDATA[<p>Box author | <span class="h-card person-mention"><a href="https://app.hackthebox.com/users/2984" class="u-url url">&#8201;<span class="p-name fn">mrb3n</span></a></span></p>]]></description>
+</item>
+<item>
+    <title>HackTheBox - Mirai Writeup</title>
+    <link>http://localhost:1313/posts/htb/mirai/</link>
+    <pubDate>Wed, 02 Nov 2022 00:00:00 &#43;0000</pubDate>
+    <author>SH∆FIQ ∆IM∆N</author>
+    <guid>http://localhost:1313/posts/htb/mirai/</guid>
+    <description><![CDATA[<p>Box author | <span class="h-card person-mention"><a href="https://app.hackthebox.com/users/2904" class="u-url url">&#8201;<span class="p-name fn">Arrexel</span></a></span></p>]]></description>
+</item>
+<item>
+    <title>HackTheBox - Blocky Writeup</title>
+    <link>http://localhost:1313/posts/htb/blocky/</link>
+    <pubDate>Sat, 22 Oct 2022 00:00:00 &#43;0000</pubDate>
+    <author>SH∆FIQ ∆IM∆N</author>
+    <guid>http://localhost:1313/posts/htb/blocky/</guid>
+    <description><![CDATA[<p>Box author | <span class="h-card person-mention"><a href="https://app.hackthebox.com/users/2904" class="u-url url">&#8201;<span class="p-name fn">Arrexel</span></a></span></p>]]></description>
+</item>
+</channel>
+</rss>

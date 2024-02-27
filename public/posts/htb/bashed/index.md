@@ -1,6 +1,10 @@
 # HackTheBox - Bashed Writeup
 
 
+Box author | {{< person url="https://app.hackthebox.com/users/2904" name="Arrexel" picture="https://www.hackthebox.com/storage/avatars/4a677d39a1156ca6a4f2fdce085aa3da.png" >}}
+
+<!--more-->
+
 ## Nmap
 
 As always. I'm gonna run the Nmap scan. Here is the result of the scan.

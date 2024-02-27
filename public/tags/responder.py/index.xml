@@ -1,0 +1,17 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>Responder.py - Tag - SHAFIQAIMAN</title>
+        <link>http://localhost:1313/tags/responder.py/</link>
+        <description>Responder.py - Tag - SHAFIQAIMAN</description>
+        <generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Sat, 09 Apr 2022 00:00:00 &#43;0000</lastBuildDate><atom:link href="http://localhost:1313/tags/responder.py/" rel="self" type="application/rss+xml" /><item>
+    <title>HackTheBox - Responder Writeup</title>
+    <link>http://localhost:1313/posts/htb/responder/</link>
+    <pubDate>Sat, 09 Apr 2022 00:00:00 &#43;0000</pubDate>
+    <author>SH∆FIQ ∆IM∆N</author>
+    <guid>http://localhost:1313/posts/htb/responder/</guid>
+    <description><![CDATA[I found two ways to gain into this machine. First, stealing the password hash by using the responder and then logon through evil-winrm. Second, gaining the remote code execution through log poisoning and getting the reverse shell.
+Nmap Let&rsquo;s scan the Ip address first by using Nmap.
+result 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 # Nmap 7.92 scan initiated Sat Apr 9 04:18:54 2022 as: nmap -sC -sV -p- -oN nmap/responder_all 10.]]></description>
+</item>
+</channel>
+</rss>

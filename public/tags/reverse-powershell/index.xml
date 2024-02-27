@@ -1,0 +1,41 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>Reverse-Powershell - Tag - SHAFIQAIMAN</title>
+        <link>http://localhost:1313/tags/reverse-powershell/</link>
+        <description>Reverse-Powershell - Tag - SHAFIQAIMAN</description>
+        <generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Fri, 17 Jun 2022 00:00:00 &#43;0000</lastBuildDate><atom:link href="http://localhost:1313/tags/reverse-powershell/" rel="self" type="application/rss+xml" /><item>
+    <title>HackTheBox - Optimum Writeup</title>
+    <link>http://localhost:1313/posts/htb/optimum/</link>
+    <pubDate>Fri, 17 Jun 2022 00:00:00 &#43;0000</pubDate>
+    <author>SH∆FIQ ∆IM∆N</author>
+    <guid>http://localhost:1313/posts/htb/optimum/</guid>
+    <description><![CDATA[<p>Box author | <span class="h-card person-mention"><a href="https://app.hackthebox.com/users/1" class="u-url url">&#8201;<span class="p-name fn">ch4p</span></a></span></p>]]></description>
+</item>
+<item>
+    <title>HackTheBox - Responder Writeup</title>
+    <link>http://localhost:1313/posts/htb/responder/</link>
+    <pubDate>Sat, 09 Apr 2022 00:00:00 &#43;0000</pubDate>
+    <author>SH∆FIQ ∆IM∆N</author>
+    <guid>http://localhost:1313/posts/htb/responder/</guid>
+    <description><![CDATA[I found two ways to gain into this machine. First, stealing the password hash by using the responder and then logon through evil-winrm. Second, gaining the remote code execution through log poisoning and getting the reverse shell.
+Nmap Let&rsquo;s scan the Ip address first by using Nmap.
+result 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 # Nmap 7.92 scan initiated Sat Apr 9 04:18:54 2022 as: nmap -sC -sV -p- -oN nmap/responder_all 10.]]></description>
+</item>
+<item>
+    <title>HackTheBox - Shield Writeup</title>
+    <link>http://localhost:1313/posts/htb/shield/</link>
+    <pubDate>Wed, 21 Jul 2021 00:00:00 &#43;0000</pubDate>
+    <author>SH∆FIQ ∆IM∆N</author>
+    <guid>http://localhost:1313/posts/htb/shield/</guid>
+    <description><![CDATA[<p>Box author | <span class="h-card person-mention"><a href="https://app.hackthebox.com/users/31190" class="u-url url">&#8201;<span class="p-name fn">TRX</span></a></span></p>]]></description>
+</item>
+<item>
+    <title>HacktheBox - Archetype Writeup</title>
+    <link>http://localhost:1313/posts/htb/archetype/</link>
+    <pubDate>Tue, 20 Jul 2021 00:00:00 &#43;0000</pubDate>
+    <author>SH∆FIQ ∆IM∆N</author>
+    <guid>http://localhost:1313/posts/htb/archetype/</guid>
+    <description><![CDATA[<p>Box author | <span class="h-card person-mention"><a href="https://app.hackthebox.com/users/1190" class="u-url url">&#8201;<span class="p-name fn">egre55</span></a></span></p>]]></description>
+</item>
+</channel>
+</rss>

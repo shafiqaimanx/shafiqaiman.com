@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <title>HackTheBox - Nibbles Writeup - SHAFIQAIMAN</title><meta name="Description" content="HacktheBox - Nibbles Writeup"><meta property="og:title" content="HackTheBox - Nibbles Writeup" />
+<meta property="og:description" content="HacktheBox - Nibbles Writeup" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://localhost:1313/posts/htb/nibbles/" /><meta property="og:image" content="http://localhost:1313/posts/htb/nibbles/featured.png" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2022-10-03T00:00:00+00:00" />
+<meta property="article:modified_time" content="2022-10-03T00:00:00+00:00" /><meta property="og:site_name" content="SHAFIQAIMAN" />
+
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:image" content="http://localhost:1313/posts/htb/nibbles/featured.png" /><meta name="twitter:title" content="HackTheBox - Nibbles Writeup"/>
+<meta name="twitter:description" content="HacktheBox - Nibbles Writeup"/>
+<meta name="twitter:site" content="@_shafiqaiman_"/>
+<meta name="application-name" content="SHAFIQAIMAN">
+<meta name="apple-mobile-web-app-title" content="SHAFIQAIMAN"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="http://localhost:1313/posts/htb/nibbles/" /><link rel="prev" href="http://localhost:1313/posts/htb/validation/" /><link rel="next" href="http://localhost:1313/posts/htb/arctic/" /><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="/lib/fontawesome-free/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"></noscript><link rel="preload" href="/lib/animate/animate.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="/lib/animate/animate.min.css"></noscript><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "HackTheBox - Nibbles Writeup",
+        "inLanguage": "en",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "http:\/\/localhost:1313\/posts\/htb\/nibbles\/"
+        },"image": [{
+                            "@type": "ImageObject",
+                            "url": "http:\/\/localhost:1313\/posts\/htb\/nibbles\/featured.png",
+                            "width":  1400 ,
+                            "height":  1060 
+                        }],"genre": "posts","keywords": "CVE-2015-6967, nibbleblog, php-reverse-shell, gobuster, upload-vuln","wordcount":  683 ,
+        "url": "http:\/\/localhost:1313\/posts\/htb\/nibbles\/","datePublished": "2022-10-03T00:00:00+00:00","dateModified": "2022-10-03T00:00:00+00:00","publisher": {
+            "@type": "Organization",
+            "name": ""},"author": {
+                "@type": "Person",
+                "name": "SH∆FIQ ∆IM∆N"
+            },"description": "HacktheBox - Nibbles Writeup"
+    }
+    </script></head>
+    <body data-header-desktop="fixed" data-header-mobile="auto"><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('dark' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'dark' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="SHAFIQAIMAN">SH∆FIQ∆IM∆N</a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/posts/" title="Posts"><i class="fa-solid fa-book"></i>  </a><a class="menu-item" href="/tags/" title="Tags"><i class="fa-solid fa-tags"></i>  </a><a class="menu-item" href="/categories/" title="Categories"><i class="fa-solid fa-folder"></i>  </a><span class="menu-item delimiter"></span><span class="menu-item search" id="search-desktop">
+                        <input type="text" placeholder="Search titles or contents..." id="search-input-desktop">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-desktop" title="Search">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-desktop" title="Clear">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-desktop">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </span><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                    <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+                </a></div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="SHAFIQAIMAN">SH∆FIQ∆IM∆N</a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><div class="search-wrapper">
+                    <div class="search mobile" id="search-mobile">
+                        <input type="text" placeholder="Search titles or contents..." id="search-input-mobile">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-mobile" title="Search">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-mobile" title="Clear">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-mobile">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </div>
+                    <a href="javascript:void(0);" class="search-cancel" id="search-cancel-mobile">
+                        Cancel
+                    </a>
+                </div><a class="menu-item" href="/posts/" title="Posts"><i class="fa-solid fa-book"></i></a><a class="menu-item" href="/tags/" title="Tags"><i class="fa-solid fa-tags"></i></a><a class="menu-item" href="/categories/" title="Categories"><i class="fa-solid fa-folder"></i></a><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+            </a></div>
+    </div>
+</header><div class="search-dropdown desktop">
+        <div id="search-dropdown-desktop"></div>
+    </div>
+    <div class="search-dropdown mobile">
+        <div id="search-dropdown-mobile"></div>
+    </div><main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">Contents</h2>
+            <div class="toc-content always-active" id="toc-content-auto"></div>
+        </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">HackTheBox - Nibbles Writeup</h1><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="https://shafiqaiman.com" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>SH∆FIQ ∆IM∆N</a></span>&nbsp;<span class="post-category">included in <a href="/categories/hackthebox/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>HacktheBox</a>&nbsp;<a href="/categories/linux/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>Linux</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="03-10-2022">03-10-2022</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;683 words&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;4 minutes&nbsp;</div>
+        </div><div class="featured-image"><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/posts/htb/nibbles/featured.png"
+        data-srcset="/posts/htb/nibbles/featured.png, /posts/htb/nibbles/featured.png 1.5x, /posts/htb/nibbles/featured.png 2x"
+        data-sizes="auto"
+        alt="/posts/htb/nibbles/featured.png"
+        title="HacktheBox - Nibbles Writeup" /></div><div class="details toc" id="toc-static"  data-kept="">
+                <div class="details-summary toc-title">
+                    <span>Contents</span>
+                    <span><i class="details-icon fas fa-angle-right" aria-hidden="true"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#nmap">Nmap</a></li>
+    <li><a href="#http">Http</a>
+      <ul>
+        <li><a href="#http-nibbleblog">Http: /nibbleblog</a></li>
+        <li><a href="#gobuster">Gobuster</a></li>
+        <li><a href="#http-nibbleblogcontent">Http: /nibbleblog/content/</a></li>
+        <li><a href="#http-adminphp">Http: /admin.php</a></li>
+      </ul>
+    </li>
+    <li><a href="#foothold">Foothold</a></li>
+    <li><a href="#privesc-monitorsh">PrivEsc: monitor.sh</a></li>
+    <li><a href="#root">Root</a></li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><p>Box author | <span class="h-card person-mention"><a href="https://app.hackthebox.com/users/2984" class="u-url url"><img class="u-photo photo" src="https://www.hackthebox.com/storage/avatars/adb3d560986d35b4fdd9605bae289ea9.png" alt="mrb3n">&#8201;<span class="p-name fn">mrb3n</span></a></span></p>
+<h2 id="nmap">Nmap</h2>
+<p>Like always, I&rsquo;m going to scan the IP address by using <a href="https://nmap.org/" target="_blank" rel="noopener noreffer ">Nmap</a>. However, today I feel spicier ;). So, I&rsquo;m going to scan the full port with <code>-p-</code> then I&rsquo;m only scanning those open ports with scripts and version enumeration.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="line"><span class="cl"><span class="n">nmap</span><span class="w"> </span><span class="o">-</span><span class="n">sCV</span><span class="w"> </span><span class="o">-</span><span class="n">p22</span><span class="p">,</span><span class="mi">80</span><span class="w"> </span><span class="o">-</span><span class="k">oN</span><span class="w"> </span><span class="n">nmap</span><span class="o">/</span><span class="n">nibbles</span><span class="w"> </span><span class="mi">10</span><span class="p">.</span><span class="mi">10</span><span class="p">.</span><span class="mi">10</span><span class="p">.</span><span class="mi">75</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="mi">22</span><span class="o">/</span><span class="n">tcp</span><span class="w"> </span><span class="k">open</span><span class="w">  </span><span class="n">ssh</span><span class="w">     </span><span class="n">OpenSSH</span><span class="w"> </span><span class="mi">7</span><span class="p">.</span><span class="mi">2</span><span class="n">p2</span><span class="w"> </span><span class="n">Ubuntu</span><span class="w"> </span><span class="mi">4</span><span class="n">ubuntu2</span><span class="p">.</span><span class="mi">2</span><span class="w"> </span><span class="p">(</span><span class="n">Ubuntu</span><span class="w"> </span><span class="n">Linux</span><span class="p">;</span><span class="w"> </span><span class="n">protocol</span><span class="w"> </span><span class="mi">2</span><span class="p">.</span><span class="mi">0</span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="o">|</span><span class="w"> </span><span class="n">ssh</span><span class="o">-</span><span class="n">hostkey</span><span class="p">:</span><span class="w"> 
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="o">|</span><span class="w">   </span><span class="mi">2048</span><span class="w"> </span><span class="n">c4</span><span class="p">:</span><span class="n">f8</span><span class="p">:</span><span class="n">ad</span><span class="p">:</span><span class="n">e8</span><span class="p">:</span><span class="n">f8</span><span class="p">:</span><span class="mi">04</span><span class="p">:</span><span class="mi">77</span><span class="p">:</span><span class="n">de</span><span class="p">:</span><span class="n">cf</span><span class="p">:</span><span class="mi">15</span><span class="p">:</span><span class="mi">0</span><span class="n">d</span><span class="p">:</span><span class="mi">63</span><span class="p">:</span><span class="mi">0</span><span class="n">a</span><span class="p">:</span><span class="mi">18</span><span class="p">:</span><span class="mi">7</span><span class="n">e</span><span class="p">:</span><span class="mi">49</span><span class="w"> </span><span class="p">(</span><span class="n">RSA</span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="o">|</span><span class="w">   </span><span class="mi">256</span><span class="w"> </span><span class="mi">22</span><span class="p">:</span><span class="mi">8</span><span class="n">f</span><span class="p">:</span><span class="n">b1</span><span class="p">:</span><span class="mi">97</span><span class="p">:</span><span class="n">bf</span><span class="p">:</span><span class="mi">0</span><span class="n">f</span><span class="p">:</span><span class="mi">17</span><span class="p">:</span><span class="mi">08</span><span class="p">:</span><span class="n">fc</span><span class="p">:</span><span class="mi">7</span><span class="n">e</span><span class="p">:</span><span class="mi">2</span><span class="k">c</span><span class="p">:</span><span class="mi">8</span><span class="n">f</span><span class="p">:</span><span class="n">e9</span><span class="p">:</span><span class="mi">77</span><span class="p">:</span><span class="mi">3</span><span class="n">a</span><span class="p">:</span><span class="mi">48</span><span class="w"> </span><span class="p">(</span><span class="n">ECDSA</span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="o">|</span><span class="n">_</span><span class="w">  </span><span class="mi">256</span><span class="w"> </span><span class="n">e6</span><span class="p">:</span><span class="n">ac</span><span class="p">:</span><span class="mi">27</span><span class="p">:</span><span class="n">a3</span><span class="p">:</span><span class="n">b5</span><span class="p">:</span><span class="n">a9</span><span class="p">:</span><span class="n">f1</span><span class="p">:</span><span class="mi">12</span><span class="p">:</span><span class="mi">3</span><span class="k">c</span><span class="p">:</span><span class="mi">34</span><span class="p">:</span><span class="n">a5</span><span class="p">:</span><span class="mi">5</span><span class="n">d</span><span class="p">:</span><span class="mi">5</span><span class="n">b</span><span class="p">:</span><span class="n">eb</span><span class="p">:</span><span class="mi">3</span><span class="n">d</span><span class="p">:</span><span class="n">e9</span><span class="w"> </span><span class="p">(</span><span class="n">ED25519</span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="mi">80</span><span class="o">/</span><span class="n">tcp</span><span class="w"> </span><span class="k">open</span><span class="w">  </span><span class="n">http</span><span class="w">    </span><span class="n">Apache</span><span class="w"> </span><span class="n">httpd</span><span class="w"> </span><span class="mi">2</span><span class="p">.</span><span class="mi">4</span><span class="p">.</span><span class="mi">18</span><span class="w"> </span><span class="p">((</span><span class="n">Ubuntu</span><span class="p">))</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="o">|</span><span class="n">_http</span><span class="o">-</span><span class="n">title</span><span class="p">:</span><span class="w"> </span><span class="n">Site</span><span class="w"> </span><span class="n">doesn</span><span class="s1">&#39;t have a title (text/html).
+</span></span></span><span class="line"><span class="cl"><span class="s1">|_http-server-header: Apache/2.4.18 (Ubuntu)
+</span></span></span><span class="line"><span class="cl"><span class="s1">Service Info: OS: Linux; CPE: cpe:/o:linux:linux_kernel
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>The nmap scan is completed and looks like I&rsquo;m only dealing with <code>port 22 and 80</code>. The banner itself says this machine is a linux box and running ubuntu.</p>
+<h2 id="http">Http</h2>
+<p>With that information, I&rsquo;m going straight to my browser and navigating to the IP address, and surprisingly it only displays <code>Hello world!</code> with <strong>bold</strong> text. Upon expecting the source of the page it&rsquo;s leaking the directory called <code>/nibbleblog/</code>.</p>
+<p><figure><a class="lightgallery" href="/posts/htb/nibbles/view-page-source.png" title="view page source" data-thumbnail="/posts/htb/nibbles/view-page-source.png" data-sub-html="<h2>view page source</h2><p>view page source</p>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/posts/htb/nibbles/view-page-source.png"
+            data-srcset="/posts/htb/nibbles/view-page-source.png, /posts/htb/nibbles/view-page-source.png 1.5x, /posts/htb/nibbles/view-page-source.png 2x"
+            data-sizes="auto"
+            alt="/posts/htb/nibbles/view-page-source.png" width="538" height="283" />
+    </a><figcaption class="image-caption">view page source</figcaption>
+    </figure></p>
+<h3 id="http-nibbleblog">Http: /nibbleblog</h3>
+<p>By navigating through that directory. I&rsquo;ve been greeted with some sort of blog page title <code>Nibbles - Yum yum</code>.  Then, I started guessing the <code>index</code> file with different extensions and I got a hit with <code>PHP</code> extensions. Turns out, this is a PHP website. So, I started to look around in that blog and cannot find anything useful.</p>
+<p><figure><a class="lightgallery" href="/posts/htb/nibbles/nibbles-yum-yum.png" title="nibbles yum yum" data-thumbnail="/posts/htb/nibbles/nibbles-yum-yum.png" data-sub-html="<h2>nibbles yum yum</h2><p>nibbles yum yum</p>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/posts/htb/nibbles/nibbles-yum-yum.png"
+            data-srcset="/posts/htb/nibbles/nibbles-yum-yum.png, /posts/htb/nibbles/nibbles-yum-yum.png 1.5x, /posts/htb/nibbles/nibbles-yum-yum.png 2x"
+            data-sizes="auto"
+            alt="/posts/htb/nibbles/nibbles-yum-yum.png" width="1028" height="630" />
+    </a><figcaption class="image-caption">nibbles yum yum</figcaption>
+    </figure></p>
+<h3 id="gobuster">Gobuster</h3>
+<p>Now, I&rsquo;m going to fire off my guns (jk). <a href="https://github.com/OJ/gobuster" target="_blank" rel="noopener noreffer ">Gobuster</a> to enumerate further and look for any hidden directories and files. Sure enough, it&rsquo;s managed to find the login page located <code>/admin.php</code> but I did not have any credentials on me right now. Also, the <code>/admin</code> directory caught my eye but again I cannot find anything useful.</p>
+<p><figure><a class="lightgallery" href="/posts/htb/nibbles/gobuster-result.png" title="gobuster" data-thumbnail="/posts/htb/nibbles/gobuster-result.png" data-sub-html="<h2>gobuster</h2><p>gobuster</p>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/posts/htb/nibbles/gobuster-result.png"
+            data-srcset="/posts/htb/nibbles/gobuster-result.png, /posts/htb/nibbles/gobuster-result.png 1.5x, /posts/htb/nibbles/gobuster-result.png 2x"
+            data-sizes="auto"
+            alt="/posts/htb/nibbles/gobuster-result.png" width="976" height="325" />
+    </a><figcaption class="image-caption">gobuster</figcaption>
+    </figure></p>
+<h3 id="http-nibbleblogcontent">Http: /nibbleblog/content/</h3>
+<p>The <code>/content</code> directory also attracts my intentions by having such a unique name :). Upon enumerating the content of it. Finally, I manage to find something useful this time and it was a username located in <code>/nibbleblog/content/private/users.xml</code>. Now, I have equipped with the username but I did not manage to find any password at all.</p>
+<p><figure><a class="lightgallery" href="/posts/htb/nibbles/found-the-username.png" title="found the username" data-thumbnail="/posts/htb/nibbles/found-the-username.png" data-sub-html="<h2>found the username</h2><p>found the username</p>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/posts/htb/nibbles/found-the-username.png"
+            data-srcset="/posts/htb/nibbles/found-the-username.png, /posts/htb/nibbles/found-the-username.png 1.5x, /posts/htb/nibbles/found-the-username.png 2x"
+            data-sizes="auto"
+            alt="/posts/htb/nibbles/found-the-username.png" width="949" height="323" />
+    </a><figcaption class="image-caption">found the username</figcaption>
+    </figure></p>
+<h3 id="http-adminphp">Http: /admin.php</h3>
+<p>Only with the username in my hands, I&rsquo;m heading to the login page by navigating through <code>/nibbleblog/admin.php</code> and start guessing the password. Suppringsly, I manage to get it correctly and the password is <code>nibbles</code>. Yeah, the name of the box itself.</p>
+<p><figure><a class="lightgallery" href="/posts/htb/nibbles/nibbleblog-dashboard.png" title="nibbleblog dashboard" data-thumbnail="/posts/htb/nibbles/nibbleblog-dashboard.png" data-sub-html="<h2>nibbleblog dashboard</h2><p>nibbleblog dashboard</p>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/posts/htb/nibbles/nibbleblog-dashboard.png"
+            data-srcset="/posts/htb/nibbles/nibbleblog-dashboard.png, /posts/htb/nibbles/nibbleblog-dashboard.png 1.5x, /posts/htb/nibbles/nibbleblog-dashboard.png 2x"
+            data-sizes="auto"
+            alt="/posts/htb/nibbles/nibbleblog-dashboard.png" width="1183" height="602" />
+    </a><figcaption class="image-caption">nibbleblog dashboard</figcaption>
+    </figure></p>
+<p>By clicking the <code>Settings</code> on the left sidebar and scrolling at the bottom. Its displays the version of it.</p>
+<p><figure><a class="lightgallery" href="/posts/htb/nibbles/nibbleblog-version-4.png" title="nibbleblog version" data-thumbnail="/posts/htb/nibbles/nibbleblog-version-4.png" data-sub-html="<h2>nibbleblog version</h2><p>nibbleblog version</p>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/posts/htb/nibbles/nibbleblog-version-4.png"
+            data-srcset="/posts/htb/nibbles/nibbleblog-version-4.png, /posts/htb/nibbles/nibbleblog-version-4.png 1.5x, /posts/htb/nibbles/nibbleblog-version-4.png 2x"
+            data-sizes="auto"
+            alt="/posts/htb/nibbles/nibbleblog-version-4.png" width="782" height="180" />
+    </a><figcaption class="image-caption">nibbleblog version</figcaption>
+    </figure></p>
+<h2 id="foothold">Foothold</h2>
+<p>Without further ado, I&rsquo;m asking my old friend Mr.Google regarding this version. Turns out, this particular version has an assigned CVE to it called <a href="https://nvd.nist.gov/vuln/detail/CVE-2015-6967" target="_blank" rel="noopener noreffer ">CVE-2015-6967</a> it&rsquo;s vulnerable to <em>Unrestricted file upload in the My Image plugin</font></em>. So, I&rsquo;m ready to upload the <code>php reverse shell</code> but first, I need to navigate through <code>Plugins -&gt; My Image -&gt; Configure</code>. Then, upload the shell (just ignore the warning), and to execute it, I must click the <code>shell</code> that is located in <code>/nibbleblog/content/private/plugins/my_image/</code>.</p>
+<p><figure><a class="lightgallery" href="/posts/htb/nibbles/nibbler-shell.png" title="shell as nibbler" data-thumbnail="/posts/htb/nibbles/nibbler-shell.png" data-sub-html="<h2>shell as nibbler</h2><p>shell as nibbler</p>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/posts/htb/nibbles/nibbler-shell.png"
+            data-srcset="/posts/htb/nibbles/nibbler-shell.png, /posts/htb/nibbles/nibbler-shell.png 1.5x, /posts/htb/nibbles/nibbler-shell.png 2x"
+            data-sizes="auto"
+            alt="/posts/htb/nibbles/nibbler-shell.png" width="1080" height="262" />
+    </a><figcaption class="image-caption">shell as nibbler</figcaption>
+    </figure></p>
+<h2 id="privesc-monitorsh">PrivEsc: monitor.sh</h2>
+<p>Viola! I&rsquo;m in as a <code>nibbler</code> user and the best thing to do is <a href="https://book.hacktricks.xyz/generic-methodologies-and-resources/shells/full-ttys#python" target="_blank" rel="noopener noreffer ">upgrade my shells with python3</a>. My favorite thing to do after getting a shell is checking the user sudo permission with the command <code>sudo -l</code>. *Jaw dropped*, apparently I can run the <code>monitor.sh</code> file as sudo without any password needed. Awesome!</p>
+<p><figure><a class="lightgallery" href="/posts/htb/nibbles/run-sudo-l.png" title="check sudo permission" data-thumbnail="/posts/htb/nibbles/run-sudo-l.png" data-sub-html="<h2>check sudo permission</h2><p>check sudo permission</p>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/posts/htb/nibbles/run-sudo-l.png"
+            data-srcset="/posts/htb/nibbles/run-sudo-l.png, /posts/htb/nibbles/run-sudo-l.png 1.5x, /posts/htb/nibbles/run-sudo-l.png 2x"
+            data-sizes="auto"
+            alt="/posts/htb/nibbles/run-sudo-l.png" width="1200" height="255" />
+    </a><figcaption class="image-caption">check sudo permission</figcaption>
+    </figure></p>
+<p>However, when I&rsquo;m in nibbler&rsquo;s home directory. I cannot find the <code>monitor.sh</code> file but I find a zip archive file called <code>personal.zip</code>. So, I unzip that archive, and hold and behold there is the <code>monitor.sh</code> file. Upon expecting the script of it, I did not find it amusing. However, the file itself has an interesting character that I can write into the file.</p>
+<h2 id="root">Root</h2>
+<p>So, I&rsquo;d end up putting one line command when executed it. It will make a <code>/bin/bash</code> as a setuid binary. Then, I&rsquo;m typing this command <code>/bin/bash -p</code> and it will drop me into the root shell.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="nb">echo</span> <span class="s2">&#34;chmod +s /bin/bash&#34;</span> &gt;&gt; monitor.sh
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><figure><a class="lightgallery" href="/posts/htb/nibbles/root-shell.png" title="become root" data-thumbnail="/posts/htb/nibbles/root-shell.png" data-sub-html="<h2>become root</h2><p>become root</p>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/posts/htb/nibbles/root-shell.png"
+            data-srcset="/posts/htb/nibbles/root-shell.png, /posts/htb/nibbles/root-shell.png 1.5x, /posts/htb/nibbles/root-shell.png 2x"
+            data-sizes="auto"
+            alt="/posts/htb/nibbles/root-shell.png" width="632" height="193" />
+    </a><figcaption class="image-caption">become root</figcaption>
+    </figure></p></div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>Updated on 03-10-2022</span>
+            </div></div>
+        <div class="post-info-line">
+            <div class="post-info-md"></div>
+            <div class="post-info-share">
+                <span><a href="javascript:void(0);" title="Share on Twitter" data-sharer="twitter" data-url="http://localhost:1313/posts/htb/nibbles/" data-title="HackTheBox - Nibbles Writeup" data-via="_shafiqaiman_" data-hashtags="CVE-2015-6967,nibbleblog,php-reverse-shell,gobuster,upload-vuln"><i class="fab fa-twitter fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Linkedin" data-sharer="linkedin" data-url="http://localhost:1313/posts/htb/nibbles/"><i class="fab fa-linkedin fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Hacker News" data-sharer="hackernews" data-url="http://localhost:1313/posts/htb/nibbles/" data-title="HackTheBox - Nibbles Writeup"><i class="fab fa-hacker-news fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Reddit" data-sharer="reddit" data-url="http://localhost:1313/posts/htb/nibbles/"><i class="fab fa-reddit fa-fw" aria-hidden="true"></i></a></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"><i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/cve-2015-6967/">CVE-2015-6967</a>,&nbsp;<a href="/tags/nibbleblog/">Nibbleblog</a>,&nbsp;<a href="/tags/php-reverse-shell/">Php-Reverse-Shell</a>,&nbsp;<a href="/tags/gobuster/">Gobuster</a>,&nbsp;<a href="/tags/upload-vuln/">Upload-Vuln</a></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">Back</a></span>&nbsp;|&nbsp;<span><a href="/">Home</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/posts/htb/validation/" class="prev" rel="prev" title="HackTheBox - Validation Writeup"><i class="fas fa-angle-left fa-fw" aria-hidden="true"></i>HackTheBox - Validation Writeup</a>
+            <a href="/posts/htb/arctic/" class="next" rel="next" title="HackTheBox - Arctic Writeup">HackTheBox - Arctic Writeup<i class="fas fa-angle-right fa-fw" aria-hidden="true"></i></a></div>
+</div>
+</article></div>
+            </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line" itemscope itemtype="http://schema.org/CreativeWork"><i class="far fa-copyright fa-fw" aria-hidden="true"></i><span itemprop="copyrightYear">2021 - 2024</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="https://shafiqaiman.com" target="_blank">SHAFIQAIMAN</a></span></div>
+        </div>
+    </footer></div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="Back to Top">
+                <i class="fas fa-arrow-up fa-fw" aria-hidden="true"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="View Comments">
+                <i class="fas fa-comment fa-fw" aria-hidden="true"></i>
+            </a>
+        </div><link rel="stylesheet" href="/lib/lightgallery/css/lightgallery-bundle.min.css"><script type="text/javascript" src="/lib/autocomplete/autocomplete.min.js"></script><script type="text/javascript" src="/lib/lunr/lunr.min.js"></script><script type="text/javascript" src="/lib/lazysizes/lazysizes.min.js"></script><script type="text/javascript" src="/lib/lightgallery/lightgallery.min.js"></script><script type="text/javascript" src="/lib/lightgallery/plugins/thumbnail/lg-thumbnail.min.js"></script><script type="text/javascript" src="/lib/lightgallery/plugins/zoom/lg-zoom.min.js"></script><script type="text/javascript" src="/lib/clipboard/clipboard.min.js"></script><script type="text/javascript" src="/lib/sharer/sharer.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"Copy to clipboard","maxShownLines":50},"comment":{},"lightgallery":true,"search":{"highlightTag":"em","lunrIndexURL":"/index.json","maxResultLength":10,"noResultsFound":"No results found","snippetLength":30,"type":"lunr"}};</script><script type="text/javascript" src="/js/theme.min.js"></script></body>
+</html>

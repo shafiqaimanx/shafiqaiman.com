@@ -1,6 +1,10 @@
 # HackTheBox - Guard Writeup
 
 
+Box author | {{< person url="https://app.hackthebox.com/users/31190" name="TRX" picture="https://www.hackthebox.com/storage/avatars/f7a696a1331031242f713514b7a4621a.png" >}}
+
+<!--more-->
+
 ## Enumeration
 
 - Top 1000 ports scan

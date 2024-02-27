@@ -1,0 +1,15 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>Sqlmap - Tag - SHAFIQAIMAN</title>
+        <link>http://localhost:1313/tags/sqlmap/</link>
+        <description>Sqlmap - Tag - SHAFIQAIMAN</description>
+        <generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Wed, 21 Jul 2021 00:00:00 &#43;0000</lastBuildDate><atom:link href="http://localhost:1313/tags/sqlmap/" rel="self" type="application/rss+xml" /><item>
+    <title>HackTheBox - Vaccine Writeup</title>
+    <link>http://localhost:1313/posts/htb/vaccine/</link>
+    <pubDate>Wed, 21 Jul 2021 00:00:00 &#43;0000</pubDate>
+    <author>SH∆FIQ ∆IM∆N</author>
+    <guid>http://localhost:1313/posts/htb/vaccine/</guid>
+    <description><![CDATA[<p>Box author | <span class="h-card person-mention"><a href="https://app.hackthebox.com/users/8308" class="u-url url">&#8201;<span class="p-name fn">MinatoTW</span></a></span></p>]]></description>
+</item>
+</channel>
+</rss>

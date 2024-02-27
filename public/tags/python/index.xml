@@ -1,0 +1,65 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>Python - Tag - SHAFIQAIMAN</title>
+        <link>http://localhost:1313/tags/python/</link>
+        <description>Python - Tag - SHAFIQAIMAN</description>
+        <generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Sat, 08 Jul 2023 00:00:00 &#43;0000</lastBuildDate><atom:link href="http://localhost:1313/tags/python/" rel="self" type="application/rss+xml" /><item>
+    <title>HackTheBox - Busqueda Writeup</title>
+    <link>http://localhost:1313/posts/htb/busqueda/</link>
+    <pubDate>Sat, 08 Jul 2023 00:00:00 &#43;0000</pubDate>
+    <author>SH∆FIQ ∆IM∆N</author>
+    <guid>http://localhost:1313/posts/htb/busqueda/</guid>
+    <description><![CDATA[<p>Box author | <span class="h-card person-mention"><a href="https://app.hackthebox.com/users/389926" class="u-url url">&#8201;<span class="p-name fn">kavigihan</span></a></span></p>]]></description>
+</item>
+<item>
+    <title>HackTheBox - Sense Writeup</title>
+    <link>http://localhost:1313/posts/htb/sense/</link>
+    <pubDate>Sun, 13 Nov 2022 00:00:00 &#43;0000</pubDate>
+    <author>SH∆FIQ ∆IM∆N</author>
+    <guid>http://localhost:1313/posts/htb/sense/</guid>
+    <description><![CDATA[<p>Box author | <span class="h-card person-mention"><a href="https://app.hackthebox.com/users/709" class="u-url url">&#8201;<span class="p-name fn">lkys37en</span></a></span></p>]]></description>
+</item>
+<item>
+    <title>HackTheBox - Shocker Writeup</title>
+    <link>http://localhost:1313/posts/htb/shocker/</link>
+    <pubDate>Sat, 05 Nov 2022 00:00:00 &#43;0000</pubDate>
+    <author>SH∆FIQ ∆IM∆N</author>
+    <guid>http://localhost:1313/posts/htb/shocker/</guid>
+    <description><![CDATA[<p>Box author | <span class="h-card person-mention"><a href="https://app.hackthebox.com/users/2984" class="u-url url">&#8201;<span class="p-name fn">mrb3n</span></a></span></p>]]></description>
+</item>
+<item>
+    <title>HackTheBox - Beep Writeup</title>
+    <link>http://localhost:1313/posts/htb/beep/</link>
+    <pubDate>Fri, 21 Jan 2022 00:00:00 &#43;0000</pubDate>
+    <author>SH∆FIQ ∆IM∆N</author>
+    <guid>http://localhost:1313/posts/htb/beep/</guid>
+    <description><![CDATA[<p>Box author | <span class="h-card person-mention"><a href="https://app.hackthebox.com/users/1" class="u-url url">&#8201;<span class="p-name fn">ch4p</span></a></span></p>]]></description>
+</item>
+<item>
+    <title>HackTheBox - Vaccine Writeup</title>
+    <link>http://localhost:1313/posts/htb/vaccine/</link>
+    <pubDate>Wed, 21 Jul 2021 00:00:00 &#43;0000</pubDate>
+    <author>SH∆FIQ ∆IM∆N</author>
+    <guid>http://localhost:1313/posts/htb/vaccine/</guid>
+    <description><![CDATA[<p>Box author | <span class="h-card person-mention"><a href="https://app.hackthebox.com/users/8308" class="u-url url">&#8201;<span class="p-name fn">MinatoTW</span></a></span></p>]]></description>
+</item>
+<item>
+    <title>HackTheBox - Oopsie Writeup</title>
+    <link>http://localhost:1313/posts/htb/oopsie/</link>
+    <pubDate>Tue, 20 Jul 2021 00:00:00 &#43;0000</pubDate>
+    <author>SH∆FIQ ∆IM∆N</author>
+    <guid>http://localhost:1313/posts/htb/oopsie/</guid>
+    <description><![CDATA[<p>Box author | <span class="h-card person-mention"><a href="https://app.hackthebox.com/users/13531" class="u-url url">&#8201;<span class="p-name fn">MrR3boot</span></a></span></p>]]></description>
+</item>
+<item>
+    <title>TryHackMe - Agent Sudo Writeup</title>
+    <link>http://localhost:1313/posts/thm/agent_sudo/</link>
+    <pubDate>Sat, 10 Jul 2021 00:00:00 &#43;0000</pubDate>
+    <author>SH∆FIQ ∆IM∆N</author>
+    <guid>http://localhost:1313/posts/thm/agent_sudo/</guid>
+    <description><![CDATA[Link : https://tryhackme.com/room/agentsudoctf
+Enumeration First, let’s do an enumeration with the IP address of this machine. I’m gonna run Nmap [Netwok Mapper] to scan any open ports. I’m gonna run this command
+1 nmap -sC -sV -oN nmap/initial &lt;machine ip&gt; Explaining the nmap scan: -sC	:= scan using nmap default script -sV	:= scan for version -oN := output in normal format 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 # Nmap 7.]]></description>
+</item>
+</channel>
+</rss>

@@ -1,6 +1,10 @@
 # HackTheBox - Jerry Writeup
 
 
+Box author | {{< person url="https://app.hackthebox.com/users/2570" name="mrh4sh" picture="https://www.hackthebox.com/storage/avatars/03763e0eb6ceb271534e847fe104cef1.png" >}}
+
+<!--more-->
+
 ## Nmap
 
 As always, I'm gonna start with the Nmap scan with this IP address `10.10.10.95`

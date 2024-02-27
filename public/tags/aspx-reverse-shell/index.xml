@@ -1,15 +1,15 @@
 <rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
     <channel>
-        <title>aspx-reverse-shell - Tag - SHAFIQAIMAN</title>
-        <link>https://shafiqaiman.com/tags/aspx-reverse-shell/</link>
-        <description>aspx-reverse-shell - Tag - SHAFIQAIMAN</description>
-        <generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Fri, 27 Aug 2021 00:00:00 &#43;0000</lastBuildDate><atom:link href="https://shafiqaiman.com/tags/aspx-reverse-shell/" rel="self" type="application/rss+xml" /><item>
+        <title>Aspx-Reverse-Shell - Tag - SHAFIQAIMAN</title>
+        <link>http://localhost:1313/tags/aspx-reverse-shell/</link>
+        <description>Aspx-Reverse-Shell - Tag - SHAFIQAIMAN</description>
+        <generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Fri, 27 Aug 2021 00:00:00 &#43;0000</lastBuildDate><atom:link href="http://localhost:1313/tags/aspx-reverse-shell/" rel="self" type="application/rss+xml" /><item>
     <title>HackTheBox - Devel Writeup</title>
-    <link>https://shafiqaiman.com/posts/htb/devel/</link>
+    <link>http://localhost:1313/posts/htb/devel/</link>
     <pubDate>Fri, 27 Aug 2021 00:00:00 &#43;0000</pubDate>
     <author>SH∆FIQ ∆IM∆N</author>
-    <guid>https://shafiqaiman.com/posts/htb/devel/</guid>
-    <description><![CDATA[Enumeration scan top 1000 ports 1 nmap -sC -sV -oN nmap/initial 10.10.10.5 the result nmap initial scan all ports scan 1 nmap -sC -sV -p- -oN nmap/all_ports 10.10.10.5 the result nmap allports scan Open Ports We all know both Nmap scan shows us, just 2 open ports 21/FTP = Microsoft ftpd 80/HTTP = Microsoft IIS httpd 7.5 FTP File Transfer Protocol [FTP] on this machine is open and allowed login as anonymous Let&rsquo;s connect to it ftp anonymous Well, I can&rsquo;t find anything on it So, I&rsquo;m thinking this FTP might have been connected to the other port [port 80].]]></description>
+    <guid>http://localhost:1313/posts/htb/devel/</guid>
+    <description><![CDATA[<p>Box author | <span class="h-card person-mention"><a href="https://app.hackthebox.com/users/1" class="u-url url">&#8201;<span class="p-name fn">ch4p</span></a></span></p>]]></description>
 </item>
 </channel>
 </rss>

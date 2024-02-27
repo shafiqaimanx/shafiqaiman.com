@@ -1,0 +1,15 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>Pfx2john - Tag - SHAFIQAIMAN</title>
+        <link>http://localhost:1313/tags/pfx2john/</link>
+        <description>Pfx2john - Tag - SHAFIQAIMAN</description>
+        <generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Sun, 21 Aug 2022 00:00:00 &#43;0000</lastBuildDate><atom:link href="http://localhost:1313/tags/pfx2john/" rel="self" type="application/rss+xml" /><item>
+    <title>HackTheBox - Timelapse Writeup</title>
+    <link>http://localhost:1313/posts/htb/timelapse/</link>
+    <pubDate>Sun, 21 Aug 2022 00:00:00 &#43;0000</pubDate>
+    <author>SH∆FIQ ∆IM∆N</author>
+    <guid>http://localhost:1313/posts/htb/timelapse/</guid>
+    <description><![CDATA[<p>Box author | <span class="h-card person-mention"><a href="https://app.hackthebox.com/users/168546" class="u-url url">&#8201;<span class="p-name fn">ctrlzero</span></a></span></p>]]></description>
+</item>
+</channel>
+</rss>

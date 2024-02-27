@@ -1,6 +1,10 @@
 # HackTheBox - Legacy Writeup
 
 
+Box author | {{< person url="https://app.hackthebox.com/users/1" name="ch4p" picture="https://www.hackthebox.com/storage/avatars/08c255a334e10b3033ab7263e6b32422.png" >}}
+
+<!--more-->
+
 ## Enumeration
 
 First, let’s do an enumeration with the IP address of this machine. I’m gonna run Nmap [Netwok Mapper] to scan any open ports. I’m gonna run this command

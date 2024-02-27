@@ -1,0 +1,527 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <title>HackTheBox - Forest Writeup - SHAFIQAIMAN</title><meta name="Description" content="HacktheBox - Forest Writeup"><meta property="og:title" content="HackTheBox - Forest Writeup" />
+<meta property="og:description" content="HacktheBox - Forest Writeup" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://localhost:1313/posts/htb/forest/" /><meta property="og:image" content="http://localhost:1313/posts/htb/forest/featured.png" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2024-02-27T00:00:00+00:00" />
+<meta property="article:modified_time" content="2024-02-27T00:00:00+00:00" /><meta property="og:site_name" content="SHAFIQAIMAN" />
+
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:image" content="http://localhost:1313/posts/htb/forest/featured.png" /><meta name="twitter:title" content="HackTheBox - Forest Writeup"/>
+<meta name="twitter:description" content="HacktheBox - Forest Writeup"/>
+<meta name="twitter:site" content="@_shafiqaiman_"/>
+<meta name="application-name" content="SHAFIQAIMAN">
+<meta name="apple-mobile-web-app-title" content="SHAFIQAIMAN"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="http://localhost:1313/posts/htb/forest/" /><link rel="prev" href="http://localhost:1313/posts/htb/pilgrimage/" /><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="/lib/fontawesome-free/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"></noscript><link rel="preload" href="/lib/animate/animate.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="/lib/animate/animate.min.css"></noscript><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "HackTheBox - Forest Writeup",
+        "inLanguage": "en",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "http:\/\/localhost:1313\/posts\/htb\/forest\/"
+        },"image": [{
+                            "@type": "ImageObject",
+                            "url": "http:\/\/localhost:1313\/posts\/htb\/forest\/featured.png",
+                            "width":  1400 ,
+                            "height":  1060 
+                        }],"genre": "posts","keywords": "ldapsearch, GetNPUsers.py, rpcclient, ASREPRoast, evil-winrm, bloodhound, account-operators-group, writedacl, powerview.ps1, secretsdump.py, DCSync-attack, psexec.py, psexec-hash, hashcat, kerberos, sharphound, ldap","wordcount":  1241 ,
+        "url": "http:\/\/localhost:1313\/posts\/htb\/forest\/","datePublished": "2024-02-27T00:00:00+00:00","dateModified": "2024-02-27T00:00:00+00:00","publisher": {
+            "@type": "Organization",
+            "name": ""},"author": {
+                "@type": "Person",
+                "name": "SH∆FIQ ∆IM∆N"
+            },"description": "HacktheBox - Forest Writeup"
+    }
+    </script></head>
+    <body data-header-desktop="fixed" data-header-mobile="auto"><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('dark' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'dark' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="SHAFIQAIMAN">SH∆FIQ∆IM∆N</a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/posts/" title="Posts"><i class="fa-solid fa-book"></i>  </a><a class="menu-item" href="/tags/" title="Tags"><i class="fa-solid fa-tags"></i>  </a><a class="menu-item" href="/categories/" title="Categories"><i class="fa-solid fa-folder"></i>  </a><span class="menu-item delimiter"></span><span class="menu-item search" id="search-desktop">
+                        <input type="text" placeholder="Search titles or contents..." id="search-input-desktop">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-desktop" title="Search">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-desktop" title="Clear">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-desktop">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </span><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                    <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+                </a></div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="SHAFIQAIMAN">SH∆FIQ∆IM∆N</a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><div class="search-wrapper">
+                    <div class="search mobile" id="search-mobile">
+                        <input type="text" placeholder="Search titles or contents..." id="search-input-mobile">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-mobile" title="Search">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-mobile" title="Clear">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-mobile">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </div>
+                    <a href="javascript:void(0);" class="search-cancel" id="search-cancel-mobile">
+                        Cancel
+                    </a>
+                </div><a class="menu-item" href="/posts/" title="Posts"><i class="fa-solid fa-book"></i></a><a class="menu-item" href="/tags/" title="Tags"><i class="fa-solid fa-tags"></i></a><a class="menu-item" href="/categories/" title="Categories"><i class="fa-solid fa-folder"></i></a><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+            </a></div>
+    </div>
+</header><div class="search-dropdown desktop">
+        <div id="search-dropdown-desktop"></div>
+    </div>
+    <div class="search-dropdown mobile">
+        <div id="search-dropdown-mobile"></div>
+    </div><main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">Contents</h2>
+            <div class="toc-content always-active" id="toc-content-auto"></div>
+        </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">HackTheBox - Forest Writeup</h1><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="https://shafiqaiman.com" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>SH∆FIQ ∆IM∆N</a></span>&nbsp;<span class="post-category">included in <a href="/categories/hackthebox/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>HacktheBox</a>&nbsp;<a href="/categories/windows/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>Windows</a>&nbsp;<a href="/categories/active-directory-101/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>Active Directory 101</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="27-02-2024">27-02-2024</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;1241 words&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;6 minutes&nbsp;</div>
+        </div><div class="featured-image"><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/posts/htb/forest/featured.png"
+        data-srcset="/posts/htb/forest/featured.png, /posts/htb/forest/featured.png 1.5x, /posts/htb/forest/featured.png 2x"
+        data-sizes="auto"
+        alt="/posts/htb/forest/featured.png"
+        title="HacktheBox - Forest Writeup" /></div><div class="details toc" id="toc-static"  data-kept="">
+                <div class="details-summary toc-title">
+                    <span>Contents</span>
+                    <span><i class="details-icon fas fa-angle-right" aria-hidden="true"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#nmap">Nmap</a></li>
+    <li><a href="#ldap-ldapsearch">LDAP: ldapsearch</a></li>
+    <li><a href="#impacket-getnpuserspy">Impacket: GetNPUsers.py</a></li>
+    <li><a href="#rpcclient-enumdomusers">Rpcclient: enumdomusers</a>
+      <ul>
+        <li><a href="#asreproast-getnpuserspy">ASREPRoast: GetNPUsers.py</a></li>
+      </ul>
+    </li>
+    <li><a href="#evil-winrm-svc-alfresco">Evil-winrm: svc-alfresco</a>
+      <ul>
+        <li><a href="#bloodhound">BloodHound</a></li>
+        <li><a href="#groups-account-operators">Groups: Account Operators</a></li>
+        <li><a href="#impacket-secretsdumppy">Impacket: secretsdump.py</a></li>
+      </ul>
+    </li>
+    <li><a href="#psexec">PsExec</a></li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><p>Box author | <span class="h-card person-mention"><a href="https://app.hackthebox.com/users/2984" class="u-url url"><img class="u-photo photo" src="https://www.hackthebox.com/storage/avatars/adb3d560986d35b4fdd9605bae289ea9.png" alt="mrb3n">&#8201;<span class="p-name fn">mrb3n</span></a></span> <span class="h-card person-mention"><a href="https://app.hackthebox.com/users/1190" class="u-url url"><img class="u-photo photo" src="https://www.hackthebox.com/storage/avatars/a9527867b56b74bd7de6f0b940a04916.png" alt="egre55">&#8201;<span class="p-name fn">egre55</span></a></span></p>
+<h2 id="nmap">Nmap</h2>
+<p>Like always, I’m going to scan the IP Address by using <a href="https://nmap.org/" target="_blank" rel="noopener noreffer ">nmap</a> but I’m going to scan the full port first. Then, I’m going to scan the only open ports.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span><span class="lnt">49
+</span><span class="lnt">50
+</span><span class="lnt">51
+</span><span class="lnt">52
+</span><span class="lnt">53
+</span><span class="lnt">54
+</span><span class="lnt">55
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="line"><span class="cl"><span class="o">#</span><span class="w"> </span><span class="n">Nmap</span><span class="w"> </span><span class="mi">7</span><span class="p">.</span><span class="mi">94</span><span class="w"> </span><span class="n">scan</span><span class="w"> </span><span class="n">initiated</span><span class="w"> </span><span class="n">Wed</span><span class="w"> </span><span class="n">Oct</span><span class="w">  </span><span class="mi">4</span><span class="w"> </span><span class="mi">11</span><span class="p">:</span><span class="mi">53</span><span class="p">:</span><span class="mi">44</span><span class="w"> </span><span class="mi">2023</span><span class="w"> </span><span class="k">as</span><span class="p">:</span><span class="w"> </span><span class="n">nmap</span><span class="w"> </span><span class="o">-</span><span class="n">sCV</span><span class="w"> </span><span class="o">-</span><span class="n">p135</span><span class="p">,</span><span class="mi">139</span><span class="p">,</span><span class="mi">3268</span><span class="p">,</span><span class="mi">3269</span><span class="p">,</span><span class="mi">389</span><span class="p">,</span><span class="mi">445</span><span class="p">,</span><span class="mi">464</span><span class="p">,</span><span class="mi">47001</span><span class="p">,</span><span class="mi">49664</span><span class="p">,</span><span class="mi">49666</span><span class="p">,</span><span class="mi">49667</span><span class="p">,</span><span class="mi">49671</span><span class="p">,</span><span class="mi">49676</span><span class="p">,</span><span class="mi">49677</span><span class="p">,</span><span class="mi">49684</span><span class="p">,</span><span class="mi">49703</span><span class="p">,</span><span class="mi">49940</span><span class="p">,</span><span class="mi">53</span><span class="p">,</span><span class="mi">593</span><span class="p">,</span><span class="mi">636</span><span class="p">,</span><span class="mi">88</span><span class="p">,</span><span class="mi">9389</span><span class="w"> </span><span class="o">-</span><span class="k">oN</span><span class="w"> </span><span class="n">nmap</span><span class="o">/</span><span class="n">forest</span><span class="w"> </span><span class="mi">10</span><span class="p">.</span><span class="mi">10</span><span class="p">.</span><span class="mi">10</span><span class="p">.</span><span class="mi">161</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="n">Nmap</span><span class="w"> </span><span class="n">scan</span><span class="w"> </span><span class="n">report</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="n">htb</span><span class="p">.</span><span class="k">local</span><span class="w"> </span><span class="p">(</span><span class="mi">10</span><span class="p">.</span><span class="mi">10</span><span class="p">.</span><span class="mi">10</span><span class="p">.</span><span class="mi">161</span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="k">Host</span><span class="w"> </span><span class="k">is</span><span class="w"> </span><span class="n">up</span><span class="w"> </span><span class="p">(</span><span class="mi">0</span><span class="p">.</span><span class="mi">032</span><span class="n">s</span><span class="w"> </span><span class="n">latency</span><span class="p">).</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="n">PORT</span><span class="w">      </span><span class="k">STATE</span><span class="w"> </span><span class="n">SERVICE</span><span class="w">      </span><span class="k">VERSION</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="mi">53</span><span class="o">/</span><span class="n">tcp</span><span class="w">    </span><span class="k">open</span><span class="w">  </span><span class="k">domain</span><span class="w">       </span><span class="k">Simple</span><span class="w"> </span><span class="n">DNS</span><span class="w"> </span><span class="n">Plus</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="mi">88</span><span class="o">/</span><span class="n">tcp</span><span class="w">    </span><span class="k">open</span><span class="w">  </span><span class="n">kerberos</span><span class="o">-</span><span class="n">sec</span><span class="w"> </span><span class="n">Microsoft</span><span class="w"> </span><span class="n">Windows</span><span class="w"> </span><span class="n">Kerberos</span><span class="w"> </span><span class="p">(</span><span class="n">server</span><span class="w"> </span><span class="n">time</span><span class="p">:</span><span class="w"> </span><span class="mi">2023</span><span class="o">-</span><span class="mi">10</span><span class="o">-</span><span class="mi">04</span><span class="w"> </span><span class="mi">04</span><span class="p">:</span><span class="mi">00</span><span class="p">:</span><span class="mi">42</span><span class="n">Z</span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="mi">135</span><span class="o">/</span><span class="n">tcp</span><span class="w">   </span><span class="k">open</span><span class="w">  </span><span class="n">msrpc</span><span class="w">        </span><span class="n">Microsoft</span><span class="w"> </span><span class="n">Windows</span><span class="w"> </span><span class="n">RPC</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="mi">139</span><span class="o">/</span><span class="n">tcp</span><span class="w">   </span><span class="k">open</span><span class="w">  </span><span class="n">netbios</span><span class="o">-</span><span class="n">ssn</span><span class="w">  </span><span class="n">Microsoft</span><span class="w"> </span><span class="n">Windows</span><span class="w"> </span><span class="n">netbios</span><span class="o">-</span><span class="n">ssn</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="mi">389</span><span class="o">/</span><span class="n">tcp</span><span class="w">   </span><span class="k">open</span><span class="w">  </span><span class="n">ldap</span><span class="w">         </span><span class="n">Microsoft</span><span class="w"> </span><span class="n">Windows</span><span class="w"> </span><span class="n">Active</span><span class="w"> </span><span class="n">Directory</span><span class="w"> </span><span class="n">LDAP</span><span class="w"> </span><span class="p">(</span><span class="k">Domain</span><span class="p">:</span><span class="w"> </span><span class="n">htb</span><span class="p">.</span><span class="k">local</span><span class="p">,</span><span class="w"> </span><span class="n">Site</span><span class="p">:</span><span class="w"> </span><span class="k">Default</span><span class="o">-</span><span class="k">First</span><span class="o">-</span><span class="n">Site</span><span class="o">-</span><span class="n">Name</span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="mi">445</span><span class="o">/</span><span class="n">tcp</span><span class="w">   </span><span class="k">open</span><span class="w">               </span><span class="n">Windows</span><span class="w"> </span><span class="n">Server</span><span class="w"> </span><span class="mi">2016</span><span class="w"> </span><span class="n">Standard</span><span class="w"> </span><span class="mi">14393</span><span class="w"> </span><span class="n">microsoft</span><span class="o">-</span><span class="n">ds</span><span class="w"> </span><span class="p">(</span><span class="n">workgroup</span><span class="p">:</span><span class="w"> </span><span class="n">HTB</span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="mi">464</span><span class="o">/</span><span class="n">tcp</span><span class="w">   </span><span class="k">open</span><span class="w">  </span><span class="n">kpasswd5</span><span class="o">?</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="mi">593</span><span class="o">/</span><span class="n">tcp</span><span class="w">   </span><span class="k">open</span><span class="w">  </span><span class="n">ncacn_http</span><span class="w">   </span><span class="n">Microsoft</span><span class="w"> </span><span class="n">Windows</span><span class="w"> </span><span class="n">RPC</span><span class="w"> </span><span class="n">over</span><span class="w"> </span><span class="n">HTTP</span><span class="w"> </span><span class="mi">1</span><span class="p">.</span><span class="mi">0</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="mi">636</span><span class="o">/</span><span class="n">tcp</span><span class="w">   </span><span class="k">open</span><span class="w">  </span><span class="n">tcpwrapped</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="mi">3268</span><span class="o">/</span><span class="n">tcp</span><span class="w">  </span><span class="k">open</span><span class="w">  </span><span class="n">ldap</span><span class="w">         </span><span class="n">Microsoft</span><span class="w"> </span><span class="n">Windows</span><span class="w"> </span><span class="n">Active</span><span class="w"> </span><span class="n">Directory</span><span class="w"> </span><span class="n">LDAP</span><span class="w"> </span><span class="p">(</span><span class="k">Domain</span><span class="p">:</span><span class="w"> </span><span class="n">htb</span><span class="p">.</span><span class="k">local</span><span class="p">,</span><span class="w"> </span><span class="n">Site</span><span class="p">:</span><span class="w"> </span><span class="k">Default</span><span class="o">-</span><span class="k">First</span><span class="o">-</span><span class="n">Site</span><span class="o">-</span><span class="n">Name</span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="mi">3269</span><span class="o">/</span><span class="n">tcp</span><span class="w">  </span><span class="k">open</span><span class="w">  </span><span class="n">tcpwrapped</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="mi">9389</span><span class="o">/</span><span class="n">tcp</span><span class="w">  </span><span class="k">open</span><span class="w">  </span><span class="n">mc</span><span class="o">-</span><span class="n">nmf</span><span class="w">       </span><span class="p">.</span><span class="n">NET</span><span class="w"> </span><span class="n">Message</span><span class="w"> </span><span class="n">Framing</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="mi">47001</span><span class="o">/</span><span class="n">tcp</span><span class="w"> </span><span class="k">open</span><span class="w">  </span><span class="n">http</span><span class="w">         </span><span class="n">Microsoft</span><span class="w"> </span><span class="n">HTTPAPI</span><span class="w"> </span><span class="n">httpd</span><span class="w"> </span><span class="mi">2</span><span class="p">.</span><span class="mi">0</span><span class="w"> </span><span class="p">(</span><span class="n">SSDP</span><span class="o">/</span><span class="n">UPnP</span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="o">|</span><span class="n">_http</span><span class="o">-</span><span class="n">title</span><span class="p">:</span><span class="w"> </span><span class="k">Not</span><span class="w"> </span><span class="k">Found</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="o">|</span><span class="n">_http</span><span class="o">-</span><span class="n">server</span><span class="o">-</span><span class="n">header</span><span class="p">:</span><span class="w"> </span><span class="n">Microsoft</span><span class="o">-</span><span class="n">HTTPAPI</span><span class="o">/</span><span class="mi">2</span><span class="p">.</span><span class="mi">0</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="mi">49664</span><span class="o">/</span><span class="n">tcp</span><span class="w"> </span><span class="k">open</span><span class="w">  </span><span class="n">msrpc</span><span class="w">        </span><span class="n">Microsoft</span><span class="w"> </span><span class="n">Windows</span><span class="w"> </span><span class="n">RPC</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="mi">49666</span><span class="o">/</span><span class="n">tcp</span><span class="w"> </span><span class="k">open</span><span class="w">  </span><span class="n">msrpc</span><span class="w">        </span><span class="n">Microsoft</span><span class="w"> </span><span class="n">Windows</span><span class="w"> </span><span class="n">RPC</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="mi">49667</span><span class="o">/</span><span class="n">tcp</span><span class="w"> </span><span class="k">open</span><span class="w">  </span><span class="n">msrpc</span><span class="w">        </span><span class="n">Microsoft</span><span class="w"> </span><span class="n">Windows</span><span class="w"> </span><span class="n">RPC</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="mi">49671</span><span class="o">/</span><span class="n">tcp</span><span class="w"> </span><span class="k">open</span><span class="w">  </span><span class="n">msrpc</span><span class="w">        </span><span class="n">Microsoft</span><span class="w"> </span><span class="n">Windows</span><span class="w"> </span><span class="n">RPC</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="mi">49676</span><span class="o">/</span><span class="n">tcp</span><span class="w"> </span><span class="k">open</span><span class="w">  </span><span class="n">ncacn_http</span><span class="w">   </span><span class="n">Microsoft</span><span class="w"> </span><span class="n">Windows</span><span class="w"> </span><span class="n">RPC</span><span class="w"> </span><span class="n">over</span><span class="w"> </span><span class="n">HTTP</span><span class="w"> </span><span class="mi">1</span><span class="p">.</span><span class="mi">0</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="mi">49677</span><span class="o">/</span><span class="n">tcp</span><span class="w"> </span><span class="k">open</span><span class="w">  </span><span class="n">msrpc</span><span class="w">        </span><span class="n">Microsoft</span><span class="w"> </span><span class="n">Windows</span><span class="w"> </span><span class="n">RPC</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="mi">49684</span><span class="o">/</span><span class="n">tcp</span><span class="w"> </span><span class="k">open</span><span class="w">  </span><span class="n">msrpc</span><span class="w">        </span><span class="n">Microsoft</span><span class="w"> </span><span class="n">Windows</span><span class="w"> </span><span class="n">RPC</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="mi">49703</span><span class="o">/</span><span class="n">tcp</span><span class="w"> </span><span class="k">open</span><span class="w">  </span><span class="n">msrpc</span><span class="w">        </span><span class="n">Microsoft</span><span class="w"> </span><span class="n">Windows</span><span class="w"> </span><span class="n">RPC</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="mi">49940</span><span class="o">/</span><span class="n">tcp</span><span class="w"> </span><span class="k">open</span><span class="w">  </span><span class="n">msrpc</span><span class="w">        </span><span class="n">Microsoft</span><span class="w"> </span><span class="n">Windows</span><span class="w"> </span><span class="n">RPC</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="n">Service</span><span class="w"> </span><span class="n">Info</span><span class="p">:</span><span class="w"> </span><span class="k">Host</span><span class="p">:</span><span class="w"> </span><span class="n">FOREST</span><span class="p">;</span><span class="w"> </span><span class="n">OS</span><span class="p">:</span><span class="w"> </span><span class="n">Windows</span><span class="p">;</span><span class="w"> </span><span class="n">CPE</span><span class="p">:</span><span class="w"> </span><span class="n">cpe</span><span class="p">:</span><span class="o">/</span><span class="n">o</span><span class="p">:</span><span class="n">microsoft</span><span class="p">:</span><span class="n">windows</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="k">Host</span><span class="w"> </span><span class="n">script</span><span class="w"> </span><span class="n">results</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="o">|</span><span class="w"> </span><span class="n">smb</span><span class="o">-</span><span class="k">security</span><span class="o">-</span><span class="k">mode</span><span class="p">:</span><span class="w"> 
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="o">|</span><span class="w">   </span><span class="n">account_used</span><span class="p">:</span><span class="w"> </span><span class="n">guest</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="o">|</span><span class="w">   </span><span class="n">authentication_level</span><span class="p">:</span><span class="w"> </span><span class="k">user</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="o">|</span><span class="w">   </span><span class="n">challenge_response</span><span class="p">:</span><span class="w"> </span><span class="n">supported</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="o">|</span><span class="n">_</span><span class="w">  </span><span class="n">message_signing</span><span class="p">:</span><span class="w"> </span><span class="n">required</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="o">|</span><span class="w"> </span><span class="n">smb</span><span class="o">-</span><span class="n">os</span><span class="o">-</span><span class="n">discovery</span><span class="p">:</span><span class="w"> 
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="o">|</span><span class="w">   </span><span class="n">OS</span><span class="p">:</span><span class="w"> </span><span class="n">Windows</span><span class="w"> </span><span class="n">Server</span><span class="w"> </span><span class="mi">2016</span><span class="w"> </span><span class="n">Standard</span><span class="w"> </span><span class="mi">14393</span><span class="w"> </span><span class="p">(</span><span class="n">Windows</span><span class="w"> </span><span class="n">Server</span><span class="w"> </span><span class="mi">2016</span><span class="w"> </span><span class="n">Standard</span><span class="w"> </span><span class="mi">6</span><span class="p">.</span><span class="mi">3</span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="o">|</span><span class="w">   </span><span class="n">Computer</span><span class="w"> </span><span class="n">name</span><span class="p">:</span><span class="w"> </span><span class="n">FOREST</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="o">|</span><span class="w">   </span><span class="n">NetBIOS</span><span class="w"> </span><span class="n">computer</span><span class="w"> </span><span class="n">name</span><span class="p">:</span><span class="w"> </span><span class="n">FOREST</span><span class="err">\</span><span class="n">x00</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="o">|</span><span class="w">   </span><span class="k">Domain</span><span class="w"> </span><span class="n">name</span><span class="p">:</span><span class="w"> </span><span class="n">htb</span><span class="p">.</span><span class="k">local</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="o">|</span><span class="w">   </span><span class="n">Forest</span><span class="w"> </span><span class="n">name</span><span class="p">:</span><span class="w"> </span><span class="n">htb</span><span class="p">.</span><span class="k">local</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="o">|</span><span class="w">   </span><span class="n">FQDN</span><span class="p">:</span><span class="w"> </span><span class="n">FOREST</span><span class="p">.</span><span class="n">htb</span><span class="p">.</span><span class="k">local</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="o">|</span><span class="n">_</span><span class="w">  </span><span class="k">System</span><span class="w"> </span><span class="n">time</span><span class="p">:</span><span class="w"> </span><span class="mi">2023</span><span class="o">-</span><span class="mi">10</span><span class="o">-</span><span class="mi">03</span><span class="n">T21</span><span class="p">:</span><span class="mi">01</span><span class="p">:</span><span class="mi">34</span><span class="o">-</span><span class="mi">07</span><span class="p">:</span><span class="mi">00</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="o">|</span><span class="w"> </span><span class="n">smb2</span><span class="o">-</span><span class="k">security</span><span class="o">-</span><span class="k">mode</span><span class="p">:</span><span class="w"> 
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="o">|</span><span class="w">   </span><span class="mi">3</span><span class="p">:</span><span class="mi">1</span><span class="p">:</span><span class="mi">1</span><span class="p">:</span><span class="w"> 
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="o">|</span><span class="n">_</span><span class="w">    </span><span class="n">Message</span><span class="w"> </span><span class="n">signing</span><span class="w"> </span><span class="n">enabled</span><span class="w"> </span><span class="k">and</span><span class="w"> </span><span class="n">required</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="o">|</span><span class="w"> </span><span class="n">smb2</span><span class="o">-</span><span class="n">time</span><span class="p">:</span><span class="w"> 
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="o">|</span><span class="w">   </span><span class="nb">date</span><span class="p">:</span><span class="w"> </span><span class="mi">2023</span><span class="o">-</span><span class="mi">10</span><span class="o">-</span><span class="mi">04</span><span class="n">T04</span><span class="p">:</span><span class="mi">01</span><span class="p">:</span><span class="mi">32</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="o">|</span><span class="n">_</span><span class="w">  </span><span class="n">start_date</span><span class="p">:</span><span class="w"> </span><span class="mi">2023</span><span class="o">-</span><span class="mi">10</span><span class="o">-</span><span class="mi">02</span><span class="n">T17</span><span class="p">:</span><span class="mi">03</span><span class="p">:</span><span class="mi">32</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="o">|</span><span class="n">_clock</span><span class="o">-</span><span class="n">skew</span><span class="p">:</span><span class="w"> </span><span class="n">mean</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="n">h26m52s</span><span class="p">,</span><span class="w"> </span><span class="n">deviation</span><span class="p">:</span><span class="w"> </span><span class="mi">4</span><span class="n">h02m31s</span><span class="p">,</span><span class="w"> </span><span class="n">median</span><span class="p">:</span><span class="w"> </span><span class="mi">6</span><span class="n">m50s</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="n">Service</span><span class="w"> </span><span class="n">detection</span><span class="w"> </span><span class="n">performed</span><span class="p">.</span><span class="w"> </span><span class="n">Please</span><span class="w"> </span><span class="n">report</span><span class="w"> </span><span class="k">any</span><span class="w"> </span><span class="n">incorrect</span><span class="w"> </span><span class="n">results</span><span class="w"> </span><span class="k">at</span><span class="w"> </span><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">nmap</span><span class="p">.</span><span class="n">org</span><span class="o">/</span><span class="n">submit</span><span class="o">/</span><span class="w"> </span><span class="p">.</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="o">#</span><span class="w"> </span><span class="n">Nmap</span><span class="w"> </span><span class="n">done</span><span class="w"> </span><span class="k">at</span><span class="w"> </span><span class="n">Wed</span><span class="w"> </span><span class="n">Oct</span><span class="w">  </span><span class="mi">4</span><span class="w"> </span><span class="mi">11</span><span class="p">:</span><span class="mi">54</span><span class="p">:</span><span class="mi">50</span><span class="w"> </span><span class="mi">2023</span><span class="w"> </span><span class="c1">-- 1 IP address (1 host up) scanned in 66.48 seconds
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>The nmap scan result is completed and that&rsquo;s a bunch of open ports. Based on the ports itself, it&rsquo;s look like a <code>Domain Controller</code>.</p>
+<p>On top of that, nmap also found the domain name called <code>htb.local</code>. So, I&rsquo;m going to add that to the <code>/etc/hosts</code> file.</p>
+<p><figure><a class="lightgallery" href="/posts/htb/forest/add-domain-name.png" title="add domain name" data-thumbnail="/posts/htb/forest/add-domain-name.png" data-sub-html="<h2>add domain name</h2><p>add domain name</p>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/posts/htb/forest/add-domain-name.png"
+            data-srcset="/posts/htb/forest/add-domain-name.png, /posts/htb/forest/add-domain-name.png 1.5x, /posts/htb/forest/add-domain-name.png 2x"
+            data-sizes="auto"
+            alt="/posts/htb/forest/add-domain-name.png" width="403" height="137" />
+    </a><figcaption class="image-caption">add domain name</figcaption>
+    </figure></p>
+<h2 id="ldap-ldapsearch">LDAP: ldapsearch</h2>
+<p>This machine doesn&rsquo;t have any web server to check it out and I tried to list the <code>SMB</code> shares with anonymous access and it failed. Then, I&rsquo;ll start to enumerate the <code>LDAP</code> server by using <code>ldapsearch</code> and find a list of users. I saved those lists of users in the file called <code>users.txt</code>.</p>
+<p><figure><a class="lightgallery" href="/posts/htb/forest/enum-users-using-ldapsearch.png" title="enum users using ldapsearch" data-thumbnail="/posts/htb/forest/enum-users-using-ldapsearch.png" data-sub-html="<h2>enum users using ldapsearch</h2><p>enum users using ldapsearch</p>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/posts/htb/forest/enum-users-using-ldapsearch.png"
+            data-srcset="/posts/htb/forest/enum-users-using-ldapsearch.png, /posts/htb/forest/enum-users-using-ldapsearch.png 1.5x, /posts/htb/forest/enum-users-using-ldapsearch.png 2x"
+            data-sizes="auto"
+            alt="/posts/htb/forest/enum-users-using-ldapsearch.png" width="1485" height="718" />
+    </a><figcaption class="image-caption">enum users using ldapsearch</figcaption>
+    </figure></p>
+<p>Unfortunately, I was stuck at this point and did not know what to do next. However, <a href="https://www.hackthebox.com/" target="_blank" rel="noopener noreffer ">HacktheBox</a> just released a new feature called <a href="https://www.hackthebox.com/blog/guided-mode" target="_blank" rel="noopener noreffer ">Guided Mode</a> which is the perfect training companion for beginners. I used that as an advantage and it says, I need to find a user who has <code>Kerberos Pre-Authentication</code> disabled.</p>
+<h2 id="impacket-getnpuserspy">Impacket: GetNPUsers.py</h2>
+<p>Based on the description above, I need to find a user that is vulnerable to an <code>asreproast</code> attack. Then, I executed the <a href="https://github.com/fortra/impacket" target="_blank" rel="noopener noreffer ">impacket</a> script called <code>GetNPUsers.py</code> alongside the list of users and it did not find anything at all.</p>
+<p><figure><a class="lightgallery" href="/posts/htb/forest/asreproast-against-users-file.png" title="asreproast with users file" data-thumbnail="/posts/htb/forest/asreproast-against-users-file.png" data-sub-html="<h2>asreproast with users file</h2><p>asreproast with users file</p>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/posts/htb/forest/asreproast-against-users-file.png"
+            data-srcset="/posts/htb/forest/asreproast-against-users-file.png, /posts/htb/forest/asreproast-against-users-file.png 1.5x, /posts/htb/forest/asreproast-against-users-file.png 2x"
+            data-sizes="auto"
+            alt="/posts/htb/forest/asreproast-against-users-file.png" width="1312" height="288" />
+    </a><figcaption class="image-caption">asreproast with users file</figcaption>
+    </figure></p>
+<h2 id="rpcclient-enumdomusers">Rpcclient: enumdomusers</h2>
+<p>Then, I remembered that <code>rpcclient</code> can be used to enumerate <code>users</code> on this machine. After successfully establishing a connection with anonymous access. I searched the users by executing the <code>enumdomusers</code> command and it did manage to find another user which is <code>svc-alfresco</code>.</p>
+<p><figure><a class="lightgallery" href="/posts/htb/forest/rpcclient-enumdomusers.png" title="rpcclient enumdomusers" data-thumbnail="/posts/htb/forest/rpcclient-enumdomusers.png" data-sub-html="<h2>rpcclient enumdomusers</h2><p>rpcclient enumdomusers</p>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/posts/htb/forest/rpcclient-enumdomusers.png"
+            data-srcset="/posts/htb/forest/rpcclient-enumdomusers.png, /posts/htb/forest/rpcclient-enumdomusers.png 1.5x, /posts/htb/forest/rpcclient-enumdomusers.png 2x"
+            data-sizes="auto"
+            alt="/posts/htb/forest/rpcclient-enumdomusers.png" width="799" height="787" />
+    </a><figcaption class="image-caption">rpcclient enumdomusers</figcaption>
+    </figure></p>
+<h3 id="asreproast-getnpuserspy">ASREPRoast: GetNPUsers.py</h3>
+<p>With that information in hand, I&rsquo;ll execute the <code>GetNPUsers.py</code> script once again. Instead of using a list of users, I&rsquo;m going to dump the hash of the <code>svc-alfresco</code> user only. After successfully dumping the hash, I&rsquo;m going to crack it using <a href="https://hashcat.net/hashcat/" target="_blank" rel="noopener noreffer ">hashcat</a>.</p>
+<p><figure><a class="lightgallery" href="/posts/htb/forest/svc-alfresco-hash.png" title="svc-alfresco hash" data-thumbnail="/posts/htb/forest/svc-alfresco-hash.png" data-sub-html="<h2>svc-alfresco hash</h2><p>svc-alfresco hash</p>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/posts/htb/forest/svc-alfresco-hash.png"
+            data-srcset="/posts/htb/forest/svc-alfresco-hash.png, /posts/htb/forest/svc-alfresco-hash.png 1.5x, /posts/htb/forest/svc-alfresco-hash.png 2x"
+            data-sizes="auto"
+            alt="/posts/htb/forest/svc-alfresco-hash.png" width="1888" height="237" />
+    </a><figcaption class="image-caption">svc-alfresco hash</figcaption>
+    </figure></p>
+<p><figure><a class="lightgallery" href="/posts/htb/forest/cracked-svc-alfresco-hash.png" title="cracked svc-alfresco hash" data-thumbnail="/posts/htb/forest/cracked-svc-alfresco-hash.png" data-sub-html="<h2>cracked svc-alfresco hash</h2><p>cracked svc-alfresco hash</p>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/posts/htb/forest/cracked-svc-alfresco-hash.png"
+            data-srcset="/posts/htb/forest/cracked-svc-alfresco-hash.png, /posts/htb/forest/cracked-svc-alfresco-hash.png 1.5x, /posts/htb/forest/cracked-svc-alfresco-hash.png 2x"
+            data-sizes="auto"
+            alt="/posts/htb/forest/cracked-svc-alfresco-hash.png" width="1876" height="471" />
+    </a><figcaption class="image-caption">cracked svc-alfresco hash</figcaption>
+    </figure></p>
+<h2 id="evil-winrm-svc-alfresco">Evil-winrm: svc-alfresco</h2>
+<p>Since I already have valid credentials, I&rsquo;m going to connect to it as a <code>svc-alfresco</code> user. I&rsquo;m in as a <code>svc-alfresco</code> user.</p>
+<p><figure><a class="lightgallery" href="/posts/htb/forest/login-as-svc-alfresco.png" title="login as svc-alfresco" data-thumbnail="/posts/htb/forest/login-as-svc-alfresco.png" data-sub-html="<h2>login as svc-alfresco</h2><p>login as svc-alfresco</p>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/posts/htb/forest/login-as-svc-alfresco.png"
+            data-srcset="/posts/htb/forest/login-as-svc-alfresco.png, /posts/htb/forest/login-as-svc-alfresco.png 1.5x, /posts/htb/forest/login-as-svc-alfresco.png 2x"
+            data-sizes="auto"
+            alt="/posts/htb/forest/login-as-svc-alfresco.png" width="1449" height="679" />
+    </a><figcaption class="image-caption">login as svc-alfresco</figcaption>
+    </figure></p>
+<h3 id="bloodhound">BloodHound</h3>
+<p>After successfully logging in. I&rsquo;m going to drop the <a href="https://github.com/Flangvik/SharpCollection" target="_blank" rel="noopener noreffer ">SharpHound</a> binary in the machine for enumerating the <code>Active Directory</code> using the <code>upload</code> command provided by <a href="https://github.com/Hackplayers/evil-winrm" target="_blank" rel="noopener noreffer ">evil-winrm</a>. Then, I executed it and saved the output into the <code>zip</code> file.</p>
+<p><figure><a class="lightgallery" href="/posts/htb/forest/executing-SharpHound.png" title="executing SharpHound" data-thumbnail="/posts/htb/forest/executing-SharpHound.png" data-sub-html="<h2>executing SharpHound</h2><p>executing SharpHound</p>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/posts/htb/forest/executing-SharpHound.png"
+            data-srcset="/posts/htb/forest/executing-SharpHound.png, /posts/htb/forest/executing-SharpHound.png 1.5x, /posts/htb/forest/executing-SharpHound.png 2x"
+            data-sizes="auto"
+            alt="/posts/htb/forest/executing-SharpHound.png" width="1876" height="646" />
+    </a><figcaption class="image-caption">executing SharpHound</figcaption>
+    </figure></p>
+<p>For analyzing the <code>zip</code> file data. I&rsquo;m going to fire up the <code>neo4j console</code> with the <code>sudo</code> privilege. I&rsquo;ll start up the <code>BloodHound</code> and import the <code>zip</code> file by clicking the <code>Upload Data</code> button on the right navigation bar.</p>
+<p><figure><a class="lightgallery" href="/posts/htb/forest/upload-data-in-bloodhound.png" title="upload data in bloodhound" data-thumbnail="/posts/htb/forest/upload-data-in-bloodhound.png" data-sub-html="<h2>upload data in bloodhound</h2><p>upload data in bloodhound</p>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/posts/htb/forest/upload-data-in-bloodhound.png"
+            data-srcset="/posts/htb/forest/upload-data-in-bloodhound.png, /posts/htb/forest/upload-data-in-bloodhound.png 1.5x, /posts/htb/forest/upload-data-in-bloodhound.png 2x"
+            data-sizes="auto"
+            alt="/posts/htb/forest/upload-data-in-bloodhound.png" width="1109" height="592" />
+    </a><figcaption class="image-caption">upload data in bloodhound</figcaption>
+    </figure></p>
+<p>After successfully importing the data. I&rsquo;ll search for <code>SVC-ALFRESCO@HTB.LOCAL</code> node and <code>Mark User as Owned</code> by right-clicking on the node.</p>
+<p><figure><a class="lightgallery" href="/posts/htb/forest/mark-user-owned.png" title="mark user owned" data-thumbnail="/posts/htb/forest/mark-user-owned.png" data-sub-html="<h2>mark user owned</h2><p>mark user owned</p>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/posts/htb/forest/mark-user-owned.png"
+            data-srcset="/posts/htb/forest/mark-user-owned.png, /posts/htb/forest/mark-user-owned.png 1.5x, /posts/htb/forest/mark-user-owned.png 2x"
+            data-sizes="auto"
+            alt="/posts/htb/forest/mark-user-owned.png" width="655" height="462" />
+    </a><figcaption class="image-caption">mark user owned</figcaption>
+    </figure></p>
+<p>Now, I&rsquo;m going to analyze the data from the owned user which is <code>svc-alfresco</code> by clicking the <code>burger menu</code> on the top left and clicking the <code>Analysis</code> button, and choosing the <code>Shortest Paths to High Value Targets</code>.</p>
+<p><figure><a class="lightgallery" href="/posts/htb/forest/shortest-path.png" title="shortest path" data-thumbnail="/posts/htb/forest/shortest-path.png" data-sub-html="<h2>shortest path</h2><p>shortest path</p>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/posts/htb/forest/shortest-path.png"
+            data-srcset="/posts/htb/forest/shortest-path.png, /posts/htb/forest/shortest-path.png 1.5x, /posts/htb/forest/shortest-path.png 2x"
+            data-sizes="auto"
+            alt="/posts/htb/forest/shortest-path.png" width="1364" height="759" />
+    </a><figcaption class="image-caption">shortest path</figcaption>
+    </figure></p>
+<h3 id="groups-account-operators">Groups: Account Operators</h3>
+<p>Honestly, the graph view is confusing. However, the current user is a member of <code>SERVICE ACCOUNT</code> -&gt; <code>PRIVILEGED IT ACCOUNT</code> -&gt; <code>ACCOUNT OPERATORS</code> and with quick googling, I found Microsoft <a href="https://learn.microsoft.com/en-us/windows-server/identity/ad-ds/manage/understand-security-groups#account-operators" target="_blank" rel="noopener noreffer ">documentation</a> about it. Turns out, the <code>Account Operators</code> group, it&rsquo;s a quite powerful group in this case, which can be used to create and modify accounts.</p>
+<div class="details admonition tip open">
+        <div class="details-summary admonition-title">
+            <i class="icon fas fa-lightbulb fa-fw" aria-hidden="true"></i>Description<i class="details-icon fas fa-angle-right fa-fw" aria-hidden="true"></i>
+        </div>
+        <div class="details-content">
+            <div class="admonition-content">The <strong>Account Operators</strong> group grants limited account creation privileges to a user. Members of this group can create and modify most types of accounts, including accounts for users, Local groups, and Global groups. Group members can log in locally to domain controllers.</div>
+        </div>
+    </div>
+<p><figure><a class="lightgallery" href="/posts/htb/forest/svc-alfresco-member-of-Account-Operators.png" title="svc-alfresco member of Account Operators" data-thumbnail="/posts/htb/forest/svc-alfresco-member-of-Account-Operators.png" data-sub-html="<h2>svc-alfresco member of Account Operators</h2><p>svc-alfresco member of Account Operators</p>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/posts/htb/forest/svc-alfresco-member-of-Account-Operators.png"
+            data-srcset="/posts/htb/forest/svc-alfresco-member-of-Account-Operators.png, /posts/htb/forest/svc-alfresco-member-of-Account-Operators.png 1.5x, /posts/htb/forest/svc-alfresco-member-of-Account-Operators.png 2x"
+            data-sizes="auto"
+            alt="/posts/htb/forest/svc-alfresco-member-of-Account-Operators.png" width="1256" height="539" />
+    </a><figcaption class="image-caption">svc-alfresco member of Account Operators</figcaption>
+    </figure></p>
+<p>The <code>Account Operators</code> group has <code>GenericAll</code> permission on the <code>Exchange Windows Permissions</code> groups. This permission essentially gives members full control of the group and allows members to directly modify group membership.</p>
+<p>On top of that, the <code>EXCHANGE WINDOWS PERMISSIONS</code> group has <code>WriteDacl</code> permission on the domain <code>HTB.LOCAL</code> and it can be used to abuse the <code>DCSync</code> attack on the domain.</p>
+<p><figure><a class="lightgallery" href="/posts/htb/forest/path-to-abuse-Exchange-Windows-Permissions.png" title="path to abuse Exchange Windows Permissions" data-thumbnail="/posts/htb/forest/path-to-abuse-Exchange-Windows-Permissions.png" data-sub-html="<h2>path to abuse Exchange Windows Permissions</h2><p>path to abuse Exchange Windows Permissions</p>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/posts/htb/forest/path-to-abuse-Exchange-Windows-Permissions.png"
+            data-srcset="/posts/htb/forest/path-to-abuse-Exchange-Windows-Permissions.png, /posts/htb/forest/path-to-abuse-Exchange-Windows-Permissions.png 1.5x, /posts/htb/forest/path-to-abuse-Exchange-Windows-Permissions.png 2x"
+            data-sizes="auto"
+            alt="/posts/htb/forest/path-to-abuse-Exchange-Windows-Permissions.png" width="1244" height="534" />
+    </a><figcaption class="image-caption">path to abuse Exchange Windows Permissions</figcaption>
+    </figure></p>
+<p>By right-clicking the <code>WriteDacl</code> button and <code>Help</code> menu. Another window will appear by giving some information on that permission. I&rsquo;ll click the Windows Abuse section and it shows the steps on how to abuse it.</p>
+<p><figure><a class="lightgallery" href="/posts/htb/forest/WriteDacl-information.png" title="WriteDacl information" data-thumbnail="/posts/htb/forest/WriteDacl-information.png" data-sub-html="<h2>WriteDacl information</h2><p>WriteDacl information</p>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/posts/htb/forest/WriteDacl-information.png"
+            data-srcset="/posts/htb/forest/WriteDacl-information.png, /posts/htb/forest/WriteDacl-information.png 1.5x, /posts/htb/forest/WriteDacl-information.png 2x"
+            data-sizes="auto"
+            alt="/posts/htb/forest/WriteDacl-information.png" width="681" height="516" />
+    </a><figcaption class="image-caption">WriteDacl information</figcaption>
+    </figure></p>
+<p>Based on the information above, I&rsquo;ll create another user called <code>shafiq</code> on the target machine and added to the <code>Exchange Windows Permissions</code> groups.</p>
+<p><figure><a class="lightgallery" href="/posts/htb/forest/create-another-user-called-shafiq.png" title="create shafiq user" data-thumbnail="/posts/htb/forest/create-another-user-called-shafiq.png" data-sub-html="<h2>create shafiq user</h2><p>create shafiq user</p>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/posts/htb/forest/create-another-user-called-shafiq.png"
+            data-srcset="/posts/htb/forest/create-another-user-called-shafiq.png, /posts/htb/forest/create-another-user-called-shafiq.png 1.5x, /posts/htb/forest/create-another-user-called-shafiq.png 2x"
+            data-sizes="auto"
+            alt="/posts/htb/forest/create-another-user-called-shafiq.png" width="1090" height="752" />
+    </a><figcaption class="image-caption">create shafiq user</figcaption>
+    </figure></p>
+<h3 id="impacket-secretsdumppy">Impacket: secretsdump.py</h3>
+<p>I&rsquo;ll upload the <a href="https://raw.githubusercontent.com/PowerShellMafia/PowerSploit/master/Recon/PowerView.ps1" target="_blank" rel="noopener noreffer ">PowerView.ps1</a> to the target machine, which is located at <code>/usr/share/windows-resources/powersploit/Recon/PowerView.ps1</code> on the <a href="https://www.kali.org/" target="_blank" rel="noopener noreffer ">Kali</a> machine and imported into my current PowerShell session like this <code>. .\PowerView.ps1</code>. Then, I&rsquo;ll give the <code>DCSync</code> rights to the <code>shafiq</code> user by executing the command below.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-powershell" data-lang="powershell"><span class="line"><span class="cl"><span class="nv">$SecPassword</span> <span class="p">=</span> <span class="nb">ConvertTo-SecureString</span> <span class="s1">&#39;P@ssw0rd1&#39;</span> <span class="n">-AsPlainText</span> <span class="n">-Force</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$Cred</span> <span class="p">=</span> <span class="nb">New-Object</span> <span class="n">System</span><span class="p">.</span><span class="py">Management</span><span class="p">.</span><span class="py">Automation</span><span class="p">.</span><span class="py">PSCredential</span><span class="p">(</span><span class="s1">&#39;HTB\shafiq&#39;</span><span class="p">,</span> <span class="nv">$SecPassword</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="nb">Add-DomainObjectAcl</span> <span class="n">-Credential</span> <span class="nv">$Cred</span> <span class="n">-TargetIdentity</span> <span class="s2">&#34;DC=htb,DC=local&#34;</span> <span class="n">-PrincipalIdentity</span> <span class="n">shafiq</span> <span class="n">-Rights</span> <span class="n">DCSync</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><figure><a class="lightgallery" href="/posts/htb/forest/given-DCSync-rights-to-shafiq.png" title="given DCSync rights to shafiq" data-thumbnail="/posts/htb/forest/given-DCSync-rights-to-shafiq.png" data-sub-html="<h2>given DCSync rights to shafiq</h2><p>given DCSync rights to shafiq</p>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/posts/htb/forest/given-DCSync-rights-to-shafiq.png"
+            data-srcset="/posts/htb/forest/given-DCSync-rights-to-shafiq.png, /posts/htb/forest/given-DCSync-rights-to-shafiq.png 1.5x, /posts/htb/forest/given-DCSync-rights-to-shafiq.png 2x"
+            data-sizes="auto"
+            alt="/posts/htb/forest/given-DCSync-rights-to-shafiq.png" width="1650" height="314" />
+    </a><figcaption class="image-caption">given DCSync rights to shafiq</figcaption>
+    </figure></p>
+<p>After successfully executing the commands without any errors. I&rsquo;ll start to perform the <code>DCSync</code> attack by using another <a href="https://github.com/fortra/impacket" target="_blank" rel="noopener noreffer ">impacket</a> script called <code>secretsdump.py</code> by supplying shafiq&rsquo;s credential.</p>
+<p><figure><a class="lightgallery" href="/posts/htb/forest/DCSync-dumping-hash.png" title="DCSync dumping hash" data-thumbnail="/posts/htb/forest/DCSync-dumping-hash.png" data-sub-html="<h2>DCSync dumping hash</h2><p>DCSync dumping hash</p>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/posts/htb/forest/DCSync-dumping-hash.png"
+            data-srcset="/posts/htb/forest/DCSync-dumping-hash.png, /posts/htb/forest/DCSync-dumping-hash.png 1.5x, /posts/htb/forest/DCSync-dumping-hash.png 2x"
+            data-sizes="auto"
+            alt="/posts/htb/forest/DCSync-dumping-hash.png" width="1242" height="579" />
+    </a><figcaption class="image-caption">DCSync dumping hash</figcaption>
+    </figure></p>
+<h2 id="psexec">PsExec</h2>
+<p>Then, I&rsquo;ll use another <a href="https://github.com/fortra/impacket" target="_blank" rel="noopener noreffer ">impacket</a> script called <code>psexec.py</code> and log in as <code>Administrator</code> using the technique called <code>Pass-The-Hash</code> and it succeeds. I’m in as <code>NT AUTHORITY\SYSTEM</code>.</p>
+<p><figure><a class="lightgallery" href="/posts/htb/forest/psexec-administrator.png" title="login as nt authority\system" data-thumbnail="/posts/htb/forest/psexec-administrator.png" data-sub-html="<h2>login as nt authority\system</h2><p>login as nt authority\system</p>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/posts/htb/forest/psexec-administrator.png"
+            data-srcset="/posts/htb/forest/psexec-administrator.png, /posts/htb/forest/psexec-administrator.png 1.5x, /posts/htb/forest/psexec-administrator.png 2x"
+            data-sizes="auto"
+            alt="/posts/htb/forest/psexec-administrator.png" width="1747" height="784" />
+    </a><figcaption class="image-caption">login as nt authority\system</figcaption>
+    </figure></p></div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>Updated on 27-02-2024</span>
+            </div></div>
+        <div class="post-info-line">
+            <div class="post-info-md"></div>
+            <div class="post-info-share">
+                <span><a href="javascript:void(0);" title="Share on Twitter" data-sharer="twitter" data-url="http://localhost:1313/posts/htb/forest/" data-title="HackTheBox - Forest Writeup" data-via="_shafiqaiman_" data-hashtags="ldapsearch,GetNPUsers.py,rpcclient,ASREPRoast,evil-winrm,bloodhound,account-operators-group,writedacl,powerview.ps1,secretsdump.py,DCSync-attack,psexec.py,psexec-hash,hashcat,kerberos,sharphound,ldap"><i class="fab fa-twitter fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Linkedin" data-sharer="linkedin" data-url="http://localhost:1313/posts/htb/forest/"><i class="fab fa-linkedin fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Hacker News" data-sharer="hackernews" data-url="http://localhost:1313/posts/htb/forest/" data-title="HackTheBox - Forest Writeup"><i class="fab fa-hacker-news fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Reddit" data-sharer="reddit" data-url="http://localhost:1313/posts/htb/forest/"><i class="fab fa-reddit fa-fw" aria-hidden="true"></i></a></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"><i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/ldapsearch/">Ldapsearch</a>,&nbsp;<a href="/tags/getnpusers.py/">GetNPUsers.py</a>,&nbsp;<a href="/tags/rpcclient/">Rpcclient</a>,&nbsp;<a href="/tags/asreproast/">ASREPRoast</a>,&nbsp;<a href="/tags/evil-winrm/">Evil-Winrm</a>,&nbsp;<a href="/tags/bloodhound/">Bloodhound</a>,&nbsp;<a href="/tags/account-operators-group/">Account-Operators-Group</a>,&nbsp;<a href="/tags/writedacl/">Writedacl</a>,&nbsp;<a href="/tags/powerview.ps1/">Powerview.ps1</a>,&nbsp;<a href="/tags/secretsdump.py/">Secretsdump.py</a>,&nbsp;<a href="/tags/dcsync-attack/">DCSync-Attack</a>,&nbsp;<a href="/tags/psexec.py/">Psexec.py</a>,&nbsp;<a href="/tags/psexec-hash/">Psexec-Hash</a>,&nbsp;<a href="/tags/hashcat/">Hashcat</a>,&nbsp;<a href="/tags/kerberos/">Kerberos</a>,&nbsp;<a href="/tags/sharphound/">Sharphound</a>,&nbsp;<a href="/tags/ldap/">Ldap</a></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">Back</a></span>&nbsp;|&nbsp;<span><a href="/">Home</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/posts/htb/pilgrimage/" class="prev" rel="prev" title="HackTheBox - Pilgrimage Writeup"><i class="fas fa-angle-left fa-fw" aria-hidden="true"></i>HackTheBox - Pilgrimage Writeup</a></div>
+</div>
+</article></div>
+            </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line" itemscope itemtype="http://schema.org/CreativeWork"><i class="far fa-copyright fa-fw" aria-hidden="true"></i><span itemprop="copyrightYear">2021 - 2024</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="https://shafiqaiman.com" target="_blank">SHAFIQAIMAN</a></span></div>
+        </div>
+    </footer></div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="Back to Top">
+                <i class="fas fa-arrow-up fa-fw" aria-hidden="true"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="View Comments">
+                <i class="fas fa-comment fa-fw" aria-hidden="true"></i>
+            </a>
+        </div><link rel="stylesheet" href="/lib/lightgallery/css/lightgallery-bundle.min.css"><script type="text/javascript" src="/lib/autocomplete/autocomplete.min.js"></script><script type="text/javascript" src="/lib/lunr/lunr.min.js"></script><script type="text/javascript" src="/lib/lazysizes/lazysizes.min.js"></script><script type="text/javascript" src="/lib/lightgallery/lightgallery.min.js"></script><script type="text/javascript" src="/lib/lightgallery/plugins/thumbnail/lg-thumbnail.min.js"></script><script type="text/javascript" src="/lib/lightgallery/plugins/zoom/lg-zoom.min.js"></script><script type="text/javascript" src="/lib/clipboard/clipboard.min.js"></script><script type="text/javascript" src="/lib/sharer/sharer.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"Copy to clipboard","maxShownLines":50},"comment":{},"lightgallery":true,"search":{"highlightTag":"em","lunrIndexURL":"/index.json","maxResultLength":10,"noResultsFound":"No results found","snippetLength":30,"type":"lunr"}};</script><script type="text/javascript" src="/js/theme.min.js"></script></body>
+</html>

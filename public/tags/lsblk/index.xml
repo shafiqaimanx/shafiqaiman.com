@@ -1,16 +1,15 @@
 <rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
     <channel>
-        <title>lsblk - Tag - SHAFIQAIMAN</title>
-        <link>https://shafiqaiman.com/tags/lsblk/</link>
-        <description>lsblk - Tag - SHAFIQAIMAN</description>
-        <generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Wed, 02 Nov 2022 00:00:00 &#43;0000</lastBuildDate><atom:link href="https://shafiqaiman.com/tags/lsblk/" rel="self" type="application/rss+xml" /><item>
+        <title>Lsblk - Tag - SHAFIQAIMAN</title>
+        <link>http://localhost:1313/tags/lsblk/</link>
+        <description>Lsblk - Tag - SHAFIQAIMAN</description>
+        <generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Wed, 02 Nov 2022 00:00:00 &#43;0000</lastBuildDate><atom:link href="http://localhost:1313/tags/lsblk/" rel="self" type="application/rss+xml" /><item>
     <title>HackTheBox - Mirai Writeup</title>
-    <link>https://shafiqaiman.com/posts/htb/mirai/</link>
+    <link>http://localhost:1313/posts/htb/mirai/</link>
     <pubDate>Wed, 02 Nov 2022 00:00:00 &#43;0000</pubDate>
     <author>SH∆FIQ ∆IM∆N</author>
-    <guid>https://shafiqaiman.com/posts/htb/mirai/</guid>
-    <description><![CDATA[Nmap Like always, I’m going to scan the IP Address by using nmap but I&rsquo;m going to scan the full port first. Then, I&rsquo;m going to scan the only open ports.
-1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 nmap -p22,53,80,1776,32400,32469 -sCV -oN nmap/mirai 10.10.10.48 22/tcp open ssh OpenSSH 6.]]></description>
+    <guid>http://localhost:1313/posts/htb/mirai/</guid>
+    <description><![CDATA[<p>Box author | <span class="h-card person-mention"><a href="https://app.hackthebox.com/users/2904" class="u-url url">&#8201;<span class="p-name fn">Arrexel</span></a></span></p>]]></description>
 </item>
 </channel>
 </rss>

@@ -1,6 +1,10 @@
 # HackTheBox - Pathfinder Writeup
 
 
+Box author | {{< person url="https://app.hackthebox.com/users/94858" name="egotisticalSW" picture="https://www.hackthebox.com/storage/avatars/6b0396fe25238856ef9ec223896bb8d1.png" >}}
+
+<!--more-->
+
 ## Enumeration
 
 - scan top 1000 ports

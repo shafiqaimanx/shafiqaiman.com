@@ -1,25 +1,24 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
+    <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="robots" content="noodp" />
-        <title>HackTheBox - Blocky Writeup - SHAFIQAIMAN</title><meta name="Description" content="shafiqaiman.com is a cybersecurity/ethical hacking website that focus on publishing of writeup in HacktheBox, Tryhackme and other online CTF (capture the flag) challenge."><meta property="og:title" content="HackTheBox - Blocky Writeup" />
-<meta property="og:description" content="Nmap Like always, I’m going to scan the IP address by using nmap but I’m going to scan the full port first. Then, I’m going to scan the only open ports.
-1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 nmap -p21,22,80,25565 -sCV -oN nmap/blocky 10.10.10.37 21/tcp open ftp ProFTPD 1.3.5a 22/tcp open ssh OpenSSH 7.2p2 Ubuntu 4ubuntu2.2 (Ubuntu Linux; protocol 2.0) | ssh-hostkey: | 2048 d62b99b4d5e753ce2bfcb5d79d79fba2 (RSA) | 256 5d7f389570c9beac67a01e86e7978403 (ECDSA) |_ 256 09d5c204951a90ef87562597df837067 (ED25519) 80/tcp open http Apache httpd 2." />
+        <title>HackTheBox - Blocky Writeup - SHAFIQAIMAN</title><meta name="Description" content="HacktheBox - Blocky Writeup"><meta property="og:title" content="HackTheBox - Blocky Writeup" />
+<meta property="og:description" content="HacktheBox - Blocky Writeup" />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://shafiqaiman.com/posts/htb/blocky/" /><meta property="og:image" content="https://shafiqaiman.com/posts/htb/blocky/featured.png"/><meta property="article:section" content="posts" />
+<meta property="og:url" content="http://localhost:1313/posts/htb/blocky/" /><meta property="og:image" content="http://localhost:1313/posts/htb/blocky/featured.png" /><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2022-10-22T00:00:00+00:00" />
 <meta property="article:modified_time" content="2022-10-22T00:00:00+00:00" /><meta property="og:site_name" content="SHAFIQAIMAN" />
-<meta name="twitter:card" content="summary_large_image"/>
-<meta name="twitter:image" content="https://shafiqaiman.com/posts/htb/blocky/featured.png"/>
-<meta name="twitter:title" content="HackTheBox - Blocky Writeup"/>
-<meta name="twitter:description" content="Nmap Like always, I’m going to scan the IP address by using nmap but I’m going to scan the full port first. Then, I’m going to scan the only open ports.
-1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 nmap -p21,22,80,25565 -sCV -oN nmap/blocky 10.10.10.37 21/tcp open ftp ProFTPD 1.3.5a 22/tcp open ssh OpenSSH 7.2p2 Ubuntu 4ubuntu2.2 (Ubuntu Linux; protocol 2.0) | ssh-hostkey: | 2048 d62b99b4d5e753ce2bfcb5d79d79fba2 (RSA) | 256 5d7f389570c9beac67a01e86e7978403 (ECDSA) |_ 256 09d5c204951a90ef87562597df837067 (ED25519) 80/tcp open http Apache httpd 2."/>
+
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:image" content="http://localhost:1313/posts/htb/blocky/featured.png" /><meta name="twitter:title" content="HackTheBox - Blocky Writeup"/>
+<meta name="twitter:description" content="HacktheBox - Blocky Writeup"/>
+<meta name="twitter:site" content="@_shafiqaiman_"/>
 <meta name="application-name" content="SHAFIQAIMAN">
 <meta name="apple-mobile-web-app-title" content="SHAFIQAIMAN"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
         <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
-        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://shafiqaiman.com/posts/htb/blocky/" /><link rel="prev" href="https://shafiqaiman.com/posts/htb/bank/" /><link rel="next" href="https://shafiqaiman.com/posts/htb/mirai/" /><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="/lib/fontawesome-free/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="http://localhost:1313/posts/htb/blocky/" /><link rel="prev" href="http://localhost:1313/posts/htb/bank/" /><link rel="next" href="http://localhost:1313/posts/htb/mirai/" /><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="/lib/fontawesome-free/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
         <noscript><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"></noscript><link rel="preload" href="/lib/animate/animate.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
         <noscript><link rel="stylesheet" href="/lib/animate/animate.min.css"></noscript><script type="application/ld+json">
     {
@@ -29,19 +28,19 @@
         "inLanguage": "en",
         "mainEntityOfPage": {
             "@type": "WebPage",
-            "@id": "https:\/\/shafiqaiman.com\/posts\/htb\/blocky\/"
+            "@id": "http:\/\/localhost:1313\/posts\/htb\/blocky\/"
         },"image": [{
                             "@type": "ImageObject",
-                            "url": "https:\/\/shafiqaiman.com\/posts\/htb\/blocky\/featured.png",
+                            "url": "http:\/\/localhost:1313\/posts\/htb\/blocky\/featured.png",
                             "width":  1400 ,
                             "height":  1060 
-                        }],"genre": "posts","keywords": "gobuster, wordpress, jd-gui, jar-file","wordcount":  523 ,
-        "url": "https:\/\/shafiqaiman.com\/posts\/htb\/blocky\/","datePublished": "2022-10-22T00:00:00+00:00","dateModified": "2022-10-22T00:00:00+00:00","publisher": {
+                        }],"genre": "posts","keywords": "gobuster, wordpress, jd-gui, jar-file","wordcount":  527 ,
+        "url": "http:\/\/localhost:1313\/posts\/htb\/blocky\/","datePublished": "2022-10-22T00:00:00+00:00","dateModified": "2022-10-22T00:00:00+00:00","publisher": {
             "@type": "Organization",
             "name": ""},"author": {
                 "@type": "Person",
                 "name": "SH∆FIQ ∆IM∆N"
-            },"description": ""
+            },"description": "HacktheBox - Blocky Writeup"
     }
     </script></head>
     <body data-header-desktop="fixed" data-header-mobile="auto"><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('dark' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'dark' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
@@ -108,8 +107,8 @@
             <h2 class="toc-title">Contents</h2>
             <div class="toc-content always-active" id="toc-content-auto"></div>
         </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">HackTheBox - Blocky Writeup</h1><div class="post-meta">
-            <div class="post-meta-line"><span class="post-author"><a href="https://shafiqaiman.com" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>SH∆FIQ ∆IM∆N</a></span>&nbsp;<span class="post-category">included in <a href="/categories/hackthebox/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>HacktheBox</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="22-10-2022">22-10-2022</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;523 words&nbsp;
+            <div class="post-meta-line"><span class="post-author"><a href="https://shafiqaiman.com" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>SH∆FIQ ∆IM∆N</a></span>&nbsp;<span class="post-category">included in <a href="/categories/hackthebox/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>HacktheBox</a>&nbsp;<a href="/categories/linux/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>Linux</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="22-10-2022">22-10-2022</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;527 words&nbsp;
                 <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;3 minutes&nbsp;</div>
         </div><div class="featured-image"><img
         class="lazyload"
@@ -118,7 +117,7 @@
         data-srcset="/posts/htb/blocky/featured.png, /posts/htb/blocky/featured.png 1.5x, /posts/htb/blocky/featured.png 2x"
         data-sizes="auto"
         alt="/posts/htb/blocky/featured.png"
-        title="/posts/htb/blocky/featured.png" /></div><div class="details toc" id="toc-static"  data-kept="">
+        title="HacktheBox - Blocky Writeup" /></div><div class="details toc" id="toc-static"  data-kept="">
                 <div class="details-summary toc-title">
                     <span>Contents</span>
                     <span><i class="details-icon fas fa-angle-right" aria-hidden="true"></i></span>
@@ -137,7 +136,8 @@
     <li><a href="#root">Root</a></li>
   </ul>
 </nav></div>
-            </div><div class="content" id="content"><h2 id="nmap">Nmap</h2>
+            </div><div class="content" id="content"><p>Box author | <span class="h-card person-mention"><a href="https://app.hackthebox.com/users/2904" class="u-url url"><img class="u-photo photo" src="https://www.hackthebox.com/storage/avatars/4a677d39a1156ca6a4f2fdce085aa3da.png" alt="Arrexel">&#8201;<span class="p-name fn">Arrexel</span></a></span></p>
+<h2 id="nmap">Nmap</h2>
 <p>Like always, I’m going to scan the IP address by using <a href="https://nmap.org/" target="_blank" rel="noopener noreffer ">nmap</a> but I’m going to scan the full port first. Then, I’m going to scan the only open ports.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -271,8 +271,7 @@
             alt="/posts/htb/blocky/ssh-root.png" width="956" height="375" />
     </a><figcaption class="image-caption">change user to root</figcaption>
     </figure></p>
-<p>NICE!</p>
-</div><div class="post-footer" id="post-footer">
+<p>NICE!</p></div><div class="post-footer" id="post-footer">
     <div class="post-info">
         <div class="post-info-line">
             <div class="post-info-mod">
@@ -281,13 +280,13 @@
         <div class="post-info-line">
             <div class="post-info-md"></div>
             <div class="post-info-share">
-                <span><a href="javascript:void(0);" title="Share on Twitter" data-sharer="twitter" data-url="https://shafiqaiman.com/posts/htb/blocky/" data-title="HackTheBox - Blocky Writeup" data-via="_shafiqaiman_" data-hashtags="gobuster,wordpress,jd-gui,jar-file"><i class="fab fa-twitter fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Linkedin" data-sharer="linkedin" data-url="https://shafiqaiman.com/posts/htb/blocky/"><i class="fab fa-linkedin fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Hacker News" data-sharer="hackernews" data-url="https://shafiqaiman.com/posts/htb/blocky/" data-title="HackTheBox - Blocky Writeup"><i class="fab fa-hacker-news fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Reddit" data-sharer="reddit" data-url="https://shafiqaiman.com/posts/htb/blocky/"><i class="fab fa-reddit fa-fw" aria-hidden="true"></i></a></span>
+                <span><a href="javascript:void(0);" title="Share on Twitter" data-sharer="twitter" data-url="http://localhost:1313/posts/htb/blocky/" data-title="HackTheBox - Blocky Writeup" data-via="_shafiqaiman_" data-hashtags="gobuster,wordpress,jd-gui,jar-file"><i class="fab fa-twitter fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Linkedin" data-sharer="linkedin" data-url="http://localhost:1313/posts/htb/blocky/"><i class="fab fa-linkedin fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Hacker News" data-sharer="hackernews" data-url="http://localhost:1313/posts/htb/blocky/" data-title="HackTheBox - Blocky Writeup"><i class="fab fa-hacker-news fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Reddit" data-sharer="reddit" data-url="http://localhost:1313/posts/htb/blocky/"><i class="fab fa-reddit fa-fw" aria-hidden="true"></i></a></span>
             </div>
         </div>
     </div>
 
     <div class="post-info-more">
-        <section class="post-tags"><i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/gobuster/">gobuster</a>,&nbsp;<a href="/tags/wordpress/">wordpress</a>,&nbsp;<a href="/tags/jd-gui/">jd-gui</a>,&nbsp;<a href="/tags/jar-file/">jar-file</a></section>
+        <section class="post-tags"><i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/gobuster/">Gobuster</a>,&nbsp;<a href="/tags/wordpress/">Wordpress</a>,&nbsp;<a href="/tags/jd-gui/">Jd-Gui</a>,&nbsp;<a href="/tags/jar-file/">Jar-File</a></section>
         <section>
             <span><a href="javascript:void(0);" onclick="window.history.back();">Back</a></span>&nbsp;|&nbsp;<span><a href="/">Home</a></span>
         </section>
@@ -298,7 +297,7 @@
 </div>
 </article></div>
             </main><footer class="footer">
-        <div class="footer-container"><div class="footer-line" itemscope itemtype="http://schema.org/CreativeWork"><i class="far fa-copyright fa-fw" aria-hidden="true"></i><span itemprop="copyrightYear">2021 - 2023</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="https://shafiqaiman.com" target="_blank">SHAFIQAIMAN</a></span></div>
+        <div class="footer-container"><div class="footer-line" itemscope itemtype="http://schema.org/CreativeWork"><i class="far fa-copyright fa-fw" aria-hidden="true"></i><span itemprop="copyrightYear">2021 - 2024</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="https://shafiqaiman.com" target="_blank">SHAFIQAIMAN</a></span></div>
         </div>
     </footer></div>
 

@@ -1,0 +1,656 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <title>HackTheBox - Oopsie Writeup - SHAFIQAIMAN</title><meta name="Description" content="HacktheBox - Oopsie Writeup"><meta property="og:title" content="HackTheBox - Oopsie Writeup" />
+<meta property="og:description" content="HacktheBox - Oopsie Writeup" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://localhost:1313/posts/htb/oopsie/" /><meta property="og:image" content="http://localhost:1313/posts/htb/oopsie/featured.png" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2021-07-20T00:00:00+00:00" />
+<meta property="article:modified_time" content="2021-07-20T00:00:00+00:00" /><meta property="og:site_name" content="SHAFIQAIMAN" />
+
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:image" content="http://localhost:1313/posts/htb/oopsie/featured.png" /><meta name="twitter:title" content="HackTheBox - Oopsie Writeup"/>
+<meta name="twitter:description" content="HacktheBox - Oopsie Writeup"/>
+<meta name="twitter:site" content="@_shafiqaiman_"/>
+<meta name="application-name" content="SHAFIQAIMAN">
+<meta name="apple-mobile-web-app-title" content="SHAFIQAIMAN"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="http://localhost:1313/posts/htb/oopsie/" /><link rel="prev" href="http://localhost:1313/posts/thm/agent_sudo/" /><link rel="next" href="http://localhost:1313/posts/htb/legacy/" /><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="/lib/fontawesome-free/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"></noscript><link rel="preload" href="/lib/animate/animate.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="/lib/animate/animate.min.css"></noscript><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "HackTheBox - Oopsie Writeup",
+        "inLanguage": "en",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "http:\/\/localhost:1313\/posts\/htb\/oopsie\/"
+        },"image": [{
+                            "@type": "ImageObject",
+                            "url": "http:\/\/localhost:1313\/posts\/htb\/oopsie\/featured.png",
+                            "width":  1049 ,
+                            "height":  669 
+                        }],"genre": "posts","keywords": "SUID, path-abused, upload-vuln, gobuster, python, php-reverse-shell","wordcount":  527 ,
+        "url": "http:\/\/localhost:1313\/posts\/htb\/oopsie\/","datePublished": "2021-07-20T00:00:00+00:00","dateModified": "2021-07-20T00:00:00+00:00","publisher": {
+            "@type": "Organization",
+            "name": ""},"author": {
+                "@type": "Person",
+                "name": "SH∆FIQ ∆IM∆N"
+            },"description": "HacktheBox - Oopsie Writeup"
+    }
+    </script></head>
+    <body data-header-desktop="fixed" data-header-mobile="auto"><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('dark' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'dark' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="SHAFIQAIMAN">SH∆FIQ∆IM∆N</a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/posts/" title="Posts"><i class="fa-solid fa-book"></i>  </a><a class="menu-item" href="/tags/" title="Tags"><i class="fa-solid fa-tags"></i>  </a><a class="menu-item" href="/categories/" title="Categories"><i class="fa-solid fa-folder"></i>  </a><span class="menu-item delimiter"></span><span class="menu-item search" id="search-desktop">
+                        <input type="text" placeholder="Search titles or contents..." id="search-input-desktop">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-desktop" title="Search">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-desktop" title="Clear">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-desktop">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </span><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                    <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+                </a></div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="SHAFIQAIMAN">SH∆FIQ∆IM∆N</a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><div class="search-wrapper">
+                    <div class="search mobile" id="search-mobile">
+                        <input type="text" placeholder="Search titles or contents..." id="search-input-mobile">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-mobile" title="Search">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-mobile" title="Clear">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-mobile">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </div>
+                    <a href="javascript:void(0);" class="search-cancel" id="search-cancel-mobile">
+                        Cancel
+                    </a>
+                </div><a class="menu-item" href="/posts/" title="Posts"><i class="fa-solid fa-book"></i></a><a class="menu-item" href="/tags/" title="Tags"><i class="fa-solid fa-tags"></i></a><a class="menu-item" href="/categories/" title="Categories"><i class="fa-solid fa-folder"></i></a><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+            </a></div>
+    </div>
+</header><div class="search-dropdown desktop">
+        <div id="search-dropdown-desktop"></div>
+    </div>
+    <div class="search-dropdown mobile">
+        <div id="search-dropdown-mobile"></div>
+    </div><main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">Contents</h2>
+            <div class="toc-content always-active" id="toc-content-auto"></div>
+        </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">HackTheBox - Oopsie Writeup</h1><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="https://shafiqaiman.com" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>SH∆FIQ ∆IM∆N</a></span>&nbsp;<span class="post-category">included in <a href="/categories/hackthebox/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>HacktheBox</a>&nbsp;<a href="/categories/linux/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>Linux</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="20-07-2021">20-07-2021</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;527 words&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;3 minutes&nbsp;</div>
+        </div><div class="featured-image"><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/posts/htb/oopsie/featured.png"
+        data-srcset="/posts/htb/oopsie/featured.png, /posts/htb/oopsie/featured.png 1.5x, /posts/htb/oopsie/featured.png 2x"
+        data-sizes="auto"
+        alt="/posts/htb/oopsie/featured.png"
+        title="HacktheBox - Oopsie Writeup" /></div><div class="details toc" id="toc-static"  data-kept="">
+                <div class="details-summary toc-title">
+                    <span>Contents</span>
+                    <span><i class="details-icon fas fa-angle-right" aria-hidden="true"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#enumeration">Enumeration</a>
+      <ul>
+        <li><a href="#the-website">The Website</a></li>
+        <li><a href="#gobuster">Gobuster</a></li>
+        <li><a href="#login-page">Login Page</a></li>
+        <li><a href="#cant-upload">Can&rsquo;t Upload</a></li>
+        <li><a href="#the-id">The ID</a></li>
+      </ul>
+    </li>
+    <li><a href="#footholdgaining-access">Foothold/Gaining Access</a>
+      <ul>
+        <li><a href="#python-script">Python Script</a></li>
+        <li><a href="#upload-as-super-admin">Upload as super admin</a></li>
+        <li><a href="#reverse-shell">Reverse Shell</a></li>
+        <li><a href="#www-data">www-data</a></li>
+        <li><a href="#robert">Robert</a></li>
+        <li><a href="#user-flag">User Flag</a></li>
+      </ul>
+    </li>
+    <li><a href="#privilege-escalation">Privilege Escalation</a>
+      <ul>
+        <li><a href="#bugtracker">Bugtracker</a></li>
+        <li><a href="#relative-path-abused">Relative Path Abused</a></li>
+        <li><a href="#root-flag">Root Flag</a></li>
+      </ul>
+    </li>
+    <li><a href="#conclusion">Conclusion</a></li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><p>Box author | <span class="h-card person-mention"><a href="https://app.hackthebox.com/users/13531" class="u-url url"><img class="u-photo photo" src="https://www.hackthebox.com/storage/avatars/45c15da90175761bef77ecb2d44942b4.png" alt="MrR3boot">&#8201;<span class="p-name fn">MrR3boot</span></a></span></p>
+<h2 id="enumeration">Enumeration</h2>
+<ul>
+<li>Top 1000 ports scan</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">nmap -sC -sV -oN nmap/inital 10.10.10.28
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><figure><a class="lightgallery" href="/posts/htb/oopsie/2.png" title="nmap initial scan" data-thumbnail="/posts/htb/oopsie/2.png" data-sub-html="<h2>nmap initial scan</h2><p>nmap initial scan</p>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/posts/htb/oopsie/2.png"
+            data-srcset="/posts/htb/oopsie/2.png, /posts/htb/oopsie/2.png 1.5x, /posts/htb/oopsie/2.png 2x"
+            data-sizes="auto"
+            alt="/posts/htb/oopsie/2.png" width="699" height="296" />
+    </a><figcaption class="image-caption">nmap initial scan</figcaption>
+    </figure></p>
+<ul>
+<li>all ports scan</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">nmap -sC -sV -p- -oN nmap/all_ports 10.10.10.28
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><figure><a class="lightgallery" href="/posts/htb/oopsie/3.png" title="nmap allports scan" data-thumbnail="/posts/htb/oopsie/3.png" data-sub-html="<h2>nmap allports scan</h2><p>nmap allports scan</p>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/posts/htb/oopsie/3.png"
+            data-srcset="/posts/htb/oopsie/3.png, /posts/htb/oopsie/3.png 1.5x, /posts/htb/oopsie/3.png 2x"
+            data-sizes="auto"
+            alt="/posts/htb/oopsie/3.png" width="705" height="279" />
+    </a><figcaption class="image-caption">nmap allports scan</figcaption>
+    </figure></p>
+<ul>
+<li>Still the same result</li>
+<li>Open ports
+<ul>
+<li>port 22 / ssh</li>
+<li>port 80 / http</li>
+</ul>
+</li>
+</ul>
+<h3 id="the-website">The Website</h3>
+<p><figure><a class="lightgallery" href="/posts/htb/oopsie/4.png" title="MegaCorp Automotive webpage" data-thumbnail="/posts/htb/oopsie/4.png" data-sub-html="<h2>MegaCorp Automotive webpage</h2><p>MegaCorp Automotive webpage</p>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/posts/htb/oopsie/4.png"
+            data-srcset="/posts/htb/oopsie/4.png, /posts/htb/oopsie/4.png 1.5x, /posts/htb/oopsie/4.png 2x"
+            data-sizes="auto"
+            alt="/posts/htb/oopsie/4.png" width="698" height="457" />
+    </a><figcaption class="image-caption">MegaCorp Automotive webpage</figcaption>
+    </figure></p>
+<h3 id="gobuster">Gobuster</h3>
+<ul>
+<li>Auto recon in the background</li>
+<li>looking the hidden directory</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">gobuster dir -u http://10.10.10.28 -w /opt/SecLists/Discovery/Web-Content/raft-medium-directories.txt -o gobuster.log
+</span></span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>The result</li>
+</ul>
+<p><figure><a class="lightgallery" href="/posts/htb/oopsie/5.png" title="gobuster" data-thumbnail="/posts/htb/oopsie/5.png" data-sub-html="<h2>gobuster</h2><p>gobuster</p>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/posts/htb/oopsie/5.png"
+            data-srcset="/posts/htb/oopsie/5.png, /posts/htb/oopsie/5.png 1.5x, /posts/htb/oopsie/5.png 2x"
+            data-sizes="auto"
+            alt="/posts/htb/oopsie/5.png" width="687" height="178" />
+    </a><figcaption class="image-caption">gobuster</figcaption>
+    </figure></p>
+<p>This webpage have an upload directory.</p>
+<h3 id="login-page">Login Page</h3>
+<ul>
+<li>Found something insteresting in the source code</li>
+</ul>
+<p><figure><a class="lightgallery" href="/posts/htb/oopsie/6.png" title="view source code" data-thumbnail="/posts/htb/oopsie/6.png" data-sub-html="<h2>view source code</h2><p>view source code</p>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/posts/htb/oopsie/6.png"
+            data-srcset="/posts/htb/oopsie/6.png, /posts/htb/oopsie/6.png 1.5x, /posts/htb/oopsie/6.png 2x"
+            data-sizes="auto"
+            alt="/posts/htb/oopsie/6.png" width="455" height="172" />
+    </a><figcaption class="image-caption">view source code</figcaption>
+    </figure></p>
+<ul>
+<li>the directory into <code>/cdn-cgi/login/script.js</code></li>
+<li>navigate into <code>http://10.10.10.28/cdn-cgi/login</code></li>
+<li>found the login page</li>
+</ul>
+<p><figure><a class="lightgallery" href="/posts/htb/oopsie/7.png" title="login page" data-thumbnail="/posts/htb/oopsie/7.png" data-sub-html="<h2>login page</h2><p>login page</p>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/posts/htb/oopsie/7.png"
+            data-srcset="/posts/htb/oopsie/7.png, /posts/htb/oopsie/7.png 1.5x, /posts/htb/oopsie/7.png 2x"
+            data-sizes="auto"
+            alt="/posts/htb/oopsie/7.png" width="704" height="541" />
+    </a><figcaption class="image-caption">login page</figcaption>
+    </figure></p>
+<ul>
+<li>Got the credentials in previous box called <a href="https://shafiqaiman.com/posts/htb/archetype/" target="_blank" rel="noopener noreffer ">Archetype</a> <em>in official pdf</em></li>
+<li>Successfully login as admin</li>
+</ul>
+<p><figure><a class="lightgallery" href="/posts/htb/oopsie/8.png" title="admin webpage" data-thumbnail="/posts/htb/oopsie/8.png" data-sub-html="<h2>admin webpage</h2><p>admin webpage</p>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/posts/htb/oopsie/8.png"
+            data-srcset="/posts/htb/oopsie/8.png, /posts/htb/oopsie/8.png 1.5x, /posts/htb/oopsie/8.png 2x"
+            data-sizes="auto"
+            alt="/posts/htb/oopsie/8.png" width="703" height="575" />
+    </a><figcaption class="image-caption">admin webpage</figcaption>
+    </figure></p>
+<h3 id="cant-upload">Can&rsquo;t Upload</h3>
+<ul>
+<li>navigate to the upload page</li>
+<li>it says <code>super admin</code> have right to view it</li>
+</ul>
+<p><figure><a class="lightgallery" href="/posts/htb/oopsie/9.png" title="can&amp;rsquo;t view upload page" data-thumbnail="/posts/htb/oopsie/9.png" data-sub-html="<h2>can&#39;t view upload page</h2><p>can&amp;rsquo;t view upload page</p>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/posts/htb/oopsie/9.png"
+            data-srcset="/posts/htb/oopsie/9.png, /posts/htb/oopsie/9.png 1.5x, /posts/htb/oopsie/9.png 2x"
+            data-sizes="auto"
+            alt="/posts/htb/oopsie/9.png" width="663" height="435" />
+    </a><figcaption class="image-caption">can't view upload page</figcaption>
+    </figure></p>
+<h3 id="the-id">The ID</h3>
+<p><figure><a class="lightgallery" href="/posts/htb/oopsie/10.png" title="id parameter" data-thumbnail="/posts/htb/oopsie/10.png" data-sub-html="<h2>id parameter</h2><p>id parameter</p>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/posts/htb/oopsie/10.png"
+            data-srcset="/posts/htb/oopsie/10.png, /posts/htb/oopsie/10.png 1.5x, /posts/htb/oopsie/10.png 2x"
+            data-sizes="auto"
+            alt="/posts/htb/oopsie/10.png" width="699" height="394" />
+    </a><figcaption class="image-caption">id parameter</figcaption>
+    </figure></p>
+<ul>
+<li>This page appear to be <code>user table</code> base on the <code>id parameter</code> in the link</li>
+<li>Making <code>python script</code> for IDs brute-force</li>
+</ul>
+<h2 id="footholdgaining-access">Foothold/Gaining Access</h2>
+<h3 id="python-script">Python Script</h3>
+<ul>
+<li>python script for ID brute force</li>
+<li>need cookies for authentication</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="ch">#!/usr/bin/env python3</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">requests</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">101</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">    <span class="n">url</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&#34;http://10.10.10.28/cdn-cgi/login/admin.php?content=accounts&amp;id=</span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s2">&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">c</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;user&#39;</span><span class="p">:</span><span class="s1">&#39;34322&#39;</span><span class="p">,</span><span class="s1">&#39;role&#39;</span><span class="p">:</span><span class="s1">&#39;admin&#39;</span><span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="n">r</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">cookies</span><span class="o">=</span><span class="n">c</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">r</span><span class="o">.</span><span class="n">content</span><span class="p">)</span> <span class="o">==</span> <span class="mi">3595</span><span class="p">:</span> <span class="c1"># nothing appear just pass it</span>
+</span></span><span class="line"><span class="cl">        <span class="k">pass</span>
+</span></span><span class="line"><span class="cl">    <span class="k">else</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&#34;Check this ID out </span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s2">&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="s2">&#34;Done&#34;</span><span class="p">)</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>The result</li>
+</ul>
+<p><figure><a class="lightgallery" href="/posts/htb/oopsie/11.png" title="brute-force id" data-thumbnail="/posts/htb/oopsie/11.png" data-sub-html="<h2>brute-force id</h2><p>brute-force id</p>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/posts/htb/oopsie/11.png"
+            data-srcset="/posts/htb/oopsie/11.png, /posts/htb/oopsie/11.png 1.5x, /posts/htb/oopsie/11.png 2x"
+            data-sizes="auto"
+            alt="/posts/htb/oopsie/11.png" width="340" height="206" />
+    </a><figcaption class="image-caption">brute-force id</figcaption>
+    </figure></p>
+<ul>
+<li>Here is the ID lead to (in order)</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-javascript" data-lang="javascript"><span class="line"><span class="cl"><span class="p">{</span><span class="s1">&#39;access id&#39;</span><span class="o">:</span><span class="s1">&#39;34322&#39;</span><span class="p">,</span><span class="s1">&#39;name&#39;</span><span class="o">:</span><span class="s1">&#39;admin&#39;</span><span class="p">,</span><span class="s1">&#39;email&#39;</span><span class="o">:</span><span class="s1">&#39;admin@megacorp.com&#39;</span><span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span><span class="s1">&#39;access id&#39;</span><span class="o">:</span><span class="s1">&#39;8832&#39;</span><span class="p">,</span><span class="s1">&#39;name&#39;</span><span class="o">:</span><span class="s1">&#39;john&#39;</span><span class="p">,</span><span class="s1">&#39;email&#39;</span><span class="o">:</span><span class="s1">&#39;john@tafcz.co.uk&#39;</span><span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span><span class="s1">&#39;access id&#39;</span><span class="o">:</span><span class="s1">&#39;57633&#39;</span><span class="p">,</span><span class="s1">&#39;name&#39;</span><span class="o">:</span><span class="s1">&#39;Peter&#39;</span><span class="p">,</span><span class="s1">&#39;email&#39;</span><span class="o">:</span><span class="s1">&#39;peter@qpic.co.uk&#39;</span><span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span><span class="s1">&#39;access id&#39;</span><span class="o">:</span><span class="s1">&#39;28832&#39;</span><span class="p">,</span><span class="s1">&#39;name&#39;</span><span class="o">:</span><span class="s1">&#39;Rafol&#39;</span><span class="p">,</span><span class="s1">&#39;email&#39;</span><span class="o">:</span><span class="s1">&#39;tom@rafol.co.uk&#39;</span><span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span><span class="s1">&#39;access id&#39;</span><span class="o">:</span><span class="s1">&#39;xxxxx&#39;</span><span class="p">,</span><span class="s1">&#39;name&#39;</span><span class="o">:</span><span class="s1">&#39;super admin&#39;</span><span class="p">,</span><span class="s1">&#39;email&#39;</span><span class="o">:</span><span class="s1">&#39;superadmin@megacorp.com&#39;</span><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="upload-as-super-admin">Upload as super admin</h3>
+<ul>
+<li>Found the super admin table</li>
+</ul>
+<p><figure><a class="lightgallery" href="/posts/htb/oopsie/12.png" title="found superadmin table" data-thumbnail="/posts/htb/oopsie/12.png" data-sub-html="<h2>found superadmin table</h2><p>found superadmin table</p>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/posts/htb/oopsie/12.png"
+            data-srcset="/posts/htb/oopsie/12.png, /posts/htb/oopsie/12.png 1.5x, /posts/htb/oopsie/12.png 2x"
+            data-sizes="auto"
+            alt="/posts/htb/oopsie/12.png" width="666" height="295" />
+    </a><figcaption class="image-caption">found superadmin table</figcaption>
+    </figure></p>
+<ul>
+<li>Turns out the <code>Access ID</code> it is the <code>cookie value</code></li>
+<li>Change the admin cookies into super admin</li>
+</ul>
+<p><figure><a class="lightgallery" href="/posts/htb/oopsie/13.png" title="admin cookie" data-thumbnail="/posts/htb/oopsie/13.png" data-sub-html="<h2>admin cookie</h2><p>admin cookie</p>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/posts/htb/oopsie/13.png"
+            data-srcset="/posts/htb/oopsie/13.png, /posts/htb/oopsie/13.png 1.5x, /posts/htb/oopsie/13.png 2x"
+            data-sizes="auto"
+            alt="/posts/htb/oopsie/13.png" width="707" height="586" />
+    </a><figcaption class="image-caption">admin cookie</figcaption>
+    </figure> <br><em>before</em></p>
+<p><figure><a class="lightgallery" href="/posts/htb/oopsie/14.png" title="superadmin cookie" data-thumbnail="/posts/htb/oopsie/14.png" data-sub-html="<h2>superadmin cookie</h2><p>superadmin cookie</p>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/posts/htb/oopsie/14.png"
+            data-srcset="/posts/htb/oopsie/14.png, /posts/htb/oopsie/14.png 1.5x, /posts/htb/oopsie/14.png 2x"
+            data-sizes="auto"
+            alt="/posts/htb/oopsie/14.png" width="704" height="620" />
+    </a><figcaption class="image-caption">superadmin cookie</figcaption>
+    </figure> <br><em>after refresh the page</em></p>
+<h3 id="reverse-shell">Reverse Shell</h3>
+<ul>
+<li>Upload the php reverse shell
+<ul>
+<li><a href="https://raw.githubusercontent.com/pentestmonkey/php-reverse-shell/master/php-reverse-shell.php" target="_blank" rel="noopener noreffer ">Here is the source </a></li>
+</ul>
+</li>
+</ul>
+<p><figure><a class="lightgallery" href="/posts/htb/oopsie/15.png" title="upload php reverse shell" data-thumbnail="/posts/htb/oopsie/15.png" data-sub-html="<h2>upload php reverse shell</h2><p>upload php reverse shell</p>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/posts/htb/oopsie/15.png"
+            data-srcset="/posts/htb/oopsie/15.png, /posts/htb/oopsie/15.png 1.5x, /posts/htb/oopsie/15.png 2x"
+            data-sizes="auto"
+            alt="/posts/htb/oopsie/15.png" width="710" height="387" />
+    </a><figcaption class="image-caption">upload php reverse shell</figcaption>
+    </figure></p>
+<ul>
+<li>Activated the reverse shell
+<ul>
+<li>through this link</li>
+</ul>
+</li>
+</ul>
+<p><figure><a class="lightgallery" href="/posts/htb/oopsie/16.png" title="execute the shell" data-thumbnail="/posts/htb/oopsie/16.png" data-sub-html="<h2>execute the shell</h2><p>execute the shell</p>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/posts/htb/oopsie/16.png"
+            data-srcset="/posts/htb/oopsie/16.png, /posts/htb/oopsie/16.png 1.5x, /posts/htb/oopsie/16.png 2x"
+            data-sizes="auto"
+            alt="/posts/htb/oopsie/16.png" width="702" height="263" />
+    </a><figcaption class="image-caption">execute the shell</figcaption>
+    </figure></p>
+<ul>
+<li>Got the shell</li>
+</ul>
+<p><figure><a class="lightgallery" href="/posts/htb/oopsie/17.png" title="shell as www-data" data-thumbnail="/posts/htb/oopsie/17.png" data-sub-html="<h2>shell as www-data</h2><p>shell as www-data</p>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/posts/htb/oopsie/17.png"
+            data-srcset="/posts/htb/oopsie/17.png, /posts/htb/oopsie/17.png 1.5x, /posts/htb/oopsie/17.png 2x"
+            data-sizes="auto"
+            alt="/posts/htb/oopsie/17.png" width="706" height="204" />
+    </a><figcaption class="image-caption">shell as www-data</figcaption>
+    </figure></p>
+<h3 id="www-data">www-data</h3>
+<ul>
+<li>Found the credentials in file called <code>db.php</code></li>
+<li>in <code>/var/www/html/cdn-cgi/login/db.php</code></li>
+</ul>
+<p><figure><a class="lightgallery" href="/posts/htb/oopsie/18.png" title="found robert credentials" data-thumbnail="/posts/htb/oopsie/18.png" data-sub-html="<h2>found robert credentials</h2><p>found robert credentials</p>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/posts/htb/oopsie/18.png"
+            data-srcset="/posts/htb/oopsie/18.png, /posts/htb/oopsie/18.png 1.5x, /posts/htb/oopsie/18.png 2x"
+            data-sizes="auto"
+            alt="/posts/htb/oopsie/18.png" width="700" height="146" />
+    </a><figcaption class="image-caption">found robert credentials</figcaption>
+    </figure></p>
+<h3 id="robert">Robert</h3>
+<ul>
+<li>Login as robert</li>
+</ul>
+<p><figure><a class="lightgallery" href="/posts/htb/oopsie/19.png" title="change user to robert" data-thumbnail="/posts/htb/oopsie/19.png" data-sub-html="<h2>change user to robert</h2><p>change user to robert</p>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/posts/htb/oopsie/19.png"
+            data-srcset="/posts/htb/oopsie/19.png, /posts/htb/oopsie/19.png 1.5x, /posts/htb/oopsie/19.png 2x"
+            data-sizes="auto"
+            alt="/posts/htb/oopsie/19.png" width="590" height="219" />
+    </a><figcaption class="image-caption">change user to robert</figcaption>
+    </figure></p>
+<h3 id="user-flag">User Flag</h3>
+<p><figure><a class="lightgallery" href="/posts/htb/oopsie/20.png" title="user flag" data-thumbnail="/posts/htb/oopsie/20.png" data-sub-html="<h2>user flag</h2><p>user flag</p>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/posts/htb/oopsie/20.png"
+            data-srcset="/posts/htb/oopsie/20.png, /posts/htb/oopsie/20.png 1.5x, /posts/htb/oopsie/20.png 2x"
+            data-sizes="auto"
+            alt="/posts/htb/oopsie/20.png" width="397" height="243" />
+    </a><figcaption class="image-caption">user flag</figcaption>
+    </figure></p>
+<ul>
+<li>Find the <font color="yellow">SUID</font></li>
+<li>The command for find it</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">find / -user root -perm -4000 -exec ls <span class="o">{}</span> <span class="se">\;</span> 2&gt;/dev/null
+</span></span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>Found weird binary that not suppose to be there</li>
+</ul>
+<p><figure><a class="lightgallery" href="/posts/htb/oopsie/21.png" title="find all SUID" data-thumbnail="/posts/htb/oopsie/21.png" data-sub-html="<h2>find all SUID</h2><p>find all SUID</p>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/posts/htb/oopsie/21.png"
+            data-srcset="/posts/htb/oopsie/21.png, /posts/htb/oopsie/21.png 1.5x, /posts/htb/oopsie/21.png 2x"
+            data-sizes="auto"
+            alt="/posts/htb/oopsie/21.png" width="474" height="326" />
+    </a><figcaption class="image-caption">find all SUID</figcaption>
+    </figure></p>
+<h2 id="privilege-escalation">Privilege Escalation</h2>
+<h3 id="bugtracker">Bugtracker</h3>
+<ul>
+<li>This is how it works</li>
+<li>However it says <code>no such file or directory</code></li>
+</ul>
+<p><figure><a class="lightgallery" href="/posts/htb/oopsie/22.png" title="cat error" data-thumbnail="/posts/htb/oopsie/22.png" data-sub-html="<h2>cat error</h2><p>cat error</p>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/posts/htb/oopsie/22.png"
+            data-srcset="/posts/htb/oopsie/22.png, /posts/htb/oopsie/22.png 1.5x, /posts/htb/oopsie/22.png 2x"
+            data-sizes="auto"
+            alt="/posts/htb/oopsie/22.png" width="525" height="349" />
+    </a><figcaption class="image-caption">cat error</figcaption>
+    </figure></p>
+<ul>
+<li>Try <code>strings</code> out the binary</li>
+<li>Turns out this binary use <code>cat command</code></li>
+<li>However this is use relative path</li>
+</ul>
+<p><figure><a class="lightgallery" href="/posts/htb/oopsie/23.png" title="strings bugtracker" data-thumbnail="/posts/htb/oopsie/23.png" data-sub-html="<h2>strings bugtracker</h2><p>strings bugtracker</p>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/posts/htb/oopsie/23.png"
+            data-srcset="/posts/htb/oopsie/23.png, /posts/htb/oopsie/23.png 1.5x, /posts/htb/oopsie/23.png 2x"
+            data-sizes="auto"
+            alt="/posts/htb/oopsie/23.png" width="511" height="745" />
+    </a><figcaption class="image-caption">strings bugtracker</figcaption>
+    </figure></p>
+<ul>
+<li>explain the <em><code>relative &amp; absolute path</code></em></li>
+</ul>
+<p><figure><a class="lightgallery" href="/posts/htb/oopsie/24.png" title="relative &amp;amp; absolute path differences" data-thumbnail="/posts/htb/oopsie/24.png" data-sub-html="<h2>relative &amp; absolute path differences</h2><p>relative &amp;amp; absolute path differences</p>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/posts/htb/oopsie/24.png"
+            data-srcset="/posts/htb/oopsie/24.png, /posts/htb/oopsie/24.png 1.5x, /posts/htb/oopsie/24.png 2x"
+            data-sizes="auto"
+            alt="/posts/htb/oopsie/24.png" width="603" height="378" />
+    </a><figcaption class="image-caption">relative & absolute path differences</figcaption>
+    </figure></p>
+<h3 id="relative-path-abused">Relative Path Abused</h3>
+<ul>
+<li>Make a fake <code>cat command</code>
+<ul>
+<li>by puting <code>/bin/bash</code> in it</li>
+<li>the bugtracker binary will execute this fake file as <code>root</code></li>
+<li><a href="https://www.hackingarticles.in/linux-privilege-escalation-using-path-variable/" target="_blank" rel="noopener noreffer ">source for relative path abused</a></li>
+</ul>
+</li>
+</ul>
+<p><figure><a class="lightgallery" href="/posts/htb/oopsie/25.png" title="shell as root" data-thumbnail="/posts/htb/oopsie/25.png" data-sub-html="<h2>shell as root</h2><p>shell as root</p>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/posts/htb/oopsie/25.png"
+            data-srcset="/posts/htb/oopsie/25.png, /posts/htb/oopsie/25.png 1.5x, /posts/htb/oopsie/25.png 2x"
+            data-sizes="auto"
+            alt="/posts/htb/oopsie/25.png" width="694" height="451" />
+    </a><figcaption class="image-caption">shell as root</figcaption>
+    </figure></p>
+<h3 id="root-flag">Root Flag</h3>
+<p><figure><a class="lightgallery" href="/posts/htb/oopsie/26.png" title="root flag" data-thumbnail="/posts/htb/oopsie/26.png" data-sub-html="<h2>root flag</h2><p>root flag</p>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/posts/htb/oopsie/26.png"
+            data-srcset="/posts/htb/oopsie/26.png, /posts/htb/oopsie/26.png 1.5x, /posts/htb/oopsie/26.png 2x"
+            data-sizes="auto"
+            alt="/posts/htb/oopsie/26.png" width="428" height="155" />
+    </a><figcaption class="image-caption">root flag</figcaption>
+    </figure></p>
+<h2 id="conclusion">Conclusion</h2>
+<p>I’ve learned a lot today. Never put the user ID as cookies value and make sure you configure the website properly. Lastly, make sure to configure the SUID binary carefully and do not put any untrust or unpatched version as SUID</p>
+<p>I have a fun time doing this machine and I hope you guys too. Bye ;)</p></div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>Updated on 20-07-2021</span>
+            </div></div>
+        <div class="post-info-line">
+            <div class="post-info-md"></div>
+            <div class="post-info-share">
+                <span><a href="javascript:void(0);" title="Share on Twitter" data-sharer="twitter" data-url="http://localhost:1313/posts/htb/oopsie/" data-title="HackTheBox - Oopsie Writeup" data-via="_shafiqaiman_" data-hashtags="SUID,path-abused,upload-vuln,gobuster,python,php-reverse-shell"><i class="fab fa-twitter fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Linkedin" data-sharer="linkedin" data-url="http://localhost:1313/posts/htb/oopsie/"><i class="fab fa-linkedin fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Hacker News" data-sharer="hackernews" data-url="http://localhost:1313/posts/htb/oopsie/" data-title="HackTheBox - Oopsie Writeup"><i class="fab fa-hacker-news fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Reddit" data-sharer="reddit" data-url="http://localhost:1313/posts/htb/oopsie/"><i class="fab fa-reddit fa-fw" aria-hidden="true"></i></a></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"><i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/suid/">SUID</a>,&nbsp;<a href="/tags/path-abused/">Path-Abused</a>,&nbsp;<a href="/tags/upload-vuln/">Upload-Vuln</a>,&nbsp;<a href="/tags/gobuster/">Gobuster</a>,&nbsp;<a href="/tags/python/">Python</a>,&nbsp;<a href="/tags/php-reverse-shell/">Php-Reverse-Shell</a></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">Back</a></span>&nbsp;|&nbsp;<span><a href="/">Home</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/posts/thm/agent_sudo/" class="prev" rel="prev" title="TryHackMe - Agent Sudo Writeup"><i class="fas fa-angle-left fa-fw" aria-hidden="true"></i>TryHackMe - Agent Sudo Writeup</a>
+            <a href="/posts/htb/legacy/" class="next" rel="next" title="HackTheBox - Legacy Writeup">HackTheBox - Legacy Writeup<i class="fas fa-angle-right fa-fw" aria-hidden="true"></i></a></div>
+</div>
+</article></div>
+            </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line" itemscope itemtype="http://schema.org/CreativeWork"><i class="far fa-copyright fa-fw" aria-hidden="true"></i><span itemprop="copyrightYear">2021 - 2024</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="https://shafiqaiman.com" target="_blank">SHAFIQAIMAN</a></span></div>
+        </div>
+    </footer></div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="Back to Top">
+                <i class="fas fa-arrow-up fa-fw" aria-hidden="true"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="View Comments">
+                <i class="fas fa-comment fa-fw" aria-hidden="true"></i>
+            </a>
+        </div><link rel="stylesheet" href="/lib/lightgallery/css/lightgallery-bundle.min.css"><script type="text/javascript" src="/lib/autocomplete/autocomplete.min.js"></script><script type="text/javascript" src="/lib/lunr/lunr.min.js"></script><script type="text/javascript" src="/lib/lazysizes/lazysizes.min.js"></script><script type="text/javascript" src="/lib/lightgallery/lightgallery.min.js"></script><script type="text/javascript" src="/lib/lightgallery/plugins/thumbnail/lg-thumbnail.min.js"></script><script type="text/javascript" src="/lib/lightgallery/plugins/zoom/lg-zoom.min.js"></script><script type="text/javascript" src="/lib/clipboard/clipboard.min.js"></script><script type="text/javascript" src="/lib/sharer/sharer.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"Copy to clipboard","maxShownLines":50},"comment":{},"lightgallery":true,"search":{"highlightTag":"em","lunrIndexURL":"/index.json","maxResultLength":10,"noResultsFound":"No results found","snippetLength":30,"type":"lunr"}};</script><script type="text/javascript" src="/js/theme.min.js"></script></body>
+</html>

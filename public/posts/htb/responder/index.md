@@ -1,6 +1,8 @@
 # HackTheBox - Responder Writeup
 
 
+<!--more-->
+
 I found `two ways` to gain into this machine. First, stealing the password hash by using the responder and then logon through evil-winrm. Second, gaining the remote code execution through log poisoning and getting the reverse shell.
 
 ## Nmap

@@ -1,23 +1,24 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
+    <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="robots" content="noodp" />
-        <title>HackTheBox - Included Writeup - SHAFIQAIMAN</title><meta name="Description" content="shafiqaiman.com is a cybersecurity/ethical hacking website that focus on publishing of writeup in HacktheBox, Tryhackme and other online CTF (capture the flag) challenge."><meta property="og:title" content="HackTheBox - Included Writeup" />
-<meta property="og:description" content="Enumeration scan top 1000 ports 1 nmap -sC -sV -oN nmap/initial 10.10.10.55 the result nmap initial scan scan all ports 1 nmap -sC -sV -p- -oN nmap/all_ports 10.10.10.55 the result nmap allports scan Open Ports Well, both the Nmap result shows only port 80 just open That&rsquo;s mean this server have a website Local File Inclusion [LFI] Based on the Nmap scan result, This server has a website Let&rsquo;s take a look webpage has file parameter When I saw this string that had file as parameter I&rsquo;m always thinking Local File Inclusion [LFI] Let&rsquo;s try it with this string: http://10." />
+        <title>HackTheBox - Included Writeup - SHAFIQAIMAN</title><meta name="Description" content="HacktheBox - Included Writeup"><meta property="og:title" content="HackTheBox - Included Writeup" />
+<meta property="og:description" content="HacktheBox - Included Writeup" />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://shafiqaiman.com/posts/htb/included/" /><meta property="og:image" content="https://shafiqaiman.com/posts/htb/included/featured.png"/><meta property="article:section" content="posts" />
+<meta property="og:url" content="http://localhost:1313/posts/htb/included/" /><meta property="og:image" content="http://localhost:1313/posts/htb/included/featured.png" /><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2021-07-29T00:00:00+00:00" />
 <meta property="article:modified_time" content="2021-07-29T00:00:00+00:00" /><meta property="og:site_name" content="SHAFIQAIMAN" />
-<meta name="twitter:card" content="summary_large_image"/>
-<meta name="twitter:image" content="https://shafiqaiman.com/posts/htb/included/featured.png"/>
-<meta name="twitter:title" content="HackTheBox - Included Writeup"/>
-<meta name="twitter:description" content="Enumeration scan top 1000 ports 1 nmap -sC -sV -oN nmap/initial 10.10.10.55 the result nmap initial scan scan all ports 1 nmap -sC -sV -p- -oN nmap/all_ports 10.10.10.55 the result nmap allports scan Open Ports Well, both the Nmap result shows only port 80 just open That&rsquo;s mean this server have a website Local File Inclusion [LFI] Based on the Nmap scan result, This server has a website Let&rsquo;s take a look webpage has file parameter When I saw this string that had file as parameter I&rsquo;m always thinking Local File Inclusion [LFI] Let&rsquo;s try it with this string: http://10."/>
+
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:image" content="http://localhost:1313/posts/htb/included/featured.png" /><meta name="twitter:title" content="HackTheBox - Included Writeup"/>
+<meta name="twitter:description" content="HacktheBox - Included Writeup"/>
+<meta name="twitter:site" content="@_shafiqaiman_"/>
 <meta name="application-name" content="SHAFIQAIMAN">
 <meta name="apple-mobile-web-app-title" content="SHAFIQAIMAN"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
         <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
-        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://shafiqaiman.com/posts/htb/included/" /><link rel="prev" href="https://shafiqaiman.com/posts/htb/pathfinder/" /><link rel="next" href="https://shafiqaiman.com/posts/htb/markup/" /><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="/lib/fontawesome-free/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="http://localhost:1313/posts/htb/included/" /><link rel="prev" href="http://localhost:1313/posts/htb/pathfinder/" /><link rel="next" href="http://localhost:1313/posts/htb/markup/" /><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="/lib/fontawesome-free/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
         <noscript><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"></noscript><link rel="preload" href="/lib/animate/animate.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
         <noscript><link rel="stylesheet" href="/lib/animate/animate.min.css"></noscript><script type="application/ld+json">
     {
@@ -27,19 +28,19 @@
         "inLanguage": "en",
         "mainEntityOfPage": {
             "@type": "WebPage",
-            "@id": "https:\/\/shafiqaiman.com\/posts\/htb\/included\/"
+            "@id": "http:\/\/localhost:1313\/posts\/htb\/included\/"
         },"image": [{
                             "@type": "ImageObject",
-                            "url": "https:\/\/shafiqaiman.com\/posts\/htb\/included\/featured.png",
+                            "url": "http:\/\/localhost:1313\/posts\/htb\/included\/featured.png",
                             "width":  1050 ,
                             "height":  665 
-                        }],"genre": "posts","keywords": "lfi, tftp, lxd-alpine, php-reverse-shell","wordcount":  581 ,
-        "url": "https:\/\/shafiqaiman.com\/posts\/htb\/included\/","datePublished": "2021-07-29T00:00:00+00:00","dateModified": "2021-07-29T00:00:00+00:00","publisher": {
+                        }],"genre": "posts","keywords": "lfi, tftp, lxd-alpine, php-reverse-shell","wordcount":  585 ,
+        "url": "http:\/\/localhost:1313\/posts\/htb\/included\/","datePublished": "2021-07-29T00:00:00+00:00","dateModified": "2021-07-29T00:00:00+00:00","publisher": {
             "@type": "Organization",
             "name": ""},"author": {
                 "@type": "Person",
                 "name": "SH∆FIQ ∆IM∆N"
-            },"description": ""
+            },"description": "HacktheBox - Included Writeup"
     }
     </script></head>
     <body data-header-desktop="fixed" data-header-mobile="auto"><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('dark' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'dark' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
@@ -106,8 +107,8 @@
             <h2 class="toc-title">Contents</h2>
             <div class="toc-content always-active" id="toc-content-auto"></div>
         </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">HackTheBox - Included Writeup</h1><div class="post-meta">
-            <div class="post-meta-line"><span class="post-author"><a href="https://shafiqaiman.com" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>SH∆FIQ ∆IM∆N</a></span>&nbsp;<span class="post-category">included in <a href="/categories/hackthebox/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>HacktheBox</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="29-07-2021">29-07-2021</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;581 words&nbsp;
+            <div class="post-meta-line"><span class="post-author"><a href="https://shafiqaiman.com" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>SH∆FIQ ∆IM∆N</a></span>&nbsp;<span class="post-category">included in <a href="/categories/hackthebox/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>HacktheBox</a>&nbsp;<a href="/categories/linux/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>Linux</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="29-07-2021">29-07-2021</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;585 words&nbsp;
                 <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;3 minutes&nbsp;</div>
         </div><div class="featured-image"><img
         class="lazyload"
@@ -116,7 +117,7 @@
         data-srcset="/posts/htb/included/featured.png, /posts/htb/included/featured.png 1.5x, /posts/htb/included/featured.png 2x"
         data-sizes="auto"
         alt="/posts/htb/included/featured.png"
-        title="/posts/htb/included/featured.png" /></div><div class="details toc" id="toc-static"  data-kept="">
+        title="HacktheBox - Included Writeup" /></div><div class="details toc" id="toc-static"  data-kept="">
                 <div class="details-summary toc-title">
                     <span>Contents</span>
                     <span><i class="details-icon fas fa-angle-right" aria-hidden="true"></i></span>
@@ -144,7 +145,8 @@
     <li><a href="#conclusion">Conclusion</a></li>
   </ul>
 </nav></div>
-            </div><div class="content" id="content"><h2 id="enumeration">Enumeration</h2>
+            </div><div class="content" id="content"><p>Box author | <span class="h-card person-mention"><a href="https://app.hackthebox.com/users/31190" class="u-url url"><img class="u-photo photo" src="https://www.hackthebox.com/storage/avatars/f7a696a1331031242f713514b7a4621a.png" alt="TRX">&#8201;<span class="p-name fn">TRX</span></a></span></p>
+<h2 id="enumeration">Enumeration</h2>
 <ul>
 <li>scan top 1000 ports</li>
 </ul>
@@ -404,7 +406,7 @@
 <li>Because I found one of the machines in <a href="https://shafiqaiman.com/posts/thm/gaming_server/" target="_blank" rel="noopener noreffer ">TryHackMe</a> have this same vuln.</li>
 <li>Sources
 <ul>
-<li><a href="https://shafiqaiman.com/posts/thm/gaming_server/" target="_blank" rel="noopener noreffer ">Doct3rJohn - GamingServer[THM]</a></li>
+<li><a href="https://shafiqaiman.com/posts/thm/gaming_server/" target="_blank" rel="noopener noreffer ">SH∆FIQ∆IM∆N - GamingServer[THM]</a></li>
 <li><a href="https://www.hackingarticles.in/lxd-privilege-escalation/" target="_blank" rel="noopener noreffer ">Hacking Articles - lxd-privilege-escalation</a></li>
 <li><a href="https://github.com/saghul/lxd-alpine-builder" target="_blank" rel="noopener noreffer ">Github - lxd-alpine-builder</a></li>
 </ul>
@@ -472,8 +474,7 @@
     </figure></p>
 <h2 id="conclusion">Conclusion</h2>
 <p>I&rsquo;ve learned a lot today. First, make sure to do recon properly and make sure to scan everything TCP/UDP/everything. Then, configure the webpage properly. Most of the time the webpage is the easier/first thing they(hacker) look at. Once again, don&rsquo;t use the same password.</p>
-<p>I have a fun time doing this machine and I hope you guys do too. Bye ;)</p>
-</div><div class="post-footer" id="post-footer">
+<p>I have a fun time doing this machine and I hope you guys do too. Bye ;)</p></div><div class="post-footer" id="post-footer">
     <div class="post-info">
         <div class="post-info-line">
             <div class="post-info-mod">
@@ -482,13 +483,13 @@
         <div class="post-info-line">
             <div class="post-info-md"></div>
             <div class="post-info-share">
-                <span><a href="javascript:void(0);" title="Share on Twitter" data-sharer="twitter" data-url="https://shafiqaiman.com/posts/htb/included/" data-title="HackTheBox - Included Writeup" data-via="_shafiqaiman_" data-hashtags="lfi,tftp,lxd-alpine,php-reverse-shell"><i class="fab fa-twitter fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Linkedin" data-sharer="linkedin" data-url="https://shafiqaiman.com/posts/htb/included/"><i class="fab fa-linkedin fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Hacker News" data-sharer="hackernews" data-url="https://shafiqaiman.com/posts/htb/included/" data-title="HackTheBox - Included Writeup"><i class="fab fa-hacker-news fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Reddit" data-sharer="reddit" data-url="https://shafiqaiman.com/posts/htb/included/"><i class="fab fa-reddit fa-fw" aria-hidden="true"></i></a></span>
+                <span><a href="javascript:void(0);" title="Share on Twitter" data-sharer="twitter" data-url="http://localhost:1313/posts/htb/included/" data-title="HackTheBox - Included Writeup" data-via="_shafiqaiman_" data-hashtags="lfi,tftp,lxd-alpine,php-reverse-shell"><i class="fab fa-twitter fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Linkedin" data-sharer="linkedin" data-url="http://localhost:1313/posts/htb/included/"><i class="fab fa-linkedin fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Hacker News" data-sharer="hackernews" data-url="http://localhost:1313/posts/htb/included/" data-title="HackTheBox - Included Writeup"><i class="fab fa-hacker-news fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Reddit" data-sharer="reddit" data-url="http://localhost:1313/posts/htb/included/"><i class="fab fa-reddit fa-fw" aria-hidden="true"></i></a></span>
             </div>
         </div>
     </div>
 
     <div class="post-info-more">
-        <section class="post-tags"><i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/lfi/">lfi</a>,&nbsp;<a href="/tags/tftp/">tftp</a>,&nbsp;<a href="/tags/lxd-alpine/">lxd-alpine</a>,&nbsp;<a href="/tags/php-reverse-shell/">php-reverse-shell</a></section>
+        <section class="post-tags"><i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/lfi/">Lfi</a>,&nbsp;<a href="/tags/tftp/">Tftp</a>,&nbsp;<a href="/tags/lxd-alpine/">Lxd-Alpine</a>,&nbsp;<a href="/tags/php-reverse-shell/">Php-Reverse-Shell</a></section>
         <section>
             <span><a href="javascript:void(0);" onclick="window.history.back();">Back</a></span>&nbsp;|&nbsp;<span><a href="/">Home</a></span>
         </section>
@@ -499,7 +500,7 @@
 </div>
 </article></div>
             </main><footer class="footer">
-        <div class="footer-container"><div class="footer-line" itemscope itemtype="http://schema.org/CreativeWork"><i class="far fa-copyright fa-fw" aria-hidden="true"></i><span itemprop="copyrightYear">2021 - 2023</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="https://shafiqaiman.com" target="_blank">SHAFIQAIMAN</a></span></div>
+        <div class="footer-container"><div class="footer-line" itemscope itemtype="http://schema.org/CreativeWork"><i class="far fa-copyright fa-fw" aria-hidden="true"></i><span itemprop="copyrightYear">2021 - 2024</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="https://shafiqaiman.com" target="_blank">SHAFIQAIMAN</a></span></div>
         </div>
     </footer></div>
 

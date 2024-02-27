@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <title>HackTheBox - Pilgrimage Writeup - SHAFIQAIMAN</title><meta name="Description" content="HacktheBox - Pilgrimage Writeup"><meta property="og:title" content="HackTheBox - Pilgrimage Writeup" />
+<meta property="og:description" content="HacktheBox - Pilgrimage Writeup" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://localhost:1313/posts/htb/pilgrimage/" /><meta property="og:image" content="http://localhost:1313/posts/htb/pilgrimage/featured.png" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2023-11-25T00:00:00+00:00" />
+<meta property="article:modified_time" content="2023-11-25T00:00:00+00:00" /><meta property="og:site_name" content="SHAFIQAIMAN" />
+
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:image" content="http://localhost:1313/posts/htb/pilgrimage/featured.png" /><meta name="twitter:title" content="HackTheBox - Pilgrimage Writeup"/>
+<meta name="twitter:description" content="HacktheBox - Pilgrimage Writeup"/>
+<meta name="twitter:site" content="@_shafiqaiman_"/>
+<meta name="application-name" content="SHAFIQAIMAN">
+<meta name="apple-mobile-web-app-title" content="SHAFIQAIMAN"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="http://localhost:1313/posts/htb/pilgrimage/" /><link rel="prev" href="http://localhost:1313/posts/htb/monitorstwo/" /><link rel="next" href="http://localhost:1313/posts/htb/forest/" /><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="/lib/fontawesome-free/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"></noscript><link rel="preload" href="/lib/animate/animate.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="/lib/animate/animate.min.css"></noscript><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "HackTheBox - Pilgrimage Writeup",
+        "inLanguage": "en",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "http:\/\/localhost:1313\/posts\/htb\/pilgrimage\/"
+        },"image": [{
+                            "@type": "ImageObject",
+                            "url": "http:\/\/localhost:1313\/posts\/htb\/pilgrimage\/featured.png",
+                            "width":  1400 ,
+                            "height":  1060 
+                        }],"genre": "posts","keywords": "CVE-2022-44268, CVE-2022-4510, git-dumper, pngcrush, exiftool, binwalk, pspy","wordcount":  882 ,
+        "url": "http:\/\/localhost:1313\/posts\/htb\/pilgrimage\/","datePublished": "2023-11-25T00:00:00+00:00","dateModified": "2023-11-25T00:00:00+00:00","publisher": {
+            "@type": "Organization",
+            "name": ""},"author": {
+                "@type": "Person",
+                "name": "SH∆FIQ ∆IM∆N"
+            },"description": "HacktheBox - Pilgrimage Writeup"
+    }
+    </script></head>
+    <body data-header-desktop="fixed" data-header-mobile="auto"><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('dark' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'dark' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="SHAFIQAIMAN">SH∆FIQ∆IM∆N</a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/posts/" title="Posts"><i class="fa-solid fa-book"></i>  </a><a class="menu-item" href="/tags/" title="Tags"><i class="fa-solid fa-tags"></i>  </a><a class="menu-item" href="/categories/" title="Categories"><i class="fa-solid fa-folder"></i>  </a><span class="menu-item delimiter"></span><span class="menu-item search" id="search-desktop">
+                        <input type="text" placeholder="Search titles or contents..." id="search-input-desktop">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-desktop" title="Search">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-desktop" title="Clear">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-desktop">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </span><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                    <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+                </a></div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="SHAFIQAIMAN">SH∆FIQ∆IM∆N</a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><div class="search-wrapper">
+                    <div class="search mobile" id="search-mobile">
+                        <input type="text" placeholder="Search titles or contents..." id="search-input-mobile">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-mobile" title="Search">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-mobile" title="Clear">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-mobile">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </div>
+                    <a href="javascript:void(0);" class="search-cancel" id="search-cancel-mobile">
+                        Cancel
+                    </a>
+                </div><a class="menu-item" href="/posts/" title="Posts"><i class="fa-solid fa-book"></i></a><a class="menu-item" href="/tags/" title="Tags"><i class="fa-solid fa-tags"></i></a><a class="menu-item" href="/categories/" title="Categories"><i class="fa-solid fa-folder"></i></a><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+            </a></div>
+    </div>
+</header><div class="search-dropdown desktop">
+        <div id="search-dropdown-desktop"></div>
+    </div>
+    <div class="search-dropdown mobile">
+        <div id="search-dropdown-mobile"></div>
+    </div><main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">Contents</h2>
+            <div class="toc-content always-active" id="toc-content-auto"></div>
+        </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">HackTheBox - Pilgrimage Writeup</h1><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="https://shafiqaiman.com" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>SH∆FIQ ∆IM∆N</a></span>&nbsp;<span class="post-category">included in <a href="/categories/hackthebox/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>HacktheBox</a>&nbsp;<a href="/categories/linux/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>Linux</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="25-11-2023">25-11-2023</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;882 words&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;5 minutes&nbsp;</div>
+        </div><div class="featured-image"><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/posts/htb/pilgrimage/featured.png"
+        data-srcset="/posts/htb/pilgrimage/featured.png, /posts/htb/pilgrimage/featured.png 1.5x, /posts/htb/pilgrimage/featured.png 2x"
+        data-sizes="auto"
+        alt="/posts/htb/pilgrimage/featured.png"
+        title="HacktheBox - Pilgrimage Writeup" /></div><div class="details toc" id="toc-static"  data-kept="">
+                <div class="details-summary toc-title">
+                    <span>Contents</span>
+                    <span><i class="details-icon fas fa-angle-right" aria-hidden="true"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#nmap">Nmap</a></li>
+    <li><a href="#http-pilgrimagehtb">Http: pilgrimage.htb</a></li>
+    <li><a href="#http-git-dumper">Http: git-dumper</a>
+      <ul>
+        <li><a href="#git-magick">Git: magick</a></li>
+        <li><a href="#magick-cve-2022-44268">Magick: CVE-2022-44268</a></li>
+        <li><a href="#sqlite-emily">SQLite: emily</a></li>
+      </ul>
+    </li>
+    <li><a href="#ssh-emily">SSH: emily</a>
+      <ul>
+        <li><a href="#binwalk">Binwalk</a></li>
+      </ul>
+    </li>
+    <li><a href="#binwalk-cve-2022-4510">Binwalk: CVE-2022-4510</a></li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><p>Box author | <span class="h-card person-mention"><a href="https://app.hackthebox.com/users/55851" class="u-url url"><img class="u-photo photo" src="https://www.hackthebox.com/storage/avatars/f63e28fe2ee2c0d4d6b4b8cf0f43fa69.png" alt="coopertim13">&#8201;<span class="p-name fn">coopertim13</span></a></span></p>
+<h2 id="nmap">Nmap</h2>
+<p>Like always, I’m going to scan the IP Address by using <a href="https://nmap.org/" target="_blank" rel="noopener noreffer ">nmap</a> but I’m going to scan the full port first. Then, I’m going to scan the only open ports.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="line"><span class="cl"><span class="n">nmap</span><span class="w"> </span><span class="o">-</span><span class="n">p22</span><span class="p">,</span><span class="mi">80</span><span class="w"> </span><span class="o">-</span><span class="n">sCV</span><span class="w"> </span><span class="o">-</span><span class="k">oN</span><span class="w"> </span><span class="n">nmap</span><span class="o">/</span><span class="n">pilgrimage_script</span><span class="w"> </span><span class="mi">10</span><span class="p">.</span><span class="mi">10</span><span class="p">.</span><span class="mi">11</span><span class="p">.</span><span class="mi">219</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="n">PORT</span><span class="w">   </span><span class="k">STATE</span><span class="w"> </span><span class="n">SERVICE</span><span class="w"> </span><span class="k">VERSION</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="mi">22</span><span class="o">/</span><span class="n">tcp</span><span class="w"> </span><span class="k">open</span><span class="w">  </span><span class="n">ssh</span><span class="w">     </span><span class="n">OpenSSH</span><span class="w"> </span><span class="mi">8</span><span class="p">.</span><span class="mi">4</span><span class="n">p1</span><span class="w"> </span><span class="n">Debian</span><span class="w"> </span><span class="mi">5</span><span class="o">+</span><span class="n">deb11u1</span><span class="w"> </span><span class="p">(</span><span class="n">protocol</span><span class="w"> </span><span class="mi">2</span><span class="p">.</span><span class="mi">0</span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="o">|</span><span class="w"> </span><span class="n">ssh</span><span class="o">-</span><span class="n">hostkey</span><span class="p">:</span><span class="w"> 
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="o">|</span><span class="w">   </span><span class="mi">3072</span><span class="w"> </span><span class="mi">20</span><span class="n">be60d295f628c1b7e9e81706f168f3</span><span class="w"> </span><span class="p">(</span><span class="n">RSA</span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="o">|</span><span class="w">   </span><span class="mi">256</span><span class="w"> </span><span class="mi">0</span><span class="n">eb6a6a8c99b4173746e70180d5fe0af</span><span class="w"> </span><span class="p">(</span><span class="n">ECDSA</span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="o">|</span><span class="n">_</span><span class="w">  </span><span class="mi">256</span><span class="w"> </span><span class="n">d14e293c708669b4d72cc80b486e9804</span><span class="w"> </span><span class="p">(</span><span class="n">ED25519</span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="mi">80</span><span class="o">/</span><span class="n">tcp</span><span class="w"> </span><span class="k">open</span><span class="w">  </span><span class="n">http</span><span class="w">    </span><span class="n">nginx</span><span class="w"> </span><span class="mi">1</span><span class="p">.</span><span class="mi">18</span><span class="p">.</span><span class="mi">0</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="o">|</span><span class="n">_http</span><span class="o">-</span><span class="n">server</span><span class="o">-</span><span class="n">header</span><span class="p">:</span><span class="w"> </span><span class="n">nginx</span><span class="o">/</span><span class="mi">1</span><span class="p">.</span><span class="mi">18</span><span class="p">.</span><span class="mi">0</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="o">|</span><span class="n">_http</span><span class="o">-</span><span class="n">title</span><span class="p">:</span><span class="w"> </span><span class="n">Pilgrimage</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">Shrink</span><span class="w"> </span><span class="n">Your</span><span class="w"> </span><span class="n">Images</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="o">|</span><span class="w"> </span><span class="n">http</span><span class="o">-</span><span class="n">cookie</span><span class="o">-</span><span class="n">flags</span><span class="p">:</span><span class="w"> 
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="o">|</span><span class="w">   </span><span class="o">/</span><span class="p">:</span><span class="w"> 
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="o">|</span><span class="w">     </span><span class="n">PHPSESSID</span><span class="p">:</span><span class="w"> 
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="o">|</span><span class="n">_</span><span class="w">      </span><span class="n">httponly</span><span class="w"> </span><span class="n">flag</span><span class="w"> </span><span class="k">not</span><span class="w"> </span><span class="k">set</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="o">|</span><span class="w"> </span><span class="n">http</span><span class="o">-</span><span class="n">git</span><span class="p">:</span><span class="w"> 
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="o">|</span><span class="w">   </span><span class="mi">10</span><span class="p">.</span><span class="mi">10</span><span class="p">.</span><span class="mi">11</span><span class="p">.</span><span class="mi">219</span><span class="p">:</span><span class="mi">80</span><span class="o">/</span><span class="p">.</span><span class="n">git</span><span class="o">/</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="o">|</span><span class="w">     </span><span class="n">Git</span><span class="w"> </span><span class="n">repository</span><span class="w"> </span><span class="k">found</span><span class="o">!</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="o">|</span><span class="w">     </span><span class="n">Repository</span><span class="w"> </span><span class="n">description</span><span class="p">:</span><span class="w"> </span><span class="k">Unnamed</span><span class="w"> </span><span class="n">repository</span><span class="p">;</span><span class="w"> </span><span class="n">edit</span><span class="w"> </span><span class="n">this</span><span class="w"> </span><span class="n">file</span><span class="w"> </span><span class="s1">&#39;description&#39;</span><span class="w"> </span><span class="k">to</span><span class="w"> </span><span class="n">name</span><span class="w"> </span><span class="n">the</span><span class="p">...</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="o">|</span><span class="n">_</span><span class="w">    </span><span class="k">Last</span><span class="w"> </span><span class="k">commit</span><span class="w"> </span><span class="n">message</span><span class="p">:</span><span class="w"> </span><span class="n">Pilgrimage</span><span class="w"> </span><span class="n">image</span><span class="w"> </span><span class="n">shrinking</span><span class="w"> </span><span class="n">service</span><span class="w"> </span><span class="n">initial</span><span class="w"> </span><span class="k">commit</span><span class="p">.</span><span class="w"> </span><span class="o">#</span><span class="w"> </span><span class="n">Please</span><span class="w"> </span><span class="p">...</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="n">Service</span><span class="w"> </span><span class="n">Info</span><span class="p">:</span><span class="w"> </span><span class="n">OS</span><span class="p">:</span><span class="w"> </span><span class="n">Linux</span><span class="p">;</span><span class="w"> </span><span class="n">CPE</span><span class="p">:</span><span class="w"> </span><span class="n">cpe</span><span class="p">:</span><span class="o">/</span><span class="n">o</span><span class="p">:</span><span class="n">linux</span><span class="p">:</span><span class="n">linux_kernel</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>The nmap scan result is completed. There are just <code>two</code> port opens which are <code>SSH, and HTTP</code>. Well, I&rsquo;m going to ignore <code>port 22</code> which is <code>SSH</code>, since I don&rsquo;t have any credentials.</p>
+<p>However, nmap also found the <code>git</code> directory on <code>port 80</code>.</p>
+<h2 id="http-pilgrimagehtb">Http: pilgrimage.htb</h2>
+<p>Then, I navigated to <code>port 80</code> on my browser and I was greeted with <code>We can’t connect to the server at the pilgrimage.htb</code>. So, I added <code>pilgrimage.htb</code> into my <code>/etc/hosts</code> file.</p>
+<p><figure><a class="lightgallery" href="/posts/htb/pilgrimage/etc-hosts-1.png" title="add the hostname" data-thumbnail="/posts/htb/pilgrimage/etc-hosts-1.png" data-sub-html="<h2>add the hostname</h2><p>add the hostname</p>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/posts/htb/pilgrimage/etc-hosts-1.png"
+            data-srcset="/posts/htb/pilgrimage/etc-hosts-1.png, /posts/htb/pilgrimage/etc-hosts-1.png 1.5x, /posts/htb/pilgrimage/etc-hosts-1.png 2x"
+            data-sizes="auto"
+            alt="/posts/htb/pilgrimage/etc-hosts-1.png" width="332" height="121" />
+    </a><figcaption class="image-caption">add the hostname</figcaption>
+    </figure></p>
+<p>With a simple reload of the page and <em>ta-daaa</em></p>
+<p><figure><a class="lightgallery" href="/posts/htb/pilgrimage/pilgrimage-index-page.png" title="pilgrimage main page" data-thumbnail="/posts/htb/pilgrimage/pilgrimage-index-page.png" data-sub-html="<h2>pilgrimage main page</h2><p>pilgrimage main page</p>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/posts/htb/pilgrimage/pilgrimage-index-page.png"
+            data-srcset="/posts/htb/pilgrimage/pilgrimage-index-page.png, /posts/htb/pilgrimage/pilgrimage-index-page.png 1.5x, /posts/htb/pilgrimage/pilgrimage-index-page.png 2x"
+            data-sizes="auto"
+            alt="/posts/htb/pilgrimage/pilgrimage-index-page.png" width="1669" height="789" />
+    </a><figcaption class="image-caption">pilgrimage main page</figcaption>
+    </figure></p>
+<h2 id="http-git-dumper">Http: git-dumper</h2>
+<p>Before I investigate the page. I need to take a look at the <code>git</code> directory first. So, I&rsquo;m using the <a href="https://github.com/arthaud/git-dumper" target="_blank" rel="noopener noreffer ">git-dumper</a> tool. After successfully dumping all the <code>git</code> repositories.</p>
+<p>The first thing I did was execute the <code>git log</code> command to show all the <code>commit</code> history and found the user called <code>emily</code>.</p>
+<p><figure><a class="lightgallery" href="/posts/htb/pilgrimage/git-log-found-emily.png" title="git-dump" data-thumbnail="/posts/htb/pilgrimage/git-log-found-emily.png" data-sub-html="<h2>git-dump</h2><p>git-dump</p>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/posts/htb/pilgrimage/git-log-found-emily.png"
+            data-srcset="/posts/htb/pilgrimage/git-log-found-emily.png, /posts/htb/pilgrimage/git-log-found-emily.png 1.5x, /posts/htb/pilgrimage/git-log-found-emily.png 2x"
+            data-sizes="auto"
+            alt="/posts/htb/pilgrimage/git-log-found-emily.png" width="677" height="188" />
+    </a><figcaption class="image-caption">git-dump</figcaption>
+    </figure></p>
+<h3 id="git-magick">Git: magick</h3>
+<p>However, there&rsquo;s an executable file on this repository called <code>magick</code> and with quick googling, turns out, it&rsquo;s a program that member of <a href="https://imagemagick.org/index.php" target="_blank" rel="noopener noreffer ">ImageMagick</a> suite of tools.</p>
+<p>While searching this program, I found that there are many vulnerabilities regarding it. So, I executed the program with a version tag.</p>
+<p><figure><a class="lightgallery" href="/posts/htb/pilgrimage/magick-version.png" title="ImageMagick 7.1.0-49 beta" data-thumbnail="/posts/htb/pilgrimage/magick-version.png" data-sub-html="<h2>ImageMagick 7.1.0-49 beta</h2><p>ImageMagick 7.1.0-49 beta</p>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/posts/htb/pilgrimage/magick-version.png"
+            data-srcset="/posts/htb/pilgrimage/magick-version.png, /posts/htb/pilgrimage/magick-version.png 1.5x, /posts/htb/pilgrimage/magick-version.png 2x"
+            data-sizes="auto"
+            alt="/posts/htb/pilgrimage/magick-version.png" width="1187" height="140" />
+    </a><figcaption class="image-caption">ImageMagick 7.1.0-49 beta</figcaption>
+    </figure></p>
+<h3 id="magick-cve-2022-44268">Magick: CVE-2022-44268</h3>
+<p>With that information in my hand. I managed to find this <a href="https://www.vicarius.io/blog/cve-2022-44268-arbitrary-remote-leak-in-imagemagick" target="_blank" rel="noopener noreffer ">article</a> about it.</p>
+<div class="details admonition tip open">
+        <div class="details-summary admonition-title">
+            <i class="icon fas fa-lightbulb fa-fw" aria-hidden="true"></i>Description<i class="details-icon fas fa-angle-right fa-fw" aria-hidden="true"></i>
+        </div>
+        <div class="details-content">
+            <div class="admonition-content">There&rsquo;s a function called <code>ReadOnePNGImage</code> that will check the image, if it has the <code>Profile</code> keyword.
+It will parse it to another function called <code>FileToBlob</code> and read the file.</div>
+        </div>
+    </div>
+<p>While I&rsquo;m inspecting the <code>git</code> repository that got dumped earlier. I managed to find the location of the <code>sqlite</code> database in <code>input.php</code>.</p>
+<p><figure><a class="lightgallery" href="/posts/htb/pilgrimage/sqlite-database-file.png" title="sqlite location" data-thumbnail="/posts/htb/pilgrimage/sqlite-database-file.png" data-sub-html="<h2>sqlite location</h2><p>sqlite location</p>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/posts/htb/pilgrimage/sqlite-database-file.png"
+            data-srcset="/posts/htb/pilgrimage/sqlite-database-file.png, /posts/htb/pilgrimage/sqlite-database-file.png 1.5x, /posts/htb/pilgrimage/sqlite-database-file.png 2x"
+            data-sizes="auto"
+            alt="/posts/htb/pilgrimage/sqlite-database-file.png" width="932" height="340" />
+    </a><figcaption class="image-caption">sqlite location</figcaption>
+    </figure></p>
+<p>Now, I have the path to the sensitive file. So, I&rsquo;m going to create a malicious image file by using <code>pngcrush</code>. Then, I&rsquo;ll upload it to the web application and download the shrink version.</p>
+<p><figure><a class="lightgallery" href="/posts/htb/pilgrimage/create-malicious-image.png" title="pngcrush create malicious image" data-thumbnail="/posts/htb/pilgrimage/create-malicious-image.png" data-sub-html="<h2>pngcrush create malicious image</h2><p>pngcrush create malicious image</p>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/posts/htb/pilgrimage/create-malicious-image.png"
+            data-srcset="/posts/htb/pilgrimage/create-malicious-image.png, /posts/htb/pilgrimage/create-malicious-image.png 1.5x, /posts/htb/pilgrimage/create-malicious-image.png 2x"
+            data-sizes="auto"
+            alt="/posts/htb/pilgrimage/create-malicious-image.png" width="1164" height="726" />
+    </a><figcaption class="image-caption">pngcrush create malicious image</figcaption>
+    </figure></p>
+<h3 id="sqlite-emily">SQLite: emily</h3>
+<p>I&rsquo;ll check the downloaded image metadata with <code>exiftool</code> and the output it&rsquo;s so massive. So, I ended up using <a href="https://gchq.github.io/CyberChef/" target="_blank" rel="noopener noreffer ">CyberChef</a> to decode all the hex code from it and managed to find <code>emily</code> credentials.</p>
+<p><figure><a class="lightgallery" href="/posts/htb/pilgrimage/emily-creds.png" title="dump sqlite found emily creds" data-thumbnail="/posts/htb/pilgrimage/emily-creds.png" data-sub-html="<h2>dump sqlite found emily creds</h2><p>dump sqlite found emily creds</p>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/posts/htb/pilgrimage/emily-creds.png"
+            data-srcset="/posts/htb/pilgrimage/emily-creds.png, /posts/htb/pilgrimage/emily-creds.png 1.5x, /posts/htb/pilgrimage/emily-creds.png 2x"
+            data-sizes="auto"
+            alt="/posts/htb/pilgrimage/emily-creds.png" width="949" height="353" />
+    </a><figcaption class="image-caption">dump sqlite found emily creds</figcaption>
+    </figure></p>
+<h2 id="ssh-emily">SSH: emily</h2>
+<p>Then, I&rsquo;ll try those credentials against <code>port 22</code> which is <code>SSH</code>. Luckily, I successfully logged in as user emily.</p>
+<p><figure><a class="lightgallery" href="/posts/htb/pilgrimage/emily-ssh.png" title="ssh as emily" data-thumbnail="/posts/htb/pilgrimage/emily-ssh.png" data-sub-html="<h2>ssh as emily</h2><p>ssh as emily</p>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/posts/htb/pilgrimage/emily-ssh.png"
+            data-srcset="/posts/htb/pilgrimage/emily-ssh.png, /posts/htb/pilgrimage/emily-ssh.png 1.5x, /posts/htb/pilgrimage/emily-ssh.png 2x"
+            data-sizes="auto"
+            alt="/posts/htb/pilgrimage/emily-ssh.png" width="781" height="362" />
+    </a><figcaption class="image-caption">ssh as emily</figcaption>
+    </figure></p>
+<p>Now, I have the credentials for this user. Then, it&rsquo;s time to check the <code>sudo</code> permission with the <code>sudo -l</code> command. Turns out, <code>emily</code> did not have a sudo privilege on this machine.</p>
+<p><figure><a class="lightgallery" href="/posts/htb/pilgrimage/sudo-l-permission.png" title="check sudo permission" data-thumbnail="/posts/htb/pilgrimage/sudo-l-permission.png" data-sub-html="<h2>check sudo permission</h2><p>check sudo permission</p>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/posts/htb/pilgrimage/sudo-l-permission.png"
+            data-srcset="/posts/htb/pilgrimage/sudo-l-permission.png, /posts/htb/pilgrimage/sudo-l-permission.png 1.5x, /posts/htb/pilgrimage/sudo-l-permission.png 2x"
+            data-sizes="auto"
+            alt="/posts/htb/pilgrimage/sudo-l-permission.png" width="576" height="218" />
+    </a><figcaption class="image-caption">check sudo permission</figcaption>
+    </figure></p>
+<h3 id="binwalk">Binwalk</h3>
+<p>However, I found the hidden directory called <code>.config</code> and there was another directory in it called <code>binwalk</code> and funny enough. There is an application called <code>binwalk</code>.</p>
+<p><figure><a class="lightgallery" href="/posts/htb/pilgrimage/binwalk-config.png" title="binwalk directory" data-thumbnail="/posts/htb/pilgrimage/binwalk-config.png" data-sub-html="<h2>binwalk directory</h2><p>binwalk directory</p>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/posts/htb/pilgrimage/binwalk-config.png"
+            data-srcset="/posts/htb/pilgrimage/binwalk-config.png, /posts/htb/pilgrimage/binwalk-config.png 1.5x, /posts/htb/pilgrimage/binwalk-config.png 2x"
+            data-sizes="auto"
+            alt="/posts/htb/pilgrimage/binwalk-config.png" width="763" height="390" />
+    </a><figcaption class="image-caption">binwalk directory</figcaption>
+    </figure></p>
+<p>So, I checked, if <code>binwalk</code> exists and it does. Then, I execute it with the help command to show the version of it. Turns out, it&rsquo;s version <code>2.3.2</code> and the release date for it was <code>Aug 16, 2021</code>.</p>
+<p><figure><a class="lightgallery" href="/posts/htb/pilgrimage/binwalk-version.png" title="binwalk v2.3.2" data-thumbnail="/posts/htb/pilgrimage/binwalk-version.png" data-sub-html="<h2>binwalk v2.3.2</h2><p>binwalk v2.3.2</p>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/posts/htb/pilgrimage/binwalk-version.png"
+            data-srcset="/posts/htb/pilgrimage/binwalk-version.png, /posts/htb/pilgrimage/binwalk-version.png 1.5x, /posts/htb/pilgrimage/binwalk-version.png 2x"
+            data-sizes="auto"
+            alt="/posts/htb/pilgrimage/binwalk-version.png" width="702" height="308" />
+    </a><figcaption class="image-caption">binwalk v2.3.2</figcaption>
+    </figure></p>
+<h2 id="binwalk-cve-2022-4510">Binwalk: CVE-2022-4510</h2>
+<p>With a quick Q&amp;A session with Mr.Google himself. I managed to find this <a href="https://www.exploit-db.com/exploits/51249" target="_blank" rel="noopener noreffer ">exploit</a> regarding the binwalk version. Based on this <a href="https://nvd.nist.gov/vuln/detail/CVE-2022-4510" target="_blank" rel="noopener noreffer ">description</a></p>
+<div class="details admonition tip open">
+        <div class="details-summary admonition-title">
+            <i class="icon fas fa-lightbulb fa-fw" aria-hidden="true"></i>Description<i class="details-icon fas fa-angle-right fa-fw" aria-hidden="true"></i>
+        </div>
+        <div class="details-content">
+            <div class="admonition-content">It&rsquo;s a <code>path traversal</code> vulnerability that could lead to <code>RCE</code> by crafting a malicious <code>PFS</code> file and get extracted into binwalk <code>plugins</code>.</div>
+        </div>
+    </div>
+<p>When I executed the exploit it created a malicious image file but I couldn&rsquo;t find anywhere to make use of it.</p>
+<p><figure><a class="lightgallery" href="/posts/htb/pilgrimage/create-a-malicious-image-privesc.png" title="abused CVE-2022-4510" data-thumbnail="/posts/htb/pilgrimage/create-a-malicious-image-privesc.png" data-sub-html="<h2>abused CVE-2022-4510</h2><p>abused CVE-2022-4510</p>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/posts/htb/pilgrimage/create-a-malicious-image-privesc.png"
+            data-srcset="/posts/htb/pilgrimage/create-a-malicious-image-privesc.png, /posts/htb/pilgrimage/create-a-malicious-image-privesc.png 1.5x, /posts/htb/pilgrimage/create-a-malicious-image-privesc.png 2x"
+            data-sizes="auto"
+            alt="/posts/htb/pilgrimage/create-a-malicious-image-privesc.png" width="844" height="506" />
+    </a><figcaption class="image-caption">abused CVE-2022-4510</figcaption>
+    </figure></p>
+<p>Then, I uploaded a tool called <a href="https://github.com/DominicBreuker/pspy" target="_blank" rel="noopener noreffer ">pspy</a> to see any command that is run by other users. Now, I&rsquo;ll try uploading any image file to the web application to see if anything gets executed in the background.</p>
+<p>It did! and I saw that the root user executed a bash file called <code>malwarescan.sh</code> inside the <code>/usr/sbin/</code> directory.</p>
+<p><figure><a class="lightgallery" href="/posts/htb/pilgrimage/pspy-output-showing-another-file.png" title="spy on processes" data-thumbnail="/posts/htb/pilgrimage/pspy-output-showing-another-file.png" data-sub-html="<h2>spy on processes</h2><p>spy on processes</p>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/posts/htb/pilgrimage/pspy-output-showing-another-file.png"
+            data-srcset="/posts/htb/pilgrimage/pspy-output-showing-another-file.png, /posts/htb/pilgrimage/pspy-output-showing-another-file.png 1.5x, /posts/htb/pilgrimage/pspy-output-showing-another-file.png 2x"
+            data-sizes="auto"
+            alt="/posts/htb/pilgrimage/pspy-output-showing-another-file.png" width="770" height="151" />
+    </a><figcaption class="image-caption">spy on processes</figcaption>
+    </figure></p>
+<p>So, I managed to read that file. It basically checks the image that gets uploaded, and if it&rsquo;s an executable or not. However, there&rsquo;s a particular <code>path</code> where uploaded images get stored.</p>
+<p>On top of that, it gets executed by <code>binwalk</code> with a <code>-e</code> flag, which means <code>extract</code> and this cloud leads into successfully <code>RCE</code>.</p>
+<p><figure><a class="lightgallery" href="/posts/htb/pilgrimage/malwarescan-file-nice.png" title="read malwarescan.sh" data-thumbnail="/posts/htb/pilgrimage/malwarescan-file-nice.png" data-sub-html="<h2>read malwarescan.sh</h2><p>read malwarescan.sh</p>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/posts/htb/pilgrimage/malwarescan-file-nice.png"
+            data-srcset="/posts/htb/pilgrimage/malwarescan-file-nice.png, /posts/htb/pilgrimage/malwarescan-file-nice.png 1.5x, /posts/htb/pilgrimage/malwarescan-file-nice.png 2x"
+            data-sizes="auto"
+            alt="/posts/htb/pilgrimage/malwarescan-file-nice.png" width="1351" height="374" />
+    </a><figcaption class="image-caption">read malwarescan.sh</figcaption>
+    </figure></p>
+<p>Now, I&rsquo;m going to put a malicious image file that I created earlier into <code>/var/www/pilgrimage.htb</code> and see what&rsquo;s going to happen.</p>
+<p>I did get the root user but it seems not really consistent. So, I&rsquo;m going to try it again by creating a malicious image file on my local machine and uploading it into the appropriate directory. It works flawlessly and I became root.</p>
+<p><figure><a class="lightgallery" href="/posts/htb/pilgrimage/rooted.png" title="becoming root" data-thumbnail="/posts/htb/pilgrimage/rooted.png" data-sub-html="<h2>becoming root</h2><p>becoming root</p>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/posts/htb/pilgrimage/rooted.png"
+            data-srcset="/posts/htb/pilgrimage/rooted.png, /posts/htb/pilgrimage/rooted.png 1.5x, /posts/htb/pilgrimage/rooted.png 2x"
+            data-sizes="auto"
+            alt="/posts/htb/pilgrimage/rooted.png" width="1836" height="772" />
+    </a><figcaption class="image-caption">becoming root</figcaption>
+    </figure></p></div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>Updated on 25-11-2023</span>
+            </div></div>
+        <div class="post-info-line">
+            <div class="post-info-md"></div>
+            <div class="post-info-share">
+                <span><a href="javascript:void(0);" title="Share on Twitter" data-sharer="twitter" data-url="http://localhost:1313/posts/htb/pilgrimage/" data-title="HackTheBox - Pilgrimage Writeup" data-via="_shafiqaiman_" data-hashtags="CVE-2022-44268,CVE-2022-4510,git-dumper,pngcrush,exiftool,binwalk,pspy"><i class="fab fa-twitter fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Linkedin" data-sharer="linkedin" data-url="http://localhost:1313/posts/htb/pilgrimage/"><i class="fab fa-linkedin fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Hacker News" data-sharer="hackernews" data-url="http://localhost:1313/posts/htb/pilgrimage/" data-title="HackTheBox - Pilgrimage Writeup"><i class="fab fa-hacker-news fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Reddit" data-sharer="reddit" data-url="http://localhost:1313/posts/htb/pilgrimage/"><i class="fab fa-reddit fa-fw" aria-hidden="true"></i></a></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"><i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/cve-2022-44268/">CVE-2022-44268</a>,&nbsp;<a href="/tags/cve-2022-4510/">CVE-2022-4510</a>,&nbsp;<a href="/tags/git-dumper/">Git-Dumper</a>,&nbsp;<a href="/tags/pngcrush/">Pngcrush</a>,&nbsp;<a href="/tags/exiftool/">Exiftool</a>,&nbsp;<a href="/tags/binwalk/">Binwalk</a>,&nbsp;<a href="/tags/pspy/">Pspy</a></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">Back</a></span>&nbsp;|&nbsp;<span><a href="/">Home</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/posts/htb/monitorstwo/" class="prev" rel="prev" title="HackTheBox - MonitorsTwo Writeup"><i class="fas fa-angle-left fa-fw" aria-hidden="true"></i>HackTheBox - MonitorsTwo Writeup</a>
+            <a href="/posts/htb/forest/" class="next" rel="next" title="HackTheBox - Forest Writeup">HackTheBox - Forest Writeup<i class="fas fa-angle-right fa-fw" aria-hidden="true"></i></a></div>
+</div>
+</article></div>
+            </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line" itemscope itemtype="http://schema.org/CreativeWork"><i class="far fa-copyright fa-fw" aria-hidden="true"></i><span itemprop="copyrightYear">2021 - 2024</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="https://shafiqaiman.com" target="_blank">SHAFIQAIMAN</a></span></div>
+        </div>
+    </footer></div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="Back to Top">
+                <i class="fas fa-arrow-up fa-fw" aria-hidden="true"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="View Comments">
+                <i class="fas fa-comment fa-fw" aria-hidden="true"></i>
+            </a>
+        </div><link rel="stylesheet" href="/lib/lightgallery/css/lightgallery-bundle.min.css"><script type="text/javascript" src="/lib/autocomplete/autocomplete.min.js"></script><script type="text/javascript" src="/lib/lunr/lunr.min.js"></script><script type="text/javascript" src="/lib/lazysizes/lazysizes.min.js"></script><script type="text/javascript" src="/lib/lightgallery/lightgallery.min.js"></script><script type="text/javascript" src="/lib/lightgallery/plugins/thumbnail/lg-thumbnail.min.js"></script><script type="text/javascript" src="/lib/lightgallery/plugins/zoom/lg-zoom.min.js"></script><script type="text/javascript" src="/lib/clipboard/clipboard.min.js"></script><script type="text/javascript" src="/lib/sharer/sharer.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"Copy to clipboard","maxShownLines":50},"comment":{},"lightgallery":true,"search":{"highlightTag":"em","lunrIndexURL":"/index.json","maxResultLength":10,"noResultsFound":"No results found","snippetLength":30,"type":"lunr"}};</script><script type="text/javascript" src="/js/theme.min.js"></script></body>
+</html>

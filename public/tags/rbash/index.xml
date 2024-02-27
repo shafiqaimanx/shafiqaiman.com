@@ -1,15 +1,15 @@
 <rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
     <channel>
-        <title>rbash - Tag - SHAFIQAIMAN</title>
-        <link>https://shafiqaiman.com/tags/rbash/</link>
-        <description>rbash - Tag - SHAFIQAIMAN</description>
-        <generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Sun, 08 Aug 2021 00:00:00 &#43;0000</lastBuildDate><atom:link href="https://shafiqaiman.com/tags/rbash/" rel="self" type="application/rss+xml" /><item>
+        <title>Rbash - Tag - SHAFIQAIMAN</title>
+        <link>http://localhost:1313/tags/rbash/</link>
+        <description>Rbash - Tag - SHAFIQAIMAN</description>
+        <generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Sun, 08 Aug 2021 00:00:00 &#43;0000</lastBuildDate><atom:link href="http://localhost:1313/tags/rbash/" rel="self" type="application/rss+xml" /><item>
     <title>HackTheBox - Guard Writeup</title>
-    <link>https://shafiqaiman.com/posts/htb/guard/</link>
+    <link>http://localhost:1313/posts/htb/guard/</link>
     <pubDate>Sun, 08 Aug 2021 00:00:00 &#43;0000</pubDate>
     <author>SH∆FIQ ∆IM∆N</author>
-    <guid>https://shafiqaiman.com/posts/htb/guard/</guid>
-    <description><![CDATA[Enumeration Top 1000 ports scan 1 nmap -sC -sV -oN nmap/initial 10.10.10.50 the result nmap initial scan scan all ports 1 nmap -sC -sV -p- -oN nmap/all_ports 10.10.10.50 the result nmap allports scan Open Ports Well, both nmap scan result shows SSH port just open Foothold/Gaining Access SSH Let&rsquo;s try SSH into the machine using the private key we&rsquo;ve got from the previous box markup. ssh as daniel It works rBash Well, I&rsquo;m login as daniel and I found the user flag already.]]></description>
+    <guid>http://localhost:1313/posts/htb/guard/</guid>
+    <description><![CDATA[<p>Box author | <span class="h-card person-mention"><a href="https://app.hackthebox.com/users/31190" class="u-url url">&#8201;<span class="p-name fn">TRX</span></a></span></p>]]></description>
 </item>
 </channel>
 </rss>

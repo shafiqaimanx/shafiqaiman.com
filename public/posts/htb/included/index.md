@@ -1,6 +1,10 @@
 # HackTheBox - Included Writeup
 
 
+Box author | {{< person url="https://app.hackthebox.com/users/31190" name="TRX" picture="https://www.hackthebox.com/storage/avatars/f7a696a1331031242f713514b7a4621a.png" >}}
+
+<!--more-->
+
 ## Enumeration
 
 - scan top 1000 ports
@@ -126,7 +130,7 @@ mike@included:~$
 - Owhhh. I'm thinking we can become root with `exploit lxd`
 - Because I found one of the machines in [TryHackMe](https://shafiqaiman.com/posts/thm/gaming_server/) have this same vuln.
 - Sources
-    - [Doct3rJohn - GamingServer[THM]](https://shafiqaiman.com/posts/thm/gaming_server/)
+    - [SH∆FIQ∆IM∆N - GamingServer[THM]](https://shafiqaiman.com/posts/thm/gaming_server/)
     - [Hacking Articles - lxd-privilege-escalation](https://www.hackingarticles.in/lxd-privilege-escalation/)
     - [Github - lxd-alpine-builder](https://github.com/saghul/lxd-alpine-builder)
 

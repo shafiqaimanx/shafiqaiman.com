@@ -1,41 +1,39 @@
 <rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
     <channel>
-        <title>php-reverse-shell - Tag - SHAFIQAIMAN</title>
-        <link>https://shafiqaiman.com/tags/php-reverse-shell/</link>
-        <description>php-reverse-shell - Tag - SHAFIQAIMAN</description>
-        <generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Sat, 15 Oct 2022 00:00:00 &#43;0000</lastBuildDate><atom:link href="https://shafiqaiman.com/tags/php-reverse-shell/" rel="self" type="application/rss+xml" /><item>
+        <title>Php-Reverse-Shell - Tag - SHAFIQAIMAN</title>
+        <link>http://localhost:1313/tags/php-reverse-shell/</link>
+        <description>Php-Reverse-Shell - Tag - SHAFIQAIMAN</description>
+        <generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Sat, 15 Oct 2022 00:00:00 &#43;0000</lastBuildDate><atom:link href="http://localhost:1313/tags/php-reverse-shell/" rel="self" type="application/rss+xml" /><item>
     <title>HackTheBox - Bank Writeup</title>
-    <link>https://shafiqaiman.com/posts/htb/bank/</link>
+    <link>http://localhost:1313/posts/htb/bank/</link>
     <pubDate>Sat, 15 Oct 2022 00:00:00 &#43;0000</pubDate>
     <author>SH∆FIQ ∆IM∆N</author>
-    <guid>https://shafiqaiman.com/posts/htb/bank/</guid>
-    <description><![CDATA[Nmap Like always, I&rsquo;m going to scan the IP address by using nmap but I&rsquo;m going to scan the full port first. Then, I&rsquo;m going to scan the only open ports.
-1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 nmap -p- --min-rate=10000 10.10.10.29 nmap -p22,53,80 -sCV -oN nmap/bank 10.10.10.29 22/tcp open ssh OpenSSH 6.6.1p1 Ubuntu 2ubuntu2.8 (Ubuntu Linux; protocol 2.0) | ssh-hostkey: | 1024 08eed030d545e459db4d54a8dc5cef15 (DSA) | 2048 b8e015482d0df0f17333b78164084a91 (RSA) | 256 a04c94d17b6ea8fd07fe11eb88d51665 (ECDSA) |_ 256 2d794430c8bb5e8f07cf5b72efa16d67 (ED25519) 53/tcp open domain ISC BIND 9.]]></description>
+    <guid>http://localhost:1313/posts/htb/bank/</guid>
+    <description><![CDATA[<p>Box author | <span class="h-card person-mention"><a href="https://app.hackthebox.com/users/95" class="u-url url">&#8201;<span class="p-name fn">makelarisjr</span></a></span></p>]]></description>
 </item>
 <item>
     <title>HackTheBox - Nibbles Writeup</title>
-    <link>https://shafiqaiman.com/posts/htb/nibbles/</link>
+    <link>http://localhost:1313/posts/htb/nibbles/</link>
     <pubDate>Mon, 03 Oct 2022 00:00:00 &#43;0000</pubDate>
     <author>SH∆FIQ ∆IM∆N</author>
-    <guid>https://shafiqaiman.com/posts/htb/nibbles/</guid>
-    <description><![CDATA[Nmap Like always, I&rsquo;m going to scan the IP address by using Nmap. However, today I feel spicier ;). So, I&rsquo;m going to scan the full port with -p- then I&rsquo;m only scanning those open ports with scripts and version enumeration.
-1 2 3 4 5 6 7 8 9 10 11 12 nmap -sCV -p22,80 -oN nmap/nibbles 10.10.10.75 22/tcp open ssh OpenSSH 7.2p2 Ubuntu 4ubuntu2.2 (Ubuntu Linux; protocol 2.0) | ssh-hostkey: | 2048 c4:f8:ad:e8:f8:04:77:de:cf:15:0d:63:0a:18:7e:49 (RSA) | 256 22:8f:b1:97:bf:0f:17:08:fc:7e:2c:8f:e9:77:3a:48 (ECDSA) |_ 256 e6:ac:27:a3:b5:a9:f1:12:3c:34:a5:5d:5b:eb:3d:e9 (ED25519) 80/tcp open http Apache httpd 2.]]></description>
+    <guid>http://localhost:1313/posts/htb/nibbles/</guid>
+    <description><![CDATA[<p>Box author | <span class="h-card person-mention"><a href="https://app.hackthebox.com/users/2984" class="u-url url">&#8201;<span class="p-name fn">mrb3n</span></a></span></p>]]></description>
 </item>
 <item>
     <title>HackTheBox - Included Writeup</title>
-    <link>https://shafiqaiman.com/posts/htb/included/</link>
+    <link>http://localhost:1313/posts/htb/included/</link>
     <pubDate>Thu, 29 Jul 2021 00:00:00 &#43;0000</pubDate>
     <author>SH∆FIQ ∆IM∆N</author>
-    <guid>https://shafiqaiman.com/posts/htb/included/</guid>
-    <description><![CDATA[Enumeration scan top 1000 ports 1 nmap -sC -sV -oN nmap/initial 10.10.10.55 the result nmap initial scan scan all ports 1 nmap -sC -sV -p- -oN nmap/all_ports 10.10.10.55 the result nmap allports scan Open Ports Well, both the Nmap result shows only port 80 just open That&rsquo;s mean this server have a website Local File Inclusion [LFI] Based on the Nmap scan result, This server has a website Let&rsquo;s take a look webpage has file parameter When I saw this string that had file as parameter I&rsquo;m always thinking Local File Inclusion [LFI] Let&rsquo;s try it with this string: http://10.]]></description>
+    <guid>http://localhost:1313/posts/htb/included/</guid>
+    <description><![CDATA[<p>Box author | <span class="h-card person-mention"><a href="https://app.hackthebox.com/users/31190" class="u-url url">&#8201;<span class="p-name fn">TRX</span></a></span></p>]]></description>
 </item>
 <item>
     <title>HackTheBox - Oopsie Writeup</title>
-    <link>https://shafiqaiman.com/posts/htb/oopsie/</link>
+    <link>http://localhost:1313/posts/htb/oopsie/</link>
     <pubDate>Tue, 20 Jul 2021 00:00:00 &#43;0000</pubDate>
     <author>SH∆FIQ ∆IM∆N</author>
-    <guid>https://shafiqaiman.com/posts/htb/oopsie/</guid>
-    <description><![CDATA[Enumeration Top 1000 ports scan 1 nmap -sC -sV -oN nmap/inital 10.10.10.28 nmap initial scan all ports scan 1 nmap -sC -sV -p- -oN nmap/all_ports 10.10.10.28 nmap allports scan Still the same result Open ports port 22 / ssh port 80 / http The Website MegaCorp Automotive webpage Gobuster Auto recon in the background looking the hidden directory 1 gobuster dir -u http://10.10.10.28 -w /opt/SecLists/Discovery/Web-Content/raft-medium-directories.txt -o gobuster.log The result gobuster This webpage have an upload directory.]]></description>
+    <guid>http://localhost:1313/posts/htb/oopsie/</guid>
+    <description><![CDATA[<p>Box author | <span class="h-card person-mention"><a href="https://app.hackthebox.com/users/13531" class="u-url url">&#8201;<span class="p-name fn">MrR3boot</span></a></span></p>]]></description>
 </item>
 </channel>
 </rss>

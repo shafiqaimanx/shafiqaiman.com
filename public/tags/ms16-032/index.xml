@@ -1,16 +1,15 @@
 <rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
     <channel>
         <title>MS16-032 - Tag - SHAFIQAIMAN</title>
-        <link>https://shafiqaiman.com/tags/ms16-032/</link>
+        <link>http://localhost:1313/tags/ms16-032/</link>
         <description>MS16-032 - Tag - SHAFIQAIMAN</description>
-        <generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Fri, 17 Jun 2022 00:00:00 &#43;0000</lastBuildDate><atom:link href="https://shafiqaiman.com/tags/ms16-032/" rel="self" type="application/rss+xml" /><item>
+        <generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Fri, 17 Jun 2022 00:00:00 &#43;0000</lastBuildDate><atom:link href="http://localhost:1313/tags/ms16-032/" rel="self" type="application/rss+xml" /><item>
     <title>HackTheBox - Optimum Writeup</title>
-    <link>https://shafiqaiman.com/posts/htb/optimum/</link>
+    <link>http://localhost:1313/posts/htb/optimum/</link>
     <pubDate>Fri, 17 Jun 2022 00:00:00 &#43;0000</pubDate>
     <author>SH∆FIQ ∆IM∆N</author>
-    <guid>https://shafiqaiman.com/posts/htb/optimum/</guid>
-    <description><![CDATA[Nmap First, let’s scan the IP address by using the Nmap
-1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 # Nmap 7.92 scan initiated Fri Jun 10 19:25:32 2022 as: nmap -sC -sV -vv -p- --min-rate=10000 -oN nmap/optimum_all 10.10.10.8 Nmap scan report for 10.10.10.8 Host is up, received echo-reply ttl 127 (0.40s latency). Scanned at 2022-06-10 19:25:32 +08 for 25s Not shown: 65534 filtered tcp ports (no-response) PORT STATE SERVICE REASON VERSION 80/tcp open http syn-ack ttl 127 HttpFileServer httpd 2.]]></description>
+    <guid>http://localhost:1313/posts/htb/optimum/</guid>
+    <description><![CDATA[<p>Box author | <span class="h-card person-mention"><a href="https://app.hackthebox.com/users/1" class="u-url url">&#8201;<span class="p-name fn">ch4p</span></a></span></p>]]></description>
 </item>
 </channel>
 </rss>
